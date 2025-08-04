@@ -1,0 +1,10 @@
+{
+    "id": "1754075815571_1736_Hook_and_Loop___UX_Audit___003___Homepage_Elements",
+    "name": "Hook and Loop - UX Audit - 003 - Homepage Elements",
+    "type": "A/B",
+    "website": "hookandloop",
+    "variations": ["control", "v1"],
+    "createdAt": "2025-08-01T19:16:55.571Z",
+    "createdAtReadable": "02/08/2025, 1:16:55 am",
+    "lastUpdated": "2025-08-01T19:16:55.886Z"
+}
