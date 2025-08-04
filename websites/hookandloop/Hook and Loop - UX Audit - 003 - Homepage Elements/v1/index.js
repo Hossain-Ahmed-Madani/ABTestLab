@@ -44,7 +44,7 @@ Initial Development: 15 hours
         flex_center: "flex items-center justify-center",
     };
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
+    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -115,7 +115,124 @@ Initial Development: 15 hours
         });
 
         document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = "ab-see-all-customization-cta px-5 py-2.5 flex mt-[15px] justify-center text-[15px] font-[600] max-w-max uppercase";
+    }
 
+    function createBrandsSectionLayout() {
+        console.log("Pending: Brands section layout ");
+    }
+
+    function createTestimonialsSectionLayout() {
+        const service_review_grid_data = [
+            {
+                column: 1,
+                items: [
+                    {
+                        name: "Mark R.",
+                        text: "I make many purchases from different hook and loop suppliers all over the world and hookandloop.com are my favorite people to work with. I have needed some favors in the past and they helped me out. The quality of product is as good as it gets in this industry. Same goes for all the employees there. I am fortunate to live in the same state, so when I place an order, I usually receive the next day. I would be lost without hookandloop.com.",
+                        className: "",
+                    },
+                    {
+                        name: "Leslie G.",
+                        text: "Thank you so much for your support this year! Your company has been a pleasure to work with.",
+                        className: "ab-rotate-2deg",
+                    },
+                    {
+                        name: "Joseph S.",
+                        text: "I am so grateful you exist! Not everyone needs both sides of the velcro!",
+                        className: "",
+                    },
+                ],
+            },
+            {
+                column: 2,
+                items: [
+                    {
+                        name: "Nate B.",
+                        text: "I had to respond and tell you that I love your emails. This is my first order with your company, and if everything goes well, it won't be my last! But the fun, whimsical email you sent is awesome. I wish more companies sounded like they were having fun.",
+                        className: "ab-rotate-neg-2deg",
+                    },
+                    {
+                        name: "Craig C.",
+                        text: "Thanks so much for the fast and easy sample order – it was perfect!",
+                        className: "",
+                    },
+                    {
+                        name: "Jim P.",
+                        text: "Your company came to us from a recommendation...now I know why they use you. She said you were great to work with. She was right.",
+                        className: "ab-rotate-neg-2deg",
+                    },
+                ],
+            },
+            {
+                column: 3,
+                items: [
+                    {
+                        name: "Joe S.",
+                        text: "Thank you. This is probably one of the best online service chats I have ever had. You are fast, clear, patient, and an asset to the company. Be proud of yourself. In this day and age, chats are usually very frustrating.",
+                        className: "",
+                    },
+                    {
+                        name: "Julia P.",
+                        text: "I'm so HAPPY to find your company AND loop fabric by the yard! I'm making small flannel boards for my class. As a teacher for MANY years, I use the flannel board everyday . . . and the children love it!!! We do games, math, stories and more. THANK YOU for having this fabric . . . I can't wait to get it and start on the boards!",
+                        className: "ab-rotate-neg-2deg",
+                    },
+                    {
+                        name: "Jim W.",
+                        text: "Wanted to send a quick note of thanks. You confirm so quickly and take very good care of us. I really appreciate you and your Team.",
+                        className: "",
+                    },
+                    // {
+                    //     name: "Cathi R.",
+                    //     text: "Thank you so much for your great customer service! I know that my order got complicated. Your staff worked hard to get my order out and they really seemed to care. I received the shipment this morning, without any complications at all. Thank you, thank you, thank you!!",
+                    // },
+                ],
+            },
+        ];
+
+        const targetNode = document.querySelector(".customer-service.text-center");
+        targetNode.className = "customer-service text-center block lg:hidden";
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <section class="ab-customer-service text-center hidden lg:block">
+                    <div class="container">
+                        <div class="section-title">
+                            <h3 class="text-[22px] font-semibold leading-none">
+                                Top Notch <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service Desktop</a></strong>
+                            </h3>
+                            <h5 class="font-normal my-[15px]">Here's what our customers have to say ...</h5>
+                        </div>
+                        <div class="ab-customer-service__review-grid mx-auto my-5 text-gray-700 body-font">
+                            ${service_review_grid_data
+                                .map(
+                                    (col) => /* HTML */ `
+                                        <div class="ab-customer-service__review-column ${TAILWIND_STYLES.flex_center} flex-col">
+                                            ${col.items
+                                                .map(
+                                                    (item) => /* HTML */ `
+                                                        <div class="ab-customer-service__review-card card w-full card-interactive ${item.className}">
+                                                            <div class="item">
+                                                                <div class="ban1 text-left">
+                                                                    <h5 class="customer-service-name ${TAILWIND_STYLES.heading_sm}">${item.name}</h5>
+                                                                    <p class="customer-service-text ${TAILWIND_STYLES.paragraph}">${item.text}</p>
+                                                                    <div class="customer-service-quotation">
+                                                                        <img src="${ASSETS.quotation}" alt="Quotation" class="" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    `
+                                                )
+                                                .join("")}
+                                        </div>
+                                    `
+                                )
+                                .join("")}
+                        </div>
+                    </div>
+                </section>
+            `
+        );
     }
 
     function init() {
@@ -132,13 +249,16 @@ Initial Development: 15 hours
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
+        createBrandsSectionLayout(); /* -> Pending */
+        createTestimonialsSectionLayout();
     }
 
     function hasAllTargetElements() {
         return !!(
             document.querySelector(`body.cms-home:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector(".custom-converting-panel") &&
-            document.querySelector(".custom-converting-panel")
+            document.querySelector(".custom-converting-panel") &&
+            document.querySelector(".customer-service")
         );
     }
 

@@ -92,6 +92,44 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta:hover {
   background: none;
 }
+.AB-HOMEPAGE-REDESIGN .ab-customer-service__review-grid {
+  width: max-content;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service__review-column {
+  gap: 20px;
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .ab-customer-service__review-card {
+  width: 320px;
+  padding: 20px;
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-name,
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-text {
+  color: rgb(55, 65, 81);
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-text {
+  margin-bottom: 20px;
+  line-height: 24px;
+  text-wrap: pretty;
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-quotation {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-quotation img {
+  width: 29px;
+  height: 24px;
+  object-fit: contain;
+}
+.AB-HOMEPAGE-REDESIGN .ab-rotate-2deg {
+  transform: rotate(2deg);
+}
+.AB-HOMEPAGE-REDESIGN .ab-rotate-neg-2deg {
+  transform: rotate(-2deg);
+}
 @media screen and (min-width: 1024px) {
   .AB-HOMEPAGE-REDESIGN .ab-hero-section {
     background-image: url("https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png");

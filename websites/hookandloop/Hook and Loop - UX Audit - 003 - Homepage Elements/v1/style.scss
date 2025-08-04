@@ -115,6 +115,52 @@ lg: 1024px
         background: none;
     }
 
+    .ab-customer-service__review-grid {
+        width: max-content;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+    }
+
+    .ab-customer-service__review-column {
+        gap: 20px;
+    }
+
+    .ab-customer-service .ab-customer-service__review-card {
+        width: 320px;
+        padding: 20px;
+    }
+
+    .ab-customer-service .customer-service-name,
+    .ab-customer-service .customer-service-text {
+        color: rgba(55, 65, 81, 1);
+    }
+
+    .ab-customer-service .customer-service-text {
+        margin-bottom: 20px;
+        line-height: 24px;
+        text-wrap: pretty;
+    }
+
+    .ab-customer-service .customer-service-quotation {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .ab-customer-service .customer-service-quotation img {
+        width: 29px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .ab-rotate-2deg {
+        transform: rotate(2deg);
+    }
+    .ab-rotate-neg-2deg {
+        transform: rotate(-2deg);
+    }
+
     @media screen and (min-width: 1024px) {
         .ab-hero-section {
             background-image: url("https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png");
