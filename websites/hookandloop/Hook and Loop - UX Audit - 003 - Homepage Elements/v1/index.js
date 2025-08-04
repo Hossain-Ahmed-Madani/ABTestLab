@@ -39,8 +39,8 @@ Initial Development: 15 hours
         heading_md: "text-[22px] font-semibold leading-none",
         heading_sm: "text-[20px] font-[500] text-hnl1d mb-3.75",
         paragraph: "leading-[28px] text-[16px]",
-        button_primary: "action primary hnl-btn",
-        button_primary_sm: "action primary bg-hnleb0 px-[8px] py-[6px] flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0",
+        button_primary: "action primary hnl-btn text-white",
+        button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
         flex_center: "flex items-center justify-center",
     };
 
@@ -91,13 +91,31 @@ Initial Development: 15 hours
                                 <a href="#" class="ab-hero-section__all-products-item ${TAILWIND_STYLES.flex_center}">Specialty Options</a>
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="#" class="ab-hero-section__all-products-item mx-auto ${TAILWIND_STYLES.flex_center}">See all Products</a>
+                                <a href="https://www.hookandloop.com/products" class="ab-hero-section__all-products-item mx-auto ${TAILWIND_STYLES.flex_center}">See all Products</a>
                             </div>
                         </div>
                     </div>
                 </section>
             `
         );
+    }
+
+    function modifyCustomizationServicesLayout() {
+        document.querySelector(".custom-converting-panel").className = "custom-converting-panel lg:px-[10px] py-5 text-center hidden lg:block";
+        document.querySelector(".custom-converting-panel .section-title a").innerText = "We're More Than Just Products!";
+
+        const pItem = document.querySelector(".custom-converting-panel .section-title p");
+        if (pItem) {
+            pItem.classList.remove("text-hnl1d");
+            pItem.innerText = "We are a full service Hook & Loop conversion facility. Let us handle the hard work for you.";
+        }
+
+        document.querySelectorAll(".custom-converting-panel .custom-converting-inner a.action.primary").forEach((item) => {
+            item.className = TAILWIND_STYLES.button_primary_sm;
+        });
+
+        document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = "ab-see-all-customization-cta px-5 py-2.5 flex mt-[15px] justify-center text-[15px] font-[600] max-w-max uppercase";
+
     }
 
     function init() {
@@ -113,10 +131,15 @@ Initial Development: 15 hours
         console.table(TEST_CONFIG);
 
         createHeroSectionLayout();
+        modifyCustomizationServicesLayout();
     }
 
     function hasAllTargetElements() {
-        return !!document.querySelector(`body.cms-home:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`);
+        return !!(
+            document.querySelector(`body.cms-home:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
+            document.querySelector(".custom-converting-panel") &&
+            document.querySelector(".custom-converting-panel")
+        );
     }
 
     waitForElement(hasAllTargetElements, init);

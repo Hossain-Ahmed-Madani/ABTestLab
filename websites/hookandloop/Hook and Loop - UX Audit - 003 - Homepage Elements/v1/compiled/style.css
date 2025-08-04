@@ -4,6 +4,9 @@ md: 768px
 lg: 1024px
 
 */
+.AB-HOMEPAGE-REDESIGN .hook-loop-products {
+  display: none;
+}
 .AB-HOMEPAGE-REDESIGN .ab-hero-section {
   background-image: url("https://www.hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner_Mobile.png");
   background-size: cover;
@@ -80,6 +83,14 @@ lg: 1024px
   text-align: center;
   vertical-align: middle;
   color: rgb(29, 29, 29);
+}
+.AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta {
+  background: none;
+  border: 2px solid rgb(29, 29, 29);
+  border-radius: 4px;
+}
+.AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta:hover {
+  background: none;
 }
 @media screen and (min-width: 1024px) {
   .AB-HOMEPAGE-REDESIGN .ab-hero-section {
