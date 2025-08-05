@@ -321,8 +321,8 @@ Initial Development: 15 hours
                                         </ul>
                                         <div class="action-rw flex flex-col lg:flex-row">
                                             <a data-content-type="features" href="https://www.hookandloop.com/product-development" class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}">Start Now For Free!</a>
-                                            <div class="or-call leading-[28px] text-[16px] my-3.75 mt-2 font-bold lg:ml-5 ${TAILWIND_STYLES.flex_center} flex-col lg:flex-row gap-1">
-                                                <span>Or</span>
+                                            <div class="or-call leading-[28px] text-[16px] mt-2 lg:mt-0 font-bold lg:ml-2 flex-col lg:flex-row gap-1 ${TAILWIND_STYLES.flex_center}">
+                                                <span class="font-medium">Or</span>
                                                 <span class="inline-flex items-center gap-1">
                                                     <span class="ml-1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18" role="img">
