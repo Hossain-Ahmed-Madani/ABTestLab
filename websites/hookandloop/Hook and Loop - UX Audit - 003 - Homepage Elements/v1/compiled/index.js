@@ -120,7 +120,101 @@ Initial Development: 15 hours
     }
 
     function createBrandsSectionLayout() {
-        console.log("Pending: Brands section layout ");
+        const brands_data = [
+            {
+                image: "/media/brandicons/carnival.jpg",
+                image_alt: "Carnival",
+                image_title: "Carnival",
+            },
+            {
+                image: "/media/brandicons/adidas.jpg",
+                image_alt: "Adidas",
+                image_title: "Adidas",
+            },
+            {
+                image: "/media/brandicons/northrop-grumman.jpg",
+                image_alt: "Northrop Grumman",
+                image_title: "Northrop Grumman",
+            },
+            {
+                image: "/media/brandicons/century-fox.jpg",
+                image_alt: "20th Century Fox",
+                image_title: "20th Century Fox",
+            },
+            {
+                image: "/media/brandicons/black-decker.jpg",
+                image_alt: "Black & Decker",
+                image_title: "Black & Decker",
+            },
+            {
+                image: "/media/brandicons/mayo-clinic.jpg",
+                image_alt: "Mayo Clinic",
+                image_title: "Mayo Clinic",
+            },
+            {
+                image: "/media/brandicons/ikea.jpg",
+                image_alt: "Ikea",
+                image_title: "Ikea",
+            },
+            {
+                image: "/media/brandicons/harley-davidson.jpg",
+                image_alt: "Harley-Davidson Motor Company",
+                image_title: "Harley-Davidson Motor Company",
+            },
+            {
+                image: "/media/brandicons/nestle.jpg",
+                image_alt: "Nestle",
+                image_title: "Nestle",
+            },
+            {
+                image: "/media/wysiwyg/Frito_Lay1.jpg",
+                image_alt: "Frito Lay",
+                image_title: "Frito Lay",
+            },
+        ];
+
+        const targetNode = document.querySelector(".hook-loop-brands");
+        targetNode.classList.add("hidden");
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <section class="ab-hook-loop-brands bg-white overflow-hidden">
+                    <div class="ab-hook-loop-brands__container">
+                        <div class="section-title">
+                            <h2 class="text-[22px] lg:text-2xl font-semibold text-center mb-12">
+                                Solving Hook and Loop <br class="md:hidden" />
+                                Needs Across the World <br class="md:hidden" />
+                                for 30 Years
+                            </h2>
+                        </div>
+                        <div class="ab-hook-loop-brands__auto-scroller-container">
+                            <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-rtl">
+                                ${brands_data
+                                    .map(
+                                        (item) => /* HTML */ `
+                                            <div class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}">
+                                                <img src="${item.image}" alt="${item.image_alt}" title="${item.image_title}" class="ab-hook-loop-brand__image" />
+                                            </div>
+                                        `
+                                    )
+                                    .join("")}
+                            </div>
+                            <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-ltr">
+                                ${brands_data
+                                    .map(
+                                        (item) => /* HTML */ `
+                                            <div class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}">
+                                                <img src="${item.image}" alt="${item.image_alt}" title="${item.image_title}" class="ab-hook-loop-brand__image" />
+                                            </div>
+                                        `
+                                    )
+                                    .join("")}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `
+        );
     }
 
     function createTestimonialsSectionLayout() {
@@ -352,7 +446,7 @@ Initial Development: 15 hours
     function createNewsLetterAndPromotionSectionLayout() {
         const targetNode = document.querySelector(".hook-loop-promotion");
 
-        const parElem = document.createElement("div");
+        const parElem = document.createElement("section");
         parElem.className = "ab-newsletter-and-promotion";
         targetNode.insertAdjacentElement("afterend", parElem);
 

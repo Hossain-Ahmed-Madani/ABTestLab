@@ -301,6 +301,31 @@ lg: 1024px
         min-width: 100%;
     }
 
+    .newsletter-subscription .newsletter_offer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .ab-hook-loop-brands {
+        padding: 60px 24px;
+    }
+
+    .ab-hook-loop-brands__auto-scroller {
+        gap: 24px;
+    }
+
+    .ab-hook-loop-brands__auto-scroller:first-child {
+        margin-bottom: 24px;
+    }
+
+    .ab-hook-loop-brand__item img {
+        width: 80px;
+        min-width: 80px;
+        height: 37px;
+        min-height: 37px;
+        object-fit: contain;
+    }
+
     @media screen and (min-width: 768px) {
         .ab-hookloop-features__top-items {
             display: grid;
@@ -374,6 +399,15 @@ lg: 1024px
             padding: 165px 60px;
         }
 
+        .newsletter-subscription form.form.subscribe {
+            width: 100%;
+        }
+
+        .newsletter-subscription .newsletter_offer {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         .hook-loop-promotion .call-or-email {
             display: none;
         }
@@ -389,6 +423,22 @@ lg: 1024px
         .ab-promotion-read-more-cta {
             min-width: max-content;
         }
+
+        .ab-hook-loop-brands__auto-scroller {
+            gap: 60px;
+        }
+
+        .ab-hook-loop-brand__item img {
+            width: 160px;
+            min-width: 160px;
+            height: 75px;
+            min-height: 75px;
+            object-fit: contain;
+        }
+
+        .ab-hook-loop-brands__auto-scroller:first-child {
+            margin-bottom: 48px;
+        }
     }
 
     @media screen and (min-width: 1280px) {
@@ -396,5 +446,78 @@ lg: 1024px
             display: grid;
             grid-template-columns: repeat(4, 1fr);
         }
+
+        .newsletter-subscription form.form.subscribe {
+            width: 600px;
+        }
     }
+
+    // ================ ANIMATION ================
+    // /* Right to Left Infinite Scroll Animation */
+    // @keyframes scroll-right-to-left {
+    //     0% {
+    //         transform: translateX(0%);
+    //     }
+    //     100% {
+    //         transform: translateX(-100%);
+    //     }
+    // }
+
+    // .scroll-infinite-rtl {
+    //     display: flex;
+    //     white-space: nowrap;
+    //     animation: scroll-right-to-left 20s linear infinite;
+    // }
+
+    // /* Left to Right Infinite Scroll Animation */
+    // @keyframes scroll-left-to-right {
+    //     0% {
+    //         transform: translateX(-100%);
+    //     }
+    //     100% {
+    //         transform: translateX(0%);
+    //     }
+    // }
+
+    // .scroll-infinite-ltr {
+    //     display: flex;
+    //     white-space: nowrap;
+    //     animation: scroll-left-to-right 20s linear infinite;
+    // }
+
+    // ...existing code...
+
+/* Right to Left Infinite Scroll Animation */
+@keyframes scroll-right-to-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.scroll-infinite-rtl {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-right-to-left 20s linear infinite;
+}
+
+/* Left to Right Infinite Scroll Animation */
+@keyframes scroll-left-to-right {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.scroll-infinite-ltr {
+    display: flex;
+    white-space: nowrap;
+    animation: scroll-left-to-right 20s linear infinite;
+}
+
+// ...existing code...
 }
