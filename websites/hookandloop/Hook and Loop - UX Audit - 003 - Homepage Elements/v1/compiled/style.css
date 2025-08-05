@@ -4,8 +4,20 @@ md: 768px
 lg: 1024px
 
 */
+.AB-HOMEPAGE-REDESIGN main#maincontent > .columns {
+  row-gap: 0;
+}
 .AB-HOMEPAGE-REDESIGN .hook-loop-products {
   display: none;
+}
+.AB-HOMEPAGE-REDESIGN .ab-heading-xl {
+  font-family: "poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
 }
 .AB-HOMEPAGE-REDESIGN .ab-hero-section {
   background-image: url("https://www.hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner_Mobile.png");
@@ -84,12 +96,12 @@ lg: 1024px
   vertical-align: middle;
   color: rgb(29, 29, 29);
 }
-.AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta {
+.AB-HOMEPAGE-REDESIGN .ab-btn-secondary {
   background: none;
   border: 2px solid rgb(29, 29, 29);
   border-radius: 4px;
 }
-.AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta:hover {
+.AB-HOMEPAGE-REDESIGN .ab-btn-secondary:hover {
   background: none;
 }
 .AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile {
@@ -182,7 +194,8 @@ lg: 1024px
   transform: rotate(-2deg);
 }
 .AB-HOMEPAGE-REDESIGN .ab-hookloop-features {
-  padding: 60px 0;
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
   display: grid;
@@ -199,6 +212,36 @@ lg: 1024px
   height: 128px;
   object-fit: contain;
 }
+.AB-HOMEPAGE-REDESIGN .newsletter-subscription,
+.AB-HOMEPAGE-REDESIGN .hook-loop-promotion {
+  padding: 60px 24px;
+}
+.AB-HOMEPAGE-REDESIGN .newsletter-subscription .section-title h2 {
+  font-family: "poppins", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+}
+.AB-HOMEPAGE-REDESIGN .hook-loop-promotion h2 {
+  font-family: "poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  text-align: left;
+  text-wrap: pretty;
+}
+.AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container > div {
+  width: 100%;
+}
 @media screen and (min-width: 768px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
     display: grid;
@@ -206,6 +249,14 @@ lg: 1024px
   }
 }
 @media screen and (min-width: 1024px) {
+  .AB-HOMEPAGE-REDESIGN .ab-heading-xl {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+  }
   .AB-HOMEPAGE-REDESIGN .ab-hero-section {
     background-image: url("https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png");
   }
@@ -245,6 +296,18 @@ lg: 1024px
   }
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .item .img-wrap {
     margin-right: 30px;
+  }
+  .AB-HOMEPAGE-REDESIGN .newsletter-subscription {
+    padding: 165px 60px;
+  }
+  .AB-HOMEPAGE-REDESIGN .hook-loop-promotion .call-or-email {
+    display: none;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container {
+    flex-direction: row;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container > div {
+    width: 50%;
   }
 }
 @media screen and (min-width: 1280px) {

@@ -35,12 +35,14 @@ Initial Development: 15 hours
     };
 
     const TAILWIND_STYLES = {
-        heading_lg: "text-[22px] lg:text-[26px] leading-1 font-semibold",
+        heading_xl: "ab-heading-xl",
+        heading_lg: "text-[24px] lg:text-[26px] leading-1 font-semibold",
         heading_md: "text-[22px] font-semibold leading-none",
         heading_sm: "text-[20px] font-[500] text-hnl1d",
         paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
         button_primary: "action primary hnl-btn text-white",
         button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
+        button_secondary: "ab-btn-secondary px-5 py-2.5 flex  justify-center text-[15px] font-[600] max-w-max uppercase",
         flex_center: "flex items-center justify-center",
     };
 
@@ -68,7 +70,7 @@ Initial Development: 15 hours
             /* HTML */ `
                 <section class="ab-hero-section relative w-full">
                     <div class="ab-hero-section__container mx-auto flex flex-col items-center text-center">
-                        <h2 class="text-white ${TAILWIND_STYLES.heading_lg}">
+                        <h2 class="text-white ${TAILWIND_STYLES.heading_xl}">
                             From full rolls to finished <br class="md:hidden" />
                             products, we’re Everything <br class="md:hidden" />
                             in Hook & Loop!<sup class="text-sm ab-sup">TM</sup>
@@ -114,7 +116,7 @@ Initial Development: 15 hours
             item.className = TAILWIND_STYLES.button_primary_sm;
         });
 
-        document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = "ab-see-all-customization-cta px-5 py-2.5 flex mt-[15px] justify-center text-[15px] font-[600] max-w-max uppercase";
+        document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = `mt-[15px] ${TAILWIND_STYLES.button_secondary}`;
     }
 
     function createBrandsSectionLayout() {
@@ -333,6 +335,34 @@ Initial Development: 15 hours
         );
     }
 
+    function modifyNewsLetterAndPromotionSection() {
+        document.querySelector(".newsletter-subscription").className = "newsletter-subscription text-center text-white flex flex-col items-center bg-[#333]";
+        document.querySelector(".newsletter-subscription .section-title p").className = `font-light ${TAILWIND_STYLES.paragraph}`;
+        document.querySelector(".newsletter-subscription form.form.subscribe button").className = `p-[15px] rounded-r-[3px] font-bold ${TAILWIND_STYLES.button_primary}`;
+
+        document.querySelector(".hook-loop-promotion").className = "hook-loop-promotion text-left text-hnl1d";
+        document.querySelector(".hook-loop-promotion .container").className = "ab-hook-loop-promotion__container";
+        document.querySelector(".hook-loop-promotion h2").className = "ab-hook-loop-promotion__header mb-6";
+        document.querySelector(".hook-loop-promotion p.read-button").className = `read-button flex justify-start`;
+        document.querySelector(".hook-loop-promotion .action.primary.read-more").className = `w-full my-6 ${TAILWIND_STYLES.button_secondary}`;
+        document.querySelector(".hook-loop-promotion .call-or-email").className = "call-or-email bg-white border border-hnld7 p-4 rounded-sm";
+        document.querySelector(".hook-loop-promotion .call-or-email p").className = "text-[18px] font-medium text-center";
+    }
+
+    function createNewsLetterAndPromotionSectionLayout() {
+        const targetNode = document.querySelector(".hook-loop-promotion");
+
+        const parElem = document.createElement("div");
+        parElem.className = "ab-newsletter-and-promotion";
+        targetNode.insertAdjacentElement("afterend", parElem);
+
+        const elem = document.createElement("div");
+        elem.className = "ab-newsletter-and-promotion__container w-full";
+        elem.appendChild(document.querySelector(".hook-loop-promotion"));
+        elem.appendChild(document.querySelector(".newsletter-subscription"));
+        parElem.appendChild(elem);
+    }
+
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
 
@@ -350,6 +380,8 @@ Initial Development: 15 hours
         createBrandsSectionLayout(); /* -> PENDING */
         createTestimonialsSectionLayout();
         createFeatureSectionLayout();
+        modifyNewsLetterAndPromotionSection();
+        createNewsLetterAndPromotionSectionLayout();
     }
 
     function hasAllTargetElements() {
@@ -358,7 +390,9 @@ Initial Development: 15 hours
             document.querySelector(".custom-converting-panel") &&
             document.querySelector(".custom-converting-panel") &&
             document.querySelector(".customer-service") &&
-            document.querySelector(".hookloop-features")
+            document.querySelector(".hookloop-features") &&
+            document.querySelector(".hook-loop-promotion") &&
+            document.querySelector(".newsletter-subscription")
         );
     }
 

@@ -9,8 +9,22 @@ lg: 1024px
 
 // Custom
 .AB-HOMEPAGE-REDESIGN {
+    main#maincontent > .columns {
+        row-gap: 0;
+    }
+
     .hook-loop-products {
         display: none;
+    }
+
+    .ab-heading-xl {
+        font-family: "poppins", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
     }
 
     .ab-hero-section {
@@ -105,13 +119,13 @@ lg: 1024px
         color: rgba(29, 29, 29, 1);
     }
 
-    .ab-see-all-customization-cta {
+    .ab-btn-secondary {
         background: none;
         border: 2px solid rgba(29, 29, 29, 1);
         border-radius: 4px;
     }
 
-    .ab-see-all-customization-cta:hover {
+    .ab-btn-secondary:hover {
         background: none;
     }
 
@@ -229,7 +243,8 @@ lg: 1024px
     }
 
     .ab-hookloop-features {
-        padding: 60px 0;
+        padding-top: 60px;
+        padding-bottom: 60px;
     }
 
     .ab-hookloop-features__top-items {
@@ -251,6 +266,41 @@ lg: 1024px
         object-fit: contain;
     }
 
+    .newsletter-subscription,
+    .hook-loop-promotion {
+        padding: 60px 24px;
+    }
+
+    .newsletter-subscription .section-title h2 {
+        font-family: "poppins", sans-serif;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 39px;
+        letter-spacing: 0%;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .hook-loop-promotion h2 {
+        font-family: "poppins", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        text-align: left;
+        text-wrap: pretty;
+    }
+
+    .ab-newsletter-and-promotion__container {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .ab-newsletter-and-promotion__container > div {
+        width: 100%;
+    }
+
     @media screen and (min-width: 768px) {
         .ab-hookloop-features__top-items {
             display: grid;
@@ -259,6 +309,15 @@ lg: 1024px
     }
 
     @media screen and (min-width: 1024px) {
+        .ab-heading-xl {
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 54px;
+            letter-spacing: 0px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
         .ab-hero-section {
             background-image: url("https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png");
         }
@@ -314,6 +373,22 @@ lg: 1024px
 
         .ab-hookloop-features__bottom-items .item .img-wrap {
             margin-right: 30px;
+        }
+
+        .newsletter-subscription {
+            padding: 165px 60px;
+        }
+
+        .hook-loop-promotion .call-or-email {
+            display: none;
+        }
+
+        .ab-newsletter-and-promotion__container {
+            flex-direction: row;
+        }
+
+        .ab-newsletter-and-promotion__container > div {
+            width: 50%;
         }
     }
 
