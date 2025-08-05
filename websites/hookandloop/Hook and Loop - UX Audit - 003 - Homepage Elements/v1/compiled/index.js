@@ -40,6 +40,7 @@ Initial Development: 15 hours
         heading_lg: "text-[22px] lg:text-[26px] leading-1 font-semibold",
         heading_sm: "text-[20px] font-[500] text-hnl1d",
         paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
+        button_primary: "action primary hnl-btn text-white",
         button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
         flex_center: "flex items-center justify-center",
     };
@@ -190,7 +191,7 @@ Initial Development: 15 hours
         ];
 
         const targetNode = document.querySelector(".customer-service.text-center");
-        targetNode.className = "customer-service text-center block lg:hidden";
+        targetNode.className = "customer-service ab-customer-service-mobile text-center block lg:hidden";
         targetNode.insertAdjacentHTML(
             "afterend",
             /* HTML */ `
@@ -235,6 +236,119 @@ Initial Development: 15 hours
         );
     }
 
+    function createFeatureSectionLayout() {
+        const targetNode = document.querySelector(".hookloop-features");
+        targetNode.classList.add("hidden");
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <section class="ab-hookloop-features bg-white">
+                    <div class="ab-hookloop-features__container container flex flex-col gap-6">
+                        <div class="ab-hookloop-features__top-items gap-6">
+                            <!-- First Item -->
+                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="img-wrap overflow-hidden">
+                                        <img src="/media/wysiwyg/features-wholesale-bulk.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                    </div>
+                                    <div class="content-wrap flex-1">
+                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Wholesale, Bulk and Discount Hook and Loop</h3>
+                                    </div>
+                                </div>
+                                <div class="action-rw w-full">
+                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/products">Start Shopping</a>
+                                </div>
+                            </div>
+
+                            <!-- Second Item -->
+                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="img-wrap overflow-hidden">
+                                        <img src="/media/wysiwyg/features-industrial-strap.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                    </div>
+                                    <div class="content-wrap flex-1 mr-[30px]">
+                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}"><a href="{{store direct_url='custom-made-straps'}}">Industrial Strength Straps</a></h3>
+                                    </div>
+                                </div>
+                                <div class="action-rw w-full">
+                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/straps/order-straps">View Straps</a>
+                                </div>
+                            </div>
+
+                            <!-- Third Item -->
+                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="img-wrap  overflow-hidden">
+                                        <img src="/media/wysiwyg/features-customizing.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                    </div>
+                                    <div class="content-wrap flex-1">
+                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Customizing Your Hook and Loop</h3>
+                                    </div>
+                                </div>
+                                <div class="action-rw w-full">
+                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/converting">Customize Now</a>
+                                </div>
+                            </div>
+
+                            <!-- Fourth Item -->
+                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                <div class="flex items-start gap-4">
+                                    <div class="img-wrap overflow-hidden">
+                                        <img src="/media/wysiwyg/features-free-expert.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                    </div>
+                                    <div class="content-wrap flex-1">
+                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Get a Free Expert Review <strong>of Your Product!</strong></h3>
+                                    </div>
+                                </div>
+                                <div class="action-rw w-full">
+                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="mailto:info@hookandloop.com">Email Us Today</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ab-hookloop-features__bottom-items">
+                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                <div class="${TAILWIND_STYLES.flex_center} flex-col lg:justify-start lg:items-start lg:flex-row">
+                                    <div class="img-wrap mb-4 w-[213px] h-[213px] rounded-[4px] overflow-hidden">
+                                        <img src="/media/wysiwyg/features-fourd-program.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                    </div>
+                                    <div class="content-wrap flex-1">
+                                        <h3 class="text-[20px] font-[500] text-hnl1d mb-4">Free 4D Program</h3>
+                                        <p class="${TAILWIND_STYLES.paragraph}">Product Consulting and Development Services for hook and loop fasteners.</p>
+                                        <ul class="list-disc mb-4 ${TAILWIND_STYLES.paragraph}">
+                                            <li class="marker:hnl0-link">Manufacturing Consulting</li>
+                                            <li class="marker:hnl0-link">Custom Product Design</li>
+                                            <li class="marker:hnl0-link">Production Planning</li>
+                                            <li class="marker:hnl0-link">Fast Response Times</li>
+                                        </ul>
+                                        <div class="action-rw flex flex-col lg:flex-row">
+                                            <a data-content-type="features" href="https://www.hookandloop.com/product-development" class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}">Start Now For Free!</a>
+                                            <div class="or-call leading-[28px] text-[16px] my-3.75 mt-2 font-bold lg:ml-5 ${TAILWIND_STYLES.flex_center} flex-col lg:flex-row gap-1">
+                                                <span>Or</span>
+                                                <span class="inline-flex items-center gap-1">
+                                                    <span class="ml-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18" role="img">
+                                                            <path
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                                                            ></path>
+                                                            <title>phone</title>
+                                                        </svg>
+                                                    </span>
+                                                    <span class="call"><a class="text-hnl1d  hover:underline" href="tel:800-940-6934">Call 800-940-6934</a></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `
+        );
+    }
+
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
 
@@ -251,6 +365,7 @@ Initial Development: 15 hours
         modifyCustomizationServicesLayout();
         createBrandsSectionLayout(); /* -> Pending */
         createTestimonialsSectionLayout();
+        createFeatureSectionLayout();
     }
 
     function hasAllTargetElements() {
@@ -258,7 +373,8 @@ Initial Development: 15 hours
             document.querySelector(`body.cms-home:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector(".custom-converting-panel") &&
             document.querySelector(".custom-converting-panel") &&
-            document.querySelector(".customer-service")
+            document.querySelector(".customer-service") &&
+            document.querySelector(".hookloop-features")
         );
     }
 

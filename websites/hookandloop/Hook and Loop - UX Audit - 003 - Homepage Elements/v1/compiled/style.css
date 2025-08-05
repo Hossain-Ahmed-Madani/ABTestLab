@@ -92,32 +92,31 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta:hover {
   background: none;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile {
   margin-top: 60px;
   margin-bottom: 60px;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .section-title {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .section-title {
   margin-top: 0;
   margin-bottom: 48px;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .section-title h5.font-normal {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .section-title h5.font-normal {
   margin-bottom: 0;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .section-title p {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .section-title p {
   margin-bottom: 0;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .my-5.text-gray-700.body-font {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .my-5.text-gray-700.body-font {
   margin-top: 0;
   margin-bottom: 0;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .card.card-interactive {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .card.card-interactive {
   padding: 20px;
-  height: max-content;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .item {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .item {
   height: 100%;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .ban1 {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .ban1 {
   margin-top: 0;
   text-align: left;
   display: flex;
@@ -125,16 +124,16 @@ lg: 1024px
   justify-content: center;
   height: 100%;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .ban1 h5.customer-service-name {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .ban1 h5.customer-service-name {
   order: -1;
   margin-bottom: 15px;
   line-height: 30px;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .ban1 p {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .ban1 p {
   line-height: 24px;
   margin-bottom: 20px;
 }
-.AB-HOMEPAGE-REDESIGN .customer-service .ban1:after {
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .ban1:after {
   content: "";
   width: 29px;
   height: 24px;
@@ -182,6 +181,30 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-rotate-neg-2deg {
   transform: rotate(-2deg);
 }
+.AB-HOMEPAGE-REDESIGN .ab-hookloop-features {
+  padding: 60px 0;
+}
+.AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+.AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .action.primary.hnl-btn {
+  min-width: 100%;
+}
+.AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .list-disc {
+  margin-left: 25px;
+}
+.AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items .item img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+}
+@media screen and (min-width: 768px) {
+  .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @media screen and (min-width: 1024px) {
   .AB-HOMEPAGE-REDESIGN .ab-hero-section {
     background-image: url("https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png");
@@ -216,5 +239,17 @@ lg: 1024px
   }
   .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item {
     max-width: 360px;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .action.primary.hnl-btn {
+    min-width: 320px;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .item .img-wrap {
+    margin-right: 30px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
   }
 }
