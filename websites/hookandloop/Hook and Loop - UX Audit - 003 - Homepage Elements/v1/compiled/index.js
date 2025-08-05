@@ -182,10 +182,6 @@ Initial Development: 15 hours
                         text: "Wanted to send a quick note of thanks. You confirm so quickly and take very good care of us. I really appreciate you and your Team.",
                         className: "",
                     },
-                    // {
-                    //     name: "Cathi R.",
-                    //     text: "Thank you so much for your great customer service! I know that my order got complicated. Your staff worked hard to get my order out and they really seemed to care. I received the shipment this morning, without any complications at all. Thank you, thank you, thank you!!",
-                    // },
                 ],
             },
         ];
@@ -237,6 +233,33 @@ Initial Development: 15 hours
     }
 
     function createFeatureSectionLayout() {
+        const features_data = [
+            {
+                title: "Wholesale, Bulk and Discount Hook and Loop",
+                image: "/media/wysiwyg/features-wholesale-bulk.jpg",
+                link: "https://www.hookandloop.com/products",
+                linkText: "Start Shopping",
+            },
+            {
+                title: "Industrial Strength Straps",
+                image: "/media/wysiwyg/features-industrial-strap.jpg",
+                link: "https://www.hookandloop.com/straps/order-straps",
+                linkText: "View Straps",
+            },
+            {
+                title: "Customizing Your Hook and Loop",
+                image: "/media/wysiwyg/features-customizing.jpg",
+                link: "https://www.hookandloop.com/converting",
+                linkText: "Customize Now",
+            },
+            {
+                title: "Get a Free Expert Review <strong>of Your Product!</strong>",
+                image: "/media/wysiwyg/features-free-expert.jpg",
+                link: "mailto:info@hookandloop.com",
+                linkText: "Email Us Today",
+            },
+        ];
+
         const targetNode = document.querySelector(".hookloop-features");
         targetNode.classList.add("hidden");
         targetNode.insertAdjacentHTML(
@@ -245,67 +268,29 @@ Initial Development: 15 hours
                 <section class="ab-hookloop-features bg-white">
                     <div class="ab-hookloop-features__container container flex flex-col gap-6">
                         <div class="ab-hookloop-features__top-items gap-6">
-                            <!-- First Item -->
-                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="img-wrap overflow-hidden">
-                                        <img src="/media/wysiwyg/features-wholesale-bulk.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
-                                    </div>
-                                    <div class="content-wrap flex-1">
-                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Wholesale, Bulk and Discount Hook and Loop</h3>
-                                    </div>
-                                </div>
-                                <div class="action-rw w-full">
-                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/products">Start Shopping</a>
-                                </div>
-                            </div>
-
-                            <!-- Second Item -->
-                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="img-wrap overflow-hidden">
-                                        <img src="/media/wysiwyg/features-industrial-strap.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
-                                    </div>
-                                    <div class="content-wrap flex-1 mr-[30px]">
-                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}"><a href="{{store direct_url='custom-made-straps'}}">Industrial Strength Straps</a></h3>
-                                    </div>
-                                </div>
-                                <div class="action-rw w-full">
-                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/straps/order-straps">View Straps</a>
-                                </div>
-                            </div>
-
-                            <!-- Third Item -->
-                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="img-wrap  overflow-hidden">
-                                        <img src="/media/wysiwyg/features-customizing.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
-                                    </div>
-                                    <div class="content-wrap flex-1">
-                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Customizing Your Hook and Loop</h3>
-                                    </div>
-                                </div>
-                                <div class="action-rw w-full">
-                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="https://www.hookandloop.com/converting">Customize Now</a>
-                                </div>
-                            </div>
-
-                            <!-- Fourth Item -->
-                            <div class="item p-4 border border-hnld7 flex flex-col gap-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="img-wrap overflow-hidden">
-                                        <img src="/media/wysiwyg/features-free-expert.jpg" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
-                                    </div>
-                                    <div class="content-wrap flex-1">
-                                        <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">Get a Free Expert Review <strong>of Your Product!</strong></h3>
-                                    </div>
-                                </div>
-                                <div class="action-rw w-full">
-                                    <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="mailto:info@hookandloop.com">Email Us Today</a>
-                                </div>
-                            </div>
+                            ${features_data
+                                .map(
+                                    (item /* HTML */) =>
+                                        `
+                                    <div class="item p-4 border border-hnld7 flex flex-col gap-4">
+                                        <div class="flex items-start gap-4">
+                                            <div class="img-wrap overflow-hidden">
+                                                <img src="${item.image}" width="300" height="300" loading="lazy" alt="" class="min-w-full" />
+                                            </div>
+                                            <div class="content-wrap flex-1">
+                                                <h3 class="mb-3.75 ${TAILWIND_STYLES.heading_sm}">${item.title}</h3>
+                                            </div>
+                                        </div>
+                                        <div class="action-rw w-full">
+                                            <a data-content-type="features" class="min-w-full ${TAILWIND_STYLES.button_primary} ${TAILWIND_STYLES.flex_center}" href="${item.link}">${item.linkText}</a>
+                                        </div>
+                                    </div>    
+                                `
+                                )
+                                .join("")}
                         </div>
                         <div class="ab-hookloop-features__bottom-items">
+                            <!-- Fifth Item -->
                             <div class="item p-4 border border-hnld7 flex flex-col gap-4">
                                 <div class="${TAILWIND_STYLES.flex_center} flex-col lg:justify-start lg:items-start lg:flex-row">
                                     <div class="img-wrap mb-4 w-[213px] h-[213px] rounded-[4px] overflow-hidden">
@@ -350,7 +335,7 @@ Initial Development: 15 hours
     }
 
     function init() {
-        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
 
         console.table({ ID: testInfo.id, Variation: testInfo.name });
 
