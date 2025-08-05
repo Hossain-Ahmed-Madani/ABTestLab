@@ -134,7 +134,7 @@ Initial Development: 15 hours
                     {
                         name: "Leslie G.",
                         text: "Thank you so much for your support this year! Your company has been a pleasure to work with.",
-                        className: "ab-rotate-2deg",
+                        className: "ab-rotate-neg-2deg",
                     },
                     {
                         name: "Joseph S.",
@@ -149,7 +149,7 @@ Initial Development: 15 hours
                     {
                         name: "Nate B.",
                         text: "I had to respond and tell you that I love your emails. This is my first order with your company, and if everything goes well, it won't be my last! But the fun, whimsical email you sent is awesome. I wish more companies sounded like they were having fun.",
-                        className: "ab-rotate-neg-2deg",
+                        className: "ab-rotate-2deg",
                     },
                     {
                         name: "Craig C.",
@@ -159,7 +159,7 @@ Initial Development: 15 hours
                     {
                         name: "Jim P.",
                         text: "Your company came to us from a recommendation...now I know why they use you. She said you were great to work with. She was right.",
-                        className: "ab-rotate-neg-2deg",
+                        className: "ab-rotate-2deg",
                     },
                 ],
             },
@@ -347,7 +347,7 @@ Initial Development: 15 hours
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
-        createBrandsSectionLayout(); /* -> Pending */
+        createBrandsSectionLayout(); /* -> PENDING */
         createTestimonialsSectionLayout();
         createFeatureSectionLayout();
     }
