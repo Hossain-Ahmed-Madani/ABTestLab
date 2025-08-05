@@ -37,8 +37,8 @@ Initial Development: 15 hours
     const TAILWIND_STYLES = {
         heading_lg: "text-[22px] lg:text-[26px] leading-1 font-semibold",
         heading_md: "text-[22px] font-semibold leading-none",
-        heading_sm: "text-[20px] font-[500] text-hnl1d mb-3.75",
-        paragraph: "leading-[28px] text-[16px]",
+        heading_sm: "text-[20px] font-[500] text-hnl1d",
+        paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
         button_primary: "action primary hnl-btn text-white",
         button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
         flex_center: "flex items-center justify-center",
@@ -196,13 +196,13 @@ Initial Development: 15 hours
             /* HTML */ `
                 <section class="ab-customer-service text-center hidden lg:block">
                     <div class="container">
-                        <div class="section-title">
+                        <div class="section-title mb-12">
                             <h3 class="text-[22px] font-semibold leading-none">
-                                Top Notch <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service Desktop</a></strong>
+                                Top Notch <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service</a></strong>
                             </h3>
                             <h5 class="font-normal my-[15px]">Here's what our customers have to say ...</h5>
                         </div>
-                        <div class="ab-customer-service__review-grid mx-auto my-5 text-gray-700 body-font">
+                        <div class="ab-customer-service__review-grid mx-auto text-gray-700 body-font">
                             ${service_review_grid_data
                                 .map(
                                     (col) => /* HTML */ `
@@ -213,8 +213,8 @@ Initial Development: 15 hours
                                                         <div class="ab-customer-service__review-card card w-full card-interactive ${item.className}">
                                                             <div class="item">
                                                                 <div class="ban1 text-left">
-                                                                    <h5 class="customer-service-name ${TAILWIND_STYLES.heading_sm}">${item.name}</h5>
-                                                                    <p class="customer-service-text ${TAILWIND_STYLES.paragraph}">${item.text}</p>
+                                                                    <h5 class="customer-service-name mb-3.75 ${TAILWIND_STYLES.heading_sm}">${item.name}</h5>
+                                                                    <p class="customer-service-text mb-5 ${TAILWIND_STYLES.paragraph}">${item.text}</p>
                                                                     <div class="customer-service-quotation">
                                                                         <img src="${ASSETS.quotation}" alt="Quotation" class="" />
                                                                     </div>

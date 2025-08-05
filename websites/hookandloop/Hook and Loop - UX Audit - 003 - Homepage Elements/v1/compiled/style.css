@@ -92,6 +92,10 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-see-all-customization-cta:hover {
   background: none;
 }
+.AB-HOMEPAGE-REDESIGN .ab-customer-service {
+  padding-top: 60px;
+  padding-bottom: 91px;
+}
 .AB-HOMEPAGE-REDESIGN .ab-customer-service__review-grid {
   width: max-content;
   display: grid;
@@ -108,11 +112,6 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-name,
 .AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-text {
   color: rgb(55, 65, 81);
-}
-.AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-text {
-  margin-bottom: 20px;
-  line-height: 24px;
-  text-wrap: pretty;
 }
 .AB-HOMEPAGE-REDESIGN .ab-customer-service .customer-service-quotation {
   display: flex;
