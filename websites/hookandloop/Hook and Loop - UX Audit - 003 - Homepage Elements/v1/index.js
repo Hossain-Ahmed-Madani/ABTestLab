@@ -116,7 +116,7 @@ Initial Development: 15 hours
             item.className = TAILWIND_STYLES.button_primary_sm;
         });
 
-        document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = `mt-[15px] ${TAILWIND_STYLES.button_secondary}`;
+        document.querySelector(".custom-converting-panel .custom-converting-inner > .actions a").className = `ab-customize-services-cta mt-[15px] ${TAILWIND_STYLES.button_secondary}`;
     }
 
     function createBrandsSectionLayout() {
@@ -344,7 +344,7 @@ Initial Development: 15 hours
         document.querySelector(".hook-loop-promotion .container").className = "ab-hook-loop-promotion__container";
         document.querySelector(".hook-loop-promotion h2").className = "ab-hook-loop-promotion__header mb-6";
         document.querySelector(".hook-loop-promotion p.read-button").className = `read-button flex justify-start`;
-        document.querySelector(".hook-loop-promotion .action.primary.read-more").className = `w-full my-6 ${TAILWIND_STYLES.button_secondary}`;
+        document.querySelector(".hook-loop-promotion .action.primary.read-more").className = `ab-promotion-read-more-cta w-full my-6 ${TAILWIND_STYLES.button_secondary}`;
         document.querySelector(".hook-loop-promotion .call-or-email").className = "call-or-email bg-white border border-hnld7 p-4 rounded-sm";
         document.querySelector(".hook-loop-promotion .call-or-email p").className = "text-[18px] font-medium text-center";
     }

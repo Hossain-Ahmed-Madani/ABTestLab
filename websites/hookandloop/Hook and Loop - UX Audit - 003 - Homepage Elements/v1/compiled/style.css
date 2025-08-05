@@ -242,6 +242,9 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container > div {
   width: 100%;
 }
+.AB-HOMEPAGE-REDESIGN .ab-promotion-read-more-cta {
+  min-width: 100%;
+}
 @media screen and (min-width: 768px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
     display: grid;
@@ -308,6 +311,9 @@ lg: 1024px
   }
   .AB-HOMEPAGE-REDESIGN .ab-newsletter-and-promotion__container > div {
     width: 50%;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-promotion-read-more-cta {
+    min-width: max-content;
   }
 }
 @media screen and (min-width: 1280px) {

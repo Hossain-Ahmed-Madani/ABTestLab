@@ -219,10 +219,6 @@ lg: 1024px
         color: rgba(55, 65, 81, 1);
     }
 
-    .ab-customer-service .customer-service-text {
-        // margin-bottom: 20px;
-    }
-
     .ab-customer-service .customer-service-quotation {
         display: flex;
         justify-content: flex-end;
@@ -301,6 +297,10 @@ lg: 1024px
         width: 100%;
     }
 
+    .ab-promotion-read-more-cta {
+        min-width: 100%;
+    }
+
     @media screen and (min-width: 768px) {
         .ab-hookloop-features__top-items {
             display: grid;
@@ -362,11 +362,6 @@ lg: 1024px
             max-width: 360px;
         }
 
-        // .ab-hookloop-features__top-items {
-        //     display: grid;
-        //     grid-template-columns: repeat(4, 1fr);
-        // }
-
         .ab-hookloop-features__bottom-items .action.primary.hnl-btn {
             min-width: 320px;
         }
@@ -389,6 +384,10 @@ lg: 1024px
 
         .ab-newsletter-and-promotion__container > div {
             width: 50%;
+        }
+
+        .ab-promotion-read-more-cta {
+            min-width: max-content;
         }
     }
 
