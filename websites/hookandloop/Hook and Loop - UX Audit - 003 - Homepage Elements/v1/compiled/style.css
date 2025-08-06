@@ -279,6 +279,11 @@ lg: 1024px
   min-height: 37px;
   object-fit: contain;
 }
+.AB-HOMEPAGE-REDESIGN .ab-subscribe-cta {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
 @media screen and (min-width: 768px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
     display: grid;
@@ -327,6 +332,9 @@ lg: 1024px
   }
   .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item {
     max-width: 360px;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .item {
+    padding: 24px;
   }
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .action.primary.hnl-btn {
     min-width: 320px;

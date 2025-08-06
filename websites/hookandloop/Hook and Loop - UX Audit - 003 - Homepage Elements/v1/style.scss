@@ -340,6 +340,12 @@ lg: 1024px
         object-fit: contain;
     }
 
+    .ab-subscribe-cta {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
     @media screen and (min-width: 768px) {
         .ab-hookloop-features__top-items {
             display: grid;
@@ -399,6 +405,10 @@ lg: 1024px
 
         .ab-hero-section__all-products-item {
             max-width: 360px;
+        }
+
+        .ab-hookloop-features__bottom-items .item {
+            padding: 24px;
         }
 
         .ab-hookloop-features__bottom-items .action.primary.hnl-btn {

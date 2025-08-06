@@ -450,13 +450,13 @@ Initial Development: 15 hours
     function modifyNewsLetterAndPromotionSection() {
         document.querySelector(".newsletter-subscription").className = "newsletter-subscription text-center text-white flex flex-col items-center bg-[#333]";
         document.querySelector(".newsletter-subscription .section-title p").className = `font-light ${TAILWIND_STYLES.paragraph}`;
-        document.querySelector(".newsletter-subscription form.form.subscribe button").className = `p-[15px] rounded-r-[3px] font-bold ${TAILWIND_STYLES.button_primary}`;
+        document.querySelector(".newsletter-subscription form.form.subscribe button").className = `ab-subscribe-cta p-[15px] rounded-r-[3px] font-bold ${TAILWIND_STYLES.button_primary}`;
 
         document.querySelector(".hook-loop-promotion").className = "hook-loop-promotion text-left text-hnl1d";
         document.querySelector(".hook-loop-promotion .container").className = "ab-hook-loop-promotion__container";
         document.querySelector(".hook-loop-promotion h2").className = "ab-hook-loop-promotion__header mb-6";
         document.querySelector(".hook-loop-promotion p.read-button").className = `read-button flex justify-start`;
-        document.querySelector(".hook-loop-promotion .action.primary.read-more").className = `ab-promotion-read-more-cta w-full my-6 ${TAILWIND_STYLES.button_secondary}`;
+        document.querySelector(".hook-loop-promotion .action.primary.read-more").className = `ab-promotion-read-more-cta w-full mt-5 mb-6 ${TAILWIND_STYLES.button_secondary}`;
         document.querySelector(".hook-loop-promotion .call-or-email").className = "call-or-email bg-white border border-hnld7 p-4 rounded-sm";
         document.querySelector(".hook-loop-promotion .call-or-email p").className = "text-[18px] font-medium text-center";
     }
