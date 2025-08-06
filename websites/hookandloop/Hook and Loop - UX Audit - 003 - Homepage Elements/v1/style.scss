@@ -27,6 +27,10 @@ lg: 1024px
         vertical-align: middle;
     }
 
+    .ab-leading-8 {
+        line-height: 32px;
+    }
+
     .ab-hero-section {
         background-image: url("https://www.hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner_Mobile.png");
         background-size: cover;
@@ -119,10 +123,16 @@ lg: 1024px
         color: rgba(29, 29, 29, 1);
     }
 
+    .custom-converting-panel__subtitle {
+        margin-top: 5px;
+        margin-bottom: 16px;
+    }
+
     .ab-btn-secondary {
         background: none;
         border: 2px solid rgba(29, 29, 29, 1);
         border-radius: 4px;
+        padding: 12px 22px;
     }
 
     .ab-btn-secondary:hover {
@@ -196,6 +206,10 @@ lg: 1024px
     .ab-customer-service {
         margin-top: 60px;
         margin-bottom: 90px;
+    }
+
+    .ab-customer-service .section-title h5 {
+        padding-top: 11px;
     }
 
     .ab-customer-service__review-grid {
@@ -453,71 +467,42 @@ lg: 1024px
     }
 
     // ================ ANIMATION ================
-    // /* Right to Left Infinite Scroll Animation */
-    // @keyframes scroll-right-to-left {
-    //     0% {
-    //         transform: translateX(0%);
-    //     }
-    //     100% {
-    //         transform: translateX(-100%);
-    //     }
-    // }
 
-    // .scroll-infinite-rtl {
-    //     display: flex;
-    //     white-space: nowrap;
-    //     animation: scroll-right-to-left 20s linear infinite;
-    // }
+    .scroll-infinite-rtl {
+        white-space: nowrap;
+        animation: scroll-right-to-left 15s linear infinite;
+    }
 
-    // /* Left to Right Infinite Scroll Animation */
-    // @keyframes scroll-left-to-right {
-    //     0% {
-    //         transform: translateX(-100%);
-    //     }
-    //     100% {
-    //         transform: translateX(0%);
-    //     }
-    // }
+    .scroll-infinite-ltr {
+        white-space: nowrap;
+        animation: scroll-left-to-right 15s linear infinite;
+    }
 
-    // .scroll-infinite-ltr {
-    //     display: flex;
-    //     white-space: nowrap;
-    //     animation: scroll-left-to-right 20s linear infinite;
-    // }
+    /* Optional: Add these if you want smoother performance */
+    .scroll-infinite-rtl,
+    .scroll-infinite-ltr {
+        will-change: transform;
+        backface-visibility: hidden;
+    }
+}
 
-    // ...existing code...
-
+// =========== KeyFrames ===========
 /* Right to Left Infinite Scroll Animation */
 @keyframes scroll-right-to-left {
     0% {
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
-}
-
-.scroll-infinite-rtl {
-    display: flex;
-    white-space: nowrap;
-    animation: scroll-right-to-left 20s linear infinite;
 }
 
 /* Left to Right Infinite Scroll Animation */
 @keyframes scroll-left-to-right {
     0% {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
     100% {
         transform: translateX(0);
     }
-}
-
-.scroll-infinite-ltr {
-    display: flex;
-    white-space: nowrap;
-    animation: scroll-left-to-right 20s linear infinite;
-}
-
-// ...existing code...
 }

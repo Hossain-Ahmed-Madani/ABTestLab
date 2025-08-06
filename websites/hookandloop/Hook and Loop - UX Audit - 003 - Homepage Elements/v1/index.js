@@ -42,7 +42,7 @@ Initial Development: 15 hours
         paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
         button_primary: "action primary hnl-btn text-white",
         button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
-        button_secondary: "ab-btn-secondary px-5 py-2.5 flex  justify-center text-[15px] font-[600] max-w-max uppercase",
+        button_secondary: "ab-btn-secondary flex  justify-center text-[15px] font-[600] max-w-max uppercase",
         flex_center: "flex items-center justify-center",
     };
 
@@ -76,24 +76,24 @@ Initial Development: 15 hours
                             in Hook & Loop!<sup class="text-sm ab-sup">TM</sup>
                         </h2>
                         <div class="ab-hero-section__brands flex justify-between items-center">
-                            <a href="https://www.hookandloop.com/brands/duragrip" class="ab-hero-section__brands-item ${TAILWIND_STYLES.flex_center}">
+                            <a href="https://www.hookandloop.com/brands/duragrip" class="ab-hero-section__brands-item overflow-hidden ${TAILWIND_STYLES.flex_center}">
                                 <img src="${ASSETS.duragrip}" alt="Duragrip" class="" />
                             </a>
-                            <a href="https://www.hookandloop.com/brands/velcro" class="ab-hero-section__brands-item ${TAILWIND_STYLES.flex_center}">
+                            <a href="https://www.hookandloop.com/brands/velcro" class="ab-hero-section__brands-item overflow-hidden ${TAILWIND_STYLES.flex_center}">
                                 <img src="${ASSETS.velcro}" alt="Velcro" class="" />
                             </a>
                         </div>
                         <div class="ab-hero-section__all-products flex flex-col items-center justify-center">
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="#" class="ab-hero-section__all-products-item ${TAILWIND_STYLES.flex_center}">Whole Rolls</a>
-                                <a href="#" class="ab-hero-section__all-products-item ${TAILWIND_STYLES.flex_center}">Cut Pieces</a>
+                                <a href="#" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Whole Rolls</a>
+                                <a href="#" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Cut Pieces</a>
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="#" class="ab-hero-section__all-products-item ${TAILWIND_STYLES.flex_center}">Straps</a>
-                                <a href="#" class="ab-hero-section__all-products-item ${TAILWIND_STYLES.flex_center}">Specialty Options</a>
+                                <a href="#" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Straps</a>
+                                <a href="#" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Specialty Options</a>
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="https://www.hookandloop.com/products" class="ab-hero-section__all-products-item mx-auto ${TAILWIND_STYLES.flex_center}">See all Products</a>
+                                <a href="https://www.hookandloop.com/products" class="ab-hero-section__all-products-item overflow-hidden mx-auto ${TAILWIND_STYLES.flex_center}">See all Products</a>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@ Initial Development: 15 hours
 
         const pItem = document.querySelector(".custom-converting-panel .section-title p");
         if (pItem) {
-            pItem.classList.remove("text-hnl1d");
+            pItem.className = `custom-converting-panel__subtitle ${TAILWIND_STYLES.paragraph}`;
             pItem.innerText = "We are a full service Hook & Loop conversion facility. Let us handle the hard work for you.";
         }
 
@@ -181,14 +181,23 @@ Initial Development: 15 hours
                 <section class="ab-hook-loop-brands bg-white overflow-hidden">
                     <div class="ab-hook-loop-brands__container">
                         <div class="section-title">
-                            <h2 class="text-[22px] lg:text-2xl font-semibold text-center mb-12">
+                            <h2 class="text-[24px] ab-leading-8 font-semibold text-center mb-12">
                                 Solving Hook and Loop <br class="md:hidden" />
                                 Needs Across the World <br class="md:hidden" />
                                 for 30 Years
                             </h2>
                         </div>
-                        <div class="ab-hook-loop-brands__auto-scroller-container">
+                        <div class="ab-hook-loop-brands__auto-scroller-container overflow-hidden">
                             <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-rtl">
+                                ${brands_data
+                                    .map(
+                                        (item) => /* HTML */ `
+                                            <div class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}">
+                                                <img src="${item.image}" alt="${item.image_alt}" title="${item.image_title}" class="ab-hook-loop-brand__image" />
+                                            </div>
+                                        `
+                                    )
+                                    .join("")}
                                 ${brands_data
                                     .map(
                                         (item) => /* HTML */ `
@@ -200,6 +209,15 @@ Initial Development: 15 hours
                                     .join("")}
                             </div>
                             <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-ltr">
+                                ${brands_data
+                                    .map(
+                                        (item) => /* HTML */ `
+                                            <div class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}">
+                                                <img src="${item.image}" alt="${item.image_alt}" title="${item.image_title}" class="ab-hook-loop-brand__image" />
+                                            </div>
+                                        `
+                                    )
+                                    .join("")}
                                 ${brands_data
                                     .map(
                                         (item) => /* HTML */ `
@@ -292,7 +310,7 @@ Initial Development: 15 hours
                             <h3 class="text-[22px] font-semibold leading-none">
                                 Top Notch <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service</a></strong>
                             </h3>
-                            <h5 class="font-normal my-[15px]">Here's what our customers have to say ...</h5>
+                            <h5 class="font-normal">Here's what our customers have to say ...</h5>
                         </div>
                         <div class="ab-customer-service__review-grid mx-auto text-gray-700 body-font">
                             ${service_review_grid_data
