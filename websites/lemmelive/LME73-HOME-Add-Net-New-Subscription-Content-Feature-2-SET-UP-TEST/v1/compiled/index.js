@@ -28,8 +28,23 @@ var testInfo = {
                 }, frequency);
             }
         } catch (error) {
+            console.warn(error);
             return;
         }
+    }
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log(`LME73: Firing GA4 Event: ${eventName} - ${eventLabel}`);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
     }
 
     const ASSETS = {
@@ -54,7 +69,7 @@ var testInfo = {
                         <div class="ab-subscription-section__text-col col col-md-6 col-lg-5">
                             <h1 class="ab-subscription-section__heading">
                                 <span class="marquee-squiggle">
-                                    <span class="marquee-squiggle__copy">save up to 20%  </span>
+                                    <span class="marquee-squiggle__copy">save up to 20% </span>
                                     <div bis_skin_checked="1" class="marquee-squiggle__wrapper">
                                         ${Array.from(
                                             { length: 18 },
@@ -106,7 +121,7 @@ var testInfo = {
                             </div>
 
                             <div bis_skin_checked="1" class="ab-subscription-section__cta">
-                                <div bis_skin_checked="1" class="btn__wrapper ">
+                                <div bis_skin_checked="1" class="btn__wrapper">
                                     <a class="btn" href="/products/byob-3" title="SUBSCRIBE NOW">
                                         <span class="btn__text"><span class="btn__text-inner">SUBSCRIBE NOW</span> </span> <span class="btn__filler"></span>
                                     </a>
@@ -121,6 +136,56 @@ var testInfo = {
         targetNode.insertAdjacentHTML(insertPosition, layout);
     }
 
+    function isElementVisibleInViewport(el) {
+        let top = el.getBoundingClientRect().top;
+        let right = el.getBoundingClientRect().right;
+        let bottom = el.getBoundingClientRect().bottom;
+        let left = el.getBoundingClientRect().left;
+        let innerWidth = window.innerWidth;
+        let innerHeight = window.innerHeight;
+
+        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+    }
+
+    function scrollHandler(e) {
+        const targetNode = document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9");
+        const isElementVisible = isElementVisibleInViewport(targetNode);
+        if (isElementVisible) {
+            fireGA4Event("LME73_ViewEvent", "User reaches hits the 'Lemme Get Real Results' section");
+            window.removeEventListener("scroll", scrollHandler);
+        }
+    }
+
+    function addGA4ScrollEventLister() {
+        waitForElement(
+            () => document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9"),
+            () => {
+                const targetNode = document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9");
+                const isElementVisible = isElementVisibleInViewport(targetNode);
+
+                if (isElementVisible) {
+                    fireGA4Event("LME73_ViewEvent", "User reaches hits the 'Lemme Get Real Results' section");
+                } else {
+                    window.addEventListener("scroll", scrollHandler);
+                }
+            }
+        );
+    }
+
+    function addGA4ClickEventListener() {
+        waitForElement(
+            () => document.querySelector(".ab-subscription-section__cta .btn"),
+            () => {
+                const ctaButton = document.querySelector(".ab-subscription-section__cta .btn");
+                if (ctaButton) {
+                    ctaButton.addEventListener("click", () => {
+                        fireGA4Event("LME73_CTAClick", "LME73 Subscription CTA");
+                    });
+                }
+            }
+        );
+    }
+
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
 
@@ -132,6 +197,8 @@ var testInfo = {
         );
 
         createLayout();
+        addGA4ScrollEventLister();
+        addGA4ClickEventListener();
     }
 
     function hasAllTargetElements() {
