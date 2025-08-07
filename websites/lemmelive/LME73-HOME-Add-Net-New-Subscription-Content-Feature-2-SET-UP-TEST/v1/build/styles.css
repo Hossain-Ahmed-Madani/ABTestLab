@@ -1,232 +1,229 @@
 .AB-LME73 .ab-subscription-section {
-  margin: 30px 0;
+    margin: 30px 0;
 }
 .AB-LME73 .ab-subscription-section__container {
-  padding-left: 0;
-  padding-right: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 .AB-LME73 .ab-subscription-section__row {
-  background: url("https://sb.monetate.net/img/1/1597/5797218.png") no-repeat
-    bottom;
-  background-size: cover;
-  position: relative;
-  border: 2px solid rgb(0, 0, 0);
-  border-radius: 20px;
-  margin-left: 22px;
-  margin-right: 22px;
-  padding: 20px 22px;
-  flex-direction: column-reverse;
-  overflow: hidden;
+    background: url("https://sb.monetate.net/img/1/1597/5797218.png") no-repeat bottom;
+    background-size: cover;
+    position: relative;
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 20px;
+    margin-left: 22px;
+    margin-right: 22px;
+    padding: 20px 22px;
+    flex-direction: column-reverse;
+    overflow: hidden;
 }
 .AB-LME73 .ab-subscription-section .col {
-  padding: 0;
+    padding: 0;
 }
 .AB-LME73 .ab-subscription-section__image-col {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .AB-LME73 .ab-subscription-section__image-col img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: bottom;
-  margin-top: 30px;
-}
-.AB-LME73 .ab-subscription-section__heading {
-  margin-bottom: 20px;
-}
-.AB-LME73 .ab-subscription-section__usp_area {
-  margin-bottom: 30px;
-}
-.AB-LME73 .ab-subscription-section__cta {
-  margin-bottom: 20px;
-}
-.AB-LME73 .ab-subscription-section__heading {
-  font-family: "Recoleta", helvetica, arial, sans-serif;
-  font-weight: 500;
-  font-style: Medium;
-  font-size: 36px;
-  line-height: 55px;
-  letter-spacing: 0;
-  color: rgb(0, 0, 0);
-}
-.AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
-  display: block;
-  line-height: 150%;
-}
-.AB-LME73 .ab-subscription-section__sub-heading {
-  font-family:
-    Mier A,
-    helvetica,
-    arial,
-    sans-serif;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0;
-  color: rgb(0, 0, 0);
-}
-.AB-LME73 .ab-subscription-section__usp_area {
-  padding-left: 0;
-}
-.AB-LME73 .ab-subscription-section__usp_area ul {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 7px;
-  max-width: 100%;
-}
-.AB-LME73 .ab-subscription-section__usp_area li {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  gap: 10px;
-}
-.AB-LME73 .ab-subscription-section__usp_area .icon_area {
-  margin-right: 0;
-}
-.AB-LME73 .ab-subscription-section__usp_area img {
-  width: 40px;
-  min-width: 40px;
-  height: 40px;
-  min-height: 40px;
-}
-.AB-LME73 .ab-subscription-section__usp_area span {
-  font-family:
-    Mier A,
-    helvetica,
-    arial,
-    sans-serif !important;
-  font-weight: 500;
-  font-size: 14px !important;
-  line-height: 100% !important;
-  text-transform: none !important;
-  margin: 0;
-  text-align: left;
-}
-.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
-  background: #000;
-  color: #fff;
-  padding: 20px 10px;
-  transition: all 0.3s ease-in-out;
-  font-family:
-    Mier A,
-    helvetica,
-    arial,
-    sans-serif;
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 16px;
-  line-height: 100%;
-  text-align: center;
-  text-transform: capitalize;
-}
-.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn:hover {
-  background: #fff;
-  color: #000;
-}
-@media screen and (min-width: 1024px) {
-  .AB-LME73 .ab-subscription-section {
-    margin-top: 117px;
-    margin-bottom: 82px;
-  }
-  .AB-LME73 .ab-subscription-section__container {
-    padding-right: var(--bs-gutter-x, var(--container-padding));
-    padding-left: var(--bs-gutter-x, var(--container-padding));
-  }
-  .AB-LME73 .ab-subscription-section__row {
-    background: none;
-    flex-direction: row;
-    position: relative;
-    padding: 42px 32px 51px;
-    margin-right: 5px;
-    margin-left: 0px;
-  }
-  .AB-LME73 .ab-subscription-section__row:after {
-    content: "";
-    background-image: url("https://sb.monetate.net/img/1/1597/5797019.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: left center;
     width: 100%;
     height: 100%;
-    left: -50px;
-    top: 0;
-    bottom: 0;
-    z-index: -1;
-    position: absolute;
-  }
-  .AB-LME73 .ab-subscription-section__image-col img {
-    width: 100%;
-    margin: 0;
-    padding: 0 50px;
     object-fit: contain;
-    object-position: center;
-  }
-  .AB-LME73 .ab-subscription-section__heading {
+    object-position: bottom;
+    margin-top: 30px;
+}
+.AB-LME73 .ab-subscription-section__heading {
+    margin-bottom: 20px;
+}
+.AB-LME73 .ab-subscription-section__usp_area {
+    margin-bottom: 30px;
+}
+.AB-LME73 .ab-subscription-section__cta {
+    margin-bottom: 20px;
+}
+.AB-LME73 .ab-subscription-section__heading {
+    font-family: "Recoleta", helvetica, arial, sans-serif;
     font-weight: 500;
-    font-size: 55px;
-    line-height: 60px;
-    margin-bottom: 15px;
-  }
-  .AB-LME73 .ab-subscription-section__sub-heading {
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 100%;
-    margin-bottom: 26px;
-  }
-  .AB-LME73 .ab-subscription-section__usp_area {
-    margin-top: 0;
-    margin-bottom: 39px;
-  }
-  .AB-LME73 .ab-subscription-section__usp_area ul {
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 40px;
-    row-gap: 29px;
-  }
-  .AB-LME73 .ab-subscription-section__usp_area li {
-    gap: 15px;
-  }
-  .AB-LME73 .ab-subscription-section__usp_area img {
-    width: 60px;
-    min-width: 60px;
-    height: 60px;
-    min-height: 60px;
-  }
-  .AB-LME73 .ab-subscription-section__usp_area span {
+    font-style: Medium;
+    font-size: 36px;
+    line-height: 55px;
+    letter-spacing: 0;
+    color: rgb(0, 0, 0);
+}
+.AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+    display: block;
+    line-height: 150%;
+}
+.AB-LME73 .ab-subscription-section__sub-heading {
     font-family:
-      Mier A,
-      helvetica,
-      arial,
-      sans-serif !important;
+        Mier A,
+        helvetica,
+        arial,
+        sans-serif;
     font-weight: 500;
-    font-size: 16px !important;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    color: rgb(0, 0, 0);
+}
+.AB-LME73 .ab-subscription-section__usp_area {
+    padding-left: 0;
+}
+.AB-LME73 .ab-subscription-section__usp_area ul {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 7px;
+    max-width: 100%;
+}
+.AB-LME73 .ab-subscription-section__usp_area li {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+}
+.AB-LME73 .ab-subscription-section__usp_area .icon_area {
+    margin-right: 0;
+}
+.AB-LME73 .ab-subscription-section__usp_area img {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+}
+.AB-LME73 .ab-subscription-section__usp_area span {
+    font-family:
+        Mier A,
+        helvetica,
+        arial,
+        sans-serif !important;
+    font-weight: 500;
+    font-size: 14px !important;
     line-height: 100% !important;
     text-transform: none !important;
-  }
-  .AB-LME73 .ab-subscription-section__cta {
-    margin-bottom: 0;
-  }
-  .AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
-    padding: 18.5px 39px;
+    margin: 0;
+    text-align: left;
+}
+.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
+    background: #000;
+    color: #fff;
+    padding: 20px 10px;
+    transition: all 0.3s ease-in-out;
+    font-family:
+        Mier A,
+        helvetica,
+        arial,
+        sans-serif;
     font-weight: 700;
-    font-size: 18px;
+    font-style: Bold;
+    font-size: 16px;
     line-height: 100%;
     text-align: center;
     text-transform: capitalize;
-  }
+}
+.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn:hover {
+    background: #fff;
+    color: #000;
+}
+@media screen and (min-width: 1024px) {
+    .AB-LME73 .ab-subscription-section {
+        margin-top: 117px;
+        margin-bottom: 82px;
+    }
+    .AB-LME73 .ab-subscription-section__container {
+        padding-right: var(--bs-gutter-x, var(--container-padding));
+        padding-left: var(--bs-gutter-x, var(--container-padding));
+    }
+    .AB-LME73 .ab-subscription-section__row {
+        background: none;
+        flex-direction: row;
+        position: relative;
+        padding: 42px 32px 51px;
+        margin-right: 5px;
+        margin-left: 0px;
+    }
+    .AB-LME73 .ab-subscription-section__row:after {
+        content: "";
+        background-image: url("https://sb.monetate.net/img/1/1597/5797019.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: left center;
+        width: 100%;
+        height: 100%;
+        left: -50px;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        position: absolute;
+    }
+    .AB-LME73 .ab-subscription-section__image-col img {
+        width: 100%;
+        margin: 0;
+        padding: 0 50px;
+        object-fit: contain;
+        object-position: center;
+    }
+    .AB-LME73 .ab-subscription-section__heading {
+        font-weight: 500;
+        font-size: 55px;
+        line-height: 60px;
+        margin-bottom: 15px;
+    }
+    .AB-LME73 .ab-subscription-section__sub-heading {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 100%;
+        margin-bottom: 26px;
+    }
+    .AB-LME73 .ab-subscription-section__usp_area {
+        margin-top: 0;
+        margin-bottom: 39px;
+    }
+    .AB-LME73 .ab-subscription-section__usp_area ul {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 40px;
+        row-gap: 29px;
+    }
+    .AB-LME73 .ab-subscription-section__usp_area li {
+        gap: 15px;
+    }
+    .AB-LME73 .ab-subscription-section__usp_area img {
+        width: 60px;
+        min-width: 60px;
+        height: 60px;
+        min-height: 60px;
+    }
+    .AB-LME73 .ab-subscription-section__usp_area span {
+        font-family:
+            Mier A,
+            helvetica,
+            arial,
+            sans-serif !important;
+        font-weight: 500;
+        font-size: 16px !important;
+        line-height: 100% !important;
+        text-transform: none !important;
+    }
+    .AB-LME73 .ab-subscription-section__cta {
+        margin-bottom: 0;
+    }
+    .AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
+        padding: 18.5px 39px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 100%;
+        text-align: center;
+        text-transform: capitalize;
+    }
 }
 
 @media screen and (min-width: 1025px) {
-  .AB-LME73--v1
-    #shopify-section-template--19531691229398__16575845243735cab9
-    > .trust-bar {
-    padding-bottom: 0;
-  }
+    .AB-LME73--v1 #shopify-section-template--19531691229398__16575845243735cab9 > .trust-bar {
+        padding-bottom: 0;
+    }
 }
 
 .AB-LME73--v2 #shopify-section-template--19531691229398__16575876165402b13f {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }

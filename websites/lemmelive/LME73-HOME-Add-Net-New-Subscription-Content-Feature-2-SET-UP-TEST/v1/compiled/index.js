@@ -4,6 +4,11 @@ var testInfo = {
 	id: id,
 	name: name};
 
+// url: ^https:\/\/lemmelive\.com\/?(?:\?.*)?$
+// preview v1: https://marketer.monetate.net/control/preview/12706/4F6BCPW3N5GXVO0PKI77YWO6GSJJXLGU/lme73-home-add-net-new-subscription-content-feature
+// preview v2: https://marketer.monetate.net/control/preview/12706/ZYS6ZHQK6UZ80H0V1K8XSZS7PIHB2BSO/lme73-home-add-net-new-subscription-content-feature
+
+
 (() => {
     const TEST_CONFIG = {
         client: "Acadia",
