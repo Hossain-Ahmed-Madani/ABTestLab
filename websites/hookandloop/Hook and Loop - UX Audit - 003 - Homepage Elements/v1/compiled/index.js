@@ -5,6 +5,7 @@ var testInfo = {
 	name: name};
 
 // https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
+// https://www.hookandloop.com/?qa5=true
 
 /* 
 
@@ -94,7 +95,9 @@ Initial Development: 15 hours
                                 <a href="https://www.hookandloop.com/products/specialty" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Specialty Options</a>
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="https://www.hookandloop.com/products" class="ab-hero-section__all-products-item ab-hero-section__all-products-item--see-all  overflow-hidden mx-auto ${TAILWIND_STYLES.flex_center} uppercase"
+                                <a
+                                    href="https://www.hookandloop.com/products"
+                                    class="ab-hero-section__all-products-item ab-hero-section__all-products-item--see-all  overflow-hidden mx-auto ${TAILWIND_STYLES.flex_center} uppercase"
                                     >See all Products</a
                                 >
                             </div>
@@ -191,7 +194,7 @@ Initial Development: 15 hours
                             </h2>
                         </div>
                         <div class="ab-hook-loop-brands__auto-scroller-container overflow-hidden">
-                            ${Array.from({length: 2})
+                            ${Array.from({ length: 2 })
                                 .map(
                                     (_, index) => /* HTML */ `
                                         <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index === 0 ? "scroll-infinite-rtl" : "scroll-infinite-ltr"}">
@@ -399,12 +402,23 @@ Initial Development: 15 hours
                                             <li class="marker:hnl0-link">Fast Response Times</li>
                                         </ul>
                                         <div class="action-rw flex flex-col lg:flex-row">
-                                            <a data-content-type="features" href="https://www.hookandloop.com/product-development" class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}">Start Now For Free!</a>
+                                            <a data-content-type="features" href="https://www.hookandloop.com/product-development" class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}"
+                                                >Start Now For Free!</a
+                                            >
                                             <div class="or-call leading-[28px] text-[16px] mt-2 lg:mt-0 font-bold lg:ml-2 flex-col lg:flex-row gap-1 ${TAILWIND_STYLES.flex_center}">
                                                 <span class="font-medium">Or</span>
                                                 <span class="inline-flex items-center gap-1">
                                                     <span class="ml-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18" role="img">
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke-width="2"
+                                                            stroke="currentColor"
+                                                            width="18"
+                                                            height="18"
+                                                            role="img"
+                                                        >
                                                             <path
                                                                 stroke-linecap="round"
                                                                 stroke-linejoin="round"
