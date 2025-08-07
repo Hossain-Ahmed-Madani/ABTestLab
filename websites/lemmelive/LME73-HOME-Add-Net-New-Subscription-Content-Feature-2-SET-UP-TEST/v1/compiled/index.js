@@ -33,7 +33,7 @@ var testInfo = {
     }
 
     const ASSETS = {
-        products: "https://sb.monetate.net/img/1/1597/5797018.png",
+        products: "https://sb.monetate.net/img/1/1597/5797275.png",
         guaranteed_delivery: "https://sb.monetate.net/img/1/1597/5797020.png",
         earn_loyalty_points: "https://sb.monetate.net/img/1/1597/5797021.png",
         vip_access: "https://sb.monetate.net/img/1/1597/5797022.png",
@@ -54,7 +54,7 @@ var testInfo = {
                         <div class="ab-subscription-section__text-col col col-md-6 col-lg-5">
                             <h1 class="ab-subscription-section__heading">
                                 <span class="marquee-squiggle">
-                                    <span class="marquee-squiggle__copy">save up to 20%</span>
+                                    <span class="marquee-squiggle__copy">save up to 20%  </span>
                                     <div bis_skin_checked="1" class="marquee-squiggle__wrapper">
                                         ${Array.from(
                                             { length: 18 },
@@ -80,7 +80,7 @@ var testInfo = {
                                     </div>
                                 </span>
 
-                                on your favorites
+                                <span class="marquee-squiggle__copy">on your favorites</span>
                             </h1>
 
                             <h2 class="ab-subscription-section__sub-heading">With our subscription program, delivered straight to your door.</h2>
