@@ -1,0 +1,107 @@
+.AB-LME73 .ab-subscription-section {
+  margin: 30px 0;
+}
+.AB-LME73 .ab-subscription-section .ab-subscription-section__container {
+  padding-left: 0;
+  padding-right: 0;
+}
+.AB-LME73 .ab-subscription-section .ab-subscription-section__row {
+  background: url("https://sb.monetate.net/img/1/1597/5797218.png") no-repeat bottom;
+  background-size: cover;
+  position: relative;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 20px;
+  margin-left: 22px;
+  margin-right: 22px;
+  padding: 20px 22px;
+  flex-direction: column-reverse;
+  overflow: hidden;
+}
+.AB-LME73 .ab-subscription-section .col {
+  padding: 0;
+}
+.AB-LME73 .ab-subscription-section__image-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.AB-LME73 .ab-subscription-section__image-col img {
+  min-width: 385px;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+.AB-LME73 .ab-subscription-section__heading,
+.AB-LME73 .ab-subscription-section__sub-heading {
+  margin-bottom: 25px;
+}
+.AB-LME73 .ab-subscription-section__usp_area {
+  margin-bottom: 30px;
+}
+.AB-LME73 .ab-subscription-section__cta {
+  margin-bottom: 20px;
+}
+.AB-LME73 .ab-subscription-section__heading {
+  font-family: "Recoleta", helvetica, arial, sans-serif;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 36px;
+  line-height: 55px;
+  letter-spacing: 0;
+  color: rgb(0, 0, 0);
+}
+.AB-LME73 .ab-subscription-section__sub-heading {
+  font-family: Mier A, helvetica, arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0;
+  color: rgb(0, 0, 0);
+}
+.AB-LME73 .ab-subscription-section__usp_area {
+  padding-left: 0;
+}
+.AB-LME73 .ab-subscription-section__usp_area ul {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 7px;
+  max-width: 100%;
+}
+.AB-LME73 .ab-subscription-section__usp_area li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+.AB-LME73 .ab-subscription-section__usp_area .icon_area {
+  margin-right: 0;
+}
+.AB-LME73 .ab-subscription-section__usp_area img {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+}
+.AB-LME73 .ab-subscription-section__usp_area span {
+  margin: 0;
+  text-align: left;
+}
+.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
+  background: #000;
+  color: #fff;
+  padding: 20px 10px;
+  transition: all 0.3s ease-in-out;
+  font-family: Mier A, helvetica, arial, sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  text-transform: capitalize;
+}
+.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn:hover {
+  background: #fff;
+  color: #000;
+}
