@@ -1,0 +1,13 @@
+{
+  "id": "1754557086107_7003_LME73_HOME_Add_Net_New_Subscription_Content_Feature_2_SET_UP_TEST",
+  "name": "LME73-HOME-Add-Net-New-Subscription-Content-Feature-2-SET-UP-TEST",
+  "type": "A/B",
+  "website": "lemmelive",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-08-07T08:58:06.107Z",
+  "createdAtReadable": "07/08/2025, 2:58:06 pm",
+  "lastUpdated": "2025-08-07T08:58:06.525Z"
+}
