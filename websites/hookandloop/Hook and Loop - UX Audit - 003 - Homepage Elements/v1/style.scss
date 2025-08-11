@@ -27,6 +27,16 @@ lg: 1024px
         vertical-align: middle;
     }
 
+    .ab-heading-lg {
+        font-family: "poppins", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+    }
+
     .ab-leading-8 {
         line-height: 32px;
     }
@@ -140,8 +150,9 @@ lg: 1024px
     }
 
     .customer-service.ab-customer-service-mobile {
-        margin-top: 60px;
-        margin-bottom: 60px;
+        padding-top: 60px;
+        padding-bottom: 60px;
+        background-color: rgba(228, 228, 228, 1);
     }
 
     .customer-service.ab-customer-service-mobile .section-title {
@@ -201,6 +212,47 @@ lg: 1024px
         background-position: center;
         margin-top: auto;
         margin-left: auto;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Previous"],
+    .customer-service.ab-customer-service-mobile button[aria-label="Next"] {
+        width: 48px;
+        height: 48px;
+        border-radius: 4px;
+        border-radius: 4px;
+        box-shadow: 0px 0px 10px 0px rgba(215, 215, 215, 1);
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Previous"] svg,
+    .customer-service.ab-customer-service-mobile button[aria-label="Next"] svg {
+        display: none;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Previous"] {
+        margin-left: -30px;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Next"] {
+        margin-right: -30px;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Previous"]:after,
+    .customer-service.ab-customer-service-mobile button[aria-label="Next"]:after {
+        content: "";
+        width: 12px;
+        height: 24px;
+        background: url('data:image/svg+xml,<svg width="14" height="26" viewBox="0 0 14 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13L1 25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .customer-service.ab-customer-service-mobile button[aria-label="Previous"]:after {
+        transform: rotate(180deg);
     }
 
     .ab-customer-service {
@@ -346,6 +398,17 @@ lg: 1024px
         line-height: 24px;
     }
 
+    @media screen and (min-width: 375px) {
+        .customer-service .section-title h2 {
+            white-space: nowrap;
+        }
+    }
+    @media screen and (min-width: 450px) {
+        .ab-md-hidden {
+            display: none;
+        }
+    }
+
     @media screen and (min-width: 768px) {
         .ab-hookloop-features__top-items {
             display: grid;
@@ -354,6 +417,10 @@ lg: 1024px
     }
 
     @media screen and (min-width: 1024px) {
+        .ab-lg-hidden {
+            display: none;
+        }
+        
         .ab-heading-xl {
             font-weight: 600;
             font-size: 36px;
@@ -405,6 +472,16 @@ lg: 1024px
 
         .ab-hero-section__all-products-item {
             max-width: 360px;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 100%;
+            text-align: center;
+            vertical-align: middle;
+        }
+        .ab-hero-section__all-products-item--see-all {
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 22.5px;
         }
 
         .ab-hookloop-features__bottom-items .item {
@@ -445,7 +522,7 @@ lg: 1024px
         }
 
         .ab-promotion-read-more-cta {
-            min-width: max-content;
+            min-width: 210px;
         }
 
         .ab-hook-loop-brands__auto-scroller {

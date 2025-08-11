@@ -4,7 +4,9 @@ md: 768px
 lg: 1024px
 
 */
-
+.AB-HOMEPAGE-REDESIGN {
+    /* Optional: Add these if you want smoother performance */
+}
 .AB-HOMEPAGE-REDESIGN main#maincontent > .columns {
     row-gap: 0;
 }
@@ -12,6 +14,15 @@ lg: 1024px
     display: none;
 }
 .AB-HOMEPAGE-REDESIGN .ab-heading-xl {
+    font-family: "poppins", sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+}
+.AB-HOMEPAGE-REDESIGN .ab-heading-lg {
     font-family: "poppins", sans-serif;
     font-weight: 600;
     font-size: 24px;
@@ -114,8 +125,9 @@ lg: 1024px
     background: none;
 }
 .AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile {
-    margin-top: 60px;
-    margin-bottom: 60px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: rgb(228, 228, 228);
 }
 .AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile .section-title {
     margin-top: 0;
@@ -164,6 +176,41 @@ lg: 1024px
     background-position: center;
     margin-top: auto;
     margin-left: auto;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Previous"],
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Next"] {
+    width: 48px;
+    height: 48px;
+    border-radius: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 10px 0px rgb(215, 215, 215);
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Previous"] svg,
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Next"] svg {
+    display: none;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Previous"] {
+    margin-left: -30px;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Next"] {
+    margin-right: -30px;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Previous"]:after,
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Next"]:after {
+    content: "";
+    width: 12px;
+    height: 24px;
+    background: url('data:image/svg+xml,<svg width="14" height="26" viewBox="0 0 14 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13L1 25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile button[aria-label="Previous"]:after {
+    transform: rotate(180deg);
 }
 .AB-HOMEPAGE-REDESIGN .ab-customer-service {
     margin-top: 60px;
@@ -282,6 +329,16 @@ lg: 1024px
     font-size: 16px;
     line-height: 24px;
 }
+@media screen and (min-width: 375px) {
+    .AB-HOMEPAGE-REDESIGN .customer-service .section-title h2 {
+        white-space: nowrap;
+    }
+}
+@media screen and (min-width: 450px) {
+    .AB-HOMEPAGE-REDESIGN .ab-md-hidden {
+        display: none;
+    }
+}
 @media screen and (min-width: 768px) {
     .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
         display: grid;
@@ -289,6 +346,9 @@ lg: 1024px
     }
 }
 @media screen and (min-width: 1024px) {
+    .AB-HOMEPAGE-REDESIGN .ab-lg-hidden {
+        display: none;
+    }
     .AB-HOMEPAGE-REDESIGN .ab-heading-xl {
         font-weight: 600;
         font-size: 36px;
@@ -330,6 +390,16 @@ lg: 1024px
     }
     .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item {
         max-width: 360px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 100%;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item--see-all {
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 22.5px;
     }
     .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .item {
         padding: 24px;
@@ -360,7 +430,7 @@ lg: 1024px
         width: 50%;
     }
     .AB-HOMEPAGE-REDESIGN .ab-promotion-read-more-cta {
-        min-width: max-content;
+        min-width: 210px;
     }
     .AB-HOMEPAGE-REDESIGN .ab-hook-loop-brands__auto-scroller {
         gap: 60px;

@@ -28,6 +28,15 @@ lg: 1024px
   text-align: center;
   vertical-align: middle;
 }
+.AB-HOMEPAGE-REDESIGN .ab-heading-lg {
+  font-family: "poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+}
 .AB-HOMEPAGE-REDESIGN .ab-leading-8 {
   line-height: 32px;
 }
@@ -122,8 +131,9 @@ lg: 1024px
   background: none;
 }
 .AB-HOMEPAGE-REDESIGN .customer-service.ab-customer-service-mobile {
-  margin-top: 60px;
-  margin-bottom: 60px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: rgb(228, 228, 228);
 }
 .AB-HOMEPAGE-REDESIGN
   .customer-service.ab-customer-service-mobile
@@ -187,6 +197,61 @@ lg: 1024px
   background-position: center;
   margin-top: auto;
   margin-left: auto;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Previous"],
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Next"] {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgb(215, 215, 215);
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Previous"]
+  svg,
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Next"]
+  svg {
+  display: none;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Previous"] {
+  margin-left: -30px;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Next"] {
+  margin-right: -30px;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Previous"]:after,
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Next"]:after {
+  content: "";
+  width: 12px;
+  height: 24px;
+  background: url('data:image/svg+xml,<svg width="14" height="26" viewBox="0 0 14 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L13 13L1 25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.AB-HOMEPAGE-REDESIGN
+  .customer-service.ab-customer-service-mobile
+  button[aria-label="Previous"]:after {
+  transform: rotate(180deg);
 }
 .AB-HOMEPAGE-REDESIGN .ab-customer-service {
   margin-top: 60px;
@@ -307,6 +372,16 @@ lg: 1024px
   font-size: 16px;
   line-height: 24px;
 }
+@media screen and (min-width: 375px) {
+  .AB-HOMEPAGE-REDESIGN .customer-service .section-title h2 {
+    white-space: nowrap;
+  }
+}
+@media screen and (min-width: 450px) {
+  .AB-HOMEPAGE-REDESIGN .ab-md-hidden {
+    display: none;
+  }
+}
 @media screen and (min-width: 768px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
     display: grid;
@@ -314,6 +389,9 @@ lg: 1024px
   }
 }
 @media screen and (min-width: 1024px) {
+  .AB-HOMEPAGE-REDESIGN .ab-lg-hidden {
+    display: none;
+  }
   .AB-HOMEPAGE-REDESIGN .ab-heading-xl {
     font-weight: 600;
     font-size: 36px;
@@ -355,6 +433,16 @@ lg: 1024px
   }
   .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item {
     max-width: 360px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 100%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item--see-all {
+    font-weight: 600;
+    font-size: 15px;
+    line-height: 22.5px;
   }
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__bottom-items .item {
     padding: 24px;
@@ -387,7 +475,7 @@ lg: 1024px
     width: 50%;
   }
   .AB-HOMEPAGE-REDESIGN .ab-promotion-read-more-cta {
-    min-width: max-content;
+    min-width: 210px;
   }
   .AB-HOMEPAGE-REDESIGN .ab-hook-loop-brands__auto-scroller {
     gap: 60px;
@@ -460,6 +548,7 @@ var testInfo = {
 };
 
 // https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
+// https://www.hookandloop.com/?qa5=true
 
 /* 
 
@@ -482,7 +571,7 @@ Initial Development: 15 hours
     test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
     page_initials: "AB-HOMEPAGE-REDESIGN",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const ASSETS = {
@@ -496,6 +585,7 @@ Initial Development: 15 hours
 
   const TAILWIND_STYLES = {
     heading_xl: "ab-heading-xl",
+    heading_lg: "ab-heading-lg",
     heading_sm: "text-[20px] font-[500] text-hnl1d",
     paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
     button_primary: "action primary hnl-btn text-white",
@@ -535,8 +625,8 @@ Initial Development: 15 hours
             class="ab-hero-section__container mx-auto flex flex-col items-center text-center"
           >
             <h2 class="text-white ${TAILWIND_STYLES.heading_xl}">
-              From full rolls to finished <br class="md:hidden" />
-              products, we’re Everything <br class="md:hidden" />
+              From full rolls to finished <br class="ab-md-hidden" />
+              products, we’re Everything <br class="ab-lg-hidden" />
               in Hook & Loop!<sup class="text-sm ab-sup">TM</sup>
             </h2>
             <div
@@ -562,12 +652,12 @@ Initial Development: 15 hours
                 class="ab-hero-section__all-products-row flex justify-between items-center"
               >
                 <a
-                  href="#"
+                  href="https://www.hookandloop.com/products"
                   class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
                   >Whole Rolls</a
                 >
                 <a
-                  href="#"
+                  href="https://www.hookandloop.com/converting"
                   class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
                   >Cut Pieces</a
                 >
@@ -576,12 +666,12 @@ Initial Development: 15 hours
                 class="ab-hero-section__all-products-row flex justify-between items-center"
               >
                 <a
-                  href="#"
+                  href="https://www.hookandloop.com/brands/duragrip/straps"
                   class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
                   >Straps</a
                 >
                 <a
-                  href="#"
+                  href="https://www.hookandloop.com/products/specialty"
                   class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
                   >Specialty Options</a
                 >
@@ -591,7 +681,7 @@ Initial Development: 15 hours
               >
                 <a
                   href="https://www.hookandloop.com/products"
-                  class="ab-hero-section__all-products-item overflow-hidden mx-auto ${TAILWIND_STYLES.flex_center}"
+                  class="ab-hero-section__all-products-item ab-hero-section__all-products-item--see-all  overflow-hidden mx-auto ${TAILWIND_STYLES.flex_center} uppercase"
                   >See all Products</a
                 >
               </div>
@@ -694,89 +784,44 @@ Initial Development: 15 hours
         <section class="ab-hook-loop-brands bg-white overflow-hidden">
           <div class="ab-hook-loop-brands__container">
             <div class="section-title">
-              <h2
-                class="text-[24px] ab-leading-8 font-semibold text-center mb-12"
-              >
-                Solving Hook and Loop <br class="md:hidden" />
-                Needs Across the World <br class="md:hidden" />
+              <h2 class="mb-12 ${TAILWIND_STYLES.heading_lg}">
+                Solving Hook and Loop <br class="ab-md-hidden" />
+                Needs Across the World <br class="ab-md-hidden" />
                 for 30 Years
               </h2>
             </div>
             <div
               class="ab-hook-loop-brands__auto-scroller-container overflow-hidden"
             >
-              <div
-                class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-rtl"
-              >
-                ${brands_data
-                  .map(
-                    (item) => /* HTML */ `
-                      <div
-                        class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}"
-                      >
-                        <img
-                          src="${item.image}"
-                          alt="${item.image_alt}"
-                          title="${item.image_title}"
-                          class="ab-hook-loop-brand__image"
-                        />
-                      </div>
-                    `,
-                  )
-                  .join("")}
-                ${brands_data
-                  .map(
-                    (item) => /* HTML */ `
-                      <div
-                        class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}"
-                      >
-                        <img
-                          src="${item.image}"
-                          alt="${item.image_alt}"
-                          title="${item.image_title}"
-                          class="ab-hook-loop-brand__image"
-                        />
-                      </div>
-                    `,
-                  )
-                  .join("")}
-              </div>
-              <div
-                class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center scroll-infinite-ltr"
-              >
-                ${brands_data
-                  .map(
-                    (item) => /* HTML */ `
-                      <div
-                        class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}"
-                      >
-                        <img
-                          src="${item.image}"
-                          alt="${item.image_alt}"
-                          title="${item.image_title}"
-                          class="ab-hook-loop-brand__image"
-                        />
-                      </div>
-                    `,
-                  )
-                  .join("")}
-                ${brands_data
-                  .map(
-                    (item) => /* HTML */ `
-                      <div
-                        class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}"
-                      >
-                        <img
-                          src="${item.image}"
-                          alt="${item.image_alt}"
-                          title="${item.image_title}"
-                          class="ab-hook-loop-brand__image"
-                        />
-                      </div>
-                    `,
-                  )
-                  .join("")}
-              </div>
+              ${Array.from({ length: 2 })
+                .map(
+                  (_, index) => /* HTML */ `
+                    <div
+                      class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index ===
+                      0
+                        ? "scroll-infinite-rtl"
+                        : "scroll-infinite-ltr"}"
+                    >
+                      ${[...brands_data, ...brands_data]
+                        .map(
+                          (item) => /* HTML */ `
+                            <div
+                              class="ab-hook-loop-brand__item ${TAILWIND_STYLES.flex_center}"
+                            >
+                              <img
+                                src="${item.image}"
+                                alt="${item.image_alt}"
+                                title="${item.image_title}"
+                                class="ab-hook-loop-brand__image"
+                              />
+                            </div>
+                          `,
+                        )
+                        .join("")}
+                    </div>
+                  `,
+                )
+                .join("")}
             </div>
           </div>
         </section>
@@ -1066,6 +1111,10 @@ Initial Development: 15 hours
   }
 
   function modifyNewsLetterAndPromotionSection() {
+    document.querySelector(
+      ".newsletter-subscription .section-title h2",
+    ).innerHTML =
+      "Sign-Up for Special <br class='lg:hidden'/> <strong>Discounts & Offers</strong>";
     document.querySelector(".newsletter-subscription").className =
       "newsletter-subscription text-center text-white flex flex-col items-center bg-[#333]";
     document.querySelector(
