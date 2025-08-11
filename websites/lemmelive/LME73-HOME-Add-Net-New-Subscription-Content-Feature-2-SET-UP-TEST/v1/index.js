@@ -16,7 +16,7 @@ import testInfo from "./info.json" assert { type: "json" };
         site_url: "https://lemmelive.com/",
         test_name: "LME73: [HOME] Add Net New Subscription Content Feature - (2) SET UP TEST",
         page_initials: "AB-LME73",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 2 /* 1, 2 */,
         test_version: 0.0001,
     };
 

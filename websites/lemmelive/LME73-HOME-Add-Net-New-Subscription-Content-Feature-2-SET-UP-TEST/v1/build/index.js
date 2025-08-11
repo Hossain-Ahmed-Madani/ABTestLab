@@ -1,3 +1,10 @@
+// https://www.figma.com/design/KEOrBCs5paKcSE5HHdxoKv/LME73---HOME--Add-Net-New-Subscription-Content-Feature?node-id=2001-3&t=PGaRkrmuDIwMhb7q-0
+// LME73: [HOME] Add Net New Subscription Content Feature-> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2033048
+// LME73: [HOME] Add Net New Subscription Content Feature [QA] -> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2034980#
+// url: ^https:\/\/lemmelive\.com\/?(?:\?.*)?$
+// preview v1: https://marketer.monetate.net/control/preview/12706/4F6BCPW3N5GXVO0PKI77YWO6GSJJXLGU/lme73-home-add-net-new-subscription-content-feature
+// preview v2: https://marketer.monetate.net/control/preview/12706/ZYS6ZHQK6UZ80H0V1K8XSZS7PIHB2BSO/lme73-home-add-net-new-subscription-content-feature
+
 (() => {
     const TEST_CONFIG = {
         client: "Acadia",
@@ -10,7 +17,6 @@
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        console.log(`Waiting for condition: ${predicate.toString()} with timer: ${timer}ms and frequency: ${frequency}ms`);
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -196,22 +202,17 @@
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
 
-        console.log(
-            `%c${JSON.stringify(TEST_CONFIG, null, 2)}`,
-            "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;"
-        );
-
         createLayout();
         addGA4ScrollEventLister();
         addGA4ClickEventListener();
     }
 
     function hasAllTargetElements() {
-        return !!(document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && document.querySelector(".shopify-section .no-list.no-list--large"));
+        return !!(
+            document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
+            document.querySelector(".shopify-section .no-list.no-list--large")
+        );
     }
 
     waitForElement(hasAllTargetElements, init);
 })();
-
-
-

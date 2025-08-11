@@ -132,6 +132,11 @@
   background: #fff;
   color: #000;
 }
+@media screen and (min-width: 350px) {
+  .AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+    white-space: nowrap;
+  }
+}
 @media screen and (min-width: 1024px) {
   .AB-LME73 .ab-subscription-section {
     margin-top: 117px;
@@ -224,7 +229,25 @@
     text-transform: capitalize;
   }
 }
+@media screen and (min-width: 2000px) {
+  .AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+    height: 105px;
+  }
+}
 
+.AB-LME73--v1
+  #shopify-section-template--19531691229398__16575845243735cab9
+  > .trust-bar {
+  padding-bottom: 0;
+}
+.AB-LME73--v1
+  #shopify-section-template--19531691229398__16575845243735cab9
+  .trust-bar
+  .trust-bar__items
+  > .col-lg:last-child
+  .trust-bar__item {
+  margin-bottom: 0;
+}
 @media screen and (min-width: 1025px) {
   .AB-LME73--v1
     #shopify-section-template--19531691229398__16575845243735cab9
@@ -251,6 +274,13 @@ var testInfo = {
   name: name,
 };
 
+// https://www.figma.com/design/KEOrBCs5paKcSE5HHdxoKv/LME73---HOME--Add-Net-New-Subscription-Content-Feature?node-id=2001-3&t=PGaRkrmuDIwMhb7q-0
+// LME73: [HOME] Add Net New Subscription Content Feature-> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2033048
+// LME73: [HOME] Add Net New Subscription Content Feature [QA] -> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2034980#
+// url: ^https:\/\/lemmelive\.com\/?(?:\?.*)?$
+// preview v1: https://marketer.monetate.net/control/preview/12706/4F6BCPW3N5GXVO0PKI77YWO6GSJJXLGU/lme73-home-add-net-new-subscription-content-feature
+// preview v2: https://marketer.monetate.net/control/preview/12706/ZYS6ZHQK6UZ80H0V1K8XSZS7PIHB2BSO/lme73-home-add-net-new-subscription-content-feature
+
 (() => {
   const TEST_CONFIG = {
     client: "Acadia",
@@ -259,7 +289,7 @@ var testInfo = {
     test_name:
       "LME73: [HOME] Add Net New Subscription Content Feature - (2) SET UP TEST",
     page_initials: "AB-LME73",
-    test_variation: 1 /* 1, 2 */,
+    test_variation: 2 /* 1, 2 */,
     test_version: 0.0001,
   };
 
