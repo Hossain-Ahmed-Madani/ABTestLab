@@ -4,14 +4,14 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-LME73 .ab-subscription-section {
+      style.innerHTML = `.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
   margin: 30px 0;
 }
-.AB-LME73 .ab-subscription-section__container {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__container {
   padding-left: 0;
   padding-right: 0;
 }
-.AB-LME73 .ab-subscription-section__row {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__row {
   background: url("https://sb.monetate.net/img/1/1597/5797218.png") no-repeat
     bottom;
   background-size: cover;
@@ -24,31 +24,31 @@
   flex-direction: column-reverse;
   overflow: hidden;
 }
-.AB-LME73 .ab-subscription-section .col {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section .col {
   padding: 0;
 }
-.AB-LME73 .ab-subscription-section__image-col {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__image-col {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.AB-LME73 .ab-subscription-section__image-col img {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__image-col img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: bottom;
   margin-top: 30px;
 }
-.AB-LME73 .ab-subscription-section__heading {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__heading {
   margin-bottom: 20px;
 }
-.AB-LME73 .ab-subscription-section__usp_area {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area {
   margin-bottom: 30px;
 }
-.AB-LME73 .ab-subscription-section__cta {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__cta {
   margin-bottom: 20px;
 }
-.AB-LME73 .ab-subscription-section__heading {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__heading {
   font-family: "Recoleta", helvetica, arial, sans-serif;
   font-weight: 500;
   font-style: Medium;
@@ -57,11 +57,13 @@
   letter-spacing: 0;
   color: rgb(0, 0, 0);
 }
-.AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+.AB-LME73:not(.AB-LME73--v0)
+  .ab-subscription-section__heading
+  .marquee-squiggle__copy {
   display: block;
   line-height: 150%;
 }
-.AB-LME73 .ab-subscription-section__sub-heading {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__sub-heading {
   font-family:
     Mier A,
     helvetica,
@@ -73,32 +75,32 @@
   letter-spacing: 0;
   color: rgb(0, 0, 0);
 }
-.AB-LME73 .ab-subscription-section__usp_area {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area {
   padding-left: 0;
 }
-.AB-LME73 .ab-subscription-section__usp_area ul {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area ul {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   gap: 7px;
   max-width: 100%;
 }
-.AB-LME73 .ab-subscription-section__usp_area li {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area li {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
   gap: 10px;
 }
-.AB-LME73 .ab-subscription-section__usp_area .icon_area {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area .icon_area {
   margin-right: 0;
 }
-.AB-LME73 .ab-subscription-section__usp_area img {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area img {
   width: 40px;
   min-width: 40px;
   height: 40px;
   min-height: 40px;
 }
-.AB-LME73 .ab-subscription-section__usp_area span {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area span {
   font-family:
     Mier A,
     helvetica,
@@ -111,7 +113,7 @@
   margin: 0;
   text-align: left;
 }
-.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__cta .btn__wrapper .btn {
   background: #000;
   color: #fff;
   padding: 20px 10px;
@@ -128,25 +130,30 @@
   text-align: center;
   text-transform: capitalize;
 }
-.AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn:hover {
+.AB-LME73:not(.AB-LME73--v0)
+  .ab-subscription-section__cta
+  .btn__wrapper
+  .btn:hover {
   background: #fff;
   color: #000;
 }
 @media screen and (min-width: 350px) {
-  .AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__heading
+    .marquee-squiggle__copy {
     white-space: nowrap;
   }
 }
 @media screen and (min-width: 1024px) {
-  .AB-LME73 .ab-subscription-section {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
     margin-top: 117px;
     margin-bottom: 82px;
   }
-  .AB-LME73 .ab-subscription-section__container {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__container {
     padding-right: var(--bs-gutter-x, var(--container-padding));
     padding-left: var(--bs-gutter-x, var(--container-padding));
   }
-  .AB-LME73 .ab-subscription-section__row {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__row {
     background: none;
     flex-direction: row;
     position: relative;
@@ -154,7 +161,7 @@
     margin-right: 5px;
     margin-left: 0px;
   }
-  .AB-LME73 .ab-subscription-section__row:after {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__row:after {
     content: "";
     background-image: url("https://sb.monetate.net/img/1/1597/5797019.png");
     background-size: cover;
@@ -168,45 +175,45 @@
     z-index: -1;
     position: absolute;
   }
-  .AB-LME73 .ab-subscription-section__image-col img {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__image-col img {
     width: 100%;
     margin: 0;
     padding: 0 50px;
     object-fit: contain;
     object-position: center;
   }
-  .AB-LME73 .ab-subscription-section__heading {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__heading {
     font-weight: 500;
     font-size: 55px;
     line-height: 60px;
     margin-bottom: 15px;
   }
-  .AB-LME73 .ab-subscription-section__sub-heading {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__sub-heading {
     font-weight: 500;
     font-size: 20px;
     line-height: 100%;
     margin-bottom: 26px;
   }
-  .AB-LME73 .ab-subscription-section__usp_area {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area {
     margin-top: 0;
     margin-bottom: 39px;
   }
-  .AB-LME73 .ab-subscription-section__usp_area ul {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area ul {
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 40px;
     row-gap: 29px;
   }
-  .AB-LME73 .ab-subscription-section__usp_area li {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area li {
     gap: 15px;
   }
-  .AB-LME73 .ab-subscription-section__usp_area img {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area img {
     width: 60px;
     min-width: 60px;
     height: 60px;
     min-height: 60px;
   }
-  .AB-LME73 .ab-subscription-section__usp_area span {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area span {
     font-family:
       Mier A,
       helvetica,
@@ -217,10 +224,13 @@
     line-height: 100% !important;
     text-transform: none !important;
   }
-  .AB-LME73 .ab-subscription-section__cta {
+  .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__cta {
     margin-bottom: 0;
   }
-  .AB-LME73 .ab-subscription-section__cta .btn__wrapper .btn {
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__cta
+    .btn__wrapper
+    .btn {
     padding: 18.5px 39px;
     font-weight: 700;
     font-size: 18px;
@@ -230,7 +240,9 @@
   }
 }
 @media screen and (min-width: 2000px) {
-  .AB-LME73 .ab-subscription-section__heading .marquee-squiggle__copy {
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__heading
+    .marquee-squiggle__copy {
     height: 105px;
   }
 }
@@ -267,13 +279,6 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
-var id = "1754557086525_2342_v1";
-var name = "v1";
-var testInfo = {
-  id: id,
-  name: name,
-};
-
 // https://www.figma.com/design/KEOrBCs5paKcSE5HHdxoKv/LME73---HOME--Add-Net-New-Subscription-Content-Feature?node-id=2001-3&t=PGaRkrmuDIwMhb7q-0
 // LME73: [HOME] Add Net New Subscription Content Feature-> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2033048
 // LME73: [HOME] Add Net New Subscription Content Feature [QA] -> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2034980#
@@ -283,20 +288,12 @@ var testInfo = {
 
 (() => {
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "lemmelive",
-    site_url: "https://lemmelive.com/",
-    test_name:
-      "LME73: [HOME] Add Net New Subscription Content Feature - (2) SET UP TEST",
     page_initials: "AB-LME73",
-    test_variation: 2 /* 1, 2 */,
+    test_variation: 1 /* 0 -> control, 1, 2 */,
     test_version: 0.0001,
   };
 
   function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-    console.log(
-      `Waiting for condition: ${predicate.toString()} with timer: ${timer}ms and frequency: ${frequency}ms`,
-    );
     try {
       if (timer <= 0) {
         throw new Error(
@@ -316,8 +313,6 @@ var testInfo = {
   }
 
   function fireGA4Event(eventName, eventLabel = "") {
-    console.log(`LME73: Firing GA4 Event: ${eventName} - ${eventLabel}`);
-
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "GA4event",
@@ -341,8 +336,7 @@ var testInfo = {
     const targetNode = document.querySelector(
       ".shopify-section .no-list.no-list--large",
     ).parentNode;
-    const insertPosition =
-      TEST_CONFIG.test_variation === 1 ? "beforebegin" : "afterend";
+    const insertPosition = "beforebegin";
 
     const layout = /* HTML */ `
       <section class="ab-subscription-section">
@@ -526,16 +520,12 @@ var testInfo = {
       `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`,
     );
 
-    console.table({ ID: testInfo.id, Variation: testInfo.name });
+    {
+      createLayout();
+      addGA4ClickEventListener();
+    }
 
-    console.log(
-      `%c${JSON.stringify(TEST_CONFIG, null, 2)}`,
-      "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;",
-    );
-
-    createLayout();
     addGA4ScrollEventLister();
-    addGA4ClickEventListener();
   }
 
   function hasAllTargetElements() {

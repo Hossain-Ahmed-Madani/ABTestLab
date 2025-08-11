@@ -1,14 +1,7 @@
-// https://www.figma.com/design/KEOrBCs5paKcSE5HHdxoKv/LME73---HOME--Add-Net-New-Subscription-Content-Feature?node-id=2001-3&t=PGaRkrmuDIwMhb7q-0
-// LME73: [HOME] Add Net New Subscription Content Feature-> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2033048
-// LME73: [HOME] Add Net New Subscription Content Feature [QA] -> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2034980#
-// url: ^https:\/\/lemmelive\.com\/?(?:\?.*)?$
-// preview v1: https://marketer.monetate.net/control/preview/12706/4F6BCPW3N5GXVO0PKI77YWO6GSJJXLGU/lme73-home-add-net-new-subscription-content-feature
-// preview v2: https://marketer.monetate.net/control/preview/12706/ZYS6ZHQK6UZ80H0V1K8XSZS7PIHB2BSO/lme73-home-add-net-new-subscription-content-feature
-
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-LME73",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 1 /* 0 -> control, 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -30,8 +23,6 @@
     }
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log(`LME73: Firing GA4 Event: ${eventName} - ${eventLabel}`);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -53,7 +44,7 @@
 
     function createLayout() {
         const targetNode = document.querySelector(".shopify-section .no-list.no-list--large").parentNode;
-        const insertPosition = "beforebegin" ;
+        const insertPosition = "beforebegin";
 
         const layout = /* HTML */ `
             <section class="ab-subscription-section">
@@ -198,9 +189,12 @@
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
 
-        createLayout();
+        {
+            createLayout();
+            addGA4ClickEventListener();
+        }
+
         addGA4ScrollEventLister();
-        addGA4ClickEventListener();
     }
 
     function hasAllTargetElements() {
