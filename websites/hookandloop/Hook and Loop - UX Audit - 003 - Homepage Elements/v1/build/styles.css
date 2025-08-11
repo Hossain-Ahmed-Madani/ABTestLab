@@ -346,6 +346,9 @@ lg: 1024px
     }
 }
 @media screen and (min-width: 1024px) {
+    .AB-HOMEPAGE-REDESIGN .ab-lg-hidden {
+        display: none;
+    }
     .AB-HOMEPAGE-REDESIGN .ab-heading-xl {
         font-weight: 600;
         font-size: 36px;

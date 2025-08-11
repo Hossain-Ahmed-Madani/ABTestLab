@@ -417,6 +417,10 @@ lg: 1024px
     }
 
     @media screen and (min-width: 1024px) {
+        .ab-lg-hidden {
+            display: none;
+        }
+        
         .ab-heading-xl {
             font-weight: 600;
             font-size: 36px;

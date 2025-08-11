@@ -28,7 +28,7 @@ Initial Development: 15 hours
         test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const ASSETS = {
@@ -73,8 +73,8 @@ Initial Development: 15 hours
                 <section class="ab-hero-section relative w-full">
                     <div class="ab-hero-section__container mx-auto flex flex-col items-center text-center">
                         <h2 class="text-white ${TAILWIND_STYLES.heading_xl}">
-                            From full rolls to finished <br class="lg:hidden" />
-                            products, we’re Everything <br class="lg:hidden" />
+                            From full rolls to finished <br class="ab-md-hidden" />
+                            products, we’re Everything <br class="ab-lg-hidden" />
                             in Hook & Loop!<sup class="text-sm ab-sup">TM</sup>
                         </h2>
                         <div class="ab-hero-section__brands flex justify-between items-center">

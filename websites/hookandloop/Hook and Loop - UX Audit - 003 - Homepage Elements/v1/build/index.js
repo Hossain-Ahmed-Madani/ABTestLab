@@ -1,11 +1,5 @@
-var id = "1754075815885_4714_v1";
-var name = "v1";
-var testInfo = {
-    id: id,
-    name: name,
-};
-
 // https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
+// https://www.hookandloop.com/?qa5=true
 
 /* 
 
@@ -28,7 +22,7 @@ Initial Development: 15 hours
         test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const ASSETS = {
@@ -73,8 +67,8 @@ Initial Development: 15 hours
                 <section class="ab-hero-section relative w-full">
                     <div class="ab-hero-section__container mx-auto flex flex-col items-center text-center">
                         <h2 class="text-white ${TAILWIND_STYLES.heading_xl}">
-                            From full rolls to finished <br class="lg:hidden" />
-                            products, we’re Everything <br class="lg:hidden" />
+                            From full rolls to finished <br class="ab-md-hidden" />
+                            products, we’re Everything <br class="ab-lg-hidden" />
                             in Hook & Loop!<sup class="text-sm ab-sup">TM</sup>
                         </h2>
                         <div class="ab-hero-section__brands flex justify-between items-center">
@@ -473,6 +467,13 @@ Initial Development: 15 hours
 
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
+
+        console.log(
+            `%cTest info`,
+            "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;"
+        );
+
+        console.table(TEST_CONFIG);
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
