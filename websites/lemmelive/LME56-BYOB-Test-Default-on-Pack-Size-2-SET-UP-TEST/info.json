@@ -1,0 +1,13 @@
+{
+  "id": "1754927109096_5506_LME56_BYOB_Test_Default_on_Pack_Size_2_SET_UP_TEST",
+  "name": "LME56-BYOB-Test-Default-on-Pack-Size-2-SET-UP-TEST",
+  "type": "A/B",
+  "website": "lemmelive",
+  "variations": [
+    "control",
+    "1"
+  ],
+  "createdAt": "2025-08-11T15:45:09.096Z",
+  "createdAtReadable": "11/08/2025, 9:45:09 pm",
+  "lastUpdated": "2025-08-11T15:45:09.418Z"
+}
