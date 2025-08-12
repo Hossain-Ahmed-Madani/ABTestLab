@@ -194,7 +194,7 @@ Initial Development: 15 hours
                             </h2>
                         </div>
                         <div class="ab-hook-loop-brands__auto-scroller-container overflow-hidden">
-                            ${Array.from({ length: 2 })
+                            ${Array.from({ length: 1 })
                                 .map(
                                     (_, index) => /* HTML */ `
                                         <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index === 0 ? "scroll-infinite-rtl" : "scroll-infinite-ltr"}">

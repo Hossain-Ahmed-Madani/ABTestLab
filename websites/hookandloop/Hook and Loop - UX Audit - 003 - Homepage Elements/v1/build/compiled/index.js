@@ -1,25 +1,5 @@
-// https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
-// https://www.hookandloop.com/?qa5=true
-
-/* 
-
-Development breakdown:
-Hero section: 2 hours 
-Customization services: 1 hours
-Brands with scroll animation: 3 hours
-Testimonials: 3 hours
-Start shopping Section: 3 hours
-Subscription section: 3 hours
-Initial Development: 15 hours
-
-*/
-
 (() => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com/",
-        test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
         test_version: 0.0003,
@@ -188,7 +168,7 @@ Initial Development: 15 hours
                             </h2>
                         </div>
                         <div class="ab-hook-loop-brands__auto-scroller-container overflow-hidden">
-                            ${Array.from({ length: 2 })
+                            ${Array.from({ length: 1 })
                                 .map(
                                     (_, index) => /* HTML */ `
                                         <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index === 0 ? "scroll-infinite-rtl" : "scroll-infinite-ltr"}">
@@ -467,13 +447,6 @@ Initial Development: 15 hours
 
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
-
-        console.log(
-            `%cTest info`,
-            "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;"
-        );
-
-        console.table(TEST_CONFIG);
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
