@@ -92,19 +92,19 @@
                                     ${[
                                         {
                                             img: ASSETS.vip_access,
-                                            text: "VIP access to exclusive drops",
+                                            text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
                                         },
                                         {
                                             img: ASSETS.paused_update,
-                                            text: "Pause, update frequency or cancel anytime",
+                                            text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
                                         },
                                         {
                                             img: ASSETS.earn_loyalty_points,
-                                            text: "Earn loyalty points for free products & discounts",
+                                            text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
                                         },
                                         {
                                             img: ASSETS.guaranteed_delivery,
-                                            text: "Guaranteed delivery during sell-outs",
+                                            text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
                                         },
                                     ]
                                         .map(
@@ -189,7 +189,7 @@
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
 
-        if (TEST_CONFIG.test_variation !== 0) {
+        {
             createLayout();
             addGA4ClickEventListener();
         }

@@ -105,10 +105,10 @@
                             <div class="ab-subscription-section__usp_area usp_area">
                                 <ul>
                                     ${[
-                                        { img: ASSETS.vip_access, text: "VIP access to exclusive drops" },
-                                        { img: ASSETS.paused_update, text: "Pause, update frequency or cancel anytime" },
-                                        { img: ASSETS.earn_loyalty_points, text: "Earn loyalty points for free products & discounts" },
-                                        { img: ASSETS.guaranteed_delivery, text: "Guaranteed delivery during sell-outs" },
+                                        { img: ASSETS.vip_access, text: "VIP access to <br class='ab-xl-block'/> exclusive drops" },
+                                        { img: ASSETS.paused_update, text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime" },
+                                        { img: ASSETS.earn_loyalty_points, text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts" },
+                                        { img: ASSETS.guaranteed_delivery, text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs" },
                                     ]
                                         .map(
                                             (item) => /* HTML */ `

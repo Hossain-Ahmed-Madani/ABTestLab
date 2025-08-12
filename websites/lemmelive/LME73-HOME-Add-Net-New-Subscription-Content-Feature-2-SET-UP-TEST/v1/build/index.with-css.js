@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
+      style.innerHTML = `.AB-LME73:not(.AB-LME73--v0) .ab-xl-block {
+  display: none;
+}
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
   margin: 30px 0;
 }
 .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__container {
@@ -239,6 +242,11 @@
     text-transform: capitalize;
   }
 }
+@media screen and (min-width: 1600px) {
+  .AB-LME73:not(.AB-LME73--v0) .ab-xl-block {
+    display: block;
+  }
+}
 @media screen and (min-width: 2000px) {
   .AB-LME73:not(.AB-LME73--v0)
     .ab-subscription-section__heading
@@ -398,19 +406,19 @@
                   ${[
                     {
                       img: ASSETS.vip_access,
-                      text: "VIP access to exclusive drops",
+                      text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
                     },
                     {
                       img: ASSETS.paused_update,
-                      text: "Pause, update frequency or cancel anytime",
+                      text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
                     },
                     {
                       img: ASSETS.earn_loyalty_points,
-                      text: "Earn loyalty points for free products & discounts",
+                      text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
                     },
                     {
                       img: ASSETS.guaranteed_delivery,
-                      text: "Guaranteed delivery during sell-outs",
+                      text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
                     },
                   ]
                     .map(
