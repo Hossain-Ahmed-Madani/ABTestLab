@@ -9,7 +9,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-LME73",
         test_variation: 1 /* 0 -> control, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0004,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -30,7 +30,6 @@
     }
 
     function fireGA4Event(eventName, eventLabel = "") {
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -132,14 +131,21 @@
     }
 
     function isElementVisibleInViewport(el) {
-        let top = el.getBoundingClientRect().top;
-        let right = el.getBoundingClientRect().right;
-        let bottom = el.getBoundingClientRect().bottom;
-        let left = el.getBoundingClientRect().left;
-        let innerWidth = window.innerWidth;
-        let innerHeight = window.innerHeight;
+        if (!el) return false;
 
-        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        // Check if any part of the element is visible in the viewport
+        const vertInView = rect.top <= windowHeight && rect.bottom >= 0;
+        const horInView = rect.left <= windowWidth && rect.right >= 0;
+
+        // Additional check for minimum visible area (at least 1px)
+        const vertVisible = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0) > 0;
+        const horVisible = Math.min(rect.right, windowWidth) - Math.max(rect.left, 0) > 0;
+
+        return vertInView && horInView && vertVisible && horVisible;
     }
 
     function scrollHandler(e) {
@@ -183,7 +189,7 @@
 
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
-        
+
         {
             createLayout();
             addGA4ClickEventListener();
