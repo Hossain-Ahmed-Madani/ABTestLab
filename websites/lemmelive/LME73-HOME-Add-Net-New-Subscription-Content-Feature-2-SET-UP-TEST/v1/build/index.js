@@ -1,8 +1,15 @@
+// https://www.figma.com/design/KEOrBCs5paKcSE5HHdxoKv/LME73---HOME--Add-Net-New-Subscription-Content-Feature?node-id=2001-3&t=PGaRkrmuDIwMhb7q-0
+// LME73: [HOME] Add Net New Subscription Content Feature-> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2033048
+// LME73: [HOME] Add Net New Subscription Content Feature [QA] -> https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2034980#
+// url: ^https:\/\/lemmelive\.com\/?(?:\?.*)?$
+// preview v1: https://marketer.monetate.net/control/preview/12706/4F6BCPW3N5GXVO0PKI77YWO6GSJJXLGU/lme73-home-add-net-new-subscription-content-feature
+// preview v2: https://marketer.monetate.net/control/preview/12706/ZYS6ZHQK6UZ80H0V1K8XSZS7PIHB2BSO/lme73-home-add-net-new-subscription-content-feature
+
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-LME73",
         test_variation: 1 /* 0 -> control, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0004,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -92,19 +99,19 @@
                                     ${[
                                         {
                                             img: ASSETS.vip_access,
-                                            text: "VIP access to exclusive drops",
+                                            text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
                                         },
                                         {
                                             img: ASSETS.paused_update,
-                                            text: "Pause, update frequency or cancel anytime",
+                                            text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
                                         },
                                         {
                                             img: ASSETS.earn_loyalty_points,
-                                            text: "Earn loyalty points for free products & discounts",
+                                            text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
                                         },
                                         {
                                             img: ASSETS.guaranteed_delivery,
-                                            text: "Guaranteed delivery during sell-outs",
+                                            text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
                                         },
                                     ]
                                         .map(
@@ -137,14 +144,21 @@
     }
 
     function isElementVisibleInViewport(el) {
-        let top = el.getBoundingClientRect().top;
-        let right = el.getBoundingClientRect().right;
-        let bottom = el.getBoundingClientRect().bottom;
-        let left = el.getBoundingClientRect().left;
-        let innerWidth = window.innerWidth;
-        let innerHeight = window.innerHeight;
+        if (!el) return false;
 
-        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+        const rect = el.getBoundingClientRect();
+        const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        // Check if any part of the element is visible in the viewport
+        const vertInView = rect.top <= windowHeight && rect.bottom >= 0;
+        const horInView = rect.left <= windowWidth && rect.right >= 0;
+
+        // Additional check for minimum visible area (at least 1px)
+        const vertVisible = Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0) > 0;
+        const horVisible = Math.min(rect.right, windowWidth) - Math.max(rect.left, 0) > 0;
+
+        return vertInView && horInView && vertVisible && horVisible;
     }
 
     function scrollHandler(e) {
@@ -189,7 +203,7 @@
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`);
 
-        if (TEST_CONFIG.test_variation !== 0) {
+        {
             createLayout();
             addGA4ClickEventListener();
         }

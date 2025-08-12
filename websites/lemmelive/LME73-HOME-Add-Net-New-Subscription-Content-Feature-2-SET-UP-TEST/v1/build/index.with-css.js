@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
+      style.innerHTML = `.AB-LME73:not(.AB-LME73--v0) .ab-xl-block {
+  display: none;
+}
+.AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
   margin: 30px 0;
 }
 .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__container {
@@ -239,6 +242,11 @@
     text-transform: capitalize;
   }
 }
+@media screen and (min-width: 1600px) {
+  .AB-LME73:not(.AB-LME73--v0) .ab-xl-block {
+    display: block;
+  }
+}
 @media screen and (min-width: 2000px) {
   .AB-LME73:not(.AB-LME73--v0)
     .ab-subscription-section__heading
@@ -290,7 +298,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-LME73",
     test_variation: 1 /* 0 -> control, 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0004,
   };
 
   function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -398,19 +406,19 @@
                   ${[
                     {
                       img: ASSETS.vip_access,
-                      text: "VIP access to exclusive drops",
+                      text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
                     },
                     {
                       img: ASSETS.paused_update,
-                      text: "Pause, update frequency or cancel anytime",
+                      text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
                     },
                     {
                       img: ASSETS.earn_loyalty_points,
-                      text: "Earn loyalty points for free products & discounts",
+                      text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
                     },
                     {
                       img: ASSETS.guaranteed_delivery,
-                      text: "Guaranteed delivery during sell-outs",
+                      text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
                     },
                   ]
                     .map(
@@ -445,18 +453,25 @@
   }
 
   function isElementVisibleInViewport(el) {
-    let top = el.getBoundingClientRect().top;
-    let right = el.getBoundingClientRect().right;
-    let bottom = el.getBoundingClientRect().bottom;
-    let left = el.getBoundingClientRect().left;
-    let innerWidth = window.innerWidth;
-    let innerHeight = window.innerHeight;
+    if (!el) return false;
 
-    return (
-      ((top > 0 && top < innerHeight) ||
-        (bottom > 0 && bottom < innerHeight)) &&
-      ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
-    );
+    const rect = el.getBoundingClientRect();
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth =
+      window.innerWidth || document.documentElement.clientWidth;
+
+    // Check if any part of the element is visible in the viewport
+    const vertInView = rect.top <= windowHeight && rect.bottom >= 0;
+    const horInView = rect.left <= windowWidth && rect.right >= 0;
+
+    // Additional check for minimum visible area (at least 1px)
+    const vertVisible =
+      Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0) > 0;
+    const horVisible =
+      Math.min(rect.right, windowWidth) - Math.max(rect.left, 0) > 0;
+
+    return vertInView && horInView && vertVisible && horVisible;
   }
 
   function scrollHandler(e) {
