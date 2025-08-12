@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-LME73",
         test_variation: 1 /* 0 -> control, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
