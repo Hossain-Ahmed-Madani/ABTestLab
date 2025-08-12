@@ -1,147 +1,147 @@
 .AB-Test015 .amazon-or {
-  margin-bottom: 13px;
+    margin-bottom: 13px;
 }
 .AB-Test015 .checkout-types li:has(.amazon-checkout-button) {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 35px;
-  flex-direction: column-reverse;
-}
-.AB-Test015 .ab-shop-safely {
-  margin-top: 10px;
-  width: 230px;
-  height: 66px;
-  border: 1px solid rgb(194, 207, 218);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-.AB-Test015 .amazon-checkout-button:after {
-  content: "Direkt zum Amazon Checkout";
-  font-family: "Open sans", arial, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 0px;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
-  position: absolute;
-  z-index: 1;
-  top: -10px;
-  background: #fff;
-  height: 18px;
-  padding: 0 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.AB-Test015 .amazon-checkout-button img {
-  height: 40px;
-}
-.AB-Test015 .ab-shop-safely {
-  padding-left: 11px;
-  padding-right: 11px;
-}
-.AB-Test015 .ab-shop-safely:after {
-  content: "Sicher einkaufen";
-  font-family: "Open sans", arial, sans-serif;
-  font-weight: 400;
-  font-size: 13px;
-  line-height: 0px;
-  letter-spacing: 0px;
-  color: rgb(0, 0, 0);
-  position: absolute;
-  z-index: 1;
-  top: -10px;
-  background: #fff;
-  height: 18px;
-  padding: 0 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.AB-Test015 .ab-shop-safely .ab-shop-safely__img-container {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 9px;
-}
-.AB-Test015 .ab-shop-safely__img-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.AB-Test015 .ab-shop-safely__img {
-  width: 44px;
-  height: 27px;
-}
-.AB-Test015 .btn-continue {
-  margin-top: 28px;
-}
-.AB-Test015 .service-timeline {
-  padding-top: 0;
-  margin-top: 37px;
-}
-@media screen and (min-width: 991px) {
-  .AB-Test015 .btn-continue {
-    margin-top: 0;
-  }
-  .AB-Test015 .checkout-types li:has(.amazon-checkout-button) {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 9px;
-    flex-direction: row;
-  }
-  .AB-Test015 .amazon-or {
-    display: none !important;
-  }
-  .AB-Test015 .checkout-types li:first-child {
-    display: flex;
+    gap: 35px;
     flex-direction: column-reverse;
-  }
-  .AB-Test015 .checkout-types .btn-checkout {
-    width: 484px;
-    float: none;
-    margin-right: 0;
-    padding: 8px 0;
-    margin-bottom: 9px;
-  }
-  .AB-Test015 .checkout-types .btn-checkout span span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row-reverse;
-  }
-  .AB-Test015 .btn-checkout span span::after {
-    width: 30px;
-  }
-  .AB-Test015 .checkout-types .cart-ssl-hint {
-    margin-right: 0 !important;
-    text-align: center;
-    font-family: "Open sans", arial, sans-serif;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 40px;
-    letter-spacing: 0px;
-    color: rgb(0, 145, 102);
-  }
-  .AB-Test015 .ab-shop-safely,
-  .AB-Test015 .amazon-checkout-button {
-    flex: 1 1 50%;
-    margin-top: 21px;
-    height: 68px;
+}
+.AB-Test015 .ab-shop-safely {
+    margin-top: 10px;
+    width: 230px;
+    height: 66px;
     border: 1px solid rgb(194, 207, 218);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-  }
-  .AB-Test015 .service-timeline.withoutprint .trenner {
-    margin-top: 22px;
-  }
+}
+.AB-Test015 .amazon-checkout-button:after {
+    content: "Direkt zum Amazon Checkout";
+    font-family: "Open sans", arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    background: #fff;
+    height: 18px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-Test015 .amazon-checkout-button img {
+    height: 40px;
+}
+.AB-Test015 .ab-shop-safely {
+    padding-left: 11px;
+    padding-right: 11px;
+}
+.AB-Test015 .ab-shop-safely:after {
+    content: "Sicher einkaufen";
+    font-family: "Open sans", arial, sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 0px;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    background: #fff;
+    height: 18px;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-Test015 .ab-shop-safely .ab-shop-safely__img-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 9px;
+}
+.AB-Test015 .ab-shop-safely__img-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-Test015 .ab-shop-safely__img {
+    width: 44px;
+    height: 27px;
+}
+.AB-Test015 .btn-continue {
+    margin-top: 28px;
+}
+.AB-Test015 .service-timeline {
+    padding-top: 0;
+    margin-top: 37px;
+}
+@media screen and (min-width: 991px) {
+    .AB-Test015 .btn-continue {
+        margin-top: 0;
+    }
+    .AB-Test015 .checkout-types li:has(.amazon-checkout-button) {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 9px;
+        flex-direction: row;
+    }
+    .AB-Test015 .amazon-or {
+        display: none !important;
+    }
+    .AB-Test015 .checkout-types li:first-child {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .AB-Test015 .checkout-types .btn-checkout {
+        width: 484px;
+        float: none;
+        margin-right: 0;
+        padding: 8px 0;
+        margin-bottom: 9px;
+    }
+    .AB-Test015 .checkout-types .btn-checkout span span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row-reverse;
+    }
+    .AB-Test015 .btn-checkout span span::after {
+        width: 30px;
+    }
+    .AB-Test015 .checkout-types .cart-ssl-hint {
+        margin-right: 0 !important;
+        text-align: center;
+        font-family: "Open sans", arial, sans-serif;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 40px;
+        letter-spacing: 0px;
+        color: rgb(0, 145, 102);
+    }
+    .AB-Test015 .ab-shop-safely,
+    .AB-Test015 .amazon-checkout-button {
+        flex: 1 1 50%;
+        margin-top: 21px;
+        height: 68px;
+        border: 1px solid rgb(194, 207, 218);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+    .AB-Test015 .service-timeline.withoutprint .trenner {
+        margin-top: 22px;
+    }
 }
