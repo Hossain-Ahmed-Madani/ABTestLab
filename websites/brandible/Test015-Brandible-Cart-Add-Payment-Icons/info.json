@@ -1,0 +1,13 @@
+{
+  "id": "1755015104770_2361_Test015_Brandible_Cart_Add_Payment_Icons",
+  "name": "Test015-Brandible-Cart-Add-Payment-Icons",
+  "type": "A/B",
+  "website": "brandible",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-08-12T16:11:44.771Z",
+  "createdAtReadable": "12/08/2025, 10:11:44 pm",
+  "lastUpdated": "2025-08-12T16:11:45.073Z"
+}

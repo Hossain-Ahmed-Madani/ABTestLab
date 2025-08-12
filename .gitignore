@@ -130,7 +130,7 @@ dist
 .pnp.*
 
 # personal folder and files should be ignored
-websites/
+# websites/
 skeleton/
 
 history.json
