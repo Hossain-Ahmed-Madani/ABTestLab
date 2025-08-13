@@ -1,0 +1,13 @@
+{
+  "id": "1755102579791_8928_MS53_1_PRODUCT_Optimize_Comparison_Chart_Design",
+  "name": "MS53-1-PRODUCT-Optimize-Comparison-Chart-Design",
+  "type": "A/B",
+  "website": "magicspoon",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-08-13T16:29:39.791Z",
+  "createdAtReadable": "13/08/2025, 10:29:39 pm",
+  "lastUpdated": "2025-08-13T16:29:40.123Z"
+}
