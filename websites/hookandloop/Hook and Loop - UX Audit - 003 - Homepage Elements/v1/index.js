@@ -24,7 +24,7 @@ Initial Development: 15 hours
         test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const ASSETS = {
@@ -483,7 +483,7 @@ Initial Development: 15 hours
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
-        createBrandsSectionLayout(); /* -> PENDING */
+        createBrandsSectionLayout(); 
         createTestimonialsSectionLayout();
         createFeatureSectionLayout();
         modifyNewsLetterAndPromotionSection();
