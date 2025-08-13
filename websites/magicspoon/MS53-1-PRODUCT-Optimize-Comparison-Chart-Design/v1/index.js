@@ -1,8 +1,6 @@
 /* 
-Figma -> https://www.figma.com/design/iWkyd0BAsc6ONU9WqGIC7H/MS53_1---PRODUCT--Optimize-Comparison-Chart-Design?node-id=63-2&p=f&t=pPfgdXTT6cU8Sc9b-0
-Control: https://magicspoon.com/products/peaches-and-cream-french-toast?_conv_eforce=1004151849.1004359150&utm_campaign=sp5
-Variation one: https://magicspoon.com/products/peaches-and-cream-french-toast?_conv_eforce=1004151849.1004359151&utm_campaign=sp5
-Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_conv_eforce=1004151849.1004359154&utm_campaign=sp5
+Figma -> https://www.figma.com/design/iWkyd0BAsc6ONU9WqGIC7H/MS53---PRODUCT--Optimize-Comparison-Chart-Design?node-id=294-2&t=sXCK7Xh2WbTgnLf1-1
+Test container -> https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004163226/summary
 */
 
 (function MS53_1_TEST() {
@@ -919,7 +917,6 @@ Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_c
     }
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
-
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -931,31 +928,9 @@ Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_c
                 }, frequency);
             }
         } catch (error) {
-            console.warn(error)
+            console.warn(error);
             return;
         }
-    }
-
-    async function waitForPromise(predicate) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve();
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    resolve();
-                    observer.disconnect();
-                } else if (count > 50) {
-                    reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                    observer.disconnect();
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
     }
 
     function getTableData() {
@@ -1027,7 +1002,7 @@ Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_c
                             <div class="ab-nutrition-table-cell ab-nutrition-table-cell--magic-spoon">${MS53_1_ASSETS["magicSpoonSvg"]}</div>
                             ${rows.map((row) => /* HTML */ ` <div class="ab-nutrition-table-cell">${getCellContent(table_data[columns[0]][row])}</div> `).join("")}
                         </div>
-                        <div class="ab-nutrition-table-column-group">
+                        <div class="ab-nutrition-table-column-group ${columns.length > 4 && window.innerWidth >= 1024 ? "ab-nutrition-table-column-group--sm" : ""}">
                             ${columns
                                 .slice(1)
                                 .map(
@@ -1045,7 +1020,14 @@ Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_c
             `
         );
 
-        if (columns.length >= 3) initializeFlickity();
+        if (columns.length >= 3 && window.innerWidth < 1024) initializeFlickity();
+    }
+
+    function swapReviewSectionPosition() {
+        console.log("MS53_1: swapReviewSectionPosition");
+        const targetNode = document.querySelector(`.product-template #product-review`).parentNode;
+
+        targetNode.insertAdjacentElement("afterend", document.querySelector("#product-us-vs-them").parentNode);
     }
 
     function init() {
@@ -1055,13 +1037,16 @@ Variation two: https://magicspoon.com/products/peaches-and-cream-french-toast?_c
 
         createLayout();
         handleIngredientsSectionViewGoal();
+
+        if (TEST_CONFIG.test_variation === 2) swapReviewSectionPosition();
     }
 
     function hasAllTargetElements() {
         return !!(
+            MS53_1_COMPARISON_CHART_ARR.some((item) => window.location.href.includes(item.url)) &&
             document.querySelector(`html#product-single body:not(.${TEST_CONFIG.page_initials})`) &&
             document.querySelector(`#product-us-vs-them .width.w-l`) &&
-            MS53_1_COMPARISON_CHART_ARR.some((item) => window.location.href.includes(item.url))
+            document.querySelector(`#product-review`)
         );
     }
 

@@ -1,5 +1,5 @@
-.MS53_1 #us-vs-them-banner,
-.MS53_1 #product-us-vs-them h2:not(.ab-sub-heading) {
+.MS53_1 #product-us-vs-them h2:not(.ab-sub-heading),
+.MS53_1 #us-vs-them-banner {
   display: none;
 }
 .MS53_1 #product-us-vs-them .width.w-l > img {
@@ -8,8 +8,8 @@
 .MS53_1 #product-us-vs-them,
 .MS53_1 #product-us-vs-them.light-purp,
 .MS53_1 .cereal-bars-template #product-us-vs-them {
-  padding-top: 31px !important;
-  padding-bottom: 53px !important;
+  padding-top: 24px !important;
+  padding-bottom: 58px !important;
 }
 .MS53_1 #product-us-vs-them .width.w-l {
   max-width: 100%;
@@ -28,6 +28,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 23px;
 }
 .MS53_1 #product-us-vs-them h2.ab-sub-heading {
   font-family: Mabry Pro;
@@ -38,6 +39,7 @@
   text-align: center;
   text-wrap: pretty;
   max-width: 100%;
+  margin-bottom: 28px;
 }
 .MS53_1 #product-us-vs-them p {
   display: none;
@@ -225,7 +227,7 @@
   height: 10px;
   display: block;
 }
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 1024px) {
   .MS53_1 .ab-nutrition-table-container.ab-flickity-added {
     margin-bottom: 65px;
   }
@@ -233,11 +235,12 @@
   .MS53_1 #product-us-vs-them.light-purp,
   .MS53_1 .cereal-bars-template #product-us-vs-them {
     padding-top: 100px !important;
-    padding-bottom: 75px !important;
+    padding-bottom: 56px !important;
   }
   .MS53_1 #product-us-vs-them .width.w-l:before {
     height: 82px;
     width: 100%;
+    margin-bottom: 22px;
   }
   .MS53_1 #product-us-vs-them h2.ab-sub-heading {
     font-weight: 400;
@@ -246,6 +249,7 @@
     letter-spacing: 0px;
     text-align: center;
     text-wrap: pretty;
+    margin-bottom: 45px;
   }
   .MS53_1 #product-us-vs-them .width.w-l:after {
     font-family: Mabry Pro;
@@ -253,7 +257,7 @@
     font-size: 10px;
     line-height: 14px;
     letter-spacing: 1.7px;
-    margin-top: 44px;
+    margin-top: 33px;
   }
   .MS53_1 .ab-nutrition-table > .ab-nutrition-table-column {
     min-width: 200px;
@@ -302,6 +306,10 @@
     min-width: 200px;
     max-width: 200px;
   }
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: auto;
+    max-width: auto;
+  }
   .MS53_1 .ab-nutrition-table-column.ab-nutrition-table-column--magic-spoon {
     margin-top: -4px;
     margin-bottom: 0;
@@ -315,27 +323,33 @@
     bottom: -43px;
   }
 }
-
-.MS53--v1 #product-us-vs-them .width.w-l:before {
-  margin-bottom: 45px;
-}
-.MS53--v1 #product-us-vs-them h2.ab-sub-heading {
-  display: none;
-}
-@media screen and (min-width: 991px) {
-  .MS53--v1 #product-us-vs-them .width.w-l:before {
-    margin-bottom: 75px;
+@media screen and (min-width: 1200px) {
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: 130px;
+    max-width: 130px;
   }
 }
-
-.MS53--v2 #product-us-vs-them .width.w-l:before {
-  margin-bottom: 24px;
+@media screen and (min-width: 1366) {
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: 140px;
+    max-width: 140px;
+  }
 }
-.MS53--v2 #product-us-vs-them h2.ab-sub-heading {
-  margin-bottom: 28px;
+@media screen and (min-width: 1440px) {
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: 160px;
+    max-width: 160px;
+  }
 }
-@media screen and (min-width: 991px) {
-  .MS53--v2 #product-us-vs-them h2.ab-sub-heading {
-    margin-bottom: 45px;
+@media screen and (min-width: 1536px) {
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: 180px;
+    max-width: 180px;
+  }
+}
+@media screen and (min-width: 1650px) {
+  .MS53_1 .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+    min-width: 200px;
+    max-width: 200px;
   }
 }

@@ -7,6 +7,10 @@
         //
     }
 
+    @media screen and (min-width: 1024px) {
+        //
+    }
+
     @media screen and (min-width: 1200px) {
         //
     }
@@ -14,8 +18,8 @@
 
 // ========= MAIN =========
 .MS53_1 {
-    #us-vs-them-banner,
-    #product-us-vs-them h2:not(.ab-sub-heading) {
+    #product-us-vs-them h2:not(.ab-sub-heading),
+    #us-vs-them-banner {
         display: none;
     }
     #product-us-vs-them .width.w-l > img {
@@ -25,18 +29,9 @@
     #product-us-vs-them,
     #product-us-vs-them.light-purp,
     .cereal-bars-template #product-us-vs-them {
-        padding-top: 31px !important;
-        padding-bottom: 53px !important;
+        padding-top: 24px !important;
+        padding-bottom: 58px !important;
     }
-
-    // @media screen and (max-width: 900px) {
-    // 	#product-us-vs-them,
-    // 	#product-us-vs-them.light-purp,
-    // 	.cereal-bars-template #product-us-vs-them {
-    // 		padding-top: 31px;
-    // 		padding-bottom: 53px;
-    // 	}
-    // }
 
     #product-us-vs-them .width.w-l {
         max-width: 100%;
@@ -58,6 +53,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 23px;
     }
 
     #product-us-vs-them h2.ab-sub-heading {
@@ -69,6 +65,7 @@
         text-align: center;
         text-wrap: pretty;
         max-width: 100%;
+        margin-bottom: 28px;
     }
 
     #product-us-vs-them p {
@@ -228,18 +225,7 @@
         justify-content: flex-start;
     }
 
-    // .ab-nutrition-table
-    // 	> .ab-nutrition-table-column
-    // 	> .ab-nutrition-table-cell:first-child {
-    // 	font-weight: 700;
-    // 	line-height: 20px;
-    // }
-
     .ab-nutrition-table-column .ab-nutrition-table-cell:first-child {
-        // margin-top: 35px;
-        // margin-bottom: 20px;
-        // height: 64px;
-        // height: 123px;
         height: 110px;
         font-weight: 700;
         line-height: 20px;
@@ -260,15 +246,6 @@
         min-width: 99px;
         max-width: 99px;
     }
-
-    // .ab-nutrition-table-column-group
-    // 	> .ab-nutrition-table-column:first-child
-    // 	.ab-nutrition-table-cell {
-    // 	background: none;
-    // 	border-radius: 0;
-    // 	border-left: 0;
-    // 	flex-grow: 1;
-    // }
 
     .ab-nutrition-table-column-group .ab-nutrition-table-column:first-child .ab-nutrition-table-cell {
         background: none;
@@ -314,8 +291,6 @@
     }
 
     .ab-nutrition-table-cell--magic-spoon {
-        // padding-top: 44px;
-        // padding-bottom: 20px;
         min-height: max-content;
     }
 
@@ -329,7 +304,7 @@
         display: block;
     }
 
-    @media screen and (min-width: 991px) {
+    @media screen and (min-width: 1024px) {
         .ab-nutrition-table-container.ab-flickity-added {
             margin-bottom: 65px;
         }
@@ -338,12 +313,13 @@
         #product-us-vs-them.light-purp,
         .cereal-bars-template #product-us-vs-them {
             padding-top: 100px !important;
-            padding-bottom: 75px !important;
+            padding-bottom: 56px !important;
         }
 
         #product-us-vs-them .width.w-l:before {
             height: 82px;
             width: 100%;
+            margin-bottom: 22px;
         }
 
         #product-us-vs-them h2.ab-sub-heading {
@@ -352,7 +328,9 @@
             line-height: 100%;
             letter-spacing: 0px;
             text-align: center;
+
             text-wrap: pretty;
+            margin-bottom: 45px;
         }
 
         #product-us-vs-them .width.w-l:after {
@@ -361,7 +339,7 @@
             font-size: 10px;
             line-height: 14px;
             letter-spacing: 1.7px;
-            margin-top: 44px;
+            margin-top: 33px;
         }
 
         // TABLE
@@ -411,18 +389,6 @@
             padding-left: 28px;
         }
 
-        // .ab-nutrition-table-cell svg.check-circle-svg {
-        // 	width: 30px;
-        // 	height: 30px;
-        // 	object-fit: contain;
-        // }
-
-        // .ab-nutrition-table-cell svg.delete-circle-svg {
-        // 	width: 21px;
-        // 	height: 21px;
-        // 	object-fit: contain;
-        // }
-
         .ab-nutrition-table-column-group:not(.flickity-enabled) {
             display: flex;
             width: 100%;
@@ -436,6 +402,11 @@
         .ab-nutrition-table-column-group .ab-nutrition-table-column {
             min-width: 200px;
             max-width: 200px;
+        }
+
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: auto;
+            max-width: auto;
         }
 
         // MAGIC SPOON COLUMN
@@ -455,43 +426,51 @@
             bottom: -43px;
         }
     }
+
+    @media screen and (min-width: 1200px) {
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: 130px;
+            max-width: 130px;
+        }
+    }
+
+    @media screen and (min-width: 1366) {
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: 140px;
+            max-width: 140px;
+        }
+    }
+
+    @media screen and (min-width: 1440px) {
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: 160px;
+            max-width: 160px;
+        }
+    }
+
+    @media screen and (min-width: 1536px) {
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: 180px;
+            max-width: 180px;
+        }
+    }
+
+    @media screen and (min-width: 1650px) {
+        .ab-nutrition-table-column-group.ab-nutrition-table-column-group--sm .ab-nutrition-table-column {
+            min-width: 200px;
+            max-width: 200px;
+        }
+    }
 }
 
 // ========= VARIATION ONE =========
 .MS53--v1 {
-    #product-us-vs-them .width.w-l:before {
-        margin-bottom: 45px;
-        // margin-bottom: calc(45px + 44px)
-        // ; 	/* add the height add negative margin of negative sppon column */
-    }
-
-    #product-us-vs-them h2.ab-sub-heading {
-        display: none;
-    }
-
-    @media screen and (min-width: 991px) {
-        #product-us-vs-them .width.w-l:before {
-            margin-bottom: 75px;
-        }
+    @media screen and (min-width: 1024px) {
+        //
     }
 }
 
 // ========= VARIATION TWO =========
 .MS53--v2 {
-    #product-us-vs-them .width.w-l:before {
-        margin-bottom: 24px;
-    }
-
-    #product-us-vs-them h2.ab-sub-heading {
-        margin-bottom: 28px;
-        // margin-bottom: calc(
-        // 	28px + 44px
-        // ); /* add the height add negative margin of negative sppon column */
-    }
-
-    @media screen and (min-width: 991px) {
-        #product-us-vs-them h2.ab-sub-heading {
-            margin-bottom: 45px;
-        }
-    }
+    //
 }
