@@ -12,7 +12,7 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
         site_url: "https://magicspoon.com/",
         test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
         page_initials: "MS53_1",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.00001,
     };
 
@@ -1028,7 +1028,10 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
 
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`);
 
-        createLayout();
+        {
+            createLayout();
+        }
+
         handleIngredientsSectionViewGoal();
     }
 

@@ -17,7 +17,7 @@
 }
 
 // ========= MAIN =========
-.MS53_1 {
+.MS53_1:not(.MS53_1--v0) {
     #product-us-vs-them h2:not(.ab-sub-heading),
     #us-vs-them-banner {
         display: none;
