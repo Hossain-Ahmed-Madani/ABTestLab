@@ -11,7 +11,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 35px;
+  gap: 25px;
   flex-direction: column-reverse;
 }
 .AB-Test015 .ab-shop-safely {
@@ -38,7 +38,7 @@
   background: #fff;
   height: 18px;
   padding: 0 16px;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
@@ -84,6 +84,13 @@
 .AB-Test015 .ab-shop-safely__img {
   width: 44px;
   height: 27px;
+  object-fit: contain;
+}
+.AB-Test015 .ab-shop-safely__img[alt="paypal"] {
+  width: 80px;
+}
+.AB-Test015 .ab-shop-safely__img[alt="grouped_payment"] {
+  width: 120px;
 }
 .AB-Test015 .btn-continue {
   margin-top: 28px;
@@ -98,7 +105,7 @@
   }
   .AB-Test015 .checkout-types li:has(.amazon-checkout-button) {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     gap: 9px;
     flex-direction: row;
@@ -106,14 +113,18 @@
   .AB-Test015 .amazon-or {
     display: none !important;
   }
+  .AB-Test015 .checkout-types {
+    min-width: 620px;
+    width: 100%;
+  }
   .AB-Test015 .checkout-types li:first-child {
     display: flex;
     flex-direction: column-reverse;
   }
   .AB-Test015 .checkout-types .btn-checkout {
-    width: 484px;
     float: none;
     margin-right: 0;
+    margin-left: auto;
     padding: 8px 0;
     margin-bottom: 9px;
   }
@@ -138,7 +149,7 @@
   }
   .AB-Test015 .ab-shop-safely,
   .AB-Test015 .amazon-checkout-button {
-    flex: 1 1 50%;
+    width: max-content;
     margin-top: 21px;
     height: 68px;
     border: 1px solid rgb(194, 207, 218);
@@ -146,6 +157,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
+  }
+  .AB-Test015 .amazon-checkout-button {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .AB-Test015 .amazon-checkout-button:after {
+    display: flex;
   }
   .AB-Test015 .service-timeline.withoutprint .trenner {
     margin-top: 22px;
@@ -179,9 +197,10 @@ var testInfo = {
       "https://cdn-3.convertexperiments.com/uf/1004828/10045957/vorkasse_689b6bb67940e.png",
     rechnung:
       "https://cdn-3.convertexperiments.com/uf/1004828/10045957/rechnung_689b6bb678ee8.png",
-    visa: "https://cdn-3.convertexperiments.com/uf/1004828/10045957/visa_689b6bb676f56.png",
     paypal:
-      "https://cdn-3.convertexperiments.com/uf/1004828/10045957/paypal_689b6bb677289.png",
+      "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-paypal.svg",
+    grouped_payment:
+      "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-creditcard.svg",
   };
 
   function waitForElement(predicate, callback, timer = 10000, frequency = 100) {

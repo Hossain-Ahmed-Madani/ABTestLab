@@ -15,8 +15,8 @@ var testInfo = {
     ASSETS = {
         vorkasse: "https://cdn-3.convertexperiments.com/uf/1004828/10045957/vorkasse_689b6bb67940e.png",
         rechnung: "https://cdn-3.convertexperiments.com/uf/1004828/10045957/rechnung_689b6bb678ee8.png",
-        visa: "https://cdn-3.convertexperiments.com/uf/1004828/10045957/visa_689b6bb676f56.png",
-        paypal: "https://cdn-3.convertexperiments.com/uf/1004828/10045957/paypal_689b6bb677289.png",
+        paypal: "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-paypal.svg",
+        grouped_payment: "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-creditcard.svg",
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
