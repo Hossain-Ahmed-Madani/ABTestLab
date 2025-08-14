@@ -362,6 +362,12 @@
     color: rgb(63, 7, 145);
   }
   .MS53_1:not(.MS53_1--v0)
+    .ab-nutrition-table-column-group
+    .ab-nutrition-table-column
+    > .ab-nutrition-table-cell:first-child {
+    font-size: 16px;
+  }
+  .MS53_1:not(.MS53_1--v0)
     .ab-nutrition-table-cell:not(:first-child):not(:nth-child(2)) {
     height: 100px;
   }
@@ -460,6 +466,10 @@
 /* 
 Figma -> https://www.figma.com/design/iWkyd0BAsc6ONU9WqGIC7H/MS53---PRODUCT--Optimize-Comparison-Chart-Design?node-id=294-2&t=sXCK7Xh2WbTgnLf1-1
 Test container -> https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004163226/summary
+
+control ->  https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385887&utm_campaign=sp5
+v1 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385888&utm_campaign=sp5
+v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385891&utm_campaign=sp5
 */
 
 (function MS53_1_TEST() {
@@ -471,7 +481,7 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
     site_url: "https://magicspoon.com/",
     test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
     page_initials: "MS53_1",
-    test_variation: 1 /* 0, 1, 2 */,
+    test_variation: 2 /* 0, 1, 2 */,
     test_version: 0.00001,
   };
 
@@ -1377,28 +1387,35 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
   }
 
   function isElementVisibleInViewport(el) {
-    let top = el.getBoundingClientRect().top;
-    let right = el.getBoundingClientRect().right;
-    let bottom = el.getBoundingClientRect().bottom;
-    let left = el.getBoundingClientRect().left;
-    let innerWidth = window.innerWidth;
-    let innerHeight = window.innerHeight;
+    if (!el) return false;
 
-    return (
-      ((top > 0 && top < innerHeight) ||
-        (bottom > 0 && bottom < innerHeight)) &&
-      ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth))
-    );
+    const rect = el.getBoundingClientRect();
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth =
+      window.innerWidth || document.documentElement.clientWidth;
+
+    // Check if any part of the element is visible in the viewport
+    const vertInView = rect.top <= windowHeight && rect.bottom >= 0;
+    const horInView = rect.left <= windowWidth && rect.right >= 0;
+
+    // Additional check for minimum visible area (at least 1px)
+    const vertVisible =
+      Math.min(rect.bottom, windowHeight) - Math.max(rect.top, 0) > 0;
+    const horVisible =
+      Math.min(rect.right, windowWidth) - Math.max(rect.left, 0) > 0;
+
+    return vertInView && horInView && vertVisible && horVisible;
   }
 
   function scrollHandler(e) {
     const targetNode = document.querySelector(
-      "#product-us-vs-them",
-    ).previousElementSibling;
+      "#product-nutrients-more",
+    ).parentNode;
     const isElementVisible = isElementVisibleInViewport(targetNode);
     if (isElementVisible) {
       fireGA4Event(
-        "MS53_1_View",
+        "MS53.1_ViewIngredients",
         "Ingredients section (area above us vs them)",
       );
       window.removeEventListener("scroll", scrollHandler);
@@ -1407,13 +1424,13 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
 
   function handleIngredientsSectionViewGoal() {
     const targetNode = document.querySelector(
-      "#product-us-vs-them",
-    ).previousElementSibling;
+      "#product-nutrients-more",
+    ).parentNode;
     const isElementVisible = isElementVisibleInViewport(targetNode);
 
     if (isElementVisible) {
       fireGA4Event(
-        "MS53_1_View",
+        "MS53.1_ViewIngredients",
         "Ingredients section (area above us vs them)",
       );
     } else {
@@ -1446,24 +1463,12 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
     );
 
     if (!matched_data) {
-      console.log("MS53_1: NO MATCHING DATA");
       return;
     }
 
     const table_data = matched_data.table;
     const columns = Object.keys(table_data);
     const rows = Object.keys(table_data[columns[0]]);
-
-    console.log(
-      "MS53_1: MATCHED DATA: ",
-      matched_data,
-      "\n\nMS53_1: TABLE DATA: ",
-      table_data,
-      "\n\nMS53_1: COLUMNS: ",
-      columns,
-      "\n\nMS53_1: ROWS: ",
-      rows,
-    );
 
     return { table_data, rows, columns };
   }
@@ -1583,6 +1588,16 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
     if (columns.length >= 3 && window.innerWidth < 1024) initializeFlickity();
   }
 
+  function swapReviewSectionPosition() {
+    const targetNode = document.querySelector(
+      `.product-template #product-review`,
+    ).parentNode;
+    targetNode.insertAdjacentElement(
+      "afterend",
+      document.querySelector("#product-us-vs-them").parentNode,
+    );
+  }
+
   function init() {
     console.table(TEST_CONFIG);
 
@@ -1593,6 +1608,7 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
 
     {
       createLayout();
+      swapReviewSectionPosition();
     }
 
     handleIngredientsSectionViewGoal();
@@ -1607,7 +1623,8 @@ Test container -> https://app.convert.com/accounts/10042082/projects/10042535/ex
         `html#product-single body:not(.${TEST_CONFIG.page_initials})`,
       ) &&
       document.querySelector(`#product-us-vs-them .width.w-l`) &&
-      document.querySelector(`#product-review`)
+      document.querySelector(`#product-review`) &&
+      document.querySelector(`#product-nutrients-more`)
     );
   }
 

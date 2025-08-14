@@ -8,7 +8,7 @@
         test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
         page_initials: "MS53_1",
         test_variation: 0 /* 0, 1, 2 */,
-        test_version: 0.00001,
+        test_version: 0.00002,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
@@ -44,20 +44,20 @@
     }
 
     function scrollHandler(e) {
-        const targetNode = document.querySelector("#product-us-vs-them").parentNode;
+        const targetNode = document.querySelector("#product-nutrients-more").parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
         if (isElementVisible) {
-            fireGA4Event("MS53_1_View", "Ingredients section (area above us vs them)");
+            fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
             window.removeEventListener("scroll", scrollHandler);
         }
     }
 
     function handleIngredientsSectionViewGoal() {
-        const targetNode = document.querySelector("#product-us-vs-them").parentNode;
+        const targetNode = document.querySelector("#product-nutrients-more").parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
 
         if (isElementVisible) {
-            fireGA4Event("MS53_1_View", "Ingredients section (area above us vs them)");
+            fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
         } else {
             window.addEventListener("scroll", scrollHandler);
         }
@@ -80,15 +80,18 @@
         }
     }
 
+
     function init() {
         console.table(TEST_CONFIG);
-
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`);
         handleIngredientsSectionViewGoal();
     }
 
     function hasAllTargetElements() {
-        return !!(document.querySelector(`html#product-single body:not(.${TEST_CONFIG.page_initials})`) && document.querySelector(`#product-us-vs-them .width.w-l`));
+        return !!(
+            document.querySelector(`html#product-single body:not(.${TEST_CONFIG.page_initials})`) &&
+            document.querySelector(`#product-nutrients-more`)
+        );
     }
 
     waitForElement(hasAllTargetElements, init);

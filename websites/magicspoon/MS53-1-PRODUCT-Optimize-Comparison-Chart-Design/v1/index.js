@@ -16,8 +16,8 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
         site_url: "https://magicspoon.com/",
         test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
         page_initials: "MS53_1",
-        test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.00001,
+        test_variation: 2 /* 0, 1, 2 */,
+        test_version: 0.00002,
     };
 
     const MS53_1_COMPARISON_CHART_ARR = [
@@ -908,20 +908,20 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
     }
 
     function scrollHandler(e) {
-        const targetNode = document.querySelector("#product-us-vs-them").parentNode;
+        const targetNode = document.querySelector("#product-nutrients-more").parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
         if (isElementVisible) {
-            fireGA4Event("MS53_1_View", "Ingredients section (area above us vs them)");
+            fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
             window.removeEventListener("scroll", scrollHandler);
         }
     }
 
     function handleIngredientsSectionViewGoal() {
-        const targetNode = document.querySelector("#product-us-vs-them").parentNode;
+        const targetNode = document.querySelector("#product-nutrients-more").parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
 
         if (isElementVisible) {
-            fireGA4Event("MS53_1_View", "Ingredients section (area above us vs them)");
+            fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
         } else {
             window.addEventListener("scroll", scrollHandler);
         }
@@ -948,15 +948,12 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
         const matched_data = MS53_1_COMPARISON_CHART_ARR.find((item) => window.location.href.includes(item.url));
 
         if (!matched_data) {
-            console.log("MS53_1: NO MATCHING DATA");
             return;
         }
 
         const table_data = matched_data.table;
         const columns = Object.keys(table_data);
         const rows = Object.keys(table_data[columns[0]]);
-
-        console.log("MS53_1: MATCHED DATA: ", matched_data, "\n\nMS53_1: TABLE DATA: ", table_data, "\n\nMS53_1: COLUMNS: ", columns, "\n\nMS53_1: ROWS: ", rows);
 
         return { table_data, rows, columns };
     }
@@ -1035,9 +1032,7 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
     }
 
     function swapReviewSectionPosition() {
-        console.log("MS53_1: swapReviewSectionPosition");
         const targetNode = document.querySelector(`.product-template #product-review`).parentNode;
-
         targetNode.insertAdjacentElement("afterend", document.querySelector("#product-us-vs-them").parentNode);
     }
 
@@ -1059,7 +1054,8 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
             MS53_1_COMPARISON_CHART_ARR.some((item) => window.location.href.includes(item.url)) &&
             document.querySelector(`html#product-single body:not(.${TEST_CONFIG.page_initials})`) &&
             document.querySelector(`#product-us-vs-them .width.w-l`) &&
-            document.querySelector(`#product-review`)
+            document.querySelector(`#product-review`) &&
+            document.querySelector(`#product-nutrients-more`) 
         );
     }
 
