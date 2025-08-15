@@ -19,7 +19,7 @@
     .ab-hero-banner-wrapper {
         width: 100%;
         height: 206px;
-        background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/hero-mobile_689f8cf63dfd9.png");
+        background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/magicspoon-t-h1-newflavors-homepagecropshomepagedesign-1-large-2-1_689f9a7b87cfa.png");
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -62,13 +62,13 @@
         text-wrap: pretty;
     }
 
-    @media screen and (min-width: 1200px) {
+    @media screen and (min-width: 768px) {
         .ab-hero-banner-wrapper {
             width: 100%;
             height: 422px;
-            background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/hero-desktop_689f8cf66f524.png");
-            padding: 78px 180px;
-            
+            background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-33-1_689f9af17ff29.png");
+            padding-top: 78px;
+            padding-left: 180px;
         }
 
         .ab-hero-banner-content {
@@ -93,6 +93,12 @@
 
         p.ab-hero-banner-subtitle br {
             display: none;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .ab-hero-banner-wrapper {
+            padding-top: 78px 180px;
         }
     }
 }
