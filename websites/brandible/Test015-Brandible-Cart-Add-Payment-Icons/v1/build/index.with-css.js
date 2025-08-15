@@ -46,8 +46,8 @@
   height: 40px;
 }
 .AB-Test015 .ab-shop-safely {
-  padding-left: 11px;
-  padding-right: 11px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 .AB-Test015 .ab-shop-safely:after {
   content: "Sicher einkaufen";
@@ -99,6 +99,13 @@
   padding-top: 0;
   margin-top: 37px;
 }
+@media screen and (max-width: 991px) {
+  .AB-Test015 .checkout-types .btn-proceed-checkout span span::after {
+    padding-left: 0px;
+    width: max-content;
+    margin-left: -7px;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-Test015 .btn-continue {
     margin-top: 0;
@@ -129,11 +136,21 @@
     padding: 8px 0;
     margin-bottom: 9px;
   }
-  .AB-Test015 .checkout-types .btn-checkout span span {
+  .AB-Test015 .cart-checkout-types .checkout-types .btn-checkout span span {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row-reverse;
+  }
+  .AB-Test015
+    .cart-checkout-types-top
+    .checkout-types
+    .btn-proceed-checkout
+    span
+    span::after {
+    padding-left: 0px;
+    width: max-content;
+    margin-left: -7px;
   }
   .AB-Test015 .btn-checkout span span::after {
     width: 30px;
@@ -152,7 +169,7 @@
   .AB-Test015 .amazon-checkout-button {
     width: max-content;
     margin-top: 21px;
-    height: 68px;
+    height: 66px;
     border: 1px solid rgb(194, 207, 218);
     display: flex;
     justify-content: center;
@@ -160,11 +177,16 @@
     position: relative;
   }
   .AB-Test015 .amazon-checkout-button {
-    padding-left: 30px;
-    padding-right: 30px;
+    min-width: 230px;
+    width: 230px;
+    max-width: 230px;
+    padding-left: 0;
+    padding-right: 0;
   }
   .AB-Test015 .amazon-checkout-button:after {
     display: flex;
+    min-width: max-content;
+    text-align: center;
   }
   .AB-Test015 .service-timeline.withoutprint .trenner {
     margin-top: 22px;
@@ -190,7 +212,7 @@ var testInfo = {
     test_name: "Test015 [Brandible] - Cart - Add Payment Icons",
     page_initials: "AB-Test015",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   ASSETS = {
@@ -201,7 +223,7 @@ var testInfo = {
     paypal:
       "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-paypal.svg",
     grouped_payment:
-      "https://www.brandible.de/media/wysiwyg/payment_icons/paymentmethod-creditcard.svg",
+      "https://cdn-3.convertexperiments.com/uf/1004828/10045957/image-1_689f66d5ea403.png",
   };
 
   function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -231,6 +253,8 @@ var testInfo = {
 
     console.table({ ID: testInfo.id, Variation: testInfo.name });
 
+    // https://cdn-3.convertexperiments.com/uf/1004828/10045957/amazon-pay_689f61d69e315.png
+
     console.log(
       `%c${TEST_CONFIG.test_name}`,
       "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;",
@@ -258,13 +282,23 @@ var testInfo = {
         </div>
       `,
     );
+
+    document
+      .querySelector(".amazon-checkout-button img.amazonpay-button-inner-image")
+      .setAttribute(
+        "src",
+        "https://cdn-3.convertexperiments.com/uf/1004828/10045957/amazon-pay_689f61d69e315.png",
+      );
   }
 
   function hasAllTargetElements() {
     return !!(
       window.location.href.includes("brandible.de/checkout/cart/") &&
       document.querySelector(
-        `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}) .amazon-checkout-button`,
+        `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`,
+      ) &&
+      document.querySelector(
+        ".amazon-checkout-button img.amazonpay-button-inner-image",
       )
     );
   }
