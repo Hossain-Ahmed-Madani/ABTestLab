@@ -7,8 +7,8 @@
         site_url: "https://magicspoon.com/",
         test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
         page_initials: "MS53_1",
-        test_variation: 2 /* 0, 1, 2 */,
-        test_version: 0.00002,
+        test_variation: 1 /* 0, 1, 2 */,
+        test_version: 0.00003,
     };
 
     const MS53_1_COMPARISON_CHART_ARR = [
@@ -908,17 +908,23 @@
     }
 
     function handleIngredientsSectionViewGoal() {
-        const targetNode = document.querySelector("#product-nutrients-more").parentNode;
-        const isElementVisible = isElementVisibleInViewport(targetNode);
+        waitForElement(
+            () => document.querySelector(`#product-nutrients-more`),
+            () => {
+                const targetNode = document.querySelector("#product-nutrients-more").parentNode;
+                const isElementVisible = isElementVisibleInViewport(targetNode);
 
-        if (isElementVisible) {
-            fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
-        } else {
-            window.addEventListener("scroll", scrollHandler);
-        }
+                if (isElementVisible) {
+                    fireGA4Event("MS53.1_ViewIngredients", "Ingredients section (area above us vs them)");
+                } else {
+                    window.addEventListener("scroll", scrollHandler);
+                }
+            }
+        );
     }
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -1022,11 +1028,6 @@
         if (columns.length >= 3 && window.innerWidth < 1024) initializeFlickity();
     }
 
-    function swapReviewSectionPosition() {
-        const targetNode = document.querySelector(`.product-template #product-review`).parentNode;
-        targetNode.insertAdjacentElement("afterend", document.querySelector("#product-us-vs-them").parentNode);
-    }
-
     function init() {
         console.table(TEST_CONFIG);
 
@@ -1034,7 +1035,6 @@
 
         {
             createLayout();
-            swapReviewSectionPosition();
         }
 
         handleIngredientsSectionViewGoal();
@@ -1045,8 +1045,7 @@
             MS53_1_COMPARISON_CHART_ARR.some((item) => window.location.href.includes(item.url)) &&
             document.querySelector(`html#product-single body:not(.${TEST_CONFIG.page_initials})`) &&
             document.querySelector(`#product-us-vs-them .width.w-l`) &&
-            document.querySelector(`#product-review`) &&
-            document.querySelector(`#product-nutrients-more`)
+            document.querySelector(`#product-review`)
         );
     }
 
