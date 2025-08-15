@@ -12,7 +12,7 @@
         site_url: "https://lemmelive.com/",
         test_name: "LME73: [HOME] Add Net New Subscription Content Feature - (2) SET UP TEST",
         page_initials: "AB-LME73",
-        test_variation: 1 /* 0 -> control, 1, 2 */,
+        test_variation: 2 /* 0 -> control, 1, 2 */,
         test_version: 0.0004,
     };
 
