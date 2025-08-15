@@ -1,0 +1,13 @@
+{
+  "id": "1755286094885_2967_MS76_COLLECTIONS_Add_Hero_Section_and_Rotating_Banner_2_SET_UP_TEST",
+  "name": "MS76-COLLECTIONS-Add-Hero-Section-and-Rotating-Banner-2-SET-UP-TEST",
+  "type": "A/B",
+  "website": "magicspoon",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-08-15T19:28:14.886Z",
+  "createdAtReadable": "16/08/2025, 1:28:14 am",
+  "lastUpdated": "2025-08-15T19:28:15.195Z"
+}
