@@ -1,10 +1,8 @@
 {
-  "id": "1755286078716_8291_magicspoon",
-  "name": "magicspoon",
-  "hostnames": [
-    "www.magicspoon.com"
-  ],
-  "createdAt": "2025-08-15T19:27:58.716Z",
-  "createdAtReadable": "16/08/2025, 1:27:58 am",
-  "lastUpdated": "2025-08-15T19:27:58.740Z"
+    "id": "1755286078716_8291_magicspoon",
+    "name": "magicspoon",
+    "hostnames": ["magicspoon.com"],
+    "createdAt": "2025-08-15T19:27:58.716Z",
+    "createdAtReadable": "16/08/2025, 1:27:58 am",
+    "lastUpdated": "2025-08-15T19:27:58.740Z"
 }

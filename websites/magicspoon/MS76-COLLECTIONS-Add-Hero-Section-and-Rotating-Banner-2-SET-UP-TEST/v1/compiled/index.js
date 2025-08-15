@@ -11,10 +11,16 @@ var testInfo = {
         site_url: "https://magicspoon.com",
         test_name: "MS76: [COLLECTIONS] Add Hero Section and Rotating Banner - (2) SET UP TEST",
         page_initials: "AB-MS76",
-        target_url: "/collections/shop-all",
+        target_url: "https://magicspoon.com/collections/shop-all",
+        test_container: "https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004162427/summary",
         figma_link: "https://www.figma.com/design/MNFePWvyeTkb8V26U5hbMN/MS76---COLLECTIONS--Add-Hero-Section-and-Rotating-Banner?node-id=66-2&p=f&t=JHouo4eCXZ2bkZgV-0",
         test_variation: 1,
         test_version: 0.0001,
+    };
+
+    ASSETS = {
+        hero_mobile: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/hero-mobile_689f8cf63dfd9.png",
+        hero_desktop: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/hero-desktop_689f8cf66f524.png",
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -29,9 +35,28 @@ var testInfo = {
                 }, frequency);
             }
         } catch (error) {
-            console.warn(error);
+            console.error(error);
             return;
         }
+    }
+
+    function createLayout() {
+        const targetNode = document.querySelector("#shopify-section-shop-all-header");
+        const layout = /* HTML */ `
+            <section class="ab-section">
+                <div class="ab-hero-banner-wrapper">
+                    <div class="ab-hero-banner-content">
+                        <h2 class="ab-hero-banner-header">
+                            EXPLORE OUR <br />
+                            PRODUCTS
+                        </h2>
+                        <p class="ab-hero-banner-subtitle">Indulge in our delicious, better-<br />for-you breakfast options.</p>
+                    </div>
+                </div>
+                <div class="ab-rotating-banner-wrapper">Rotating Scroller</div>
+            </section>
+        `;
+        targetNode.insertAdjacentHTML("afterend", layout);
     }
 
     function init() {
@@ -39,14 +64,17 @@ var testInfo = {
 
         console.table({ ID: testInfo.id, Variation: testInfo.name });
 
-        console.log(
-            `%c${JSON.stringify(TEST_CONFIG, null, 2)}`,
-            "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;"
-        );
+        console.table(TEST_CONFIG);
+
+        createLayout();
     }
 
     function hasAllTargetElements() {
-        return !!(document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && document.querySelector(`.target-element`));
+        return !!(
+            document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
+            document.querySelector(`#shopify-section-shop-all-header`) &&
+            true
+        );
     }
 
     waitForElement(hasAllTargetElements, init);
