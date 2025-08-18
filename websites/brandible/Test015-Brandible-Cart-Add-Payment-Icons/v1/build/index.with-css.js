@@ -17,11 +17,11 @@
 .AB-Test015 .ab-shop-safely {
   margin-top: 10px;
   width: 230px;
-  height: 66px;
+  height: 60px;
   border: 1px solid rgb(194, 207, 218);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: end;
   position: relative;
 }
 .AB-Test015 .amazon-checkout-button:after {
@@ -71,6 +71,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  padding-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -101,7 +102,7 @@
 }
 @media screen and (max-width: 991px) {
   .AB-Test015 .checkout-types .btn-proceed-checkout span span::after {
-    padding-left: 0px;
+    padding-left: 0px !important;
     width: max-content;
     margin-left: -7px;
   }
@@ -134,7 +135,7 @@
     margin-right: 0;
     margin-left: auto;
     padding: 8px 0;
-    margin-bottom: 9px;
+    margin-bottom: 5px;
   }
   .AB-Test015 .cart-checkout-types .checkout-types .btn-checkout span span {
     display: flex;
@@ -168,7 +169,7 @@
   .AB-Test015 .ab-shop-safely,
   .AB-Test015 .amazon-checkout-button {
     width: max-content;
-    margin-top: 21px;
+    margin-top: 10px;
     height: 60px;
     border: 1px solid rgb(194, 207, 218);
     display: flex;
@@ -218,7 +219,7 @@ var testInfo = {
     test_name: "Test015 [Brandible] - Cart - Add Payment Icons",
     page_initials: "AB-Test015",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0004,
   };
 
   ASSETS = {
