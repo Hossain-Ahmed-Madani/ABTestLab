@@ -1,7 +1,12 @@
+/* 
+    v1: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384015&utm_campaign=sp5
+    v2: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384016&utm_campaign=sp5
+*/
+
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-MS76",
-        test_variation: 1 /* 0, 1, 2 */,
+        test_variation: 1 /* 1, 2 */,
         test_version: 0.0001,
     };
 
