@@ -1,12 +1,8 @@
 (() => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com/",
-        test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const ASSETS = {
@@ -41,6 +37,14 @@
             console.warn(error);
             return;
         }
+    }
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: eventName,
+            link_text: eventLabel,
+        });
     }
 
     function createHeroSectionLayout() {
@@ -449,16 +453,40 @@
         parElem.appendChild(elem);
     }
 
+    function clickEvent() {
+        waitForElement(
+            () => document.querySelector(".ab-hero-section"),
+            () => {
+                // GA4 Event
+                document.querySelectorAll(".ab-hero-section__brands-item").forEach((item) => {
+                    item.addEventListener("click", (e) => {
+                        const label = e.target.closest("img").getAttribute("alt");
+                        fireGA4Event("homepage_brands_click", label);
+                    });
+                });
+
+                // GA4 Event
+                document.querySelectorAll(".ab-hero-section__all-products-item").forEach((item) => {
+                    item.addEventListener("click", (e) => {
+                        const label = e.target.closest("a").innerText;
+                        fireGA4Event("homepage_products_click", label);
+                    });
+                });
+            }
+        );
+    }
+
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
-        createBrandsSectionLayout(); /* -> PENDING */
+        createBrandsSectionLayout();
         createTestimonialsSectionLayout();
         createFeatureSectionLayout();
         modifyNewsLetterAndPromotionSection();
         createNewsLetterAndPromotionSectionLayout();
+        clickEvent();
     }
 
     function hasAllTargetElements() {
