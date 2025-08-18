@@ -17,6 +17,9 @@ import testInfo from "./info.json" assert { type: "json" };
     ASSETS = {
         hero_mobile: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/magicspoon-t-h1-newflavors-homepagecropshomepagedesign-1-large-2-1_689f9a7b87cfa.png",
         hero_desktop: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-33-1_689f9af17ff29.png",
+        check_circle : '',
+        cross_circle : '',
+
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
