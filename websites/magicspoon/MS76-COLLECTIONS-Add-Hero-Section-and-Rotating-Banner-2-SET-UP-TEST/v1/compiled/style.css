@@ -43,6 +43,52 @@
   color: rgb(63, 7, 145);
   text-wrap: pretty;
 }
+.AB-MS76 .ab-rotating-banner-wrapper {
+  background: rgb(221, 198, 255);
+  padding-top: 13px;
+  padding-bottom: 13px;
+  overflow: hidden;
+}
+.AB-MS76 .shop-all-filters {
+  margin-top: 20px;
+}
+.AB-MS76 .ab-rotating-banner-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 10px;
+}
+.AB-MS76 .ab-rotating-banner-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.AB-MS76 .ab-rotating-banner-item__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-MS76 .ab-rotating-banner-item__img img {
+  width: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  height: 14px;
+  min-height: 14px;
+  max-height: 14px;
+}
+.AB-MS76 .ab-rotating-banner-item__label {
+  font-family: Mabry Pro;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(63, 7, 145);
+  white-space: nowrap;
+}
 @media screen and (min-width: 768px) {
   .AB-MS76 .ab-hero-banner-wrapper {
     width: 100%;
@@ -75,5 +121,48 @@
 @media screen and (min-width: 1200px) {
   .AB-MS76 .ab-hero-banner-wrapper {
     padding-top: 78px 180px;
+  }
+  .AB-MS76 .shop-all-filters {
+    margin-top: 60px;
+  }
+  .AB-MS76 .ab-rotating-banner-content {
+    gap: 20px;
+  }
+}
+
+.scroll-infinite-rtl {
+  white-space: nowrap;
+  animation: scroll-right-to-left-md 15s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  min-width: 200%;
+}
+@media screen and (min-width: 768px) {
+  .scroll-infinite-rtl {
+    animation: scroll-right-to-left-md 25s linear infinite;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .scroll-infinite-rtl {
+    min-width: 100%;
+    animation: scroll-right-to-left-lg 15s linear infinite;
+  }
+}
+
+/* Right to Left Infinite Scroll Animation */
+@keyframes scroll-right-to-left-md {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes scroll-right-to-left-lg {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

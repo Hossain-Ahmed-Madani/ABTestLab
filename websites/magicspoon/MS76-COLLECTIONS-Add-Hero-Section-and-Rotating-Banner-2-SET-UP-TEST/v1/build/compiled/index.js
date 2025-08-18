@@ -105,7 +105,9 @@
                             .map(
                                 (item) => /* HTML */ `
                                     <div class="ab-rotating-banner-item">
-                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
+                                        <div class="ab-rotating-banner-item__img">
+                                            <img src="${item.icon}" />
+                                        </div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
                                     </div>
                                 `
