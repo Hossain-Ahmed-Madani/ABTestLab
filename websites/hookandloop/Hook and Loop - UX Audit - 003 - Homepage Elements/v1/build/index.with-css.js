@@ -116,6 +116,12 @@ lg: 1024px
   text-align: center;
   vertical-align: middle;
   color: rgb(29, 29, 29);
+  transition: all 0.3s;
+}
+.AB-HOMEPAGE-REDESIGN .ab-hero-section__all-products-item:hover {
+  border-color: rgb(235, 0, 0);
+  background: rgb(235, 0, 0);
+  color: #fff;
 }
 .AB-HOMEPAGE-REDESIGN .custom-converting-panel__subtitle {
   margin-top: 5px;
@@ -126,6 +132,12 @@ lg: 1024px
   border: 2px solid rgb(29, 29, 29);
   border-radius: 4px;
   padding: 12px 22px;
+  transition: all 0.3s;
+}
+.AB-HOMEPAGE-REDESIGN .ab-btn-secondary:hover {
+  border-color: rgb(235, 0, 0);
+  background-color: rgb(235, 0, 0) !important;
+  color: #fff;
 }
 .AB-HOMEPAGE-REDESIGN .ab-btn-secondary:hover {
   background: none;
@@ -357,9 +369,6 @@ lg: 1024px
 .AB-HOMEPAGE-REDESIGN .ab-hook-loop-brands__auto-scroller {
   gap: 24px;
 }
-.AB-HOMEPAGE-REDESIGN .ab-hook-loop-brands__auto-scroller:first-child {
-  margin-bottom: 24px;
-}
 .AB-HOMEPAGE-REDESIGN .ab-hook-loop-brand__item img {
   width: 80px;
   min-width: 80px;
@@ -487,9 +496,6 @@ lg: 1024px
     min-height: 75px;
     object-fit: contain;
   }
-  .AB-HOMEPAGE-REDESIGN .ab-hook-loop-brands__auto-scroller:first-child {
-    margin-bottom: 48px;
-  }
 }
 @media screen and (min-width: 1280px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
@@ -502,11 +508,11 @@ lg: 1024px
 }
 .AB-HOMEPAGE-REDESIGN .scroll-infinite-rtl {
   white-space: nowrap;
-  animation: scroll-right-to-left 15s linear infinite;
+  animation: scroll-right-to-left 25s linear infinite;
 }
 .AB-HOMEPAGE-REDESIGN .scroll-infinite-ltr {
   white-space: nowrap;
-  animation: scroll-left-to-right 15s linear infinite;
+  animation: scroll-left-to-right 25s linear infinite;
 }
 .AB-HOMEPAGE-REDESIGN .scroll-infinite-rtl,
 .AB-HOMEPAGE-REDESIGN .scroll-infinite-ltr {
@@ -565,13 +571,9 @@ Initial Development: 15 hours
 
 (() => {
   const TEST_CONFIG = {
-    client: "Hook & Loop",
-    project: "Hook & Loop",
-    site_url: "https://www.hookandloop.com/",
-    test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
     page_initials: "AB-HOMEPAGE-REDESIGN",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const ASSETS = {
@@ -613,6 +615,14 @@ Initial Development: 15 hours
       console.warn(error);
       return;
     }
+  }
+
+  function fireGA4Event(eventName, eventLabel = "") {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: eventName,
+      link_text: eventLabel,
+    });
   }
 
   function createHeroSectionLayout() {
@@ -793,7 +803,7 @@ Initial Development: 15 hours
             <div
               class="ab-hook-loop-brands__auto-scroller-container overflow-hidden"
             >
-              ${Array.from({ length: 2 })
+              ${Array.from({ length: 1 })
                 .map(
                   (_, index) => /* HTML */ `
                     <div
@@ -1157,6 +1167,33 @@ Initial Development: 15 hours
     parElem.appendChild(elem);
   }
 
+  function clickEvent() {
+    waitForElement(
+      () => document.querySelector(".ab-hero-section"),
+      () => {
+        // GA4 Event
+        document
+          .querySelectorAll(".ab-hero-section__brands-item")
+          .forEach((item) => {
+            item.addEventListener("click", (e) => {
+              const label = e.target.closest("img").getAttribute("alt");
+              fireGA4Event("homepage_brands_click", label);
+            });
+          });
+
+        // GA4 Event
+        document
+          .querySelectorAll(".ab-hero-section__all-products-item")
+          .forEach((item) => {
+            item.addEventListener("click", (e) => {
+              const label = e.target.closest("a").innerText;
+              fireGA4Event("homepage_products_click", label);
+            });
+          });
+      },
+    );
+  }
+
   function init() {
     document.body.classList.add(
       TEST_CONFIG.page_initials,
@@ -1166,20 +1203,14 @@ Initial Development: 15 hours
 
     console.table({ ID: testInfo.id, Variation: testInfo.name });
 
-    console.log(
-      `%cTest info`,
-      "background: black; border: 2px solid green; color: white; display: block; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3); text-align: left; font-weight: bold; padding: 10px; margin: 10px; font-family: monospace; white-space: pre;",
-    );
-
-    console.table(TEST_CONFIG);
-
     createHeroSectionLayout();
     modifyCustomizationServicesLayout();
-    createBrandsSectionLayout(); /* -> PENDING */
+    createBrandsSectionLayout();
     createTestimonialsSectionLayout();
     createFeatureSectionLayout();
     modifyNewsLetterAndPromotionSection();
     createNewsLetterAndPromotionSectionLayout();
+    clickEvent();
   }
 
   function hasAllTargetElements() {

@@ -131,6 +131,13 @@ lg: 1024px
         text-align: center;
         vertical-align: middle;
         color: rgba(29, 29, 29, 1);
+        transition: all 0.3s;
+
+        &:hover {
+            border-color: rgb(235, 0, 0);
+            background: rgb(235, 0, 0);
+            color: #fff;
+        }
     }
 
     .custom-converting-panel__subtitle {
@@ -143,6 +150,13 @@ lg: 1024px
         border: 2px solid rgba(29, 29, 29, 1);
         border-radius: 4px;
         padding: 12px 22px;
+        transition: all 0.3s;
+
+        &:hover {
+            border-color: rgb(235, 0, 0);
+            background-color: rgb(235, 0, 0) !important;
+            color: #fff;
+        }
     }
 
     .ab-btn-secondary:hover {
@@ -380,9 +394,9 @@ lg: 1024px
         gap: 24px;
     }
 
-    .ab-hook-loop-brands__auto-scroller:first-child {
-        margin-bottom: 24px;
-    }
+    // .ab-hook-loop-brands__auto-scroller:first-child {
+    //     margin-bottom: 24px;
+    // }
 
     .ab-hook-loop-brand__item img {
         width: 80px;
@@ -420,7 +434,7 @@ lg: 1024px
         .ab-lg-hidden {
             display: none;
         }
-        
+
         .ab-heading-xl {
             font-weight: 600;
             font-size: 36px;
@@ -537,9 +551,9 @@ lg: 1024px
             object-fit: contain;
         }
 
-        .ab-hook-loop-brands__auto-scroller:first-child {
-            margin-bottom: 48px;
-        }
+        // .ab-hook-loop-brands__auto-scroller:first-child {
+        //     margin-bottom: 48px;
+        // }
     }
 
     @media screen and (min-width: 1280px) {
@@ -557,12 +571,12 @@ lg: 1024px
 
     .scroll-infinite-rtl {
         white-space: nowrap;
-        animation: scroll-right-to-left 15s linear infinite;
+        animation: scroll-right-to-left 25s linear infinite;
     }
 
     .scroll-infinite-ltr {
         white-space: nowrap;
-        animation: scroll-left-to-right 15s linear infinite;
+        animation: scroll-left-to-right 25s linear infinite;
     }
 
     /* Optional: Add these if you want smoother performance */
