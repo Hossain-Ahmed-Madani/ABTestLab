@@ -189,12 +189,20 @@
             // flex: 1 1 50%;
             width: max-content;
             margin-top: 21px;
-            height: 66px;
+            height: 60px;
             border: 1px solid rgba(194, 207, 218, 1);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: end;
             position: relative;
+        }
+
+        .ab-shop-safely > .ab-shop-safely__img-container {
+            padding-bottom: 12px;
+        }
+
+        .amazon-checkout-button #LoginWithAmazon1 {
+            padding-bottom: 5.5px;
         }
 
         .amazon-checkout-button {

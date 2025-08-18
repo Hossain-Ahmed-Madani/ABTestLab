@@ -9,7 +9,7 @@ var testInfo = {
         test_name: "Test015 [Brandible] - Cart - Add Payment Icons",
         page_initials: "AB-Test015",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     ASSETS = {

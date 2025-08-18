@@ -148,7 +148,7 @@
     .btn-proceed-checkout
     span
     span::after {
-    padding-left: 0px;
+    padding-left: 0px !important;
     width: max-content;
     margin-left: -7px;
   }
@@ -169,12 +169,18 @@
   .AB-Test015 .amazon-checkout-button {
     width: max-content;
     margin-top: 21px;
-    height: 66px;
+    height: 60px;
     border: 1px solid rgb(194, 207, 218);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     position: relative;
+  }
+  .AB-Test015 .ab-shop-safely > .ab-shop-safely__img-container {
+    padding-bottom: 12px;
+  }
+  .AB-Test015 .amazon-checkout-button #LoginWithAmazon1 {
+    padding-bottom: 5.5px;
   }
   .AB-Test015 .amazon-checkout-button {
     min-width: 230px;
