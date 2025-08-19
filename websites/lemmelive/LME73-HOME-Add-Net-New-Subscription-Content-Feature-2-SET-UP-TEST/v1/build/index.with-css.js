@@ -86,6 +86,7 @@
   grid-template-columns: repeat(1, 1fr);
   gap: 7px;
   max-width: 100%;
+  margin: 0;
 }
 .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area li {
   display: flex;
@@ -149,7 +150,7 @@
 }
 @media screen and (min-width: 1024px) {
   .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section {
-    margin-top: 117px;
+    margin-top: 82px;
     margin-bottom: 82px;
   }
   .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__container {
@@ -210,6 +211,26 @@
   .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area li {
     gap: 15px;
   }
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__usp_area
+    li.ab-usp--vip-access {
+    order: 1;
+  }
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__usp_area
+    li.ab-usp--pause-update {
+    order: 2;
+  }
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__usp_area
+    li.ab-usp--earn-loyalty {
+    order: 3;
+  }
+  .AB-LME73:not(.AB-LME73--v0)
+    .ab-subscription-section__usp_area
+    li.ab-usp--guaranteed-delivery {
+    order: 4;
+  }
   .AB-LME73:not(.AB-LME73--v0) .ab-subscription-section__usp_area img {
     width: 60px;
     min-width: 60px;
@@ -255,29 +276,29 @@
   }
 }
 
-.AB-LME73--v1
-  #shopify-section-template--19531691229398__16575845243735cab9
-  > .trust-bar {
+.AB-LME73.AB-LME73--v1 .shopify-section > .trust-bar {
   padding-bottom: 0;
 }
-.AB-LME73--v1
-  #shopify-section-template--19531691229398__16575845243735cab9
-  .trust-bar
+.AB-LME73.AB-LME73--v1
+  .shopify-section
+  > .trust-bar
   .trust-bar__items
   > .col-lg:last-child
   .trust-bar__item {
   margin-bottom: 0;
 }
-@media screen and (min-width: 1025px) {
-  .AB-LME73--v1
-    #shopify-section-template--19531691229398__16575845243735cab9
-    > .trust-bar {
+@media screen and (min-width: 1024px) {
+  .AB-LME73.AB-LME73--v1 .shopify-section > .trust-bar {
     padding-bottom: 0;
+  }
+  .AB-LME73.AB-LME73--v1 .ab-subscription-section {
+    margin-top: 100px;
+    margin-bottom: 82px;
   }
 }
 
-.AB-LME73--v2 #shopify-section-template--19531691229398__16575876165402b13f {
-  margin-bottom: 0;
+.AB-LME73.AB-LME73--v2 .shopify-section.ab-leave-out-section {
+  margin-bottom: 0 !important;
 }
 `;
       document.head.appendChild(style);
@@ -298,7 +319,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-LME73",
     test_variation: 2 /* 0 -> control, 1, 2 */,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -321,6 +342,8 @@
   }
 
   function fireGA4Event(eventName, eventLabel = "") {
+    console.log("LME73: fireGA4Event", eventName, eventLabel);
+
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "GA4event",
@@ -344,6 +367,8 @@
     const targetNode = document.querySelector(
       ".shopify-section .no-list.no-list--large",
     ).parentNode;
+    targetNode.classList.add("ab-leave-out-section");
+
     const insertPosition = "afterend";
 
     const layout = /* HTML */ `
@@ -407,23 +432,27 @@
                     {
                       img: ASSETS.vip_access,
                       text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
-                    },
-                    {
-                      img: ASSETS.paused_update,
-                      text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
+                      className: "ab-usp--vip-access",
                     },
                     {
                       img: ASSETS.earn_loyalty_points,
                       text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
+                      className: "ab-usp--earn-loyalty",
+                    },
+                    {
+                      img: ASSETS.paused_update,
+                      text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
+                      className: "ab-usp--pause-update",
                     },
                     {
                       img: ASSETS.guaranteed_delivery,
                       text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
+                      className: "ab-usp--guaranteed-delivery",
                     },
                   ]
                     .map(
                       (item) => /* HTML */ `
-                        <li>
+                        <li class="${item.className}">
                           <div class="icon_area"><img src="${item.img}" /></div>
                           <span>${item.text}</span>
                         </li>
@@ -476,8 +505,8 @@
 
   function scrollHandler(e) {
     const targetNode = document.querySelector(
-      "#shopify-section-template--19531691229398__16575845243735cab9",
-    );
+      ".shopify-section > .trust-bar",
+    ).parentNode;
     const isElementVisible = isElementVisibleInViewport(targetNode);
     if (isElementVisible) {
       fireGA4Event(
@@ -490,14 +519,11 @@
 
   function addGA4ScrollEventLister() {
     waitForElement(
-      () =>
-        document.querySelector(
-          "#shopify-section-template--19531691229398__16575845243735cab9",
-        ),
+      () => document.querySelector(".shopify-section > .trust-bar "),
       () => {
         const targetNode = document.querySelector(
-          "#shopify-section-template--19531691229398__16575845243735cab9",
-        );
+          ".shopify-section > .trust-bar ",
+        ).parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
 
         if (isElementVisible) {

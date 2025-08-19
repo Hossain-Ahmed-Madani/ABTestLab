@@ -6,7 +6,7 @@
         test_name: "LME73: [HOME] Add Net New Subscription Content Feature - (2) SET UP TEST",
         page_initials: "AB-LME73",
         test_variation: 2 /* 0 -> control, 1, 2 */,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -27,6 +27,8 @@
     }
 
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("LME73: fireGA4Event", eventName, eventLabel);
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -39,8 +41,6 @@
     }
 
     const ASSETS = {
-        mask_group_desktop: "https://sb.monetate.net/img/1/1597/5797019.png",
-        mask_group_mobile: "https://sb.monetate.net/img/1/1597/5797218.png",
         products: "https://sb.monetate.net/img/1/1597/5797275.png",
         guaranteed_delivery: "https://sb.monetate.net/img/1/1597/5797020.png",
         earn_loyalty_points: "https://sb.monetate.net/img/1/1597/5797021.png",
@@ -50,7 +50,9 @@
 
     function createLayout() {
         const targetNode = document.querySelector(".shopify-section .no-list.no-list--large").parentNode;
-        const insertPosition = TEST_CONFIG.test_variation === 1 ? "beforebegin" : "afterend";
+        targetNode.classList.add("ab-leave-out-section");
+
+        const insertPosition = "afterend";
 
         const layout = /* HTML */ `
             <section class="ab-subscription-section">
@@ -96,14 +98,30 @@
                             <div class="ab-subscription-section__usp_area usp_area">
                                 <ul>
                                     ${[
-                                        { img: ASSETS.vip_access, text: "VIP access to <br class='ab-xl-block'/> exclusive drops" },
-                                        { img: ASSETS.paused_update, text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime" },
-                                        { img: ASSETS.earn_loyalty_points, text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts" },
-                                        { img: ASSETS.guaranteed_delivery, text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs" },
+                                        {
+                                            img: ASSETS.vip_access,
+                                            text: "VIP access to <br class='ab-xl-block'/> exclusive drops",
+                                            className: "ab-usp--vip-access",
+                                        },
+                                        {
+                                            img: ASSETS.earn_loyalty_points,
+                                            text: "Earn loyalty points for <br class='ab-xl-block'/> free products & discounts",
+                                            className: "ab-usp--earn-loyalty",
+                                        },
+                                        {
+                                            img: ASSETS.paused_update,
+                                            text: "Pause, update frequency <br class='ab-xl-block'/> or cancel anytime",
+                                            className: "ab-usp--pause-update",
+                                        },
+                                        {
+                                            img: ASSETS.guaranteed_delivery,
+                                            text: "Guaranteed delivery <br class='ab-xl-block'/> during sell-outs",
+                                            className: "ab-usp--guaranteed-delivery",
+                                        },
                                     ]
                                         .map(
                                             (item) => /* HTML */ `
-                                                <li>
+                                                <li class="${item.className}">
                                                     <div class="icon_area"><img src="${item.img}" /></div>
                                                     <span>${item.text}</span>
                                                 </li>
@@ -116,7 +134,8 @@
                             <div bis_skin_checked="1" class="ab-subscription-section__cta">
                                 <div bis_skin_checked="1" class="btn__wrapper">
                                     <a class="btn" href="/products/byob-3" title="SUBSCRIBE NOW">
-                                        <span class="btn__text"><span class="btn__text-inner">SUBSCRIBE NOW</span> </span> <span class="btn__filler"></span>
+                                        <span class="btn__text"><span class="btn__text-inner">SUBSCRIBE NOW</span> </span>
+                                        <span class="btn__filler"></span>
                                     </a>
                                 </div>
                             </div>
@@ -148,7 +167,7 @@
     }
 
     function scrollHandler(e) {
-        const targetNode = document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9");
+        const targetNode = document.querySelector(".shopify-section > .trust-bar").parentNode;
         const isElementVisible = isElementVisibleInViewport(targetNode);
         if (isElementVisible) {
             fireGA4Event("LME73_ViewEvent", "User reaches hits the 'Lemme Get Real Results' section");
@@ -158,9 +177,9 @@
 
     function addGA4ScrollEventLister() {
         waitForElement(
-            () => document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9"),
+            () => document.querySelector(".shopify-section > .trust-bar "),
             () => {
-                const targetNode = document.querySelector("#shopify-section-template--19531691229398__16575845243735cab9");
+                const targetNode = document.querySelector(".shopify-section > .trust-bar ").parentNode;
                 const isElementVisible = isElementVisibleInViewport(targetNode);
 
                 if (isElementVisible) {
