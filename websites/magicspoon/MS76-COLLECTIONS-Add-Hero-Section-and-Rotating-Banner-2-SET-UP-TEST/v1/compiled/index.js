@@ -6,7 +6,7 @@
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-MS76",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 2 /* 1, 2 */,
         test_version: 0.0002,
     };
 

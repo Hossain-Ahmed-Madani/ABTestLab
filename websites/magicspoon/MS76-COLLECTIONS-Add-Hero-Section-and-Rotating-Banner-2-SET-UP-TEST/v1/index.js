@@ -13,7 +13,7 @@
         target_url: "https://magicspoon.com/collections/shop-all",
         test_container: "https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004162427/summary",
         figma_link: "https://www.figma.com/design/MNFePWvyeTkb8V26U5hbMN/MS76---COLLECTIONS--Add-Hero-Section-and-Rotating-Banner?node-id=66-2&p=f&t=JHouo4eCXZ2bkZgV-0",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 2 /* 1, 2 */,
         test_version: 0.0002,
     };
 

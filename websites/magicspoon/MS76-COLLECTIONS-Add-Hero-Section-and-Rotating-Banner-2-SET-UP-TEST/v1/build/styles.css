@@ -134,6 +134,9 @@
     .AB-MS76 .shop-all-filters {
         margin-top: 60px;
     }
+    .AB-MS76 .ab-rotating-banner-wrapper {
+        gap: 20px;
+    }
     .AB-MS76 .ab-rotating-banner-content {
         gap: 20px;
         animation: ab-scroll-lg 25s linear infinite;
