@@ -135,7 +135,7 @@
 }
 @media screen and (min-width: 1200px) {
   .AB-MS76 .ab-hero-banner-wrapper {
-    padding-top: 78px 180px;
+    padding: 78px 180px;
   }
   .AB-MS76 .shop-all-filters {
     margin-top: 60px;
