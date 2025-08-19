@@ -8,7 +8,7 @@
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-LME73",
-        test_variation: 2 /* 0 -> control, 1, 2 */,
+        test_variation: 1 /* 0 -> control, 1, 2 */,
         test_version: 0.0005,
     };
 
@@ -55,7 +55,7 @@
         const targetNode = document.querySelector(".shopify-section .no-list.no-list--large").parentNode;
         targetNode.classList.add("ab-leave-out-section");
 
-        const insertPosition = "afterend";
+        const insertPosition = "beforebegin" ;
 
         const layout = /* HTML */ `
             <section class="ab-subscription-section">
