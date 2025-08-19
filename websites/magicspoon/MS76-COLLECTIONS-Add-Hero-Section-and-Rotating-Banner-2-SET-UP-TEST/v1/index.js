@@ -14,7 +14,7 @@
         test_container: "https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004162427/summary",
         figma_link: "https://www.figma.com/design/MNFePWvyeTkb8V26U5hbMN/MS76---COLLECTIONS--Add-Hero-Section-and-Rotating-Banner?node-id=66-2&p=f&t=JHouo4eCXZ2bkZgV-0",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const ASSETS = {
@@ -52,7 +52,7 @@
                 title: "no gluten containing ingredients",
             },
         ],
-        // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ✅ Dye free, ✅ Never artificially flavored, ✅ gluten fre
+        // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ✅ Dye free, ✅ Never artificially flavored, ✅ gluten free
         2: [
             {
                 icon: ASSETS.check_circle,
@@ -76,7 +76,7 @@
             },
             {
                 icon: ASSETS.check_circle,
-                title: "gluten fre",
+                title: "gluten free",
             },
         ],
     };
@@ -114,18 +114,30 @@
                     </div>
                 </div>
                 <div class="ab-rotating-banner-wrapper">
-                    <div class="ab-rotating-banner-content scroll-infinite-rtl">
-                        ${[...matched_data, ...matched_data, ...matched_data]
+                    <ul class="ab-rotating-banner-content">
+                        ${[...matched_data, ...matched_data]
                             .map(
                                 (item) => /* HTML */ `
-                                    <div class="ab-rotating-banner-item">
+                                    <li class="ab-rotating-banner-item">
                                         <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
-                                    </div>
+                                    </li>
                                 `
                             )
                             .join("")}
-                    </div>
+                    </ul>
+                    <ul class="ab-rotating-banner-content">
+                        ${[...matched_data, ...matched_data]
+                            .map(
+                                (item) => /* HTML */ `
+                                    <li class="ab-rotating-banner-item">
+                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
+                                        <div class="ab-rotating-banner-item__label">${item.title}</div>
+                                    </li>
+                                `
+                            )
+                            .join("")}
+                    </ul>
                 </div>
             </section>
         `;

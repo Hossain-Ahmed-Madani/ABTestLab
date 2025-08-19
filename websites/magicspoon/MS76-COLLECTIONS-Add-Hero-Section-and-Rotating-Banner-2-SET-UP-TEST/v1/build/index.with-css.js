@@ -49,20 +49,29 @@
   color: rgb(63, 7, 145);
   text-wrap: pretty;
 }
+.AB-MS76 .shop-all-filters {
+  margin-top: 20px;
+}
 .AB-MS76 .ab-rotating-banner-wrapper {
   background: rgb(221, 198, 255);
   padding-top: 13px;
   padding-bottom: 13px;
   overflow: hidden;
-}
-.AB-MS76 .shop-all-filters {
-  margin-top: 20px;
+  user-select: none;
+  display: flex;
+  gap: 10px;
 }
 .AB-MS76 .ab-rotating-banner-content {
+  flex-shrink: 0;
+  min-width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
-  padding-left: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: ab-scroll-sm 25s linear infinite;
 }
 .AB-MS76 .ab-rotating-banner-item {
   display: flex;
@@ -133,43 +142,18 @@
   }
   .AB-MS76 .ab-rotating-banner-content {
     gap: 20px;
+    animation: ab-scroll-lg 25s linear infinite;
   }
 }
 
-.scroll-infinite-rtl {
-  white-space: nowrap;
-  animation: scroll-right-to-left-md 15s linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  min-width: 200%;
-}
-@media screen and (min-width: 768px) {
-  .scroll-infinite-rtl {
-    animation: scroll-right-to-left-md 25s linear infinite;
+@keyframes ab-scroll-sm {
+  to {
+    transform: translateX(calc(-100% - 10px));
   }
 }
-@media screen and (min-width: 1200px) {
-  .scroll-infinite-rtl {
-    min-width: 100%;
-    animation: scroll-right-to-left-lg 15s linear infinite;
-  }
-}
-
-/* Right to Left Infinite Scroll Animation */
-@keyframes scroll-right-to-left-md {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
-@keyframes scroll-right-to-left-lg {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
+@keyframes ab-scroll-lg {
+  to {
+    transform: translateX(calc(-100% - 20px));
   }
 }
 `;
@@ -180,11 +164,16 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+    v1: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384015&utm_campaign=sp5
+    v2: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384016&utm_campaign=sp5
+*/
+
 (() => {
   const TEST_CONFIG = {
     page_initials: "AB-MS76",
-    test_variation: 1 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_variation: 2 /* 1, 2 */,
+    test_version: 0.0002,
   };
 
   const ASSETS = {
@@ -222,7 +211,7 @@
         title: "no gluten containing ingredients",
       },
     ],
-    // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ✅ Dye free, ✅ Never artificially flavored, ✅ gluten fre
+    // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ✅ Dye free, ✅ Never artificially flavored, ✅ gluten free
     2: [
       {
         icon: ASSETS.check_circle,
@@ -246,7 +235,7 @@
       },
       {
         icon: ASSETS.check_circle,
-        title: "gluten fre",
+        title: "gluten free",
       },
     ],
   };
@@ -290,22 +279,38 @@
           </div>
         </div>
         <div class="ab-rotating-banner-wrapper">
-          <div class="ab-rotating-banner-content scroll-infinite-rtl">
-            ${[...matched_data, ...matched_data, ...matched_data]
+          <ul class="ab-rotating-banner-content">
+            ${[...matched_data, ...matched_data]
               .map(
                 (item) => /* HTML */ `
-                  <div class="ab-rotating-banner-item">
+                  <li class="ab-rotating-banner-item">
                     <div class="ab-rotating-banner-item__img">
                       <img src="${item.icon}" />
                     </div>
                     <div class="ab-rotating-banner-item__label">
                       ${item.title}
                     </div>
-                  </div>
+                  </li>
                 `,
               )
               .join("")}
-          </div>
+          </ul>
+          <ul class="ab-rotating-banner-content">
+            ${[...matched_data, ...matched_data]
+              .map(
+                (item) => /* HTML */ `
+                  <li class="ab-rotating-banner-item">
+                    <div class="ab-rotating-banner-item__img">
+                      <img src="${item.icon}" />
+                    </div>
+                    <div class="ab-rotating-banner-item__label">
+                      ${item.title}
+                    </div>
+                  </li>
+                `,
+              )
+              .join("")}
+          </ul>
         </div>
       </section>
     `;
