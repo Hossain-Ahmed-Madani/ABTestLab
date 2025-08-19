@@ -3,8 +3,8 @@ Figma -> https://www.figma.com/design/iWkyd0BAsc6ONU9WqGIC7H/MS53---PRODUCT--Opt
 Test container -> https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004163226/summary
 
 control ->  https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385887&utm_campaign=sp5
-v1 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385888&utm_campaign=sp5
-v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385891&utm_campaign=sp5
+v1 ->       https://magicspoon.com/products/variety-pack-cereal-case?_conv_eforce=1004163226.1004385888&utm_campaign=sp5
+v2 ->       https://magicspoon.com/products/variety-pack-cereal-case?_conv_eforce=1004163226.1004385891&utm_campaign=sp5
 */
 
 (function MS53_1_TEST() {
