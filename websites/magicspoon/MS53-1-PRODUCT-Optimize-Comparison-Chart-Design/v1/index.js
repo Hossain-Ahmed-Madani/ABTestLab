@@ -3,8 +3,8 @@ Figma -> https://www.figma.com/design/iWkyd0BAsc6ONU9WqGIC7H/MS53---PRODUCT--Opt
 Test container -> https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004163226/summary
 
 control ->  https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385887&utm_campaign=sp5
-v1 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385888&utm_campaign=sp5
-v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforce=1004163226.1004385891&utm_campaign=sp5
+v1 ->       https://magicspoon.com/products/variety-pack-cereal-case?_conv_eforce=1004163226.1004385888&utm_campaign=sp5
+v2 ->       https://magicspoon.com/products/variety-pack-cereal-case?_conv_eforce=1004163226.1004385891&utm_campaign=sp5
 */
 
 (function MS53_1_TEST() {
@@ -16,8 +16,8 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
         site_url: "https://magicspoon.com/",
         test_name: `MS53.1: [PRODUCT] Optimize Comparison Chart Design - (2) SET UP TEST`,
         page_initials: "MS53_1",
-        test_variation: 2 /* 0, 1, 2 */,
-        test_version: 0.00003,
+        test_variation: 1 /* 0, 1, 2 */,
+        test_version: 0.00004,
     };
 
     const MS53_1_COMPARISON_CHART_ARR = [
@@ -571,6 +571,14 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
                     "Grain Free": "No",
                     "Gluten Free": "No",
                 },
+                "Cocoa Puffs": {
+                    Protein: "1g",
+                    "Net Carbs": "22g",
+                    Sugar: "9g",
+                    "Serving Size": "27g",
+                    "Grain Free": "No",
+                    "Gluten Free": "No",
+                },
             },
         },
 
@@ -876,8 +884,6 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log(`MS53_1: Firing GA4 Event: ${eventName} - ${eventLabel}`);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -933,7 +939,6 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
     }
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
-
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -1043,14 +1048,10 @@ v2 ->       https://magicspoon.com/products/variety-1-case-6-boxes-1?_conv_eforc
     }
 
     function init() {
-        console.table(TEST_CONFIG);
-
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`);
 
-        if (TEST_CONFIG.test_variation !== 0) {
-            createLayout();
-            if (TEST_CONFIG.test_variation === 2) swapReviewSectionPosition();
-        }
+        createLayout();
+        if (TEST_CONFIG.test_variation === 2) swapReviewSectionPosition();
 
         handleIngredientsSectionViewGoal();
     }
