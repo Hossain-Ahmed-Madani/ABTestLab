@@ -55,7 +55,7 @@
     }
 
     function fireConvertGoal() {
-        console.log("Trigger Goal: EXP-681: Last Minute - Change Date | JS");
+        console.log("Trigger Goal: ECX-136: Last Minute - Change Date | JS");
         window._conv_q = window._conv_q || [];
         _conv_q.push(["triggerConversion", "1004103971"]);
     }
