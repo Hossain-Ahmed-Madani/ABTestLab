@@ -6,7 +6,7 @@
         test_name: "ECX-136 Mobile | Last Minute Page | Hide productions with no performances & Improved date navigation",
         page_initials: "AB-ECX-136",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -65,60 +65,100 @@
     }
 
     function handleLastMinuteSelectOnchange() {
-        document.querySelector("#last-minute-day-select").addEventListener("change", (e) => {
-            const value = e.target.value;
+        const { selectElement } = getLastMinuteSelectFunctionalities();
+        selectElement.addEventListener("change", (e) => {
             hideTableWithNoTime();
             fireConvertGoal();
+            updateLayout();
         });
     }
 
-    function handleLastMinuteArrowClickAction(action /* prev, next */) {
-        // Get select input and option elements
+    function getLastMinuteSelectFunctionalities() {
         const selectElement = document.querySelector("#last-minute-day-select");
-        let currentOptionElement = document.querySelector(`#last-minute-day-select option[value='${selectElement.value}']`);
-        const totalOptions = selectElement.options.length;
-        let currentOptionIndex = selectElement.selectedIndex;
 
-        // Determine required outcome
-        if ((action === "prev" && currentOptionIndex === 0) || (action === "next" && currentOptionIndex === totalOptions - 1)) return;
-
-        currentOptionElement.removeAttribute("selected");
-
-        if (action === "prev") {
-            currentOptionElement = currentOptionElement.previousElementSibling;
-            currentOptionIndex--;
-        } else if (action === "next") {
-            currentOptionElement = currentOptionElement.nextElementSibling;
-            currentOptionIndex++;
+        function getCurrentOptionElement() {
+            return document.querySelector(`#last-minute-day-select option[value='${selectElement.value}']`);
+        }
+        function getCurrentOptionIndex() {
+            return selectElement.selectedIndex;
+        }
+        function getTotalOptions() {
+            return selectElement.options.length;
         }
 
-        // Dispatch change events
-        selectElement.value = currentOptionElement.value;
-        currentOptionElement.setAttribute("selected", "selected");
-        const event = new Event("change", { bubbles: true });
-        selectElement.dispatchEvent(event);
+        function dispatchOnchangeEvent(currOption) {
+            document.querySelectorAll(`#last-minute-day-select option`).forEach((item) => item.removeAttribute("selected"));
+            selectElement.value = currOption.value;
+            selectElement.selectedIndex = currOption.index;
+            currOption.setAttribute("selected", "selected");
+            const event = new Event("change", { bubbles: true });
+            selectElement.dispatchEvent(event);
+        }
 
-        // Update ab last minute layout
-        const abLastMinuteHeadingElem = document.querySelector(".ab-last-minute__date-heading");
-        abLastMinuteHeadingElem.innerText = currentOptionElement.innerText;
-        abLastMinuteHeadingElem.setAttribute("value", currentOptionElement.value);
+        function selectPreviousDate() {
+            const currentOptionElement = getCurrentOptionElement();
+            if (!currentOptionElement.previousElementSibling) {
+                return;
+            }
+
+            dispatchOnchangeEvent(currentOptionElement.previousElementSibling);
+        }
+
+        function selectNextDate() {
+            const currentOptionElement = getCurrentOptionElement();
+
+            if (!currentOptionElement.nextElementSibling) {
+                return;
+            }
+            dispatchOnchangeEvent(currentOptionElement.nextElementSibling);
+        }
+
+        function selectSecondDate() {
+            dispatchOnchangeEvent(document.querySelector(`#last-minute-day-select option:nth-child(2)`));
+        }
+
+        return {
+            selectElement,
+            getCurrentOptionElement,
+            getCurrentOptionIndex,
+            getTotalOptions,
+            dispatchOnchangeEvent,
+            selectPreviousDate,
+            selectNextDate,
+            selectSecondDate,
+        };
+    }
+
+    function updateLayout() {
+        const { getCurrentOptionElement, getTotalOptions, getCurrentOptionIndex } = getLastMinuteSelectFunctionalities();
+
+        const targetNode = document.querySelector(".ab-last-minute__date-heading");
+        targetNode.innerText = getCurrentOptionElement().innerText;
+        targetNode.setAttribute("value", getCurrentOptionElement().value);
 
         document.querySelectorAll(".ab-last-minute__button").forEach((item) => {
             item.classList.remove("ab-last-minute__button--disabled");
 
-            if (currentOptionIndex === 0 && item.querySelector(".sp-icon-chevron-left")) {
+            if (getCurrentOptionIndex() === 0 && item.querySelector(".sp-icon-chevron-left")) {
                 item.classList.add("ab-last-minute__button--disabled");
-            } else if (currentOptionIndex === totalOptions - 1 && item.querySelector(".sp-icon-chevron-right")) {
+            } else if (getCurrentOptionIndex() === getTotalOptions() - 1 && item.querySelector(".sp-icon-chevron-right")) {
                 item.classList.add("ab-last-minute__button--disabled");
             }
         });
     }
 
     function clickEvents() {
+        const { selectNextDate, selectPreviousDate } = getLastMinuteSelectFunctionalities();
+
         document.querySelectorAll(".ab-last-minute__button").forEach((item) => {
             const action = item.querySelector(".sp-icon-chevron-left") ? "prev" : "next";
+
             item.addEventListener("click", (e) => {
-                handleLastMinuteArrowClickAction(action);
+                if (action === "prev") {
+                    selectPreviousDate();
+                } else if (action === "next") {
+                    selectNextDate();
+                }
             });
         });
     }
@@ -156,8 +196,9 @@
             () => document.readyState === "complete",
             () => {
                 const result = isLondonTimeBetween7PMToMidnight();
+                const { selectSecondDate } = getLastMinuteSelectFunctionalities();
                 if (result.isBetween) {
-                    handleLastMinuteArrowClickAction("next");
+                    selectSecondDate();
                 }
             }
         );
