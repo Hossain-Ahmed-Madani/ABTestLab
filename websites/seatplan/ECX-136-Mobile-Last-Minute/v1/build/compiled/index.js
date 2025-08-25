@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-ECX-136",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -64,7 +64,7 @@
         const { selectElement } = getLastMinuteSelectFunctionalities();
         selectElement.addEventListener("change", (e) => {
             hideTableWithNoTime();
-            fireConvertGoal();
+            // fireConvertGoal();
             updateLayout();
         });
     }
@@ -155,6 +155,7 @@
                 } else if (action === "next") {
                     selectNextDate();
                 }
+                fireConvertGoal();
             });
         });
     }
