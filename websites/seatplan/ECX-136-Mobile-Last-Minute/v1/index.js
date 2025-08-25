@@ -6,7 +6,7 @@
         test_name: "ECX-136 Mobile | Last Minute Page | Hide productions with no performances & Improved date navigation",
         page_initials: "AB-ECX-136",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -163,27 +163,49 @@
         });
     }
 
-    function getLondonTimeParts() {
-        const formatter = new Intl.DateTimeFormat("en-GB", {
-            timeZone: "Europe/London",
-            hour12: false,
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-        });
+    // Async function to load the scripts
+    async function loadMomentTimezone() {
+        if (typeof window.moment?.tz === "function") return; // Already loaded
 
-        const parts = formatter.formatToParts(new Date());
-        const partObject = Object.fromEntries(parts.map(({ type, value }) => [type, value]));
+        // Load moment.js first if needed
+        if (typeof window.moment === "undefined") {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src = "https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js";
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Load moment-timezone
+        await new Promise((resolve, reject) => {
+            const script = document.createElement("script");
+            script.src = "https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.43/moment-timezone-with-data.min.js";
+            script.onload = resolve;
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
+    // Synchronous function to get London time (requires scripts to be loaded first)
+    function getLondonTime() {
+        if (typeof window.moment?.tz !== "function") {
+            throw new Error("moment-timezone not loaded. Call loadMomentTimezone() first.");
+        }
+
+        const londonTime = window.moment().tz("Europe/London");
 
         return {
-            hour: parseInt(partObject.hour, 10),
-            timeString: `${partObject.hour}:${partObject.minute}:${partObject.second}`,
+            hour: londonTime.hours(),
+            timeString: londonTime.format("HH:mm:ss"),
         };
     }
 
+    // Synchronous function to check time range
     function isLondonTimeBetween7PMToMidnight() {
-        const { hour, timeString } = getLondonTimeParts();
-        const isBetween = hour >= 19 && hour <= 23;
+        const { hour, timeString } = getLondonTime();
+        const isBetween = hour >= 19 && hour <= 23; /* main */
 
         return {
             isBetween,
@@ -195,11 +217,22 @@
         waitForElement(
             () => document.readyState === "complete",
             () => {
-                const result = isLondonTimeBetween7PMToMidnight();
-                const { selectSecondDate } = getLastMinuteSelectFunctionalities();
-                if (result.isBetween) {
-                    selectSecondDate();
-                }
+                // Load scripts once at the beginning
+                loadMomentTimezone().then(() => {
+                    // Now use synchronous functions
+                    const time = getLondonTime();
+                    console.log("London time:", time.timeString);
+
+                    const result = isLondonTimeBetween7PMToMidnight();
+                    console.log("Is between 7 PM and midnight:", result.isBetween);
+                    console.log("Time string:", result.londonTimeString);
+
+                    // const result = isLondonTimeBetween7PMToMidnight();
+                    const { selectSecondDate } = getLastMinuteSelectFunctionalities();
+                    if (result.isBetween) {
+                        selectSecondDate();
+                    }
+                });
             }
         );
     }
