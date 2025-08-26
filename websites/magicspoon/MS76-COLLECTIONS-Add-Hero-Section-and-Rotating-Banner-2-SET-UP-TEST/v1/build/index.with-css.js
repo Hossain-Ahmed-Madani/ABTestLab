@@ -1,0 +1,341 @@
+(function () {
+  var interval = setInterval(function () {
+    if (document.head) {
+      // Check if <head> exists
+      clearInterval(interval); // Stop checking once found
+      var style = document.createElement("style");
+      style.innerHTML = `.AB-MS76 #shopify-section-shop-all-header {
+  display: none;
+}
+.AB-MS76 .ab-hero-banner-wrapper {
+  width: 100%;
+  height: 206px;
+  background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/magicspoon-t-h1-newflavors-homepagecropshomepagedesign-1-large-2-1_689f9a7b87cfa.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 15px 10px;
+}
+.AB-MS76 .ab-hero-banner-content {
+  margin-left: auto;
+  margin-right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 10px;
+}
+.AB-MS76 h2.ab-hero-banner-header {
+  width: max-content;
+  font-family: Mabry Pro;
+  font-weight: 900;
+  font-style: Black;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: rgb(63, 7, 145);
+  text-wrap: pretty;
+}
+.AB-MS76 p.ab-hero-banner-subtitle {
+  width: max-content;
+  font-family: Mabry Pro;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: rgb(63, 7, 145);
+  text-wrap: pretty;
+}
+.AB-MS76 .ab-section {
+  margin-bottom: 20px;
+}
+.AB-MS76 .ab-rotating-banner-wrapper {
+  background: rgb(221, 198, 255);
+  padding-top: 13px;
+  padding-bottom: 13px;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  gap: 10px;
+}
+.AB-MS76 .ab-rotating-banner-content {
+  flex-shrink: 0;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  animation: ab-scroll-sm 25s linear infinite;
+}
+.AB-MS76 .ab-rotating-banner-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.AB-MS76 .ab-rotating-banner-item__img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-MS76 .ab-rotating-banner-item__img img {
+  width: 14px;
+  min-width: 14px;
+  max-width: 14px;
+  height: 14px;
+  min-height: 14px;
+  max-height: 14px;
+}
+.AB-MS76 .ab-rotating-banner-item__label {
+  font-family: Mabry Pro;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(63, 7, 145);
+  white-space: nowrap;
+}
+@media screen and (min-width: 768px) {
+  .AB-MS76 .ab-hero-banner-wrapper {
+    width: 100%;
+    height: 422px;
+    background-image: url("https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-33-1_689f9af17ff29.png");
+    padding-top: 78px;
+    padding-left: 180px;
+  }
+  .AB-MS76 .ab-hero-banner-content {
+    align-items: flex-start;
+    gap: 25px;
+  }
+  .AB-MS76 h2.ab-hero-banner-header {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+  .AB-MS76 p.ab-hero-banner-subtitle {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+  .AB-MS76 p.ab-hero-banner-subtitle br {
+    display: none;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .AB-MS76 .ab-hero-banner-wrapper {
+    padding: 78px 180px;
+  }
+  .AB-MS76 .ab-section {
+    margin-bottom: 60px;
+  }
+  .AB-MS76 .ab-rotating-banner-wrapper {
+    gap: 20px;
+  }
+  .AB-MS76 .ab-rotating-banner-content {
+    gap: 20px;
+    animation: ab-scroll-lg 25s linear infinite;
+  }
+}
+
+@keyframes ab-scroll-sm {
+  to {
+    transform: translateX(calc(-100% - 10px));
+  }
+}
+@keyframes ab-scroll-lg {
+  to {
+    transform: translateX(calc(-100% - 20px));
+  }
+}
+`;
+      document.head.appendChild(style);
+      setTimeout(() => {
+        clearInterval(interval); // Clear the interval after 5 seconds
+      }, 5000);
+    }
+  }, 100); // Check every 100ms for <head>
+})();
+/* 
+    v1: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384015&utm_campaign=sp5
+    v2: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384016&utm_campaign=sp5
+*/
+
+(() => {
+  const TEST_CONFIG = {
+    page_initials: "AB-MS76",
+    test_variation: 2 /* 1, 2 */,
+    test_version: 0.0002,
+  };
+
+  const ASSETS = {
+    check_circle:
+      "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-1-1_68a3314ab9936.svg",
+    cross_circle:
+      "https://cdn-3.convertexperiments.com/uf/10042082/10042535/delete-1-streamline-flex_68a3314ab8857.svg",
+  };
+
+  const DATA = {
+    // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ❌ no dyes, ❌ no artificial flavors, ❌ no gluten containing ingredients
+    1: [
+      {
+        icon: ASSETS.check_circle,
+        title: "high protein",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "high fiber",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "nostalgic flavors",
+      },
+      {
+        icon: ASSETS.cross_circle,
+        title: "no dyes",
+      },
+      {
+        icon: ASSETS.cross_circle,
+        title: "no artificial flavors",
+      },
+      {
+        icon: ASSETS.cross_circle,
+        title: "no gluten containing ingredients",
+      },
+    ],
+    // ✅ high protein, ✅ high fiber, ✅ nostalgic flavors, ✅ Dye free, ✅ Never artificially flavored, ✅ gluten free
+    2: [
+      {
+        icon: ASSETS.check_circle,
+        title: "high protein",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "high fiber",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "nostalgic flavors",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "Dye free",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "Never artificially flavored",
+      },
+      {
+        icon: ASSETS.check_circle,
+        title: "gluten free",
+      },
+    ],
+  };
+
+  function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+    try {
+      if (timer <= 0) {
+        throw new Error(
+          `Timeout reached while waiting for condition: ${predicate.toString()}`,
+        );
+      } else if (predicate && predicate()) {
+        callback();
+      } else {
+        setTimeout(() => {
+          waitForElement(predicate, callback, timer - frequency, frequency);
+        }, frequency);
+      }
+    } catch (error) {
+      console.error(error);
+      return;
+    }
+  }
+
+  function createLayout() {
+    const targetNode = document.querySelector(
+      "#shopify-section-shop-all-header",
+    );
+    const matched_data = DATA[TEST_CONFIG.test_variation];
+
+    const layout = /* HTML */ `
+      <section class="ab-section">
+        <div class="ab-hero-banner-wrapper">
+          <div class="ab-hero-banner-content">
+            <h2 class="ab-hero-banner-header">
+              EXPLORE OUR <br />
+              PRODUCTS
+            </h2>
+            <p class="ab-hero-banner-subtitle">
+              Indulge in our delicious, better-<br />for-you breakfast options.
+            </p>
+          </div>
+        </div>
+        <div class="ab-rotating-banner-wrapper">
+          <ul class="ab-rotating-banner-content">
+            ${[...matched_data, ...matched_data]
+              .map(
+                (item) => /* HTML */ `
+                  <li class="ab-rotating-banner-item">
+                    <div class="ab-rotating-banner-item__img">
+                      <img src="${item.icon}" />
+                    </div>
+                    <div class="ab-rotating-banner-item__label">
+                      ${item.title}
+                    </div>
+                  </li>
+                `,
+              )
+              .join("")}
+          </ul>
+          <ul class="ab-rotating-banner-content">
+            ${[...matched_data, ...matched_data]
+              .map(
+                (item) => /* HTML */ `
+                  <li class="ab-rotating-banner-item">
+                    <div class="ab-rotating-banner-item__img">
+                      <img src="${item.icon}" />
+                    </div>
+                    <div class="ab-rotating-banner-item__label">
+                      ${item.title}
+                    </div>
+                  </li>
+                `,
+              )
+              .join("")}
+          </ul>
+        </div>
+      </section>
+    `;
+    targetNode.insertAdjacentHTML("afterend", layout);
+  }
+
+  function init() {
+    document.body.classList.add(
+      TEST_CONFIG.page_initials,
+      `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
+      `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`,
+    );
+    createLayout();
+  }
+
+  function hasAllTargetElements() {
+    return !!(
+      document.querySelector(
+        `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`,
+      ) && document.querySelector(`#shopify-section-shop-all-header`)
+    );
+  }
+
+  waitForElement(hasAllTargetElements, init);
+})();
