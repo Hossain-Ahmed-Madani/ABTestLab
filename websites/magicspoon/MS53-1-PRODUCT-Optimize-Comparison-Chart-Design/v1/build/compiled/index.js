@@ -3,7 +3,8 @@
 
     const TEST_CONFIG = {
         page_initials: "MS53_1",
-        test_variation: 1 /* 0, 1, 2 */};
+        test_variation: 1 /* 0, 1, 2 */,
+    };
 
     const MS53_1_COMPARISON_CHART_ARR = [
         // '========= GRANOLA ========='
@@ -838,7 +839,13 @@
                     stroke-linecap="round"
                     stroke-linejoin="round"
                 />
-                <path d="M10.6963 17.9517L14.9171 22.3044C16.9032 16.5991 18.5573 14.0955 22.3034 10.6973" stroke="#3F0791" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                    d="M10.6963 17.9517L14.9171 22.3044C16.9032 16.5991 18.5573 14.0955 22.3034 10.6973"
+                    stroke="#3F0791"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
             </svg>
         `,
 
@@ -956,7 +963,14 @@
 
     function initializeFlickity() {
         waitForElement(
-            () => !!(document.querySelector(".ab-nutrition-table-column-group") && window.$ && typeof window.$ === "function" && window.$.fn.flickity && typeof window.$.fn.flickity === "function"),
+            () =>
+                !!(
+                    document.querySelector(".ab-nutrition-table-column-group") &&
+                    window.$ &&
+                    typeof window.$ === "function" &&
+                    window.$.fn.flickity &&
+                    typeof window.$.fn.flickity === "function"
+                ),
             () => {
                 const targetNode = window.$(".ab-nutrition-table-column-group");
                 targetNode.flickity({
@@ -1029,9 +1043,7 @@
 
     function init() {
         document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`);
-
         createLayout();
-
         handleIngredientsSectionViewGoal();
     }
 
