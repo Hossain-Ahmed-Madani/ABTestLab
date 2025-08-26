@@ -68,7 +68,6 @@
         const { selectElement } = getLastMinuteSelectFunctionalities();
         selectElement.addEventListener("change", (e) => {
             hideTableWithNoTime();
-            // fireConvertGoal();
             updateLayout();
         });
     }
@@ -218,17 +217,8 @@
         waitForElement(
             () => document.readyState === "complete",
             () => {
-                // Load scripts once at the beginning
                 loadMomentTimezone().then(() => {
-                    // Now use synchronous functions
-                    const time = getLondonTime();
-                    console.log("London time:", time.timeString);
-
                     const result = isLondonTimeBetween7PMToMidnight();
-                    console.log("Is between 7 PM and midnight:", result.isBetween);
-                    console.log("Time string:", result.londonTimeString);
-
-                    // const result = isLondonTimeBetween7PMToMidnight();
                     const { selectSecondDate } = getLastMinuteSelectFunctionalities();
                     if (result.isBetween) {
                         selectSecondDate();
