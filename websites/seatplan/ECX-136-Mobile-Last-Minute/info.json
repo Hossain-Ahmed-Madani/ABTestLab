@@ -1,0 +1,13 @@
+{
+  "id": "1755708861771_9944_ECX_136_Mobile_Last_Minute",
+  "name": "ECX-136-Mobile-Last-Minute",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-08-20T16:54:21.771Z",
+  "createdAtReadable": "20/08/2025, 10:54:21 pm",
+  "lastUpdated": "2025-08-20T16:54:22.348Z"
+}
