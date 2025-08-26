@@ -1,8 +1,3 @@
-/* 
-    v1: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384015&utm_campaign=sp5
-    v2: https://magicspoon.com/collections/shop-all?_conv_eforce=1004162427.1004384016&utm_campaign=sp5
-*/
-
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-MS76",
@@ -136,7 +131,11 @@
     }
 
     function init() {
-        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+        document.body.classList.add(
+            TEST_CONFIG.page_initials,
+            `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
+            `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`
+        );
         createLayout();
     }
 

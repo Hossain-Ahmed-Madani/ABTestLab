@@ -105,9 +105,7 @@
                             .map(
                                 (item) => /* HTML */ `
                                     <li class="ab-rotating-banner-item">
-                                        <div class="ab-rotating-banner-item__img">
-                                            <img src="${item.icon}" />
-                                        </div>
+                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
                                     </li>
                                 `
@@ -119,9 +117,7 @@
                             .map(
                                 (item) => /* HTML */ `
                                     <li class="ab-rotating-banner-item">
-                                        <div class="ab-rotating-banner-item__img">
-                                            <img src="${item.icon}" />
-                                        </div>
+                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
                                     </li>
                                 `
@@ -135,7 +131,11 @@
     }
 
     function init() {
-        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+        document.body.classList.add(
+            TEST_CONFIG.page_initials,
+            `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
+            `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`
+        );
         createLayout();
     }
 

@@ -1,12 +1,20 @@
-
 (() => {
     const TEST_CONFIG = {
+        client: "Acadia",
+        project: "Magicspoon",
+        site_url: "https://magicspoon.com",
+        test_name: "MS76: [COLLECTIONS] Add Hero Section and Rotating Banner - (2) SET UP TEST",
         page_initials: "AB-MS76",
+        target_url: "https://magicspoon.com/collections/shop-all",
+        test_container: "https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004162427/summary",
+        figma_link: "https://www.figma.com/design/MNFePWvyeTkb8V26U5hbMN/MS76---COLLECTIONS--Add-Hero-Section-and-Rotating-Banner?node-id=66-2&p=f&t=JHouo4eCXZ2bkZgV-0",
         test_variation: 2 /* 1, 2 */,
         test_version: 0.0002,
     };
 
     const ASSETS = {
+        hero_mobile: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/magicspoon-t-h1-newflavors-homepagecropshomepagedesign-1-large-2-1_689f9a7b87cfa.png",
+        hero_desktop: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-33-1_689f9af17ff29.png",
         check_circle: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-1-1_68a3314ab9936.svg",
         cross_circle: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/delete-1-streamline-flex_68a3314ab8857.svg",
     };
@@ -106,9 +114,7 @@
                             .map(
                                 (item) => /* HTML */ `
                                     <li class="ab-rotating-banner-item">
-                                        <div class="ab-rotating-banner-item__img">
-                                            <img src="${item.icon}" />
-                                        </div>
+                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
                                     </li>
                                 `
@@ -120,9 +126,7 @@
                             .map(
                                 (item) => /* HTML */ `
                                     <li class="ab-rotating-banner-item">
-                                        <div class="ab-rotating-banner-item__img">
-                                            <img src="${item.icon}" />
-                                        </div>
+                                        <div class="ab-rotating-banner-item__img"><img src="${item.icon}" /></div>
                                         <div class="ab-rotating-banner-item__label">${item.title}</div>
                                     </li>
                                 `
@@ -136,7 +140,11 @@
     }
 
     function init() {
-        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+        document.body.classList.add(
+            TEST_CONFIG.page_initials,
+            `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
+            `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`
+        );
         createLayout();
     }
 

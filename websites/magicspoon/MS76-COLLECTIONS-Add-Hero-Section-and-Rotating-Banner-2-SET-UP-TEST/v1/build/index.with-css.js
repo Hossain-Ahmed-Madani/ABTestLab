@@ -49,8 +49,8 @@
   color: rgb(63, 7, 145);
   text-wrap: pretty;
 }
-.AB-MS76 .shop-all-filters {
-  margin-top: 20px;
+.AB-MS76 .ab-section {
+  margin-bottom: 20px;
 }
 .AB-MS76 .ab-rotating-banner-wrapper {
   background: rgb(221, 198, 255);
@@ -137,8 +137,8 @@
   .AB-MS76 .ab-hero-banner-wrapper {
     padding: 78px 180px;
   }
-  .AB-MS76 .shop-all-filters {
-    margin-top: 60px;
+  .AB-MS76 .ab-section {
+    margin-bottom: 60px;
   }
   .AB-MS76 .ab-rotating-banner-wrapper {
     gap: 20px;
