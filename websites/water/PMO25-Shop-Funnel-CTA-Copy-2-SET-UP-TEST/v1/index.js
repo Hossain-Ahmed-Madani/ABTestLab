@@ -1,3 +1,6 @@
+// https://trello.com/c/2dylU19x/3920-pmo25-shop-funnel-cta-copy-2-set-up-test
+// https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2036051#c2556744:what
+
 (() => {
     const TEST_CONFIG = {
         client: "Acadia",
