@@ -77,7 +77,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-one-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Select Dispenser" : "Add Products to Continue";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Dispenser" : "Add Products to Continue";
                         }
                     });
                 },
@@ -91,7 +91,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-two-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Select Add-Ons" : "Skip";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Add-Ons" : "Skip";
                         }
                     });
                 },

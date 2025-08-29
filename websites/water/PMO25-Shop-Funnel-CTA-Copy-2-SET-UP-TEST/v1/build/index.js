@@ -1,5 +1,9 @@
 (() => {
     const TEST_CONFIG = {
+        client: "Acadia",
+        project: "Water",
+        site_url: "https://www.water.com/",
+        test_name: "PMO25: [Shop Funnel] CTA Copy-(2) SET UP TEST : remove the special characters and spaces and replace them with _",
         page_initials: "AB-PMO25",
         test_variation: 1,
         test_version: 0.0001,
@@ -77,7 +81,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-one-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Select Dispenser" : "Add Products to Continue";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Dispenser" : "Add Products to Continue";
                         }
                     });
                 },
@@ -91,7 +95,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-two-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Select Add-Ons" : "Skip";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Add-Ons" : "Skip";
                         }
                     });
                 },
