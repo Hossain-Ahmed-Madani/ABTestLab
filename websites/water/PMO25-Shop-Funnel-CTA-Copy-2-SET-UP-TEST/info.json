@@ -1,0 +1,10 @@
+{
+    "id": "1756487234377_1989_PMO25_Shop_Funnel_CTA_Copy_2_SET_UP_TEST",
+    "name": "PMO25-Shop-Funnel-CTA-Copy-2-SET-UP-TEST",
+    "type": "A/B",
+    "website": "water",
+    "variations": ["control", "v1"],
+    "createdAt": "2025-08-29T17:07:14.377Z",
+    "createdAtReadable": "29/08/2025, 11:07:14 pm",
+    "lastUpdated": "2025-08-29T17:07:14.816Z"
+}

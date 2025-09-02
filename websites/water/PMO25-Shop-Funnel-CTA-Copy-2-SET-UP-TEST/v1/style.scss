@@ -1,0 +1,12 @@
+.AB-PMO25--v1 {
+    .wrapper-step:nth-of-type(1) .wrapper-step__actions .btn:not(.ab-btn),
+    .wrapper-step:nth-of-type(2) .wrapper-step__actions .btn:not(.ab-btn) {
+        display: none;
+    }
+
+    .btn[disabled] ~ .ab-btn {
+        cursor: not-allowed;
+        opacity: 0.5;
+        pointer-events: non;
+    }
+}
