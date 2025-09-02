@@ -1,3 +1,154 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
 .AB-PMO23 {
-    //
+    .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+        padding: 30px 25px 38px;
+
+        height: max-content;
+    }
+    .ab-storyblok-modal > .wrapper-outer > .wrapper-inner > .wrapper-body {
+        gap: 0;
+    }
+
+    .ab-storyblok-modal .storyblok-text-blocks .wrapper-frames .wrapper-frame:nth-child(3):last-child {
+        grid-column: span 1;
+    }
+
+    .ab-wrapper-body .wrapper-heading {
+        font-family: Nunito Sans;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: #00053e;
+    }
+
+    .ab-water-type-wrapper-block .wrapper-frames {
+        gap: 30px;
+    }
+
+    .ab-water-type-wrapper-block .wrapper-frame:not(:last-child) {
+        padding-bottom: 30px;
+    }
+
+    .ab-water-type-wrapper-block .wrapper-frame:not(:last-child) {
+        border-bottom: 1px solid #00053e26;
+    }
+
+    .ab-water-type-wrapper-block .ab-wrapper-image-container {
+        margin-right: 21px;
+    }
+
+    .ab-water-type-wrapper-block .ab-wrapper-image svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .ab-water-type-wrapper-block .ab-heading-2 {
+        font-family: Nunito Sans;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: normal;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: #00053e;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .ab-water-type-wrapper-block .wrapper-description {
+        font-family: Nunito Sans;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        color: #00053e;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-wrapper-body .wrapper-heading {
+            font-size: 36px;
+            line-height: 42px;
+        }
+
+        .ab-water-type-wrapper-block .ab-wrapper-image svg {
+            width: 60px;
+            height: 60px;
+        }
+
+        .ab-water-type-wrapper-block .ab-heading-2 {
+            font-size: 24px;
+            line-height: normal;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-description {
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+
+    @media screen and (min-width: 1025.5px) {
+        .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+            padding: 50px 55px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-frames {
+            gap: 40px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-frame {
+            border: 0px;
+            background: #f2f5f7;
+            border-radius: 15px;
+            padding: 30px;
+            padding-bottom: 43px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-frame:not(:last-child) {
+            border: 0px;
+        }
+
+        .ab-water-type-wrapper-block .ab-wrapper-image-container {
+            margin-right: 0;
+            margin-bottom: 33px;
+        }
+
+        .ab-water-type-wrapper-block .ab-heading-2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-description {
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+}
+
+.AB-PMO23--v1 {
+    .ab-wrapper-body .ab-wrapper-heading--water-types {
+        margin-bottom: 40px;
+    }
+    @media screen and (min-width: 768px) {
+        .ab-wrapper-body .ab-wrapper-heading--water-types {
+            margin-bottom: 50px;
+            //
+        }
+    }
 }
