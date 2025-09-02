@@ -8,7 +8,7 @@
         site_url: "https://www.water.com/",
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
-        test_variation: 1 /* 0 -> control, 1, 2, 3 */,
+        test_variation: 3 /* 0 -> control, 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -113,7 +113,7 @@
 
     const PMO23_DATA = {
         learn_more_txt: ["What's the Difference?", "How Much Water Do I Need?", "Water Guide?"],
-        water_type: [
+        water_types: [
             {
                 icon: ASSETS.purified_svg,
                 title: "Purified",
@@ -178,16 +178,20 @@
 
     function updateModalComponent() {
         const targetNode = document.querySelector(".storyblok-text-blocks").parentNode;
-        targetNode.closest('.storyblok-modal').classList.add('ab-storyblok-modal');
-        targetNode.classList.add('ab-wrapper-body');
+        targetNode.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
+        targetNode.classList.add("ab-wrapper-body", "ab-wrapper-body--water-type-active" /* ab-wrapper-body--quantity-active */);
 
         targetNode.innerHTML = /* HTML */ `
             <div class="wrapper-text flex flex-col">
                 <div class="ab-wrapper-heading ab-wrapper-heading--water-types  wrapper-heading text-center">Water Types</div>
             </div>
+            <div class="ab-modal-tabs-wrapper flex justify-center items-center">
+                <div class="ab-modal-tab-item ab-modal-tab-item--quality flex justify-center items-center">Quantity</div>
+                <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
+            </div>
             <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
                 <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
-                    ${PMO23_DATA.water_type
+                    ${PMO23_DATA.water_types
                         .map(
                             (item, index) => /* HTML */ `
                                 <!-- ITEM ${index + 1} -->
@@ -217,7 +221,29 @@
                         .join("")}
                 </div>
             </div>
+            <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
+                <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
+                <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
+            </div>
         `;
+
+        waitForElement(
+            () => document.querySelector(".ab-modal-tab-item"),
+            () => {
+                document.querySelectorAll(".ab-modal-tab-item").forEach((item) =>
+                    item.addEventListener("click", (e) => {
+                        targetNode.classList.remove("ab-wrapper-body--water-type-active", "ab-wrapper-body--quantity-active");
+                        fireGA4Event("PMO23_Pills", targetNode.innerText);
+
+                        if (item.classList.contains("ab-modal-tab-item--quality")) {
+                            targetNode.classList.add("ab-wrapper-body--quantity-active");
+                        } else if (item.classList.contains("ab-modal-tab-item--type")) {
+                            targetNode.classList.add("ab-wrapper-body--water-type-active");
+                        }
+                    })
+                );
+            }
+        );
     }
 
     function init() {

@@ -18,6 +18,36 @@
   text-transform: capitalize;
   color: #00053e;
 }
+.AB-PMO23 .ab-modal-tab-item {
+  width: 135px;
+  height: 35px;
+  background: #fff;
+  border: 1px solid #0067c3;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-style: SemiBold;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  text-transform: capitalize;
+  color: #0067c3;
+}
+.AB-PMO23 .ab-modal-tab-item:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.AB-PMO23 .ab-modal-tab-item:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.AB-PMO23 .ab-wrapper-body--quantity-active .ab-modal-tab-item--quality,
+.AB-PMO23 .ab-wrapper-body--water-type-active .ab-modal-tab-item--type {
+  background: #0067c3;
+  color: #fdffff;
+}
 .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
   gap: 30px;
 }
@@ -55,6 +85,31 @@
   margin-bottom: 0;
   text-align: left;
 }
+.AB-PMO23 .ab-freq-txt {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgba(0, 5, 62, 0.6980392157);
+  margin-bottom: 9px;
+}
+.AB-PMO23 .ab-helpline-txt {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #00053e;
+}
+.AB-PMO23 .ab-helpline-txt a {
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: underline;
+  color: #0067c3;
+}
 @media screen and (min-width: 768px) {
   .AB-PMO23 .ab-wrapper-body .wrapper-heading {
     font-size: 36px;
@@ -70,6 +125,15 @@
   }
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-description {
     font-size: 14px;
+    line-height: 22px;
+  }
+  .AB-PMO23 .ab-freq-txt {
+    font-size: 12px;
+    line-height: 100%;
+    margin-bottom: 15px;
+  }
+  .AB-PMO23 .ab-helpline-txt {
+    font-size: 16px;
     line-height: 22px;
   }
 }
@@ -107,8 +171,44 @@
 .AB-PMO23--v1 .ab-wrapper-body .ab-wrapper-heading--water-types {
   margin-bottom: 40px;
 }
+.AB-PMO23--v1 .ab-modal-tabs-wrapper,
+.AB-PMO23--v1 .ab-wrapper-bottom {
+  display: none !important;
+}
 @media screen and (min-width: 768px) {
   .AB-PMO23--v1 .ab-wrapper-body .ab-wrapper-heading--water-types {
     margin-bottom: 50px;
+  }
+}
+
+.AB-PMO23--v2 .ab-modal-tabs-wrapper {
+  display: none !important;
+}
+
+.AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+  padding: 13px 25px 20px;
+}
+.AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
+  margin-bottom: 16px;
+}
+.AB-PMO23--v3 .ab-water-type-wrapper-block {
+  margin-top: 30px;
+  margin-bottom: 53px;
+}
+.AB-PMO23--v3 .ab-wrapper-body--quantity-active .ab-water-type-wrapper-block,
+.AB-PMO23--v3 .ab-wrapper-body--water-type-active .ab-quantity-wrapper-block {
+  display: none !important;
+}
+@media screen and (min-width: 768px) {
+  .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
+    margin-bottom: 26px;
+  }
+  .AB-PMO23--v3 .ab-water-type-wrapper-block {
+    margin-bottom: 24px;
+  }
+}
+@media screen and (min-width: 1025.5px) {
+  .AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    padding: 50px 55px;
   }
 }
