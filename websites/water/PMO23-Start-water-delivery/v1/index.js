@@ -111,7 +111,7 @@
         </svg> `,
     };
 
-    const PMO23_DATA = {
+    const DATA = {
         learn_more_txt: ["What's the Difference?", "How Much Water Do I Need?", "Water Guide?"],
         water_types: [
             {
@@ -149,6 +149,7 @@
                 }, frequency);
             }
         } catch (error) {
+            console.error(error);
             return;
         }
     }
@@ -169,7 +170,7 @@
     function createLayout() {
         const btn = document.querySelector("a.text-primo-river[data-modal-v2-trigger]");
         if (btn) {
-            btn.innerText = PMO23_DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
+            btn.innerText = DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
         }
 
         const parent = document.querySelector(".storyblok-text-blocks").parentNode;
@@ -187,7 +188,7 @@
                 </div>
                 <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
                     <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
-                        ${PMO23_DATA.water_types
+                        ${DATA.water_types
                             .map(
                                 (item, index) => /* HTML */ `
                                     <!-- ITEM ${index + 1} -->
