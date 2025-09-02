@@ -8,7 +8,7 @@
         site_url: "https://www.water.com/",
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
-        test_variation: 3 /* 0 -> control, 1, 2, 3 */,
+        test_variation: 1 /* 0 -> control, 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -166,83 +166,99 @@
         });
     }
 
-    function updateLearnMoreBtnComponent() {
-        const targetNode = document.querySelector("a.text-primo-river[data-modal-v2-trigger]");
-
-        {
-            targetNode.innerText = PMO23_DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
+    function createLayout() {
+        const btn = document.querySelector("a.text-primo-river[data-modal-v2-trigger]");
+        if (btn) {
+            btn.innerText = PMO23_DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
         }
 
-        targetNode.addEventListener("click", (e) => fireGA4Event("PMO23_Learn_More", targetNode.innerText));
-    }
+        const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+        if (parent) {
+            parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
+            parent.classList.add("ab-wrapper-body", "ab-wrapper-body--water-type-active" /* ab-wrapper-body--quantity-active */);
 
-    function updateModalComponent() {
-        const targetNode = document.querySelector(".storyblok-text-blocks").parentNode;
-        targetNode.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-        targetNode.classList.add("ab-wrapper-body", "ab-wrapper-body--water-type-active" /* ab-wrapper-body--quantity-active */);
-
-        targetNode.innerHTML = /* HTML */ `
-            <div class="wrapper-text flex flex-col">
-                <div class="ab-wrapper-heading ab-wrapper-heading--water-types  wrapper-heading text-center">Water Types</div>
-            </div>
-            <div class="ab-modal-tabs-wrapper flex justify-center items-center">
-                <div class="ab-modal-tab-item ab-modal-tab-item--quality flex justify-center items-center">Quantity</div>
-                <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
-            </div>
-            <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
-                <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
-                    ${PMO23_DATA.water_types
-                        .map(
-                            (item, index) => /* HTML */ `
-                                <!-- ITEM ${index + 1} -->
-                                <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
-                                    <div class="wrapper-inner h-full flex lg:flex-col self-center">
-                                        <div class="ab-wrapper-image-container flex justify-start items-start lg:items-center lg:justify-center">
-                                            <div class="ab-wrapper-image flex justify-start items-start lg:items-center lg:justify-center">${item.icon}</div>
-                                        </div>
-                                        <div class="wrapper-headline">
-                                            <div class="wrapper-headline-text flex flex-col">
-                                                <div class="wrapper-element storyblok-heading">
-                                                    <div class="wrapper-inner">
-                                                        <div role="heading" class="ab-heading-2 text-left lg:text-center">
-                                                            <span> ${item.title}</span>
+            parent.innerHTML = /* HTML */ `
+                <div class="wrapper-text flex flex-col">
+                    <div class="ab-wrapper-heading ab-wrapper-heading--water-types  wrapper-heading text-center">Water Types</div>
+                </div>
+                <div class="ab-modal-tabs-wrapper flex justify-center items-center">
+                    <div class="ab-modal-tab-item ab-modal-tab-item--quantity flex justify-center items-center">Quantity</div>
+                    <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
+                </div>
+                <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
+                    <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
+                        ${PMO23_DATA.water_types
+                            .map(
+                                (item, index) => /* HTML */ `
+                                    <!-- ITEM ${index + 1} -->
+                                    <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
+                                        <div class="wrapper-inner h-full flex lg:flex-col self-center">
+                                            <div class="ab-wrapper-image-container flex justify-start items-start lg:items-center lg:justify-center">
+                                                <div class="ab-wrapper-image flex justify-start items-start lg:items-center lg:justify-center">${item.icon}</div>
+                                            </div>
+                                            <div class="wrapper-headline">
+                                                <div class="wrapper-headline-text flex flex-col">
+                                                    <div class="wrapper-element storyblok-heading">
+                                                        <div class="wrapper-inner">
+                                                            <div role="heading" class="ab-heading-2 text-left lg:text-center">
+                                                                <span> ${item.title}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="wrapper-description paragraph-lg list-ticks text-left lg:text-center">
-                                                <p>${item.desc}</p>
+                                                <div class="wrapper-description paragraph-lg list-ticks text-left lg:text-center">
+                                                    <p>${item.desc}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            `
-                        )
-                        .join("")}
+                                `
+                            )
+                            .join("")}
+                    </div>
                 </div>
-            </div>
-            <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
-                <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
-                <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
-            </div>
-        `;
+                <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
+                    <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
+                    <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
+                </div>
+            `;
+        }
+    }
 
-        waitForElement(
-            () => document.querySelector(".ab-modal-tab-item"),
-            () => {
-                document.querySelectorAll(".ab-modal-tab-item").forEach((item) =>
-                    item.addEventListener("click", (e) => {
-                        targetNode.classList.remove("ab-wrapper-body--water-type-active", "ab-wrapper-body--quantity-active");
+    function clickEvents() {
+        const actionList = [
+            {
+                selector: "a.text-primo-river[data-modal-v2-trigger]",
+                callback: (e) => fireGA4Event("PMO23_Learn_More", e.target.innerText),
+            },
+            {
+                selector: ".ab-modal-tab-item",
+                callback: (e) => {
+                    const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+                    const targetNode = e.target;
+
+                    if (parent && targetNode) {
+                        parent.classList.remove("ab-wrapper-body--water-type-active", "ab-wrapper-body--quantity-active");
                         fireGA4Event("PMO23_Pills", targetNode.innerText);
 
-                        if (item.classList.contains("ab-modal-tab-item--quality")) {
-                            targetNode.classList.add("ab-wrapper-body--quantity-active");
-                        } else if (item.classList.contains("ab-modal-tab-item--type")) {
-                            targetNode.classList.add("ab-wrapper-body--water-type-active");
+                        if (targetNode.classList.contains("ab-modal-tab-item--quantity")) {
+                            parent.classList.add("ab-wrapper-body--quantity-active");
+                        } else if (targetNode.classList.contains("ab-modal-tab-item--type")) {
+                            parent.classList.add("ab-wrapper-body--water-type-active");
                         }
-                    })
-                );
-            }
+                    }
+                },
+            },
+        ];
+
+        actionList.forEach((actionItem) =>
+            waitForElement(
+                () => document.querySelectorAll(actionItem.selector).length >= 1,
+                () => {
+                    const targetNodes = document.querySelectorAll(actionItem.selector);
+                    targetNodes.forEach((item) => item.addEventListener("click", actionItem.callback));
+                }
+            )
         );
     }
 
@@ -255,8 +271,8 @@
             `${TEST_CONFIG.page_initials}--version-${TEST_CONFIG.test_version}`
         );
 
-        updateLearnMoreBtnComponent();
-        updateModalComponent();
+        createLayout();
+        clickEvents();
     }
 
     function hasAllTargetElements() {
