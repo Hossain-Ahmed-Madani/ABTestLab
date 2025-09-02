@@ -27,11 +27,14 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+// https://trello.com/c/2dylU19x/3920-pmo25-shop-funnel-cta-copy-2-set-up-test
+// https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2036051#c2556744:what
+
 (() => {
   const TEST_CONFIG = {
     page_initials: "AB-PMO25",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -122,7 +125,7 @@
                 parentNode
                   .querySelector(".btn:not(.ab-btn)")
                   .innerText.trim() === "Next"
-                  ? "Select Dispenser"
+                  ? "Next: Select Dispenser →"
                   : "Add Products to Continue";
             }
           });
@@ -143,7 +146,7 @@
                 parentNode
                   .querySelector(".btn:not(.ab-btn)")
                   .innerText.trim() === "Next"
-                  ? "Select Add-Ons"
+                  ? "Next: Select Add-ons →"
                   : "Skip";
             }
           });
@@ -156,7 +159,7 @@
 
   function hasAllTargetElements() {
     return !!(
-      window.location.href.includes("/start-water-delivery/") &&
+      window.location.href.includes("start-water-delivery") &&
       document.querySelector(
         `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`,
       ) &&

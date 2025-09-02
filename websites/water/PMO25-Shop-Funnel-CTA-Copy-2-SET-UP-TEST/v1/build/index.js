@@ -5,8 +5,8 @@
         site_url: "https://www.water.com/",
         test_name: "PMO25: [Shop Funnel] CTA Copy-(2) SET UP TEST : remove the special characters and spaces and replace them with _",
         page_initials: "AB-PMO25",
-        test_variation: 1,
-        test_version: 0.0001,
+        test_variation: 1, 
+        test_version: 0.0002,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -81,7 +81,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-one-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Dispenser" : "Add Products to Continue";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Dispenser →" : "Add Products to Continue";
                         }
                     });
                 },
@@ -95,7 +95,7 @@
                         const targetNode = document.querySelector(".ab-btn.ab-step-two-btn");
                         const parentNode = targetNode.parentNode;
                         if (!mutation.target.classList.contains("ab-btn")) {
-                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Add-Ons" : "Skip";
+                            targetNode.innerText = parentNode.querySelector(".btn:not(.ab-btn)").innerText.trim() === "Next" ? "Next: Select Add-ons →" : "Skip";
                         }
                     });
                 },
@@ -107,7 +107,7 @@
 
     function hasAllTargetElements() {
         return !!(
-            window.location.href.includes("/start-water-delivery/") &&
+            window.location.href.includes("start-water-delivery") &&
             document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector(".wrapper-step:nth-of-type(1) .wrapper-step__actions .btn:not(.ab-btn)") &&
             document.querySelector(".wrapper-step:nth-of-type(2) .wrapper-step__actions .btn:not(.ab-btn)")
