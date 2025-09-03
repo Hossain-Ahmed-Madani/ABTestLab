@@ -8,7 +8,7 @@
         site_url: "https://www.water.com/",
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
-        test_variation: 1 /* 0 -> control, 1, 2, 3 */,
+        test_variation: 2 /* 0 -> control, 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -109,6 +109,10 @@
                 </clipPath>
             </defs>
         </svg> `,
+
+        one_two_people_img : 'https://sb.monetate.net/img/1/1576/5822037.png',
+        three_five_people_img : 'https://sb.monetate.net/img/1/1576/5822036.png',
+        five_plus_people_img : 'https://sb.monetate.net/img/1/1576/5822035.png',
     };
 
     const DATA = {
@@ -133,6 +137,23 @@
                 icon: ASSETS.distilled_svg,
                 title: "Distilled",
                 desc: "Sparkletts distilled water is boiled to remove all impurities, reducing water to its purest form, H20.",
+            },
+        ],
+        quantity: [
+            {
+                imgSrc: ASSETS.one_two_people_img,
+                title: "For 1-2 people",
+                desc: "We recommend two 5 gallon water bottles delivered every 2 weeks*",
+            },
+            {
+                imgSrc: ASSETS.three_five_people_img,
+                title: "For 3-5 people",
+                desc: "We recommend four 5 gallon water bottles delivered every 2 weeks*.",
+            },
+            {
+                imgSrc: ASSETS.five_plus_people_img,
+                title: "FOR 5+ people",
+                desc: "We recommend six 5 gallon water bottles delivered every 2 weeks*.",
             },
         ],
     };
@@ -167,6 +188,84 @@
         });
     }
 
+    function createQuantityLayout() {
+    
+        return /* HTML */ `
+            <div class="ab-quantity-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
+                <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-3 lg:grid-cols-3 justify-items-center">
+                    ${DATA.quantity
+                        .map(
+                            (item, index) => /* HTML */ `
+                                <!-- ITEM ${index + 1} -->
+                                <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
+                                    <div class="wrapper-inner h-full flex lg:flex-col self-center">
+                                        <div class="ab-wrapper-image-container flex justify-start items-center lg:justify-center">
+                                            <div class="ab-wrapper-image flex justify-start items-center lg:justify-center">
+                                                <img src="${item.imgSrc}"/>
+                                            </div>
+                                        </div>
+                                        <div class="wrapper-headline">
+                                            <div class="wrapper-headline-text flex flex-col">
+                                                <div class="wrapper-element storyblok-heading">
+                                                    <div class="wrapper-inner">
+                                                        <div role="heading" class="ab-heading-2 text-left lg:text-center">
+                                                            <span> ${item.title}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper-description paragraph-lg list-ticks text-left lg:text-center">
+                                                <p>${item.desc}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                        )
+                        .join("")}
+                </div>
+            </div>
+        `;
+    }
+
+
+    function createWaterTypeLayout() {
+        return /* HTML */ `
+            <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
+                <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
+                    ${DATA.water_types
+                        .map(
+                            (item, index) => /* HTML */ `
+                                <!-- ITEM ${index + 1} -->
+                                <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
+                                    <div class="wrapper-inner h-full flex lg:flex-col self-center">
+                                        <div class="ab-wrapper-image-container flex justify-start items-start lg:items-center lg:justify-center">
+                                            <div class="ab-wrapper-image flex justify-start items-start lg:items-center lg:justify-center">${item.icon}</div>
+                                        </div>
+                                        <div class="wrapper-headline">
+                                            <div class="wrapper-headline-text flex flex-col">
+                                                <div class="wrapper-element storyblok-heading">
+                                                    <div class="wrapper-inner">
+                                                        <div role="heading" class="ab-heading-2 text-left lg:text-center">
+                                                            <span> ${item.title}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="wrapper-description paragraph-lg list-ticks text-left lg:text-center">
+                                                <p>${item.desc}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                        )
+                        .join("")}
+                </div>
+            </div>
+        `;
+    }
+
     function createLayout() {
         const btn = document.querySelector("a.text-primo-river[data-modal-v2-trigger]");
         if (btn) {
@@ -176,48 +275,22 @@
         const parent = document.querySelector(".storyblok-text-blocks").parentNode;
         if (parent) {
             parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-            parent.classList.add("ab-wrapper-body", "ab-wrapper-body--water-type-active" /* ab-wrapper-body--quantity-active */);
+            const activeClass = "ab-wrapper-body--quantity-active" ;
+            parent.classList.add("ab-wrapper-body", activeClass);
 
             parent.innerHTML = /* HTML */ `
                 <div class="wrapper-text flex flex-col">
-                    <div class="ab-wrapper-heading ab-wrapper-heading--water-types  wrapper-heading text-center">Water Types</div>
+                    <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
+                    <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
+                        ${"How much water do I need?" }
+                    </div>
                 </div>
                 <div class="ab-modal-tabs-wrapper flex justify-center items-center">
                     <div class="ab-modal-tab-item ab-modal-tab-item--quantity flex justify-center items-center">Quantity</div>
                     <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
                 </div>
-                <div class="ab-water-type-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
-                    <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-4 lg:grid-cols-4 justify-items-center">
-                        ${DATA.water_types
-                            .map(
-                                (item, index) => /* HTML */ `
-                                    <!-- ITEM ${index + 1} -->
-                                    <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
-                                        <div class="wrapper-inner h-full flex lg:flex-col self-center">
-                                            <div class="ab-wrapper-image-container flex justify-start items-start lg:items-center lg:justify-center">
-                                                <div class="ab-wrapper-image flex justify-start items-start lg:items-center lg:justify-center">${item.icon}</div>
-                                            </div>
-                                            <div class="wrapper-headline">
-                                                <div class="wrapper-headline-text flex flex-col">
-                                                    <div class="wrapper-element storyblok-heading">
-                                                        <div class="wrapper-inner">
-                                                            <div role="heading" class="ab-heading-2 text-left lg:text-center">
-                                                                <span> ${item.title}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="wrapper-description paragraph-lg list-ticks text-left lg:text-center">
-                                                    <p>${item.desc}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `
-                            )
-                            .join("")}
-                    </div>
-                </div>
+                ${createQuantityLayout()}
+                ${createWaterTypeLayout()}
                 <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
                     <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
                     <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
@@ -239,7 +312,7 @@
                     const targetNode = e.target;
 
                     if (parent && targetNode) {
-                        parent.classList.remove("ab-wrapper-body--water-type-active", "ab-wrapper-body--quantity-active");
+                        parent.classList.remove("ab-wrapper-body--quantity-active", "ab-wrapper-body--water-type-active");
                         fireGA4Event("PMO23_Pills", targetNode.innerText);
 
                         if (targetNode.classList.contains("ab-modal-tab-item--quantity")) {

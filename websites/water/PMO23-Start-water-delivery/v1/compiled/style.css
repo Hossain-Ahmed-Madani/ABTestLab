@@ -1,7 +1,3 @@
-.AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-  padding: 30px 25px 38px;
-  height: max-content;
-}
 .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner > .wrapper-body {
   gap: 0;
 }
@@ -11,7 +7,6 @@
 .AB-PMO23 .ab-wrapper-body .wrapper-heading {
   font-family: Nunito Sans;
   font-weight: 600;
-  font-style: SemiBold;
   font-size: 30px;
   line-height: normal;
   letter-spacing: 0px;
@@ -47,6 +42,14 @@
 .AB-PMO23 .ab-wrapper-body--water-type-active .ab-modal-tab-item--type {
   background: #0067c3;
   color: #fdffff;
+}
+.AB-PMO23 .ab-wrapper-body--quantity-active .ab-water-type-wrapper-block,
+.AB-PMO23 .ab-wrapper-body--water-type-active .ab-quantity-wrapper-block {
+  display: none !important;
+}
+.AB-PMO23 .ab-wrapper-body--quantity-active .ab-wrapper-heading--water-types,
+.AB-PMO23 .ab-wrapper-body--water-type-active .ab-wrapper-heading--quantity {
+  display: none !important;
 }
 .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
   gap: 30px;
@@ -84,6 +87,49 @@
   color: #00053e;
   margin-bottom: 0;
   text-align: left;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .wrapper-frames {
+  gap: 20px;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .wrapper-frame {
+  padding: 20px;
+  background: #f2f5f7;
+  border-radius: 15px;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image {
+  margin-right: 11px;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image img {
+  width: 100px;
+  min-width: 100px;
+  height: 102px;
+  min-height: 102px;
+  object-fit: contain;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .wrapper-headline-text .wrapper-inner {
+  background: #00053e;
+  padding: 3.5px 9px;
+  border-radius: 500px;
+  width: max-content;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .ab-heading-2 {
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .wrapper-description {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: #00053e;
 }
 .AB-PMO23 .ab-freq-txt {
   font-family: Nunito Sans;
@@ -138,9 +184,6 @@
   }
 }
 @media screen and (min-width: 1025.5px) {
-  .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-    padding: 50px 55px;
-  }
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
     gap: 40px;
   }
@@ -168,6 +211,10 @@
   }
 }
 
+.AB-PMO23--v1 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+  padding: 30px 25px 38px;
+  height: max-content;
+}
 .AB-PMO23--v1 .ab-wrapper-body .ab-wrapper-heading--water-types {
   margin-bottom: 40px;
 }
@@ -180,9 +227,26 @@
     margin-bottom: 50px;
   }
 }
+@media screen and (min-width: 1025px) {
+  .AB-PMO23--v1 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    padding: 50px 55px;
+  }
+}
 
+.AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+  padding: 30px 25px 38px;
+  height: max-content;
+}
+.AB-PMO23--v2 .ab-wrapper-body .ab-wrapper-heading--quantity {
+  margin-bottom: 30px;
+}
 .AB-PMO23--v2 .ab-modal-tabs-wrapper {
   display: none !important;
+}
+@media screen and (min-width: 1025px) {
+  .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    padding: 50px 55px;
+  }
 }
 
 .AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
@@ -191,16 +255,18 @@
 .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
   margin-bottom: 16px;
 }
+.AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--quantity {
+  margin-bottom: 16px;
+}
 .AB-PMO23--v3 .ab-water-type-wrapper-block {
   margin-top: 30px;
   margin-bottom: 53px;
 }
-.AB-PMO23--v3 .ab-wrapper-body--quantity-active .ab-water-type-wrapper-block,
-.AB-PMO23--v3 .ab-wrapper-body--water-type-active .ab-quantity-wrapper-block {
-  display: none !important;
-}
 @media screen and (min-width: 768px) {
   .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
+    margin-bottom: 26px;
+  }
+  .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--quantity {
     margin-bottom: 26px;
   }
   .AB-PMO23--v3 .ab-water-type-wrapper-block {
