@@ -8,7 +8,7 @@
         site_url: "https://www.water.com/",
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
-        test_variation: 2 /* 0 -> control, 1, 2, 3 */,
+        test_variation: 1 /* 0 -> control, 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -143,22 +143,22 @@
             {
                 imgSrc: ASSETS.one_two_people_img,
                 title: "For 1-2 people",
-                desc: "We recommend two 5 gallon water bottles delivered every 2 weeks*",
+                desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*",
             },
             {
                 imgSrc: ASSETS.three_five_people_img,
                 title: "For 3-5 people",
-                desc: "We recommend four 5 gallon water bottles delivered every 2 weeks*.",
+                desc: "We recommend <span>four 5 gallon</span> water bottles delivered every 2 weeks*.",
             },
             {
                 imgSrc: ASSETS.five_plus_people_img,
                 title: "FOR 5+ people",
-                desc: "We recommend six 5 gallon water bottles delivered every 2 weeks*.",
+                desc: "We recommend <span>six 5 gallon</span> water bottles delivered every 2 weeks*.",
             },
         ],
     };
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+    function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
         try {
             if (timer <= 0) {
                 throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -192,6 +192,7 @@
     
         return /* HTML */ `
             <div class="ab-quantity-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
+                <p class="ab-quantity-wrapper-sub-text">See our recommended bottle quantity below. Edit, skip or cancel your recurring orders in your account anytime.</p>
                 <div class="wrapper-frames grid grid-cols-1 landscape:grid-cols-3 lg:grid-cols-3 justify-items-center">
                     ${DATA.quantity
                         .map(
@@ -200,14 +201,14 @@
                                 <div class="wrapper-frame w-full max-w-172 storyblok-text-blocks-frame">
                                     <div class="wrapper-inner h-full flex lg:flex-col self-center">
                                         <div class="ab-wrapper-image-container flex justify-start items-center lg:justify-center">
-                                            <div class="ab-wrapper-image flex justify-start items-center lg:justify-center">
+                                            <div class="ab-wrapper-image flex justify-start lg:items-center lg:justify-center">
                                                 <img src="${item.imgSrc}"/>
                                             </div>
                                         </div>
-                                        <div class="wrapper-headline">
-                                            <div class="wrapper-headline-text flex flex-col">
+                                        <div class="wrapper-headline flex flex-col justify-center items-start">
+                                            <div class="wrapper-headline-text mr-auto lg:mx-auto">
                                                 <div class="wrapper-element storyblok-heading">
-                                                    <div class="wrapper-inner">
+                                                    <div class="ab-heading-wrapper-inner wrapper-inner">
                                                         <div role="heading" class="ab-heading-2 text-left lg:text-center">
                                                             <span> ${item.title}</span>
                                                         </div>
@@ -275,14 +276,14 @@
         const parent = document.querySelector(".storyblok-text-blocks").parentNode;
         if (parent) {
             parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-            const activeClass = "ab-wrapper-body--quantity-active" ;
+            const activeClass = "ab-wrapper-body--water-type-active";
             parent.classList.add("ab-wrapper-body", activeClass);
 
             parent.innerHTML = /* HTML */ `
                 <div class="wrapper-text flex flex-col">
                     <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
                     <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
-                        ${"How much water do I need?" }
+                        ${"Water Guide"}
                     </div>
                 </div>
                 <div class="ab-modal-tabs-wrapper flex justify-center items-center">

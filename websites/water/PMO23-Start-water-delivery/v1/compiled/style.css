@@ -88,6 +88,17 @@
   margin-bottom: 0;
   text-align: left;
 }
+.AB-PMO23 .ab-quantity-wrapper-block {
+  margin-bottom: 30px;
+}
+.AB-PMO23 .ab-quantity-wrapper-sub-text {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+}
 .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frames {
   gap: 20px;
 }
@@ -95,6 +106,7 @@
   padding: 20px;
   background: #f2f5f7;
   border-radius: 15px;
+  position: relative;
 }
 .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image {
   margin-right: 11px;
@@ -106,11 +118,12 @@
   min-height: 102px;
   object-fit: contain;
 }
-.AB-PMO23 .ab-quantity-wrapper-block .wrapper-headline-text .wrapper-inner {
+.AB-PMO23 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
   background: #00053e;
   padding: 3.5px 9px;
   border-radius: 500px;
-  width: max-content;
+  width: 115px;
+  margin-bottom: 15px;
 }
 .AB-PMO23 .ab-quantity-wrapper-block .ab-heading-2 {
   font-family: Nunito Sans;
@@ -130,6 +143,9 @@
   line-height: 18px;
   letter-spacing: 0px;
   color: #00053e;
+}
+.AB-PMO23 .ab-quantity-wrapper-block .wrapper-description span {
+  color: #0067c3;
 }
 .AB-PMO23 .ab-freq-txt {
   font-family: Nunito Sans;
@@ -161,6 +177,9 @@
     font-size: 36px;
     line-height: 42px;
   }
+  .AB-PMO23 .ab-wrapper-body .wrapper-heading br {
+    display: none;
+  }
   .AB-PMO23 .ab-water-type-wrapper-block .ab-wrapper-image svg {
     width: 60px;
     height: 60px;
@@ -173,6 +192,29 @@
     font-size: 14px;
     line-height: 22px;
   }
+  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frame {
+    padding: 30px 25px 23px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image img {
+    width: 160px;
+    min-width: 160px;
+    height: 163px;
+    min-height: 163px;
+    object-fit: contain;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
+    padding: 6px 19px;
+    width: 135px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-description {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-description span {
+    color: #0067c3;
+  }
   .AB-PMO23 .ab-freq-txt {
     font-size: 12px;
     line-height: 100%;
@@ -184,6 +226,9 @@
   }
 }
 @media screen and (min-width: 1025.5px) {
+  .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    min-width: 1160px;
+  }
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
     gap: 40px;
   }
@@ -208,6 +253,33 @@
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-description {
     text-align: center;
     margin-bottom: 0;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block {
+    margin-bottom: 50px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-sub-text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frames {
+    gap: 40px;
+    width: max-content;
+    margin: auto;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frame {
+    max-width: 250px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
+    margin-bottom: 0;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    margin: auto;
   }
 }
 
@@ -243,9 +315,15 @@
 .AB-PMO23--v2 .ab-modal-tabs-wrapper {
   display: none !important;
 }
+.AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
+  margin-bottom: 30px;
+}
 @media screen and (min-width: 1025px) {
   .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
+    margin-bottom: 60px;
   }
 }
 
@@ -262,6 +340,13 @@
   margin-top: 30px;
   margin-bottom: 53px;
 }
+.AB-PMO23--v3 .ab-quantity-wrapper-block {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
+  margin-bottom: 30px;
+}
 @media screen and (min-width: 768px) {
   .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
     margin-bottom: 26px;
@@ -276,5 +361,12 @@
 @media screen and (min-width: 1025.5px) {
   .AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
+  }
+  .AB-PMO23--v3 .ab-quantity-wrapper-block {
+    margin-top: 22px;
+    margin-bottom: 20px;
+  }
+  .AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
+    margin-bottom: 30px;
   }
 }

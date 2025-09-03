@@ -125,6 +125,19 @@
     }
 
     // Start from here
+    .ab-quantity-wrapper-block {
+        margin-bottom: 30px;
+    }
+
+    .ab-quantity-wrapper-sub-text {
+        font-family: Nunito Sans;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        text-align: center;
+    }
+
     .ab-quantity-wrapper-block .wrapper-frames {
         gap: 20px;
     }
@@ -133,6 +146,7 @@
         padding: 20px;
         background: #f2f5f7;
         border-radius: 15px;
+        position: relative;
     }
 
     .ab-quantity-wrapper-block .ab-wrapper-image {
@@ -147,11 +161,12 @@
         object-fit: contain;
     }
 
-    .ab-quantity-wrapper-block .wrapper-headline-text .wrapper-inner {
+    .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
         background: #00053e;
         padding: 3.5px 9px;
         border-radius: 500px;
-        width: max-content;
+        width: 115px;
+        margin-bottom: 15px;
     }
 
     .ab-quantity-wrapper-block .ab-heading-2 {
@@ -173,6 +188,10 @@
         line-height: 18px;
         letter-spacing: 0px;
         color: #00053e;
+    }
+
+    .ab-quantity-wrapper-block .wrapper-description span {
+        color: #0067c3;
     }
 
     // end
@@ -211,6 +230,10 @@
             line-height: 42px;
         }
 
+        .ab-wrapper-body .wrapper-heading br {
+            display: none;
+        }
+
         .ab-water-type-wrapper-block .ab-wrapper-image svg {
             width: 60px;
             height: 60px;
@@ -226,6 +249,34 @@
             line-height: 22px;
         }
 
+        .ab-quantity-wrapper-block .wrapper-frame {
+            padding: 30px 25px 23px;
+        }
+
+        .ab-quantity-wrapper-block .ab-wrapper-image img {
+            width: 160px;
+            min-width: 160px;
+            height: 163px;
+            min-height: 163px;
+            object-fit: contain;
+        }
+
+        .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
+            padding: 6px 19px;
+            width: 135px;
+        }
+
+        .ab-quantity-wrapper-block .wrapper-description {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .ab-quantity-wrapper-block .wrapper-description span {
+            color: #0067c3;
+        }
+
         .ab-freq-txt {
             font-size: 12px;
             line-height: 100%;
@@ -239,6 +290,11 @@
     }
 
     @media screen and (min-width: 1025.5px) {
+        .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+            // min-width: 1110px;
+            min-width: 1160px;
+        }
+
         .ab-water-type-wrapper-block .wrapper-frames {
             gap: 40px;
         }
@@ -268,6 +324,39 @@
         .ab-water-type-wrapper-block .wrapper-description {
             text-align: center;
             margin-bottom: 0;
+        }
+
+        // Start from here
+        .ab-quantity-wrapper-block {
+            margin-bottom: 50px;
+        }
+
+        .ab-quantity-wrapper-sub-text {
+            font-size: 14px;
+            line-height: 22px;
+        }
+
+        .ab-quantity-wrapper-block .wrapper-frames {
+            gap: 40px;
+            width: max-content;
+            margin: auto;
+        }
+        .ab-quantity-wrapper-block .wrapper-frame {
+            max-width: 250px;
+        }
+
+        .ab-quantity-wrapper-block .ab-wrapper-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+
+        .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
+            margin-bottom: 0;
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            margin: auto;
         }
     }
 }
@@ -314,6 +403,10 @@
         display: none !important;
     }
 
+    .ab-quantity-wrapper-sub-text {
+        margin-bottom: 30px;
+    }
+
     @media screen and (min-width: 768px) {
         //
     }
@@ -321,6 +414,10 @@
     @media screen and (min-width: 1025px) {
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
             padding: 50px 55px;
+        }
+
+        .ab-quantity-wrapper-sub-text {
+            margin-bottom: 60px;
         }
     }
 }
@@ -343,6 +440,15 @@
         margin-bottom: 53px;
     }
 
+    .ab-quantity-wrapper-block {
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .ab-quantity-wrapper-sub-text {
+        margin-bottom: 30px;
+    }
+
     @media screen and (min-width: 768px) {
         .ab-wrapper-body .ab-wrapper-heading--water-types {
             margin-bottom: 26px;
@@ -361,6 +467,18 @@
     @media screen and (min-width: 1025.5px) {
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
             padding: 50px 55px;
+        }
+
+        .ab-quantity-wrapper-block {
+            // margin-top: 30px;
+            // margin-bottom: 50px;
+            margin-top: 22px;
+            margin-bottom: 20px;
+        }
+
+        .ab-quantity-wrapper-sub-text {
+            // margin-bottom: 60px;
+            margin-bottom: 30px;
         }
     }
 }
