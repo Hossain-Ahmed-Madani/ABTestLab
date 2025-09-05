@@ -1,0 +1,13 @@
+{
+  "id": "1757072107413_2152_Product_Listing_Page_Show_Discount_Percentage_DTM",
+  "name": "Product-Listing-Page-Show-Discount-Percentage-DTM",
+  "type": "A/B",
+  "website": "springhillnursery",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-09-05T11:35:07.413Z",
+  "createdAtReadable": "05/09/2025, 5:35:07 pm",
+  "lastUpdated": "2025-09-05T11:35:07.717Z"
+}
