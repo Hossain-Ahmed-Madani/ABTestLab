@@ -26,19 +26,6 @@
         }
     }
 
-    function fireGA4Event(eventName, eventLabel = "") {
-        console.log(`Firing GA4 Event: ${eventName} - ${eventLabel}`);
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: "GA4event",
-            "ga4-event-name": "cro_event",
-            "ga4-event-p1-name": "event_category",
-            "ga4-event-p1-value": eventName,
-            "ga4-event-p2-name": "event_label",
-            "ga4-event-p2-value": eventLabel,
-        });
-    }
-
     waitForElement(
         () =>
             !!(
