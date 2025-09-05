@@ -1,3 +1,4 @@
+// ticket: https://trello.com/c/abZ2YUSs/3955-product-listing-page-show-discount-percentage-dtm
 // https://springhillnursery.com/collections/shipping-now
 
 (() => {
