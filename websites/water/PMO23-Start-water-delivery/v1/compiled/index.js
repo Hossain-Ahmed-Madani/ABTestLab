@@ -273,7 +273,8 @@
             btn.innerText = DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
         }
 
-        const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+        // const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+        const parent = document.querySelector("#water-types .wrapper-body");
         if (parent) {
             parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
             const activeClass = "ab-wrapper-body--water-type-active";
@@ -309,7 +310,8 @@
             {
                 selector: ".ab-modal-tab-item",
                 callback: (e) => {
-                    const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+                    // const parent = document.querySelector(".storyblok-text-blocks").parentNode;
+                    const parent = document.querySelector("#water-types .wrapper-body");
                     const targetNode = e.target;
 
                     if (parent && targetNode) {
@@ -337,6 +339,16 @@
         );
     }
 
+    function modalViewGoal() {
+        new MutationObserver((mutationsList, observer) => {
+            if(document.querySelector("#water-types").getAttribute("aria-hidden") === "false") {
+                fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
+                observer.disconnect();
+            }
+        
+        }).observe( document.querySelector("#water-types") , { attributes: true });
+    }
+
     function init() {
         console.log(TEST_CONFIG);
 
@@ -348,6 +360,7 @@
 
         createLayout();
         clickEvents();
+        modalViewGoal();
     }
 
     function hasAllTargetElements() {
@@ -355,7 +368,8 @@
             window.location.href.includes("start-water-delivery") &&
             document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector("a.text-primo-river[data-modal-v2-trigger]") &&
-            document.querySelector(".storyblok-text-blocks")
+            document.querySelector(".storyblok-text-blocks") &&
+            document.querySelector("#water-types") 
         );
     }
 
