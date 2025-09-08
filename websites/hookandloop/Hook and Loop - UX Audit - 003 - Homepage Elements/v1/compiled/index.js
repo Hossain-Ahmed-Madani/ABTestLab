@@ -24,7 +24,7 @@ Initial Development: 15 hours
     const TEST_CONFIG = {
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const ASSETS = {
@@ -39,25 +39,386 @@ Initial Development: 15 hours
         heading_sm: "text-[20px] font-[500] text-hnl1d",
         paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
         button_primary: "action primary hnl-btn text-white",
-        button_primary_sm: "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
+        button_primary_sm:
+            "action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white",
         button_secondary: "ab-btn-secondary flex  justify-center text-[15px] font-[600] max-w-max uppercase",
         flex_center: "flex items-center justify-center",
     };
 
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        try {
-            if (timer <= 0) {
-                throw new Error(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            } else if (predicate && predicate()) {
-                callback();
-            } else {
-                setTimeout(() => {
-                    waitForElement(predicate, callback, timer - frequency, frequency);
-                }, frequency);
+    const DATA = {
+        customization_services: [
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/straps/specialty",
+                imageSrc: "/media/wysiwyg/IMG_2665.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Custom made velcro straps",
+                buttonText: "Custom Straps",
+                buttonHref: "https://www.hookandloop.com/straps/specialty",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/strip-cutting",
+                imageSrc: "/media/wysiwyg/cc-cutting.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Free velcro cut to length service",
+                buttonText: "Cutting",
+                buttonHref: "https://www.hookandloop.com/converting/strip-cutting",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/die-cutting",
+                imageSrc: "/media/wysiwyg/IMG_5041_1.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Custom velcro die cutting",
+                buttonText: "Die Cutting",
+                buttonHref: "https://www.hookandloop.com/converting/die-cutting",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/sewing",
+                imageSrc: "/media/wysiwyg/cc-sewing.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Sewn velcro straps with webbing",
+                buttonText: "Sewing",
+                buttonHref: "https://www.hookandloop.com/converting/sewing",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/logo-imprinting",
+                imageSrc: "/media/wysiwyg/cc-imprinting.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Logo imprinted velcro straps",
+                buttonText: "Logo Imprinting",
+                buttonHref: "https://www.hookandloop.com/converting/logo-imprinting",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/packaging",
+                imageSrc: "/media/wysiwyg/cc-packaging.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Cleanly packaged velcro",
+                buttonText: "Packaging",
+                buttonHref: "https://www.hookandloop.com/converting/packaging",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/welding",
+                imageSrc: "/media/wysiwyg/cc-welding.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Ultrasonic welding velcro straps",
+                buttonText: "Welding",
+                buttonHref: "https://www.hookandloop.com/converting/welding",
+            },
+            {
+                contentType: "customization services",
+                href: "https://www.hookandloop.com/converting/grommeting",
+                imageSrc: "/media/wysiwyg/cc-grommeting.jpg",
+                imageWidth: "230",
+                imageHeight: "230",
+                imageAlt: "Grommets installed in customized velcro straps",
+                buttonText: "Grommeting",
+                buttonHref: "https://www.hookandloop.com/converting/grommeting",
+            },
+        ],
+    };
+
+    class CustomizationFluidSlider {
+        constructor(sliderElement) {
+            this.slider = sliderElement;
+            this.slides = Array.from(sliderElement.querySelectorAll(".my-slide-item"));
+            this.isDragging = false;
+            this.startPos = 0;
+            this.currentTranslate = 0;
+            this.prevTranslate = 0;
+            this.animationID = 0;
+            this.currentIndex = 0;
+            this.velocity = 0;
+            this.lastTime = 0;
+            this.lastPos = 0;
+            this.deceleration = 0.0005; // Slower deceleration
+            this.initialTranslate = 0;
+            this.dragSensitivity = 0.6; // Reduced sensitivity
+
+            // Bind methods
+            this.prevSlide = this.prevSlide.bind(this);
+            this.nextSlide = this.nextSlide.bind(this);
+            this.touchStart = this.touchStart.bind(this);
+            this.touchMove = this.touchMove.bind(this);
+            this.touchEnd = this.touchEnd.bind(this);
+            this.handleResize = this.handleResize.bind(this);
+            this.animationLoop = this.animationLoop.bind(this);
+
+            this.init();
+        }
+
+        init() {
+            this.addPrevNextEventListener();
+            this.setSlideWidths();
+            this.addEventListeners();
+            this.updateSliderPosition();
+            this.updateButtonStates();
+            this.animationLoop();
+        }
+
+        addPrevNextEventListener() {
+            this.prevBtn = document.querySelector(".custom-converting-panel--mobile .slider-nav .slider-prev");
+            this.nextBtn = document.querySelector(".custom-converting-panel--mobile .slider-nav .slider-next");
+
+            this.prevBtn.removeEventListener("click", this.prevSlide);
+            this.nextBtn.removeEventListener("click", this.nextSlide);
+
+            this.prevBtn.addEventListener("click", this.prevSlide);
+            this.nextBtn.addEventListener("click", this.nextSlide);
+        }
+
+        setSlideWidths() {
+            const slideCount = this.getSlidesPerView();
+            const sliderWidth = this.slider.clientWidth;
+            const slideWidth = sliderWidth / slideCount;
+
+            this.slides.forEach((slide) => {
+                slide.style.flex = `0 0 ${slideWidth}px`;
+            });
+        }
+
+        getSlidesPerView() {
+            if (window.innerWidth < 768) return 2;
+            if (window.innerWidth < 1024) return 4;
+            return this.slides.length;
+        }
+
+        addEventListeners() {
+            this.slider.removeEventListener("mousedown", this.touchStart);
+            this.slider.removeEventListener("mousemove", this.touchMove);
+            this.slider.removeEventListener("mouseup", this.touchEnd);
+            this.slider.removeEventListener("mouseleave", this.touchEnd);
+            this.slider.removeEventListener("touchstart", this.touchStart);
+            this.slider.removeEventListener("touchmove", this.touchMove);
+            this.slider.removeEventListener("touchend", this.touchEnd);
+
+            this.slider.addEventListener("mousedown", this.touchStart);
+            this.slider.addEventListener("mousemove", this.touchMove);
+            this.slider.addEventListener("mouseup", this.touchEnd);
+            this.slider.addEventListener("mouseleave", this.touchEnd);
+
+            this.slider.addEventListener("touchstart", this.touchStart);
+            this.slider.addEventListener("touchmove", this.touchMove);
+            this.slider.addEventListener("touchend", this.touchEnd);
+
+            this.slider.addEventListener(
+                "touchmove",
+                (e) => {
+                    if (this.isDragging) e.preventDefault();
+                },
+                { passive: false }
+            );
+
+            window.addEventListener("resize", this.handleResize);
+        }
+
+        touchStart(e) {
+            if (window.innerWidth >= 1024) return;
+
+            this.isDragging = true;
+            this.velocity = 0;
+
+            const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+            this.startPos = clientX;
+            this.lastTime = performance.now();
+            this.lastPos = clientX;
+            this.initialTranslate = this.currentTranslate;
+
+            this.slider.style.cursor = "grabbing";
+            this.slider.style.transition = "none";
+
+            if (e.type !== "touchstart") e.preventDefault();
+        }
+
+        touchMove(e) {
+            if (!this.isDragging || window.innerWidth >= 1024) return;
+
+            const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+            const currentTime = performance.now();
+            const deltaTime = Math.max(1, currentTime - this.lastTime);
+
+            const deltaPos = clientX - this.lastPos;
+            const instantVelocity = deltaPos / deltaTime;
+
+            // Smoother velocity calculation with lower sensitivity
+            this.velocity = this.velocity * 0.8 + instantVelocity * 0.2 * this.dragSensitivity;
+
+            const dragDistance = (clientX - this.startPos) * this.dragSensitivity;
+            this.currentTranslate = this.initialTranslate + dragDistance;
+
+            this.applyBoundaries();
+
+            this.lastTime = currentTime;
+            this.lastPos = clientX;
+
+            this.setSliderPosition();
+        }
+
+        applyBoundaries() {
+            const maxTranslate = 0;
+            const minTranslate = -(this.slides.length - this.getSlidesPerView()) * this.slides[0].clientWidth;
+
+            if (this.currentTranslate > maxTranslate) {
+                const overshoot = (this.currentTranslate - maxTranslate) * 0.2; // Reduced elasticity
+                this.currentTranslate = maxTranslate + overshoot;
+            } else if (this.currentTranslate < minTranslate) {
+                const overshoot = (minTranslate - this.currentTranslate) * 0.2; // Reduced elasticity
+                this.currentTranslate = minTranslate - overshoot;
             }
-        } catch (error) {
-            console.warn(error);
-            return;
+        }
+
+        touchEnd() {
+            if (window.innerWidth >= 1024) return;
+
+            this.isDragging = false;
+            this.slider.style.cursor = "grab";
+
+            // Use distance-based snapping instead of velocity for more control
+            const slideWidth = this.slides[0].clientWidth;
+            const dragDistance = this.currentTranslate - this.initialTranslate;
+            const dragThreshold = slideWidth * 0.15; // 15% of slide width to trigger change
+
+            if (Math.abs(dragDistance) > dragThreshold) {
+                const direction = dragDistance > 0 ? -1 : 1;
+                const targetIndex = this.currentIndex + direction;
+                this.goToSlide(targetIndex);
+            } else {
+                // If drag was too small, return to current position
+                this.goToSlide(this.currentIndex);
+            }
+        }
+
+        animationLoop() {
+            if (!this.isDragging && Math.abs(this.velocity) > 0.01) {
+                // Slower deceleration for smoother stopping
+                this.velocity *= 1 - this.deceleration;
+                this.currentTranslate += this.velocity * 16;
+
+                this.applyBoundaries();
+
+                if (Math.abs(this.velocity) < 0.05) {
+                    // Lower threshold for snapping
+                    this.snapToNearestSlide();
+                }
+
+                this.setSliderPosition();
+            }
+
+            requestAnimationFrame(this.animationLoop);
+        }
+
+        snapToNearestSlide() {
+            const slideWidth = this.slides[0].clientWidth;
+            const currentPosition = -this.currentTranslate / slideWidth;
+            const maxSlide = this.slides.length - this.getSlidesPerView();
+
+            // Use proper rounding to nearest slide
+            let targetSlide;
+            if (currentPosition % 1 > 0.6) {
+                targetSlide = Math.ceil(currentPosition);
+            } else if (currentPosition % 1 < 0.4) {
+                targetSlide = Math.floor(currentPosition);
+            } else {
+                targetSlide = Math.round(currentPosition);
+            }
+
+            targetSlide = Math.max(0, Math.min(targetSlide, maxSlide));
+            this.goToSlide(targetSlide);
+            this.velocity = 0;
+        }
+
+        setSliderPosition() {
+            this.slider.scrollLeft = -this.currentTranslate;
+        }
+
+        updateSliderPosition() {
+            this.currentTranslate = -this.slider.scrollLeft;
+            this.prevTranslate = this.currentTranslate;
+        }
+
+        nextSlide() {
+            const maxIndex = this.slides.length - this.getSlidesPerView();
+            if (this.currentIndex < maxIndex) {
+                this.goToSlide(this.currentIndex + 1);
+            }
+        }
+
+        prevSlide() {
+            if (this.currentIndex > 0) {
+                this.goToSlide(this.currentIndex - 1);
+            }
+        }
+
+        goToSlide(index) {
+            const slideWidth = this.slides[0].clientWidth;
+            this.currentTranslate = -(index * slideWidth);
+            this.prevTranslate = this.currentTranslate;
+            this.currentIndex = index;
+            this.velocity = 0;
+
+            this.slider.style.transition = "scroll-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+            this.setSliderPosition();
+
+            this.updateButtonStates();
+
+            setTimeout(() => {
+                this.slider.style.transition = "";
+            }, 400);
+        }
+
+        updateButtonStates() {
+            if (!this.prevBtn || !this.nextBtn) return;
+
+            const maxIndex = this.slides.length - this.getSlidesPerView();
+            this.prevBtn.disabled = this.currentIndex <= 0;
+            this.nextBtn.disabled = this.currentIndex >= maxIndex;
+            this.prevBtn.style.opacity = this.currentIndex <= 0 ? "0.5" : "1";
+            this.nextBtn.style.opacity = this.currentIndex >= maxIndex ? "0.5" : "1";
+        }
+
+        handleResize() {
+            if (window.innerWidth >= 1024) {
+                this.destroy();
+            } else {
+                this.setSlideWidths();
+                this.goToSlide(this.currentIndex);
+                this.updateButtonStates();
+            }
+        }
+
+        destroy() {
+            this.slides.forEach((slide) => {
+                slide.style.flex = "";
+            });
+            this.slider.style.cursor = "";
+
+            if (this.prevBtn && this.nextBtn) {
+                this.prevBtn.removeEventListener("click", this.prevSlide);
+                this.nextBtn.removeEventListener("click", this.nextSlide);
+            }
+        }
+    }
+    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
+        if (timer <= 0) {
+            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
+        } else if (predicate && predicate()) {
+            callback();
+        } else {
+            setTimeout(() => {
+                waitForElement(predicate, callback, timer - frequency, frequency);
+            }, frequency);
         }
     }
 
@@ -95,8 +456,12 @@ Initial Development: 15 hours
                                 <a href="https://www.hookandloop.com/converting" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Cut Pieces</a>
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
-                                <a href="https://www.hookandloop.com/brands/duragrip/straps" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Straps</a>
-                                <a href="https://www.hookandloop.com/products/specialty" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}">Specialty Options</a>
+                                <a href="https://www.hookandloop.com/brands/duragrip/straps" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
+                                    >Straps</a
+                                >
+                                <a href="https://www.hookandloop.com/products/specialty" class="ab-hero-section__all-products-item overflow-hidden ${TAILWIND_STYLES.flex_center}"
+                                    >Specialty Options</a
+                                >
                             </div>
                             <div class="ab-hero-section__all-products-row flex justify-between items-center">
                                 <a
@@ -112,8 +477,100 @@ Initial Development: 15 hours
         );
     }
 
+    function initCustomizationServicesSlider() {
+        waitForElement(
+            () => document.querySelector(".custom-converting-panel--mobile .my-slider"),
+            () => {
+                const sliderElement = document.querySelector(".custom-converting-panel--mobile .my-slider");
+                sliderElement._sliderInstance = new CustomizationFluidSlider(sliderElement);
+            }
+        );
+    }
+
+    function createMobileCustomizationServicesInnerLayout() {
+        const targetNode = document.querySelector(".custom-converting-panel .custom-converting-inner");
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="custom-converting-inner custom-converting-panel--mobile relative block lg:hidden">
+                    <ul class="list-none text-center my-slider">
+                        ${DATA.customization_services
+                            .map(
+                                (item) => /* HTML */ `
+                                    <li class="my-slide-item">
+                                        <a data-content-type="${item.contentType}" href="${item.href}">
+                                            <div class="img-wrap overflow-hidden rounded-[4px]">
+                                                <img
+                                                    class="rounded-[4px] hover:transform hover:scale-[1.2] transition-all duration-300 ease-in-out"
+                                                    src="${item.imageSrc}"
+                                                    loading="lazy"
+                                                    width="${item.imageWidth}"
+                                                    height="${item.imageHeight}"
+                                                    alt="${item.imageAlt}"
+                                                />
+                                            </div>
+                                        </a>
+                                        <div class="actions">
+                                            <a
+                                                data-content-type="${item.contentType}"
+                                                class="action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white"
+                                                href="${item.buttonHref}"
+                                                >${item.buttonText}</a
+                                            >
+                                        </div>
+                                    </li>
+                                `
+                            )
+                            .join("")}
+                    </ul>
+                    <div class="slider-nav">
+                        <button class="slider-btn slider-prev" aria-label="Previous slide" disabled="">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                width="25"
+                                height="25"
+                                role="img"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+                                <title>chevron-left</title>
+                            </svg></button
+                        ><button class="slider-btn slider-next" aria-label="Next slide">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="w-5 h-5"
+                                width="25"
+                                height="25"
+                                role="img"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+                                <title>chevron-right</title>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="actions flex justify-center">
+                        <a
+                            data-content-type="customization services"
+                            class="ab-customize-services-cta mt-[15px] ab-btn-secondary flex  justify-center text-[15px] font-[600] max-w-max uppercase"
+                            href="https://www.hookandloop.com/converting"
+                            >See all customization services</a
+                        >
+                    </div>
+                </div>
+            `
+        );
+    }
+
     function modifyCustomizationServicesLayout() {
-        document.querySelector(".custom-converting-panel").className = "custom-converting-panel lg:px-[10px] py-5 text-center hidden lg:block";
+        document.querySelector(".custom-converting-panel").className = "custom-converting-panel lg:px-[10px] py-5 text-center"; /*  hidden lg:block */
         document.querySelector(".custom-converting-panel .section-title a").innerText = "We're More Than Just Products!";
 
         const pItem = document.querySelector(".custom-converting-panel .section-title p");
@@ -121,6 +578,8 @@ Initial Development: 15 hours
             pItem.className = `custom-converting-panel__subtitle ${TAILWIND_STYLES.paragraph}`;
             pItem.innerText = "We are a full service Hook & Loop conversion facility. Let us handle the hard work for you.";
         }
+
+        document.querySelector(".custom-converting-panel .custom-converting-inner").classList.add("custom-converting-panel--desktop", "hidden", "lg:block");
 
         document.querySelectorAll(".custom-converting-panel .custom-converting-inner a.action.primary").forEach((item) => {
             item.className = TAILWIND_STYLES.button_primary_sm;
@@ -201,7 +660,11 @@ Initial Development: 15 hours
                             ${Array.from({ length: 1 })
                                 .map(
                                     (_, index) => /* HTML */ `
-                                        <div class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index === 0 ? "scroll-infinite-rtl" : "scroll-infinite-ltr"}">
+                                        <div
+                                            class="ab-hook-loop-brands__auto-scroller w-full flex justify-start items-center ${index === 0
+                                                ? "scroll-infinite-rtl"
+                                                : "scroll-infinite-ltr"}"
+                                        >
                                             ${[...brands_data, ...brands_data]
                                                 .map(
                                                     (item) => /* HTML */ `
@@ -295,7 +758,8 @@ Initial Development: 15 hours
                     <div class="container">
                         <div class="section-title mb-12">
                             <h3 class="text-[22px] font-semibold leading-none">
-                                Top Notch <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service</a></strong>
+                                Top Notch
+                                <strong><a data-content-type="customer testimonials" class="text-hnle0 hover:text-hnl1d" href="/customer-feedback">Customer Service</a></strong>
                             </h3>
                             <h5 class="font-normal">Here's what our customers have to say ...</h5>
                         </div>
@@ -406,7 +870,10 @@ Initial Development: 15 hours
                                             <li class="marker:hnl0-link">Fast Response Times</li>
                                         </ul>
                                         <div class="action-rw flex flex-col lg:flex-row">
-                                            <a data-content-type="features" href="https://www.hookandloop.com/product-development" class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}"
+                                            <a
+                                                data-content-type="features"
+                                                href="https://www.hookandloop.com/product-development"
+                                                class="action primary hnl-btn ${TAILWIND_STYLES.flex_center}"
                                                 >Start Now For Free!</a
                                             >
                                             <div class="or-call leading-[28px] text-[16px] mt-2 lg:mt-0 font-bold lg:ml-2 flex-col lg:flex-row gap-1 ${TAILWIND_STYLES.flex_center}">
@@ -449,7 +916,8 @@ Initial Development: 15 hours
         document.querySelector(".newsletter-subscription .section-title h2").innerHTML = "Sign-Up for Special <br class='lg:hidden'/> <strong>Discounts & Offers</strong>";
         document.querySelector(".newsletter-subscription").className = "newsletter-subscription text-center text-white flex flex-col items-center bg-[#333]";
         document.querySelector(".newsletter-subscription .section-title p").className = `font-light ${TAILWIND_STYLES.paragraph}`;
-        document.querySelector(".newsletter-subscription form.form.subscribe button").className = `ab-subscribe-cta p-[15px] rounded-r-[3px] font-bold ${TAILWIND_STYLES.button_primary}`;
+        document.querySelector(".newsletter-subscription form.form.subscribe button").className =
+            `ab-subscribe-cta p-[15px] rounded-r-[3px] font-bold ${TAILWIND_STYLES.button_primary}`;
 
         document.querySelector(".hook-loop-promotion").className = "hook-loop-promotion text-left text-hnl1d";
         document.querySelector(".hook-loop-promotion .container").className = "ab-hook-loop-promotion__container";
@@ -498,17 +966,23 @@ Initial Development: 15 hours
     }
 
     function init() {
-        document.body.classList.add(TEST_CONFIG.page_initials, `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`, `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`);
+        document.body.classList.add(
+            TEST_CONFIG.page_initials,
+            `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
+            `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`
+        );
 
         console.table({ ID: testInfo.id, Variation: testInfo.name });
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
+        createMobileCustomizationServicesInnerLayout();
         createBrandsSectionLayout();
         createTestimonialsSectionLayout();
         createFeatureSectionLayout();
         modifyNewsLetterAndPromotionSection();
         createNewsLetterAndPromotionSectionLayout();
+        initCustomizationServicesSlider();
         clickEvent();
     }
 

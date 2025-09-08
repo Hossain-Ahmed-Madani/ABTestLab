@@ -391,6 +391,22 @@ lg: 1024px
     display: none;
   }
 }
+@media screen and (max-width: 768px) {
+  .AB-HOMEPAGE-REDESIGN
+    .custom-converting-panel--mobile
+    .ab-customize-services-cta {
+    width: 100%;
+    min-width: 100%;
+    font-size: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .AB-HOMEPAGE-REDESIGN .custom-converting-panel--mobile .my-slide-item img {
+    height: 155px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
 @media screen and (min-width: 768px) {
   .AB-HOMEPAGE-REDESIGN .ab-hookloop-features__top-items {
     display: grid;
@@ -538,6 +554,113 @@ lg: 1024px
     transform: translateX(0);
   }
 }
+/* SLIDER */
+/* Slider Container */
+.my-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  will-change: transform;
+  position: relative;
+}
+
+.my-slider::-webkit-scrollbar {
+  display: none;
+}
+
+/* Slide Items */
+.my-slide-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.2s ease-out;
+}
+
+/* Mobile (2 slides) */
+.my-slide-item {
+  width: calc(50% - 8px);
+  margin-right: 8px;
+}
+
+/* Tablet (4 slides) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .my-slide-item {
+    width: calc(25% - 8px);
+  }
+}
+/* Desktop (no slider) */
+@media (min-width: 1024px) {
+  .my-slider {
+    display: block;
+    overflow: visible;
+    flex-wrap: wrap;
+  }
+  .my-slide-item {
+    width: auto;
+    margin-right: 0;
+    display: inline-block;
+    flex: none;
+  }
+}
+/* Navigation Buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+  z-index: 999;
+  padding: 0 8px;
+}
+
+.slider-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgb(215, 215, 215);
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-btn:not(:disabled) {
+  pointer-events: all;
+}
+
+.slider-btn.slider-prev {
+  margin-left: -25px;
+}
+
+.slider-btn.slider-next {
+  margin-right: -25px;
+}
+
+.slider-btn:hover:not(:disabled) {
+  background: rgb(255, 255, 255);
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.slider-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.slider-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -573,7 +696,7 @@ Initial Development: 15 hours
   const TEST_CONFIG = {
     page_initials: "AB-HOMEPAGE-REDESIGN",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const ASSETS = {
@@ -598,22 +721,393 @@ Initial Development: 15 hours
     flex_center: "flex items-center justify-center",
   };
 
-  function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-    try {
-      if (timer <= 0) {
-        throw new Error(
-          `Timeout reached while waiting for condition: ${predicate.toString()}`,
-        );
-      } else if (predicate && predicate()) {
-        callback();
-      } else {
-        setTimeout(() => {
-          waitForElement(predicate, callback, timer - frequency, frequency);
-        }, frequency);
+  const DATA = {
+    customization_services: [
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/straps/specialty",
+        imageSrc: "/media/wysiwyg/IMG_2665.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Custom made velcro straps",
+        buttonText: "Custom Straps",
+        buttonHref: "https://www.hookandloop.com/straps/specialty",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/strip-cutting",
+        imageSrc: "/media/wysiwyg/cc-cutting.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Free velcro cut to length service",
+        buttonText: "Cutting",
+        buttonHref: "https://www.hookandloop.com/converting/strip-cutting",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/die-cutting",
+        imageSrc: "/media/wysiwyg/IMG_5041_1.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Custom velcro die cutting",
+        buttonText: "Die Cutting",
+        buttonHref: "https://www.hookandloop.com/converting/die-cutting",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/sewing",
+        imageSrc: "/media/wysiwyg/cc-sewing.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Sewn velcro straps with webbing",
+        buttonText: "Sewing",
+        buttonHref: "https://www.hookandloop.com/converting/sewing",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/logo-imprinting",
+        imageSrc: "/media/wysiwyg/cc-imprinting.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Logo imprinted velcro straps",
+        buttonText: "Logo Imprinting",
+        buttonHref: "https://www.hookandloop.com/converting/logo-imprinting",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/packaging",
+        imageSrc: "/media/wysiwyg/cc-packaging.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Cleanly packaged velcro",
+        buttonText: "Packaging",
+        buttonHref: "https://www.hookandloop.com/converting/packaging",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/welding",
+        imageSrc: "/media/wysiwyg/cc-welding.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Ultrasonic welding velcro straps",
+        buttonText: "Welding",
+        buttonHref: "https://www.hookandloop.com/converting/welding",
+      },
+      {
+        contentType: "customization services",
+        href: "https://www.hookandloop.com/converting/grommeting",
+        imageSrc: "/media/wysiwyg/cc-grommeting.jpg",
+        imageWidth: "230",
+        imageHeight: "230",
+        imageAlt: "Grommets installed in customized velcro straps",
+        buttonText: "Grommeting",
+        buttonHref: "https://www.hookandloop.com/converting/grommeting",
+      },
+    ],
+  };
+
+  class CustomizationFluidSlider {
+    constructor(sliderElement) {
+      this.slider = sliderElement;
+      this.slides = Array.from(
+        sliderElement.querySelectorAll(".my-slide-item"),
+      );
+      this.isDragging = false;
+      this.startPos = 0;
+      this.currentTranslate = 0;
+      this.prevTranslate = 0;
+      this.animationID = 0;
+      this.currentIndex = 0;
+      this.velocity = 0;
+      this.lastTime = 0;
+      this.lastPos = 0;
+      this.deceleration = 0.0005; // Slower deceleration
+      this.initialTranslate = 0;
+      this.dragSensitivity = 0.6; // Reduced sensitivity
+
+      // Bind methods
+      this.prevSlide = this.prevSlide.bind(this);
+      this.nextSlide = this.nextSlide.bind(this);
+      this.touchStart = this.touchStart.bind(this);
+      this.touchMove = this.touchMove.bind(this);
+      this.touchEnd = this.touchEnd.bind(this);
+      this.handleResize = this.handleResize.bind(this);
+      this.animationLoop = this.animationLoop.bind(this);
+
+      this.init();
+    }
+
+    init() {
+      this.addPrevNextEventListener();
+      this.setSlideWidths();
+      this.addEventListeners();
+      this.updateSliderPosition();
+      this.updateButtonStates();
+      this.animationLoop();
+    }
+
+    addPrevNextEventListener() {
+      this.prevBtn = document.querySelector(
+        ".custom-converting-panel--mobile .slider-nav .slider-prev",
+      );
+      this.nextBtn = document.querySelector(
+        ".custom-converting-panel--mobile .slider-nav .slider-next",
+      );
+
+      this.prevBtn.removeEventListener("click", this.prevSlide);
+      this.nextBtn.removeEventListener("click", this.nextSlide);
+
+      this.prevBtn.addEventListener("click", this.prevSlide);
+      this.nextBtn.addEventListener("click", this.nextSlide);
+    }
+
+    setSlideWidths() {
+      const slideCount = this.getSlidesPerView();
+      const sliderWidth = this.slider.clientWidth;
+      const slideWidth = sliderWidth / slideCount;
+
+      this.slides.forEach((slide) => {
+        slide.style.flex = `0 0 ${slideWidth}px`;
+      });
+    }
+
+    getSlidesPerView() {
+      if (window.innerWidth < 768) return 2;
+      if (window.innerWidth < 1024) return 4;
+      return this.slides.length;
+    }
+
+    addEventListeners() {
+      this.slider.removeEventListener("mousedown", this.touchStart);
+      this.slider.removeEventListener("mousemove", this.touchMove);
+      this.slider.removeEventListener("mouseup", this.touchEnd);
+      this.slider.removeEventListener("mouseleave", this.touchEnd);
+      this.slider.removeEventListener("touchstart", this.touchStart);
+      this.slider.removeEventListener("touchmove", this.touchMove);
+      this.slider.removeEventListener("touchend", this.touchEnd);
+
+      this.slider.addEventListener("mousedown", this.touchStart);
+      this.slider.addEventListener("mousemove", this.touchMove);
+      this.slider.addEventListener("mouseup", this.touchEnd);
+      this.slider.addEventListener("mouseleave", this.touchEnd);
+
+      this.slider.addEventListener("touchstart", this.touchStart);
+      this.slider.addEventListener("touchmove", this.touchMove);
+      this.slider.addEventListener("touchend", this.touchEnd);
+
+      this.slider.addEventListener(
+        "touchmove",
+        (e) => {
+          if (this.isDragging) e.preventDefault();
+        },
+        { passive: false },
+      );
+
+      window.addEventListener("resize", this.handleResize);
+    }
+
+    touchStart(e) {
+      if (window.innerWidth >= 1024) return;
+
+      this.isDragging = true;
+      this.velocity = 0;
+
+      const clientX =
+        e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+      this.startPos = clientX;
+      this.lastTime = performance.now();
+      this.lastPos = clientX;
+      this.initialTranslate = this.currentTranslate;
+
+      this.slider.style.cursor = "grabbing";
+      this.slider.style.transition = "none";
+
+      if (e.type !== "touchstart") e.preventDefault();
+    }
+
+    touchMove(e) {
+      if (!this.isDragging || window.innerWidth >= 1024) return;
+
+      const clientX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+      const currentTime = performance.now();
+      const deltaTime = Math.max(1, currentTime - this.lastTime);
+
+      const deltaPos = clientX - this.lastPos;
+      const instantVelocity = deltaPos / deltaTime;
+
+      // Smoother velocity calculation with lower sensitivity
+      this.velocity =
+        this.velocity * 0.8 + instantVelocity * 0.2 * this.dragSensitivity;
+
+      const dragDistance = (clientX - this.startPos) * this.dragSensitivity;
+      this.currentTranslate = this.initialTranslate + dragDistance;
+
+      this.applyBoundaries();
+
+      this.lastTime = currentTime;
+      this.lastPos = clientX;
+
+      this.setSliderPosition();
+    }
+
+    applyBoundaries() {
+      const maxTranslate = 0;
+      const minTranslate =
+        -(this.slides.length - this.getSlidesPerView()) *
+        this.slides[0].clientWidth;
+
+      if (this.currentTranslate > maxTranslate) {
+        const overshoot = (this.currentTranslate - maxTranslate) * 0.2; // Reduced elasticity
+        this.currentTranslate = maxTranslate + overshoot;
+      } else if (this.currentTranslate < minTranslate) {
+        const overshoot = (minTranslate - this.currentTranslate) * 0.2; // Reduced elasticity
+        this.currentTranslate = minTranslate - overshoot;
       }
-    } catch (error) {
-      console.warn(error);
-      return;
+    }
+
+    touchEnd() {
+      if (window.innerWidth >= 1024) return;
+
+      this.isDragging = false;
+      this.slider.style.cursor = "grab";
+
+      // Use distance-based snapping instead of velocity for more control
+      const slideWidth = this.slides[0].clientWidth;
+      const dragDistance = this.currentTranslate - this.initialTranslate;
+      const dragThreshold = slideWidth * 0.15; // 15% of slide width to trigger change
+
+      if (Math.abs(dragDistance) > dragThreshold) {
+        const direction = dragDistance > 0 ? -1 : 1;
+        const targetIndex = this.currentIndex + direction;
+        this.goToSlide(targetIndex);
+      } else {
+        // If drag was too small, return to current position
+        this.goToSlide(this.currentIndex);
+      }
+    }
+
+    animationLoop() {
+      if (!this.isDragging && Math.abs(this.velocity) > 0.01) {
+        // Slower deceleration for smoother stopping
+        this.velocity *= 1 - this.deceleration;
+        this.currentTranslate += this.velocity * 16;
+
+        this.applyBoundaries();
+
+        if (Math.abs(this.velocity) < 0.05) {
+          // Lower threshold for snapping
+          this.snapToNearestSlide();
+        }
+
+        this.setSliderPosition();
+      }
+
+      requestAnimationFrame(this.animationLoop);
+    }
+
+    snapToNearestSlide() {
+      const slideWidth = this.slides[0].clientWidth;
+      const currentPosition = -this.currentTranslate / slideWidth;
+      const maxSlide = this.slides.length - this.getSlidesPerView();
+
+      // Use proper rounding to nearest slide
+      let targetSlide;
+      if (currentPosition % 1 > 0.6) {
+        targetSlide = Math.ceil(currentPosition);
+      } else if (currentPosition % 1 < 0.4) {
+        targetSlide = Math.floor(currentPosition);
+      } else {
+        targetSlide = Math.round(currentPosition);
+      }
+
+      targetSlide = Math.max(0, Math.min(targetSlide, maxSlide));
+      this.goToSlide(targetSlide);
+      this.velocity = 0;
+    }
+
+    setSliderPosition() {
+      this.slider.scrollLeft = -this.currentTranslate;
+    }
+
+    updateSliderPosition() {
+      this.currentTranslate = -this.slider.scrollLeft;
+      this.prevTranslate = this.currentTranslate;
+    }
+
+    nextSlide() {
+      const maxIndex = this.slides.length - this.getSlidesPerView();
+      if (this.currentIndex < maxIndex) {
+        this.goToSlide(this.currentIndex + 1);
+      }
+    }
+
+    prevSlide() {
+      if (this.currentIndex > 0) {
+        this.goToSlide(this.currentIndex - 1);
+      }
+    }
+
+    goToSlide(index) {
+      const slideWidth = this.slides[0].clientWidth;
+      this.currentTranslate = -(index * slideWidth);
+      this.prevTranslate = this.currentTranslate;
+      this.currentIndex = index;
+      this.velocity = 0;
+
+      this.slider.style.transition =
+        "scroll-left 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+      this.setSliderPosition();
+
+      this.updateButtonStates();
+
+      setTimeout(() => {
+        this.slider.style.transition = "";
+      }, 400);
+    }
+
+    updateButtonStates() {
+      if (!this.prevBtn || !this.nextBtn) return;
+
+      const maxIndex = this.slides.length - this.getSlidesPerView();
+      this.prevBtn.disabled = this.currentIndex <= 0;
+      this.nextBtn.disabled = this.currentIndex >= maxIndex;
+      this.prevBtn.style.opacity = this.currentIndex <= 0 ? "0.5" : "1";
+      this.nextBtn.style.opacity = this.currentIndex >= maxIndex ? "0.5" : "1";
+    }
+
+    handleResize() {
+      if (window.innerWidth >= 1024) {
+        this.destroy();
+      } else {
+        this.setSlideWidths();
+        this.goToSlide(this.currentIndex);
+        this.updateButtonStates();
+      }
+    }
+
+    destroy() {
+      this.slides.forEach((slide) => {
+        slide.style.flex = "";
+      });
+      this.slider.style.cursor = "";
+
+      if (this.prevBtn && this.nextBtn) {
+        this.prevBtn.removeEventListener("click", this.prevSlide);
+        this.nextBtn.removeEventListener("click", this.nextSlide);
+      }
+    }
+  }
+  function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
+    if (timer <= 0) {
+      console.warn(
+        `Timeout reached while waiting for condition: ${predicate.toString()}`,
+      );
+    } else if (predicate && predicate()) {
+      callback();
+    } else {
+      setTimeout(() => {
+        waitForElement(predicate, callback, timer - frequency, frequency);
+      }, frequency);
     }
   }
 
@@ -702,9 +1196,125 @@ Initial Development: 15 hours
     );
   }
 
+  function initCustomizationServicesSlider() {
+    waitForElement(
+      () =>
+        document.querySelector(".custom-converting-panel--mobile .my-slider"),
+      () => {
+        const sliderElement = document.querySelector(
+          ".custom-converting-panel--mobile .my-slider",
+        );
+        sliderElement._sliderInstance = new CustomizationFluidSlider(
+          sliderElement,
+        );
+      },
+    );
+  }
+
+  function createMobileCustomizationServicesInnerLayout() {
+    const targetNode = document.querySelector(
+      ".custom-converting-panel .custom-converting-inner",
+    );
+    targetNode.insertAdjacentHTML(
+      "afterend",
+      /* HTML */ `
+        <div
+          class="custom-converting-inner custom-converting-panel--mobile relative block lg:hidden"
+        >
+          <ul class="list-none text-center my-slider">
+            ${DATA.customization_services
+              .map(
+                (item) => /* HTML */ `
+                  <li class="my-slide-item">
+                    <a
+                      data-content-type="${item.contentType}"
+                      href="${item.href}"
+                    >
+                      <div class="img-wrap overflow-hidden rounded-[4px]">
+                        <img
+                          class="rounded-[4px] hover:transform hover:scale-[1.2] transition-all duration-300 ease-in-out"
+                          src="${item.imageSrc}"
+                          loading="lazy"
+                          width="${item.imageWidth}"
+                          height="${item.imageHeight}"
+                          alt="${item.imageAlt}"
+                        />
+                      </div>
+                    </a>
+                    <div class="actions">
+                      <a
+                        data-content-type="${item.contentType}"
+                        class="action primary bg-hnleb0 px-[8px] py-2 flex mt-[15px] justify-center rounded-[4px] border-[2px] border-hnleb0 text-[12px] font-[600] hover:border-hnleb0 text-white"
+                        href="${item.buttonHref}"
+                        >${item.buttonText}</a
+                      >
+                    </div>
+                  </li>
+                `,
+              )
+              .join("")}
+          </ul>
+          <div class="slider-nav">
+            <button
+              class="slider-btn slider-prev"
+              aria-label="Previous slide"
+              disabled=""
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-5 h-5"
+                width="25"
+                height="25"
+                role="img"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 19l-7-7 7-7"
+                ></path>
+                <title>chevron-left</title>
+              </svg></button
+            ><button class="slider-btn slider-next" aria-label="Next slide">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                class="w-5 h-5"
+                width="25"
+                height="25"
+                role="img"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 5l7 7-7 7"
+                ></path>
+                <title>chevron-right</title>
+              </svg>
+            </button>
+          </div>
+          <div class="actions flex justify-center">
+            <a
+              data-content-type="customization services"
+              class="ab-customize-services-cta mt-[15px] ab-btn-secondary flex  justify-center text-[15px] font-[600] max-w-max uppercase"
+              href="https://www.hookandloop.com/converting"
+              >See all customization services</a
+            >
+          </div>
+        </div>
+      `,
+    );
+  }
+
   function modifyCustomizationServicesLayout() {
     document.querySelector(".custom-converting-panel").className =
-      "custom-converting-panel lg:px-[10px] py-5 text-center hidden lg:block";
+      "custom-converting-panel lg:px-[10px] py-5 text-center"; /*  hidden lg:block */
     document.querySelector(
       ".custom-converting-panel .section-title a",
     ).innerText = "We're More Than Just Products!";
@@ -717,6 +1327,10 @@ Initial Development: 15 hours
       pItem.innerText =
         "We are a full service Hook & Loop conversion facility. Let us handle the hard work for you.";
     }
+
+    document
+      .querySelector(".custom-converting-panel .custom-converting-inner")
+      .classList.add("custom-converting-panel--desktop", "hidden", "lg:block");
 
     document
       .querySelectorAll(
@@ -1205,11 +1819,13 @@ Initial Development: 15 hours
 
     createHeroSectionLayout();
     modifyCustomizationServicesLayout();
+    createMobileCustomizationServicesInnerLayout();
     createBrandsSectionLayout();
     createTestimonialsSectionLayout();
     createFeatureSectionLayout();
     modifyNewsLetterAndPromotionSection();
     createNewsLetterAndPromotionSectionLayout();
+    initCustomizationServicesSlider();
     clickEvent();
   }
 
