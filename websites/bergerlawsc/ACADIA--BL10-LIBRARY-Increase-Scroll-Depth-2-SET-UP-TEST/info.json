@@ -1,0 +1,13 @@
+{
+  "id": "1757408058876_4705_ACADIA__BL10_LIBRARY_Increase_Scroll_Depth_2_SET_UP_TEST",
+  "name": "ACADIA--BL10-LIBRARY-Increase-Scroll-Depth-2-SET-UP-TEST",
+  "type": "A/B",
+  "website": "bergerlawsc",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-09-09T08:54:18.876Z",
+  "createdAtReadable": "09/09/2025, 2:54:18 pm",
+  "lastUpdated": "2025-09-09T08:54:19.301Z"
+}
