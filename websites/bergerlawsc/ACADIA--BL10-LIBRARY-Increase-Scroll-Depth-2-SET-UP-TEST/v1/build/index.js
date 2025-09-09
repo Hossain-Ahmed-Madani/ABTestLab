@@ -1,12 +1,3 @@
-/* 
-https://www.figma.com/design/gRstDeTcFaKxrCReVHbMeh/BL-10-Blog-Work?node-id=26-2&p=f&t=g7MMjZOYSByPG8s3-0
-https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-child-safety.cfm
-
-
-control: https://marketer.monetate.net/control/preview/13087/ZOIEV7SN3KS01R8A681547H1YINEME5N/bl10-library-increase-scroll-depth
-v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X74UDT7DC/bl10-library-increase-scroll-depth
-*/
-
 (() => {
     const TEST_CONFIG = {
         client: "Acadia",
