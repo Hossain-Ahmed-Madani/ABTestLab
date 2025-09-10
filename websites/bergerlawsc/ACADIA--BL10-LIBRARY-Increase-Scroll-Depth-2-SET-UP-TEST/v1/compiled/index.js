@@ -43,9 +43,9 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function createTableOfContents() {
-        const selector = document.querySelectorAll(".dss-content h2").length > 0 ? ".dss-content h2" : ".dss-content h3";
+        const foundNodes = document.querySelectorAll(".dss-content h2, .dss-content h3");
 
-        const firstChild =  document.querySelector(`${selector}:first-of-type`);
+        const firstChild = foundNodes[0];
         const initialText = firstChild.textContent.split(".")?.[1] || firstChild.textContent;
 
         return /* HTML */ `
@@ -57,7 +57,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
                         <span class="ab-ellipsis-two-lines">${initialText}</span>
                     </div>
                     <ul class="ab-table-content-list">
-                        ${Array.from(document.querySelectorAll(selector))
+                        ${Array.from(foundNodes)
                             .map((item, index) => {
                                 item.setAttribute("id", `section-${index + 1}`);
                                 const txt = item.textContent.split(".")[1] || item.textContent;
@@ -80,7 +80,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         document.querySelector("#nav").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                <div class="ab-scroll-and-table-contents ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? "": "ab-scroll-and-table-contents--only-scroll"}">
+                <div class="ab-scroll-and-table-contents ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
                     <div class="ab-scroll-container" data-scroll="25"></div>
                     ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
                 </div>
