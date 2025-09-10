@@ -1,10 +1,11 @@
 .AB-BL10 .ab-scroll-and-table-contents {
     background: #f2f5f7;
     padding-bottom: 15px;
-    height: 72px;
-    min-height: 72px;
-    position: relative;
     z-index: -1;
+}
+.AB-BL10 .ab-scroll-and-table-contents.ab-scroll-and-table-contents--only-scroll {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 .AB-BL10 .ab-scroll-container {
     width: 100%;
@@ -53,7 +54,7 @@
 .AB-BL10 .ab-table-content-selection {
     width: 363px;
     max-width: 363px;
-    height: 35px;
+    min-height: 42px;
     margin-top: 12px;
     position: relative;
 }
@@ -61,7 +62,10 @@
     display: none !important;
 }
 .AB-BL10 .ab-table-content-selection[data-state="opened"] .ab-table-content-selected-item {
-    display: none !important;
+    opacity: 0;
+    visibility: hidden !important;
+    z-index: -1;
+    position: relative;
 }
 .AB-BL10 .ab-table-content-selected-item {
     border-radius: 5px;
@@ -70,7 +74,7 @@
     padding: 13px 15px;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     color: #933a25;
     font-family: quasimoda, sans-serif;
@@ -136,9 +140,15 @@
 .AB-BL10 .ab-table-content-list .ab-table-content-item:not(:last-child) {
     border-bottom: 1px solid #e8e5de;
 }
+.AB-BL10 .ab-ellipsis-two-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 @media screen and (min-width: 991px) {
     .AB-BL10 .ab-scroll-and-table-contents {
-        height: 60px;
         margin-top: -1px;
         padding-top: 7px;
         padding-bottom: 13px;

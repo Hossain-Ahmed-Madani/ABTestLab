@@ -1,3 +1,12 @@
+/* 
+https://www.figma.com/design/gRstDeTcFaKxrCReVHbMeh/BL-10-Blog-Work?node-id=26-2&p=f&t=g7MMjZOYSByPG8s3-0
+https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-child-safety.cfm
+
+
+control: https://marketer.monetate.net/control/preview/13087/ZOIEV7SN3KS01R8A681547H1YINEME5N/bl10-library-increase-scroll-depth
+v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X74UDT7DC/bl10-library-increase-scroll-depth
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "Acadia",
@@ -34,7 +43,10 @@
     }
 
     function createTableOfContents() {
-        const initialText = document.querySelector(".dss-content h3:first-of-type").textContent.split(".")[1];
+        const selector = document.querySelectorAll(".dss-content h2").length > 0 ? ".dss-content h2" : ".dss-content h3";
+
+        const firstChild =  document.querySelector(`${selector}:first-of-type`);
+        const initialText = firstChild.textContent.split(".")?.[1] || firstChild.textContent;
 
         return /* HTML */ `
             <div class="ab-table-contents-container container">
@@ -42,18 +54,18 @@
                 <div class="ab-table-content-selection" data-state="closed">
                     <div class="ab-table-content-selected-item">
                         <span>1.1</span>
-                        <span>${initialText}</span>
+                        <span class="ab-ellipsis-two-lines">${initialText}</span>
                     </div>
                     <ul class="ab-table-content-list">
-                        ${Array.from(document.querySelectorAll(".dss-content h3"))
+                        ${Array.from(document.querySelectorAll(selector))
                             .map((item, index) => {
                                 item.setAttribute("id", `section-${index + 1}`);
-                                const txt = item.textContent.split(".")[1];
+                                const txt = item.textContent.split(".")[1] || item.textContent;
 
                                 return /* HTML */ `
                                     <li targetH3="#section-${index + 1}" class="ab-table-content-item" ${index === 0 ? "selected" : ""}>
                                         <span>1.${index + 1}</span>
-                                        <span>${txt}</span>
+                                        <span class=" ab-ellipsis-two-lines">${txt}</span>
                                     </li>
                                 `;
                             })
@@ -68,9 +80,9 @@
         document.querySelector("#nav").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                <div class="ab-scroll-and-table-contents">
+                <div class="ab-scroll-and-table-contents ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? "": "ab-scroll-and-table-contents--only-scroll"}">
                     <div class="ab-scroll-container" data-scroll="25"></div>
-                    ${document.querySelectorAll(".dss-content h3").length > 0 ? createTableOfContents() : ""}
+                    ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
                 </div>
             `
         );
@@ -211,7 +223,7 @@
             window.location.href.includes("/library/") &&
             document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector("#nav") &&
-            document.querySelector(".dss-content h3")
+            document.querySelector(".dss-content")
         );
     }
 

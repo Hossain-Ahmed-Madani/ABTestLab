@@ -7,10 +7,12 @@
       style.innerHTML = `.AB-BL10 .ab-scroll-and-table-contents {
   background: #f2f5f7;
   padding-bottom: 15px;
-  height: 72px;
-  min-height: 72px;
-  position: relative;
   z-index: -1;
+}
+.AB-BL10
+  .ab-scroll-and-table-contents.ab-scroll-and-table-contents--only-scroll {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 .AB-BL10 .ab-scroll-container {
   width: 100%;
@@ -59,7 +61,7 @@
 .AB-BL10 .ab-table-content-selection {
   width: 363px;
   max-width: 363px;
-  height: 35px;
+  min-height: 42px;
   margin-top: 12px;
   position: relative;
 }
@@ -71,7 +73,10 @@
 .AB-BL10
   .ab-table-content-selection[data-state="opened"]
   .ab-table-content-selected-item {
-  display: none !important;
+  opacity: 0;
+  visibility: hidden !important;
+  z-index: -1;
+  position: relative;
 }
 .AB-BL10 .ab-table-content-selected-item {
   border-radius: 5px;
@@ -80,7 +85,7 @@
   padding: 13px 15px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
   color: #933a25;
   font-family: quasimoda, sans-serif;
@@ -146,9 +151,15 @@
 .AB-BL10 .ab-table-content-list .ab-table-content-item:not(:last-child) {
   border-bottom: 1px solid #e8e5de;
 }
+.AB-BL10 .ab-ellipsis-two-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 @media screen and (min-width: 991px) {
   .AB-BL10 .ab-scroll-and-table-contents {
-    height: 60px;
     margin-top: -1px;
     padding-top: 7px;
     padding-bottom: 13px;
@@ -195,6 +206,9 @@
 https://www.figma.com/design/gRstDeTcFaKxrCReVHbMeh/BL-10-Blog-Work?node-id=26-2&p=f&t=g7MMjZOYSByPG8s3-0
 https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-child-safety.cfm
 
+
+control: https://marketer.monetate.net/control/preview/13087/ZOIEV7SN3KS01R8A681547H1YINEME5N/bl10-library-increase-scroll-depth
+v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X74UDT7DC/bl10-library-increase-scroll-depth
 */
 
 (() => {
@@ -238,9 +252,14 @@ https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-chil
   }
 
   function createTableOfContents() {
-    const initialText = document
-      .querySelector(".dss-content h3:first-of-type")
-      .textContent.split(".")[1];
+    const selector =
+      document.querySelectorAll(".dss-content h2").length > 0
+        ? ".dss-content h2"
+        : ".dss-content h3";
+
+    const firstChild = document.querySelector(`${selector}:first-of-type`);
+    const initialText =
+      firstChild.textContent.split(".")?.[1] || firstChild.textContent;
 
     return /* HTML */ `
       <div class="ab-table-contents-container container">
@@ -248,13 +267,13 @@ https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-chil
         <div class="ab-table-content-selection" data-state="closed">
           <div class="ab-table-content-selected-item">
             <span>1.1</span>
-            <span>${initialText}</span>
+            <span class="ab-ellipsis-two-lines">${initialText}</span>
           </div>
           <ul class="ab-table-content-list">
-            ${Array.from(document.querySelectorAll(".dss-content h3"))
+            ${Array.from(document.querySelectorAll(selector))
               .map((item, index) => {
                 item.setAttribute("id", `section-${index + 1}`);
-                const txt = item.textContent.split(".")[1];
+                const txt = item.textContent.split(".")[1] || item.textContent;
 
                 return /* HTML */ `
                   <li
@@ -263,7 +282,7 @@ https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-chil
                     ${index === 0 ? "selected" : ""}
                   >
                     <span>1.${index + 1}</span>
-                    <span>${txt}</span>
+                    <span class=" ab-ellipsis-two-lines">${txt}</span>
                   </li>
                 `;
               })
@@ -278,9 +297,16 @@ https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-chil
     document.querySelector("#nav").insertAdjacentHTML(
       "afterend",
       /* HTML */ `
-        <div class="ab-scroll-and-table-contents">
+        <div
+          class="ab-scroll-and-table-contents ${document.querySelectorAll(
+            ".dss-content h2, .dss-content h3",
+          ).length > 0
+            ? ""
+            : "ab-scroll-and-table-contents--only-scroll"}"
+        >
           <div class="ab-scroll-container" data-scroll="25"></div>
-          ${document.querySelectorAll(".dss-content h3").length > 0
+          ${document.querySelectorAll(".dss-content h2, .dss-content h3")
+            .length > 0
             ? createTableOfContents()
             : ""}
         </div>
@@ -452,7 +478,7 @@ https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-chil
         `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`,
       ) &&
       document.querySelector("#nav") &&
-      document.querySelector(".dss-content h3")
+      document.querySelector(".dss-content")
     );
   }
 
