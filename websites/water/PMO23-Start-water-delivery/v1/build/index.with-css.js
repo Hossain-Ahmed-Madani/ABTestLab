@@ -8,8 +8,32 @@
   .ab-storyblok-modal
   > .wrapper-outer
   > .wrapper-inner
+  button.wrapper-btn-close,
+.AB-PMO23
+  .ab-storyblok-modal
+  > .wrapper-outer
+  > .wrapper-inner
+  button.wrapper-btn-close:hover,
+.AB-PMO23
+  .ab-storyblok-modal
+  > .wrapper-outer
+  > .wrapper-inner
+  button.wrapper-btn-close:focus {
+  border: none;
+  outline: none;
+}
+.AB-PMO23 .storyblok-modal > .wrapper-outer > .wrapper-inner {
+  height: auto;
+}
+.AB-PMO23
+  .ab-storyblok-modal
+  > .wrapper-outer
+  > .wrapper-inner
   > .wrapper-body {
   gap: 0;
+}
+.AB-PMO23 .storyblok-modal > .wrapper-outer > .wrapper-inner > .wrapper-body {
+  overflow: visible;
 }
 .AB-PMO23
   .ab-storyblok-modal
@@ -186,7 +210,34 @@
   text-decoration: underline;
   color: #0067c3;
 }
+@media screen and (max-width: 767.5px) {
+  .AB-PMO23 .modal-v2.pop-up.ab-storyblok-modal {
+    height: 100vh;
+    overflow-y: scroll;
+  }
+  .AB-PMO23 .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    margin: auto;
+  }
+  .AB-PMO23
+    .modal-v2.pop-up.ab-storyblok-modal
+    > .wrapper-outer
+    > .wrapper-inner {
+    margin: 1.5rem 1rem;
+  }
+  .AB-PMO23 .ab-storyblok-modal > .wrapper-outer {
+    width: max-content;
+  }
+}
 @media screen and (min-width: 768px) {
+  .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    width: 654px;
+  }
   .AB-PMO23 .ab-wrapper-body .wrapper-heading {
     font-size: 36px;
     line-height: 42px;
@@ -206,16 +257,6 @@
     font-size: 14px;
     line-height: 22px;
   }
-  .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frame {
-    padding: 30px 25px 23px;
-  }
-  .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image img {
-    width: 160px;
-    min-width: 160px;
-    height: 163px;
-    min-height: 163px;
-    object-fit: contain;
-  }
   .AB-PMO23 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
     padding: 6px 19px;
     width: 135px;
@@ -230,18 +271,18 @@
     color: #0067c3;
   }
   .AB-PMO23 .ab-freq-txt {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 100%;
     margin-bottom: 15px;
   }
   .AB-PMO23 .ab-helpline-txt {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 22px;
   }
 }
 @media screen and (min-width: 1025.5px) {
   .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-    min-width: 1160px;
+    min-width: 100%;
   }
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
     gap: 40px;
@@ -282,10 +323,18 @@
   }
   .AB-PMO23 .ab-quantity-wrapper-block .wrapper-frame {
     max-width: 250px;
+    padding: 30px 25px 23px;
   }
   .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image {
     margin-right: 0;
     margin-bottom: 20px;
+  }
+  .AB-PMO23 .ab-quantity-wrapper-block .ab-wrapper-image img {
+    width: 160px;
+    min-width: 160px;
+    height: 163px;
+    min-height: 163px;
+    object-fit: contain;
   }
   .AB-PMO23 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
     margin-bottom: 0;
@@ -296,26 +345,53 @@
     margin: auto;
   }
 }
+@media screen and (min-width: 1178px) {
+  .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    min-width: 1110px;
+    width: 1110px;
+  }
+}
 
 .AB-PMO23--v1 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
   padding: 30px 25px 38px;
-  height: max-content;
+  height: auto;
 }
 .AB-PMO23--v1 .ab-wrapper-body .ab-wrapper-heading--water-types {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 .AB-PMO23--v1 .ab-modal-tabs-wrapper,
 .AB-PMO23--v1 .ab-wrapper-bottom {
   display: none !important;
+}
+@media screen and (max-width: 767.5px) {
+  .AB-PMO23--v1 .ab-water-type-wrapper-block .ab-heading-2 {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 1024.5px) {
+  .AB-PMO23--v1 .ab-water-type-wrapper-block .ab-wrapper-image {
+    padding-top: 5px;
+  }
 }
 @media screen and (min-width: 768px) {
   .AB-PMO23--v1 .ab-wrapper-body .ab-wrapper-heading--water-types {
     margin-bottom: 50px;
   }
 }
+@media screen and (max-width: 1024.5px) {
+  .AB-PMO23--v1 .ab-water-type-wrapper-block .ab-wrapper-image {
+    padding-top: 5px;
+  }
+}
 @media screen and (min-width: 1025px) {
   .AB-PMO23--v1 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    min-width: 1110px;
+    width: 1110px;
     padding: 50px 55px;
+  }
+  .AB-PMO23--v1 .ab-water-type-wrapper-block .wrapper-frame {
+    width: 220px;
+    height: 350px;
   }
 }
 
@@ -332,6 +408,14 @@
 .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
   margin-bottom: 30px;
 }
+@media screen and (max-width: 767.5px) {
+  .AB-PMO23--v2 .ab-wrapper-body .ab-wrapper-heading--quantity {
+    margin-bottom: 20px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
+    margin-bottom: 20px;
+  }
+}
 @media screen and (min-width: 1025px) {
   .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
@@ -339,16 +423,20 @@
   .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
     margin-bottom: 60px;
   }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .wrapper-frame {
+    width: 250px;
+    height: 290px;
+  }
 }
 
-.AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+.AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer {
   padding: 13px 25px 20px;
 }
 .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--quantity {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .AB-PMO23--v3 .ab-water-type-wrapper-block {
   margin-top: 30px;
@@ -361,6 +449,17 @@
 .AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
   margin-bottom: 30px;
 }
+.AB-PMO23--v3 .ab-quantity-wrapper-block .wrapper-frames {
+  gap: 22px;
+}
+@media screen and (max-width: 767.5px) {
+  .AB-PMO23--v3 .ab-water-type-wrapper-block {
+    margin-top: 20px;
+  }
+  .AB-PMO23--v3 .ab-quantity-wrapper-block {
+    margin-top: 20px;
+  }
+}
 @media screen and (min-width: 768px) {
   .AB-PMO23--v3 .ab-wrapper-body .ab-wrapper-heading--water-types {
     margin-bottom: 26px;
@@ -372,16 +471,24 @@
     margin-bottom: 24px;
   }
 }
-@media screen and (min-width: 1025.5px) {
+@media screen and (min-width: 1025px) {
   .AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
   }
   .AB-PMO23--v3 .ab-quantity-wrapper-block {
     margin-top: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   .AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
     margin-bottom: 30px;
+  }
+  .AB-PMO23--v3 .ab-quantity-wrapper-block .wrapper-frame {
+    width: 250px;
+    height: 290px;
+  }
+  .AB-PMO23--v3 .ab-water-type-wrapper-block .wrapper-frame {
+    width: 220px;
+    height: 350px;
   }
 }
 `;
@@ -403,8 +510,8 @@
     test_name:
       "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
     page_initials: "AB-PMO23",
-    test_variation: 1 /* 0 -> control, 1, 2, 3 */,
-    test_version: 0.0001,
+    test_variation: 3 /* 0 -> control, 1, 2, 3 */,
+    test_version: 0.0002,
   };
 
   const ASSETS = {
@@ -776,8 +883,11 @@
           class="ab-wrapper-bottom flex flex-col justify-center items-center"
         >
           <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
-          <h5 class="ab-helpline-txt">
-            Have Questions? Call <a href="tel:">800-201-6218</a>
+          <h5
+            class="ab-helpline-txt flex flex-wrap justify-center items-center"
+          >
+            <span>Have Questions?</span
+            ><span>&nbspCall&nbsp<a href="tel:">800-201-6218</a></span>
           </h5>
         </div>
       `;

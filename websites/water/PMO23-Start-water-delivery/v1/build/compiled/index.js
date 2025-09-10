@@ -9,7 +9,7 @@
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
         test_variation: 1 /* 0 -> control, 1, 2, 3 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const ASSETS = {
@@ -110,9 +110,9 @@
             </defs>
         </svg> `,
 
-        one_two_people_img: "https://sb.monetate.net/img/1/1576/5822037.png",
-        three_five_people_img: "https://sb.monetate.net/img/1/1576/5822036.png",
-        five_plus_people_img: "https://sb.monetate.net/img/1/1576/5822035.png",
+        one_two_people_img : 'https://sb.monetate.net/img/1/1576/5822037.png',
+        three_five_people_img : 'https://sb.monetate.net/img/1/1576/5822036.png',
+        five_plus_people_img : 'https://sb.monetate.net/img/1/1576/5822035.png',
     };
 
     const DATA = {
@@ -170,7 +170,7 @@
                 }, frequency);
             }
         } catch (error) {
-            console.error(error);
+            console.warn(error);
             return;
         }
     }
@@ -189,6 +189,7 @@
     }
 
     function createQuantityLayout() {
+    
         return /* HTML */ `
             <div class="ab-quantity-wrapper-block wrapper-block storyblok-text-blocks icon-no-border">
                 <p class="ab-quantity-wrapper-sub-text">See our recommended bottle quantity below. Edit, skip or cancel your recurring orders in your account anytime.</p>
@@ -201,7 +202,7 @@
                                     <div class="wrapper-inner h-full flex lg:flex-col self-center">
                                         <div class="ab-wrapper-image-container flex justify-start items-center lg:justify-center">
                                             <div class="ab-wrapper-image flex justify-start lg:items-center lg:justify-center">
-                                                <img src="${item.imgSrc}" />
+                                                <img src="${item.imgSrc}"/>
                                             </div>
                                         </div>
                                         <div class="wrapper-headline flex flex-col justify-center items-start">
@@ -227,6 +228,7 @@
             </div>
         `;
     }
+
 
     function createWaterTypeLayout() {
         return /* HTML */ `
@@ -275,22 +277,25 @@
         const parent = document.querySelector("#water-types .wrapper-body");
         if (parent) {
             parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-            const activeClass = "ab-wrapper-body--water-type-active";
+            const activeClass = TEST_CONFIG.test_variation === 2 ? "ab-wrapper-body--quantity-active" : "ab-wrapper-body--water-type-active";
             parent.classList.add("ab-wrapper-body", activeClass);
 
             parent.innerHTML = /* HTML */ `
                 <div class="wrapper-text flex flex-col">
                     <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
-                    <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">${"Water Guide"}</div>
+                    <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
+                        ${TEST_CONFIG.test_variation === 2 ? "How much </br> water do I need?" : "Water Guide"}
+                    </div>
                 </div>
                 <div class="ab-modal-tabs-wrapper flex justify-center items-center">
                     <div class="ab-modal-tab-item ab-modal-tab-item--quantity flex justify-center items-center">Quantity</div>
                     <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
                 </div>
-                ${createQuantityLayout()} ${createWaterTypeLayout()}
+                ${createQuantityLayout()}
+                ${createWaterTypeLayout()}
                 <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
                     <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
-                    <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
+                    <h5 class="ab-helpline-txt flex flex-wrap justify-center items-center"><span>Have Questions?</span><span>&nbspCall&nbsp<a href="tel:">800-201-6218</a></span></h5>
                 </div>
             `;
         }
@@ -336,11 +341,12 @@
 
     function modalViewGoal() {
         new MutationObserver((mutationsList, observer) => {
-            if (document.querySelector("#water-types").getAttribute("aria-hidden") === "false") {
+            if(document.querySelector("#water-types").getAttribute("aria-hidden") === "false") {
                 fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
                 observer.disconnect();
             }
-        }).observe(document.querySelector("#water-types"), { attributes: true });
+        
+        }).observe( document.querySelector("#water-types") , { attributes: true });
     }
 
     function init() {
@@ -363,7 +369,7 @@
             document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             document.querySelector("a.text-primo-river[data-modal-v2-trigger]") &&
             document.querySelector(".storyblok-text-blocks") &&
-            document.querySelector("#water-types")
+            document.querySelector("#water-types") 
         );
     }
 

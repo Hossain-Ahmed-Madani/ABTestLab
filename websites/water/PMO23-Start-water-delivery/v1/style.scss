@@ -239,12 +239,18 @@
     //  ============ NEW START ============
 
     @media screen and (max-width: 375px) {
-        .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-            // margin-top: 200px !important;
-        }
+        // .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer {
+        //     margin-top: 5000px !important;
+        // }
     }
 
     @media screen and (max-width: 767.5px) {
+        .modal-v2.pop-up.ab-storyblok-modal {
+
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
         .storyblok-modal > .wrapper-outer > .wrapper-inner {
             // height: max-content;
         }
@@ -253,9 +259,14 @@
             margin: 0 !important;
             padding: 0 !important;
 
-            height: 100vh;
-            overflow-y: scroll;
+            // height: 100vh;
+            // overflow-y: scroll;
             width: 100%;
+            height: auto;
+            position: absolute;
+            top: 0;
+            // bottom: 0;
+            margin: auto;
         }
 
         .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer > .wrapper-inner {

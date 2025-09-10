@@ -185,12 +185,18 @@
   color: #0067c3;
 }
 @media screen and (max-width: 767.5px) {
+  .AB-PMO23 .modal-v2.pop-up.ab-storyblok-modal {
+    height: 100vh;
+    overflow-y: scroll;
+  }
   .AB-PMO23 .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer {
     margin: 0 !important;
     padding: 0 !important;
-    height: 100vh;
-    overflow-y: scroll;
     width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    margin: auto;
   }
   .AB-PMO23 .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     margin: 1.5rem 1rem;
