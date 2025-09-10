@@ -8,7 +8,7 @@
         site_url: "https://www.water.com/",
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
-        test_variation: 1 /* 0 -> control, 1, 2, 3 */,
+        test_variation: 3 /* 0 -> control, 1, 2, 3 */,
         test_version: 0.0002,
     };
 
@@ -295,7 +295,7 @@
                 ${createWaterTypeLayout()}
                 <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
                     <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
-                    <h5 class="ab-helpline-txt">Have Questions? Call <a href="tel:">800-201-6218</a></h5>
+                    <h5 class="ab-helpline-txt flex flex-wrap justify-center items-center"><span>Have Questions?</span><span>&nbspCall&nbsp<a href="tel:">800-201-6218</a></span></h5>
                 </div>
             `;
         }
