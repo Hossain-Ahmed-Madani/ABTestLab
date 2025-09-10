@@ -216,18 +216,19 @@
     color: #0067c3;
   }
   .AB-PMO23 .ab-freq-txt {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 100%;
     margin-bottom: 15px;
   }
   .AB-PMO23 .ab-helpline-txt {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 22px;
   }
 }
 @media screen and (min-width: 1025.5px) {
   .AB-PMO23 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-    min-width: 1160px;
+    min-width: 1110px;
+    width: 1110px;
   }
   .AB-PMO23 .ab-water-type-wrapper-block .wrapper-frames {
     gap: 40px;
@@ -301,7 +302,13 @@
 }
 @media screen and (min-width: 1025px) {
   .AB-PMO23--v1 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    min-width: 1110px;
+    width: 1110px;
     padding: 50px 55px;
+  }
+  .AB-PMO23--v1 .ab-water-type-wrapper-block .wrapper-frame {
+    width: 220px;
+    height: 350px;
   }
 }
 
@@ -324,6 +331,10 @@
   }
   .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
     margin-bottom: 60px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .wrapper-frame {
+    width: 250px;
+    height: 290px;
   }
 }
 
@@ -358,15 +369,23 @@
     margin-bottom: 24px;
   }
 }
-@media screen and (min-width: 1025.5px) {
+@media screen and (min-width: 1025px) {
   .AB-PMO23--v3 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
   }
   .AB-PMO23--v3 .ab-quantity-wrapper-block {
     margin-top: 22px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   .AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
     margin-bottom: 30px;
+  }
+  .AB-PMO23--v3 .ab-quantity-wrapper-block .wrapper-frame {
+    width: 250px;
+    height: 290px;
+  }
+  .AB-PMO23--v3 .ab-water-type-wrapper-block .wrapper-frame {
+    width: 220px;
+    height: 350px;
   }
 }

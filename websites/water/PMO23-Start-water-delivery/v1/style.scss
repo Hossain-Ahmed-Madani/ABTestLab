@@ -278,21 +278,23 @@
         }
 
         .ab-freq-txt {
-            font-size: 12px;
+            font-size: 14px;
             line-height: 100%;
             margin-bottom: 15px;
         }
 
         .ab-helpline-txt {
-            font-size: 16px;
+            font-size: 18px;
             line-height: 22px;
         }
     }
 
     @media screen and (min-width: 1025.5px) {
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-            // min-width: 1110px;
-            min-width: 1160px;
+            min-width: 1110px;
+            width: 1110px;
+            // max-height: 608px;
+            // height: 608px;
         }
 
         .ab-water-type-wrapper-block .wrapper-frames {
@@ -384,7 +386,16 @@
     }
     @media screen and (min-width: 1025px) {
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+            min-width: 1110px;
+            width: 1110px;
+            // max-height: 525px;
+            // height: 525px;
             padding: 50px 55px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-frame {
+            width: 220px;
+            height: 350px;
         }
     }
 }
@@ -418,6 +429,11 @@
 
         .ab-quantity-wrapper-sub-text {
             margin-bottom: 60px;
+        }
+
+        .ab-quantity-wrapper-block .wrapper-frame {
+            width: 250px;
+            height: 290px;
         }
     }
 }
@@ -464,21 +480,32 @@
         }
     }
 
-    @media screen and (min-width: 1025.5px) {
+    @media screen and (min-width: 1025px) {
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
             padding: 50px 55px;
+            // height: 630px;
         }
 
         .ab-quantity-wrapper-block {
             // margin-top: 30px;
             // margin-bottom: 50px;
             margin-top: 22px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
         }
 
         .ab-quantity-wrapper-sub-text {
             // margin-bottom: 60px;
             margin-bottom: 30px;
+        }
+
+        .ab-quantity-wrapper-block .wrapper-frame {
+            width: 250px;
+            height: 290px;
+        }
+
+        .ab-water-type-wrapper-block .wrapper-frame {
+            width: 220px;
+            height: 350px;
         }
     }
 }

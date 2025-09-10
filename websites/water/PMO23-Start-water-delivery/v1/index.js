@@ -9,7 +9,7 @@
         test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
         page_initials: "AB-PMO23",
         test_variation: 1 /* 0 -> control, 1, 2, 3 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const ASSETS = {
