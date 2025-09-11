@@ -11,9 +11,9 @@
   align-self: center;
   flex-direction: column;
   gap: 3px;
-  margin-bottom: 5px;
 }
 .AB-PLP-DTM .ab-savings-percentage {
+  margin-top: 5px;
   background-color: rgba(202, 94, 92, 0.05);
   border: 1px solid #641f33;
   border-radius: 0;
@@ -25,6 +25,9 @@
   width: max-content;
   height: max-content;
   margin: auto;
+  margin-top: 5px;
+  display: inline-block;
+  align-self: center;
 }
 @media screen and (min-width: 1025px) {
   .AB-PLP-DTM .product-item__price-wrap {
@@ -54,10 +57,10 @@
     test_name: "Product Listing Page - Show Discount Percentage [DTM]",
     page_initials: "AB-PLP-DTM",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
-  function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+  function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
     if (timer <= 0) {
       console.warn(
         `Timeout reached while waiting for condition: ${predicate.toString()}`,
@@ -128,17 +131,19 @@
   }
 
   function createLayout() {
-    const targetNodes = document.querySelectorAll(
-      ".product-item__price-wrap:has(.sale)",
-    );
+    const targetNodes = document.querySelectorAll(".product-item:has(.sale)");
+
     targetNodes.forEach((cNode, index) => {
-      let savingsBadge = cNode.closest(".ab-savings-percentage");
+      let savingsBadge = cNode.querySelector(".ab-savings-percentage");
+
       if (!savingsBadge) {
         savingsBadge = document.createElement("span");
         savingsBadge.className =
           "displayed-discount badge-shape fs-body-75 ab-savings-percentage";
         savingsBadge.setAttribute("data-badge-shape", "rounded-rectangle");
-        cNode.insertAdjacentElement("afterend", savingsBadge);
+        cNode
+          .querySelector(".product-item__price-wrap")
+          .insertAdjacentElement("afterend", savingsBadge);
       }
 
       const saleEl = cNode.querySelector(".sale");

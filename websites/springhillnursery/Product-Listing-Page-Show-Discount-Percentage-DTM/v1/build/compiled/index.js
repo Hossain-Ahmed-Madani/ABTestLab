@@ -1,3 +1,6 @@
+// ticket: https://trello.com/c/abZ2YUSs/3955-product-listing-page-show-discount-percentage-dtm
+// https://springhillnursery.com/collections/shipping-now
+
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolution",
@@ -6,10 +9,10 @@
         test_name: "Product Listing Page - Show Discount Percentage [DTM]",
         page_initials: "AB-PLP-DTM",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+    function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
@@ -69,7 +72,7 @@
 
         targetNodes.forEach((cNode, index) => {
             let savingsBadge = cNode.querySelector(".ab-savings-percentage");
-            
+
             if (!savingsBadge) {
                 savingsBadge = document.createElement("span");
                 savingsBadge.className = "displayed-discount badge-shape fs-body-75 ab-savings-percentage";

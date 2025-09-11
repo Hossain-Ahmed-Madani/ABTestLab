@@ -5,9 +5,9 @@
     align-self: center;
     flex-direction: column;
     gap: 3px;
-    margin-bottom: 5px;
 }
 .AB-PLP-DTM .ab-savings-percentage {
+    margin-top: 5px;
     background-color: rgba(202, 94, 92, 0.05);
     border: 1px solid #641f33;
     border-radius: 0;
@@ -19,6 +19,9 @@
     width: max-content;
     height: max-content;
     margin: auto;
+    margin-top: 5px;
+    display: inline-block;
+    align-self: center;
 }
 @media screen and (min-width: 1025px) {
     .AB-PLP-DTM .product-item__price-wrap {
