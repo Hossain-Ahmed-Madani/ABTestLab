@@ -13,6 +13,12 @@
 }
 
 .AB-PMO23 {
+    [data-modal-v2-trigger].modal-v2__trigger__ready,
+    [data-modal-v2-trigger].modal-v2__trigger__ready:hover,
+    [data-modal-v2-trigger].modal-v2__trigger__ready:focus {
+        outline: none;
+    }
+
     .ab-storyblok-modal > .wrapper-outer > .wrapper-inner button.wrapper-btn-close,
     .ab-storyblok-modal > .wrapper-outer > .wrapper-inner button.wrapper-btn-close:hover,
     .ab-storyblok-modal > .wrapper-outer > .wrapper-inner button.wrapper-btn-close:focus {
@@ -246,7 +252,6 @@
 
     @media screen and (max-width: 767.5px) {
         .modal-v2.pop-up.ab-storyblok-modal {
-
             height: 100vh;
             overflow-y: scroll;
         }
@@ -425,43 +430,11 @@
         .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
             min-width: 1110px;
             width: 1110px;
-            // max-height: 608px;
-            // height: 608px;
         }
     }
 }
 
 .AB-PMO23--v1 {
-    // //  ============ NEW START ============
-
-    // @media screen and (max-width: 375px) {
-    //     .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-    //         // margin-top: 200px !important;
-    //     }
-    // }
-
-    // @media screen and (max-width: 767.5px) {
-    //     .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer {
-    //         margin: 0 !important;
-    //         padding: 0 !important;
-
-    //         height: 100vh;
-    //         overflow-y: scroll;
-    //         width: 100%;
-    //     }
-
-    //     .modal-v2.pop-up.ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
-    //         margin: 1.5rem 1rem;
-    //     }
-
-    //     .ab-storyblok-modal > .wrapper-outer {
-    //         width: max-content;
-    //         // height: auto;
-    //     }
-    // }
-
-    // // ============ NEW END ============
-
     .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
         padding: 30px 25px 38px;
         height: auto;
@@ -590,11 +563,23 @@
     }
 
     .ab-quantity-wrapper-sub-text {
-        margin-bottom: 30px;
+        margin-bottom: 25px;
     }
 
     .ab-quantity-wrapper-block .wrapper-frames {
         gap: 22px;
+    }
+
+    @media screen and (max-width: 767.5px) {
+        .ab-water-type-wrapper-block .ab-heading-2 {
+            margin-bottom: 10px;
+        }
+    }
+
+    @media screen and (max-width: 1024.5px) {
+        .ab-water-type-wrapper-block .ab-wrapper-image {
+            padding-top: 5px;
+        }
     }
 
     @media screen and (max-width: 767.5px) {

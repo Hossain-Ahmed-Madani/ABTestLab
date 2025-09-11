@@ -4,7 +4,12 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-PMO23
+      style.innerHTML = `.AB-PMO23 [data-modal-v2-trigger].modal-v2__trigger__ready,
+.AB-PMO23 [data-modal-v2-trigger].modal-v2__trigger__ready:hover,
+.AB-PMO23 [data-modal-v2-trigger].modal-v2__trigger__ready:focus {
+  outline: none;
+}
+.AB-PMO23
   .ab-storyblok-modal
   > .wrapper-outer
   > .wrapper-inner
@@ -447,10 +452,20 @@
   margin-bottom: 30px;
 }
 .AB-PMO23--v3 .ab-quantity-wrapper-sub-text {
-  margin-bottom: 30px;
+  margin-bottom: 25px;
 }
 .AB-PMO23--v3 .ab-quantity-wrapper-block .wrapper-frames {
   gap: 22px;
+}
+@media screen and (max-width: 767.5px) {
+  .AB-PMO23--v3 .ab-water-type-wrapper-block .ab-heading-2 {
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 1024.5px) {
+  .AB-PMO23--v3 .ab-water-type-wrapper-block .ab-wrapper-image {
+    padding-top: 5px;
+  }
 }
 @media screen and (max-width: 767.5px) {
   .AB-PMO23--v3 .ab-water-type-wrapper-block {

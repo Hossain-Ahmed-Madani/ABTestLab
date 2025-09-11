@@ -277,14 +277,14 @@
         const parent = document.querySelector("#water-types .wrapper-body");
         if (parent) {
             parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-            const activeClass = "ab-wrapper-body--water-type-active";
+            const activeClass = TEST_CONFIG.test_variation === 2 ? "ab-wrapper-body--quantity-active" : "ab-wrapper-body--water-type-active";
             parent.classList.add("ab-wrapper-body", activeClass);
 
             parent.innerHTML = /* HTML */ `
                 <div class="wrapper-text flex flex-col">
                     <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
                     <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
-                        ${"Water Guide"}
+                        ${TEST_CONFIG.test_variation === 2 ? "How much </br> water do I need?" : "Water Guide"}
                     </div>
                 </div>
                 <div class="ab-modal-tabs-wrapper flex justify-center items-center">
