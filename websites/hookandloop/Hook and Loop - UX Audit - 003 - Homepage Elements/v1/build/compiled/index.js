@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const ASSETS = {

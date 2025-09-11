@@ -1,18 +1,12 @@
 (() => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com/",
-        test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const ASSETS = {
         quotation: "https://www.hookandloop.com/media/wysiwyg/AB-TEST/Quotation.png",
-        hero_banner_mobile: "https://www.hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner_Mobile.png",
-        hero_banner_desktop: "https://hookandloop.com/media/wysiwyg/AB-TEST/Hero_Banner.png",
         duragrip: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/d/u/duragrip.jpg",
         velcro: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/v/e/velcro_logo_1.jpg",
     };
@@ -20,7 +14,6 @@
     const TAILWIND_STYLES = {
         heading_xl: "ab-heading-xl",
         heading_lg: "ab-heading-lg",
-        heading_md: "text-[22px] font-semibold leading-none",
         heading_sm: "text-[20px] font-[500] text-hnl1d",
         paragraph: "leading-6 text-[16px] [text-wrap:pretty]",
         button_primary: "action primary hnl-btn text-white",
@@ -307,7 +300,6 @@
         snapToNearestSlide() {
             const slideWidth = this.slides[0].clientWidth;
             const currentPosition = -this.currentTranslate / slideWidth;
-            const currentSlide = Math.round(currentPosition);
             const maxSlide = this.slides.length - this.getSlidesPerView();
 
             // Use proper rounding to nearest slide

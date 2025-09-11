@@ -690,7 +690,7 @@ lg: 1024px
     display: flex;
     justify-content: space-between;
     pointer-events: none;
-    z-index: 999;
+    z-index: 10;
     padding: 0 8px;
 }
 
@@ -706,7 +706,7 @@ lg: 1024px
     align-items: center;
 }
 
-.slider-btn:not(:disabled) {
+.slider-btn {
     pointer-events: all;
 }
 
@@ -727,6 +727,7 @@ lg: 1024px
 .slider-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+    // pointer-events: none;
     transform: none;
 }
 

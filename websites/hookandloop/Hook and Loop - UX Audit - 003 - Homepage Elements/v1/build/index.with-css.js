@@ -618,7 +618,7 @@ lg: 1024px
   display: flex;
   justify-content: space-between;
   pointer-events: none;
-  z-index: 999;
+  z-index: 10;
   padding: 0 8px;
 }
 
@@ -634,7 +634,7 @@ lg: 1024px
   align-items: center;
 }
 
-.slider-btn:not(:disabled) {
+.slider-btn {
   pointer-events: all;
 }
 
@@ -669,13 +669,6 @@ lg: 1024px
     }
   }, 100); // Check every 100ms for <head>
 })();
-var id = "1754075815885_4714_v1";
-var name = "v1";
-var testInfo = {
-  id: id,
-  name: name,
-};
-
 // https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
 // https://www.hookandloop.com/?qa5=true
 
@@ -1814,8 +1807,6 @@ Initial Development: 15 hours
       `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
       `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`,
     );
-
-    console.table({ ID: testInfo.id, Variation: testInfo.name });
 
     createHeroSectionLayout();
     modifyCustomizationServicesLayout();

@@ -563,7 +563,7 @@
     display: flex;
     justify-content: space-between;
     pointer-events: none;
-    z-index: 999;
+    z-index: 10;
     padding: 0 8px;
 }
 
@@ -579,7 +579,7 @@
     align-items: center;
 }
 
-.slider-btn:not(:disabled) {
+.slider-btn {
     pointer-events: all;
 }
 

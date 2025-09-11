@@ -1,4 +1,3 @@
-import testInfo from "./info.json" assert { type: "json" };
 
 // https://www.figma.com/design/JZ7TKElYDSJ9DA3HafAkl2/Hook-and-Loop---UX-Audit---003---Homepage-Elements?node-id=0-1&t=So85TLSfgwSOKm5K-1
 // https://www.hookandloop.com/?qa5=true
@@ -24,7 +23,7 @@ Initial Development: 15 hours
         test_name: `Hook and Loop - UX Audit - 003 - Homepage Elements`,
         page_initials: "AB-HOMEPAGE-REDESIGN",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const ASSETS = {
@@ -975,8 +974,6 @@ Initial Development: 15 hours
             `${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation}`,
             `${TEST_CONFIG.page_initials}--version:${TEST_CONFIG.test_version}`
         );
-
-        console.table({ ID: testInfo.id, Variation: testInfo.name });
 
         createHeroSectionLayout();
         modifyCustomizationServicesLayout();
