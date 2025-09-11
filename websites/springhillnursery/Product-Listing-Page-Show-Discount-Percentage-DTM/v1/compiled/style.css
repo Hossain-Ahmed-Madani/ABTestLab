@@ -5,7 +5,7 @@
   align-self: center;
   flex-direction: column;
   gap: 3px;
-  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .AB-PLP-DTM .ab-savings-percentage {
   background-color: rgba(202, 94, 92, 0.05);
