@@ -64,6 +64,7 @@
                     });
 
                     document.querySelector(".lsg-bundle-interval-el.lsg-bundle-interval-sub-el").click();
+                    document.querySelector(".lsg-bundle-interval-el.lsg-bundle-interval-sub-el").click();
                 }
             );
 
