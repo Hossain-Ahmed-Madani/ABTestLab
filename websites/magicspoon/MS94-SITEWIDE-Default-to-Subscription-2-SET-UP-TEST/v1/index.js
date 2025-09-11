@@ -81,17 +81,6 @@
                     });
                 }
             );
-
-            // return;
-
-            // waitForElement(
-            //     () => document.readyState === "complete",
-            //     () => {
-            //         document
-            //             .querySelectorAll(".ms24b-row.ms24b-subscribe, .lsg-bundle-interval-el.lsg-bundle-interval-sub-el, label.custom-rtx-subscription-label")
-            //             .forEach((item) => item.click());
-            //     }
-            // );
         }
     );
 })();
