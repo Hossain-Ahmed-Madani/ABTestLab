@@ -1,6 +1,3 @@
-// ticket: https://trello.com/c/abZ2YUSs/3955-product-listing-page-show-discount-percentage-dtm
-// https://springhillnursery.com/collections/shipping-now
-
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolution",
@@ -9,7 +6,7 @@
         test_name: "Product Listing Page - Show Discount Percentage [DTM]",
         page_initials: "AB-PLP-DTM",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
@@ -68,14 +65,16 @@
     }
 
     function createLayout() {
-        const targetNodes = document.querySelectorAll(".product-item__price-wrap:has(.sale)");
+        const targetNodes = document.querySelectorAll(".product-item:has(.sale)");
+
         targetNodes.forEach((cNode, index) => {
-            let savingsBadge = cNode.closest(".ab-savings-percentage");
+            let savingsBadge = cNode.querySelector(".ab-savings-percentage");
+            
             if (!savingsBadge) {
                 savingsBadge = document.createElement("span");
                 savingsBadge.className = "displayed-discount badge-shape fs-body-75 ab-savings-percentage";
                 savingsBadge.setAttribute("data-badge-shape", "rounded-rectangle");
-                cNode.insertAdjacentElement("afterend", savingsBadge);
+                cNode.querySelector(".product-item__price-wrap").insertAdjacentElement("afterend", savingsBadge);
             }
 
             const saleEl = cNode.querySelector(".sale");
