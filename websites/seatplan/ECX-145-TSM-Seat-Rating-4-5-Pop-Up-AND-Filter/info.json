@@ -1,0 +1,10 @@
+{
+    "id": "1757688067963_7784_ECX_145_TSM_Seat_Rating_4_5_Pop_Up_AND_Filter",
+    "name": "ECX-145-TSM-Seat-Rating-4-5-Pop-Up-AND-Filter",
+    "type": "A/B",
+    "website": "seatplan",
+    "variations": ["control", "v1"],
+    "createdAt": "2025-09-12T14:41:07.963Z",
+    "createdAtReadable": "12/09/2025, 8:41:07 pm",
+    "lastUpdated": "2025-09-12T14:41:08.081Z"
+}
