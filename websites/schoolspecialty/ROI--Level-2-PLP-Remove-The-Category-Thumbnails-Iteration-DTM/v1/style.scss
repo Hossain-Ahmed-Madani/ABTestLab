@@ -1,15 +1,88 @@
-html {
-    position: relative;
+.AB-LEVEL-2-PLP {
+    .titleItems > .mt-20 {
+        margin-top: 100px !important;
+    }
+    .left_espot > .productlist,
+    .left_espot > .bottomBorder {
+        display: none;
+    }
 
-    &::before {
-        content: "AB test pilot CSS";
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 99999999999;
-        background: #ff0000;
-        color: #ffffff;
-        padding: 10px;
-        border: 7px solid #269b11;
+    .ab-container {
+        height: 100%;
+        list-style: none;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .ab-container > li:not(:first-child) {
+        display: none;
+    }
+
+    .ab-container--expanded > li:not(:first-child) {
+        display: block;
+    }
+
+    .ab-content-toggle-button {
+        margin-top: 15px !important;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 13px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .ab-content-toggle-button,
+    .ab-content-toggle-button:hover,
+    .ab-content-toggle-button:focus {
+        border: none;
+        outline: none;
+        background: none;
+    }
+
+    .ab-content-toggle-button__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ab-content-toggle-button__icon svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .ab-content-toggle-button__text {
+        font-family: "MuseoSans-700";
+        font-weight: 700;
+        font-style: 900;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        text-decoration: underline;
+        text-decoration-style: solid;
+        text-decoration-thickness: 0%;
+        text-decoration-skip-ink: auto;
+        color: #0f6cb6;
+    }
+
+    .ab-content-toggle-button__text--view-less {
+        display: none;
+    }
+
+    .ab-content-toggle-button--expanded {
+        .ab-content-toggle-button__icon svg {
+            transform: rotate(180deg);
+        }
+
+        .ab-content-toggle-button__text--view-more {
+            display: none;
+        }
+
+        .ab-content-toggle-button__text--view-less {
+            display: block;
+        }
     }
 }

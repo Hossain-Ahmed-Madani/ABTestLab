@@ -22,15 +22,73 @@
         }
     }
 
+    const ASSETS = {
+        view_more_svg: /* HTML */ `<svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.5558 14.4036L-1.25902e-07 2.88031L2.88843 -1.01024e-06L13 10.0831L23.1116 -1.26257e-07L26 2.88031L14.4442 14.4036C14.0611 14.7855 13.5417 15 13 15C12.4583 15 11.9389 14.7855 11.5558 14.4036Z"
+                fill="#2B94E6"
+            />
+        </svg> `,
+    };
+
+    function createLayout() {
+        const targetNode = document.querySelector(".productlist").previousElementSibling;
+
+        const ul = document.createElement("ul");
+        ul.className = "ab-container";
+
+        ul.innerHTML = Array.from(document.querySelectorAll(".left_espot .productlist")).reduce((acc, cNode) => {
+            const borderHTML = `<div class="bottomBorder">&nbsp;</div>`;
+            if (cNode.querySelector(".fx-row")) {
+                return (acc += Array.from(cNode.querySelectorAll(".fx-row")).reduce(
+                    (accRow, cRowNode) => (accRow += /* HTML */ `<li><div class="productlist">${cRowNode.outerHTML + borderHTML}</div></li>`),
+                    ""
+                ));
+            } else {
+                return (acc += /* HTML */ `<li>${cNode.outerHTML + borderHTML}</li> `);
+            }
+        }, "");
+
+        targetNode.insertAdjacentElement("afterend", ul);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "ab-content-toggle-button";
+        button.innerHTML = /* HTML */ `
+            <span class="ab-content-toggle-button__icon">${ASSETS.view_more_svg}</span>
+            <span class="ab-content-toggle-button__text ab-content-toggle-button__text--view-more">View More Categories</span>
+            <span class="ab-content-toggle-button__text ab-content-toggle-button__text--view-less">View Less Categories</span>
+        `;
+
+        button.addEventListener("click", (e) => {
+            if (!ul.classList.contains("ab-container--expanded")) {
+                ul.classList.add("ab-container--expanded");
+                button.classList.add("ab-content-toggle-button--expanded");
+            } else {
+                ul.classList.remove("ab-container--expanded");
+                button.classList.remove("ab-content-toggle-button--expanded");
+            }
+        });
+
+        ul.insertAdjacentElement("afterend", button);
+    }
+
     function init() {
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version${test_version}`);
 
         console.table(TEST_CONFIG);
+
+        createLayout();
     }
 
     function hasAllTargetElements() {
-        return !!(document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && true);
+        return !!(
+            document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
+            document.querySelector(".left_espot .productlist")
+        );
     }
 
     waitForElement(hasAllTargetElements, init);
