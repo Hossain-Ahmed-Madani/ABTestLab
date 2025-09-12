@@ -1,6 +1,3 @@
-// ticket: https://trello.com/c/abZ2YUSs/3955-product-listing-page-show-discount-percentage-dtm
-// https://springhillnursery.com/collections/shipping-now
-
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolution",
@@ -9,7 +6,7 @@
         test_name: "Product Listing Page - Show Discount Percentage [DTM]",
         page_initials: "AB-PLP-DTM",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0006,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 100) {

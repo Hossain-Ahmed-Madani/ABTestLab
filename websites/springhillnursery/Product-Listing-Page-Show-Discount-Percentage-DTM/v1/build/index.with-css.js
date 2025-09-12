@@ -17,7 +17,7 @@
   background-color: rgba(202, 94, 92, 0.05);
   border: 1px solid #641f33;
   border-radius: 0;
-  padding: 2px 5px;
+  padding: 3px 8px;
   color: #7f2841;
   font-weight: 700;
   font-size: 14px;
@@ -26,8 +26,10 @@
   height: max-content;
   margin: auto;
   margin-top: 5px;
-  display: inline-block;
+  display: inline-flex;
   align-self: center;
+  justify-content: center;
+  align-items: center;
 }
 @media screen and (min-width: 1025px) {
   .AB-PLP-DTM .product-item__price-wrap {
@@ -57,7 +59,7 @@
     test_name: "Product Listing Page - Show Discount Percentage [DTM]",
     page_initials: "AB-PLP-DTM",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0006,
   };
 
   function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
