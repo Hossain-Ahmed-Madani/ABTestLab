@@ -1,0 +1,13 @@
+{
+  "id": "1757667133707_6637_ROI__Level_2_PLP_Remove_The_Category_Thumbnails_Iteration_DTM",
+  "name": "ROI--Level-2-PLP-Remove-The-Category-Thumbnails-Iteration-DTM",
+  "type": "A/B",
+  "website": "schoolspecialty",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-09-12T08:52:13.707Z",
+  "createdAtReadable": "12/09/2025, 2:52:13 pm",
+  "lastUpdated": "2025-09-12T08:52:14.026Z"
+}
