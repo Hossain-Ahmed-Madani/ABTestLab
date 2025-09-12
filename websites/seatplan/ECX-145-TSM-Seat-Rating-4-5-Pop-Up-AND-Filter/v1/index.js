@@ -6,18 +6,15 @@
         } else if (predicate && predicate()) {
             callback();
         } else {
-            setTimeout(() => {
-                waitForElement(predicate, callback, timer - frequency, frequency);
-            }, frequency);
+            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
         }
     }
 
     waitForElement(
-        () => typeof window.tsmHighRatedSeatsFilterAbTest === 'function',
+        () => typeof window.tsmHighRatedSeatsFilterAbTest === "function",
         () => {
-            console.log('EXP-: All | TSM | Seat Rating Pop Up & Filter | A/B');
+            console.log("EXP-: All | TSM | Seat Rating Pop Up & Filter | A/B");
             window.tsmHighRatedSeatsFilterAbTest();
         }
     );
-
 })();
