@@ -9,7 +9,7 @@
         test_version: 0.0001,
     };
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
+    function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
@@ -22,14 +22,39 @@
         }
     }
 
+    function q(selector, context) {
+        return document.querySelector(selector);
+    }
+
     function init() {
         console.table(TEST_CONFIG);
         const { page_initials, test_variation} = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+
+        // START TEST CODE
+
+        const selector = "#seatmap-base-app";
+
+        waitForElement(
+            () => q(selector),
+            () => {
+                const targetNode = q(selector);
+
+                let count = 0;
+
+                new MutationObserver((mutationList, observer) => {
+                    if (q(".seatplan-tooltip-info-outer")) {
+                        count++;
+                    }
+
+                    console.log(count, "ECX-143");
+                }).observe(targetNode, { subtree: true, childList: true, subtree: true });
+            }
+        );
     }
 
     function hasAllTargetElements() {
-        return !!(document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && true);
+        return !!q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`);
     }
 
     waitForElement(hasAllTargetElements, init);
