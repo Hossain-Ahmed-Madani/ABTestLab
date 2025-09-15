@@ -63,11 +63,12 @@
             goal_id: "1004105711",
             predicate: () => q(".production-right-panel__sticky-container"),
             callback: (goal_name, goal_id) => {
-                const targetNode = q(".production-right-panel__sticky-container");
+                const selector = ".production-right-panel__sticky-container"
+                const targetNode = q(selector);
 
                 const cb = (e) => {
                     convPush(goal_name, goal_id);
-                    e.target.removeEventListener("click", cb);
+                    e.target.closest(selector).removeEventListener("click", cb);
                 };
 
                 targetNode.addEventListener("click", cb);
@@ -101,7 +102,6 @@
 
     GOAL_LIST.forEach(({ goal_name, goal_id, predicate, callback }) => {
         waitForElement(predicate, () => {
-            console.log("predicate met for: ", goal_id, goal_name);
             callback(goal_name, goal_id);
         });
     });

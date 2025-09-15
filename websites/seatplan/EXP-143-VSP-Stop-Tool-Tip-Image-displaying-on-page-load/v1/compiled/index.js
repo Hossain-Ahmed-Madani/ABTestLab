@@ -1,3 +1,13 @@
+/* 
+
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004168043/summary
+
+control: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004168043.1004396837&utm_campaign=sp5 
+v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004168043.1004396838&utm_campaign=sp5 
+v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004168043.1004396843&utm_campaign=sp5 
+
+ */
+
 (() => {
     const TEST_CONFIG = {
         client: "SeatPlan",
