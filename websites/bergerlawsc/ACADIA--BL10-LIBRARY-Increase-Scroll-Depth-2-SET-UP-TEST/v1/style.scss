@@ -18,7 +18,7 @@
         padding-bottom: 15px;
         // height: 72px;
         // min-height: 72px;
-        // position: relative;
+        position: relative;
         z-index: -1;
     }
 
@@ -97,7 +97,6 @@
         visibility: hidden !important;
         z-index: -1;
         position: relative;
-        // display: none !important;
     }
 
     .ab-table-content-selected-item {
@@ -228,8 +227,21 @@
             border-top-right-radius: 0;
         }
     }
+
+    // @media screen and (min-width: 1220px) {
+    //     .ab-table-content-selection:hover .ab-table-content-selected-item {
+    //         opacity: 0;
+    //         visibility: hidden !important;
+    //         z-index: -1;
+    //         position: relative;
+    //     }
+    //     .ab-table-content-selection:hover .ab-table-content-list {
+    //         display: flex !important;
+    //     }
+    // }
 }
 
+// HTML
 @media screen and (max-width: 859px) {
     html:not(.mobile-open) .AB-BL10 #top-header.top-header-1 {
         overflow: visible;

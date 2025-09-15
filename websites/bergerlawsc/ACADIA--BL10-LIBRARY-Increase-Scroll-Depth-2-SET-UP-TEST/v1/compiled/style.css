@@ -1,6 +1,7 @@
 .AB-BL10 .ab-scroll-and-table-contents {
   background: #f2f5f7;
   padding-bottom: 15px;
+  position: relative;
   z-index: -1;
 }
 .AB-BL10 .ab-scroll-and-table-contents.ab-scroll-and-table-contents--only-scroll {

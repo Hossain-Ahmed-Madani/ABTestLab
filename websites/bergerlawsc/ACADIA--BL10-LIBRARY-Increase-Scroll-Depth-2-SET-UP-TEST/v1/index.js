@@ -1,6 +1,7 @@
 /* 
 https://www.figma.com/design/gRstDeTcFaKxrCReVHbMeh/BL-10-Blog-Work?node-id=26-2&p=f&t=g7MMjZOYSByPG8s3-0
 https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-child-safety.cfm
+https://www.bergerlawsc.com/library/in-the-news.cfm
 
 
 control: https://marketer.monetate.net/control/preview/13087/ZOIEV7SN3KS01R8A681547H1YINEME5N/bl10-library-increase-scroll-depth
@@ -15,7 +16,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         test_name: "BL10: [LIBRARY] Increase Scroll Depth-(2) SET UP TEST",
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
@@ -42,8 +43,15 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         }
     }
 
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     function createTableOfContents() {
-        const foundNodes = document.querySelectorAll(".dss-content h2, .dss-content h3");
+        const foundNodes = qq(".dss-content h2, .dss-content h3");
 
         const firstChild = foundNodes[0];
         const initialText = firstChild.textContent.split(".")?.[1] || firstChild.textContent;
@@ -67,6 +75,15 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
                                         <span>1.${index + 1}</span>
                                         <span class=" ab-ellipsis-two-lines">${txt}</span>
                                     </li>
+
+                                    ${foundNodes.length === 1
+                                        ? /* HTML */ `
+                                              <li targetH3="#section-${index + 1}" class="ab-table-content-item">
+                                                  <span>1.${index + 1}</span>
+                                                  <span class=" ab-ellipsis-two-lines">${txt}</span>
+                                              </li>
+                                          `
+                                        : ""}
                                 `;
                             })
                             .join("")}
@@ -77,22 +94,23 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function createLayout() {
-        document.querySelector("#nav").insertAdjacentHTML(
+        q("#nav").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                <div class="ab-scroll-and-table-contents ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
+                <div class="ab-scroll-and-table-contents ${qq(".dss-content h2, .dss-content h3").length > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
                     <div class="ab-scroll-container" data-scroll="25"></div>
-                    ${document.querySelectorAll(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
+                    ${qq(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
                 </div>
             `
         );
     }
 
-    function handleScroll() {
+    function handleScrollEvent() {
+        const selector = ".ab-scroll-container";
         waitForElement(
-            () => document.querySelector(".ab-scroll-container"),
+            () => q(selector),
             () => {
-                const targetNode = document.querySelector(".ab-scroll-container");
+                const targetNode = q(selector);
 
                 const milestones = [25, 50, 75, 100]; // scroll checkpoints
                 let lastMilestone = null; // track last milestone crossed
@@ -147,72 +165,110 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         );
     }
 
-    function handleSelectionTableInteraction() {
-        waitForElement(
-            () => !!(document.querySelector(".ab-scroll-and-table-contents") && document.querySelector(".ab-table-content-selection")),
-            () => {
-                // PREVENT LOADING THE LINK
-                document.querySelector(".ab-scroll-and-table-contents").addEventListener("click", (e) => e.preventDefault());
+    function scrollToTargetItem(selector) {
+        if (!selector) return;
 
-                // HANDLE MOUSE ENTER AND LEAVE EVENTS
-                const selectionContainer = document.querySelector(".ab-table-content-selection");
+        const targetElement = q(selector);
 
-                selectionContainer.addEventListener("mouseenter", (e) => {
-                    selectionContainer.setAttribute("data-state", "opened");
-                });
-                selectionContainer.addEventListener("mouseleave", (e) => {
-                    selectionContainer.setAttribute("data-state", "closed");
-                });
+        const headerOffsetObj = {
+            "(max-width: 575px)": 200,
+            "(min-width: 576px) and (max-width: 991px)": 230,
+            "(min-width: 992px)": 150,
+        };
 
-                // HANDLE CLICK ON ITEMS
-                document.querySelector(".ab-table-content-selection").addEventListener("click", (e) => {
-                    if (e.target.closest(".ab-table-content-selected-item")) {
-                        selectionContainer.setAttribute("data-state", "opened");
+        const matchingQuery = Object.keys(headerOffsetObj).find((mediaQuery) => window.matchMedia(mediaQuery).matches);
+        const headerOffset = matchingQuery ? headerOffsetObj[matchingQuery] : 150;
+
+        window.scrollTo({
+            top: targetElement.offsetTop - headerOffset,
+            behavior: "smooth",
+        });
+
+        fireGA4Event("BL10_Tableofcontent", targetElement.textContent);
+    }
+
+    function handleShowHideSelection(action /* show, hide */) {
+        const selectionContainer = q(".ab-table-content-selection");
+        if (action === "show") {
+            selectionContainer.setAttribute("data-state", "opened");
+        } else if (action === "hide") {
+            selectionContainer.setAttribute("data-state", "closed");
+        }
+    }
+
+    function eventListeners() {
+        const event_list = [
+            {
+                selector: ".ab-scroll-and-table-contents",
+                event: "click",
+                callback: (e) => e.preventDefault(),
+            },
+            {
+                selector: ".ab-table-content-selection",
+                event: "mouseenter",
+                callback: (e) => {
+                    if (window.innerWidth >= 1200) {
+                        handleShowHideSelection("show");
+                    }
+                },
+            },
+            {
+                selector: ".ab-table-content-selection",
+                event: "mouseleave",
+                callback: (e) => {
+                    if (window.innerWidth >= 1200) {
+                        handleShowHideSelection("hide");
+                    }
+                },
+            },
+            {
+                selector: ".ab-table-content-selected-item",
+                event: "click",
+                callback: (e) => {
+                    if (window.innerWidth < 1200) handleShowHideSelection("show");
+                },
+            },
+            {
+                selector: ".ab-table-content-item",
+                event: "click",
+                callback: (e) => {
+                    if (e.target.hasAttribute("selected") && window.innerWidth < 1200) {
+                        setTimeout(() => handleShowHideSelection("hide"), 50);
                         return;
                     }
 
-                    if (e.target.closest(".ab-table-content-item[selected]")) {
-                        setTimeout(() => {
-                            selectionContainer.setAttribute("data-state", "closed");
-                        }, 50);
+                    if (!e.target.hasAttribute("selected")) {
+                        const selectionContainer = q(".ab-table-content-selection");
+                        const arr = [...qq(".ab-table-content-item")];
+                        const selectedItem = q(".ab-table-content-item[selected]");
+                        const cItem = e.target.closest(".ab-table-content-item");
+
+
+                        if (selectedItem.getAttribute("targeth3") !== cItem.getAttribute("targeth3")) {
+                            arr.forEach((el) => el.removeAttribute("selected"));
+                            cItem.setAttribute("selected", "true");
+                            q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
+                        }
+
+                        if (arr.indexOf(cItem) !== 0) {
+                            setTimeout(() => selectionContainer.setAttribute("data-state", "closed"), 50);
+                        }
+
+                        scrollToTargetItem(cItem.getAttribute("targetH3"));
                     }
+                },
+            },
+        ];
 
-                    if (e.target.closest(".ab-table-content-item:not([selected])")) {
-                        document.querySelectorAll(".ab-table-content-item").forEach((el) => el.removeAttribute("selected"));
-
-                        const item = e.target.closest(".ab-table-content-item");
-                        item.setAttribute("selected", "true");
-                        document.querySelector(".ab-table-content-selected-item").innerHTML = item.innerHTML;
-
-                        setTimeout(() => {
-                            // if (window.innerWidth < 991) {
-                            selectionContainer.setAttribute("data-state", "closed");
-                            // }
-                        }, 50);
-
-                        // SCROLL TO THE TARGET H3
-                        const targetH3 = item.getAttribute("targetH3");
-                        const targetElement = document.querySelector(targetH3);
-
-                        const headerOffsetObj = {
-                            "(max-width: 575px)": 200,
-                            "(min-width: 576px) and (max-width: 991px)": 230,
-                            "(min-width: 992px)": 150,
-                        };
-
-                        const matchingQuery = Object.keys(headerOffsetObj).find((mediaQuery) => window.matchMedia(mediaQuery).matches);
-                        const headerOffset = matchingQuery ? headerOffsetObj[matchingQuery] : 150;
-
-                        window.scrollTo({
-                            top: targetElement.offsetTop - headerOffset,
-                            behavior: "smooth",
-                        });
-
-                        fireGA4Event("BL10_Tableofcontent", targetElement.textContent);
-                    }
-                });
-            }
-        );
+        event_list.forEach(({ selector, event, callback }) => {
+            waitForElement(
+                () => selector && qq(selector).length > 0,
+                () => {
+                    const targetNodes = qq(selector);
+                    targetNodes.forEach((node) => node.addEventListener(event, callback));
+                }
+            );
+        });
     }
 
     function init() {
@@ -221,16 +277,16 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         createLayout();
-        handleScroll();
-        handleSelectionTableInteraction();
+        eventListeners();
+        handleScrollEvent();
     }
 
     function hasAllTargetElements() {
         return !!(
             window.location.href.includes("/library/") &&
-            document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
-            document.querySelector("#nav") &&
-            document.querySelector(".dss-content")
+            q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
+            q("#nav") &&
+            q(".dss-content")
         );
     }
 

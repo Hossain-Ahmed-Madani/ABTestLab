@@ -1,10 +1,8 @@
 {
-  "id": "1757408031103_7496_bergerlawsc",
-  "name": "bergerlawsc",
-  "hostnames": [
-    "bergerlawsc.com"
-  ],
-  "createdAt": "2025-09-09T08:53:51.103Z",
-  "createdAtReadable": "09/09/2025, 2:53:51 pm",
-  "lastUpdated": "2025-09-09T08:53:51.142Z"
+    "id": "1757408031103_7496_bergerlawsc",
+    "name": "bergerlawsc",
+    "hostnames": ["bergerlawsc.com"],
+    "createdAt": "2025-09-09T08:53:51.103Z",
+    "createdAtReadable": "09/09/2025, 2:53:51 pm",
+    "lastUpdated": "2025-09-09T08:53:51.142Z"
 }
