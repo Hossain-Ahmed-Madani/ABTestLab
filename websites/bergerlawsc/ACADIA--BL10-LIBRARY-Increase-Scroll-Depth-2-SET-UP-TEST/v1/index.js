@@ -51,7 +51,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function createTableOfContents() {
-        const foundNodes = qq(".dss-content h2, .dss-content h3");
+        const foundNodes = qq(".dss-content h2, .dss-content h3").filter((cItem) => cItem.textContent.trim().length > 0);
 
         const firstChild = foundNodes[0];
         const initialText = firstChild.textContent.split(".")?.[1] || firstChild.textContent;
@@ -94,10 +94,19 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function createLayout() {
+        const totalHeaders = qq(".dss-content h2, .dss-content h3").reduce((acc, cItem) => {
+            if (cItem.textContent.trim().length > 0) {
+                return acc + 1; // Only count if has text content
+            }
+            return acc;
+        }, 0);
+
+        console.log(totalHeaders);
+
         q("#nav").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                <div class="ab-scroll-and-table-contents ${qq(".dss-content h2, .dss-content h3").length > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
+                <div class="ab-scroll-and-table-contents ${totalHeaders > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
                     <div class="ab-scroll-container" data-scroll="25"></div>
                     ${qq(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
                 </div>
@@ -105,62 +114,124 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         );
     }
 
+    function getHeaderOffset() {
+        const headerOffsetObj = {
+            "(max-width: 575px)": 200,
+            "(min-width: 576px) and (max-width: 991px)": 230,
+            "(min-width: 992px)": 150,
+        };
+
+        const matchingQuery = Object.keys(headerOffsetObj).find((mediaQuery) => window.matchMedia(mediaQuery).matches);
+        return matchingQuery ? headerOffsetObj[matchingQuery] : 150;
+    }
+
+    function autoSelectOnScroll() {
+        const totalHeaders = qq(".dss-content h2, .dss-content h3").reduce((acc, cItem) => {
+            if (cItem.textContent.trim().length > 0) {
+                return acc + 1; // Only count if has text content
+            }
+            return acc;
+        }, 0);
+
+        
+        const headerOffset = getHeaderOffset();
+        const arr = [...qq(".ab-table-content-item")];
+
+        const handleAutoSelect = () => {
+            if (totalHeaders === 1) return;
+
+            arr.forEach((cItem) => {
+                const header = q(cItem.getAttribute("targeth3"));
+                const top = header.getBoundingClientRect().top;
+
+                if (top > 100 && top <= headerOffset && !cItem.hasAttribute("selected")) {
+                    arr.forEach((item) => item.removeAttribute("selected"));
+                    cItem.setAttribute("selected", "");
+                    q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
+                }
+            });
+        };
+
+        return { handleAutoSelect };
+    }
+
+    function getMileStoneFunctions() {
+        const getScrollPercent = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            return (scrollTop / docHeight) * 100;
+        };
+
+        const closestMilestone = (percent) => {
+            const milestones = [25, 50, 75, 100]; // scroll checkpoints
+            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
+        };
+
+        return { getScrollPercent, closestMilestone };
+    }
+
+    function updateProgressBar() {
+        const selector = ".ab-scroll-container";
+        const targetNode = q(selector);
+
+        const { getScrollPercent, closestMilestone } = getMileStoneFunctions();
+        const milestone_reached = { 25: false, 50: false, 75: false, 100: false };
+
+        const percent = getScrollPercent();
+        const milestone = closestMilestone(percent);
+
+        let lastMilestone = null; // track last milestone crossed
+
+        // console.log({ percent, milestone, lastMilestone });
+
+        if (milestone !== lastMilestone && milestone !== 0) {
+            lastMilestone = milestone;
+        }
+
+        if (milestone >= 25) {
+            targetNode.setAttribute("data-scroll", milestone);
+        }
+
+        // Fire GA4 event when a new milestone is reached
+        if (milestone === 25 && !milestone_reached[25]) {
+            milestone_reached[25] = true;
+            fireGA4Event("BL10_Scrolldepth", "25%");
+        } else if (milestone === 50 && !milestone_reached[50]) {
+            fireGA4Event("BL10_Scrolldepth", "50%");
+            milestone_reached[50] = true;
+        } else if (milestone === 75 && !milestone_reached[75]) {
+            fireGA4Event("BL10_Scrolldepth", "75%");
+            milestone_reached[75] = true;
+        } else if (milestone === 100 && !milestone_reached[100]) {
+            fireGA4Event("BL10_Scrolldepth", "100%");
+            milestone_reached[100] = true;
+        }
+    }
+
+    function throttle(func, limit) {
+        let inThrottle;
+        return function (...args) {
+            if (!inThrottle) {
+                func.apply(this, args);
+                inThrottle = true;
+                setTimeout(() => (inThrottle = false), limit);
+            }
+        };
+    }
+
+    function handleScrollActions() {
+        const { handleAutoSelect } = autoSelectOnScroll();
+        handleAutoSelect();
+        updateProgressBar();
+    }
+
     function handleScrollEvent() {
         const selector = ".ab-scroll-container";
         waitForElement(
             () => q(selector),
             () => {
-                const targetNode = q(selector);
-
-                const milestones = [25, 50, 75, 100]; // scroll checkpoints
-                let lastMilestone = null; // track last milestone crossed
-
-                function getScrollPercent() {
-                    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                    return (scrollTop / docHeight) * 100;
-                }
-
-                function closestMilestone(percent) {
-                    return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
-                }
-
-                let milestone_reached = {
-                    25: false,
-                    50: false,
-                    75: false,
-                    100: false,
-                };
-
-                window.addEventListener("scroll", () => {
-                    const percent = getScrollPercent();
-                    const milestone = closestMilestone(percent);
-
-                    // console.log({ percent, milestone, lastMilestone });
-
-                    if (milestone !== lastMilestone && milestone !== 0) {
-                        lastMilestone = milestone;
-                    }
-
-                    if (milestone >= 25) {
-                        targetNode.setAttribute("data-scroll", milestone);
-                    }
-
-                    // Fire GA4 event when a new milestone is reached
-                    if (milestone === 25 && !milestone_reached[25]) {
-                        milestone_reached[25] = true;
-                        fireGA4Event("BL10_Scrolldepth", "25%");
-                    } else if (milestone === 50 && !milestone_reached[50]) {
-                        fireGA4Event("BL10_Scrolldepth", "50%");
-                        milestone_reached[50] = true;
-                    } else if (milestone === 75 && !milestone_reached[75]) {
-                        fireGA4Event("BL10_Scrolldepth", "75%");
-                        milestone_reached[75] = true;
-                    } else if (milestone === 100 && !milestone_reached[100]) {
-                        fireGA4Event("BL10_Scrolldepth", "100%");
-                        milestone_reached[100] = true;
-                    }
-                });
+                const throttledScrollHandler = throttle(handleScrollActions, 50);
+                window.addEventListener("scroll", throttledScrollHandler);
             }
         );
     }
@@ -169,15 +240,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         if (!selector) return;
 
         const targetElement = q(selector);
-
-        const headerOffsetObj = {
-            "(max-width: 575px)": 200,
-            "(min-width: 576px) and (max-width: 991px)": 230,
-            "(min-width: 992px)": 150,
-        };
-
-        const matchingQuery = Object.keys(headerOffsetObj).find((mediaQuery) => window.matchMedia(mediaQuery).matches);
-        const headerOffset = matchingQuery ? headerOffsetObj[matchingQuery] : 150;
+        const headerOffset = getHeaderOffset();
 
         window.scrollTo({
             top: targetElement.offsetTop - headerOffset,
@@ -243,7 +306,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
                         const selectedItem = q(".ab-table-content-item[selected]");
                         const cItem = e.target.closest(".ab-table-content-item");
 
-
                         if (selectedItem.getAttribute("targeth3") !== cItem.getAttribute("targeth3")) {
                             arr.forEach((el) => el.removeAttribute("selected"));
                             cItem.setAttribute("selected", "true");
@@ -282,11 +344,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function hasAllTargetElements() {
-        return !!(
-            q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
-            q("#nav") &&
-            q(".dss-content")
-        );
+        return !!(q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && q("#nav") && q(".dss-content"));
     }
 
     waitForElement(hasAllTargetElements, init);
