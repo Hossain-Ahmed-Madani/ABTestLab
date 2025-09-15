@@ -283,7 +283,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
 
     function hasAllTargetElements() {
         return !!(
-            window.location.href.includes("/library/") &&
             q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
             q("#nav") &&
             q(".dss-content")
