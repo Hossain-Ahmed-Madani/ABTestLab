@@ -1,5 +1,3 @@
-// https://seatplan.com/london/abba-arena-venue/seating-plan/
-
 (() => {
     const TEST_CONFIG = {
         client: "SeatPlan",
@@ -32,16 +30,16 @@
         return context ? [...context.querySelectorAll(selector)] : [...document.querySelectorAll(selector)];
     }
 
-    function hideToolTip() {
+    function addToolTipClass() {
         // Hiding the first tooltip
         const selector = ".seatplan-tooltip-info-outer";
 
         waitForElement(
             () => q(selector),
             () => {
-                console.log("Added hidden class in tooltip, ab-tooltip-hidden");
+                console.log("Added hidden class in tooltip, seatplan-tooltip-info-outer--ab-on-load");
                 const targetNode = q(selector);
-                targetNode.classList.add("ab-tooltip-hidden");
+                targetNode.classList.add("seatplan-tooltip-info-outer--ab-on-load");
             }
         );
     }
@@ -68,7 +66,7 @@
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
 
-        hideToolTip();
+        addToolTipClass();
         addStickyCtaOnLoad();
     }
 
