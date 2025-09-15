@@ -1,4 +1,4 @@
-.AB-EXP-143:not(.AB-EXP-143--show-tooltip) .seatplan-tooltip-info-outer {
+.AB-EXP-143 .seatplan-tooltip-info-outer.ab-tooltip-hidden {
   display: none !important;
 }
 
