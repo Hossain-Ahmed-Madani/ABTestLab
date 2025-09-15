@@ -1,3 +1,5 @@
+// https://seatplan.com/london/abba-arena-venue/seating-plan/
+
 (() => {
     const TEST_CONFIG = {
         client: "SeatPlan",
@@ -26,12 +28,8 @@
         return document.querySelector(selector);
     }
 
-    function init() {
-        console.table(TEST_CONFIG);
-        const { page_initials, test_variation} = TEST_CONFIG;
-        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
-
-        // START TEST CODE
+    function addShowToolTipClassOnMutation() {
+        // Showing tool tip class after first tooltip get's removed from #seatmap-base-add
 
         const selector = "#seatmap-base-app";
 
@@ -39,18 +37,27 @@
             () => q(selector),
             () => {
                 const targetNode = q(selector);
-
-                let count = 0;
+                targetNode.click();
 
                 new MutationObserver((mutationList, observer) => {
-                    if (q(".seatplan-tooltip-info-outer")) {
-                        count++;
-                    }
-
-                    console.log(count, "ECX-143");
-                }).observe(targetNode, { subtree: true, childList: true, subtree: true });
+                    [...mutationList[0].removedNodes].forEach((item) => {
+                        if (item.classList.contains("seatplan-tooltip-info-outer")) {
+                            console.log("First Tool tip removed from dom, adding class AB-EXP-143--show-tooltip");
+                            document.body.classList.add("AB-EXP-143--show-tooltip");
+                            observer.disconnect();
+                        }
+                    });
+                }).observe(targetNode, { childList: true });
             }
         );
+    }
+
+    function init() {
+        console.table(TEST_CONFIG);
+        const { page_initials, test_variation} = TEST_CONFIG;
+        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
+
+        addShowToolTipClassOnMutation();
     }
 
     function hasAllTargetElements() {

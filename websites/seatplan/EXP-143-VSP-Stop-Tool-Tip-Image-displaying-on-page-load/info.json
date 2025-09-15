@@ -1,13 +1,10 @@
 {
-  "id": "1757683889706_8082_EXP_143_VSP_Stop_Tool_Tip_Image_displaying_on_page_load",
-  "name": "EXP-143-VSP-Stop-Tool-Tip-Image-displaying-on-page-load",
-  "type": "A/B",
-  "website": "seatplan",
-  "variations": [
-    "control",
-    "v1"
-  ],
-  "createdAt": "2025-09-12T13:31:29.706Z",
-  "createdAtReadable": "12/09/2025, 7:31:29 pm",
-  "lastUpdated": "2025-09-12T13:31:30.036Z"
+    "id": "1757683889706_8082_EXP_143_VSP_Stop_Tool_Tip_Image_displaying_on_page_load",
+    "name": "EXP-143-VSP-Stop-Tool-Tip-Image-displaying-on-page-load",
+    "type": "A/B",
+    "website": "seatplan",
+    "variations": ["control", "v1"],
+    "createdAt": "2025-09-12T13:31:29.706Z",
+    "createdAtReadable": "12/09/2025, 7:31:29 pm",
+    "lastUpdated": "2025-09-12T13:31:30.036Z"
 }
