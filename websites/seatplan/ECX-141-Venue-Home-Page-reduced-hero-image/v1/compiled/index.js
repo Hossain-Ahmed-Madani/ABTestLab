@@ -1,5 +1,6 @@
 /* 
 
+url-regex: https:\/\/seatplan\.com\/(london|new-york)\/.*(theat(re|er)|venue)\/(\?.*)?$
 url: https://seatplan.com/london/lyceum-theatre/
 
 */
