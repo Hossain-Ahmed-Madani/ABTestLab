@@ -16,12 +16,13 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         test_name: "BL10: [LIBRARY] Increase Scroll Depth-(2) SET UP TEST",
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     let AUTO_UPDATE_ON = false;
 
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -152,6 +153,49 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         return { handleAutoSelect };
     }
 
+    // Window Scroll
+    function ga4ScrollGoalFunctions() {
+        const milestones = [25, 50, 75, 100]; // scroll checkpoints
+        let lastMilestone = null; // track last milestone crossed
+
+        const getScrollPercent = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            return (scrollTop / docHeight) * 100;
+        };
+
+        const closestMilestone = (percent) => {
+            // find the closest milestone user has passed
+            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
+        };
+
+        const handleScrollGa4Goal = () => {
+            const percent = getScrollPercent();
+            const milestone = closestMilestone(percent);
+
+            if (milestone !== lastMilestone && milestone !== 0) {
+                if (lastMilestone !== null) {
+                    console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
+                }
+                lastMilestone = milestone;
+            }
+
+            if (milestone === 25) {
+                fireGA4Event("BL10_Scrolldepth", "25%");
+            } else if (milestone === 50) {
+                fireGA4Event("BL10_Scrolldepth", "50%");
+            } else if (milestone === 75) {
+                fireGA4Event("BL10_Scrolldepth", "75%");
+            } else if (milestone === 100) {
+                fireGA4Event("BL10_Scrolldepth", "100%");
+            }
+
+        };
+
+        return { handleScrollGa4Goal };
+    }
+
+    // .dss-content Scroll
     function getMileStoneFunctions(targetElement) {
         const milestones = [25, 50, 75, 100];
 
@@ -212,19 +256,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         const percent = getScrollPercent();
         const milestone = closestMilestone(percent);
 
-        // DEBUG: Add these logs to see what's happening
-        console.log("Scroll Percent:", percent.toFixed(2) + "%");
-        console.log("Milestone:", milestone + "%");
-        console.log("Element Top:", sectionToTrack.offsetTop);
-        console.log("Element Height:", sectionToTrack.offsetHeight);
-        console.log("Scroll Top:", window.scrollY || document.documentElement.scrollTop);
-        console.log("Window Height:", window.innerHeight);
-        console.log("Start Point:", sectionToTrack.offsetTop - window.innerHeight);
-        console.log("End Point:", sectionToTrack.offsetTop + sectionToTrack.offsetHeight - window.innerHeight);
-        console.log("Element fully visible when scroll reaches:", sectionToTrack.offsetTop);
-        console.log("Element fully scrolled when scroll reaches:", sectionToTrack.offsetTop + sectionToTrack.offsetHeight - window.innerHeight);
-        console.log("---");
-
         // Store milestones in a persistent variable
         if (typeof window.scrollMilestones === "undefined") {
             window.scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
@@ -239,16 +270,12 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         // Fire GA4 event when a new milestone is reached
         if (finalMilestone === 25 && !window.scrollMilestones[25]) {
             window.scrollMilestones[25] = true;
-            fireGA4Event("BL10_Scrolldepth", "25%");
         } else if (finalMilestone === 50 && !window.scrollMilestones[50]) {
             window.scrollMilestones[50] = true;
-            fireGA4Event("BL10_Scrolldepth", "50%");
         } else if (finalMilestone === 75 && !window.scrollMilestones[75]) {
             window.scrollMilestones[75] = true;
-            fireGA4Event("BL10_Scrolldepth", "75%");
         } else if (finalMilestone === 100 && !window.scrollMilestones[100]) {
             window.scrollMilestones[100] = true;
-            fireGA4Event("BL10_Scrolldepth", "100%");
         }
     }
 
@@ -263,19 +290,17 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         };
     }
 
-    function handleScrollActions() {
-        const { handleAutoSelect } = autoSelectOnScroll();
-        handleAutoSelect();
-        updateProgressBar();
-    }
-
     function handleScrollEvent() {
         const selector = ".ab-scroll-container";
+        const { handleScrollGa4Goal } = ga4ScrollGoalFunctions();
         waitForElement(
             () => q(selector),
             () => {
-                const throttledScrollHandler = throttle(handleScrollActions, 50);
-                window.addEventListener("scroll", throttledScrollHandler);
+                const throttledScrollHandler = throttle(updateProgressBar, 50);
+                window.addEventListener("scroll", (e) => {
+                    handleScrollGa4Goal();
+                    throttledScrollHandler();
+                });
             }
         );
     }
@@ -332,6 +357,19 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
                 },
             },
             {
+                selector: "body",
+                event: "click",
+                callback: (e) => {
+                    if (window.innerWidth >= 1200) {
+                        return;
+                    }
+
+                    if (!e.target.closest(".ab-table-content-selection")) {
+                        handleShowHideSelection("hide");
+                    }
+                },
+            },
+            {
                 selector: ".ab-table-content-selected-item",
                 event: "click",
                 callback: (e) => {
@@ -351,16 +389,16 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
                         return;
                     }
 
-                    // if (e.target.hasAttribute("selected") && window.innerWidth < 1200) {
-                    //     setTimeout(() => handleShowHideSelection("hide"), 50);
-                    //     return;
-                    // }
-
                     if (!e.target.hasAttribute("selected")) {
                         const selectionContainer = q(".ab-table-content-selection");
                         const arr = [...qq(".ab-table-content-item")];
                         const selectedItem = q(".ab-table-content-item[selected]");
                         const cItem = e.target.closest(".ab-table-content-item");
+
+                        if (arr.indexOf(cItem) === 0 && !e.target.closest("span")) {
+                            handleShowHideSelection("hide");
+                            return;
+                        }
 
                         if (selectedItem.getAttribute("targeth3") !== cItem.getAttribute("targeth3")) {
                             arr.forEach((el) => el.removeAttribute("selected"));
@@ -368,11 +406,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
                             q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
                         }
 
-                        setTimeout(() => selectionContainer.setAttribute("data-state", "closed"), 50);
-                        // if (arr.indexOf(cItem) !== 0) {
-                        //     setTimeout(() => selectionContainer.setAttribute("data-state", "closed"), 50);
-                        // }
-
+                        handleShowHideSelection("hide");
                         scrollToTargetItem(cItem.getAttribute("targetH3"));
                     }
                 },

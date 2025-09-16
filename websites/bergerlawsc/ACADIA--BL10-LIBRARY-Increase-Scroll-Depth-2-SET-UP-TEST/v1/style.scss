@@ -145,8 +145,8 @@
         padding: 0;
         transition: all 0.3s ease-in-out;
 
-        max-height: 85vh;
-        overflow-y: scroll;
+        max-height: 75vh;
+        overflow-y: auto;
     }
 
     .inner.mobile-open .ab-scroll-and-table-contents {
@@ -232,9 +232,16 @@
             overflow-y: auto;
         }
 
-        
+        .ab-table-content-list {
+            max-height: 85vh;
+        }
     }
 
+    @media screen and (min-width: 1200px) {
+        #ela-main_nav-link-library {
+            height: 43px;
+        }
+    }
     // @media screen and (min-width: 1220px) {
     //     .ab-table-content-selection:hover .ab-table-content-selected-item {
     //         opacity: 0;
