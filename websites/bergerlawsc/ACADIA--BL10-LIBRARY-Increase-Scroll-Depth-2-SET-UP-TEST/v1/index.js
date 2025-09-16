@@ -22,7 +22,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     let AUTO_UPDATE_ON = false;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("BL10: ", eventName, eventLabel);
+        // console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -174,9 +174,9 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
             const milestone = closestMilestone(percent);
 
             if (milestone !== lastMilestone && milestone !== 0) {
-                if (lastMilestone !== null) {
-                    console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
-                }
+                // if (lastMilestone !== null) {
+                //     console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
+                // }
                 lastMilestone = milestone;
             }
 

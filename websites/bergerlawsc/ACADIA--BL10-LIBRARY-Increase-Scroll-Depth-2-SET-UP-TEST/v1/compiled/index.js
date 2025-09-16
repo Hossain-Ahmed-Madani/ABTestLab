@@ -16,7 +16,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("BL10: ", eventName, eventLabel);
+        // console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -121,7 +121,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     // Window Scroll
     function ga4ScrollGoalFunctions() {
         const milestones = [25, 50, 75, 100]; // scroll checkpoints
-        let lastMilestone = null; // track last milestone crossed
 
         const getScrollPercent = () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -137,13 +136,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         const handleScrollGa4Goal = () => {
             const percent = getScrollPercent();
             const milestone = closestMilestone(percent);
-
-            if (milestone !== lastMilestone && milestone !== 0) {
-                if (lastMilestone !== null) {
-                    console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
-                }
-                lastMilestone = milestone;
-            }
 
             if (milestone === 25) {
                 fireGA4Event("BL10_Scrolldepth", "25%");
