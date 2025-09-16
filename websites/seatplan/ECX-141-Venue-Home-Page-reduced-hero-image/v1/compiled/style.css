@@ -1,0 +1,26 @@
+.AB-EXP-141 .section-hero__home-of {
+  display: none;
+}
+.AB-EXP-141 .section-hero .container {
+  height: 260px;
+}
+.AB-EXP-141 .section-hero h1 {
+  margin-top: 60px;
+}
+.AB-EXP-141 .header,
+.AB-EXP-141 .city-nav {
+  background-color: transparent !important;
+}
+@media screen and (min-width: 768px) {
+  .AB-EXP-141 div.trust-bar {
+    display: none;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .AB-EXP-141 .section-hero .container {
+    height: 350px;
+  }
+  .AB-EXP-141 .section-hero h1 {
+    margin-top: 60px;
+  }
+}

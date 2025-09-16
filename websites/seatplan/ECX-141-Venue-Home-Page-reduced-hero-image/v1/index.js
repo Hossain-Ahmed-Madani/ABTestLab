@@ -1,3 +1,9 @@
+/* 
+
+url: https://seatplan.com/london/lyceum-theatre/
+
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "SeatPlan",
@@ -35,7 +41,7 @@
     }
 
     function hasAllTargetElements() {
-        return !!(q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && true);
+        return !!(q(`body.venue-homepage-wrapper :not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && true);
     }
 
     waitForElement(hasAllTargetElements, init);
