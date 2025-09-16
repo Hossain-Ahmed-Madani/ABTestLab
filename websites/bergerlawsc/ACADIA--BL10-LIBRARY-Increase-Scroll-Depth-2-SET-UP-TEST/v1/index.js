@@ -20,7 +20,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log(`BL10: Firing GA4 Event: ${eventName} - ${eventLabel}`);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -35,7 +34,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
+            return;
         } else if (predicate && predicate()) {
             callback();
         } else {
@@ -101,8 +100,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
             return acc;
         }, 0);
 
-        console.log(totalHeaders);
-
         q("#nav").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
@@ -133,7 +130,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
             return acc;
         }, 0);
 
-        
         const headerOffset = getHeaderOffset();
         const arr = [...qq(".ab-table-content-item")];
 
@@ -334,7 +330,6 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
     }
 
     function init() {
-        console.table(TEST_CONFIG);
 
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
