@@ -16,7 +16,7 @@ v1: https://marketer.monetate.net/control/preview/13087/D6GZFD5F9BNA03TRGWOR729X
         test_name: "BL10: [LIBRARY] Increase Scroll Depth-(2) SET UP TEST",
         page_initials: "AB-BL10",
         test_variation: 0,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
