@@ -3,6 +3,11 @@
 url-regex: https:\/\/seatplan\.com\/(london|new-york)\/.*(theat(re|er)|venue)\/(\?.*)?$
 url: https://seatplan.com/london/lyceum-theatre/
 
+
+container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004168246/summary
+control:   https://seatplan.com/london/lyceum-theatre/?_conv_eforce=1004168246.1004397290&utm_campaign=qa5
+v1:        https://seatplan.com/london/lyceum-theatre/?_conv_eforce=1004168246.1004397291&utm_campaign=qa5
+
 */
 
 (() => {
@@ -38,7 +43,7 @@ url: https://seatplan.com/london/lyceum-theatre/
     function init() {
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(testInfo);
+        console.table(TEST_CONFIG);
     }
 
     function hasAllTargetElements() {
