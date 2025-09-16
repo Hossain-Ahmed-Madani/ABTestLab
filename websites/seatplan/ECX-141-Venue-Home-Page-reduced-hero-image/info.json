@@ -1,0 +1,13 @@
+{
+  "id": "1758015694263_2576_ECX_141_Venue_Home_Page_reduced_hero_image",
+  "name": "ECX-141-Venue-Home-Page-reduced-hero-image",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-09-16T09:41:34.263Z",
+  "createdAtReadable": "16/09/2025, 3:41:34 pm",
+  "lastUpdated": "2025-09-16T09:41:34.557Z"
+}
