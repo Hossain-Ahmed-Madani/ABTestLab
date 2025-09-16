@@ -12,11 +12,18 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     const TEST_CONFIG = {
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0007,
+    };
+
+    SCROLL_GOALS_FIRED = {
+        25: false,
+        50: false,
+        75: false,
+        100: false,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        // console.log("BL10: ", eventName, eventLabel);
+        console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -137,16 +144,19 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
             const percent = getScrollPercent();
             const milestone = closestMilestone(percent);
 
-            if (milestone === 25) {
+            if (milestone === 25 && !SCROLL_GOALS_FIRED[25]) {
+                SCROLL_GOALS_FIRED[25] = true;
                 fireGA4Event("BL10_Scrolldepth", "25%");
-            } else if (milestone === 50) {
+            } else if (milestone === 50 && !SCROLL_GOALS_FIRED[50]) {
+                SCROLL_GOALS_FIRED[50] = true;
                 fireGA4Event("BL10_Scrolldepth", "50%");
-            } else if (milestone === 75) {
+            } else if (milestone === 75 && !SCROLL_GOALS_FIRED[75]) {
+                SCROLL_GOALS_FIRED[75] = true;
                 fireGA4Event("BL10_Scrolldepth", "75%");
-            } else if (milestone === 100) {
+            } else if (milestone === 100 && !SCROLL_GOALS_FIRED[100]) {
+                SCROLL_GOALS_FIRED[100] = true;
                 fireGA4Event("BL10_Scrolldepth", "100%");
             }
-
         };
 
         return { handleScrollGa4Goal };
