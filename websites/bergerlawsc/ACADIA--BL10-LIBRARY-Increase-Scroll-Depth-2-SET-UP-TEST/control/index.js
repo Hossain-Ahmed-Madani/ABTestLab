@@ -20,6 +20,7 @@ v1: https://marketer.monetate.net/control/preview/13087/MBIJ7YMOZCKELA62TQTKUF1A
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
+        // console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -48,110 +49,52 @@ v1: https://marketer.monetate.net/control/preview/13087/MBIJ7YMOZCKELA62TQTKUF1A
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function getMileStoneFunctions(targetElement) {
-        const milestones = [25, 50, 75, 100];
+    // Window Scroll
+    function ga4ScrollGoalFunctions() {
+        const milestones = [25, 50, 75, 100]; // scroll checkpoints
+        let lastMilestone = null; // track last milestone crossed
 
         const getScrollPercent = () => {
-            if (!targetElement) return 0;
-
-            const rect = targetElement.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
-
-            const elementTop = targetElement.offsetTop;
-            const elementHeight = targetElement.offsetHeight;
-            const elementBottom = elementTop + elementHeight;
-
-            // When element starts entering viewport (top of element touches bottom of viewport)
-            const startScrollPoint = elementTop - windowHeight;
-
-            // When element is fully scrolled (bottom of element reaches top of viewport)
-            const endScrollPoint = elementBottom - windowHeight;
-
-            // Current scroll position
-            const currentScroll = scrollTop;
-
-            // Calculate percentage
-            let percentage = 0;
-
-            if (currentScroll <= startScrollPoint) {
-                // Not reached yet
-                percentage = 0;
-            } else if (currentScroll >= endScrollPoint) {
-                // Fully scrolled through the element
-                percentage = 100;
-            } else {
-                // In progress
-                const totalScrollRange = endScrollPoint - startScrollPoint;
-                const scrolledThrough = currentScroll - startScrollPoint;
-                percentage = (scrolledThrough / totalScrollRange) * 100;
-            }
-
-            return Math.min(Math.max(percentage, 0), 100);
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            return (scrollTop / docHeight) * 100;
         };
 
         const closestMilestone = (percent) => {
-            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 25);
+            // find the closest milestone user has passed
+            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
         };
 
-        return { getScrollPercent, closestMilestone };
-    }
+        const handleScrollGa4Goal = () => {
+            const percent = getScrollPercent();
+            const milestone = closestMilestone(percent);
 
-    function updateProgressBar() {
-        const sectionToTrack = q(".main-content .dss-content");
+            if (milestone !== lastMilestone && milestone !== 0) {
+                if (lastMilestone !== null) {
+                    console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
+                }
+                lastMilestone = milestone;
+            }
 
-        if (!sectionToTrack) return;
-
-        const { getScrollPercent, closestMilestone } = getMileStoneFunctions(sectionToTrack);
-        const percent = getScrollPercent();
-        const milestone = closestMilestone(percent);
-
-        // Store milestones in a persistent variable
-        if (typeof window.scrollMilestones === "undefined") {
-            window.scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
-        }
-
-        // Ensure milestone never goes below 25
-        const finalMilestone = Math.max(milestone, 25);
-
-        // Fire GA4 event when a new milestone is reached
-        if (finalMilestone === 25 && !window.scrollMilestones[25]) {
-            window.scrollMilestones[25] = true;
-            fireGA4Event("BL10_Scrolldepth", "25%");
-        } else if (finalMilestone === 50 && !window.scrollMilestones[50]) {
-            window.scrollMilestones[50] = true;
-            fireGA4Event("BL10_Scrolldepth", "50%");
-        } else if (finalMilestone === 75 && !window.scrollMilestones[75]) {
-            window.scrollMilestones[75] = true;
-            fireGA4Event("BL10_Scrolldepth", "75%");
-        } else if (finalMilestone === 100 && !window.scrollMilestones[100]) {
-            window.scrollMilestones[100] = true;
-            fireGA4Event("BL10_Scrolldepth", "100%");
-        }
-    }
-
-    function throttle(func, limit) {
-        let inThrottle;
-        return function (...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => (inThrottle = false), limit);
+            if (milestone === 25) {
+                fireGA4Event("BL10_Scrolldepth", "25%");
+            } else if (milestone === 50) {
+                fireGA4Event("BL10_Scrolldepth", "50%");
+            } else if (milestone === 75) {
+                fireGA4Event("BL10_Scrolldepth", "75%");
+            } else if (milestone === 100) {
+                fireGA4Event("BL10_Scrolldepth", "100%");
             }
         };
-    }
 
-    function handleScrollActions() {
-        updateProgressBar();
+        return { handleScrollGa4Goal };
     }
-
     function handleScrollEvent() {
-        const throttledScrollHandler = throttle(handleScrollActions, 50);
-        window.addEventListener("scroll", throttledScrollHandler);
+        const { handleScrollGa4Goal } = ga4ScrollGoalFunctions();
+        window.addEventListener("scroll", handleScrollGa4Goal);
     }
 
     function init() {
-
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
