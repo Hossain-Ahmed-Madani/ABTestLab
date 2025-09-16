@@ -198,19 +198,6 @@
         const percent = getScrollPercent();
         const milestone = closestMilestone(percent);
 
-        // DEBUG: Add these logs to see what's happening
-        console.log("Scroll Percent:", percent.toFixed(2) + "%");
-        console.log("Milestone:", milestone + "%");
-        console.log("Element Top:", sectionToTrack.offsetTop);
-        console.log("Element Height:", sectionToTrack.offsetHeight);
-        console.log("Scroll Top:", window.scrollY || document.documentElement.scrollTop);
-        console.log("Window Height:", window.innerHeight);
-        console.log("Start Point:", sectionToTrack.offsetTop - window.innerHeight);
-        console.log("End Point:", sectionToTrack.offsetTop + sectionToTrack.offsetHeight - window.innerHeight);
-        console.log("Element fully visible when scroll reaches:", sectionToTrack.offsetTop);
-        console.log("Element fully scrolled when scroll reaches:", sectionToTrack.offsetTop + sectionToTrack.offsetHeight - window.innerHeight);
-        console.log("---");
-
         // Store milestones in a persistent variable
         if (typeof window.scrollMilestones === "undefined") {
             window.scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
