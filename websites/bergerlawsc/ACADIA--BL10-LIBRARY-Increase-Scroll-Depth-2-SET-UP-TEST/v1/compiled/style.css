@@ -58,6 +58,7 @@
   min-height: 42px;
   margin-top: 12px;
   position: relative;
+  user-select: none;
 }
 .AB-BL10 .ab-table-content-selection[data-state=closed] .ab-table-content-list {
   display: none !important;
