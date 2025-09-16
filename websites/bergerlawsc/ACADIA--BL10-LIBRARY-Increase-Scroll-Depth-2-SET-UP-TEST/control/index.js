@@ -48,49 +48,85 @@ v1: https://marketer.monetate.net/control/preview/13087/MBIJ7YMOZCKELA62TQTKUF1A
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function getMileStoneFunctions() {
+    function getMileStoneFunctions(targetElement) {
+        const milestones = [25, 50, 75, 100];
+
         const getScrollPercent = () => {
+            if (!targetElement) return 0;
+
+            const rect = targetElement.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            return (scrollTop / docHeight) * 100;
+
+            const elementTop = targetElement.offsetTop;
+            const elementHeight = targetElement.offsetHeight;
+            const elementBottom = elementTop + elementHeight;
+
+            // When element starts entering viewport (top of element touches bottom of viewport)
+            const startScrollPoint = elementTop - windowHeight;
+
+            // When element is fully scrolled (bottom of element reaches top of viewport)
+            const endScrollPoint = elementBottom - windowHeight;
+
+            // Current scroll position
+            const currentScroll = scrollTop;
+
+            // Calculate percentage
+            let percentage = 0;
+
+            if (currentScroll <= startScrollPoint) {
+                // Not reached yet
+                percentage = 0;
+            } else if (currentScroll >= endScrollPoint) {
+                // Fully scrolled through the element
+                percentage = 100;
+            } else {
+                // In progress
+                const totalScrollRange = endScrollPoint - startScrollPoint;
+                const scrolledThrough = currentScroll - startScrollPoint;
+                percentage = (scrolledThrough / totalScrollRange) * 100;
+            }
+
+            return Math.min(Math.max(percentage, 0), 100);
         };
 
         const closestMilestone = (percent) => {
-            const milestones = [25, 50, 75, 100]; // scroll checkpoints
-            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
+            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 25);
         };
 
         return { getScrollPercent, closestMilestone };
     }
 
     function updateProgressBar() {
-        const { getScrollPercent, closestMilestone } = getMileStoneFunctions();
-        const milestone_reached = { 25: false, 50: false, 75: false, 100: false };
+        const sectionToTrack = q(".main-content .dss-content");
 
+        if (!sectionToTrack) return;
+
+        const { getScrollPercent, closestMilestone } = getMileStoneFunctions(sectionToTrack);
         const percent = getScrollPercent();
         const milestone = closestMilestone(percent);
 
-        let lastMilestone = null; // track last milestone crossed
-
-        // console.log({ percent, milestone, lastMilestone });
-
-        if (milestone !== lastMilestone && milestone !== 0) {
-            lastMilestone = milestone;
+        // Store milestones in a persistent variable
+        if (typeof window.scrollMilestones === "undefined") {
+            window.scrollMilestones = { 25: false, 50: false, 75: false, 100: false };
         }
 
+        // Ensure milestone never goes below 25
+        const finalMilestone = Math.max(milestone, 25);
+
         // Fire GA4 event when a new milestone is reached
-        if (milestone === 25 && !milestone_reached[25]) {
-            milestone_reached[25] = true;
+        if (finalMilestone === 25 && !window.scrollMilestones[25]) {
+            window.scrollMilestones[25] = true;
             fireGA4Event("BL10_Scrolldepth", "25%");
-        } else if (milestone === 50 && !milestone_reached[50]) {
+        } else if (finalMilestone === 50 && !window.scrollMilestones[50]) {
+            window.scrollMilestones[50] = true;
             fireGA4Event("BL10_Scrolldepth", "50%");
-            milestone_reached[50] = true;
-        } else if (milestone === 75 && !milestone_reached[75]) {
+        } else if (finalMilestone === 75 && !window.scrollMilestones[75]) {
+            window.scrollMilestones[75] = true;
             fireGA4Event("BL10_Scrolldepth", "75%");
-            milestone_reached[75] = true;
-        } else if (milestone === 100 && !milestone_reached[100]) {
+        } else if (finalMilestone === 100 && !window.scrollMilestones[100]) {
+            window.scrollMilestones[100] = true;
             fireGA4Event("BL10_Scrolldepth", "100%");
-            milestone_reached[100] = true;
         }
     }
 
