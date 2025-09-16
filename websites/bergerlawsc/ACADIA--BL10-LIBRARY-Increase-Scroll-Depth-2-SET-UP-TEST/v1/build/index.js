@@ -1,13 +1,22 @@
+/* 
+https://www.figma.com/design/gRstDeTcFaKxrCReVHbMeh/BL-10-Blog-Work?node-id=26-2&p=f&t=g7MMjZOYSByPG8s3-0
+https://www.bergerlawsc.com/library/10-ways-sc-buses-must-be-maintained-for-child-safety.cfm
+https://www.bergerlawsc.com/library/in-the-news.cfm
+
+
+control: https://marketer.monetate.net/control/preview/13087/MBIJ7YMOZCKELA62TQTKUF1AFBG8XHO8/bl10-library-increase-scroll-depth
+v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9MGW8P6JUE/bl10-library-increase-scroll-depth
+*/
+
 (() => {
     const TEST_CONFIG = {
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
-    let AUTO_UPDATE_ON = false;
-
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -109,35 +118,48 @@
         return matchingQuery ? headerOffsetObj[matchingQuery] : 150;
     }
 
-    function autoSelectOnScroll() {
-        const totalHeaders = qq(".dss-content h2, .dss-content h3").reduce((acc, cItem) => {
-            if (cItem.textContent.trim().length > 0) {
-                return acc + 1; // Only count if has text content
-            }
-            return acc;
-        }, 0);
+    // Window Scroll
+    function ga4ScrollGoalFunctions() {
+        const milestones = [25, 50, 75, 100]; // scroll checkpoints
+        let lastMilestone = null; // track last milestone crossed
 
-        const headerOffset = getHeaderOffset();
-        const arr = [...qq(".ab-table-content-item")];
-
-        const handleAutoSelect = () => {
-            if (totalHeaders === 1 || AUTO_UPDATE_ON === false) return;
-
-            arr.forEach((cItem) => {
-                const header = q(cItem.getAttribute("targeth3"));
-                const top = header.getBoundingClientRect().top;
-
-                if (top > 100 && top <= headerOffset && !cItem.hasAttribute("selected")) {
-                    arr.forEach((item) => item.removeAttribute("selected"));
-                    cItem.setAttribute("selected", "");
-                    q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
-                }
-            });
+        const getScrollPercent = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            return (scrollTop / docHeight) * 100;
         };
 
-        return { handleAutoSelect };
+        const closestMilestone = (percent) => {
+            // find the closest milestone user has passed
+            return milestones.reduce((prev, curr) => (percent >= curr ? curr : prev), 0);
+        };
+
+        const handleScrollGa4Goal = () => {
+            const percent = getScrollPercent();
+            const milestone = closestMilestone(percent);
+
+            if (milestone !== lastMilestone && milestone !== 0) {
+                if (lastMilestone !== null) {
+                    console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
+                }
+                lastMilestone = milestone;
+            }
+
+            if (milestone === 25) {
+                fireGA4Event("BL10_Scrolldepth", "25%");
+            } else if (milestone === 50) {
+                fireGA4Event("BL10_Scrolldepth", "50%");
+            } else if (milestone === 75) {
+                fireGA4Event("BL10_Scrolldepth", "75%");
+            } else if (milestone === 100) {
+                fireGA4Event("BL10_Scrolldepth", "100%");
+            }
+        };
+
+        return { handleScrollGa4Goal };
     }
 
+    // .dss-content Scroll
     function getMileStoneFunctions(targetElement) {
         const milestones = [25, 50, 75, 100];
 
@@ -212,16 +234,12 @@
         // Fire GA4 event when a new milestone is reached
         if (finalMilestone === 25 && !window.scrollMilestones[25]) {
             window.scrollMilestones[25] = true;
-            fireGA4Event("BL10_Scrolldepth", "25%");
         } else if (finalMilestone === 50 && !window.scrollMilestones[50]) {
             window.scrollMilestones[50] = true;
-            fireGA4Event("BL10_Scrolldepth", "50%");
         } else if (finalMilestone === 75 && !window.scrollMilestones[75]) {
             window.scrollMilestones[75] = true;
-            fireGA4Event("BL10_Scrolldepth", "75%");
         } else if (finalMilestone === 100 && !window.scrollMilestones[100]) {
             window.scrollMilestones[100] = true;
-            fireGA4Event("BL10_Scrolldepth", "100%");
         }
     }
 
@@ -236,19 +254,17 @@
         };
     }
 
-    function handleScrollActions() {
-        const { handleAutoSelect } = autoSelectOnScroll();
-        handleAutoSelect();
-        updateProgressBar();
-    }
-
     function handleScrollEvent() {
         const selector = ".ab-scroll-container";
+        const { handleScrollGa4Goal } = ga4ScrollGoalFunctions();
         waitForElement(
             () => q(selector),
             () => {
-                const throttledScrollHandler = throttle(handleScrollActions, 50);
-                window.addEventListener("scroll", throttledScrollHandler);
+                const throttledScrollHandler = throttle(updateProgressBar, 50);
+                window.addEventListener("scroll", (e) => {
+                    handleScrollGa4Goal();
+                    throttledScrollHandler();
+                });
             }
         );
     }
@@ -258,7 +274,6 @@
 
         const targetElement = q(selector);
         const headerOffset = getHeaderOffset();
-        AUTO_UPDATE_ON = false;
 
         window.scrollTo({
             top: targetElement.offsetTop - headerOffset,
@@ -267,7 +282,7 @@
 
         fireGA4Event("BL10_Tableofcontent", targetElement.textContent);
 
-        setTimeout(() => (AUTO_UPDATE_ON = true), 1500);
+        setTimeout(() => true, 1500);
     }
 
     function handleShowHideSelection(action /* show, hide */) {
@@ -305,6 +320,19 @@
                 },
             },
             {
+                selector: "body",
+                event: "click",
+                callback: (e) => {
+                    if (window.innerWidth >= 1200) {
+                        return;
+                    }
+
+                    if (!e.target.closest(".ab-table-content-selection")) {
+                        handleShowHideSelection("hide");
+                    }
+                },
+            },
+            {
                 selector: ".ab-table-content-selected-item",
                 event: "click",
                 callback: (e) => {
@@ -324,16 +352,16 @@
                         return;
                     }
 
-                    // if (e.target.hasAttribute("selected") && window.innerWidth < 1200) {
-                    //     setTimeout(() => handleShowHideSelection("hide"), 50);
-                    //     return;
-                    // }
-
                     if (!e.target.hasAttribute("selected")) {
-                        const selectionContainer = q(".ab-table-content-selection");
+                        q(".ab-table-content-selection");
                         const arr = [...qq(".ab-table-content-item")];
                         const selectedItem = q(".ab-table-content-item[selected]");
                         const cItem = e.target.closest(".ab-table-content-item");
+
+                        if (arr.indexOf(cItem) === 0 && !e.target.closest("span")) {
+                            handleShowHideSelection("hide");
+                            return;
+                        }
 
                         if (selectedItem.getAttribute("targeth3") !== cItem.getAttribute("targeth3")) {
                             arr.forEach((el) => el.removeAttribute("selected"));
@@ -341,11 +369,7 @@
                             q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
                         }
 
-                        setTimeout(() => selectionContainer.setAttribute("data-state", "closed"), 50);
-                        // if (arr.indexOf(cItem) !== 0) {
-                        //     setTimeout(() => selectionContainer.setAttribute("data-state", "closed"), 50);
-                        // }
-
+                        handleShowHideSelection("hide");
                         scrollToTargetItem(cItem.getAttribute("targetH3"));
                     }
                 },

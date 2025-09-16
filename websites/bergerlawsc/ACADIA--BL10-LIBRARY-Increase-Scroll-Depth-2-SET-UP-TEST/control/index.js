@@ -20,7 +20,7 @@ v1: https://marketer.monetate.net/control/preview/13087/MBIJ7YMOZCKELA62TQTKUF1A
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        // console.log("BL10: ", eventName, eventLabel);
+        console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",

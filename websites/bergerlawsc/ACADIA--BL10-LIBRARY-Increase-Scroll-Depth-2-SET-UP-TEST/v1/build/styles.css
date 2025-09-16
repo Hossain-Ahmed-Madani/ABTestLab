@@ -108,8 +108,8 @@
     margin: 0;
     padding: 0;
     transition: all 0.3s ease-in-out;
-    max-height: 85vh;
-    overflow-y: scroll;
+    max-height: 75vh;
+    overflow-y: auto;
 }
 .AB-BL10 .inner.mobile-open .ab-scroll-and-table-contents {
     z-index: -1;
@@ -177,6 +177,14 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         overflow-y: auto;
+    }
+    .AB-BL10 .ab-table-content-list {
+        max-height: 85vh;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .AB-BL10 #ela-main_nav-link-library {
+        height: 43px;
     }
 }
 
