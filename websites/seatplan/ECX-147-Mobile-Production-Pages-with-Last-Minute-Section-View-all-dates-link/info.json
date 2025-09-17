@@ -1,0 +1,13 @@
+{
+  "id": "1758117623297_3345_ECX_147_Mobile_Production_Pages_with_Last_Minute_Section_View_all_dates_link",
+  "name": "ECX-147-Mobile-Production-Pages-with-Last-Minute-Section-View-all-dates-link",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-09-17T14:00:23.297Z",
+  "createdAtReadable": "17/09/2025, 8:00:23 pm",
+  "lastUpdated": "2025-09-17T14:00:23.691Z"
+}
