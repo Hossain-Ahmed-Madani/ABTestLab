@@ -1,6 +1,6 @@
 {
     "id": "1757683889706_8082_EXP_143_VSP_Stop_Tool_Tip_Image_displaying_on_page_load",
-    "name": "EXP-143-VSP-Stop-Tool-Tip-Image-displaying-on-page-load",
+    "name": "ECX-143-VSP-Stop-Tool-Tip-Image-displaying-on-page-load",
     "type": "A/B",
     "website": "seatplan",
     "variations": ["control", "v1"],
