@@ -41,20 +41,19 @@
     align-items: center;
 }
 .AB-LEVEL-2-PLP .ab-content-toggle-button__icon svg {
-    width: 15px;
-    height: 15px;
+    height: 26px;
 }
 .AB-LEVEL-2-PLP .ab-content-toggle-button__text {
     font-family: "MuseoSans-700";
     font-weight: 700;
-    font-style: 900;
     font-size: 16px;
     line-height: 100%;
-    letter-spacing: 0%;
+    letter-spacing: 0px;
     text-align: center;
     text-decoration: underline;
     text-decoration-style: solid;
     text-decoration-thickness: 0%;
+    text-underline-offset: 2px;
     text-decoration-skip-ink: auto;
     color: #0f6cb6;
 }

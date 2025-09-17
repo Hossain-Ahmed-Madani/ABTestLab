@@ -6,7 +6,6 @@ v1: https://select.schoolspecialty.com/furniture/early-childhood?_conv_eforce=10
 
 */
 
-
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolution",
@@ -15,31 +14,38 @@ v1: https://select.schoolspecialty.com/furniture/early-childhood?_conv_eforce=10
         test_name: "Level 2 PLP - Remove the Category Thumbnails [Iteration][DTM]",
         page_initials: "AB-LEVEL-2-PLP",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
+
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 100) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
         } else {
-            setTimeout(() => {
-                waitForElement(predicate, callback, timer - frequency, frequency);
-            }, frequency);
+            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
         }
     }
 
     const ASSETS = {
-        view_more_svg: /* HTML */ `<svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M11.5558 14.4036L-1.25902e-07 2.88031L2.88843 -1.01024e-06L13 10.0831L23.1116 -1.26257e-07L26 2.88031L14.4442 14.4036C14.0611 14.7855 13.5417 15 13 15C12.4583 15 11.9389 14.7855 11.5558 14.4036Z"
-                fill="#2B94E6"
-            />
-        </svg> `,
+        view_more_svg: /* HTML */ `
+            <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M11.5558 14.4036L-1.25902e-07 2.88031L2.88843 -1.01024e-06L13 10.0831L23.1116 -1.26257e-07L26 2.88031L14.4442 14.4036C14.0611 14.7855 13.5417 15 13 15C12.4583 15 11.9389 14.7855 11.5558 14.4036Z"
+                    fill="#2B94E6"
+                />
+            </svg>
+        `,
     };
 
     function createLayout() {
@@ -48,15 +54,34 @@ v1: https://select.schoolspecialty.com/furniture/early-childhood?_conv_eforce=10
         const ul = document.createElement("ul");
         ul.className = "ab-container";
 
-        ul.innerHTML = Array.from(document.querySelectorAll(".left_espot .productlist")).reduce((acc, cNode) => {
+        ul.innerHTML = qq(".left_espot .productlist").reduce((acc, cNode) => {
             const borderHTML = `<div class="bottomBorder">&nbsp;</div>`;
-            if (cNode.querySelector(".fx-row")) {
-                return (acc += Array.from(cNode.querySelectorAll(".fx-row")).reduce(
+
+            if (q(cNode, ".fx-row")) {
+                return (acc += qq(cNode, ".fx-row").reduce(
                     (accRow, cRowNode) => (accRow += /* HTML */ `<li><div class="productlist">${cRowNode.outerHTML + borderHTML}</div></li>`),
                     ""
                 ));
+            } else if (q(cNode, ".bottomBorder")) {
+                let html = "";
+                const oneFifthElements = qq(cNode, ".one-fifth");
+
+                // Group .one-fifth elements in chunks of 4
+                for (let i = 0; i < oneFifthElements.length; i += 4) {
+                    let tmp_html = "<li><div class='productlist'>";
+
+                    // Add up to 4 .one-fifth elements
+                    for (let j = i; j < i + 4 && j < oneFifthElements.length; j++) {
+                        tmp_html += oneFifthElements[j].outerHTML;
+                    }
+
+                    tmp_html += "</div>" + borderHTML + "</li>";
+                    html += tmp_html;
+                }
+
+                return (acc += html);
             } else {
-                return (acc += /* HTML */ `<li>${cNode.outerHTML + borderHTML}</li> `);
+                return (acc += /* HTML */ `<li>${cNode.outerHTML + borderHTML}</li>`);
             }
         }, "");
 
@@ -88,16 +113,13 @@ v1: https://select.schoolspecialty.com/furniture/early-childhood?_conv_eforce=10
         const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version${test_version}`);
 
-        console.table(TEST_CONFIG);
+        // console.table(TEST_CONFIG);
 
         createLayout();
     }
 
     function hasAllTargetElements() {
-        return !!(
-            document.querySelector(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) &&
-            document.querySelector(".left_espot .productlist")
-        );
+        return !!(q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && q(".left_espot .productlist"));
     }
 
     waitForElement(hasAllTargetElements, init);
