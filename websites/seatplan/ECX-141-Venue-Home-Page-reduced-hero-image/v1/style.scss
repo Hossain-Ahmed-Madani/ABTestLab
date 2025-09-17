@@ -1,0 +1,52 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-EXP-141.AB-EXP-141--v1 {
+    .section-hero__home-of {
+        display: none;
+    }
+
+    .section-hero .container {
+        height: 260px;
+    }
+
+    .section-hero h1 {
+        margin-top: 60px;
+    }
+
+    .header,
+    .city-nav {
+        background-color: transparent !important;
+    }
+
+    @media screen and (min-width: 768px) {
+        div.trust-bar {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        .section-hero .container {
+            height: 350px;
+        }
+
+        .section-hero h1 {
+            margin-top: 60px;
+        }
+    }
+}
