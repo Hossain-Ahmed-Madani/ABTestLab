@@ -8,6 +8,7 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
 
  */
 
+
 (() => {
     const TEST_CONFIG = {
         client: "SeatPlan",
