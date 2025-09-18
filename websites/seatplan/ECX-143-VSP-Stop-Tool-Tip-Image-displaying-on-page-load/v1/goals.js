@@ -24,7 +24,7 @@
 
     function convPush(goal_name, goal_id) {
         window._conv_q = window._conv_q || [];
-        _conv_q.push(["triggerConversion", "1004105704"]);
+        _conv_q.push(["triggerConversion", goal_id]);
         console.log("Triggered Goal:", goal_name, goal_id);
     }
 

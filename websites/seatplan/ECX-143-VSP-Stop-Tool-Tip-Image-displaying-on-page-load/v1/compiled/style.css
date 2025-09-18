@@ -2,6 +2,10 @@
   display: none !important;
 }
 
+.AB-EXP-143--v1.AB-EXP-143--hide-cta .production-right-panel__sticky-container {
+  bottom: -100px !important;
+}
+
 .AB-EXP-143--v2.AB-EXP-143--sticky-cta .production-right-panel__sticky-container {
   bottom: 0;
 }

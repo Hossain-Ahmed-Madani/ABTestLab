@@ -15,9 +15,11 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
         site_url: "https://seatplan.com/",
         test_name: "ECX-143: VSP - Stop Tool Tip Image displaying on page load ",
         page_initials: "AB-EXP-143",
-        test_variation: 1,
-        test_version: 0.0001,
+        test_variation: 1 /* 1, 2 */,
+        test_version: 0.0003,
     };
+
+    const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
@@ -55,15 +57,16 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
     }
 
     function addStickyCtaOnLoad() {
-        if (TEST_CONFIG.test_variation !== 2) return;
+        const { test_variation } = TEST_CONFIG;
 
+        const className = test_variation === 1 ? "AB-EXP-143--hide-cta" : "AB-EXP-143--sticky-cta";
         const body = document.body;
-        body.classList.add("AB-EXP-143--sticky-cta");
+        body.classList.add(className);
 
         const handleScroll = (e) => {
             setTimeout(() => {
-                console.log("User Scrolled, Removing Sticky CTA body class");
-                body.classList.remove("AB-EXP-143--sticky-cta");
+                console.log("User Scrolled, Removing Sticky CTA body class:", className);
+                body.classList.remove(className);
                 window.removeEventListener("scroll", handleScroll);
             }, 250);
         };
@@ -72,16 +75,13 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
     }
 
     function init() {
-        console.table(TEST_CONFIG);
-        const { page_initials, test_variation, test_version } = TEST_CONFIG;
-        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${TEST_CONFIG.page_initials}--version${TEST_CONFIG.test_version}`);
-
+        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version${test_version}`);
         addToolTipClass();
         addStickyCtaOnLoad();
     }
 
     function hasAllTargetElements() {
-        return !!q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`);
+        return !!q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`);
     }
 
     waitForElement(hasAllTargetElements, init);
