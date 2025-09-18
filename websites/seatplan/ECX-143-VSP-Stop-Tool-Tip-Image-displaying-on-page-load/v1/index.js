@@ -23,14 +23,11 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
         } else {
-            setTimeout(() => {
-                waitForElement(predicate, callback, timer - frequency, frequency);
-            }, frequency);
+            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
         }
     }
 
@@ -65,7 +62,6 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
 
         const handleScroll = (e) => {
             setTimeout(() => {
-                console.log("User Scrolled, Removing Sticky CTA body class:", className);
                 body.classList.remove(className);
                 window.removeEventListener("scroll", handleScroll);
             }, 250);
@@ -75,7 +71,7 @@ v2: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
     }
 
     function init() {
-        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version${test_version}`);
+        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         addToolTipClass();
         addStickyCtaOnLoad();
     }

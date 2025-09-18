@@ -1,12 +1,6 @@
-.AB-EXP-143 {
-    //
-}
 
-// .AB-EXP-143:not(.AB-EXP-143--show-tooltip) .seatplan-tooltip-info-outer {
-//     display: none !important;
-// }
-
-.AB-EXP-143 .seatplan-tooltip-info-outer--ab-on-load {
+.AB-EXP-143--v1 .seatplan-tooltip-info-outer--ab-on-load, 
+.AB-EXP-143--v2 .seatplan-tooltip-info-outer--ab-on-load {
     display: none !important;
 }
 
