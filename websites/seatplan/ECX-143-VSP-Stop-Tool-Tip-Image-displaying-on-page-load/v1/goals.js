@@ -59,6 +59,21 @@
             },
         },
         {
+            goal_name: "VSP | Open seat overlay | JS",
+            goal_id: "100489963",
+            predicate: () => q("#seat-reveal-panel"),
+            callback: (goal_name, goal_id) => {
+                const targetNode = q("#seat-reveal-panel");
+
+                new MutationObserver((mutationList, observer) => {
+                    if (q("#seat-reveal-panel.is-visible")) {
+                        convPush(goal_name, goal_id);
+                        observer.disconnect();
+                    }
+                }).observe(targetNode, { attributes: true });
+            },
+        },
+        {
             goal_name: "EXP-143 Click Mobile Sticky CTA Button | JS",
             goal_id: "1004105711",
             predicate: () => q(".production-right-panel__sticky-container"),
