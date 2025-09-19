@@ -10,7 +10,7 @@
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-    const BODY_CLASSLIST = [page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`];
+    const BODY_CLASSLIST = [page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`];
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
@@ -133,7 +133,7 @@
     }
 
     function hasAllTargetElements() {
-        return !!(document.body && BODY_CLASSLIST.every((className) => !document.body.classList.contains(className)));
+        return !!document.querySelector(`body:not(.${BODY_CLASSLIST[0]}):not(.${BODY_CLASSLIST[1]})`);
     }
 
     waitForElement(hasAllTargetElements, init);
