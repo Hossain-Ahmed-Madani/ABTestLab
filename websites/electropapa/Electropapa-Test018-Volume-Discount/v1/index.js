@@ -38,12 +38,15 @@
         return observer;
     }
 
-    function getCelebrationTxt(totalPrice, unitPrice, quantity) {
-        const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-        const discount_percentage = quantity < 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
+    function getDiscountAmount(totalPrice, unitPrice, quantity) {
+        // const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
+        // const discount_percentage = quantity < 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
         // const discount_amount = totalPrice * (discount_percentage / 100);
         const discount_amount = totalPrice - unitPrice * quantity;
+        return discount_amount;
+    }
 
+    function getCelebrationTxt(discount_amount, quantity) {
         const single_item_txt = "<b>Clever sein und sparen:</b>&nbspAb 2 Stück mindestens 5% Rabatt";
         const multi_item_txt = `Glückwunsch! Du sparst ${discount_amount}€ durch unseren Mengenrabatt.`;
 
@@ -65,16 +68,31 @@
         const targetNodes = qq(".offcanvas-cart-items .line-item");
 
         targetNodes.forEach((targetNode) => {
+            /* 
+                1. Pending works: create a separate function that takes the targetNode and returns total, unitPrice, discount, quantity etc
+                2. Create Separate layout functions for badge and celebration if necessary or make this cleaner
+                3. Create a price formatter to format the price similar to german price in control
+                4. Note: .ab-reduced-total-price will not view properly add flex to the parent node
+            */
+
             const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
-            const totalPrice = parseAmount(q(targetNode, ".line-item-total-price-value"));
+            const totalPriceContainer = q(targetNode, ".line-item-total-price-value");
+            const totalPrice = parseAmount(totalPriceContainer);
             const unitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
+            const discount_amount = getDiscountAmount(totalPrice, unitPrice, quantity);
+
+            if (quantity > 1 && !q(targetNode, ".ab-reduced-total-price")) {
+                const parentNode = totalPriceContainer.parentNode;
+                const discount_amount = totalPrice - unitPrice * quantity;
+                parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${discount_amount}€</div>`);
+            }
 
             if (!q(targetNode, ".ab-celebration-message-container")) {
                 targetNode.insertAdjacentHTML(
                     "beforeend",
-                    /* HTML */ `
-                    <div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">
-                        ${getCelebrationTxt(totalPrice, unitPrice, quantity)}
+                    /* HTML */
+                    `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">
+                        ${getCelebrationTxt(discount_amount, quantity)}
                     </div>`
                 );
             }
@@ -102,7 +120,6 @@
                 const offcanvasNode = Array.from(record.addedNodes).find((node) => node.nodeType === 1 && node.classList?.contains("offcanvas"));
 
                 if (offcanvasNode) {
-                    console.log("--- Side cart element added:");
                     cartObserver();
                 }
             }
