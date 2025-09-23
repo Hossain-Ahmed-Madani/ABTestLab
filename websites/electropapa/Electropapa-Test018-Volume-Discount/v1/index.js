@@ -12,7 +12,7 @@
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
     const BODY_CLASSLIST = [page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`];
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
+    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
@@ -29,6 +29,12 @@
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
+    function fireConvertGoal(goalName, goalId) {
+        console.log("Triggered convert goal: ", goalName, goalId);
+        window._conv_q = window._conv_q || [];
+        _conv_q.push(["triggerConversion", goalId]);
     }
 
     function mutationObserverFunction(selector, callback, config) {
@@ -111,6 +117,10 @@
                 /* HTML */
                 `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>`
             );
+
+            if (quantity > 1) {
+                fireConvertGoal("Shows Celebration Message | JS", 1004106272);
+            }
         }
     }
 
@@ -265,6 +275,7 @@
     function clickEvents() {
         document.body.addEventListener("click", (e) => {
             if (e.target.closest(".ab-quantity-dropdown-select")) {
+                // fireConvertGoal("Dropdown Open Click | JS", 1004106271);
                 toggleDropdown("toggle");
             }
 
@@ -280,6 +291,10 @@
                 q(".ab-quantity-dropdown-select").innerText = selectedValue;
                 toggleDropdown("hide");
             }
+
+            // if (e.target.closest(".product-detail-quantity-group.quantity-selector-group button.btn.btn-outline-light")) {
+            //     fireConvertGoal("Volume selector click | JS", 1004106270);
+            // }
         });
     }
 
