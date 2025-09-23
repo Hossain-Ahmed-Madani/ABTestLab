@@ -33,6 +33,14 @@
   vertical-align: middle;
   color: #4a545b;
 }
+.AB-TEST-018 .is-offcanvas .line-item-quantity-select-wrapper {
+  min-width: 139px;
+}
+.AB-TEST-018 .line-item-quantity {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 
 .AB-TEST-018--v2 .ab-celebration-message-container.ab-celebration-message-container--viewing-for-single {
   position: relative;
