@@ -38,17 +38,50 @@
         return observer;
     }
 
-    function getDiscountAmount(totalPrice, unitPrice, quantity) {
-        // const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-        // const discount_percentage = quantity < 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
-        // const discount_amount = totalPrice * (discount_percentage / 100);
-        const discount_amount = totalPrice - unitPrice * quantity;
-        return discount_amount;
+    function parseAmount(targetNode) {
+        if (!targetNode) return 0;
+        return parseFloat(targetNode.innerText?.replace(".", "")?.replace(",", ".")?.replace("€", ""));
     }
 
-    function getCelebrationTxt(discount_amount, quantity) {
+    function formatPriceToGerman(price) {
+        const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
+            style: "currency",
+            currency: "EUR",
+        }).format(price);
+
+        return formattedPriceTxt;
+    }
+
+    function calculateDiscount(totalPrice, unitPrice, quantity) {
+        // const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
+        // const discount_percentage = quantity < 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
+        // const discount = totalPrice * (discount_percentage / 100);
+        const discount = totalPrice - unitPrice * quantity;
+        return discount;
+    }
+
+    function getPriceData(targetNode) {
+        const totalPriceContainer = q(targetNode, ".line-item-total-price-value");
+        const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
+        const totalPrice = parseAmount(totalPriceContainer);
+        const unitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
+        const discount = calculateDiscount(totalPrice, unitPrice, quantity);
+        const offerPrice = totalPrice - discount;
+
+        return {
+            totalPrice,
+            unitPrice,
+            quantity,
+            discount,
+            offerPrice,
+        };
+    }
+
+    function getCelebrationTxt(targetNode) {
+        const { discount, quantity } = getPriceData(targetNode);
+
         const single_item_txt = "<b>Clever sein und sparen:</b>&nbspAb 2 Stück mindestens 5% Rabatt";
-        const multi_item_txt = `Glückwunsch! Du sparst ${discount_amount}€ durch unseren Mengenrabatt.`;
+        const multi_item_txt = `Glückwunsch! Du sparst ${discount}€ durch unseren Mengenrabatt.`;
 
         if (test_variation === 1) {
             return quantity <= 1 ? "" : multi_item_txt;
@@ -59,9 +92,26 @@
         }
     }
 
-    function parseAmount(elem) {
-        if (!elem) return 0;
-        return parseFloat(elem.innerText?.replace(",", ".")?.replace(".", "")?.replace("€", ""));
+    function createReducedPriceLayout(targetNode) {
+        const { totalPrice, unitPrice, quantity, discount, offerPrice } = getPriceData(targetNode);
+        const parentNode = q(targetNode, ".line-item-total-price:not(.ab-added-reduced-total)");
+
+        if (quantity > 1 && parentNode) {
+            parentNode.classList.add("ab-added-reduced-total");
+            parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${formatPriceToGerman(offerPrice)}</div>`);
+        }
+    }
+
+    function createCelebrationMessageLayout(targetNode) {
+        const { totalPrice, unitPrice, quantity, discount, offerPrice } = getPriceData(targetNode);
+
+        if (!q(targetNode, ".ab-celebration-message-container")) {
+            targetNode.insertAdjacentHTML(
+                "beforeend",
+                /* HTML */
+                `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>`
+            );
+        }
     }
 
     function createCelebrationMessageComponent() {
@@ -75,27 +125,8 @@
                 4. Note: .ab-reduced-total-price will not view properly add flex to the parent node
             */
 
-            const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
-            const totalPriceContainer = q(targetNode, ".line-item-total-price-value");
-            const totalPrice = parseAmount(totalPriceContainer);
-            const unitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
-            const discount_amount = getDiscountAmount(totalPrice, unitPrice, quantity);
-
-            if (quantity > 1 && !q(targetNode, ".ab-reduced-total-price")) {
-                const parentNode = totalPriceContainer.parentNode;
-                const discount_amount = totalPrice - unitPrice * quantity;
-                parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${discount_amount}€</div>`);
-            }
-
-            if (!q(targetNode, ".ab-celebration-message-container")) {
-                targetNode.insertAdjacentHTML(
-                    "beforeend",
-                    /* HTML */
-                    `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">
-                        ${getCelebrationTxt(discount_amount, quantity)}
-                    </div>`
-                );
-            }
+            createReducedPriceLayout(targetNode);
+            createCelebrationMessageLayout(targetNode);
         });
     }
 
