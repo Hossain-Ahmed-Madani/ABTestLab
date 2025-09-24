@@ -2,10 +2,6 @@
     const TEST_KEY = "CONVERT_1004169319_BUCKETED";
     const IS_BUCKETED = window[TEST_KEY];
 
-    if (IS_BUCKETED) {
-        return true;
-    }
-
     async function waitForPromise(predicate) {
         let count = 0;
 
@@ -20,11 +16,11 @@
                 if (typeof predicate === "function" && predicate()) {
                     observer.disconnect();
                     resolve();
-                } else if (count >= 100) {
+                } else if (count >= 50) {
                     observer.disconnect();
                     // reject(new Error(`Max polling reached while waiting for: ${count} ' : ' ${predicate.toString()}`));
                 }
-            }).observe(document.body, { childList: true });
+            }).observe(document.body, { childList: true, subtree: true });
         });
     }
 
@@ -40,7 +36,7 @@
         if (IS_BUCKETED) {
             return true;
         } else {
-            return waitForPromise(() => qq("body.is-ctl-product", ".btn.header-cart-btn.header-actions-btn").length > 0)
+            return waitForPromise(() => qq("body.is-ctl-product, .offcanvas").length > 0)
                 .then(() => {
                     window[TEST_KEY] = true;
                     convert_recheck_experiment();
