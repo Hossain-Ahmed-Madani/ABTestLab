@@ -58,34 +58,45 @@
         return formattedPriceTxt;
     }
 
-    function calculateDiscount(totalPrice, unitPrice, quantity) {
-        // const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-        // const discount_percentage = quantity < 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
-        // const discount = totalPrice * (discount_percentage / 100);
-        const discount = totalPrice - unitPrice * quantity;
-        return discount;
+    function calculateDiscount(offerPrice, quantity) {
+        const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
+        const discount_percentage = quantity <= 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
+
+        // Calculate discount amount
+        const discount = offerPrice * (discount_percentage / 100);
+
+        return {
+            discountAmount: discount,
+            discountPercentage: discount_percentage,
+            finalTotal: offerPrice - discount,
+        };
     }
 
     function getPriceData(targetNode) {
-        const totalPriceContainer = q(targetNode, ".line-item-total-price-value");
+        const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
+        const offerPrice = parseAmount(offerPriceContainer);
         const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
-        const totalPrice = parseAmount(totalPriceContainer);
-        const unitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
-        const discount = calculateDiscount(totalPrice, unitPrice, quantity);
-        const offerPrice = totalPrice - discount;
+
+        // Get discount calculation results
+        const discountResult = calculateDiscount(offerPrice, quantity);
+
+        // Calculate unit prices
+        const finalUnitPrice = quantity > 0 ? discountResult.finalTotal / quantity : 0;
+        const originalUnitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
 
         return {
-            totalPrice,
-            unitPrice,
-            quantity,
-            discount,
-            offerPrice,
+            offerPrice, // Original total before discount
+            discount: discountResult.discountAmount, // Amount saved
+            totalPrice: discountResult.finalTotal, // Final price after discount
+            originalUnitPrice: originalUnitPrice, // Unit price before discount
+            finalUnitPrice: finalUnitPrice, // Unit price after discount
+            quantity
         };
     }
 
     function getCelebrationTxt(targetNode) {
         const { discount, quantity } = getPriceData(targetNode);
-        const multi_item_txt = `Glückwunsch! Du sparst ${discount}€ durch unseren Mengenrabatt.`;
+        const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount)} durch unseren Mengenrabatt.`;
 
         {
             return quantity <= 1 ? "" : multi_item_txt;
@@ -93,12 +104,14 @@
     }
 
     function createReducedPriceLayout(targetNode) {
-        const { quantity, offerPrice } = getPriceData(targetNode);
+        const { totalPrice, quantity, offerPrice } = getPriceData(targetNode);
         const parentNode = q(targetNode, ".line-item-total-price:not(.ab-added-reduced-total)");
+
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-            parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${formatPriceToGerman(offerPrice)}</div>`);
+            q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(offerPrice);
+            parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
 
