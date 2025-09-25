@@ -18,7 +18,9 @@
   flex-direction: column;
   margin-bottom: 1rem;
 }
-.AB-TEST-018 .line-item-total-price.ab-added-reduced-total .line-item-total-price-value {
+.AB-TEST-018
+  .line-item-total-price.ab-added-reduced-total
+  .line-item-total-price-value {
   text-decoration: line-through;
 }
 .AB-TEST-018 .ab-reduced-total-price {
@@ -123,7 +125,9 @@
   vertical-align: middle;
   color: #4a545b;
 }
-.AB-TEST-018--v1 li.ab-quantity-dropdown-option:first-child .ab-quantity-dropdown-option__green-badge {
+.AB-TEST-018--v1
+  li.ab-quantity-dropdown-option:first-child
+  .ab-quantity-dropdown-option__green-badge {
   display: none;
 }
 .AB-TEST-018--v1 .ab-quantity-dropdown-option__green-badge {
@@ -154,10 +158,14 @@
   vertical-align: middle;
   color: #4a545b;
 }
-.AB-TEST-018--v1 .ab-quantity-dropdown-layout[expanded=true] .ab-quantity-dropdown-select:after {
+.AB-TEST-018--v1
+  .ab-quantity-dropdown-layout[expanded="true"]
+  .ab-quantity-dropdown-select:after {
   transform: rotate(-180deg);
 }
-.AB-TEST-018--v1 .ab-quantity-dropdown-layout[expanded=true] ul.ab-quantity-dropdown-options {
+.AB-TEST-018--v1
+  .ab-quantity-dropdown-layout[expanded="true"]
+  ul.ab-quantity-dropdown-options {
   display: block;
   opacity: 1;
   top: 41px;
@@ -168,7 +176,8 @@
   }
 }
 
-.AB-TEST-018--v2 .ab-celebration-message-container.ab-celebration-message-container--viewing-for-single {
+.AB-TEST-018--v2
+  .ab-celebration-message-container.ab-celebration-message-container--viewing-for-single {
   position: relative;
   margin-top: 18px;
   margin-bottom: 8px;
@@ -189,7 +198,8 @@
   color: #ffffff;
   text-align: center;
 }
-.AB-TEST-018--v2 .ab-celebration-message-container.ab-celebration-message-container--viewing-for-single::before {
+.AB-TEST-018--v2
+  .ab-celebration-message-container.ab-celebration-message-container--viewing-for-single::before {
   position: absolute;
   content: "";
   background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none"><path d="M7.16802 2.18271C7.8674 0.585897 10.1326 0.585899 10.832 2.18271L17.2989 16.9476C17.8776 18.2691 16.9095 19.75 15.4669 19.75H2.53313C1.09047 19.75 0.122352 18.2691 0.701139 16.9476L7.16802 2.18271Z" fill="%233CC261"/></svg>');
