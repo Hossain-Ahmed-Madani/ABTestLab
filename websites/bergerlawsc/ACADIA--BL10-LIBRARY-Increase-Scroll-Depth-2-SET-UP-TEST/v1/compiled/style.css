@@ -167,6 +167,7 @@
     display: block;
   }
   .AB-BL10 .ab-table-contents-container {
+    margin-top: 10px;
     justify-content: flex-end;
     gap: 20px;
   }

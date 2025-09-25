@@ -12,8 +12,10 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     const TEST_CONFIG = {
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
+
+    let ON_SCROLL_UPDATE_ON = true;
 
     SCROLL_GOALS_FIRED = {
         25: false,
@@ -125,6 +127,36 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         return matchingQuery ? headerOffsetObj[matchingQuery] : 150;
     }
 
+    function autoSelectOnScroll() {
+        const totalHeaders = qq(".dss-content h2, .dss-content h3").reduce((acc, cItem) => {
+            if (cItem.textContent.trim().length > 0) {
+                return acc + 1; // Only count if has text content
+            }
+            return acc;
+        }, 0);
+
+        const headerOffset = getHeaderOffset();
+        const arr = [...qq(".ab-table-content-item")];
+
+        const handleAutoSelect = () => {
+
+            if (totalHeaders === 1 || ON_SCROLL_UPDATE_ON === false) return;
+
+            arr.forEach((cItem) => {
+                const header = q(cItem.getAttribute("targeth3"));
+                const top = header.getBoundingClientRect().top;
+
+                if (top > 100 && top <= headerOffset && !cItem.hasAttribute("selected")) {
+                    arr.forEach((item) => item.removeAttribute("selected"));
+                    cItem.setAttribute("selected", "");
+                    q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
+                }
+            });
+        };
+
+        return { handleAutoSelect };
+    }
+
     // Window Scroll
     function ga4ScrollGoalFunctions() {
         const milestones = [25, 50, 75, 100]; // scroll checkpoints
@@ -162,7 +194,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         return { handleScrollGa4Goal };
     }
 
-    // .dss-content Scroll
     function getMileStoneFunctions(targetElement) {
         const milestones = [25, 50, 75, 100];
 
@@ -258,13 +289,18 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     }
 
     function handleScrollEvent() {
-        const selector = ".ab-scroll-container";
         const { handleScrollGa4Goal } = ga4ScrollGoalFunctions();
+        const { handleAutoSelect } = autoSelectOnScroll();
+
+        const selector = ".ab-scroll-container";
+
         waitForElement(
             () => q(selector),
             () => {
                 const throttledScrollHandler = throttle(updateProgressBar, 50);
+                
                 window.addEventListener("scroll", (e) => {
+                    handleAutoSelect();
                     handleScrollGa4Goal();
                     throttledScrollHandler();
                 });
@@ -277,6 +313,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
 
         const targetElement = q(selector);
         const headerOffset = getHeaderOffset();
+        ON_SCROLL_UPDATE_ON = false;
 
         window.scrollTo({
             top: targetElement.offsetTop - headerOffset,
@@ -285,7 +322,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
 
         fireGA4Event("BL10_Tableofcontent", targetElement.textContent);
 
-        setTimeout(() => (true), 1500);
+        setTimeout(() => (ON_SCROLL_UPDATE_ON = true), 2000);
     }
 
     function handleShowHideSelection(action /* show, hide */) {
