@@ -16,12 +16,12 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         test_name: "BL10: [LIBRARY] Increase Scroll Depth-(2) SET UP TEST",
         page_initials: "AB-BL10",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     let ON_SCROLL_UPDATE_ON = true;
 
-    SCROLL_GOALS_FIRED = {
+    const SCROLL_GOALS_FIRED = {
         25: false,
         50: false,
         75: false,
@@ -29,7 +29,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("BL10: ", eventName, eventLabel);
+        // console.log("BL10: ", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -54,6 +54,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
+
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
@@ -143,7 +144,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         const arr = [...qq(".ab-table-content-item")];
 
         const handleAutoSelect = () => {
-
             if (totalHeaders === 1 || ON_SCROLL_UPDATE_ON === false) return;
 
             arr.forEach((cItem) => {
@@ -307,7 +307,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
             () => q(selector),
             () => {
                 const throttledScrollHandler = throttle(updateProgressBar, 50);
-                
+
                 window.addEventListener("scroll", (e) => {
                     handleAutoSelect();
                     handleScrollGa4Goal();
@@ -436,8 +436,9 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
         });
     }
 
+    const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
     function init() {
-        const { page_initials, test_variation, test_version } = TEST_CONFIG;
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         createLayout();
         eventListeners();
@@ -445,7 +446,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     }
 
     function hasAllTargetElements() {
-        return !!(q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && q("#nav") && q(".dss-content"));
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q("#nav") && q(".dss-content"));
     }
 
     waitForElement(hasAllTargetElements, init);
