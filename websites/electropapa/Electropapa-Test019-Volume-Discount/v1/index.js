@@ -1,11 +1,12 @@
 /* 
-Ticket: https://trello.com/c/trjmMt98/4062-test018-electropapa-a-b-c-followup016-pds-side-cart-volume-discount
-Test Container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004169319/summary
+Ticket: https://trello.com/c/pVg0rKnQ/4093-test019-electropapa-a-b-c-followup016-pds-side-cart-textlink-popup-and-volume-discount-nudge-cart#
+Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Yt5f6zHNlA/edit?tab=t.0
 
-Forced Variation:
-v1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004169319.1004399802&utm_campaign=qa5
-v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004169319.1004400054&utm_campaign=qa5
+Test container: 
 
+ControL: 
+V1: 
+v2: 
 */
 
 (() => {
@@ -13,10 +14,10 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         client: "Netzproduzenten",
         project: "Project Name",
         site_url: "https://electropapa.com/de",
-        test_name: "Test018 A/B/C - Followup016 - PDS & Side Cart - Volume discount",
-        page_initials: "AB-TEST-018",
+        test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
+        page_initials: "AB-TEST-019",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -315,9 +316,6 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
                 toggleDropdown("hide");
             }
 
-            // if (e.target.closest(".product-detail-quantity-group.quantity-selector-group button.btn.btn-outline-light")) {
-            //     fireConvertGoal("Volume selector click | JS", 1004106270);
-            // }
         });
     }
 

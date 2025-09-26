@@ -1,6 +1,6 @@
 {
-    "id": "1758277344684_9126_Electropapa_Test018_Volume_Discount",
-    "name": "Electropapa-Test018-Volume-Discount",
+    "id": "1758277344684_9127_Electropapa_Test018_Volume_Discount",
+    "name": "Electropapa-Test019-Volume-Discount",
     "type": "A/B",
     "website": "electropapa",
     "variations": ["control", "v1"],
