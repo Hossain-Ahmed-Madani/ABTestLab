@@ -60,13 +60,13 @@ v2:
         return parseFloat(targetNode.innerText?.replace(".", "")?.replace(",", ".")?.replace("€", ""));
     }
 
-    function formatPriceToGerman(price) {
+    function formatPriceToGerman(price, trimInnerSpace = false) {
         const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
             style: "currency",
             currency: "EUR",
         }).format(price);
 
-        return formattedPriceTxt;
+        return trimInnerSpace ? formattedPriceTxt.replaceAll('\u00A0', ''): formattedPriceTxt;
     }
 
     function calculateDiscount(offerPrice, quantity) {
@@ -109,7 +109,7 @@ v2:
         const { discount, quantity } = getPriceData(targetNode);
 
         const single_item_txt = "<b>Clever sein und sparen:</b>&nbspAb 2 Stück mindestens 5% Rabatt";
-        const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount)} durch unseren Mengenrabatt.`;
+        const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount, true)} durch unseren Mengenrabatt.`;
 
         if (test_variation === 1) {
             return quantity <= 1 ? "" : multi_item_txt;
@@ -199,7 +199,6 @@ v2:
 
     function clickEvents() {
         document.body.addEventListener("click", (e) => {
-            
             // ==== Variation 1 ====
             if (e.target.closest(".ab-free-delivery-txt-cta")) {
                 q(".product-detail-tax-link").click();
