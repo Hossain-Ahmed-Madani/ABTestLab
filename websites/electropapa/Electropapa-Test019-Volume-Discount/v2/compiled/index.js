@@ -69,38 +69,27 @@ v2:
         return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
     }
 
-    function calculateDiscount(offerPrice, quantity) {
+    function calculateOriginalPrice(offerPrice, quantity) {
         const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
         const discount_percentage = quantity <= 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
 
-        // Calculate discount amount
-        const discount = offerPrice * (discount_percentage / 100);
-
-        return {
-            discountAmount: discount,
-            discountPercentage: discount_percentage,
-            finalTotal: offerPrice - discount,
-        };
+        // Calculate original price from discounted price
+        const originalPrice = offerPrice / (1 - discount_percentage / 100);
+        return originalPrice;
     }
 
     function getPriceData(targetNode) {
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
-        const offerPrice = parseAmount(offerPriceContainer);
+        const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
         const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-        // Get discount calculation results
-        const discountResult = calculateDiscount(offerPrice, quantity);
-
-        // Calculate unit prices
-        const finalUnitPrice = quantity > 0 ? discountResult.finalTotal / quantity : 0;
-        const originalUnitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
+        const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        const discount = totalPrice - offerPrice;
 
         return {
-            offerPrice, // Original total before discount
-            discount: discountResult.discountAmount, // Amount saved
-            totalPrice: discountResult.finalTotal, // Final price after discount
-            originalUnitPrice: originalUnitPrice, // Unit price before discount
-            finalUnitPrice: finalUnitPrice, // Unit price after discount
+            totalPrice, // Original main price
+            offerPrice, // Discounted price
+            discount, // Actual amount saved
             quantity,
         };
     }
@@ -117,13 +106,13 @@ v2:
     }
 
     function createReducedPriceLayout(targetNode) {
-        const { totalPrice, quantity, offerPrice } = getPriceData(targetNode);
+        const { totalPrice, quantity} = getPriceData(targetNode);
         const parentNode = q(targetNode, ".line-item-total-price:not(.ab-added-reduced-total)");
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-            q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(offerPrice);
-            parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${formatPriceToGerman(totalPrice)}</div>`);
+            // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
+            parentNode.insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-total-price ">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
 

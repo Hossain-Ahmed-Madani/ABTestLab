@@ -19,13 +19,12 @@
   margin-bottom: 1rem;
 }
 .AB-TEST-019 .line-item-total-price.ab-added-reduced-total .line-item-total-price-value {
-  text-decoration: line-through;
+  margin-top: 0.2rem;
 }
-.AB-TEST-019 .ab-reduced-total-price {
+.AB-TEST-019 .ab-total-price {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 5px;
   font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -34,6 +33,7 @@
   text-align: right;
   vertical-align: middle;
   color: #4a545b;
+  text-decoration: line-through;
 }
 .AB-TEST-019 .is-offcanvas .line-item-quantity-select-wrapper {
   min-width: 139px;
