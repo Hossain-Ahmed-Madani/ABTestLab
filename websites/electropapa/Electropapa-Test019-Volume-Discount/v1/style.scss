@@ -44,6 +44,7 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        margin-top: 5px;
 
         font-family: Inter, sans-serif;
         font-weight: 400;
@@ -114,8 +115,8 @@
         left: 0;
         right: 0;
         margin: auto;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 
     .ab-quantity-modal__container {
@@ -133,8 +134,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 15px;
-        height: 15px;
+        width: 5px;
+        height: 5px;
 
         font-family: Inter, sans-serif;
         font-weight: 400;
@@ -208,7 +209,7 @@
         padding: 0;
         user-select: none;
         border: 1px solid #47b4eb;
-        border-radius: 2px;
+        border-radius: 4px;
         transition: all 0.3s;
     }
 
@@ -323,7 +324,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            gap: 10px;
+            gap: 6px;
         }
     }
 }
