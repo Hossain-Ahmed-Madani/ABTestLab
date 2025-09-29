@@ -66,7 +66,7 @@ v2:
             currency: "EUR",
         }).format(price);
 
-        return trimInnerSpace ? formattedPriceTxt.replaceAll('\u00A0', ''): formattedPriceTxt;
+        return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
     }
 
     function calculateDiscount(offerPrice, quantity) {
