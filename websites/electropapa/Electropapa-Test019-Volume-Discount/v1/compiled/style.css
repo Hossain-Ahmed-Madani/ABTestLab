@@ -41,7 +41,7 @@
 .AB-TEST-019 .line-item-quantity {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: end;
 }
 
 .AB-TEST-019--v1 .product-detail-tax-link {
