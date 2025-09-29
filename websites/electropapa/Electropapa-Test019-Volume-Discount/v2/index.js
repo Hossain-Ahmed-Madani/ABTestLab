@@ -131,14 +131,48 @@ v2:
         }
     }
 
-    function createCelebrationMessageLayout(targetNode) {
+    function createSingleItemProgressBtnLayout() {
+        const layout = /* HTML */ `
+            <div class="ab-single-item-progress-btn-container">
+                <div class="ab-single-item-progress-btn-container__heading">Jetzt zum Sparpreis immer Ersatz parat haben</div>
+                <div class="ab-single-item-progress-btn-container__progress-bar" step="1">
+                    <div class="ab-single-item-progress-btn-container__progress-bar__pointer ab-single-item-progress-btn-container__progress-bar__pointer--2"></div>
+                    <div class="ab-single-item-progress-btn-container__progress-bar__pointer ab-single-item-progress-btn-container__progress-bar__pointer--3"></div>
+                </div>
+                <div class="ab-single-item-progress-btn-container__btn-container">
+                    <div class="ab-single-item-progress-btn-container__btn ab-single-item-progress-btn-container__btn--selected" quantity="1">
+                        <span class="ab-single-item-progress-btn-container__btn__label">1 Stück</span>
+                        <span class="ab-single-item-progress-btn-container__btn__badge"></span>
+                    </div>
+                    <div class="ab-single-item-progress-btn-container__btn" quantity="2">
+                        <span class="ab-single-item-progress-btn-container__btn__label">2 Stück</span>
+                        <span class="ab-single-item-progress-btn-container__btn__badge">Spare 5%</span>
+                    </div>
+                    <div class="ab-single-item-progress-btn-container__btn" quantity="4">
+                        <span class="ab-single-item-progress-btn-container__btn__label">4 Stück</span>
+                        <span class="ab-single-item-progress-btn-container__btn__badge">Spare 6%</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        return layout;
+    }
+
+    function createCelebrationMessageLayoutV2(targetNode) {
         const { totalPrice, quantity, discount, offerPrice } = getPriceData(targetNode);
 
-        if (!q(targetNode, ".ab-celebration-message-container")) {
+        if (!q(targetNode, ".ab-single-item-progress-btn-container") && quantity < 2) {
+            q(targetNode, ".line-item-quantity").classList.add("ab-hidden");
+            q(targetNode, ".line-item-remove").insertAdjacentElement("beforeend", q(targetNode, ".line-item-total-price.line-item-price"));
+            targetNode.insertAdjacentHTML("beforeend", createSingleItemProgressBtnLayout());
+        }
+
+        if (!q(targetNode, ".ab-celebration-message-container") && quantity > 1) {
             targetNode.insertAdjacentHTML(
                 "beforeend",
                 /* HTML */
-                `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>`
+                `<div class="ab-celebration-message-container">${getCelebrationTxt(targetNode)}</div>`
             );
 
             if (quantity > 1) {
@@ -151,7 +185,7 @@ v2:
         const targetNodes = qq(".offcanvas-cart-items .line-item");
         targetNodes.forEach((targetNode) => {
             createReducedPriceLayout(targetNode);
-            createCelebrationMessageLayout(targetNode);
+            createCelebrationMessageLayoutV2(targetNode);
         });
     }
 
@@ -190,6 +224,36 @@ v2:
         document.body.addEventListener("click", (e) => {
             // ==== Variation 2 ====
 
+            if (e.target.closest(".ab-single-item-progress-btn-container__btn:not(.ab-single-item-progress-btn-container__btn--selected)")) {
+                const clickedItem = e.target.closest(".ab-single-item-progress-btn-container__btn:not(.ab-single-item-progress-btn-container__btn--selected)");
+                const quantity = clickedItem.getAttribute("quantity");
+                const container = e.target.closest(".ab-single-item-progress-btn-container");
+
+                qq(container, ".ab-single-item-progress-btn-container__btn").forEach((item) => {
+                    const className = "ab-single-item-progress-btn-container__btn--selected";
+                    if (item === clickedItem) {
+                        item.classList.add(className);
+                    } else {
+                        item.classList.remove(className);
+                    }
+                });
+
+                const progressBar = q(container, ".ab-single-item-progress-btn-container__progress-bar");
+
+                if (quantity === "1") {
+                    progressBar.setAttribute("step", 1);
+                } else if (quantity === "2") {
+                    progressBar.setAttribute("step", 2);
+                } else if (quantity === "4") {
+                    progressBar.setAttribute("step", 3);
+                }
+
+                const inputElement = q(e.target.closest(".line-item"), ".js-offcanvas-cart-change-quantity-number");
+                inputElement.value = quantity;
+                const changeEvent = new Event("change", { bubbles: true });
+                inputElement.dispatchEvent(changeEvent);
+            }
+
             if (e.target.closest(".ab-quantity-dropdown-option")) {
                 const curr = e.target.closest(".ab-quantity-dropdown-option");
                 const selectedValue = curr.getAttribute("value");
@@ -205,7 +269,7 @@ v2:
         document.body.classList.add(...BODY_CLASSLIST);
         console.table(TEST_CONFIG);
         bodyObserver(); /* Observing body -> when side cart appears in dom -> Observing Side Cart */
-        // clickEvents();
+        clickEvents();
     }
 
     function hasAllTargetElements() {
