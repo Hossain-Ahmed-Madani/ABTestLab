@@ -19,7 +19,7 @@
 
     .ab-celebration-message-container {
         display: block;
-        padding: 13px 4px 14px;
+        padding: 13px 0 14px;
         font-family: Inter, sans-serif;
         font-weight: 600;
         font-size: 12px;
@@ -66,18 +66,47 @@
         justify-content: flex-start;
         align-items: end;
     }
+
+    @media screen and (min-width: 991px) {
+        .ab-celebration-message-container {
+            padding: 13px 4px 14px;
+            white-space: nowrap;
+        }
+    }
 }
 
 .AB-TEST-019--v2 {
-    .ab-celebration-message-container--viewing-for-single {
-    }
+    // .ab-celebration-message-container--viewing-for-single {
+    // }
 
     .ab-hidden {
         display: none;
     }
 
+    .row.line-item-row {
+        padding-bottom: 0.5rem;
+    }
+
+    .line-item-info {
+        margin-bottom: 0 !important;
+    }
+
+    .is-offcanvas .line-item-remove {
+        height: auto;
+    }
+
+    .line-item-remove {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
     .line-item-remove .line-item-total-price.line-item-price {
         margin-left: auto;
+        // margin-top: 17px;
+        // margin-top: 100%;
+        margin-top: 0;
+        margin-bottom: 9px;
     }
 
     .ab-single-item-progress-btn-container {
