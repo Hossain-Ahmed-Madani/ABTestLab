@@ -11,7 +11,6 @@
   letter-spacing: 0px;
   color: #03a616;
   text-align: left;
-  white-space: nowrap;
 }
 .AB-TEST-019 .line-item-total-price.ab-added-reduced-total {
   display: flex;
@@ -20,13 +19,14 @@
 }
 .AB-TEST-019 .line-item-total-price.ab-added-reduced-total .line-item-total-price-value {
   margin-top: 0.2rem;
+  font-weight: 400;
 }
 .AB-TEST-019 .ab-total-price {
   display: flex;
   justify-content: flex-end;
   align-items: center;
   font-family: Inter, sans-serif;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 14px;
   line-height: 21px;
   letter-spacing: 0px;

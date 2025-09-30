@@ -17,7 +17,7 @@ v2:
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 2 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -49,10 +49,15 @@ v2:
     }
 
     function mutationObserverFunction(selector, callback, config) {
-        const targetNode = q(selector);
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-        return observer;
+        waitForElement(
+            () => q(selector),
+            () => {
+                const targetNode = q(selector);
+                const observer = new MutationObserver(callback);
+                observer.observe(targetNode, config);
+                return observer;
+            }
+        );
     }
 
     function parseAmount(targetNode) {
@@ -253,11 +258,16 @@ v2:
     }
 
     // ==== Variation 2 ====
-
     function init() {
         document.body.classList.add(...BODY_CLASSLIST);
         console.table(TEST_CONFIG);
-        bodyObserver(); /* Observing body -> when side cart appears in dom -> Observing Side Cart */
+        // Observing body -> when side cart appears in dom -> Observing Side Cart
+        bodyObserver();
+
+        // Handle when test buckets on side cart open
+        cartObserver();
+
+        // Other functionalities
         clickEvents();
     }
 
