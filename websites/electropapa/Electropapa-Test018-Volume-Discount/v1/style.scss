@@ -37,14 +37,13 @@
     }
 
     .line-item-total-price.ab-added-reduced-total .line-item-total-price-value {
-        text-decoration: line-through;
+        margin-top: 0.2rem;
     }
 
-    .ab-reduced-total-price {
+    .ab-total-price {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-
         font-family: Inter, sans-serif;
         font-weight: 400;
         font-size: 14px;
@@ -53,6 +52,7 @@
         text-align: right;
         vertical-align: middle;
         color: #4a545b;
+        text-decoration: line-through;
     }
 
     .is-offcanvas .line-item-quantity-select-wrapper {
