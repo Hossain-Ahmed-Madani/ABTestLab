@@ -114,7 +114,6 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-            // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
             parentNode.insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-total-price ">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
@@ -122,11 +121,16 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     function createCelebrationMessageLayout(targetNode) {
         const { totalPrice, quantity, discount, offerPrice } = getPriceData(targetNode);
 
+        const layout = /* HTML */ `
+            <div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>
+        `;
+
         if (!q(targetNode, ".ab-celebration-message-container")) {
-            targetNode.insertAdjacentHTML(
-                "beforeend",
-                /* HTML */
-                `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>`
+            setTimeout(
+                () => {
+                    targetNode.insertAdjacentHTML("beforeend", layout);
+                },
+                quantity > 1 && test_variation === 2 ? 1000 : 0
             );
 
             if (quantity > 1) {
@@ -286,7 +290,6 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     function clickEvents() {
         document.body.addEventListener("click", (e) => {
             if (e.target.closest(".ab-quantity-dropdown-select")) {
-                // fireConvertGoal("Dropdown Open Click | JS", 1004106271);
                 toggleDropdown("toggle");
             }
 
@@ -302,10 +305,6 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
                 q(".ab-quantity-dropdown-select").innerText = selectedValue;
                 toggleDropdown("hide");
             }
-
-            // if (e.target.closest(".product-detail-quantity-group.quantity-selector-group button.btn.btn-outline-light")) {
-            //     fireConvertGoal("Volume selector click | JS", 1004106270);
-            // }
         });
     }
 

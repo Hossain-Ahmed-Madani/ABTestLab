@@ -1,3 +1,13 @@
+/* 
+Ticket: https://trello.com/c/trjmMt98/4062-test018-electropapa-a-b-c-followup016-pds-side-cart-volume-discount
+Test Container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004169319/summary
+
+Forced Variation:
+v1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004169319.1004399802&utm_campaign=qa5
+v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004169319.1004400054&utm_campaign=qa5
+
+*/
+
 (() => {
   const TEST_CONFIG = {
     client: "Netzproduzenten",
@@ -7,7 +17,7 @@
       "Test018 A/B/C - Followup016 - PDS & Side Cart - Volume discount",
     page_initials: "AB-TEST-018",
     test_variation: 1 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -64,61 +74,49 @@
     );
   }
 
-  function formatPriceToGerman(price) {
+  function formatPriceToGerman(price, trimInnerSpace = false) {
     const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
       style: "currency",
       currency: "EUR",
     }).format(price);
 
-    return formattedPriceTxt;
+    return trimInnerSpace
+      ? formattedPriceTxt.replaceAll("\u00A0", "")
+      : formattedPriceTxt;
   }
 
-  function calculateDiscount(offerPrice, quantity) {
+  function calculateOriginalPrice(offerPrice, quantity) {
     const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
     const discount_percentage =
       quantity <= 10
         ? percentage_by_quantity[quantity]
         : percentage_by_quantity[10];
 
-    // Calculate discount amount
-    const discount = offerPrice * (discount_percentage / 100);
-
-    return {
-      discountAmount: discount,
-      discountPercentage: discount_percentage,
-      finalTotal: offerPrice - discount,
-    };
+    // Calculate original price from discounted price
+    const originalPrice = offerPrice / (1 - discount_percentage / 100);
+    return originalPrice;
   }
 
   function getPriceData(targetNode) {
     const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
-    const offerPrice = parseAmount(offerPriceContainer);
+    const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
     const quantity =
       +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-    // Get discount calculation results
-    const discountResult = calculateDiscount(offerPrice, quantity);
-
-    // Calculate unit prices
-    const finalUnitPrice =
-      quantity > 0 ? discountResult.finalTotal / quantity : 0;
-    const originalUnitPrice = parseAmount(
-      q(targetNode, ".line-item-unit-price-value"),
-    );
+    const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+    const discount = totalPrice - offerPrice;
 
     return {
-      offerPrice, // Original total before discount
-      discount: discountResult.discountAmount, // Amount saved
-      totalPrice: discountResult.finalTotal, // Final price after discount
-      originalUnitPrice: originalUnitPrice, // Unit price before discount
-      finalUnitPrice: finalUnitPrice, // Unit price after discount
+      totalPrice, // Original main price
+      offerPrice, // Discounted price
+      discount, // Actual amount saved
       quantity,
     };
   }
 
   function getCelebrationTxt(targetNode) {
     const { discount, quantity } = getPriceData(targetNode);
-    const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount)} durch unseren Mengenrabatt.`;
+    const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount, true)} durch unseren Mengenrabatt.`;
 
     {
       return quantity <= 1 ? "" : multi_item_txt;
@@ -126,7 +124,7 @@
   }
 
   function createReducedPriceLayout(targetNode) {
-    const { totalPrice, quantity, offerPrice } = getPriceData(targetNode);
+    const { totalPrice, quantity } = getPriceData(targetNode);
     const parentNode = q(
       targetNode,
       ".line-item-total-price:not(.ab-added-reduced-total)",
@@ -134,11 +132,9 @@
 
     if (quantity > 1 && parentNode) {
       parentNode.classList.add("ab-added-reduced-total");
-      q(parentNode, ".line-item-total-price-value").innerText =
-        formatPriceToGerman(offerPrice);
       parentNode.insertAdjacentHTML(
-        "beforeend",
-        /* HTML */ `<div class="ab-reduced-total-price">
+        "afterbegin",
+        /* HTML */ `<div class="ab-total-price ">
           ${formatPriceToGerman(totalPrice)}
         </div>`,
       );
@@ -148,18 +144,20 @@
   function createCelebrationMessageLayout(targetNode) {
     const { quantity } = getPriceData(targetNode);
 
+    const layout = /* HTML */ `
+      <div
+        class="ab-celebration-message-container ${quantity <= 1
+          ? "ab-celebration-message-container--viewing-for-single"
+          : ""}"
+      >
+        ${getCelebrationTxt(targetNode)}
+      </div>
+    `;
+
     if (!q(targetNode, ".ab-celebration-message-container")) {
-      targetNode.insertAdjacentHTML(
-        "beforeend",
-        /* HTML */
-        `<div
-          class="ab-celebration-message-container ${quantity <= 1
-            ? "ab-celebration-message-container--viewing-for-single"
-            : ""}"
-        >
-          ${getCelebrationTxt(targetNode)}
-        </div>`,
-      );
+      setTimeout(() => {
+        targetNode.insertAdjacentHTML("beforeend", layout);
+      }, 0);
 
       if (quantity > 1) {
         fireConvertGoal("Shows Celebration Message | JS", 1004106272);
@@ -343,7 +341,6 @@
   function clickEvents() {
     document.body.addEventListener("click", (e) => {
       if (e.target.closest(".ab-quantity-dropdown-select")) {
-        // fireConvertGoal("Dropdown Open Click | JS", 1004106271);
         toggleDropdown("toggle");
       }
 
@@ -364,10 +361,6 @@
         q(".ab-quantity-dropdown-select").innerText = selectedValue;
         toggleDropdown("hide");
       }
-
-      // if (e.target.closest(".product-detail-quantity-group.quantity-selector-group button.btn.btn-outline-light")) {
-      //     fireConvertGoal("Volume selector click | JS", 1004106270);
-      // }
     });
   }
 
