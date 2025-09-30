@@ -7,6 +7,7 @@ Test container: https://app.convert.com/accounts/1004828/projects/10047105/exper
 ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401762&utm_campaign=qa5 
 V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5 
 v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5 
+
 */
 
 (() => {
@@ -17,7 +18,7 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -49,10 +50,15 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     }
 
     function mutationObserverFunction(selector, callback, config) {
-        const targetNode = q(selector);
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-        return observer;
+        waitForElement(
+            () => q(selector),
+            () => {
+                const targetNode = q(selector);
+                const observer = new MutationObserver(callback);
+                observer.observe(targetNode, config);
+                return observer;
+            }
+        );
     }
 
     function parseAmount(targetNode) {
@@ -69,38 +75,27 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
     }
 
-    function calculateDiscount(offerPrice, quantity) {
+    function calculateOriginalPrice(offerPrice, quantity) {
         const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
         const discount_percentage = quantity <= 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
 
-        // Calculate discount amount
-        const discount = offerPrice * (discount_percentage / 100);
-
-        return {
-            discountAmount: discount,
-            discountPercentage: discount_percentage,
-            finalTotal: offerPrice - discount,
-        };
+        // Calculate original price from discounted price
+        const originalPrice = offerPrice / (1 - discount_percentage / 100);
+        return originalPrice;
     }
 
     function getPriceData(targetNode) {
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
-        const offerPrice = parseAmount(offerPriceContainer);
+        const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
         const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-        // Get discount calculation results
-        const discountResult = calculateDiscount(offerPrice, quantity);
-
-        // Calculate unit prices
-        const finalUnitPrice = quantity > 0 ? discountResult.finalTotal / quantity : 0;
-        const originalUnitPrice = parseAmount(q(targetNode, ".line-item-unit-price-value"));
+        const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        const discount = totalPrice - offerPrice;
 
         return {
-            offerPrice, // Original total before discount
-            discount: discountResult.discountAmount, // Amount saved
-            totalPrice: discountResult.finalTotal, // Final price after discount
-            originalUnitPrice: originalUnitPrice, // Unit price before discount
-            finalUnitPrice: finalUnitPrice, // Unit price after discount
+            totalPrice, // Original main price
+            offerPrice, // Discounted price
+            discount, // Actual amount saved
             quantity,
         };
     }
@@ -115,13 +110,13 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     }
 
     function createReducedPriceLayout(targetNode) {
-        const { totalPrice, quantity, offerPrice } = getPriceData(targetNode);
+        const { totalPrice, quantity} = getPriceData(targetNode);
         const parentNode = q(targetNode, ".line-item-total-price:not(.ab-added-reduced-total)");
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-            q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(offerPrice);
-            parentNode.insertAdjacentHTML("beforeend", /* HTML */ `<div class="ab-reduced-total-price">${formatPriceToGerman(totalPrice)}</div>`);
+            // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
+            parentNode.insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-total-price ">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
 
@@ -347,7 +342,14 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     function init() {
         document.body.classList.add(...BODY_CLASSLIST);
         console.table(TEST_CONFIG);
-        bodyObserver(); /* Observing body -> when side cart appears in dom -> Observing Side Cart */
+
+        // Observing body -> when side cart appears in dom -> Observing Side Cart
+        bodyObserver();
+
+        // Handle when test buckets on side cart open
+        cartObserver();
+
+        // Other functionalities
         createV1PriceModal();
         clickEvents();
     }

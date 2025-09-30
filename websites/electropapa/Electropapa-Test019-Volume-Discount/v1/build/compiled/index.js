@@ -1,13 +1,25 @@
+/* 
+Ticket: https://trello.com/c/pVg0rKnQ/4093-test019-electropapa-a-b-c-followup016-pds-side-cart-textlink-popup-and-volume-discount-nudge-cart#
+Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Yt5f6zHNlA/edit?tab=t.0
+
+Test container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004170195/summary
+
+ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401762&utm_campaign=qa5 
+V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5 
+v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5 
+
+*/
+
 (() => {
   const TEST_CONFIG = {
     client: "Netzproduzenten",
     project: "Project Name",
     site_url: "https://electropapa.com/de",
     test_name:
-      "Test018 A/B/C - Followup016 - PDS & Side Cart - Volume discount",
-    page_initials: "AB-TEST-018",
-    test_variation: 1 /* 0, 1, 2 */,
-    test_version: 0.0001,
+      "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
+    page_initials: "AB-TEST-019",
+    test_variation: 1 /* 1, 2 */,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -38,7 +50,7 @@
   }
 
   function qq(s, o) {
-    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    return [...document.querySelectorAll(s)];
   }
 
   function fireConvertGoal(goalName, goalId) {
@@ -48,10 +60,15 @@
   }
 
   function mutationObserverFunction(selector, callback, config) {
-    const targetNode = q(selector);
-    const observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
-    return observer;
+    waitForElement(
+      () => q(selector),
+      () => {
+        const targetNode = q(selector);
+        const observer = new MutationObserver(callback);
+        observer.observe(targetNode, config);
+        return observer;
+      },
+    );
   }
 
   function parseAmount(targetNode) {
@@ -64,61 +81,49 @@
     );
   }
 
-  function formatPriceToGerman(price) {
+  function formatPriceToGerman(price, trimInnerSpace = false) {
     const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
       style: "currency",
       currency: "EUR",
     }).format(price);
 
-    return formattedPriceTxt;
+    return trimInnerSpace
+      ? formattedPriceTxt.replaceAll("\u00A0", "")
+      : formattedPriceTxt;
   }
 
-  function calculateDiscount(offerPrice, quantity) {
+  function calculateOriginalPrice(offerPrice, quantity) {
     const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
     const discount_percentage =
       quantity <= 10
         ? percentage_by_quantity[quantity]
         : percentage_by_quantity[10];
 
-    // Calculate discount amount
-    const discount = offerPrice * (discount_percentage / 100);
-
-    return {
-      discountAmount: discount,
-      discountPercentage: discount_percentage,
-      finalTotal: offerPrice - discount,
-    };
+    // Calculate original price from discounted price
+    const originalPrice = offerPrice / (1 - discount_percentage / 100);
+    return originalPrice;
   }
 
   function getPriceData(targetNode) {
     const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
-    const offerPrice = parseAmount(offerPriceContainer);
+    const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
     const quantity =
       +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-    // Get discount calculation results
-    const discountResult = calculateDiscount(offerPrice, quantity);
-
-    // Calculate unit prices
-    const finalUnitPrice =
-      quantity > 0 ? discountResult.finalTotal / quantity : 0;
-    const originalUnitPrice = parseAmount(
-      q(targetNode, ".line-item-unit-price-value"),
-    );
+    const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+    const discount = totalPrice - offerPrice;
 
     return {
-      offerPrice, // Original total before discount
-      discount: discountResult.discountAmount, // Amount saved
-      totalPrice: discountResult.finalTotal, // Final price after discount
-      originalUnitPrice: originalUnitPrice, // Unit price before discount
-      finalUnitPrice: finalUnitPrice, // Unit price after discount
+      totalPrice, // Original main price
+      offerPrice, // Discounted price
+      discount, // Actual amount saved
       quantity,
     };
   }
 
   function getCelebrationTxt(targetNode) {
     const { discount, quantity } = getPriceData(targetNode);
-    const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount)} durch unseren Mengenrabatt.`;
+    const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount, true)} durch unseren Mengenrabatt.`;
 
     {
       return quantity <= 1 ? "" : multi_item_txt;
@@ -126,7 +131,7 @@
   }
 
   function createReducedPriceLayout(targetNode) {
-    const { totalPrice, quantity, offerPrice } = getPriceData(targetNode);
+    const { totalPrice, quantity } = getPriceData(targetNode);
     const parentNode = q(
       targetNode,
       ".line-item-total-price:not(.ab-added-reduced-total)",
@@ -134,11 +139,10 @@
 
     if (quantity > 1 && parentNode) {
       parentNode.classList.add("ab-added-reduced-total");
-      q(parentNode, ".line-item-total-price-value").innerText =
-        formatPriceToGerman(offerPrice);
+      // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
       parentNode.insertAdjacentHTML(
-        "beforeend",
-        /* HTML */ `<div class="ab-reduced-total-price">
+        "afterbegin",
+        /* HTML */ `<div class="ab-total-price ">
           ${formatPriceToGerman(totalPrice)}
         </div>`,
       );
@@ -220,29 +224,50 @@
     });
   }
 
-  function updateClassName() {
-    qq(
-      "#productDetailPageBuyProductForm .col-4.col-sm-3.d-flex.justify-content-end",
-    ).forEach((item) => {
-      item.classList.remove("col-sm-3");
-      item.classList.add("col-sm-4");
-    });
+  function showHideVolumeDiscountModal(action /* show, hide */) {
+    const body = document.body;
+    const className = BODY_CLASSLIST[0] + "--show-volume-discount-modal";
+    if (action === "show") {
+      body.classList.add(className);
+    } else if (action === "hide") {
+      body.classList.remove(className);
+      //
+    }
+  }
 
-    qq(
-      "#productDetailPageBuyProductForm .col-6.col-sm-7.col-md-8.col-lg-7.col-xl-8",
-    ).forEach((item) => {
-      item.classList.remove("col-md-8", "col-xl-8");
-    });
+  function clickEvents() {
+    document.body.addEventListener("click", (e) => {
+      // ==== Variation 1 ====
+      if (e.target.closest(".ab-free-delivery-txt-cta")) {
+        q(".product-detail-tax-link").click();
+      }
 
-    qq(
-      "#productDetailPageBuyProductForm .col-sm-9, #productDetailPageBuyProductForm .col-md-9",
-    ).forEach((item) => {
-      item.classList.remove("col-sm-9", "col-md-9");
-      item.classList.add("col-sm-8");
+      if (e.target.closest(".ab-volume-discount-modal-cta")) {
+        showHideVolumeDiscountModal("show");
+      }
+
+      if (
+        e.target.closest(".ab-quantity-modal__close-cta") ||
+        (e.target.closest(".ab-quantity-modal-backdrop") &&
+          !e.target.closest(".ab-quantity-modal"))
+      ) {
+        showHideVolumeDiscountModal("hide");
+      }
+
+      if (e.target.closest(".ab-quantity-dropdown-option")) {
+        const curr = e.target.closest(".ab-quantity-dropdown-option");
+        const selectedValue = curr.getAttribute("value");
+        const targetInput = q(
+          ".product-detail-quantity-group.quantity-selector-group input.product-detail-quantity-input",
+        );
+        targetInput.value = selectedValue;
+        showHideVolumeDiscountModal("hide");
+      }
     });
   }
 
-  function createDropdownComponent() {
+  // ==== Variation 1 ====
+  function createV1PriceModal() {
     const SELECT_OPTIONS = [
       {
         value: 1,
@@ -301,84 +326,86 @@
       },
     ];
 
-    const layout = /* HTML */ `
-      <div class="ab-quantity-dropdown-layout" expanded="false">
-        <div class="ab-quantity-dropdown-select">
-          ${SELECT_OPTIONS[0].label}
-        </div>
-        <ul class="ab-quantity-dropdown-options">
-          ${SELECT_OPTIONS.map(
-            ({ value, label, discount_percentage }) => /* HTML */ `
-              <li class="ab-quantity-dropdown-option" value="${value}">
-                <span class="ab-quantity-dropdown-option__value">${label}</span>
-                ${value <= 10
-                  ? `<span class="ab-quantity-dropdown-option__green-badge">Spare ${discount_percentage}%</span>`
-                  : `<span class="ab-quantity-dropdown-option__ten-plus-badge"><i>Bitte Mail an uns</i></span>`}
-              </li>
-            `,
-          ).join("")}
-        </ul>
-      </div>
-    `;
+    const selector = ".product-detail-tax-link, .product-delivery-available";
 
-    q(
-      ".product-detail-quantity-group.quantity-selector-group",
-    ).insertAdjacentHTML("afterend", layout);
-  }
-
-  function toggleDropdown(action /* show, hide, toggle */) {
-    const container = q(".ab-quantity-dropdown-layout");
-    const isExpanded =
-      container.getAttribute("expanded")?.toLowerCase() === "true";
-
-    if (action === "toggle") {
-      container.setAttribute("expanded", !isExpanded);
-    } else if (action === "show") {
-      container.setAttribute("expanded", true);
-    } else if (action === "hide") {
-      container.setAttribute("expanded", false);
-    }
-  }
-
-  function clickEvents() {
-    document.body.addEventListener("click", (e) => {
-      if (e.target.closest(".ab-quantity-dropdown-select")) {
-        // fireConvertGoal("Dropdown Open Click | JS", 1004106271);
-        toggleDropdown("toggle");
-      }
-
-      if (
-        q(".ab-quantity-dropdown-select") &&
-        !e.target.closest(".ab-quantity-dropdown-layout")
-      ) {
-        toggleDropdown("hide");
-      }
-
-      if (e.target.closest(".ab-quantity-dropdown-option")) {
-        const curr = e.target.closest(".ab-quantity-dropdown-option");
-        const selectedValue = curr.getAttribute("value");
-        const targetInput = q(
-          ".product-detail-quantity-group.quantity-selector-group input.product-detail-quantity-input",
-        );
-        targetInput.value = selectedValue;
-        q(".ab-quantity-dropdown-select").innerText = selectedValue;
-        toggleDropdown("hide");
-      }
-
-      // if (e.target.closest(".product-detail-quantity-group.quantity-selector-group button.btn.btn-outline-light")) {
-      //     fireConvertGoal("Volume selector click | JS", 1004106270);
-      // }
-    });
-  }
-
-  function createV1PriceDropdown() {
-    const selector =
-      "body.is-ctl-product.is-act-index #productDetailPageBuyProductForm";
     waitForElement(
-      () => q(selector),
+      () => qq(selector).length === 2,
       () => {
-        updateClassName();
-        createDropdownComponent();
+        // ======  Modal Cta Link ======
+        q(".product-detail-tax-link").insertAdjacentHTML(
+          "afterend",
+          `<span class="ab-volume-discount-modal-cta">Sparpreis bei höherer Stückzahl verfügbar</span>`,
+        );
+
+        // ====== Delivery Layout ======
+        q(".product-delivery-available").insertAdjacentHTML(
+          "afterend",
+          /* HTML */ `
+            <div class="ab-free-delivery-txt-cta-container">
+              <div class="product-delivery-available">
+                <div>
+                  <span class="delivery-status-indicator bg-success"></span>
+                </div>
+                <div class="high-availability">
+                  <span class="text-success fw-bold">Auf Lager</span>
+                </div>
+              </div>
+              <div class="product-delivery-available ab-free-delivery-txt-cta">
+                <div>
+                  <span class="delivery-status-indicator bg-success"></span>
+                </div>
+                <div class="high-availability">
+                  <span class="text-success fw-bold"
+                    >Kostenfreie Lieferung in DE</span
+                  >
+                </div>
+              </div>
+            </div>
+          `,
+        );
+
+        // ====== Modal Layout ======
+        q("body").insertAdjacentHTML(
+          "afterbegin",
+          /* HTML */ `
+            <!-- MODAL  -->
+            <div class="ab-quantity-modal-layout">
+              <div class="ab-quantity-modal-backdrop"></div>
+              <div class="ab-quantity-modal">
+                <div class="ab-quantity-modal__container">
+                  <div
+                    class="ab-quantity-modal__close-cta btn-close close"
+                  ></div>
+                  <div class="ab-quantity-modal__heading">
+                    Jetzt zum Sparpreis immer Ersatz parat haben
+                  </div>
+                  <div class="ab-quantity-modal__sub-heading">
+                    Clever sein und sparen!
+                  </div>
+                  <div class="ab-quantity-dropdown-layout">
+                    <ul class="ab-quantity-dropdown-options">
+                      ${SELECT_OPTIONS.map(
+                        ({ value, label, discount_percentage }) => /* HTML */ `
+                          <li
+                            class="ab-quantity-dropdown-option"
+                            value="${value}"
+                          >
+                            <span class="ab-quantity-dropdown-option__value"
+                              >${label} Stk.</span
+                            >
+                            ${value <= 10
+                              ? `<span class="ab-quantity-dropdown-option__green-badge">Spare ${discount_percentage}%</span>`
+                              : `<span class="ab-quantity-dropdown-option__ten-plus-badge"><i>Bitte Mail an uns</i></span>`}
+                          </li>
+                        `,
+                      ).join("")}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `,
+        );
       },
     );
   }
@@ -386,8 +413,15 @@
   function init() {
     document.body.classList.add(...BODY_CLASSLIST);
     console.table(TEST_CONFIG);
-    bodyObserver(); /* Observing body -> when side cart appears in dom -> Observing Side Cart */
-    createV1PriceDropdown();
+
+    // Observing body -> when side cart appears in dom -> Observing Side Cart
+    bodyObserver();
+
+    // Handle when test buckets on side cart open
+    cartObserver();
+
+    // Other functionalities
+    createV1PriceModal();
     clickEvents();
   }
 

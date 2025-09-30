@@ -2,11 +2,12 @@
 Ticket: https://trello.com/c/pVg0rKnQ/4093-test019-electropapa-a-b-c-followup016-pds-side-cart-textlink-popup-and-volume-discount-nudge-cart#
 Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Yt5f6zHNlA/edit?tab=t.0
 
-Test container: 
+Test container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004170195/summary
 
-ControL: 
-V1: 
-v2: 
+ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401762&utm_campaign=qa5 
+V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5 
+v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5 
+
 */
 
 (() => {
@@ -17,7 +18,7 @@ v2:
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -49,10 +50,15 @@ v2:
     }
 
     function mutationObserverFunction(selector, callback, config) {
-        const targetNode = q(selector);
-        const observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);
-        return observer;
+        waitForElement(
+            () => q(selector),
+            () => {
+                const targetNode = q(selector);
+                const observer = new MutationObserver(callback);
+                observer.observe(targetNode, config);
+                return observer;
+            }
+        );
     }
 
     function parseAmount(targetNode) {
@@ -115,7 +121,7 @@ v2:
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-              // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
+            // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
             parentNode.insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-total-price ">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
@@ -342,7 +348,14 @@ v2:
     function init() {
         document.body.classList.add(...BODY_CLASSLIST);
         console.table(TEST_CONFIG);
-        bodyObserver(); /* Observing body -> when side cart appears in dom -> Observing Side Cart */
+
+        // Observing body -> when side cart appears in dom -> Observing Side Cart
+        bodyObserver();
+
+        // Handle when test buckets on side cart open
+        cartObserver();
+
+        // Other functionalities
         createV1PriceModal();
         clickEvents();
     }

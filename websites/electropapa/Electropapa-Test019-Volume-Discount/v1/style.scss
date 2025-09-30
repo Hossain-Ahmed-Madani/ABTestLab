@@ -19,7 +19,7 @@
 
     .ab-celebration-message-container {
         display: block;
-        padding: 13px 4px 14px;
+        padding: 13px 0px 14px;
         font-family: Inter, sans-serif;
         font-weight: 600;
         font-size: 12px;
@@ -27,7 +27,6 @@
         letter-spacing: 0px;
         color: #03a616;
         text-align: left;
-        white-space: nowrap;
     }
 
     .line-item-total-price.ab-added-reduced-total {
@@ -37,15 +36,6 @@
     }
 
     .line-item-total-price.ab-added-reduced-total .line-item-total-price-value {
-        text-decoration: line-through;
-    }
-
-    .ab-reduced-total-price {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-top: 5px;
-
         font-family: Inter, sans-serif;
         font-weight: 400;
         font-size: 14px;
@@ -53,7 +43,24 @@
         letter-spacing: 0px;
         text-align: right;
         vertical-align: middle;
+        color: #4A545B;
+    }
+
+    .ab-total-price {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 5px;
+
+        font-family: Inter, sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+        letter-spacing: 0px;
+        text-align: right;
+        vertical-align: middle;
         color: #4a545b;
+        text-decoration: line-through;
     }
 
     .is-offcanvas .line-item-quantity-select-wrapper {
@@ -64,6 +71,14 @@
         display: flex;
         justify-content: flex-start;
         align-items: end;
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-celebration-message-container {
+            display: block;
+            padding: 13px 4px 14px;
+            white-space: nowrap;
+        }
     }
 }
 
