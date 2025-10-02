@@ -158,7 +158,7 @@
     li.ab-quantity-dropdown-option {
         height: 41px;
         user-select: none;
-        padding: 6px 9px 5px 30px;
+        padding: 6px 7px 5px;
         margin-left: 0;
         display: flex;
         align-items: center;
@@ -185,8 +185,8 @@
     }
 
     .ab-quantity-dropdown-option__green-badge {
-        width: 68px;
-        height: 24px;
+        width: 65px;
+        height: 20px;
         background: #3cc261;
         border-radius: 2px;
         display: flex;
@@ -195,7 +195,7 @@
 
         font-family: Inter, sans-serif;
         font-weight: 500;
-        font-size: 12px;
+        font-size: 11px;
         line-height: 21px;
         letter-spacing: 0px;
         text-align: center;
@@ -207,7 +207,7 @@
         font-family: Inter, sans-serif;
         font-weight: 300;
         font-style: Italic;
-        font-size: 10px;
+        font-size: 8px;
         line-height: 21px;
         letter-spacing: 0px;
         text-align: center;
@@ -230,6 +230,20 @@
     @media screen and (min-width: 768px) {
         .ab-quantity-dropdown-select:after {
             right: 29px;
+        }
+
+        li.ab-quantity-dropdown-option {
+            padding: 6px 9px 5px 30px;
+        }
+
+        .ab-quantity-dropdown-option__green-badge {
+            width: 68px;
+            height: 24px;
+            font-size: 12px;
+        }
+
+        .ab-quantity-dropdown-option__ten-plus-badge {
+            font-size: 10px;
         }
     }
 }
