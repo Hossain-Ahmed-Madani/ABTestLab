@@ -73,16 +73,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function mutationObserver() {
-        new MutationObserver((mutationList, observer) => {
-            if (!q(".ab-security-layout")) {
-                createSecurityFilterLayout();
-            } else {
-                updateSecurityFilterLayout();
-            }
-        }).observe(q(".content-main--inner"), { childList: true, subtree: true });
-    }
-
     function createSecurityFilterLayout() {
         if (q(".ab-security-layout")) return;
 
@@ -141,6 +131,16 @@
         });
     }
 
+    function mutationObserver() {
+        new MutationObserver((mutationList, observer) => {
+            if (!q(".ab-security-layout")) {
+                createSecurityFilterLayout();
+            } else {
+                updateSecurityFilterLayout();
+            }
+        }).observe(q(".content-main--inner"), { childList: true, subtree: true });
+    }
+
     function clickFunction() {
         ACTION_LIST = [
             {
@@ -148,15 +148,15 @@
                 event: "click",
                 callback: (e) => {
                     const option = e.target.closest(".ab-security-layout__option-item");
-                    const labelFor = option.getAttribute("for");
+                    if (!option) return;
 
+                    const labelFor = option.getAttribute("for");
                     const isChecked = option.classList.contains("checked");
-                    if (option) {
-                        if (isChecked) {
-                            option.classList.remove("checked");
-                        } else {
-                            option.classList.add("checked");
-                        }
+
+                    if (isChecked) {
+                        option.classList.remove("checked");
+                    } else {
+                        option.classList.add("checked");
                     }
 
                     q("#" + labelFor).click();
