@@ -292,9 +292,7 @@
                 waitForElement(
                     () => qq(selector).length > 0,
                     () => {
-                        qq(selector).forEach((item) => {
-                            item.addEventListener(event, callback);
-                        });
+                        qq(selector).forEach((item) => item.addEventListener(event, callback));
                     }
                 );
             }
