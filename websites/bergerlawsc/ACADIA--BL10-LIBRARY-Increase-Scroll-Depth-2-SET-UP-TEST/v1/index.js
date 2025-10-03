@@ -62,42 +62,47 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     function createTableOfContents() {
         const foundNodes = qq(".dss-content h2, .dss-content h3").filter((cItem) => cItem.textContent.trim().length > 0);
 
-        const firstChild = foundNodes[0];
-        const initialText = firstChild.textContent.split(".")?.[1] || firstChild.textContent;
+        const firstChild = foundNodes?.[0];
+        const initialText = firstChild?.textContent.split(".")?.[1] || firstChild?.textContent;
 
         return /* HTML */ `
             <div class="ab-table-contents-container container">
-                <div class="ab-table-contents-title">Table of Contents</div>
-                <div class="ab-table-content-selection" data-state="closed">
-                    <div class="ab-table-content-selected-item">
-                        <span>1.1</span>
-                        <span class="ab-ellipsis-two-lines">${initialText}</span>
-                    </div>
-                    <ul class="ab-table-content-list">
-                        ${Array.from(foundNodes)
-                            .map((item, index) => {
-                                item.setAttribute("id", `section-${index + 1}`);
-                                const txt = item.textContent.split(".")[1] || item.textContent;
+                <a class="ab-schedule-free-consultation" href="https://www.bergerlawsc.com/contact.cfm">Schedule Your Free Consultation →</a>
+                ${foundNodes.length > 0
+                    ? /* HTML */ `
+                          <div class="ab-table-contents-title">Table of Contents</div>
+                          <div class="ab-table-content-selection" data-state="closed">
+                              <div class="ab-table-content-selected-item">
+                                  <span>1.</span>
+                                  <span class="ab-ellipsis-one-lines">${initialText}</span>
+                              </div>
+                              <ul class="ab-table-content-list">
+                                  ${Array.from(foundNodes)
+                                      .map((item, index) => {
+                                          item.setAttribute("id", `section-${index + 1}`);
+                                          const txt = item.textContent.split(".")[1] || item.textContent;
 
-                                return /* HTML */ `
-                                    <li targetH3="#section-${index + 1}" class="ab-table-content-item" ${index === 0 ? "selected" : ""}>
-                                        <span>1.${index + 1}</span>
-                                        <span class=" ab-ellipsis-two-lines">${txt}</span>
-                                    </li>
-
-                                    ${foundNodes.length === 1
-                                        ? /* HTML */ `
-                                              <li targetH3="#section-${index + 1}" class="ab-table-content-item">
+                                          return /* HTML */ `
+                                              <li targetH3="#section-${index + 1}" class="ab-table-content-item" ${index === 0 ? "selected" : ""}>
                                                   <span>1.${index + 1}</span>
-                                                  <span class=" ab-ellipsis-two-lines">${txt}</span>
+                                                  <span class=" ab-ellipsis-one-lines">${txt}</span>
                                               </li>
-                                          `
-                                        : ""}
-                                `;
-                            })
-                            .join("")}
-                    </ul>
-                </div>
+
+                                              ${foundNodes.length === 1
+                                                  ? /* HTML */ `
+                                                        <li targetH3="#section-${index + 1}" class="ab-table-content-item">
+                                                            <span>1.${index + 1}</span>
+                                                            <span class=" ab-ellipsis-two-lines">${txt}</span>
+                                                        </li>
+                                                    `
+                                                  : ""}
+                                          `;
+                                      })
+                                      .join("")}
+                              </ul>
+                          </div>
+                      `
+                    : ""}
             </div>
         `;
     }
@@ -115,7 +120,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
             /* HTML */ `
                 <div class="ab-scroll-and-table-contents ${totalHeaders > 0 ? "" : "ab-scroll-and-table-contents--only-scroll"}">
                     <div class="ab-scroll-container" data-scroll="25"></div>
-                    ${qq(".dss-content h2, .dss-content h3").length > 0 ? createTableOfContents() : ""}
+                    ${createTableOfContents()}
                 </div>
             `
         );
@@ -346,6 +351,14 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     function eventListeners() {
         const event_list = [
             {
+                selector: ".ab-schedule-free-consultation",
+                event: "click",
+                callback: (e) => {
+                    const url = e.target.closest(".ab-schedule-free-consultation").getAttribute("href");
+                    window.location.replace(url);
+                },
+            },
+            {
                 selector: ".ab-scroll-and-table-contents",
                 event: "click",
                 callback: (e) => e.preventDefault(),
@@ -388,6 +401,10 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
                     const selectionContainer = q(".ab-table-content-selection");
                     if (selectionContainer.getAttribute("data-state") === "closed") {
                         handleShowHideSelection("show");
+                    }
+                    // AMENDS
+                    else {
+                        handleShowHideSelection("hide");
                     }
                     // if (window.innerWidth < 1200) handleShowHideSelection("show");
                 },

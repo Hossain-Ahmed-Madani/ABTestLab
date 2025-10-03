@@ -15,9 +15,8 @@
 .AB-BL10 {
     .ab-scroll-and-table-contents {
         background: #f2f5f7;
-        padding-bottom: 15px;
-        // height: 72px;
-        // min-height: 72px;
+        padding-bottom: 12px;
+        // padding-bottom: 15px;
         position: relative;
         z-index: -1;
     }
@@ -67,6 +66,36 @@
         align-items: center;
     }
 
+    .ab-schedule-free-consultation {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        min-width: 176px;
+        height: 52px;
+        flex-grow: 1;
+        // margin-left: -20px;
+        background: #933925;
+        padding: 6px 20px;
+        text-decoration: none;
+        border: none;
+
+        font-family: quasimoda, sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        text-align: center;
+        color: #ffffff;
+
+        &:focus,
+        &:hover {
+            text-decoration: none;
+            border: none;
+            outline: none;
+        }
+    }
+
     .ab-table-contents-title {
         color: #0a1d35;
         text-align: right;
@@ -84,7 +113,7 @@
         max-width: 363px;
         // height: 42px;
         min-height: 42px;
-        margin-top: 12px;
+        // margin-top: 12px;
         position: relative;
         user-select: none;
     }
@@ -189,6 +218,14 @@
         border-bottom: 1px solid #e8e5de;
     }
 
+    .ab-ellipsis-one-lines {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .ab-ellipsis-two-lines {
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -196,6 +233,74 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    // ======= AMENDS START =======
+
+    @media screen and (max-width: 768px) {
+        #top-header.top-header-1 .inner.sticky-nav.sticky-in {
+            // box-shadow: none;
+        }
+
+        .inner.sticky-nav.sticky-in {
+            background: #fff;
+            box-shadow: none;
+        }
+
+        .ab-table-content-selection[data-state="opened"] .ab-table-content-selected-item {
+            visibility: visible !important;
+            opacity: 1 !important;
+            z-index: 1;
+        }
+
+        .ab-table-content-selection[data-state="opened"] .ab-table-content-selected-item:after {
+            transform: rotate(-180deg);
+        }
+
+        .ab-table-content-selection {
+            position: static;
+        }
+
+        .ab-table-content-list {
+            top: 52px;
+        }
+
+        .ab-table-contents-container {
+            position: relative;
+            width: 100%;
+            // margin: 9px 0 12px;
+            margin: 6px 0 9px;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .ab-table-content-selected-item {
+            margin-right: 9px;
+        }
+
+        .ab-table-content-list {
+            left: 9px;
+            right: 9px;
+        }
+
+        .ab-table-content-selected-item {
+            padding: 13px 10px;
+        }
+
+        .ab-scroll-and-table-contents {
+            background: #fff;
+            padding-bottom: 0;
+        }
+
+        .ab-table-content-list .ab-table-content-item:first-child::after {
+            display: none;
+        }
+
+        // .ab-table-content-list  {
+        //     max-height: 70vh;
+        // }
+    }
+
+    // ======= AMENDS END =======
 
     @media screen and (min-width: 991px) {
         .ab-scroll-and-table-contents {
@@ -215,6 +320,10 @@
 
         .ab-table-contents-title {
             display: block;
+        }
+
+        .ab-schedule-free-consultation {
+            display: none;
         }
 
         .ab-table-contents-container {
