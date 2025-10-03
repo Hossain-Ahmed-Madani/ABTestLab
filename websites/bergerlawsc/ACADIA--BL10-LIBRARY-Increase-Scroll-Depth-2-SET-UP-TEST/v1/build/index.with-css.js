@@ -6,7 +6,7 @@
       var style = document.createElement("style");
       style.innerHTML = `.AB-BL10 .ab-scroll-and-table-contents {
   background: #f2f5f7;
-  padding-bottom: 15px;
+  padding-bottom: 12px;
   position: relative;
   z-index: -1;
 }
@@ -48,6 +48,31 @@
   justify-content: center;
   align-items: center;
 }
+.AB-BL10 .ab-schedule-free-consultation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 176px;
+  height: 52px;
+  flex-grow: 1;
+  background: #933925;
+  padding: 6px 20px;
+  text-decoration: none;
+  border: none;
+  font-family: quasimoda, sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+}
+.AB-BL10 .ab-schedule-free-consultation:focus,
+.AB-BL10 .ab-schedule-free-consultation:hover {
+  text-decoration: none;
+  border: none;
+  outline: none;
+}
 .AB-BL10 .ab-table-contents-title {
   color: #0a1d35;
   text-align: right;
@@ -63,7 +88,6 @@
   width: 363px;
   max-width: 363px;
   min-height: 42px;
-  margin-top: 12px;
   position: relative;
   user-select: none;
 }
@@ -155,12 +179,67 @@
 .AB-BL10 .ab-table-content-list .ab-table-content-item:not(:last-child) {
   border-bottom: 1px solid #e8e5de;
 }
+.AB-BL10 .ab-ellipsis-one-lines {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .AB-BL10 .ab-ellipsis-two-lines {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+@media screen and (max-width: 768px) {
+  .AB-BL10 .inner.sticky-nav.sticky-in {
+    background: #fff;
+    box-shadow: none;
+  }
+  .AB-BL10
+    .ab-table-content-selection[data-state="opened"]
+    .ab-table-content-selected-item {
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 1;
+  }
+  .AB-BL10
+    .ab-table-content-selection[data-state="opened"]
+    .ab-table-content-selected-item:after {
+    transform: rotate(-180deg);
+  }
+  .AB-BL10 .ab-table-content-selection {
+    position: static;
+  }
+  .AB-BL10 .ab-table-content-list {
+    top: 52px;
+  }
+  .AB-BL10 .ab-table-contents-container {
+    position: relative;
+    width: 100%;
+    margin: 6px 0 9px;
+    gap: 10px;
+    z-index: 10;
+  }
+  .AB-BL10 .ab-table-content-selected-item {
+    margin-right: 9px;
+  }
+  .AB-BL10 .ab-table-content-list {
+    left: 9px;
+    right: 9px;
+  }
+  .AB-BL10 .ab-table-content-selected-item {
+    padding: 13px 10px;
+  }
+  .AB-BL10 .ab-scroll-and-table-contents {
+    background: #fff;
+    padding-bottom: 0;
+  }
+  .AB-BL10 .ab-table-content-list .ab-table-content-item:first-child::after {
+    display: none;
+  }
 }
 @media screen and (min-width: 991px) {
   .AB-BL10 .ab-scroll-and-table-contents {
@@ -177,7 +256,11 @@
   .AB-BL10 .ab-table-contents-title {
     display: block;
   }
+  .AB-BL10 .ab-schedule-free-consultation {
+    display: none;
+  }
   .AB-BL10 .ab-table-contents-container {
+    margin-top: 10px;
     justify-content: flex-end;
     gap: 20px;
   }
@@ -195,7 +278,7 @@
 }
 @media screen and (min-width: 1200px) {
   .AB-BL10 #ela-main_nav-link-library {
-    height: 43px;
+    height: 41px;
   }
 }
 
@@ -229,11 +312,20 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
   const TEST_CONFIG = {
     page_initials: "AB-BL10",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0009,
+  };
+
+  let ON_SCROLL_UPDATE_ON = true;
+
+  const SCROLL_GOALS_FIRED = {
+    25: false,
+    50: false,
+    75: false,
+    100: false,
   };
 
   function fireGA4Event(eventName, eventLabel = "") {
-    console.log("BL10: ", eventName, eventLabel);
+    // console.log("BL10: ", eventName, eventLabel);
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "GA4event",
@@ -261,6 +353,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
   function q(s, o) {
     return document.querySelector(s);
   }
+
   function qq(s, o) {
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
@@ -270,50 +363,62 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
       (cItem) => cItem.textContent.trim().length > 0,
     );
 
-    const firstChild = foundNodes[0];
+    const firstChild = foundNodes?.[0];
     const initialText =
-      firstChild.textContent.split(".")?.[1] || firstChild.textContent;
+      firstChild?.textContent.split(".")?.[1] || firstChild?.textContent;
 
     return /* HTML */ `
       <div class="ab-table-contents-container container">
-        <div class="ab-table-contents-title">Table of Contents</div>
-        <div class="ab-table-content-selection" data-state="closed">
-          <div class="ab-table-content-selected-item">
-            <span>1.1</span>
-            <span class="ab-ellipsis-two-lines">${initialText}</span>
-          </div>
-          <ul class="ab-table-content-list">
-            ${Array.from(foundNodes)
-              .map((item, index) => {
-                item.setAttribute("id", `section-${index + 1}`);
-                const txt = item.textContent.split(".")[1] || item.textContent;
+        <a
+          class="ab-schedule-free-consultation"
+          href="https://www.bergerlawsc.com/contact.cfm"
+          >Schedule Your Free Consultation →</a
+        >
+        ${foundNodes.length > 0
+          ? /* HTML */ `
+              <div class="ab-table-contents-title">Table of Contents</div>
+              <div class="ab-table-content-selection" data-state="closed">
+                <div class="ab-table-content-selected-item">
+                  <span>1.</span>
+                  <span class="ab-ellipsis-one-lines">${initialText}</span>
+                </div>
+                <ul class="ab-table-content-list">
+                  ${Array.from(foundNodes)
+                    .map((item, index) => {
+                      item.setAttribute("id", `section-${index + 1}`);
+                      const txt =
+                        item.textContent.split(".")[1] || item.textContent;
 
-                return /* HTML */ `
-                  <li
-                    targetH3="#section-${index + 1}"
-                    class="ab-table-content-item"
-                    ${index === 0 ? "selected" : ""}
-                  >
-                    <span>1.${index + 1}</span>
-                    <span class=" ab-ellipsis-two-lines">${txt}</span>
-                  </li>
-
-                  ${foundNodes.length === 1
-                    ? /* HTML */ `
+                      return /* HTML */ `
                         <li
                           targetH3="#section-${index + 1}"
                           class="ab-table-content-item"
+                          ${index === 0 ? "selected" : ""}
                         >
                           <span>1.${index + 1}</span>
-                          <span class=" ab-ellipsis-two-lines">${txt}</span>
+                          <span class=" ab-ellipsis-one-lines">${txt}</span>
                         </li>
-                      `
-                    : ""}
-                `;
-              })
-              .join("")}
-          </ul>
-        </div>
+
+                        ${foundNodes.length === 1
+                          ? /* HTML */ `
+                              <li
+                                targetH3="#section-${index + 1}"
+                                class="ab-table-content-item"
+                              >
+                                <span>1.${index + 1}</span>
+                                <span class=" ab-ellipsis-two-lines"
+                                  >${txt}</span
+                                >
+                              </li>
+                            `
+                          : ""}
+                      `;
+                    })
+                    .join("")}
+                </ul>
+              </div>
+            `
+          : ""}
       </div>
     `;
   }
@@ -338,9 +443,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
             : "ab-scroll-and-table-contents--only-scroll"}"
         >
           <div class="ab-scroll-container" data-scroll="25"></div>
-          ${qq(".dss-content h2, .dss-content h3").length > 0
-            ? createTableOfContents()
-            : ""}
+          ${createTableOfContents()}
         </div>
       `,
     );
@@ -359,10 +462,45 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     return matchingQuery ? headerOffsetObj[matchingQuery] : 150;
   }
 
+  function autoSelectOnScroll() {
+    const totalHeaders = qq(".dss-content h2, .dss-content h3").reduce(
+      (acc, cItem) => {
+        if (cItem.textContent.trim().length > 0) {
+          return acc + 1; // Only count if has text content
+        }
+        return acc;
+      },
+      0,
+    );
+
+    const headerOffset = getHeaderOffset();
+    const arr = [...qq(".ab-table-content-item")];
+
+    const handleAutoSelect = () => {
+      if (totalHeaders === 1 || ON_SCROLL_UPDATE_ON === false) return;
+
+      arr.forEach((cItem) => {
+        const header = q(cItem.getAttribute("targeth3"));
+        const top = header.getBoundingClientRect().top;
+
+        if (
+          top > 100 &&
+          top <= headerOffset &&
+          !cItem.hasAttribute("selected")
+        ) {
+          arr.forEach((item) => item.removeAttribute("selected"));
+          cItem.setAttribute("selected", "");
+          q(".ab-table-content-selected-item").innerHTML = cItem.innerHTML;
+        }
+      });
+    };
+
+    return { handleAutoSelect };
+  }
+
   // Window Scroll
   function ga4ScrollGoalFunctions() {
     const milestones = [25, 50, 75, 100]; // scroll checkpoints
-    let lastMilestone = null; // track last milestone crossed
 
     const getScrollPercent = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -383,20 +521,17 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
       const percent = getScrollPercent();
       const milestone = closestMilestone(percent);
 
-      if (milestone !== lastMilestone && milestone !== 0) {
-        if (lastMilestone !== null) {
-          console.log(`User moved from ${lastMilestone}% → ${milestone}%`);
-        }
-        lastMilestone = milestone;
-      }
-
-      if (milestone === 25) {
+      if (milestone === 25 && !SCROLL_GOALS_FIRED[25]) {
+        SCROLL_GOALS_FIRED[25] = true;
         fireGA4Event("BL10_Scrolldepth", "25%");
-      } else if (milestone === 50) {
+      } else if (milestone === 50 && !SCROLL_GOALS_FIRED[50]) {
+        SCROLL_GOALS_FIRED[50] = true;
         fireGA4Event("BL10_Scrolldepth", "50%");
-      } else if (milestone === 75) {
+      } else if (milestone === 75 && !SCROLL_GOALS_FIRED[75]) {
+        SCROLL_GOALS_FIRED[75] = true;
         fireGA4Event("BL10_Scrolldepth", "75%");
-      } else if (milestone === 100) {
+      } else if (milestone === 100 && !SCROLL_GOALS_FIRED[100]) {
+        SCROLL_GOALS_FIRED[100] = true;
         fireGA4Event("BL10_Scrolldepth", "100%");
       }
     };
@@ -404,7 +539,6 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     return { handleScrollGa4Goal };
   }
 
-  // .dss-content Scroll
   function getMileStoneFunctions(targetElement) {
     const milestones = [25, 50, 75, 100];
 
@@ -504,13 +638,18 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
   }
 
   function handleScrollEvent() {
-    const selector = ".ab-scroll-container";
     const { handleScrollGa4Goal } = ga4ScrollGoalFunctions();
+    const { handleAutoSelect } = autoSelectOnScroll();
+
+    const selector = ".ab-scroll-container";
+
     waitForElement(
       () => q(selector),
       () => {
         const throttledScrollHandler = throttle(updateProgressBar, 50);
+
         window.addEventListener("scroll", (e) => {
+          handleAutoSelect();
           handleScrollGa4Goal();
           throttledScrollHandler();
         });
@@ -523,6 +662,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
 
     const targetElement = q(selector);
     const headerOffset = getHeaderOffset();
+    ON_SCROLL_UPDATE_ON = false;
 
     window.scrollTo({
       top: targetElement.offsetTop - headerOffset,
@@ -531,7 +671,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
 
     fireGA4Event("BL10_Tableofcontent", targetElement.textContent);
 
-    setTimeout(() => true, 1500);
+    setTimeout(() => (ON_SCROLL_UPDATE_ON = true), 2000);
   }
 
   function handleShowHideSelection(action /* show, hide */) {
@@ -545,6 +685,16 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
 
   function eventListeners() {
     const event_list = [
+      {
+        selector: ".ab-schedule-free-consultation",
+        event: "click",
+        callback: (e) => {
+          const url = e.target
+            .closest(".ab-schedule-free-consultation")
+            .getAttribute("href");
+          window.location.replace(url);
+        },
+      },
       {
         selector: ".ab-scroll-and-table-contents",
         event: "click",
@@ -588,6 +738,10 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
           const selectionContainer = q(".ab-table-content-selection");
           if (selectionContainer.getAttribute("data-state") === "closed") {
             handleShowHideSelection("show");
+          }
+          // AMENDS
+          else {
+            handleShowHideSelection("hide");
           }
           // if (window.innerWidth < 1200) handleShowHideSelection("show");
         },
@@ -639,8 +793,9 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
     });
   }
 
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
   function init() {
-    const { page_initials, test_variation, test_version } = TEST_CONFIG;
     document.body.classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
@@ -654,7 +809,7 @@ v1: https://marketer.monetate.net/control/preview/13087/8BFQHTP8MRVUPUZGCXLDWN9M
   function hasAllTargetElements() {
     return !!(
       q(
-        `body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`,
+        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
       ) &&
       q("#nav") &&
       q(".dss-content")
