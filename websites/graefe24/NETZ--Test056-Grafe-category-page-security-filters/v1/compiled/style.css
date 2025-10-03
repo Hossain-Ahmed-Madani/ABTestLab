@@ -55,6 +55,7 @@
 .AB-TEST056 .ab-security-layout__tooltip-cta:after {
   content: "Info";
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-size: 10px;
   font-weight: 400;
   line-height: 100%;
   letter-spacing: 0px;
@@ -71,6 +72,11 @@
 }
 .AB-TEST056 .ab-security-layout__head > .ab-security-layout__tooltip-cta {
   display: none;
+}
+.AB-TEST056 .ab-security-layout__option-item-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .AB-TEST056 .ab-security-layout__options {
   display: grid;
@@ -122,6 +128,26 @@
   vertical-align: middle;
   color: #13629b;
 }
+@media screen and (max-width: 991px) {
+  .AB-TEST056 .ab-security-layout__option-item--order-1 {
+    order: 1;
+  }
+  .AB-TEST056 .ab-security-layout__option-item--order-2 {
+    order: 2;
+  }
+  .AB-TEST056 .ab-security-layout__option-item--order-3 {
+    order: 3;
+  }
+  .AB-TEST056 .ab-security-layout__option-item--order-4 {
+    order: 4;
+  }
+  .AB-TEST056 .ab-security-layout__option-item--order-5 {
+    order: 5;
+  }
+  .AB-TEST056 .ab-security-layout__option-item--order-6 {
+    order: 6;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-TEST056 .syn-sl--box-description {
     margin-bottom: 19px;
@@ -130,6 +156,9 @@
     display: flex;
   }
   .AB-TEST056 .ab-security-layout__tooltip-cta:after {
+    display: none;
+  }
+  .AB-TEST056 .ab-security-layout__tooltip-cta:before {
     display: none;
   }
   .AB-TEST056 .ab-security-layout__head {
@@ -168,6 +197,9 @@
     width: 10px;
     height: 5px;
     margin-top: -4px;
+  }
+  .AB-TEST056 .ab-security-layout__option-item-cta {
+    display: none;
   }
 }
 
@@ -238,7 +270,7 @@
 .AB-TEST056__modal__head__title {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0px;
   vertical-align: middle;
@@ -250,7 +282,7 @@
 .AB-TEST056__modal__head__sub-title {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 140%;
   letter-spacing: 0px;
   margin-bottom: 10px;
@@ -295,7 +327,7 @@
 .AB-TEST056__modal__item__txt {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 140%;
   letter-spacing: 0px;
   color: #000000;
@@ -309,6 +341,24 @@
     bottom: 0;
     min-height: max-content;
     height: max-content;
+  }
+  .AB-TEST056__modal__head {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 6px;
+  }
+  .AB-TEST056__modal__head__title {
+    font-size: 16px;
+  }
+  .AB-TEST056__modal__head__sub-title {
+    font-size: 12px;
+    margin-bottom: 15px;
+  }
+  .AB-TEST056__modal__item {
+    gap: 14px;
+  }
+  .AB-TEST056__modal__item__txt {
+    font-size: 12px;
   }
 }
 
