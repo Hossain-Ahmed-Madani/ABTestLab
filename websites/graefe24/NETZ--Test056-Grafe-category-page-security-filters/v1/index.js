@@ -1,3 +1,10 @@
+/* 
+    Test doc: https://docs.google.com/document/d/1_Qg6DOPK75FjK6keUc7U6bqXUx9XHUp_Y3PADAhCOxM/edit?tab=t.0
+    Figma: https://www.figma.com/design/IXXxSANOOd7R3XCFVgABAe/Test056---Kategorieseite---Erweiterung-des-Sicherheitsfilters?node-id=18-49&t=MPA79lO2FLQ01kuo-0
+    Test container: https://app.convert.com/accounts/1004828/projects/1004764/experiences/1004170679/summary
+    v1: https://www.graefe24.de/schliesszylinder/?_conv_eforce=1004170679.1004402886&f=351%7C413&n=24&o=8&p=1&s=41&utm_campaign=qa5
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "Netzproduzenten",
