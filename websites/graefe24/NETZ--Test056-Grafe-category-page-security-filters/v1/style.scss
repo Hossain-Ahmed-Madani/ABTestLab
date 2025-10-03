@@ -219,3 +219,277 @@
         }
     }
 }
+
+/**
+ * ----------------------------------------
+		 *			MODAL
+ * ----------------------------------------
+ */
+
+.AB-TEST056--modal-show {
+    overflow: hidden !important;
+    padding-right: 15px;
+
+    .dvaccess.dvaccess-pos-lb,
+    div[data-test-id="userlike-container"] {
+        display: none;
+    }
+
+    .AB-TEST056 {
+        &__modal-layout {
+            display: block;
+        }
+
+        &__modal-backdrop {
+            display: block;
+        }
+
+        &__modal {
+            // ADD CSS
+        }
+    }
+}
+
+.AB-TEST056 {
+    &__modal-layout {
+        display: none;
+
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100vh;
+        background: transparent;
+        z-index: 9999;
+        overflow: hidden;
+
+        display: none;
+        // display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow-y: scroll;
+    }
+
+    &__modal-backdrop {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &__modal {
+        opacity: 1;
+        box-shadow: 0px 4px 23.9px 0px #00000029;
+        margin: auto;
+        width: 100%;
+        max-width: 434px;
+        min-height: 100%;
+        background: #ffffff;
+        top: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        z-index: 1;
+        padding: 6px 17px 48px;
+
+        &__head {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 6px;
+
+            &__title {
+                font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: #000000;
+                min-height: 37px;
+
+                display: inline-flex;
+                align-items: center;
+            }
+
+            &__sub-title {
+                font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 140%;
+                letter-spacing: 0px;
+                margin-bottom: 10px;
+            }
+
+            &__close-cta {
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                top: 15px;
+                right: 18px;
+                cursor: pointer;
+
+                svg {
+                    width: 14px;
+                    height: 14px;
+                }
+            }
+        }
+
+        &__body {
+            width: 100%;
+        }
+
+        &__content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 42px;
+        }
+
+        &__item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 11px;
+
+            &__img {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    min-width: 81px;
+                    width: 81px;
+                    height: auto;
+                }
+            }
+
+            &__txt {
+                font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 140%;
+                letter-spacing: 0px;
+                color: #000000;
+            }
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+
+         &__modal-layout {
+            overflow-y: hidden;
+         }
+
+        &__modal {
+            top: 0;
+            bottom: 0;
+            min-height: max-content;
+            height: max-content;
+        }
+    }
+}
+
+// ANIMATION
+.slide-bottom {
+    -webkit-animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-top {
+    -webkit-animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/**
+  * ----------------------------------------
+  * animation slide-bottom
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes slide-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+/**
+  * ----------------------------------------
+  * animation slide-top
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-top {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+}
+@keyframes slide-top {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+}
+
+/**
+  * ----------------------------------------
+  * animation fade-in
+  * ----------------------------------------
+  */
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
