@@ -4,7 +4,7 @@ Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Y
 
 Test container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004170195/summary
 
-ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401762&utm_campaign=qa5 
+ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?convert_action=convert_vpreview&convert_e=1004170195&convert_v=1004401762&utm_campaign=qa5 
 V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5 
 v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5 
 
@@ -18,7 +18,7 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -75,21 +75,31 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
     }
 
-    function calculateOriginalPrice(offerPrice, quantity) {
-        const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-        const discount_percentage = quantity <= 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
-
-        // Calculate original price from discounted price
-        const originalPrice = offerPrice / (1 - discount_percentage / 100);
-        return originalPrice;
+    async function getProductOriginalPricePerQuantity(url) {
+        return fetch(url)
+            .then((res) => res.text())
+            .then((resTxt) => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(resTxt, "text/html");
+                const priceNode = doc.querySelector(".product-detail-price");
+                if (priceNode) {
+                    return parseAmount(priceNode);
+                } else {
+                    throw new Error("Price element not found");
+                }
+            });
     }
 
-    function getPriceData(targetNode) {
+    async function getPriceData(targetNode) {
+        const productUrl = q(targetNode, ".line-item-label a")?.href || "";
+
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
         const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
         const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-        const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        const totalPricePerQuantity = await getProductOriginalPricePerQuantity(productUrl);
+        const totalPrice = totalPricePerQuantity * quantity;
         const discount = totalPrice - offerPrice;
 
         return {
@@ -100,8 +110,7 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         };
     }
 
-    function getCelebrationTxt(targetNode) {
-        const { discount, quantity } = getPriceData(targetNode);
+    function getCelebrationTxt({ targetNode, totalPrice, quantity, discount, offerPrice }) {
         const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount, true)} durch unseren Mengenrabatt.`;
 
         {
@@ -109,25 +118,23 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         }
     }
 
-    function createReducedPriceLayout(targetNode) {
-        const { totalPrice, quantity} = getPriceData(targetNode);
+    function createReducedPriceLayout({ targetNode, totalPrice, quantity, discount, offerPrice }) {
         const parentNode = q(targetNode, ".line-item-total-price:not(.ab-added-reduced-total)");
 
         if (quantity > 1 && parentNode) {
             parentNode.classList.add("ab-added-reduced-total");
-            // q(parentNode, ".line-item-total-price-value").innerText = formatPriceToGerman(totalPrice);
             parentNode.insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-total-price ">${formatPriceToGerman(totalPrice)}</div>`);
         }
     }
 
-    function createCelebrationMessageLayout(targetNode) {
-        const { quantity} = getPriceData(targetNode);
-
+    function createCelebrationMessageLayout({ targetNode, totalPrice, quantity, discount, offerPrice }) {
         if (!q(targetNode, ".ab-celebration-message-container")) {
             targetNode.insertAdjacentHTML(
                 "beforeend",
                 /* HTML */
-                `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">${getCelebrationTxt(targetNode)}</div>`
+                `<div class="ab-celebration-message-container ${quantity <= 1 ? "ab-celebration-message-container--viewing-for-single" : ""}">
+                    ${getCelebrationTxt({ targetNode, totalPrice, quantity, discount, offerPrice })}
+                </div>`
             );
 
             if (quantity > 1) {
@@ -138,9 +145,10 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
 
     function createCelebrationMessageComponent() {
         const targetNodes = qq(".offcanvas-cart-items .line-item");
-        targetNodes.forEach((targetNode) => {
-            createReducedPriceLayout(targetNode);
-            createCelebrationMessageLayout(targetNode);
+        targetNodes.forEach(async (targetNode) => {
+            const { totalPrice, quantity, discount, offerPrice } = await getPriceData(targetNode);
+            createReducedPriceLayout({ targetNode, totalPrice, quantity, discount, offerPrice });
+            createCelebrationMessageLayout({ targetNode, totalPrice, quantity, discount, offerPrice });
         });
     }
 
