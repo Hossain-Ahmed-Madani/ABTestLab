@@ -183,14 +183,11 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         return mutationObserverFunction("body", bodyObserverCallback, { childList: true });
     }
 
-    function showHideVolumeDiscountModal(action /* show, hide */) {
+    function toggleHideVolumeDiscountTable(action /* show, hide, toggle */) {
         const body = document.body;
-        const className = BODY_CLASSLIST[0] + "--show-volume-discount-modal";
-        if (action === "show") {
-            body.classList.add(className);
-        } else if (action === "hide") {
-            body.classList.remove(className);
-            //
+        const className = BODY_CLASSLIST[0] + "--show-volume-discount-table";
+        {
+            body.classList.toggle(className);
         }
     }
 
@@ -202,20 +199,24 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
             }
 
             if (e.target.closest(".ab-volume-discount-modal-cta")) {
-                showHideVolumeDiscountModal("show");
+                toggleHideVolumeDiscountTable();
             }
 
-            if (e.target.closest(".ab-quantity-modal__close-cta") || (e.target.closest(".ab-quantity-modal-backdrop") && !e.target.closest(".ab-quantity-modal"))) {
-                showHideVolumeDiscountModal("hide");
-            }
+            // if (e.target.closest(".ab-volume-discount-modal-cta")) {
+            //     showHideVolumeDiscountModal("show");
+            // }
 
-            if (e.target.closest(".ab-quantity-dropdown-option")) {
-                const curr = e.target.closest(".ab-quantity-dropdown-option");
-                const selectedValue = curr.getAttribute("value");
-                const targetInput = q(".product-detail-quantity-group.quantity-selector-group input.product-detail-quantity-input");
-                targetInput.value = selectedValue;
-                showHideVolumeDiscountModal("hide");
-            }
+            // if (e.target.closest(".ab-quantity-modal__close-cta") || (e.target.closest(".ab-quantity-modal-backdrop") && !e.target.closest(".ab-quantity-modal"))) {
+            //     showHideVolumeDiscountModal("hide");
+            // }
+
+            // if (e.target.closest(".ab-quantity-dropdown-option")) {
+            //     const curr = e.target.closest(".ab-quantity-dropdown-option");
+            //     const selectedValue = curr.getAttribute("value");
+            //     const targetInput = q(".product-detail-quantity-group.quantity-selector-group input.product-detail-quantity-input");
+            //     targetInput.value = selectedValue;
+            //     showHideVolumeDiscountModal("hide");
+            // }
         });
     }
 

@@ -22,11 +22,13 @@
         padding: 13px 0px 14px;
         font-family: Inter, sans-serif;
         font-weight: 600;
-        font-size: 12px;
+        // font-size: 12px;
+        font-size: 11px;
         line-height: 100%;
         letter-spacing: 0px;
         color: #03a616;
         text-align: left;
+        // white-space: nowrap;
     }
 
     .line-item-total-price.ab-added-reduced-total {
@@ -43,7 +45,7 @@
         letter-spacing: 0px;
         text-align: right;
         vertical-align: middle;
-        color: #4A545B;
+        color: #4a545b;
     }
 
     .ab-total-price {
@@ -64,7 +66,8 @@
     }
 
     .is-offcanvas .line-item-quantity-select-wrapper {
-        min-width: 139px;
+        // min-width: 139px;
+        min-width: 145px;
     }
 
     .line-item-quantity {
@@ -76,8 +79,9 @@
     @media screen and (min-width: 991px) {
         .ab-celebration-message-container {
             display: block;
-            padding: 13px 4px 14px;
-            white-space: nowrap;
+            // padding: 13px 4px 14px;
+            padding: 13px 0px 14px;
+            // white-space: nowrap;
         }
     }
 }
@@ -86,6 +90,20 @@
     .product-detail-tax-link {
         display: none;
     }
+
+    // ======= Product Volume Discount Table Start =====
+    &.AB-TEST-019--show-volume-discount-table {
+        .product-detail-price-container .product-block-prices {
+            display: block;
+        }
+
+        .product-block-prices {
+            width: 100%;
+            max-width: 488px;
+        }
+    }
+
+    // ======= Product Volume Discount Table Start =====
 
     // ======= Modal Start =====
 
@@ -234,7 +252,7 @@
         margin-left: 0;
         display: flex;
         justify-content: space-between;
-        cursor: pointer;
+        // cursor: pointer;
     }
 
     li.ab-quantity-dropdown-option:not(:last-child) {
@@ -328,6 +346,7 @@
         color: #47b4eb;
         text-decoration: underline;
         text-underline-offset: 2px;
+        user-select: none;
     }
 
     @media screen and (min-width: 768px) {

@@ -1,7 +1,4 @@
 (function () {
-    const TEST_KEY = "CONVERT_1004169319_BUCKETED";
-    const IS_BUCKETED = window[TEST_KEY];
-
     async function waitForPromise(predicate) {
         let count = 0;
 
@@ -13,12 +10,13 @@
             new MutationObserver((mutationList, observer) => {
                 count++;
 
+                console.log("Waiting...", count);
+
                 if (typeof predicate === "function" && predicate()) {
                     observer.disconnect();
                     resolve();
-                } else if (count >= 50) {
+                } else if (count >= 100) {
                     observer.disconnect();
-                    // reject(new Error(`Max polling reached while waiting for: ${count} ' : ' ${predicate.toString()}`));
                 }
             }).observe(document.body, { childList: true, subtree: true });
         });
@@ -33,6 +31,9 @@
     }
 
     try {
+        const TEST_KEY = "CONVERT_1004169319_BUCKETED";
+        const IS_BUCKETED = window[TEST_KEY];
+
         if (IS_BUCKETED) {
             return true;
         } else {
