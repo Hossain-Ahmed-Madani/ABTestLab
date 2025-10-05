@@ -30,8 +30,6 @@
         text-align: left;
     }
 
-    
-
     .line-item-total-price.ab-added-reduced-total {
         display: flex;
         flex-direction: column;
@@ -122,13 +120,14 @@
     .ab-single-item-progress-btn-container__heading {
         font-family: Inter, sans-serif;
         font-weight: 400;
-        font-style: Regular;
-        font-size: 14px;
+        // font-style: Regular;
+        // font-size: 14px;
+        font-size: 13px;
         line-height: 21px;
         letter-spacing: 0px;
         vertical-align: middle;
         color: #4a545b;
-        height: 21px;
+        min-height: 21px;
         margin-bottom: 11px;
     }
 
@@ -285,5 +284,11 @@
 
     .ab-single-item-progress-btn-container__btn__badge:empty {
         display: none;
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-single-item-progress-btn-container__heading {
+            font-size: 14px;
+        }
     }
 }

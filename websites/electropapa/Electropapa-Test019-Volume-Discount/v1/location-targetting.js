@@ -1,4 +1,6 @@
 (function () {
+    console.log("PDS & Side Cart | JS [OPT]");
+
     async function waitForPromise(predicate) {
         let count = 0;
 
@@ -10,15 +12,13 @@
             new MutationObserver((mutationList, observer) => {
                 count++;
 
-                console.log("Waiting...", count);
-
                 if (typeof predicate === "function" && predicate()) {
                     observer.disconnect();
                     resolve();
                 } else if (count >= 100) {
                     observer.disconnect();
                 }
-            }).observe(document.body, { childList: true, subtree: true });
+            }).observe(q("body"), { childList: true, subtree: false });
         });
     }
 
@@ -31,18 +31,24 @@
     }
 
     try {
+        if (!q("body")) {
+            throw new Error("No body");
+        }
+
         const TEST_KEY = "CONVERT_1004169319_BUCKETED";
         const IS_BUCKETED = window[TEST_KEY];
 
         if (IS_BUCKETED) {
             return true;
         } else {
-            return waitForPromise(() => qq("body.is-ctl-product, .offcanvas").length > 0)
+            // Start mutation observer, but return false synchronously
+            waitForPromise(() => qq("body.is-ctl-product, .offcanvas")?.length > 0)
                 .then(() => {
                     window[TEST_KEY] = true;
                     convert_recheck_experiment();
-                })
-                .catch((err) => false);
+                });
+
+            return false;
         }
     } catch (error) {
         convert_recheck_experiment();

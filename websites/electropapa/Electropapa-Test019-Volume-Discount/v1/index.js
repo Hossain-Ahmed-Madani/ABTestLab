@@ -100,7 +100,7 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     }
 
     async function getPriceData(targetNode) {
-        const productUrl = q(targetNode, ".line-item-label a")?.href || "";
+        const productUrl = q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
 
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
         const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
