@@ -1,6 +1,4 @@
 (function () {
-    console.log("PDS & Side Cart | JS [OPT]");
-
     async function waitForPromise(predicate) {
         let count = 0;
 
@@ -54,4 +52,4 @@
         convert_recheck_experiment();
         return false;
     }
-})();
+})()

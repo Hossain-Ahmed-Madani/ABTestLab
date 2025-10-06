@@ -6,7 +6,7 @@
     padding: 13px 0px 14px;
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 100%;
     letter-spacing: 0px;
     color: #03a616;
@@ -43,7 +43,7 @@
     text-decoration: line-through;
 }
 .AB-TEST-019 .is-offcanvas .line-item-quantity-select-wrapper {
-    min-width: 139px;
+    min-width: 145px;
 }
 .AB-TEST-019 .line-item-quantity {
     display: flex;
@@ -53,13 +53,16 @@
 @media screen and (min-width: 991px) {
     .AB-TEST-019 .ab-celebration-message-container {
         display: block;
-        padding: 13px 4px 14px;
-        white-space: nowrap;
+        padding: 13px 0px 14px;
     }
 }
 
-.AB-TEST-019--v1 .product-detail-tax-link {
-    display: none;
+.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-table .product-detail-price-container .product-block-prices {
+    display: block;
+}
+.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-table .product-block-prices {
+    width: 100%;
+    max-width: 488px;
 }
 .AB-TEST-019--v1.AB-TEST-019--show-volume-discount-modal {
     overflow: hidden;
@@ -147,6 +150,10 @@
     color: #4a545b;
     margin-bottom: 15px;
 }
+.AB-TEST-019--v1 .product-detail-tax-container {
+    display: flex;
+    flex-direction: column;
+}
 @media screen and (min-width: 768px) {
     .AB-TEST-019--v1 .ab-quantity-modal {
         top: 100px;
@@ -185,7 +192,6 @@
     margin-left: 0;
     display: flex;
     justify-content: space-between;
-    cursor: pointer;
 }
 .AB-TEST-019--v1 li.ab-quantity-dropdown-option:not(:last-child) {
     border-bottom: 0.5px solid #d8d8d8;
@@ -240,6 +246,7 @@
     gap: 5px;
 }
 .AB-TEST-019--v1 .ab-free-delivery-txt-cta {
+    display: none !important;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -253,6 +260,23 @@
 }
 .AB-TEST-019--v1 .ab-volume-discount-modal-cta {
     cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    user-select: none;
+    margin-bottom: 10px;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 1.5rem;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__icon svg {
+    width: 10px;
+    height: 10px;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__txt {
     font-family: Inter, sans-serif;
     font-weight: 600;
     font-style: Semi Bold;

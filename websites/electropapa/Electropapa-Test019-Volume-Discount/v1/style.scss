@@ -87,9 +87,9 @@
 }
 
 .AB-TEST-019--v1 {
-    .product-detail-tax-link {
-        display: none;
-    }
+    // .product-detail-tax-link {
+    //     display: none;
+    // }
 
     // ======= Product Volume Discount Table Start =====
     &.AB-TEST-019--show-volume-discount-table {
@@ -204,6 +204,19 @@
         color: #4a545b;
         margin-bottom: 15px;
     }
+
+    .product-detail-tax-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    // .product-delivery-available > div:first-child {
+    //     min-width: 0.5rem;
+    // }
+
+    // .product-shipping-information > div > div:first-child {
+    //     min-width: 0.5rem;
+    // }
 
     @media screen and (min-width: 768px) {
         .ab-quantity-modal {
@@ -321,6 +334,7 @@
     }
 
     .ab-free-delivery-txt-cta {
+        display: none !important;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -336,6 +350,26 @@
 
     .ab-volume-discount-modal-cta {
         cursor: pointer;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        user-select: none;
+        margin-bottom: 10px;
+    }
+
+    .ab-volume-discount-modal-cta__icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 1.5rem;
+
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    }
+
+    .ab-volume-discount-modal-cta__txt {
         font-family: Inter, sans-serif;
         font-weight: 600;
         font-style: Semi Bold;
@@ -346,7 +380,6 @@
         color: #47b4eb;
         text-decoration: underline;
         text-underline-offset: 2px;
-        user-select: none;
     }
 
     @media screen and (min-width: 768px) {

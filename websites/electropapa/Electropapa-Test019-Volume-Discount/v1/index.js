@@ -24,6 +24,24 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
     const BODY_CLASSLIST = [page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`];
 
+    ASSETS = {
+        information_svg: /* HTML */ `<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <rect y="0.00012207" width="10" height="10" fill="url(#pattern0_3911_2703)" />
+            <defs>
+                <pattern id="pattern0_3911_2703" patternContentUnits="objectBoundingBox" width="1" height="1">
+                    <use xlink:href="#image0_3911_2703" transform="scale(0.015625)" />
+                </pattern>
+                <image
+                    id="image0_3911_2703"
+                    width="64"
+                    height="64"
+                    preserveAspectRatio="none"
+                    xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAACYJJREFUeJzlW21wlNUVfs7djyifwu4GsK12pjNqK7VS6AyOBUMhm4Vk1Qp0poBDQFqno0DtWKFMbTNqpVA7o1D7hfIl+AMtpW42ZJMqNGMLMxVHLMwQ7YxYZ4BkNwECTGez2fv0x25Ckr3vZtl93wyZPn+yueeec8897/vee+455wocRjB2rlx6ZBahpoK4Q4DbAEwAcBOAMdlulwFcAHAeQCuAUxB9UoluObhgStxJ/cQJoZXR+AwXsYRgJSB3ljAOCTkhwmZo7I2FA+/bqSdgowHu/0t8bLfC9yh4BMBX7JI7CCcpeLX7Crcd/k75ZTsElmyA6voLE9JMraVgNYCJNuhUANgByJZkyr3l8LcnXChFUvEGIKWqvuNhgL+CoLwUJUpAJ4GfNFX7t0GExQgoygDzG9q+pLXaCeCbxfAD6ILgIogrWS1GgxgPYFyR8lqo07VN90/+5FoZr9kAwUj7IhF5BcD4AlnaCBwS4m8CdZwed2ssNL7T1LGq8eJESfXcroV3i/A+aMy5hrfrglBWNob9fy6wP4BrMQApoWhiM4EnC+h9GSJvqDR3HQz7W4p9PevqqI5OT8ymyHKAi3B127TUUshNjTWBDYWOWZABKg7RXXal4w8AVw7RtQvg7+Au22z1lIvF3P1dPo8nubqQxZbAno7J/pXHZkhqKLlDGmD6e/QE2hJ/IhHO000T2CZu7wa7Jz4Yc/d3+dze5EYAjwBQebq+lRztX3h4jvTkk5ffAKQEo4ndAizLI+K0UJY0hn1H8sqyGZUNbfcqrfYCuNWqj4C7GqsDK/J9DvksiFA0sTnv5AUHkinXtOGePAA0L5j0dzc800QQsepDyPJQffz5fHIs34Dsav+GJSf58j3HAmvq6kQXpLFTIKWqIfECiB9Z9RDKQqvdwWiA7D5/DNZb3TOxmsDPi1C3D/Minbco0XOEINNyqOlB32elyAtGEs+K8KcW5PPi6vl64/wppwcTcj8BUrJOjnHyAtla6uRD0fY1Lkm3CrgTwl3i1h8F69tXlyKzKex/GuTLFuQJTLt3gMx54DkGqKqP18LKwxMcmPme74elKBqqb6si5UUAN/RrvkEgL1VGOoKlyL7nWGBNnjWhIhTtWDq4cYABqusvTIDIJgsBnyS73StK/uapnoL50xMl+seliK6rE02XtxbAp8ahwRfmNXcOeLMHGCDN1FoAAQOvFqqlpZ68AICCL+Qh31Kq/FhofKeQywCYtr5JKtnzeP+GPgMEY+dGU/CYSSiBbbZtdcS/81A/tmOIxnD5uwS2m2gCPFGxr73Ppe4zgOp2PQrAb+A5L27vBjsUAwDlUs8ASBtIWshf2jVOGVPrAVzMpYivbJSs6tOn9weFK0yChNhip3t7cIHvKMmlyMT/etEJ4Xcbw+Xv2jVOJHxzApDfWJD7DCBAJoaniH8aOl6G23urE/79/IaOcT1pzASAG7U+8tYDgUt2jxGOnPF3i+c0gNGDaVo4rbm6/AM3AGQCmAaIvOHU4ebgAl8XgCYnZPciEr45Eapvf5OQ5YNpomUJgA8UAGSit7lQae5yUsHhAKH2mNpFUAkAEoydK5eU6xxy9+a2WLV/SrHBjOsFdXVUR2Yk2pC7wGsvU5OU9MgsmBwTweGRPnkg4xwJ5LCBpFLwzlKEmmpiFOCQs6oNK4xzoXCqW4jbjSxafeikRqFoey2ZWZwI2dlU43duvaH+EJL7khO4TSGTq8sletytTukTrI9/n5QdACoAVAi4syoaXzUEW9HwoOeUqV0EtyuYvb+LTsb2BHg0p425bXYh4xQh188g/ArA2ByCoMspZbL4XK4ueQ9JdsDkaI1VMMXaCVsSj9cZTA91bN6g6P8DFGB42jJkBmYkwpR3vKRgXhyKTVJez8hd67IGSBgI4+fu7/I5rNCwYX7D2QDMi31CAfjIxOTxpIz+wUgE0y6js0eiVQEwOgmE/pqjWg0nRN1lalbCVgXRJ41MChVO6jTMmGNs1eqkUqJbYIqgasypq+OI3ybr6qgIVhhIOpXytqiDC6bECTmRQxaUH52emO24hg7jH9/onAuTu08cf/uhcR0KAETYbGLOVGaMbAjS5uy2QnPmDwBo7DWzc9FI3g7DkTN+UBYaiVq/DmQNEAsH3ifkX4ZuY9ze5BrnVHQW3eJ9AoaIMMATsfCk40D/1Jhwh4WcNSPxLcg4PzRmukC80vvzqgHc6T/C7BXelK3JGVHQ9GyCMcXPjuR/8Wrvf30GaKqafAXAFgt5j1Q2tN1rs46OIRhtnw2y1kQTql/3rzMesM8nU+6tINoNfEpptbe6/sIEWzQUdBfUVgTm7u/yCWQPzCn4s17NAemyAQbIpL/FKkd/a1pSu2xyjo7ltJCm1Nw1YfE+ulze5G7QIrokeHJwCi5nMrEa32sAWkz8JMJHpsetPpOCoTWfguBqTZDgM6SxrlS5XaMSWwVYYKIJ8U6sOvD64PbcpylC6nQtMjc4DJLksWAk8WwpijaHyz9WoqZC9CKBLFSipsYeKM9XNzAkquoTzwH4gQW5swcuc/bbSmAwGq8R4i3LPtdJmdzifXR1jUpshfXkScpDTWH/ARMxb6VoKNK+kSLrregiiNDlrXW6PNYKc/d3+Vze5G6r1x4ASHmuKex/2oo+ZKlsKBrfYUov98OnQi6zs7ihEASj7bMFssdywQMAyPZYtW9VvhznkMXSmUrxxJsAHsjTjQS2lzG1PpuEcAzzG84GND2bsvu8tf6CA8lR/sWlFUtnsXgfXV03Jn4PwVDpq0uk7HArvbGhuvxcIbILRThyxp+C53EK1iJz5c4awt2JSYFVtpTL94GUUH38eYqsK4DvioBvguq1mcd8h4pdKDO5/Y5vQfTD2VOd4WAzSEvKL5pqfD+z9cJEfwQjiQdFuB2Zy4+FIJHNzx9Kq/TxG9LpVqvPJPOU3XdkY3hzspEcU+7ShE4StU3hgGX1uAlFXZoKHTz7Ra3dO4W4rxh+ZHIRF3E1KTMGmYOLKXY/JIR4pweuFX8NT/zPNfMWM2AvgpF4WAS/BfD5UuSUgHOgrIvV+F4b1mtz/TGvuXO8u7tnNSlrUfjrWiriAF8sS8vWUsvrbLs6W7GvfUzZKFlFyEoBv2qX3AEQfAjN7fTqV7LHdxtEOoDKaPvdomVJthTtLgxxNScPNIjjUGiG1q/3hrHshCMG6I/Myu6dBaXvpJYvi+A2ABM56Pq8ZA5fnQBaITwFrU6mUt6Wtx8a1+Gkfv8DQvWR+2IzVdkAAAAASUVORK5CYII="
+                />
+            </defs>
+        </svg> `,
+    };
+
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -309,13 +327,17 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
             },
         ];
 
-        const selector = ".product-detail-tax-link, .product-delivery-available";
+        const selector = ".product-detail-tax, .product-detail-tax-link, .product-delivery-available";
 
         waitForElement(
-            () => qq(selector).length === 2,
+            () => qq(selector).length === 3,
             () => {
                 // ======  Modal Cta Link ======
-                q(".product-detail-tax-link").insertAdjacentHTML("afterend", `<span class="ab-volume-discount-modal-cta">Sparpreis bei höherer Stückzahl verfügbar</span>`);
+                q(".product-detail-tax-link").innerText = "Kostenfreie Lieferung in DE";
+                q(".product-detail-tax").insertAdjacentHTML("afterend", `<span class="ab-volume-discount-modal-cta">
+                        <span class="ab-volume-discount-modal-cta__icon">${ASSETS.information_svg}</span>
+                        <span class="ab-volume-discount-modal-cta__txt">Sparpreis bei höherer Stückzahl verfügbar</span>
+                    </span>`);
 
                 // ====== Delivery Layout ======
                 q(".product-delivery-available").insertAdjacentHTML(

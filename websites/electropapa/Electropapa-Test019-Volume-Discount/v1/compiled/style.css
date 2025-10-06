@@ -57,9 +57,6 @@
   }
 }
 
-.AB-TEST-019--v1 .product-detail-tax-link {
-  display: none;
-}
 .AB-TEST-019--v1.AB-TEST-019--show-volume-discount-table .product-detail-price-container .product-block-prices {
   display: block;
 }
@@ -153,6 +150,10 @@
   color: #4a545b;
   margin-bottom: 15px;
 }
+.AB-TEST-019--v1 .product-detail-tax-container {
+  display: flex;
+  flex-direction: column;
+}
 @media screen and (min-width: 768px) {
   .AB-TEST-019--v1 .ab-quantity-modal {
     top: 100px;
@@ -245,6 +246,7 @@
   gap: 5px;
 }
 .AB-TEST-019--v1 .ab-free-delivery-txt-cta {
+  display: none !important;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -258,6 +260,23 @@
 }
 .AB-TEST-019--v1 .ab-volume-discount-modal-cta {
   cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  user-select: none;
+  margin-bottom: 10px;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 1.5rem;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__icon svg {
+  width: 10px;
+  height: 10px;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__txt {
   font-family: Inter, sans-serif;
   font-weight: 600;
   font-style: Semi Bold;
@@ -268,7 +287,6 @@
   color: #47b4eb;
   text-decoration: underline;
   text-underline-offset: 2px;
-  user-select: none;
 }
 @media screen and (min-width: 768px) {
   .AB-TEST-019--v1 .ab-quantity-dropdown-select:after {
