@@ -6,7 +6,7 @@
     padding: 13px 0 14px;
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 100%;
     letter-spacing: 0px;
     color: #03a616;
@@ -36,7 +36,7 @@
     text-decoration: line-through;
 }
 .AB-TEST-019 .is-offcanvas .line-item-quantity-select-wrapper {
-    min-width: 139px;
+    min-width: 145px;
 }
 .AB-TEST-019 .line-item-quantity {
     display: flex;
@@ -45,8 +45,7 @@
 }
 @media screen and (min-width: 991px) {
     .AB-TEST-019 .ab-celebration-message-container {
-        padding: 13px 4px 14px;
-        white-space: nowrap;
+        padding: 13px 0px 14px;
     }
 }
 
@@ -79,13 +78,12 @@
 .AB-TEST-019--v2 .ab-single-item-progress-btn-container__heading {
     font-family: Inter, sans-serif;
     font-weight: 400;
-    font-style: Regular;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 21px;
     letter-spacing: 0px;
     vertical-align: middle;
     color: #4a545b;
-    height: 21px;
+    min-height: 21px;
     margin-bottom: 11px;
 }
 .AB-TEST-019--v2 .ab-single-item-progress-btn-container__progress-bar {
@@ -215,4 +213,9 @@
 }
 .AB-TEST-019--v2 .ab-single-item-progress-btn-container__btn__badge:empty {
     display: none;
+}
+@media screen and (min-width: 991px) {
+    .AB-TEST-019--v2 .ab-single-item-progress-btn-container__heading {
+        font-size: 14px;
+    }
 }

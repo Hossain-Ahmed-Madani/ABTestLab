@@ -2,11 +2,12 @@
 Ticket: https://trello.com/c/pVg0rKnQ/4093-test019-electropapa-a-b-c-followup016-pds-side-cart-textlink-popup-and-volume-discount-nudge-cart#
 Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Yt5f6zHNlA/edit?tab=t.0
 
-Test container: 
+Test container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004170195/summary
 
-ControL: 
-V1: 
-v2: 
+ControL: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?convert_action=convert_vpreview&convert_e=1004170195&convert_v=1004401762&utm_campaign=qa5 
+V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5 
+v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5 
+
 */
 
 (() => {
@@ -18,7 +19,7 @@ v2:
       "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
     page_initials: "AB-TEST-019",
     test_variation: 2 /* 1, 2 */,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -91,25 +92,34 @@ v2:
       : formattedPriceTxt;
   }
 
-  function calculateOriginalPrice(offerPrice, quantity) {
-    const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-    const discount_percentage =
-      quantity <= 10
-        ? percentage_by_quantity[quantity]
-        : percentage_by_quantity[10];
-
-    // Calculate original price from discounted price
-    const originalPrice = offerPrice / (1 - discount_percentage / 100);
-    return originalPrice;
+  async function getProductOriginalPricePerQuantity(url) {
+    return fetch(url)
+      .then((res) => res.text())
+      .then((resTxt) => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(resTxt, "text/html");
+        const priceNode = doc.querySelector(".product-detail-price");
+        if (priceNode) {
+          return parseAmount(priceNode);
+        } else {
+          throw new Error("Price element not found");
+        }
+      });
   }
 
-  function getPriceData(targetNode) {
+  async function getPriceData(targetNode) {
+    const productUrl =
+      q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
+
     const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
     const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
     const quantity =
       +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
-    const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+    // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+    const totalPricePerQuantity =
+      await getProductOriginalPricePerQuantity(productUrl);
+    const totalPrice = totalPricePerQuantity * quantity;
     const discount = totalPrice - offerPrice;
 
     return {
@@ -120,9 +130,13 @@ v2:
     };
   }
 
-  function getCelebrationTxt(targetNode) {
-    const { discount, quantity } = getPriceData(targetNode);
-
+  function getCelebrationTxt({
+    targetNode,
+    totalPrice,
+    quantity,
+    discount,
+    offerPrice,
+  }) {
     const single_item_txt =
       "<b>Clever sein und sparen:</b>&nbspAb 2 Stück mindestens 5% Rabatt";
     const multi_item_txt = `Glückwunsch! Du sparst ${formatPriceToGerman(discount, true)} durch unseren Mengenrabatt.`;
@@ -132,8 +146,13 @@ v2:
     }
   }
 
-  function createReducedPriceLayout(targetNode) {
-    const { totalPrice, quantity } = getPriceData(targetNode);
+  function createReducedPriceLayout({
+    targetNode,
+    totalPrice,
+    quantity,
+    discount,
+    offerPrice,
+  }) {
     const parentNode = q(
       targetNode,
       ".line-item-total-price:not(.ab-added-reduced-total)",
@@ -203,9 +222,13 @@ v2:
     return layout;
   }
 
-  function createCelebrationMessageLayoutV2(targetNode) {
-    const { quantity } = getPriceData(targetNode);
-
+  function createCelebrationMessageLayoutV2({
+    targetNode,
+    totalPrice,
+    quantity,
+    discount,
+    offerPrice,
+  }) {
     if (
       !q(targetNode, ".ab-single-item-progress-btn-container") &&
       quantity < 2
@@ -226,7 +249,13 @@ v2:
         "beforeend",
         /* HTML */
         `<div class="ab-celebration-message-container">
-          ${getCelebrationTxt(targetNode)}
+          ${getCelebrationTxt({
+            targetNode,
+            totalPrice,
+            quantity,
+            discount,
+            offerPrice,
+          })}
         </div>`,
       );
 
@@ -238,9 +267,24 @@ v2:
 
   function createCelebrationMessageComponent() {
     const targetNodes = qq(".offcanvas-cart-items .line-item");
-    targetNodes.forEach((targetNode) => {
-      createReducedPriceLayout(targetNode);
-      createCelebrationMessageLayoutV2(targetNode);
+    targetNodes.forEach(async (targetNode) => {
+      const { totalPrice, quantity, discount, offerPrice } =
+        await getPriceData(targetNode);
+
+      createReducedPriceLayout({
+        targetNode,
+        totalPrice,
+        quantity,
+        discount,
+        offerPrice,
+      });
+      createCelebrationMessageLayoutV2({
+        targetNode,
+        totalPrice,
+        quantity,
+        discount,
+        offerPrice,
+      });
     });
   }
 
