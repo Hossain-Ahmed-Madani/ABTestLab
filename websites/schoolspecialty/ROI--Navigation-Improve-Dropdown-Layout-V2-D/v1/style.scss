@@ -1,0 +1,141 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+/*  {
+  .subcategoryList-level3.active li{
+      min-width: 236px;
+  }
+} */
+
+.AB-NAV-V2-D {
+    .departmentMenu {
+        width: 326px;
+    }
+    .categoryList {
+        padding: 0;
+        background: #fff;
+    }
+    .categoryList > li:hover {
+        background-color: #e7f0f8;
+        color: rgb(77, 77, 77) !important;
+    }
+    .categoryList > li.selected {
+        background-color: #e7f0f8;
+        color: rgb(77, 77, 77) !important;
+    }
+    .categoryList > li > a.active {
+        color: rgb(77, 77, 77) !important;
+    }
+    .categoryList > li {
+        margin-left: 0;
+        width: 100%;
+    }
+    .categoryList li a {
+        font-family: "MuseoSans-300";
+        padding: 10px 0 10px 10px;
+    }
+    .categoryList li a.left-positioned {
+        padding: 10px 0 10px 40px !important;
+    }
+    .subcategoryList-level3_title {
+        display: none;
+    }
+    .subcategoryList-level3 {
+        padding: 0;
+        background-color: #e7f0f8;
+        left: 315px;
+        transition: top 0.05s;
+    }
+    .subcategoryList-level3 li a {
+        border-bottom: 1px solid #e7f0f8;
+    }
+    .categoryList span.icon-keyboard_arrow_right {
+        font-size: 20px;
+        display: block;
+        margin-top: 4px;
+    }
+    .subcategoryList-level3 {
+        position: fixed;
+        min-height: unset;
+        height: 584px;
+        min-width: 270px;
+        /* width: unset !important; */
+        column-count: unset;
+        flex-direction: column;
+        flex-wrap: wrap;
+        padding-right: 10px;
+    }
+    .subcategoryList-level3.active {
+        display: flex;
+    }
+    .categoryList {
+        height: 584px;
+        overflow: auto;
+    }
+    .categoryList::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+    }
+    .roi-scrollbar-track {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 4px;
+        height: 100%;
+        background: rgb(227, 227, 227);
+        pointer-events: none;
+    }
+    .roi-scrollbar-thumb {
+        position: absolute;
+        width: 100%;
+        background: rgb(176, 176, 176);
+        min-height: 24px;
+        border-radius: 2px;
+    }
+    #departmentsMenu > li:has(> #departmentButton_QuickOrder),
+    #departmentsMenu > li:has(> #departmentButton_Dashboard) {
+        display: none;
+    }
+    #departmentsMenu > li.selected,
+    #departmentsMenu > li:hover {
+        background: #e7f0f8 !important;
+    }
+    #departmentsMenu > li.selected p,
+    #departmentsMenu > li:hover p {
+        color: #0e6cb6;
+    }
+    #departmentsMenu {
+        max-width: 2000px;
+        margin: auto;
+    }
+    #departmentsMenu li:has(> a.departmentButton[href="/deals-clearance"]) {
+        border-right: 0;
+    }
+    #departmentsButton + ul.categoryList > li:last-of-type {
+        border-bottom: none;
+    }
+    .departmentMenu {
+        top: calc(100% + 1px);
+    }
+    #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) {
+        background-color: #e7f0f8;
+        color: rgb(77, 77, 77) !important;
+    }
+    #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) ul.subcategoryList {
+        display: flex !important;
+    }
+    #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) ul.subcategoryList li {
+        min-width: 236px;
+    }
+}
