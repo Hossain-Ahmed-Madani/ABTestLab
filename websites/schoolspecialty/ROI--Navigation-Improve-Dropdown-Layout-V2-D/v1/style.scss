@@ -231,10 +231,31 @@
     }
 
     #departmentsMenu > li.ab-click-active p {
-        color: #0e6cb6  !important;
+        color: #0e6cb6 !important;
     }
 
     #departmentsMenu > li.ab-click-active .icon-arrow_drop_down {
         color: #0f6cb6 !important;
+    }
+
+
+}
+
+.AB-NAV-V2-D--nav-opened {
+    overflow: hidden;
+    position: relative;
+    padding-right: 15px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 5;
     }
 }

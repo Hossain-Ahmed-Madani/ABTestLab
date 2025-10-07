@@ -5,11 +5,6 @@
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
       style.innerHTML = `@charset "UTF-8";
-/*  {
-  .subcategoryList-level3.active li{
-      min-width: 236px;
-  }
-} */
 .AB-NAV-V2-D {
   /* Webkit browsers (Chrome, Safari, Edge) */
   /* Firefox */
@@ -258,6 +253,24 @@
 .AB-NAV-V2-D #departmentsMenu > li.ab-click-active .icon-arrow_drop_down {
   color: #0f6cb6 !important;
 }
+
+.AB-NAV-V2-D--nav-opened {
+  overflow: hidden;
+  position: relative;
+  padding-right: 15px;
+}
+.AB-NAV-V2-D--nav-opened:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 5;
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -315,14 +328,17 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
         selector: "body",
         event: "click",
         callback: (e) => {
+          body = e.currentTarget;
+
           if (
             !e.target.closest(
               "#departmentsMenu > li, .departmentMenu, .categoryList, .categoryList > li, .subcategoryList-level3",
             )
           ) {
-            qq(".ab-click-active").forEach((item) => {
-              item.classList.remove("ab-click-active");
-            });
+            body.classList.remove("AB-NAV-V2-D--nav-opened");
+            qq(".ab-click-active").forEach((item) =>
+              item.classList.remove("ab-click-active"),
+            );
           }
         },
       },
@@ -335,6 +351,7 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
           const el = e.currentTarget;
           const isActive = el.classList.contains("ab-click-active");
 
+          q("body").classList.remove("AB-NAV-V2-D--nav-opened");
           qq(
             "#departmentsMenu > li, .departmentMenu, .categoryList, .categoryList > li, .subcategoryList-level3",
           ).forEach((item) => {
@@ -342,6 +359,7 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
           });
 
           if (!isActive) {
+            q("body").classList.add("AB-NAV-V2-D--nav-opened");
             el.classList.add("ab-click-active");
             q(el, ":scope .departmentMenu").classList.add("ab-click-active");
           }
@@ -366,11 +384,13 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
           }
 
           if (!isActive) {
-            el.classList.add("ab-click-active");
-            el.parentNode.classList.add("ab-click-active");
-            q(el, ":scope .subcategoryList-level3").classList.add(
-              "ab-click-active",
-            );
+            q("body").classList.add("AB-NAV-V2-D--nav-opened");
+            [
+              el,
+              el.parentNode,
+              q(el, ":scope .subcategoryList-level3"),
+            ].forEach((item) => item.classList.add("ab-click-active"));
+            return;
           }
         },
       },
@@ -404,6 +424,11 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
   }
 
   function updateLayout() {
+    q("body").insertAdjacentHTML(
+      "afterbegin",
+      '<div class="ab-overlay"></div>',
+    );
+
     qq(".categoryList").forEach((item) => {
       const categoryItem =
         item.parentNode.parentNode.querySelector(":scope > a");
