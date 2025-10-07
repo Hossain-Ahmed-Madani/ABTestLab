@@ -1,215 +1,210 @@
-@charset "UTF-8";
-.AB-NAV-V2-D {
-  /* Webkit browsers (Chrome, Safari, Edge) */
-  /* Firefox */
-}
 .AB-NAV-V2-D .departmentMenu {
-  width: 326px;
+    width: 326px;
 }
 .AB-NAV-V2-D .categoryList {
-  padding: 0;
-  background: #fff;
+    padding: 0;
+    background: #fff;
 }
 .AB-NAV-V2-D .categoryList > li:hover {
-  background-color: #e7f0f8;
-  color: rgb(77, 77, 77) !important;
+    background-color: #e7f0f8;
+    color: rgb(77, 77, 77) !important;
 }
 .AB-NAV-V2-D .categoryList > li.selected {
-  background-color: #e7f0f8;
-  color: rgb(77, 77, 77) !important;
+    background-color: #e7f0f8;
+    color: rgb(77, 77, 77) !important;
 }
 .AB-NAV-V2-D .categoryList > li > a.active {
-  color: rgb(77, 77, 77) !important;
+    color: rgb(77, 77, 77) !important;
 }
 .AB-NAV-V2-D .categoryList > li {
-  margin-left: 0;
-  width: 100%;
+    margin-left: 0;
+    width: 100%;
 }
 .AB-NAV-V2-D .categoryList li a {
-  font-family: "MuseoSans-300";
-  padding: 10px 0 10px 10px;
+    font-family: "MuseoSans-300";
+    padding: 10px 0 10px 10px;
 }
 .AB-NAV-V2-D .categoryList li a.left-positioned {
-  padding: 10px 0 10px 40px !important;
+    padding: 10px 0 10px 40px !important;
 }
 .AB-NAV-V2-D .subcategoryList-level3_title {
-  display: none;
+    display: none;
 }
 .AB-NAV-V2-D .subcategoryList-level3 {
-  padding: 0;
-  background-color: #e7f0f8;
-  left: 315px;
-  transition: top 0.05s;
+    padding: 0;
+    background-color: #e7f0f8;
+    left: 315px;
+    transition: top 0.05s;
 }
 .AB-NAV-V2-D .subcategoryList-level3 li a {
-  border-bottom: 1px solid #e7f0f8;
+    border-bottom: 1px solid #e7f0f8;
 }
 .AB-NAV-V2-D .categoryList span.icon-keyboard_arrow_right {
-  font-size: 20px;
-  display: block;
-  margin-top: 4px;
+    font-size: 20px;
+    display: block;
+    margin-top: 4px;
 }
 .AB-NAV-V2-D .subcategoryList-level3 {
-  position: fixed;
-  min-height: unset;
-  height: 584px;
-  min-width: 270px;
-  /* width: unset !important; */
-  column-count: unset;
-  flex-direction: column;
-  flex-wrap: wrap;
-  padding-right: 10px;
+    position: fixed;
+    min-height: unset;
+    height: 584px;
+    min-width: 270px;
+    /* width: unset !important; */
+    column-count: unset;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding-right: 10px;
 }
 .AB-NAV-V2-D .subcategoryList-level3.active {
-  display: flex;
+    display: flex;
 }
 .AB-NAV-V2-D .categoryList {
-  height: 584px;
-  overflow: auto;
+    height: 584px;
+    overflow: auto;
 }
 .AB-NAV-V2-D .categoryList::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+    width: 0px;
+    background: transparent;
 }
 .AB-NAV-V2-D .roi-scrollbar-track {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 4px;
-  height: 100%;
-  background: rgb(227, 227, 227);
-  pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: rgb(227, 227, 227);
+    pointer-events: none;
 }
 .AB-NAV-V2-D .roi-scrollbar-thumb {
-  position: absolute;
-  width: 100%;
-  background: rgb(176, 176, 176);
-  min-height: 24px;
-  border-radius: 2px;
+    position: absolute;
+    width: 100%;
+    background: rgb(176, 176, 176);
+    min-height: 24px;
+    border-radius: 2px;
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(> #departmentButton_QuickOrder),
 .AB-NAV-V2-D #departmentsMenu > li:has(> #departmentButton_Dashboard) {
-  display: none;
+    display: none;
 }
 .AB-NAV-V2-D #departmentsMenu > li.selected,
 .AB-NAV-V2-D #departmentsMenu > li:hover {
-  background: #e7f0f8 !important;
+    background: #e7f0f8 !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li.selected p,
 .AB-NAV-V2-D #departmentsMenu > li:hover p {
-  color: #0e6cb6;
+    color: #0e6cb6;
 }
 .AB-NAV-V2-D #departmentsMenu {
-  max-width: 2000px;
-  margin: auto;
+    max-width: 2000px;
+    margin: auto;
 }
 .AB-NAV-V2-D #departmentsMenu li:has(> a.departmentButton[href="/deals-clearance"]) {
-  border-right: 0;
+    border-right: 0;
 }
 .AB-NAV-V2-D #departmentsButton + ul.categoryList > li:last-of-type {
-  border-bottom: none;
+    border-bottom: none;
 }
 .AB-NAV-V2-D .departmentMenu {
-  top: calc(100% + 1px);
+    top: calc(100% + 1px);
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) {
-  background-color: #e7f0f8;
-  color: rgb(77, 77, 77) !important;
+    background-color: #e7f0f8;
+    color: rgb(77, 77, 77) !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) ul.subcategoryList:not(.ab-click-active) {
-  display: flex !important;
+    display: flex !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) ul.subcategoryList:not(.ab-click-active) li {
-  min-width: 236px;
+    min-width: 236px;
 }
 .AB-NAV-V2-D #departmentsMenu ul.active {
-  display: none;
+    display: none;
 }
 .AB-NAV-V2-D .departmentMenu,
 .AB-NAV-V2-D .departmentMenu.active,
 .AB-NAV-V2-D #departmentsMenu > li:hover .departmentMenu,
 .AB-NAV-V2-D .subcategoryList-level3,
 .AB-NAV-V2-D .subcategoryList-level3.active {
-  display: none;
+    display: none;
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(.departmentButton:hover) .categoryList li:nth-child(1) ul.subcategoryList:not(.ab-click-active) {
-  display: none !important;
+    display: none !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li .departmentMenu.ab-click-active {
-  display: block;
+    display: block;
 }
 .AB-NAV-V2-D .categoryList.ab-click-active {
-  position: static !important;
+    position: static !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active {
-  width: 326px !important;
-  background-color: #fff;
-  box-shadow: none !important;
-  position: absolute !important;
-  display: block !important;
-  top: 0 !important;
-  left: 0 !important;
-  z-index: 10;
-  overflow-y: auto;
+    width: 326px !important;
+    background-color: #fff;
+    box-shadow: none !important;
+    position: absolute !important;
+    display: block !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 10;
+    overflow-y: auto;
 }
 .AB-NAV-V2-D .categoryList::-webkit-scrollbar,
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active::-webkit-scrollbar {
-  width: 4px;
+    width: 4px;
 }
 .AB-NAV-V2-D .categoryList::-webkit-scrollbar-track,
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active::-webkit-scrollbar-track {
-  background: rgb(227, 227, 227);
-  border-radius: 0;
+    background: rgb(227, 227, 227);
+    border-radius: 0;
 }
 .AB-NAV-V2-D .categoryList::-webkit-scrollbar-thumb,
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active::-webkit-scrollbar-thumb {
-  background: rgb(176, 176, 176);
-  border-radius: 2px;
-  min-height: 24px;
+    background: rgb(176, 176, 176);
+    border-radius: 2px;
+    min-height: 24px;
 }
 .AB-NAV-V2-D .categoryList::-webkit-scrollbar-thumb:hover,
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active::-webkit-scrollbar-thumb:hover {
-  background: rgb(150, 150, 150);
+    background: rgb(150, 150, 150);
 }
 .AB-NAV-V2-D .categoryList,
 .AB-NAV-V2-D #departmentsMenu > li .subcategoryList-level3.ab-click-active {
-  scrollbar-width: thin;
-  scrollbar-color: rgb(176, 176, 176) rgb(227, 227, 227);
+    scrollbar-width: thin;
+    scrollbar-color: rgb(176, 176, 176) rgb(227, 227, 227);
 }
 .AB-NAV-V2-D .backToCategories a {
-  color: #0e6cb6;
-  font-size: 20px;
-  font-weight: 500;
+    color: #0e6cb6;
+    font-size: 20px;
+    font-weight: 500;
 }
 .AB-NAV-V2-D .backToCategories a:before {
-  content: "‹";
-  font-size: 30px;
-  margin-right: 0px;
-  position: relative;
-  top: 2px;
+    content: "‹";
+    font-size: 30px;
+    margin-right: 0px;
+    position: relative;
+    top: 2px;
 }
 .AB-NAV-V2-D .backToCategories a:hover {
-  text-decoration: none;
+    text-decoration: none;
 }
 .AB-NAV-V2-D .categoryList > li > a.allCategories:hover,
 .AB-NAV-V2-D .categoryList > li > a.shopAllSubcategories:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover {
-  background-color: transparent !important;
+    background-color: transparent !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover p {
-  color: #fff !important;
+    color: #fff !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover p .icon-arrow_drop_down {
-  color: rgba(0, 169, 204, 0.7) !important;
+    color: rgba(0, 169, 204, 0.7) !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li.ab-click-active {
-  background: #e7f0f8 !important;
+    background: #e7f0f8 !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li.ab-click-active p {
-  color: #0e6cb6 !important;
+    color: #0e6cb6 !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li.ab-click-active .icon-arrow_drop_down {
-  color: #0f6cb6 !important;
+    color: #0f6cb6 !important;
 }
