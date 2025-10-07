@@ -52,6 +52,9 @@
   justify-content: flex-start;
   align-items: flex-end;
 }
+.AB-TEST-018 .checkout-aside-summary-list .ab-celebration-message-container {
+  padding: 13px 0px 14px;
+}
 @media screen and (min-width: 991px) {
   .AB-TEST-018 .ab-celebration-message-container {
     padding: 13px 4px 14px;
@@ -135,7 +138,7 @@
 .AB-TEST-018--v1 .ab-quantity-dropdown-option__value {
   font-family: Inter, sans-serif;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 10px;
   line-height: 21px;
   letter-spacing: 0px;
   vertical-align: middle;
@@ -145,7 +148,7 @@
   display: none;
 }
 .AB-TEST-018--v1 .ab-quantity-dropdown-option__green-badge {
-  width: 65px;
+  width: 55px;
   height: 20px;
   background: #3cc261;
   border-radius: 2px;
@@ -154,7 +157,7 @@
   align-items: center;
   font-family: Inter, sans-serif;
   font-weight: 500;
-  font-size: 11px;
+  font-size: 10px;
   line-height: 21px;
   letter-spacing: 0px;
   text-align: center;
@@ -186,6 +189,9 @@
   }
   .AB-TEST-018--v1 li.ab-quantity-dropdown-option {
     padding: 6px 9px 5px 30px;
+  }
+  .AB-TEST-018--v1 .ab-quantity-dropdown-option__value {
+    font-size: 14px;
   }
   .AB-TEST-018--v1 .ab-quantity-dropdown-option__green-badge {
     width: 68px;
