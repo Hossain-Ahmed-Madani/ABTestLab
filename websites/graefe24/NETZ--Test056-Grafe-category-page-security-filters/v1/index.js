@@ -13,7 +13,7 @@
         test_name: "Test056 [Gräfe] - category page - Security filters complemented by top 5 filters",
         page_initials: "AB-TEST056",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -27,6 +27,11 @@
                 ></path>
             </svg>
         `,
+        abus_img_src : 'https://www.graefe24.de/media/image/9c/2c/be/abus-logo-png-transparent.png',
+        doppelzylinder_img_src : 'https://www.graefe24.de/media/image/f1/18/f1/ABUS-Bravus-3000-MX-Doppelzylinder.jpg',
+        knaufzylinder_img_src : 'https://www.graefe24.de/media/image/90/3a/d8/ABUS-Bravus-3000-MX-Knaufzylinder_600x600.jpg',
+        sicherungskartes_img_src : 'https://www.graefe24.de/media/image/20/f2/37/sicherungskarte_1.png',
+        schließzylinder_img_src : 'https://www.graefe24.de/media/image/d4/67/0d/Graefe24-Not-und-Gefahrenfunktion-Schliesszylinder-Titelbild_600x600@2x.jpg',
     };
 
     const DATA = {
@@ -64,27 +69,27 @@
         ],
         modal: [
             {
-                imgSrc: "https://cdn-3.convertexperiments.com/uf/1004828/1004764/image-3-1_68df9a685568c.png",
+                imgSrc: ASSETS['abus_img_src'],
                 description:
                     "<b>ABUS</b> steht seit der Gründung in den 1920er Jahren für ein hohes Maß an Qualität und ein breitgefächertes Sortiment. Die Profilzylinder in vielerlei Varianten der Marke sind heute sowohl im privaten als auch im gewerblichen Bereich anzutreffen.",
             },
             {
-                imgSrc: "https://cdn-3.convertexperiments.com/uf/1004828/1004764/image-4-4_68df9a67d99e1.png",
+                imgSrc:  ASSETS['doppelzylinder_img_src'],
                 description:
                     "Der klassische <b>Doppelzylinder</b> gehört heute zu den Elementen aus dem Bereich der Sicherheitstechnik, die vergleichsweise häufig genutzt werden. Bei ihm handelt es sich um eine Profilzylinder Version, die sich vollkommen unkompliziert von beiden Seiten der Tür abschließen bzw. öffnen lässt.",
             },
             {
-                imgSrc: "https://cdn-3.convertexperiments.com/uf/1004828/1004764/image-5-2_68df9a684f045.png",
+                imgSrc: ASSETS['knaufzylinder_img_src'],
                 description:
                     "Der <b>Knaufzylinder</b> ist der praktische Schließzylinder für den Einsatz in Haus- und Wohnungstüren oder bei anderen Türen, die von der Innenseite jederzeit geöffnet werden dürfen. Hierzu befindet sich direkt am Zylinder ein Drehknauf (demontierbar), mit dessen Hilfe die Tür verschlossen werden kann.",
             },
             {
-                imgSrc: "https://cdn-3.convertexperiments.com/uf/1004828/1004764/image-6-1_68df9a67d9069.png",
+                imgSrc: ASSETS['sicherungskartes_img_src'],
                 description:
                     "Eine <b>Sicherungskarte</b> ist ein Dokument, das als Eigentums- und Berechtigungsnachweis für eine Schließanlage oder einen geschützten Schließzylinder dient und den unbefugten Nachbau von Schlüsseln verhindert.",
             },
             {
-                imgSrc: "https://cdn-3.convertexperiments.com/uf/1004828/1004764/bildschirmfoto-2025-09-25-um-091046-removebg-preview-1_68df9a6853033.png",
+                imgSrc: ASSETS['schließzylinder_img_src'],
                 description:
                     "Schließzylinder <b>mit Not- und Gefahrenfunktion</b> haben gegenüber herkömmlichen Profilzylindern einen entscheidenden Vorteil. Sie verfügen über eine eingebaute Funktion, die es ermöglicht, die Tür auch dann von außen zu öffnen, wenn auf der Innenseite ein Schlüssel steckt.",
             },
@@ -248,6 +253,7 @@
     function mutationObserver() {
         new MutationObserver((mutationList, observer) => {
             if (!q(".ab-security-layout")) {
+                console.log("Re-creating security filter layout...");
                 createSecurityFilterLayout();
             } else {
                 updateSecurityFilterLayout();

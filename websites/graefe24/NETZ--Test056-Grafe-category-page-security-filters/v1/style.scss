@@ -19,6 +19,17 @@
         display: none;
     }
 
+    .syn-sl .syn-sl--box-outer-header {
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 22px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #ffffff;
+        min-height: 22px;
+    }
+
     .syn-sl--box-description {
         margin-bottom: 16px;
     }
@@ -49,7 +60,7 @@
         min-height: 15px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         font-weight: 700;
-        font-size: 12px;
+        font-size: 11px;
         line-height: 120%;
         letter-spacing: 0px;
         vertical-align: middle;
@@ -110,7 +121,7 @@
 
     .ab-security-layout__options {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(1, 1fr);
         row-gap: 17px;
     }
 
@@ -148,12 +159,13 @@
     .ab-security-layout__option-item__checkbox:after {
         opacity: 0;
         content: "";
-        width: 8px;
-        height: 3px;
-        border-left: 2px solid #fff;
-        border-bottom: 2px solid #fff;
-        transform: rotate(-45deg);
-        margin-top: -4px;
+        background: url('data:image/svg+xml,<svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="0.992751" y1="4.67387" x2="4.80228" y2="8.4834" stroke="white" stroke-width="2"/><line x1="3.38811" y1="8.48338" x2="11.0072" y2="0.864336" stroke="white" stroke-width="2"/></svg>');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+
+        width: 10px;
+        height: 10px;
         transition: opacity 0.3s;
     }
 
@@ -188,7 +200,41 @@
         }
     }
 
+    @media screen and (min-width: 360px) {
+        .ab-security-layout__options {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-security-layout__option-item--order-6 {
+            justify-content: flex-start;
+        }
+
+        .ab-security-layout__tooltip-cta {
+            margin-left: 0;
+            justify-content: flex-start;
+        }
+
+        .ab-security-layout__tooltip-cta {
+            margin-left: 3px;
+        }
+
+        .ab-security-layout__tooltip-cta:before {
+            display: none;
+        }
+
+    }
+
     @media screen and (min-width: 991px) {
+        .syn-sl .syn-sl--box-outer-header {
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 26px;
+            letter-spacing: 0px;
+            min-height: 31px;
+        }
+
         .syn-sl--box-description {
             margin-bottom: 19px;
         }
@@ -228,11 +274,6 @@
             padding-right: 19px;
         }
 
-        .ab-security-layout__options {
-            display: flex;
-            justify-content: space-between;
-        }
-
         .ab-security-layout__option-item__label {
             font-weight: 700;
             font-size: 14px;
@@ -245,13 +286,24 @@
         }
 
         .ab-security-layout__option-item__checkbox:after {
-            width: 10px;
-            height: 5px;
-            margin-top: -4px;
+            width: 13px;
+            height: 13px;
         }
 
         .ab-security-layout__option-item-cta {
             display: none;
+        }
+
+        .ab-security-layout__options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .ab-security-layout__options {
+            display: flex;
+            justify-content: space-between;
         }
     }
 }
@@ -329,7 +381,7 @@
         right: 0;
         position: absolute;
         z-index: 1;
-        padding: 6px 17px 48px;
+        padding: 6px 26px 48px 17px;
 
         &__head {
             display: flex;
@@ -424,6 +476,7 @@
             bottom: 0;
             min-height: max-content;
             height: max-content;
+            padding: 6px 43px 48px 17px;
 
             &__head {
                 display: flex;
