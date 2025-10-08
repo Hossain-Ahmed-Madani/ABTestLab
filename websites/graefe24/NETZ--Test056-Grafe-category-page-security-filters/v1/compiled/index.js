@@ -27,11 +27,11 @@
                 ></path>
             </svg>
         `,
-        abus_img_src : 'https://www.graefe24.de/media/image/9c/2c/be/abus-logo-png-transparent.png',
-        doppelzylinder_img_src : 'https://www.graefe24.de/media/image/f1/18/f1/ABUS-Bravus-3000-MX-Doppelzylinder.jpg',
-        knaufzylinder_img_src : 'https://www.graefe24.de/media/image/90/3a/d8/ABUS-Bravus-3000-MX-Knaufzylinder_600x600.jpg',
-        sicherungskartes_img_src : 'https://www.graefe24.de/media/image/20/f2/37/sicherungskarte_1.png',
-        schließzylinder_img_src : 'https://www.graefe24.de/media/image/d4/67/0d/Graefe24-Not-und-Gefahrenfunktion-Schliesszylinder-Titelbild_600x600@2x.jpg',
+        abus_img_src: "https://www.graefe24.de/media/image/9c/2c/be/abus-logo-png-transparent.png",
+        doppelzylinder_img_src: "https://www.graefe24.de/media/image/f1/18/f1/ABUS-Bravus-3000-MX-Doppelzylinder.jpg",
+        knaufzylinder_img_src: "https://www.graefe24.de/media/image/90/3a/d8/ABUS-Bravus-3000-MX-Knaufzylinder_600x600.jpg",
+        sicherungskartes_img_src: "https://www.graefe24.de/media/image/20/f2/37/sicherungskarte_1.png",
+        schließzylinder_img_src: "https://www.graefe24.de/media/image/d4/67/0d/Graefe24-Not-und-Gefahrenfunktion-Schliesszylinder-Titelbild_600x600@2x.jpg",
     };
 
     const DATA = {
@@ -69,27 +69,27 @@
         ],
         modal: [
             {
-                imgSrc: ASSETS['abus_img_src'],
+                imgSrc: ASSETS["abus_img_src"],
                 description:
                     "<b>ABUS</b> steht seit der Gründung in den 1920er Jahren für ein hohes Maß an Qualität und ein breitgefächertes Sortiment. Die Profilzylinder in vielerlei Varianten der Marke sind heute sowohl im privaten als auch im gewerblichen Bereich anzutreffen.",
             },
             {
-                imgSrc:  ASSETS['doppelzylinder_img_src'],
+                imgSrc: ASSETS["doppelzylinder_img_src"],
                 description:
                     "Der klassische <b>Doppelzylinder</b> gehört heute zu den Elementen aus dem Bereich der Sicherheitstechnik, die vergleichsweise häufig genutzt werden. Bei ihm handelt es sich um eine Profilzylinder Version, die sich vollkommen unkompliziert von beiden Seiten der Tür abschließen bzw. öffnen lässt.",
             },
             {
-                imgSrc: ASSETS['knaufzylinder_img_src'],
+                imgSrc: ASSETS["knaufzylinder_img_src"],
                 description:
                     "Der <b>Knaufzylinder</b> ist der praktische Schließzylinder für den Einsatz in Haus- und Wohnungstüren oder bei anderen Türen, die von der Innenseite jederzeit geöffnet werden dürfen. Hierzu befindet sich direkt am Zylinder ein Drehknauf (demontierbar), mit dessen Hilfe die Tür verschlossen werden kann.",
             },
             {
-                imgSrc: ASSETS['sicherungskartes_img_src'],
+                imgSrc: ASSETS["sicherungskartes_img_src"],
                 description:
                     "Eine <b>Sicherungskarte</b> ist ein Dokument, das als Eigentums- und Berechtigungsnachweis für eine Schließanlage oder einen geschützten Schließzylinder dient und den unbefugten Nachbau von Schlüsseln verhindert.",
             },
             {
-                imgSrc: ASSETS['schließzylinder_img_src'],
+                imgSrc: ASSETS["schließzylinder_img_src"],
                 description:
                     "Schließzylinder <b>mit Not- und Gefahrenfunktion</b> haben gegenüber herkömmlichen Profilzylindern einen entscheidenden Vorteil. Sie verfügen über eine eingebaute Funktion, die es ermöglicht, die Tür auch dann von außen zu öffnen, wenn auf der Innenseite ein Schlüssel steckt.",
             },
@@ -114,73 +114,59 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function createModalLayout() {
-        const layout = /* HTML */ `
-            <div class="${page_initials}__modal-layout">
-                <div class="${page_initials}__modal-backdrop"></div>
-                <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal__head">
-                        <div class="${page_initials}__modal__head__title">Erläuterungen zur Auswahl</div>
-                        <div class="${page_initials}__modal__head__sub-title">
-                            Die Optionen zur Auswahl werden von unseren Kunden gern genommen, um den passenden Schließzylinder zu finden. Weitere Filter finden Sie in der linken Spalte
-                        </div>
-                        <div class="${page_initials}__modal__head__close-cta">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                                <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </div>
+    function getModalLayout() {
+        return /* HTML */ `
+            <div class="${page_initials}__modal-backdrop"></div>
+            <div class="${page_initials}__modal">
+                <div class="${page_initials}__modal__head">
+                    <div class="${page_initials}__modal__head__title">Erläuterungen zur Auswahl</div>
+                    <div class="${page_initials}__modal__head__sub-title">
+                        Die Optionen zur Auswahl werden von unseren Kunden gern genommen, um den passenden Schließzylinder zu finden. Weitere Filter finden Sie in der linken Spalte
                     </div>
-                    <div class="${page_initials}__modal__body">
-                        <div class="${page_initials}__modal__content">
-                            ${DATA["modal"]
-                                .map(
-                                    ({ imgSrc, description }) => /* HTML */ `
-                                        <div class="${page_initials}__modal__item">
-                                            <div class="${page_initials}__modal__item__img">
-                                                <img src="${imgSrc}" />
-                                            </div>
-                                            <div class="${page_initials}__modal__item__txt">${description}</div>
+                    <div class="${page_initials}__modal__head__close-cta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                            <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="${page_initials}__modal__body">
+                    <div class="${page_initials}__modal__content">
+                        ${DATA["modal"]
+                            .map(
+                                ({ imgSrc, description }) => /* HTML */ `
+                                    <div class="${page_initials}__modal__item">
+                                        <div class="${page_initials}__modal__item__img">
+                                            <img src="${imgSrc}" />
                                         </div>
-                                    `
-                                )
-                                .join("")}
-                        </div>
+                                        <div class="${page_initials}__modal__item__txt">${description}</div>
+                                    </div>
+                                `
+                            )
+                            .join("")}
                     </div>
                 </div>
             </div>
         `;
-
-        q("body").insertAdjacentHTML("afterbegin", layout);
-    }
-
-    function animate(targetElement, className, interval) {
-        if (!targetElement) return;
-        if (className.includes(".")) className.replace(".", "");
-        targetElement.classList.add(className);
-        setTimeout(() => targetElement.classList.remove(className), interval);
-    }
-
-    function preventScroll(e) {
-        e.preventDefault();
     }
 
     function handleModalView(action = "show") {
         const modalShowClass = `${page_initials}--modal-show`;
         const body = document.body;
 
-        const modal = q(`.${page_initials}__modal`);
+        q(`.${page_initials}__modal`);
 
         if (action === "show" && !body.classList.contains(modalShowClass)) {
-            animate(modal, "slide-bottom", 200);
-            modal.classList.add("slide-bottom");
+            // animate(modal, "slide-bottom", 200);
+            // modal.classList.add("slide-bottom");
             body.classList.add(modalShowClass);
-            document.addEventListener("touchmove", preventScroll, { passive: false });
+            // document.addEventListener("touchmove", preventScroll, { passive: false });
         }
 
         if (action === "hide") {
-            animate(modal, "slide-top", 200);
-            setTimeout(() => body.classList.remove(modalShowClass), 200);
-            document.removeEventListener("touchmove", preventScroll);
+            // animate(modal, "slide-top", 200);
+            // setTimeout(() => body.classList.remove(modalShowClass), 200);
+            // document.removeEventListener("touchmove", preventScroll);
+            body.classList.remove(modalShowClass);
         }
     }
 
@@ -197,7 +183,7 @@
             /* HTML */ `
                 <div class="ab-security-layout ab-security-layout--locking-level">
                     <div class="ab-security-layout__head">
-                        <span class="ab-security-layout__title">1. Wählen Sie die Sicherheitsstufe Ihres Schließzylinders  </span>
+                        <span class="ab-security-layout__title">1. Wählen Sie die Sicherheitsstufe Ihres Schließzylinders</span>
                         <span class="ab-security-layout__tooltip-cta"> ${tooltip_svg} </span>
                     </div>
                 </div>
@@ -229,11 +215,12 @@
                                 )
                                 .join("")}
                             <div class="ab-security-layout__option-item-cta ab-security-layout__option-item--order-6">
-                                <span class="ab-security-layout__tooltip-cta"> ${tooltip_svg} </span>
+                                <span class="ab-security-layout__tooltip-cta"> ${tooltip_svg}</span>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="ab-modal-container">${getModalLayout()}</div>
             `
         );
     }
@@ -253,7 +240,6 @@
     function mutationObserver() {
         new MutationObserver((mutationList, observer) => {
             if (!q(".ab-security-layout")) {
-                console.log("Re-creating security filter layout...");
                 createSecurityFilterLayout();
             } else {
                 updateSecurityFilterLayout();
@@ -316,7 +302,7 @@
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         createSecurityFilterLayout();
-        createModalLayout();
+        // createModalLayout();
         mutationObserver();
         clickFunction();
     }

@@ -264,59 +264,63 @@
 		 *			MODAL
  * ----------------------------------------
  */
-.AB-TEST056--modal-show {
-  overflow: hidden !important;
-  padding-right: 15px;
-}
 .AB-TEST056--modal-show .dvaccess.dvaccess-pos-lb,
 .AB-TEST056--modal-show div[data-test-id="userlike-container"] {
   display: none;
 }
-.AB-TEST056--modal-show .AB-TEST056__modal-layout {
-  display: block;
-}
 .AB-TEST056--modal-show .AB-TEST056__modal-backdrop {
   display: block;
+  opacity: 1;
 }
-.AB-TEST056__modal-layout {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: transparent;
-  z-index: 9999;
-  overflow: hidden;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  overflow-y: scroll;
+.AB-TEST056--modal-show .AB-TEST056__modal {
+  display: block;
+  opacity: 1;
+}
+
+.AB-TEST056 .ab-modal-container {
+  position: relative;
 }
 .AB-TEST056__modal-backdrop {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
 }
 .AB-TEST056__modal {
-  opacity: 1;
+  display: none;
+  opacity: 0;
   box-shadow: 0px 4px 23.9px 0px rgba(0, 0, 0, 0.1607843137);
   margin: auto;
   width: 100%;
-  max-width: 434px;
-  min-height: 100%;
+  height: max-content;
   background: #ffffff;
   top: 0;
   left: 0;
   right: 0;
   position: absolute;
-  z-index: 1;
+  z-index: 10001;
   padding: 6px 26px 48px 17px;
+}
+@media screen and (max-width: 768px) {
+  .AB-TEST056__modal {
+    top: 15px;
+    width: calc(100% + 7px);
+    margin-left: -3px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .AB-TEST056__modal {
+    width: 100%;
+    margin-right: 0;
+    top: 0;
+    max-width: 434px;
+  }
 }
 .AB-TEST056__modal__head {
   display: flex;
@@ -392,12 +396,10 @@
   color: #000000;
 }
 @media screen and (min-width: 991px) {
-  .AB-TEST056__modal-layout {
-    overflow-y: hidden;
-  }
   .AB-TEST056__modal {
-    top: 0;
-    bottom: 0;
+    top: -37px;
+    left: 0;
+    right: 40%;
     min-height: max-content;
     height: max-content;
     padding: 6px 43px 48px 17px;
@@ -657,90 +659,76 @@
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
-  function createModalLayout() {
-    const layout = /* HTML */ `
-      <div class="${page_initials}__modal-layout">
-        <div class="${page_initials}__modal-backdrop"></div>
-        <div class="${page_initials}__modal">
-          <div class="${page_initials}__modal__head">
-            <div class="${page_initials}__modal__head__title">
-              Erläuterungen zur Auswahl
-            </div>
-            <div class="${page_initials}__modal__head__sub-title">
-              Die Optionen zur Auswahl werden von unseren Kunden gern genommen,
-              um den passenden Schließzylinder zu finden. Weitere Filter finden
-              Sie in der linken Spalte
-            </div>
-            <div class="${page_initials}__modal__head__close-cta">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="27"
-                height="27"
-                viewBox="0 0 27 27"
-                fill="none"
-              >
-                <path
-                  d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999"
-                  stroke="#547351"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </div>
+  function getModalLayout() {
+    return /* HTML */ `
+      <div class="${page_initials}__modal-backdrop"></div>
+      <div class="${page_initials}__modal">
+        <div class="${page_initials}__modal__head">
+          <div class="${page_initials}__modal__head__title">
+            Erläuterungen zur Auswahl
           </div>
-          <div class="${page_initials}__modal__body">
-            <div class="${page_initials}__modal__content">
-              ${DATA["modal"]
-                .map(
-                  ({ imgSrc, description }) => /* HTML */ `
-                    <div class="${page_initials}__modal__item">
-                      <div class="${page_initials}__modal__item__img">
-                        <img src="${imgSrc}" />
-                      </div>
-                      <div class="${page_initials}__modal__item__txt">
-                        ${description}
-                      </div>
+          <div class="${page_initials}__modal__head__sub-title">
+            Die Optionen zur Auswahl werden von unseren Kunden gern genommen, um
+            den passenden Schließzylinder zu finden. Weitere Filter finden Sie
+            in der linken Spalte
+          </div>
+          <div class="${page_initials}__modal__head__close-cta">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="27"
+              height="27"
+              viewBox="0 0 27 27"
+              fill="none"
+            >
+              <path
+                d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999"
+                stroke="#547351"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+        </div>
+        <div class="${page_initials}__modal__body">
+          <div class="${page_initials}__modal__content">
+            ${DATA["modal"]
+              .map(
+                ({ imgSrc, description }) => /* HTML */ `
+                  <div class="${page_initials}__modal__item">
+                    <div class="${page_initials}__modal__item__img">
+                      <img src="${imgSrc}" />
                     </div>
-                  `,
-                )
-                .join("")}
-            </div>
+                    <div class="${page_initials}__modal__item__txt">
+                      ${description}
+                    </div>
+                  </div>
+                `,
+              )
+              .join("")}
           </div>
         </div>
       </div>
     `;
-
-    q("body").insertAdjacentHTML("afterbegin", layout);
-  }
-
-  function animate(targetElement, className, interval) {
-    if (!targetElement) return;
-    if (className.includes(".")) className.replace(".", "");
-    targetElement.classList.add(className);
-    setTimeout(() => targetElement.classList.remove(className), interval);
-  }
-
-  function preventScroll(e) {
-    e.preventDefault();
   }
 
   function handleModalView(action = "show") {
     const modalShowClass = `${page_initials}--modal-show`;
     const body = document.body;
 
-    const modal = q(`.${page_initials}__modal`);
+    q(`.${page_initials}__modal`);
 
     if (action === "show" && !body.classList.contains(modalShowClass)) {
-      animate(modal, "slide-bottom", 200);
-      modal.classList.add("slide-bottom");
+      // animate(modal, "slide-bottom", 200);
+      // modal.classList.add("slide-bottom");
       body.classList.add(modalShowClass);
-      document.addEventListener("touchmove", preventScroll, { passive: false });
+      // document.addEventListener("touchmove", preventScroll, { passive: false });
     }
 
     if (action === "hide") {
-      animate(modal, "slide-top", 200);
-      setTimeout(() => body.classList.remove(modalShowClass), 200);
-      document.removeEventListener("touchmove", preventScroll);
+      // animate(modal, "slide-top", 200);
+      // setTimeout(() => body.classList.remove(modalShowClass), 200);
+      // document.removeEventListener("touchmove", preventScroll);
+      body.classList.remove(modalShowClass);
     }
   }
 
@@ -759,7 +747,7 @@
         <div class="ab-security-layout ab-security-layout--locking-level">
           <div class="ab-security-layout__head">
             <span class="ab-security-layout__title"
-              >1. Wählen Sie die Sicherheitsstufe Ihres Schließzylinders  </span
+              >1. Wählen Sie die Sicherheitsstufe Ihres Schließzylinders</span
             >
             <span class="ab-security-layout__tooltip-cta">
               ${tooltip_svg}
@@ -809,12 +797,13 @@
                 class="ab-security-layout__option-item-cta ab-security-layout__option-item--order-6"
               >
                 <span class="ab-security-layout__tooltip-cta">
-                  ${tooltip_svg}
-                </span>
+                  ${tooltip_svg}</span
+                >
               </div>
             </div>
           </div>
         </div>
+        <div class="ab-modal-container">${getModalLayout()}</div>
       `,
     );
   }
@@ -904,7 +893,7 @@
     );
     console.table(TEST_CONFIG);
     createSecurityFilterLayout();
-    createModalLayout();
+    // createModalLayout();
     mutationObserver();
     clickFunction();
   }

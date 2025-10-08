@@ -250,59 +250,63 @@
 		 *			MODAL
  * ----------------------------------------
  */
-.AB-TEST056--modal-show {
-  overflow: hidden !important;
-  padding-right: 15px;
-}
 .AB-TEST056--modal-show .dvaccess.dvaccess-pos-lb,
 .AB-TEST056--modal-show div[data-test-id=userlike-container] {
   display: none;
 }
-.AB-TEST056--modal-show .AB-TEST056__modal-layout {
-  display: block;
-}
 .AB-TEST056--modal-show .AB-TEST056__modal-backdrop {
   display: block;
+  opacity: 1;
 }
-.AB-TEST056__modal-layout {
-  display: none;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  background: transparent;
-  z-index: 9999;
-  overflow: hidden;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  overflow-y: scroll;
+.AB-TEST056--modal-show .AB-TEST056__modal {
+  display: block;
+  opacity: 1;
+}
+
+.AB-TEST056 .ab-modal-container {
+  position: relative;
 }
 .AB-TEST056__modal-backdrop {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  bottom: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
 }
 .AB-TEST056__modal {
-  opacity: 1;
+  display: none;
+  opacity: 0;
   box-shadow: 0px 4px 23.9px 0px rgba(0, 0, 0, 0.1607843137);
   margin: auto;
   width: 100%;
-  max-width: 434px;
-  min-height: 100%;
+  height: max-content;
   background: #ffffff;
   top: 0;
   left: 0;
   right: 0;
   position: absolute;
-  z-index: 1;
+  z-index: 10001;
   padding: 6px 26px 48px 17px;
+}
+@media screen and (max-width: 768px) {
+  .AB-TEST056__modal {
+    top: 15px;
+    width: calc(100% + 7px);
+    margin-left: -3px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .AB-TEST056__modal {
+    width: 100%;
+    margin-right: 0;
+    top: 0;
+    max-width: 434px;
+  }
 }
 .AB-TEST056__modal__head {
   display: flex;
@@ -375,12 +379,10 @@
   color: #000000;
 }
 @media screen and (min-width: 991px) {
-  .AB-TEST056__modal-layout {
-    overflow-y: hidden;
-  }
   .AB-TEST056__modal {
-    top: 0;
-    bottom: 0;
+    top: -37px;
+    left: 0;
+    right: 40%;
     min-height: max-content;
     height: max-content;
     padding: 6px 43px 48px 17px;
