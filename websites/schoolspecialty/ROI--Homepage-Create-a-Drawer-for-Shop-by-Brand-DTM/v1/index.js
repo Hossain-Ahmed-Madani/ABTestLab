@@ -1,12 +1,20 @@
+/* 
+Test info:
+    Ticket link: https://trello.com/c/grIWH9Gt/4126-homepage-create-a-drawer-for-shop-by-brand-dtm
+    Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170091/summary
+    FIgma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
+
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolution",
         project: "select.schoolspecialty",
-        site_url: "/",
-        test_name: "Homepage - Create a Drawer for Shop by Brand​ [DTM]",
+        site_url: "https://select.schoolspecialty.com/",
+        test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
         page_initials: "AB-HOME-BRAND-DRAWER",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -138,7 +146,7 @@
     }
 
     function createLayout() {
-        q('div[id^="catalogEntryRecommendationWidget"]:first-of-type').insertAdjacentHTML(
+        q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]').insertAdjacentHTML(
             "afterend",
             /* HTML */ `
                 <div class="ab-brands-section background-true border-true">
@@ -147,12 +155,10 @@
                         <div class="p-20 ssi-text__center">
                             <h2 class="txt-34 txt-navy-blue ssi-font__bold mb-20">Quality and Value from Our Trusted Brands</h2>
                             <p class="txt-18 ssi-text__center">Discover our curated family of brands offering reliable solutions for all your needs.</p>
-                            <a href="/brands" class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link" style="display: inline-block"
-                                >Learn More About Our Family Brands</a
-                            >
+                            <a href="/brands" class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link" style="display: inline-block">Learn More About Our Family Brands</a>
                         </div>
 
-                        <div class="fx-row fx-start fx-middle categories">
+                        <div class="fx-row fx-start fx-middle brands">
                             ${DATA.brands
                                 .map(
                                     ({ brandName, label, url, imgUrl }, index) => /* HTML */ `
@@ -170,8 +176,8 @@
                                 .join("")}
                         </div>
                         <div class="more-brands collapsed">
-                            <div class="categories-icon"></div>
-                            <div class="categories-text">View More Brands</div>
+                            <div class="brands-icon"></div>
+                            <div class="brands-text">View More Brands</div>
                         </div>
                     </div>
                 </div>
@@ -185,10 +191,10 @@
             () => {
                 const moreBrands = q(".more-brands");
                 moreBrands.addEventListener("click", function () {
-                    var brandsContainer = document.querySelector(".ab-brands-section .categories");
-                    var categoriesText = document.querySelector(".categories-text");
-                    var categoriesIcon = document.querySelector(".categories-icon");
-                    var featuredCategories = document.querySelector(".ab-brands-section");
+                    const brandsContainer = document.querySelector(".ab-brands-section .brands");
+                    const brandsText = document.querySelector(".brands-text");
+                    const brandsIcon = document.querySelector(".brands-icon");
+                    const featuredBrands = document.querySelector(".ab-brands-section");
 
                     if (this.classList.contains("collapsed")) {
                         // Clear any previous height constraints and set current height
@@ -197,7 +203,7 @@
 
                         // After a short delay, start expanding the brands
                         setTimeout(function () {
-                            brandsContainer.classList.add("categories-expanded");
+                            brandsContainer.classList.add("brands-expanded");
                             brandsContainer.style.maxHeight = "1200px";
                         }, 50);
 
@@ -207,8 +213,8 @@
                         }, 800);
 
                         setTimeout(function () {
-                            categoriesText.textContent = "View Less Brands";
-                            categoriesIcon.classList.add("icon-inverted");
+                            brandsText.textContent = "View Less Brands";
+                            brandsIcon.classList.add("icon-inverted");
                         }, 300);
                     } else {
                         // Clear any previous height constraints and set current height
@@ -217,9 +223,9 @@
 
                         // After a short delay, start collapsing the brands
                         setTimeout(function () {
-                            brandsContainer.classList.remove("categories-expanded");
+                            brandsContainer.classList.remove("brands-expanded");
                             brandsContainer.style.minHeight = "0";
-                            featuredCategories.scrollIntoView({ behavior: "smooth" });
+                            featuredBrands.scrollIntoView({ behavior: "smooth" });
                         }, 100);
 
                         // After the height animation completes, remove min-height to allow natural sizing
@@ -228,8 +234,8 @@
                         }, 800);
 
                         setTimeout(function () {
-                            categoriesText.textContent = "View More Brands";
-                            categoriesIcon.classList.remove("icon-inverted");
+                            brandsText.textContent = "View More Brands";
+                            brandsIcon.classList.remove("icon-inverted");
                         }, 300);
                     }
 
@@ -247,7 +253,9 @@
     }
 
     function hasAllTargetElements() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q('div[id^="catalogEntryRecommendationWidget"]:first-of-type'));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]')
+        );
     }
 
     waitForElement(hasAllTargetElements, init);

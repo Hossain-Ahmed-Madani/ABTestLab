@@ -8,12 +8,12 @@
     padding: 20px 10px !important;
   }
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .categories {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
   overflow: hidden;
   transition: all 0.6s ease-in-out;
   align-items: flex-start;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .categories > div:nth-child(n+7) {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n+7) {
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
@@ -21,7 +21,7 @@
   max-height: 0;
   padding: 0 !important;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .categories.categories-expanded > div:nth-child(n+7) {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+7) {
   opacity: 1;
   transform: translateY(0);
   transition-delay: 0.2s;
@@ -29,7 +29,7 @@
   padding: 20px !important;
 }
 @media (max-width: 1280px) {
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories > div:nth-child(n+5) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n+5) {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
@@ -37,7 +37,7 @@
     max-height: 0;
     padding: 0 !important;
   }
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories.categories-expanded > div:nth-child(n+5) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+5) {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.2s;
@@ -46,7 +46,7 @@
   }
 }
 @media (max-width: 900px) {
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories > div:nth-child(n+6) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n+6) {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
@@ -54,7 +54,7 @@
     max-height: 0;
     padding: 0 !important;
   }
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories.categories-expanded > div:nth-child(n+6) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+6) {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.2s;
@@ -63,7 +63,7 @@
   }
 }
 @media (max-width: 600px) {
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories > div:nth-child(n+5) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n+5) {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
@@ -71,7 +71,7 @@
     max-height: 0;
     padding: 0 !important;
   }
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .categories.categories-expanded > div:nth-child(n+5) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+5) {
     opacity: 1;
     transform: translateY(0);
     transition-delay: 0.2s;
@@ -87,10 +87,10 @@
   transition: all 0.3s ease-in-out;
   opacity: 1;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands:hover .categories-text {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands:hover .brands-text {
   text-decoration: none;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .categories-icon {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .brands-icon {
   width: 15px;
   height: 15px;
   border-right: 3px solid #2b94e6;
@@ -98,7 +98,7 @@
   transform: rotate(45deg);
   transition: transform 0.3s;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .categories-text {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .brands-text {
   color: #0f6cb6;
   font-family: MuseoSans-700;
   font-weight: bold;
@@ -107,12 +107,12 @@
   margin-top: 10px;
   transition: color 0.3s ease-in-out;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .categories .cat-circle {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands .cat-circle {
   border-radius: 8px;
   background: #fff;
   border: 1px solid #2b94e6;
 }
-.AB-HOME-BRAND-DRAWER .ab-brands-section .categories .cat-circle.cat-last {
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands .cat-circle.cat-last {
   background: #e9d11f;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .icon-inverted {
