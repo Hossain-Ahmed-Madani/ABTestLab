@@ -5,10 +5,11 @@ Test info:
     Previous test preview: https://select.schoolspecialty.com/?convert_action=convert_vpreview&convert_e=1004157358&convert_v=1004371721
 
     Ticket link: https://trello.com/c/grIWH9Gt/4126-homepage-create-a-drawer-for-shop-by-brand-dtm
+    Figma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
     Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170091/summary
-    FIgma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
+    Forced Variation: https://select.schoolspecialty.com/?_conv_eforce=1004170091.1004401541&utm_campaign=qa5
+    
     Location: ^https:\/\/select\.schoolspecialty\.com\/?(\?.*)?$
-
 */
 
 (() => {
