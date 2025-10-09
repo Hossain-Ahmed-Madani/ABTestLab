@@ -2,6 +2,8 @@
 
 OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpreview&convert_e=1004165327&convert_v=1004390817
 
+Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170093/summary
+v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_campaign=qa5 
 */
 
 (() => {
@@ -12,16 +14,13 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
     test_name: "Navigation - Improve Dropdown Layout V2 [D]",
     page_initials: "AB-NAV-V2-D",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
   function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
     if (timer <= 0) {
-      console.warn(
-        `Timeout reached while waiting for condition: ${predicate.toString()}`,
-      );
       return;
     } else if (predicate && predicate()) {
       callback();
