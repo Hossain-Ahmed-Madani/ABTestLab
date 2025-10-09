@@ -1,0 +1,13 @@
+{
+  "id": "1760003239300_5756_ROI__Homepage_Create_a_Drawer_for_Shop_by_Brand_DTM",
+  "name": "ROI--Homepage-Create-a-Drawer-for-Shop-by-Brand-DTM",
+  "type": "A/B",
+  "website": "schoolspecialty",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-09T09:47:19.300Z",
+  "createdAtReadable": "09/10/2025, 3:47:19 pm",
+  "lastUpdated": "2025-10-09T09:47:19.562Z"
+}

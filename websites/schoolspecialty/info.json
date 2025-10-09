@@ -1,0 +1,10 @@
+{
+  "id": "1760003224859_2138_schoolspecialty",
+  "name": "schoolspecialty",
+  "hostnames": [
+    "select.schoolspecialty"
+  ],
+  "createdAt": "2025-10-09T09:47:04.859Z",
+  "createdAtReadable": "09/10/2025, 3:47:04 pm",
+  "lastUpdated": "2025-10-09T09:47:04.897Z"
+}

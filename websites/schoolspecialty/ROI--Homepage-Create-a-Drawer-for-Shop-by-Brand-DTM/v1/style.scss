@@ -1,0 +1,163 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-HOME-BRAND-DRAWER {
+    .ab-brands-section {
+        background: white;
+        margin-top: 20px !important;
+        margin-bottom: 20px !important;
+
+        @media (max-width: 420px) {
+            .left_espot > .p-40:has(> h2) {
+                padding: 20px 10px !important;
+            }
+        }
+
+        .categories {
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            align-items: flex-start;
+        }
+
+        .categories > div:nth-child(n + 7) {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition:
+                opacity 0.4s ease-in-out,
+                transform 0.4s ease-in-out;
+            transition-delay: 0s;
+            max-height: 0;
+            padding: 0 !important;
+        }
+
+        .categories.categories-expanded > div:nth-child(n + 7) {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.2s;
+            max-height: unset;
+            padding: 20px !important;
+        }
+
+        @media (max-width: 1280px) {
+            .categories > div:nth-child(n + 5) {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition:
+                    opacity 0.4s ease-in-out,
+                    transform 0.4s ease-in-out;
+                transition-delay: 0s;
+                max-height: 0;
+                padding: 0 !important;
+            }
+
+            .categories.categories-expanded > div:nth-child(n + 5) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.2s;
+                max-height: unset;
+                padding: 20px !important;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .categories > div:nth-child(n + 6) {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition:
+                    opacity 0.4s ease-in-out,
+                    transform 0.4s ease-in-out;
+                transition-delay: 0s;
+                max-height: 0;
+                padding: 0 !important;
+            }
+
+            .categories.categories-expanded > div:nth-child(n + 6) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.2s;
+                max-height: unset;
+                padding: 20px !important;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .categories > div:nth-child(n + 5) {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition:
+                    opacity 0.4s ease-in-out,
+                    transform 0.4s ease-in-out;
+                transition-delay: 0s;
+                max-height: 0;
+                padding: 0 !important;
+            }
+
+            .categories.categories-expanded > div:nth-child(n + 5) {
+                opacity: 1;
+                transform: translateY(0);
+                transition-delay: 0.2s;
+                max-height: unset;
+                padding: 20px !important;
+            }
+        }
+
+        .more-brands {
+            display: flex !important;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            // padding: 0 0 30px;
+            opacity: 1;
+        }
+
+        .more-brands:hover .categories-text {
+            text-decoration: none;
+        }
+
+        .more-brands .categories-icon {
+            width: 15px;
+            height: 15px;
+            border-right: 3px solid #2b94e6;
+            border-bottom: 3px solid #2b94e6;
+            transform: rotate(45deg);
+            transition: transform 0.3s;
+        }
+
+        .more-brands .categories-text {
+            color: #0f6cb6;
+            font-family: MuseoSans-700;
+            font-weight: bold;
+            font-size: 16px;
+            text-decoration: underline;
+            // margin-top: 16px;
+            margin-top: 10px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .categories .cat-circle {
+            border-radius: 8px;
+            background: #fff;
+            border: 1px solid #2b94e6;
+        }
+
+        .categories .cat-circle.cat-last {
+            background: #e9d11f;
+        }
+
+        .more-brands .icon-inverted {
+            transform: rotate(225deg);
+        }
+    }
+}
