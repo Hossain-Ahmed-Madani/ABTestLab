@@ -8,6 +8,14 @@
         padding: 20px 10px !important;
     }
 }
+@media (min-width: 1281px) {
+    .AB-HOME-BRAND-DRAWER .ab-brands-section.background-true.border-true {
+        padding: 42px 30px 48px;
+    }
+    .AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card {
+        padding: 20px;
+    }
+}
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
     overflow: hidden;
     transition: all 0.6s ease-in-out;

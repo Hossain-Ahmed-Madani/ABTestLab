@@ -1,8 +1,13 @@
 /* 
 Test info:
+    Previous test name: Homepage - Turn the Category Grid into a Drawer
+    Previous test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004157358/summary
+    Previous test preview: https://select.schoolspecialty.com/?convert_action=convert_vpreview&convert_e=1004157358&convert_v=1004371721
+
     Ticket link: https://trello.com/c/grIWH9Gt/4126-homepage-create-a-drawer-for-shop-by-brand-dtm
     Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170091/summary
     FIgma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
+    Location: ^https:\/\/select\.schoolspecialty\.com\/?(\?.*)?$
 
 */
 
@@ -128,7 +133,6 @@ Test info:
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
@@ -163,7 +167,7 @@ Test info:
                                 .map(
                                     ({ brandName, label, url, imgUrl }, index) => /* HTML */ `
                                         <!-- ITEM ${index + 1}-->
-                                        <div class="fx-col-6 fx-col-sm-4 fx-col-md-3 fx-col-lg-2 p-20">
+                                        <div class="brands-card fx-col-6 fx-col-sm-3 fx-col-md-3 fx-col-lg-2">
                                             <a href="${url}" aria-label="${label}">
                                                 <div class="cat-circle p-20">
                                                     <img loading="lazy" src="${imgUrl}" class="ssi-responsive-image" alt="${brandName} Logo" />
