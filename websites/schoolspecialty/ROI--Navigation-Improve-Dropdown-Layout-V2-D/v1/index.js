@@ -39,6 +39,11 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function triggerConvertGoal(goalId) {
+        window._conv_q = window._conv_q || [];
+        _conv_q.push(["triggerConversion", goalId]);
+    }
+
     function clickFunction() {
         ACTION_LIST = [
             {
@@ -57,10 +62,12 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
                 selector: "#departmentsMenu > li",
                 event: "click",
                 callback: (e) => {
+                    triggerConvertGoal(1004107490);
                     e.preventDefault();
                     e.stopPropagation();
                     const el = e.currentTarget;
                     const isActive = el.classList.contains("ab-click-active");
+
 
                     q("body").classList.remove("AB-NAV-V2-D--nav-opened");
                     qq("#departmentsMenu > li, .departmentMenu, .categoryList, .categoryList > li, .subcategoryList-level3").forEach((item) => {
@@ -78,6 +85,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
                 selector: ".categoryList > li",
                 event: "click",
                 callback: (e) => {
+                    triggerConvertGoal(1004107490);
                     e.preventDefault();
                     e.stopPropagation();
                     const el = e.currentTarget;
@@ -103,6 +111,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
                 selector: ".subcategoryList-level3",
                 event: "click",
                 callback: (e) => {
+                    triggerConvertGoal(1004107490);
                     e.preventDefault();
                     e.stopPropagation();
                     const el = e.currentTarget;

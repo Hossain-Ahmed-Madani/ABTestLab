@@ -1,17 +1,16 @@
-(() => {
+(function () {
     const TEST_CONFIG = {
-        client: "Client Name",
-        project: "Project Name",
-        site_url: "https://www.example.com",
-        test_name: "Ticket Name",
-        page_initials: "AB-TEST",
-        test_variation: 1,
-        test_version: 0.0001,
+        client: "ROI Revolution",
+        project: "select.schoolspecialty",
+        site_url: "https://select.schoolspecialty.com/",
+        test_name: "Navigation - Improve Dropdown Layout V2 [D]",
+        page_initials: "AB-NAV-V2-D",
+        test_variation: 0 /* Control */,
+        test_version: 0.0003,
     };
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
@@ -28,15 +27,23 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function init() {
-        const { page_initials, test_variation, test_version } = TEST_CONFIG;
-        document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(testInfo);
+    function triggerConvertGoal(goalId) {
+        window._conv_q = window._conv_q || [];
+        _conv_q.push(["triggerConversion", goalId]);
     }
 
-    function hasAllTargetElements() {
-        return !!(q(`body:not(.${TEST_CONFIG.page_initials}):not(${TEST_CONFIG.page_initials}--v${TEST_CONFIG.test_variation})`) && true);
+    function clickEvent(e) {
+        if (e.target.closest("a") || e.target.closest("li")) {
+            triggerConvertGoal(1004107490);
+            e.currentTarget.removeEventListener("click", clickEvent);
+        }
     }
 
-    waitForElement(hasAllTargetElements, init);
+    waitForElement(
+        () => q("#departmentsMenu"),
+        () => {
+            document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            q("#departmentsMenu").addEventListener("click", clickEvent);
+        }
+    );
 })();
