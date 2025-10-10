@@ -1,0 +1,43 @@
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content {
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-height: 100%;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content #braintree-loading-container,
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .text-center.text-sm.text-grey-darker {
+  display: none;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .text-sm.mt-2 .mt-8 {
+  margin-top: 15px;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content-body .border-l {
+  border: 0;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header h3 span {
+  display: none;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header h3:before {
+  content: "";
+  width: 18px;
+  height: 11px;
+  border-bottom: 3px solid #0a7806;
+  border-left: 3px solid #0a7806;
+  display: inline-block;
+  transform: rotate(-45deg);
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .close-x {
+  position: static;
+  order: 1;
+}
