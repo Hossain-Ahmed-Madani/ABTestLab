@@ -1,0 +1,13 @@
+{
+  "id": "1760106057514_3070_ROI__PDP_Add_a_Post_ATC_Modal_Iteration_M",
+  "name": "ROI--PDP-Add-a-Post-ATC-Modal-Iteration-M",
+  "type": "A/B",
+  "website": "domyown",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-10T14:20:57.514Z",
+  "createdAtReadable": "10/10/2025, 8:20:57 pm",
+  "lastUpdated": "2025-10-10T14:20:57.837Z"
+}
