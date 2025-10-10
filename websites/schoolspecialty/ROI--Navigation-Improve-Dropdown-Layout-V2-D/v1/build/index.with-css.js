@@ -253,6 +253,9 @@
 .AB-NAV-V2-D #departmentsMenu > li.ab-click-active .icon-arrow_drop_down {
   color: #0f6cb6 !important;
 }
+.AB-NAV-V2-D .ab-order-1 {
+  order: 1;
+}
 
 .AB-NAV-V2-D--nav-opened {
   position: relative;
@@ -281,8 +284,10 @@
 
 OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpreview&convert_e=1004165327&convert_v=1004390817
 
+Figma: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=515-1139&t=POKsESukEq8uuzDv-0&scaling=scale-down&content-scaling=fixed&page-id=515%3A936&starting-point-node-id=515%3A1139
 Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170093/summary
 v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_campaign=qa5 
+
 */
 
 (() => {
@@ -293,7 +298,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
     test_name: "Navigation - Improve Dropdown Layout V2 [D]",
     page_initials: "AB-NAV-V2-D",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -458,6 +463,10 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
         `,
       );
     });
+
+    q(
+      '#departmentsMenu > li > a.departmentButton[href="/ideas-resources"]',
+    ).parentNode.classList.add("ab-order-1");
   }
 
   function init() {
@@ -480,7 +489,8 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
       q(".departmentMenu") &&
       q(".categoryList") &&
       q(".categoryList > li") &&
-      q(".subcategoryList-level3 .subcategoryList-level3_title")
+      q(".subcategoryList-level3 .subcategoryList-level3_title") &&
+      q('#departmentsMenu > li > a.departmentButton[href="/ideas-resources"]')
     );
   }
 
