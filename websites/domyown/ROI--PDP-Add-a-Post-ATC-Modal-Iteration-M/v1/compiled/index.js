@@ -31,38 +31,16 @@
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
 
-    async function insertHTMLContent(htmlContent) {
+    async function insertHTMLContentNoScript(htmlContent) {
         // Create a temporary container
         const tempContainer = document.createElement("div");
         tempContainer.innerHTML = htmlContent;
 
-        // Extract all script elements
-        const scripts = Array.from(tempContainer.querySelectorAll("script"));
-        const scriptData = [];
-
-        // Store script contents and attributes
-        scripts.forEach((script) => {
-            scriptData.push({
-                src: script.src || null,
-                content: script.textContent || "",
-                type: script.type || "text/javascript",
-                async: script.async,
-                defer: script.defer,
-                id: script.id || null,
-                attributes: Array.from(script.attributes).reduce((acc, attr) => {
-                    acc[attr.name] = attr.value;
-                    return acc;
-                }, {}),
-            });
-            // Remove script from temp container
-            script.remove();
-        });
-
         // Insert the HTML without scripts first
-        q("body").insertAdjacentHTML("afterbegin", tempContainer.innerHTML);
+        q("body").insertAdjacentHTML("afterbegin", htmlContent);
         q("#modal-window-added-product").style.display = "block";
     }
 
@@ -131,7 +109,7 @@
                     console.log("Cart updated successfully:", result);
 
                     // Insert HTML and execute all scripts in order
-                    await insertHTMLContent(result.htmlContent);
+                    await insertHTMLContentNoScript(result.htmlContent);
 
                     console.log("Modal HTML inserted");
                 })
@@ -144,10 +122,37 @@
         });
     }
 
+    function updateModalLayout() {
+        const modal = q("#modal-window-added-product:not(.ab-modal-updated)");
+
+        const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
+        if (checkoutContainer) {
+            q(modal, ".quick-view-addons")?.insertAdjacentElement("afterend", checkoutContainer);
+        }
+
+        if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
+            const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
+            clonedNode.classList.add("ab-cloned-node");
+            q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
+        }
+
+        modal.classList.add("ab-modal-update");
+    }
+
+    function mutationObserverFunction() {
+        return new MutationObserver((mutationsList, observer) => {
+            if (q("#modal-window-added-product:not(.ab-modal-updated)")) {
+                console.log("Modal added to body");
+                updateModalLayout();
+            }
+        }).observe(q("body"), { attributes: false, childList: true, subtree: false });
+    }
+
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         clickFunction();
+        mutationObserverFunction();
     }
 
     function hasAllTargetElements() {

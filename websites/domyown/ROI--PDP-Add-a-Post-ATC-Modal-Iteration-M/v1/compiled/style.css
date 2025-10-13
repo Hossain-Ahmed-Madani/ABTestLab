@@ -41,3 +41,13 @@
   position: static;
   order: 1;
 }
+.AB-PDP-ATC-MODAL #modal-window-added-product #braintree-asset-container,
+.AB-PDP-ATC-MODAL #modal-window-added-product #braintree-loading-container {
+  display: none;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}

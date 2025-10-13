@@ -38,6 +38,57 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    async function executeScript(scriptData) {
+        return new Promise((resolve, reject) => {
+            const newScript = document.createElement("script");
+
+            // Set type
+            newScript.type = scriptData.type;
+
+            // Set id if exists
+            if (scriptData.id) {
+                newScript.id = scriptData.id;
+            }
+
+            // Copy other attributes (excluding src, type, id which are handled separately)
+            Object.keys(scriptData.attributes).forEach((attrName) => {
+                if (!["src", "type", "id"].includes(attrName)) {
+                    newScript.setAttribute(attrName, scriptData.attributes[attrName]);
+                }
+            });
+
+            if (scriptData.src) {
+                // External script - wait for load
+                newScript.src = scriptData.src;
+                newScript.async = false; // Force sequential loading
+
+                newScript.onload = () => {
+                    console.log(`External script loaded: ${scriptData.src}`);
+                    resolve();
+                };
+
+                newScript.onerror = (error) => {
+                    console.error(`Failed to load script: ${scriptData.src}`, error);
+                    // Resolve anyway to continue with other scripts
+                    resolve();
+                };
+
+                document.head.appendChild(newScript);
+            } else {
+                // Inline script - executes immediately
+                try {
+                    newScript.textContent = scriptData.content;
+                    document.body.appendChild(newScript);
+                    console.log("Inline script executed");
+                    resolve();
+                } catch (error) {
+                    console.error("Error executing inline script:", error);
+                    resolve(); // Continue even if there's an error
+                }
+            }
+        });
+    }
+
     async function insertHTMLContent(htmlContent) {
         // Create a temporary container
         const tempContainer = document.createElement("div");
@@ -66,7 +117,23 @@
         });
 
         // Insert the HTML without scripts first
-        q("body").insertAdjacentHTML("afterbegin", tempContainer.innerHTML);
+        q("body").insertAdjacentHTML("afterbegin", htmlContent);
+
+        // Execute scripts sequentially
+        for (const script of scriptData) {
+            await executeScript(script);
+        }
+
+        q("#modal-window-added-product").style.display = "block";
+    }
+
+    async function insertHTMLContentNoScript(htmlContent) {
+        // Create a temporary container
+        const tempContainer = document.createElement("div");
+        tempContainer.innerHTML = htmlContent;
+
+        // Insert the HTML without scripts first
+        q("body").insertAdjacentHTML("afterbegin", htmlContent);
         q("#modal-window-added-product").style.display = "block";
     }
 
@@ -135,7 +202,7 @@
                     console.log("Cart updated successfully:", result);
 
                     // Insert HTML and execute all scripts in order
-                    await insertHTMLContent(result.htmlContent);
+                    await insertHTMLContentNoScript(result.htmlContent);
 
                     console.log("Modal HTML inserted");
                 })
@@ -148,10 +215,37 @@
         });
     }
 
+    function updateModalLayout() {
+        const modal = q("#modal-window-added-product:not(.ab-modal-updated)");
+
+        const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
+        if (checkoutContainer) {
+            q(modal, ".quick-view-addons")?.insertAdjacentElement("afterend", checkoutContainer);
+        }
+
+        if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
+            const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
+            clonedNode.classList.add("ab-cloned-node");
+            q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
+        }
+
+        modal.classList.add("ab-modal-update");
+    }
+
+    function mutationObserverFunction() {
+        return new MutationObserver((mutationsList, observer) => {
+            if (q("#modal-window-added-product:not(.ab-modal-updated)")) {
+                console.log("Modal added to body");
+                updateModalLayout();
+            }
+        }).observe(q("body"), { attributes: false, childList: true, subtree: false });
+    }
+
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         clickFunction();
+        mutationObserverFunction();
     }
 
     function hasAllTargetElements() {

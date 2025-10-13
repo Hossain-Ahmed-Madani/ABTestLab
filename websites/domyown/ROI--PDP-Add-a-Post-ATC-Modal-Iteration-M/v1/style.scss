@@ -29,7 +29,7 @@
         margin-top: 15px;
     }
 
-    #modal-window-added-product .modal-content-body  .border-l  {
+    #modal-window-added-product .modal-content-body .border-l {
         border: 0;
     }
 
@@ -63,5 +63,18 @@
     #modal-window-added-product .modal-content .close-x {
         position: static;
         order: 1;
+    }
+
+    #modal-window-added-product #braintree-asset-container,
+    #modal-window-added-product #braintree-loading-container {
+        display: none;
+    }
+
+
+    #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3px;
     }
 }
