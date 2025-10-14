@@ -15,7 +15,7 @@
 .AB-PDP-ATC-MODAL {
     #modal-window-added-product .modal-content {
         position: absolute;
-        right: 0;
+        right: -100%;
         top: 0;
         min-height: 100%;
     }
@@ -70,11 +70,68 @@
         display: none;
     }
 
-
-    #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"] {
+    #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"]
+    {
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 3px;
+    }
+
+    a.close-modal {
+        display: none;
+    }
+
+    .ab-close-modal {
+        order: 1;
+        color: #333;
+        font-size: 2.25rem;
+    }
+
+    // MODAL OPEN CLOSE
+    // ...existing code...
+
+    #modal-window-added-product {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        z-index: 9999;
+
+        &.is-active {
+            display: block;
+        }
+
+        .modal-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+
+            &.is-active {
+                opacity: 1;
+            }
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 0;
+            right: -110%;
+            height: 100%;
+            // width: 100%;
+            // max-width: 500px;
+            background: #fff;
+            transition: right 0.3s ease-in-out;
+
+            &.is-active {
+                right: 0;
+            }
+        }
     }
 }

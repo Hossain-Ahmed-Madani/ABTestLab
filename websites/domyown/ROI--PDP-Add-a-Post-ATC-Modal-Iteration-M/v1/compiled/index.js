@@ -34,6 +34,10 @@
         return o ? s.querySelector(o) : document.querySelector(s);
     }
 
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     async function insertHTMLContentNoScript(htmlContent) {
         // Create a temporary container
         const tempContainer = document.createElement("div");
@@ -91,7 +95,7 @@
         }
     }
 
-    function clickFunction() {
+    function handleAddToCartClick() {
         const submitBtn = q("input.add-to-cart");
         submitBtn.addEventListener("click", (e) => {
             e.preventDefault();
@@ -130,13 +134,56 @@
             q(modal, ".quick-view-addons")?.insertAdjacentElement("afterend", checkoutContainer);
         }
 
+        if (q(modal, ".modal-content-header") && !q(modal, ".ab-close-modal")) {
+            q(modal, ".modal-content-header").insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-close-modal" rel="added-product">×</div>`);
+        }
+
         if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
             const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
             clonedNode.classList.add("ab-cloned-node");
             q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
         }
 
-        modal.classList.add("ab-modal-update");
+        handleModalClose();
+
+        modal.classList.add("ab-modal-updated");
+    }
+
+    function openModal() {
+        const modal = q("#modal-window-added-product");
+        const modalBg = q(modal, ".modal-background");
+        const modalContent = q(modal, ".modal-content");
+
+        modal.classList.add("is-active");
+        // Trigger reflow to ensure animations work
+        void modal.offsetWidth;
+
+        modalBg.classList.add("is-active");
+        modalContent.classList.add("is-active");
+    }
+
+    function closeModal() {
+        const modal = q("#modal-window-added-product");
+        const modalBg = q(modal, ".modal-background");
+        const modalContent = q(modal, ".modal-content");
+
+        modalBg.classList.remove("is-active");
+        modalContent.classList.remove("is-active");
+
+        // Wait for animations to complete before hiding modal
+        setTimeout(() => {
+            modal.classList.remove("is-active");
+            q(modal, ".close-modal").click();
+        }, 300);
+    }
+
+    function handleModalClose() {
+        qq(".modal-background, .ab-close-modal").forEach((item) => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                closeModal();
+            });
+        });
     }
 
     function mutationObserverFunction() {
@@ -144,6 +191,7 @@
             if (q("#modal-window-added-product:not(.ab-modal-updated)")) {
                 console.log("Modal added to body");
                 updateModalLayout();
+                openModal();
             }
         }).observe(q("body"), { attributes: false, childList: true, subtree: false });
     }
@@ -151,7 +199,7 @@
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        clickFunction();
+        handleAddToCartClick();
         mutationObserverFunction();
     }
 
