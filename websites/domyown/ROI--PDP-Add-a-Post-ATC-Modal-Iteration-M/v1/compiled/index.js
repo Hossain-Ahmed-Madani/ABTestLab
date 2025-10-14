@@ -131,6 +131,8 @@
 
         const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
         if (checkoutContainer) {
+            checkoutContainer.classList.remove("border-1");
+            checkoutContainer.classList.add("border-t", "pt-2");
             q(modal, ".quick-view-addons")?.insertAdjacentElement("afterend", checkoutContainer);
         }
 

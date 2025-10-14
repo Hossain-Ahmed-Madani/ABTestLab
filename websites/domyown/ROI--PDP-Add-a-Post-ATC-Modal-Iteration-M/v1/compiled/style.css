@@ -11,9 +11,6 @@
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .text-sm.mt-2 .mt-8 {
   margin-top: 15px;
 }
-.AB-PDP-ATC-MODAL #modal-window-added-product .modal-content-body .border-l {
-  border: 0;
-}
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header {
   display: flex;
   justify-content: space-between;
@@ -58,6 +55,15 @@
   order: 1;
   color: #333;
   font-size: 2.25rem;
+}
+.AB-PDP-ATC-MODAL .modal-content {
+  padding-left: 0;
+  padding-right: 0;
+}
+.AB-PDP-ATC-MODAL .modal-content-header,
+.AB-PDP-ATC-MODAL .modal-content-body > div {
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product {
   position: fixed;
