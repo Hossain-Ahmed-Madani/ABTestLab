@@ -18,6 +18,22 @@
         margin-top: 20px !important;
         margin-bottom: 20px !important;
 
+        h2 {
+            color: #000;
+        }
+
+        p.brands-subtitle {
+            font-weight: 600;
+        }
+
+        .brands-card {
+            cursor: default;
+        }
+
+        .brands-card a {
+            display: block;
+        }
+
         @media (max-width: 420px) {
             .left_espot > .p-40:has(> h2) {
                 padding: 20px 10px !important;
@@ -32,7 +48,6 @@
             .brands-card {
                 padding: 20px;
             }
-
         }
 
         .brands {
@@ -50,6 +65,7 @@
             transition-delay: 0s;
             max-height: 0;
             padding: 0 !important;
+            pointer-events: none;
         }
 
         .brands.brands-expanded > div:nth-child(n + 7) {
@@ -58,6 +74,7 @@
             transition-delay: 0.2s;
             max-height: unset;
             padding: 20px !important;
+            pointer-events: all;
         }
 
         @media (max-width: 1280px) {
@@ -70,6 +87,7 @@
                 transition-delay: 0s;
                 max-height: 0;
                 padding: 0 !important;
+                pointer-events: none;
             }
 
             .brands.brands-expanded > div:nth-child(n + 5) {
@@ -78,6 +96,7 @@
                 transition-delay: 0.2s;
                 max-height: unset;
                 padding: 20px !important;
+                pointer-events: all;
             }
         }
 
@@ -99,6 +118,7 @@
                 transition-delay: 0.2s;
                 max-height: unset;
                 padding: 20px !important;
+                pointer-events: all;
             }
         }
 
@@ -112,6 +132,7 @@
                 transition-delay: 0s;
                 max-height: 0;
                 padding: 0 !important;
+                pointer-events: none;
             }
 
             .brands.brands-expanded > div:nth-child(n + 5) {
@@ -120,10 +141,13 @@
                 transition-delay: 0.2s;
                 max-height: unset;
                 padding: 20px !important;
+                pointer-events: all;
             }
         }
 
         .more-brands {
+            margin: auto;
+            width: max-content;
             display: flex !important;
             flex-direction: column;
             align-items: center;
@@ -149,7 +173,8 @@
         .more-brands .brands-text {
             color: #0f6cb6;
             font-family: MuseoSans-700;
-            font-weight: bold;
+            // font-weight: bold;
+            font-weight: 500;
             font-size: 16px;
             text-decoration: underline;
             // margin-top: 16px;

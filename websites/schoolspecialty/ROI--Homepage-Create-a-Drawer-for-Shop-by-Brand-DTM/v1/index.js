@@ -125,7 +125,7 @@ Test info:
             },
             {
                 brandName: "Projects by Design",
-                label: "Shop Projects by Design",
+                label: "Free Consultation",
                 url: "/projects-by-design",
                 imgUrl: "/wcsstore/SSIB2BStorefrontAssetStore/images/logos/pbd-logo-large-rev.png",
             },
@@ -159,8 +159,8 @@ Test info:
                     <div class="left_espot">
                         <div class="p-20 ssi-text__center">
                             <h2 class="txt-34 txt-navy-blue ssi-font__bold mb-20">Quality and Value from Our Trusted Brands</h2>
-                            <p class="txt-18 ssi-text__center">Discover our curated family of brands offering reliable solutions for all your needs.</p>
-                            <a href="/brands" class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link" style="display: inline-block">Learn More About Our Family Brands</a>
+                            <p class="brands-subtitle txt-16 ssi-text__center">Discover our curated family of brands offering reliable solutions for all your needs.</p>
+                            <a href="/brands" class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link" style="display: inline-block">Learn More About Our Family of Brands</a>
                         </div>
 
                         <div class="fx-row fx-start fx-middle brands">

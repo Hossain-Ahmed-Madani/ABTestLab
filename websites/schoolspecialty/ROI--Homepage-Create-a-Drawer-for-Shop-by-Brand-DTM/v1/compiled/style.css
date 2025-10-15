@@ -3,6 +3,18 @@
   margin-top: 20px !important;
   margin-bottom: 20px !important;
 }
+.AB-HOME-BRAND-DRAWER .ab-brands-section h2 {
+  color: #000;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section p.brands-subtitle {
+  font-weight: 600;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card {
+  cursor: default;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a {
+  display: block;
+}
 @media (max-width: 420px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .left_espot > .p-40:has(> h2) {
     padding: 20px 10px !important;
@@ -28,6 +40,7 @@
   transition-delay: 0s;
   max-height: 0;
   padding: 0 !important;
+  pointer-events: none;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+7) {
   opacity: 1;
@@ -35,6 +48,7 @@
   transition-delay: 0.2s;
   max-height: unset;
   padding: 20px !important;
+  pointer-events: all;
 }
 @media (max-width: 1280px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n+5) {
@@ -44,6 +58,7 @@
     transition-delay: 0s;
     max-height: 0;
     padding: 0 !important;
+    pointer-events: none;
   }
   .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+5) {
     opacity: 1;
@@ -51,6 +66,7 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 @media (max-width: 900px) {
@@ -68,6 +84,7 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 @media (max-width: 600px) {
@@ -78,6 +95,7 @@
     transition-delay: 0s;
     max-height: 0;
     padding: 0 !important;
+    pointer-events: none;
   }
   .AB-HOME-BRAND-DRAWER .ab-brands-section .brands.brands-expanded > div:nth-child(n+5) {
     opacity: 1;
@@ -85,9 +103,12 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands {
+  margin: auto;
+  width: max-content;
   display: flex !important;
   flex-direction: column;
   align-items: center;
@@ -109,7 +130,7 @@
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .brands-text {
   color: #0f6cb6;
   font-family: MuseoSans-700;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   text-decoration: underline;
   margin-top: 10px;
