@@ -17,8 +17,21 @@
         overflow: hidden;
     }
 
+    input.add-to-cart[disabled] {
+        pointer-events: none;
+        opacity: 0.7;
+    }
+
+    #modal-window-added-product .ab-cloned-node .rfk_header {
+        display: none;
+    }
+
     #modal-window-added-product .rfk-rw ul li .rfk_name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
+        line-clamp: 1;
+        overflow: hidden;
         margin-bottom: 4px;
     }
 
@@ -142,11 +155,15 @@
         margin-top: 15px;
     }
 
+    .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap > .w-full.md\:w-2\/3 .text-lg {
+        line-height: 100%;
+    }
+
     .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap > .w-full.md\:w-2\/3 .text-lg + p {
         font-size: 14px;
         font-weight: 600;
         line-height: 100%;
-        margin: 3px 0 10px;
+        margin: 8px 0 10px;
 
         span {
             color: #315caa;

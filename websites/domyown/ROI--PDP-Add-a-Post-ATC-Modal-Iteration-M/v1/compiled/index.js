@@ -20,10 +20,6 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    const COMPONENT_STATE = {
-        modal_updating: false,
-    };
-
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
             return;
@@ -153,14 +149,15 @@
                 .then(async (result) => {
                     // Insert HTML and execute all scripts in order
                     await insertHTMLContentNoScript(result.htmlContent);
-
-                    console.log("Modal HTML inserted");
                 })
                 .catch((error) => {
                     console.error("Failed to add to cart:", error);
                 })
-                .finally(() => {
+                .finally(async () => {
                     submitBtn.removeAttribute("disabled");
+                    await updateLayout();
+                    openModal();
+                    handleModalClose();
                 });
         });
     }
@@ -214,27 +211,23 @@
         if (quantityElem && !q(modal, ".ab-price-content")) {
             const priceContentHTML = getPriceContent(htmlContent);
 
-            console.log(priceContentHTML);
             quantityElem.insertAdjacentHTML("afterend", `<div class="ab-price-content">${priceContentHTML}</div>`);
             quantityElem.classList.add("hidden");
         }
 
         // q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
-        handleModalClose();
-
         modal.classList.add("ab-modal-updated");
     }
 
     async function updateLayout() {
-        COMPONENT_STATE["modal_updating"] = true;
 
         const { htmlContent, cartAmount } = await miniCart();
 
         updateModalLayout(htmlContent);
         updateMiniCartLayout(cartAmount);
 
-        COMPONENT_STATE["modal_updating"] = false;
+        return true;
     }
 
     function openModal() {
@@ -278,21 +271,10 @@
         });
     }
 
-    function mutationObserverFunction() {
-        return new MutationObserver((mutationsList, observer) => {
-            if (q("#modal-window-added-product:not(.ab-modal-updated)") && COMPONENT_STATE["modal_updating"] === false) {
-                console.log("Modal added to body");
-                updateLayout();
-                openModal();
-            }
-        }).observe(q("body"), { attributes: false, childList: true, subtree: false });
-    }
-
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         handleAddToCartClick();
-        mutationObserverFunction();
     }
 
     function hasAllTargetElements() {

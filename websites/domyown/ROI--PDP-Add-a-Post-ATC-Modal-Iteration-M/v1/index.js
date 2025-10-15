@@ -67,7 +67,6 @@
                 newScript.async = false; // Force sequential loading
 
                 newScript.onload = () => {
-                    console.log(`External script loaded: ${scriptData.src}`);
                     resolve();
                 };
 
@@ -83,7 +82,6 @@
                 try {
                     newScript.textContent = scriptData.content;
                     document.body.appendChild(newScript);
-                    console.log("Inline script executed");
                     resolve();
                 } catch (error) {
                     console.error("Error executing inline script:", error);
@@ -242,14 +240,15 @@
                 .then(async (result) => {
                     // Insert HTML and execute all scripts in order
                     await insertHTMLContentNoScript(result.htmlContent);
-
-                    console.log("Modal HTML inserted");
                 })
                 .catch((error) => {
                     console.error("Failed to add to cart:", error);
                 })
-                .finally(() => {
+                .finally(async () => {
                     submitBtn.removeAttribute("disabled");
+                    await updateLayout();
+                    openModal();
+                    handleModalClose();
                 });
         });
     }
@@ -303,14 +302,11 @@
         if (quantityElem && !q(modal, ".ab-price-content")) {
             const priceContentHTML = getPriceContent(htmlContent);
 
-            console.log(priceContentHTML);
             quantityElem.insertAdjacentHTML("afterend", `<div class="ab-price-content">${priceContentHTML}</div>`);
             quantityElem.classList.add("hidden");
         }
 
         // q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
-
-        handleModalClose();
 
         modal.classList.add("ab-modal-updated");
     }
@@ -324,6 +320,8 @@
         updateMiniCartLayout(cartAmount);
 
         COMPONENT_STATE["modal_updating"] = false;
+
+        return true;
     }
 
     function openModal() {
@@ -367,21 +365,10 @@
         });
     }
 
-    function mutationObserverFunction() {
-        return new MutationObserver((mutationsList, observer) => {
-            if (q("#modal-window-added-product:not(.ab-modal-updated)") && COMPONENT_STATE["modal_updating"] === false) {
-                console.log("Modal added to body");
-                updateLayout();
-                openModal();
-            }
-        }).observe(q("body"), { attributes: false, childList: true, subtree: false });
-    }
-
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         handleAddToCartClick();
-        mutationObserverFunction();
     }
 
     function hasAllTargetElements() {
