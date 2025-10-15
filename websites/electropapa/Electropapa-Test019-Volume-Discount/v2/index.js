@@ -293,7 +293,12 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         if (!window.location.href.includes("/checkout/cart")) return;
 
         waitForElement(
-            () => qq(".checkout-product-table .line-item").length > 0 && q(".checkout-aside-summary-list .checkout-aside-summary-value:first-of-type"),
+            () =>
+                !!(
+                    qq(".checkout-product-table .line-item").length > 0 &&
+                    q(".checkout-aside-summary-list .checkout-aside-summary-value:first-of-type") &&
+                    qq(".checkout-aside-summary-list .ab-total-price, .checkout-aside-summary-list .ab-celebration-message-container").length === 0
+                ),
             async () => {
                 const targetNodes = qq(".checkout-product-table .line-item");
 

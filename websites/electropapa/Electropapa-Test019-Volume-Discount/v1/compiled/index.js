@@ -7,6 +7,8 @@ Test container: https://app.convert.com/accounts/1004828/projects/10047105/exper
 V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5
 v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5
 
+without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?utm_campaign=qa5
+
 */
 
 (() => {
@@ -17,7 +19,7 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0004,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -39,6 +41,23 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
                 />
             </defs>
         </svg> `,
+        arrow_svg: /* HTML */ `
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <rect width="32" height="32" fill="url(#pattern0_421_2)" />
+                <defs>
+                    <pattern id="pattern0_421_2" patternContentUnits="objectBoundingBox" width="1" height="1">
+                        <use xlink:href="#image0_421_2" transform="scale(0.03125)" />
+                    </pattern>
+                    <image
+                        id="image0_421_2"
+                        width="32"
+                        height="32"
+                        preserveAspectRatio="none"
+                        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAA7DAAAOwwHHb6hkAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAA51JREFUWIXFl99Pm1UYxz/PKV2hFIoySkc0ERNYlqlDjQvJZhgkmtEOSUxGvNqS/QMmXohXxLEZ4cZsCVfe+yOYmai02zLdiInZIjDnNHqxDDRMnW0WgbaALX0fL2hrYaM9EHTfq5NznvN8P2/e5/wSLNUdvVer6oTVoQvDPpQngLrc8BzCLyg3FC5XZol83tuQsMkr5QJCkXhrVqUf9DXAa8m7qPCRqg5f6gnc2hLA0dHZqgVv5SngdaDC0ni9MqqcSfuSA+OdzcvWAC99EWsxwqcgT23ReI1U9Zq45dWLhxv+KAvQHY096zhyEWjYDvMi3ZGsE77Q23hzQ4DVL5dv/gPzAoRL9IVoOHA332HyjUNXZiqNyCe25h6X0Fbvpq3ejcdVtpbzeiyrMnZ0dLbqPgBPynca2Geb6fhuL0Ptfoba/Rzfbbs4AHh+wVv51hqAUCTeymq1W6vGLQ9sW+qNUCQWLACsrvMtL7WtyJdVGQAw3dF7tblN5v/WsVc+i9cYVSeM/Q63napeNhoy6tD1EMwBMCJdBmNf+dstR/UZg9L8sAAEedIAteUCg14XLX77RdLiryDoddkQ+E25mFZ/BSMH6zh7oI6OJk/ZnB1NHs4eqGPkYB2tFtAGWCgVcGJPNT63YAT622pKQnQ0eehvq8EI+NzCiT3Vpd2V+QqEGZSdG8Wcu73E3kcqcJt/IcqZA2Qc5dztpTL+Om1QbpQKmoinOTmZIO0oQAFiV9E/bqxy8WaR+YoD71xPMBFPlwRA5HujcLl0FEzG0wyug9j7qLsw/nS9G1eR+enrC1z7s4w5YNCvTHpRx4DUZiGKj598ezPmQGp5kfNmvC+QVPjYZsZkPM2pqQSZHESxMo5ycsraHODD8b5A0gCo6jCQsZk1EUszOJWgGEGBwakEEzFr83QWZwhyx/GlnsAtVc7Yzp6IpRn5MVWAeP+n1GbMEdX3vjzSOA1Fd4C0LzmwI1n9ooi02ySJ/LrEz39lAGV6IWttDnpVXPNvF2CKh0KRWDCLfIvy+CYybka/u1X2j/Xs/C3fsWYrjoYDd2XFOQLc2XZrYdYl2cPF5vcBAFzobbxpzMpzwNfb565XXej+aDj4w/qRBx5G50O74sbMvQwMYrFHlFBaRd81Zr6z+C1QLIvHaSyYu0AeA8qcLgWlBD5YwRnOV/tGsr5PHxqN+XZUEUakU6ANpRnJPc+VOYQZhO9Ar/ydIjreF0ja5P0HWRJXChYouuEAAAAASUVORK5CYII="
+                    />
+                </defs>
+            </svg>
+        `,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -290,7 +309,10 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
                     "afterend",
                     `<span class="ab-volume-discount-modal-cta">
                         <span class="ab-volume-discount-modal-cta__icon">${ASSETS.information_svg}</span>
-                        <span class="ab-volume-discount-modal-cta__txt">Sparpreis bei höherer Stückzahl verfügbar</span>
+                        <span class="ab-volume-discount-modal-cta__txt">
+                            <span>Sparpreis bei höherer Stückzahl verfügbar</span>
+                            <span class="ab-volume-discount-modal-cta__down-arrow-icon">${ASSETS.arrow_svg}</span>
+                        </span>
                     </span>`
                 );
 
@@ -372,7 +394,12 @@ v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
         if (!window.location.href.includes("/checkout/cart")) return;
 
         waitForElement(
-            () => qq(".checkout-product-table .line-item").length > 0 && q(".checkout-aside-summary-list .checkout-aside-summary-value:first-of-type"),
+            () =>
+                !!(
+                    qq(".checkout-product-table .line-item").length > 0 &&
+                    q(".checkout-aside-summary-list .checkout-aside-summary-value:first-of-type") &&
+                    qq(".checkout-aside-summary-list .ab-total-price, .checkout-aside-summary-list .ab-celebration-message-container").length === 0
+                ),
             async () => {
                 const targetNodes = qq(".checkout-product-table .line-item");
 

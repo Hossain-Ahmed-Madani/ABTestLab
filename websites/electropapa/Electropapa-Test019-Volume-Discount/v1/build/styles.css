@@ -6,7 +6,7 @@
     padding: 13px 0px 14px;
     font-family: Inter, sans-serif;
     font-weight: 600;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 100%;
     letter-spacing: 0px;
     color: #03a616;
@@ -276,6 +276,15 @@
     width: 10px;
     height: 10px;
 }
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__down-arrow-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-TEST-019--v1 .ab-volume-discount-modal-cta__down-arrow-icon svg {
+    width: 12px;
+    height: 12px;
+}
 .AB-TEST-019--v1 .ab-volume-discount-modal-cta__txt {
     font-family: Inter, sans-serif;
     font-weight: 600;
@@ -287,6 +296,9 @@
     color: #47b4eb;
     text-decoration: underline;
     text-underline-offset: 2px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 @media screen and (min-width: 768px) {
     .AB-TEST-019--v1 .ab-quantity-dropdown-select:after {

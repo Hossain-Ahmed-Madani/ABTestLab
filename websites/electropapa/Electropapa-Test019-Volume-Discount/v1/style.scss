@@ -368,6 +368,19 @@
             height: 10px;
         }
     }
+    
+    .ab-volume-discount-modal-cta__down-arrow-icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // min-width: 1.5rem;
+        // margin-right: -3px;
+
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
 
     .ab-volume-discount-modal-cta__txt {
         font-family: Inter, sans-serif;
@@ -380,6 +393,10 @@
         color: #47b4eb;
         text-decoration: underline;
         text-underline-offset: 2px;
+        
+        display: flex;
+        align-items: center;
+        gap: 5px;
     }
 
     @media screen and (min-width: 768px) {
