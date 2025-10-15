@@ -15,7 +15,7 @@
         test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
         page_initials: "AB-PDP-ATC-MODAL",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -169,7 +169,6 @@
             });
 
             const data = await response.json();
-            console.log("Add to Cart Response:", data);
 
             return {
                 status: data.response,
@@ -188,6 +187,7 @@
         const submitBtn = q("input.add-to-cart");
         submitBtn.addEventListener("click", (e) => {
             e.preventDefault();
+            e.stopPropagation();
 
             submitBtn.setAttribute("disabled", "true");
 
@@ -199,8 +199,6 @@
 
             addToCart(token, productId, productQuantity, referrer)
                 .then(async (result) => {
-                    console.log("Cart updated successfully:", result);
-
                     // Insert HTML and execute all scripts in order
                     await insertHTMLContentNoScript(result.htmlContent);
 
@@ -230,10 +228,13 @@
         }
 
         if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
+            q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty")?.parentNode.classList.add("hidden");
             const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
             clonedNode.classList.add("ab-cloned-node");
             q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
         }
+
+        q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
         handleModalClose();
 
@@ -264,12 +265,12 @@
         // Wait for animations to complete before hiding modal
         setTimeout(() => {
             modal.classList.remove("is-active");
-            q(modal, ".close-modal").click();
+            q(modal, ".close-modal:not(.not-margin)").click();
         }, 300);
     }
 
     function handleModalClose() {
-        qq(".modal-background, .ab-close-modal").forEach((item) => {
+        qq(".modal-background, .ab-close-modal, .close-modal.no-margin").forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
                 closeModal();

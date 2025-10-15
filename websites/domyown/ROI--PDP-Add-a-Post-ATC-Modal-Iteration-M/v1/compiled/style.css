@@ -23,16 +23,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .modal-content-header h3:before {
   content: "";
   width: 18px;
   height: 11px;
-  border-bottom: 3px solid #0a7806;
-  border-left: 3px solid #0a7806;
+  border-bottom: 4px solid #0a7806;
+  border-left: 4px solid #0a7806;
   display: inline-block;
   transform: rotate(-45deg);
+  margin-top: -3px;
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content .close-x {
   position: static;
@@ -42,13 +43,22 @@
 .AB-PDP-ATC-MODAL #modal-window-added-product #braintree-loading-container {
   display: none;
 }
+.AB-PDP-ATC-MODAL #modal-window-added-product h3.heading.font-bold.text-xl.md\:text-2xl.mt-4 {
+  margin-top: 6px;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .quick-view-addons {
+  margin-bottom: 20px;
+}
+.AB-PDP-ATC-MODAL #modal-window-added-product .list-reset {
+  margin-bottom: 20px;
+}
 .AB-PDP-ATC-MODAL #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"] {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
 }
-.AB-PDP-ATC-MODAL a.close-modal {
+.AB-PDP-ATC-MODAL a.close-modal:not(.no-margin) {
   display: none;
 }
 .AB-PDP-ATC-MODAL .ab-close-modal {
@@ -62,8 +72,17 @@
 }
 .AB-PDP-ATC-MODAL .modal-content-header,
 .AB-PDP-ATC-MODAL .modal-content-body > div {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.AB-PDP-ATC-MODAL .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap > .w-full.md\:w-2\/3 {
+  margin-top: 15px;
+}
+.AB-PDP-ATC-MODAL .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap .w-1\/3 {
+  margin-right: 15px;
+}
+.AB-PDP-ATC-MODAL .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap .w-1\/3 img {
+  border: 1px solid #ebebeb;
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product {
   position: fixed;

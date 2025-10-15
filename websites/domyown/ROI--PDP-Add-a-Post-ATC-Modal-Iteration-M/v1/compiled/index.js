@@ -2,9 +2,9 @@
     Test info:
         Test name: PDP - Add a Post ATC Modal (Iteration) [M]
         Ticket: https://trello.com/c/7rHQ37aa/4201-pdp-add-a-post-atc-modal-iteration-m
-        Test container: 
+        Test container: https://app.vwo.com/#/test/ab/271/edit/variations/?accountId=348406
         Preview: 
-        Forced variation: 
+        Forced variation: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI3MSI6eyJ2IjoiMiIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tJTI1MkZ0ZXJtaWRvci1zYy1wLTE4NC5odG1sIiwiYXBwIjoiYXBwIiwidHMiOjE3NjA0MzM0MjI3NTB9fX0=
 */
 
 (() => {
@@ -15,7 +15,7 @@
         test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
         page_initials: "AB-PDP-ATC-MODAL",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -80,7 +80,6 @@
             });
 
             const data = await response.json();
-            console.log("Add to Cart Response:", data);
 
             return {
                 status: data.response,
@@ -99,6 +98,7 @@
         const submitBtn = q("input.add-to-cart");
         submitBtn.addEventListener("click", (e) => {
             e.preventDefault();
+            e.stopPropagation();
 
             submitBtn.setAttribute("disabled", "true");
 
@@ -110,8 +110,6 @@
 
             addToCart(token, productId, productQuantity, referrer)
                 .then(async (result) => {
-                    console.log("Cart updated successfully:", result);
-
                     // Insert HTML and execute all scripts in order
                     await insertHTMLContentNoScript(result.htmlContent);
 
@@ -141,10 +139,13 @@
         }
 
         if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
+            q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty")?.parentNode.classList.add("hidden");
             const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
             clonedNode.classList.add("ab-cloned-node");
             q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
         }
+
+        q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
         handleModalClose();
 
@@ -175,12 +176,12 @@
         // Wait for animations to complete before hiding modal
         setTimeout(() => {
             modal.classList.remove("is-active");
-            q(modal, ".close-modal").click();
+            q(modal, ".close-modal:not(.not-margin)").click();
         }, 300);
     }
 
     function handleModalClose() {
-        qq(".modal-background, .ab-close-modal").forEach((item) => {
+        qq(".modal-background, .ab-close-modal, .close-modal.no-margin").forEach((item) => {
             item.addEventListener("click", (e) => {
                 e.preventDefault();
                 closeModal();
