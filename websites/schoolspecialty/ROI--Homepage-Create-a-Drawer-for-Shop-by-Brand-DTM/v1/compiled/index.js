@@ -10,6 +10,12 @@ Test info:
     Forced Variation: https://select.schoolspecialty.com/?_conv_eforce=1004170091.1004401541&utm_campaign=qa5
     
     Location: ^https:\/\/select\.schoolspecialty\.com\/?(\?.*)?$
+
+
+    Goal: PDP Views
+    regex old: schoolspecialty\.com\/(\d|\w|\-|\/)+(\-(\d){7})($|\?)
+    regex new : schoolspecialty\.com\/(\d|\w|\-|\/)+(\-(\d{4,8}))($|\?|&)
+
 */
 
 (() => {
@@ -20,7 +26,7 @@ Test info:
         test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
         page_initials: "AB-HOME-BRAND-DRAWER",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

@@ -9,6 +9,18 @@
   margin-top: 20px !important;
   margin-bottom: 20px !important;
 }
+.AB-HOME-BRAND-DRAWER .ab-brands-section h2 {
+  color: #000;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section p.brands-subtitle {
+  font-weight: 600;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card {
+  cursor: default;
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a {
+  display: block;
+}
 @media (max-width: 420px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .left_espot > .p-40:has(> h2) {
     padding: 20px 10px !important;
@@ -36,6 +48,7 @@
   transition-delay: 0s;
   max-height: 0;
   padding: 0 !important;
+  pointer-events: none;
 }
 .AB-HOME-BRAND-DRAWER
   .ab-brands-section
@@ -46,6 +59,7 @@
   transition-delay: 0.2s;
   max-height: unset;
   padding: 20px !important;
+  pointer-events: all;
 }
 @media (max-width: 1280px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n + 5) {
@@ -57,6 +71,7 @@
     transition-delay: 0s;
     max-height: 0;
     padding: 0 !important;
+    pointer-events: none;
   }
   .AB-HOME-BRAND-DRAWER
     .ab-brands-section
@@ -67,6 +82,7 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 @media (max-width: 900px) {
@@ -89,6 +105,7 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 @media (max-width: 600px) {
@@ -101,6 +118,7 @@
     transition-delay: 0s;
     max-height: 0;
     padding: 0 !important;
+    pointer-events: none;
   }
   .AB-HOME-BRAND-DRAWER
     .ab-brands-section
@@ -111,9 +129,12 @@
     transition-delay: 0.2s;
     max-height: unset;
     padding: 20px !important;
+    pointer-events: all;
   }
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands {
+  margin: auto;
+  width: max-content;
   display: flex !important;
   flex-direction: column;
   align-items: center;
@@ -135,7 +156,7 @@
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .brands-text {
   color: #0f6cb6;
   font-family: MuseoSans-700;
-  font-weight: bold;
+  font-weight: 500;
   font-size: 16px;
   text-decoration: underline;
   margin-top: 10px;
@@ -167,9 +188,16 @@ Test info:
     Previous test preview: https://select.schoolspecialty.com/?convert_action=convert_vpreview&convert_e=1004157358&convert_v=1004371721
 
     Ticket link: https://trello.com/c/grIWH9Gt/4126-homepage-create-a-drawer-for-shop-by-brand-dtm
+    Figma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
     Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170091/summary
-    FIgma link: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=431-4368&t=QFmBu4224DlgTQbt-0&scaling=scale-down&content-scaling=fixed&page-id=431%3A1969&starting-point-node-id=431%3A1971
+    Forced Variation: https://select.schoolspecialty.com/?_conv_eforce=1004170091.1004401541&utm_campaign=qa5
+    
     Location: ^https:\/\/select\.schoolspecialty\.com\/?(\?.*)?$
+
+
+    Goal: PDP Views
+    regex old: schoolspecialty\.com\/(\d|\w|\-|\/)+(\-(\d){7})($|\?)
+    regex new : schoolspecialty\.com\/(\d|\w|\-|\/)+(\-(\d{4,8}))($|\?|&)
 
 */
 
@@ -181,7 +209,7 @@ Test info:
     test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
     page_initials: "AB-HOME-BRAND-DRAWER",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -302,7 +330,7 @@ Test info:
       },
       {
         brandName: "Projects by Design",
-        label: "Shop Projects by Design",
+        label: "Free Consultation",
         url: "/projects-by-design",
         imgUrl:
           "/wcsstore/SSIB2BStorefrontAssetStore/images/logos/pbd-logo-large-rev.png",
@@ -340,7 +368,7 @@ Test info:
               <h2 class="txt-34 txt-navy-blue ssi-font__bold mb-20">
                 Quality and Value from Our Trusted Brands
               </h2>
-              <p class="txt-18 ssi-text__center">
+              <p class="brands-subtitle txt-16 ssi-text__center">
                 Discover our curated family of brands offering reliable
                 solutions for all your needs.
               </p>
@@ -348,7 +376,7 @@ Test info:
                 href="/brands"
                 class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link"
                 style="display: inline-block"
-                >Learn More About Our Family Brands</a
+                >Learn More About Our Family of Brands</a
               >
             </div>
 
