@@ -20,6 +20,10 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const COMPONENT_STATE = {
+        modal_updating: false,
+    };
+
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
         if (timer <= 0) {
             return;
@@ -94,6 +98,43 @@
         }
     }
 
+    async function miniCart() {
+        try {
+            const response = await fetch("https://www.domyown.com/cart/mini", {
+                headers: {
+                    accept: "application/json, text/javascript, */*; q=0.01",
+                    "accept-language": "en-US,en;q=0.9",
+                    "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+                    priority: "u=1, i",
+                    "sec-ch-ua": '"Google Chrome";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
+                    "sec-ch-ua-mobile": "?1",
+                    "sec-ch-ua-platform": '"Android"',
+                    "sec-fetch-dest": "empty",
+                    "sec-fetch-mode": "cors",
+                    "sec-fetch-site": "same-origin",
+                    "x-csrf-token": "RBePmwuHWyWx43OZ7yx8UbDCZsEKhMXPkFwuKm02",
+                    "x-newrelic-id": "VwEGVF9SGwEHUVNXBgY=",
+                    "x-requested-with": "XMLHttpRequest",
+                },
+                referrer: "https://www.domyown.com/cart",
+                method: "GET",
+                mode: "cors",
+                credentials: "include",
+            });
+
+            const data = await response.json();
+
+            return {
+                status: data.response,
+                htmlContent: data.content,
+                cartAmount: data.cartAmount,
+            };
+        } catch (error) {
+            console.error("Mini Cart Error:", error);
+            throw error;
+        }
+    }
+
     function handleAddToCartClick() {
         const submitBtn = q("input.add-to-cart");
         submitBtn.addEventListener("click", (e) => {
@@ -124,7 +165,30 @@
         });
     }
 
-    function updateModalLayout() {
+    function updateMiniCartLayout(cartAmount) {
+        const miniCart = q("#mini-cart");
+
+        let cartAmountEl = q(miniCart, ".cart-amount");
+
+        if (!cartAmountEl) {
+            cartAmountEl = document.createElement("div");
+            cartAmountEl.setAttribute("id", "cart-amount");
+            cartAmountEl.className = "absolute text-xs text-white bg-red-light rounded-full border-2 border-white h-6 w-6 text-center -pin-r-2 -pin-t-2";
+            miniCart.insertAdjacentElement("beforeend", cartAmountEl);
+        }
+
+        cartAmountEl.innerText = cartAmount;
+    }
+
+    function getPriceContent(htmlContent) {
+        const tmpDiv = document.createElement("div");
+        tmpDiv.innerHTML = htmlContent;
+        const productId = q("#products-grid").getAttribute("data-selected-products-id");
+        const priceContent = q(tmpDiv, `tr.product-item-${productId} .text-right.border-t.border-grey-light.align-top.font-bold.py-1`)?.innerHTML;
+        return priceContent;
+    }
+
+    function updateModalLayout(htmlContent) {
         const modal = q("#modal-window-added-product:not(.ab-modal-updated)");
 
         const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
@@ -145,14 +209,36 @@
             q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
         }
 
-        q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
+        const quantityElem = q(modal, ".modal-content-body > div.flex.flex-wrap.md\\:flex-no-wrap > .w-full.md\\:w-2\\/3 p:last-of-type");
+
+        if (quantityElem && !q(modal, ".ab-price-content")) {
+            const priceContentHTML = getPriceContent(htmlContent);
+
+            console.log(priceContentHTML);
+            quantityElem.insertAdjacentHTML("afterend", `<div class="ab-price-content">${priceContentHTML}</div>`);
+            quantityElem.classList.add("hidden");
+        }
+
+        // q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
         handleModalClose();
 
         modal.classList.add("ab-modal-updated");
     }
 
+    async function updateLayout() {
+        COMPONENT_STATE["modal_updating"] = true;
+
+        const { htmlContent, cartAmount } = await miniCart();
+
+        updateModalLayout(htmlContent);
+        updateMiniCartLayout(cartAmount);
+
+        COMPONENT_STATE["modal_updating"] = false;
+    }
+
     function openModal() {
+        const body = q("body");
         const modal = q("#modal-window-added-product");
         const modalBg = q(modal, ".modal-background");
         const modalContent = q(modal, ".modal-content");
@@ -161,15 +247,18 @@
         // Trigger reflow to ensure animations work
         void modal.offsetWidth;
 
+        body.classList.add(TEST_CONFIG.page_initials + "--overflow-hidden");
         modalBg.classList.add("is-active");
         modalContent.classList.add("is-active");
     }
 
     function closeModal() {
+        const body = q("body");
         const modal = q("#modal-window-added-product");
         const modalBg = q(modal, ".modal-background");
         const modalContent = q(modal, ".modal-content");
 
+        body.classList.remove(TEST_CONFIG.page_initials + "--overflow-hidden");
         modalBg.classList.remove("is-active");
         modalContent.classList.remove("is-active");
 
@@ -191,9 +280,9 @@
 
     function mutationObserverFunction() {
         return new MutationObserver((mutationsList, observer) => {
-            if (q("#modal-window-added-product:not(.ab-modal-updated)")) {
+            if (q("#modal-window-added-product:not(.ab-modal-updated)") && COMPONENT_STATE["modal_updating"] === false) {
                 console.log("Modal added to body");
-                updateModalLayout();
+                updateLayout();
                 openModal();
             }
         }).observe(q("body"), { attributes: false, childList: true, subtree: false });

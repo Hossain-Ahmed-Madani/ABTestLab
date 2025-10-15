@@ -13,11 +13,33 @@
 }
 
 .AB-PDP-ATC-MODAL {
+    &--overflow-hidden {
+        overflow: hidden;
+    }
+
+    #modal-window-added-product .rfk-rw ul li .rfk_name {
+        -webkit-line-clamp: 1;
+        margin-bottom: 4px;
+    }
+
     #modal-window-added-product .modal-content {
         position: absolute;
         right: -100%;
         top: 0;
         min-height: 100%;
+        overflow: hidden;
+    }
+
+    #modal-window-added-product .modal-content-body {
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-top: 0px;
+        // padding-bottom: 20px;
+    }
+    #modal-window-added-product .rfk_pimage,
+    #modal-window-added-product .rfk_pimage img {
+        height: 103px;
+        max-height: 103px;
     }
 
     #modal-window-added-product .modal-content #braintree-loading-container,
@@ -76,11 +98,15 @@
     }
 
     #modal-window-added-product .quick-view-addons {
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
+        margin-top: 10px;
+        margin-bottom: 0;
+        padding-top: 5px;
     }
 
     #modal-window-added-product .list-reset {
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
+        margin-bottom: 0;
     }
 
     #modal-window-added-product a.button-primary[href="https://www.domyown.com/checkout/payment"]
@@ -116,8 +142,40 @@
         margin-top: 15px;
     }
 
+    .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap > .w-full.md\:w-2\/3 .text-lg + p {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 100%;
+        margin: 3px 0 10px;
+
+        span {
+            color: #315caa;
+        }
+    }
+
+    .ab-price-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .ab-price-content span {
+        margin-bottom: 0;
+    }
+
+    .ab-price-content span.text-red {
+        font-size: 15px;
+        line-height: 100%;
+        font-weight: 600;
+    }
+
+    .ab-price-content span.line-through {
+        font-size: 13px;
+        line-height: 100%;
+    }
+
     .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap .w-1\/3 {
-        margin-right: 15px;
+        margin-right: 20px;
     }
 
     .modal-content-body > div.flex.flex-wrap.md\:flex-no-wrap .w-1\/3 img {
