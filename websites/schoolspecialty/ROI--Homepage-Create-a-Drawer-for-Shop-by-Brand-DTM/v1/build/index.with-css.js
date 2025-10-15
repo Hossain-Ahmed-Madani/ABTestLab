@@ -21,6 +21,12 @@
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a {
   display: block;
 }
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a,
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a:hover,
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card a:focus {
+  text-decoration: none;
+  border: none;
+}
 @media (max-width: 420px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .left_espot > .p-40:has(> h2) {
     padding: 20px 10px !important;
@@ -209,7 +215,7 @@ Test info:
     test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
     page_initials: "AB-HOME-BRAND-DRAWER",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -304,6 +310,7 @@ Test info:
         brandName: "FOSS",
         label: "Shop FOSS",
         url: "https://www.foss-science.com/",
+        target: "_blank",
         imgUrl:
           "/wcsstore/SSIB2BStorefrontAssetStore/images/corporate/brands/foss-logo.png",
       },
@@ -383,12 +390,19 @@ Test info:
             <div class="fx-row fx-start fx-middle brands">
               ${DATA.brands
                 .map(
-                  ({ brandName, label, url, imgUrl }, index) => /* HTML */ `
+                  (
+                    { brandName, label, url, imgUrl, target },
+                    index,
+                  ) => /* HTML */ `
                     <!-- ITEM ${index + 1}-->
                     <div
                       class="brands-card fx-col-6 fx-col-sm-3 fx-col-md-3 fx-col-lg-2"
                     >
-                      <a href="${url}" aria-label="${label}">
+                      <a
+                        href="${url}"
+                        aria-label="${label}"
+                        target="${target ? target : "_self"}"
+                      >
                         <div class="cat-circle p-20">
                           <img
                             loading="lazy"
