@@ -3,9 +3,13 @@
 TEST INFO:
     Ticket: https://trello.com/c/RTPTT3Iq/4221-%F0%9F%92%99-lme36-product-add-faq-carousel-within-buy-box-2-set-up-test
     Test Data: https://docs.google.com/spreadsheets/d/12Xw4gg-15vp-CJ3IMeJ_0mmgYMcC73S_OEGfExADDRk/edit?gid=0#gid=0
-    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
     Figma: https://www.figma.com/design/KIxYJABuvWotw6vOTpc0Eo/LME36?node-id=17-2163&t=bry8ux3vKRhJ2kjG-0
-    Preview: 
+
+
+    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
+    Preview will all experiences: 
+        v1: https://marketer.monetate.net/control/preview/12706/U6QJK6OLHBT5N5C2LNY35A0N0U0NKZ12/lme36-product-add-faq-carousel-within-buy-box
+        v2: https://marketer.monetate.net/control/preview/12706/G6HYT5FZMAA6LKPT6I04JEU2YJU8EQBE/lme36-product-add-faq-carousel-within-buy-box
 
     Target urls:
         https://lemmelive.com/collections/all/products/lemme-glp-1
@@ -21,7 +25,7 @@ TEST INFO:
         site_url: "https://lemmelive.com/",
         test_name: "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
         page_initials: "LME36",
-        test_variation: 2,
+        test_variation: 1,
         test_version: 0.0001,
     };
 
@@ -111,7 +115,7 @@ TEST INFO:
 
     const STATE = {
         previouslyClickedTabElement: null,
-        faqActive: false ,
+        faqActive: true,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -265,11 +269,9 @@ TEST INFO:
     }
 
     function createV2Layout() {
+        getFaqData();
 
-        q(".benefit-nav").insertAdjacentHTML(
-            "beforeend",
-            /* HTML */ ` <a href="javascript:void(0)" style="color: rgb(113, 75, 103); text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">FAQs</a> `
-        );
+        return;
     }
 
     function handleDropdownView(action /* show, hide, toggle */) {
