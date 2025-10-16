@@ -1,0 +1,13 @@
+{
+  "id": "1760613404614_9948_ACADIA__LME36_PRODUCT_Add_FAQ_Carousel_within_Buy_Box_2_SET_UP_TEST",
+  "name": "ACADIA--LME36-PRODUCT-Add-FAQ-Carousel-within-Buy-Box-2-SET-UP-TEST",
+  "type": "A/B",
+  "website": "lemmelive",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-16T11:16:44.614Z",
+  "createdAtReadable": "10/16/2025, 5:16:44 PM",
+  "lastUpdated": "2025-10-16T11:16:44.950Z"
+}
