@@ -21,7 +21,7 @@ TEST INFO:
         site_url: "https://lemmelive.com/",
         test_name: "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
         page_initials: "LME36",
-        test_variation: 1,
+        test_variation: 2,
         test_version: 0.0001,
     };
 
@@ -111,6 +111,7 @@ TEST INFO:
 
     const STATE = {
         previouslyClickedTabElement: null,
+        faqActive: test_variation === 2 ? false : true,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -234,7 +235,7 @@ TEST INFO:
         if (!found_data) return;
 
         const layout = /* HTML */ `
-            <div class="faq-container">
+            <div class="faq-container ${STATE["faqActive"] === false ? "ab-hidden" : ""}">
                 <div class="faq-title-container">
                     ${found_data
                         .map(
@@ -261,6 +262,15 @@ TEST INFO:
         `;
 
         q(".product-benefits__content").insertAdjacentHTML("afterend", layout);
+    }
+
+    function createV2Layout() {
+        if (test_variation !== 2) return;
+
+        q(".benefit-nav").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ ` <a href="javascript:void(0)" style="color: rgb(113, 75, 103); text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">FAQs</a> `
+        );
     }
 
     function handleDropdownView(action /* show, hide, toggle */) {
@@ -314,6 +324,50 @@ TEST INFO:
         document.addEventListener("click", handleOutsideClick);
     }
 
+    function updateFaqContainer() {
+        isFaqActive = STATE["faqActive"];
+        const faqContainer = q(".faq-container");
+        if (isFaqActive) {
+            faqContainer.classList.remove("ab-hidden");
+        } else {
+            faqContainer.classList.add("ab-hidden");
+        }
+    }
+
+    function updateDetailsContent() {
+        isFaqActive = STATE["faqActive"];
+
+        const targetNodes = qq(".product-benefits__content > *:not(.benefit-nav)");
+
+        if (isFaqActive) {
+            targetNodes.forEach((elem) => elem.classList.add("ab-hidden"));
+        } else {
+            targetNodes.forEach((elem) => elem.classList.remove("ab-hidden"));
+        }
+    }
+
+    function handleNavClick(e) {
+        const currentTarget = e.currentTarget;
+        const txt = currentTarget.innerText;
+
+        if (txt.includes("SUPPLEMENT FACTS")) return;
+
+        qq(".benefit-nav > a").forEach((elem) =>
+            elem.setAttribute("style", "color: rgb(113, 75, 103); text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;  border-color: transparent;")
+        );
+
+        if (txt.includes("FAQs")) {
+            STATE["faqActive"] = true;
+        } else if (txt.includes("DETAILS")) {
+            STATE["faqActive"] = false;
+        }
+
+        currentTarget.setAttribute("style", "color: rgb(113, 75, 103); text-decoration: underline; border-color: #000;");
+
+        updateFaqContainer();
+        updateDetailsContent();
+    }
+
     function clickFunction() {
         [
             {
@@ -345,11 +399,9 @@ TEST INFO:
                 callback: (e) => handleDropdownView("hide"),
             },
             {
-                selector: "",
-                event: "",
-                callback: (e) => {
-                    //
-                },
+                selector: ".LME36--v2 .benefit-nav a",
+                event: "click",
+                callback: handleNavClick,
             },
         ].forEach(({ selector, event, callback }) => {
             if (!selector) return;
@@ -367,12 +419,18 @@ TEST INFO:
         console.table(TEST_CONFIG);
 
         createLayout();
+        createV2Layout();
         clickFunction();
         handleDrag();
     }
 
     function hasAllTargetElements() {
-        return !!(document.readyState === "complete" && q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation}) .product-benefits__content`));
+        return !!(
+            document.readyState === "complete" &&
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(".product-benefits__content") &&
+            q(".benefit-nav")
+        );
     }
 
     waitForElement(hasAllTargetElements, init);

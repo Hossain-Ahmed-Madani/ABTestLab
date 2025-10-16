@@ -1,3 +1,6 @@
+.LME36 .ab-hidden {
+  display: none;
+}
 .LME36 .faq-container {
   position: relative;
 }
@@ -155,4 +158,8 @@
 
 .LME36--v1 .custom-benefit-controls {
   margin-bottom: 18px;
+}
+
+.LME36--v2 .faq-container {
+  margin-top: 15px;
 }

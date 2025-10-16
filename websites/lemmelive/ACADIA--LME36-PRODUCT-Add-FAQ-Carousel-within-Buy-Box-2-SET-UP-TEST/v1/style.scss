@@ -13,8 +13,12 @@
 }
 
 .LME36 {
-    .product-content {
-        // overflow: hidden;
+    // .product-content {
+    //    overflow: hidden;
+    // }
+
+    .ab-hidden {
+        display: none;
     }
 
     .faq-container {
@@ -208,5 +212,11 @@
 .LME36--v1 {
     .custom-benefit-controls {
         margin-bottom: 18px;
+    }
+}
+
+.LME36--v2 {
+    .faq-container {
+        margin-top: 15px;
     }
 }
