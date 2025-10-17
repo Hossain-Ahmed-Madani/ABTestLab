@@ -42,93 +42,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    async function executeScript(scriptData) {
-        return new Promise((resolve, reject) => {
-            const newScript = document.createElement("script");
-
-            // Set type
-            newScript.type = scriptData.type;
-
-            // Set id if exists
-            if (scriptData.id) {
-                newScript.id = scriptData.id;
-            }
-
-            // Copy other attributes (excluding src, type, id which are handled separately)
-            Object.keys(scriptData.attributes).forEach((attrName) => {
-                if (!["src", "type", "id"].includes(attrName)) {
-                    newScript.setAttribute(attrName, scriptData.attributes[attrName]);
-                }
-            });
-
-            if (scriptData.src) {
-                // External script - wait for load
-                newScript.src = scriptData.src;
-                newScript.async = false; // Force sequential loading
-
-                newScript.onload = () => {
-                    resolve();
-                };
-
-                newScript.onerror = (error) => {
-                    console.error(`Failed to load script: ${scriptData.src}`, error);
-                    // Resolve anyway to continue with other scripts
-                    resolve();
-                };
-
-                document.head.appendChild(newScript);
-            } else {
-                // Inline script - executes immediately
-                try {
-                    newScript.textContent = scriptData.content;
-                    document.body.appendChild(newScript);
-                    resolve();
-                } catch (error) {
-                    console.error("Error executing inline script:", error);
-                    resolve(); // Continue even if there's an error
-                }
-            }
-        });
-    }
-
-    async function insertHTMLContent(htmlContent) {
-        // Create a temporary container
-        const tempContainer = document.createElement("div");
-        tempContainer.innerHTML = htmlContent;
-
-        // Extract all script elements
-        const scripts = Array.from(tempContainer.querySelectorAll("script"));
-        const scriptData = [];
-
-        // Store script contents and attributes
-        scripts.forEach((script) => {
-            scriptData.push({
-                src: script.src || null,
-                content: script.textContent || "",
-                type: script.type || "text/javascript",
-                async: script.async,
-                defer: script.defer,
-                id: script.id || null,
-                attributes: Array.from(script.attributes).reduce((acc, attr) => {
-                    acc[attr.name] = attr.value;
-                    return acc;
-                }, {}),
-            });
-            // Remove script from temp container
-            script.remove();
-        });
-
-        // Insert the HTML without scripts first
-        q("body").insertAdjacentHTML("afterbegin", htmlContent);
-
-        // Execute scripts sequentially
-        for (const script of scriptData) {
-            await executeScript(script);
-        }
-
-        q("#modal-window-added-product").style.display = "block";
-    }
-
     async function insertHTMLContentNoScript(htmlContent) {
         // Create a temporary container
         const tempContainer = document.createElement("div");
@@ -224,11 +137,7 @@
 
     function handleCartUpdateAndView(result) {
         waitForElement(
-            () => {
-                console.log("waiting for:", qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product"));
-
-                return !!(q("input.add-to-cart") && qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0);
-            },
+            () => !!(q("button.ab-add-to-cart") && qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0),
             async () => {
                 const htmlContent = result.htmlContent;
                 await insertHTMLContentNoScript(htmlContent);
@@ -238,7 +147,7 @@
                 openModal();
                 handleModalClose();
 
-                const submitBtn = q("input.add-to-cart");
+                const submitBtn = q("button.ab-add-to-cart");
                 submitBtn.removeAttribute("disabled");
             }
         );
@@ -260,18 +169,24 @@
     }
 
     function handleAddToCartClick() {
-        q("input.add-to-cart").addEventListener("click", async (e) => {
-            const submitBtn = e.currentTarget;
-            submitBtn.setAttribute("disabled", "true");
+        const submitBtn = document.createElement("button");
+        submitBtn.setAttribute('type', 'button');
+        submitBtn.className = "button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center";
+        submitBtn.innerText = "Add to Cart";
 
+        submitBtn.addEventListener("click", async (e) => {
             e.preventDefault();
             e.stopPropagation();
+
+            submitBtn.setAttribute("disabled", "true");
 
             const { token, referrer, productId, productQuantity } = getFormData();
 
             const res = await addToCart(token, productId, productQuantity, referrer);
             handleCartUpdateAndView(res);
         });
+
+        q("input.add-to-cart").insertAdjacentElement("afterend", submitBtn);
     }
 
     function updateMiniCartLayout(cartAmount) {
@@ -312,7 +227,7 @@
         }
 
         const prevSliderContent = q(modal, ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']");
-        console.log("prevSliderContent", prevSliderContent);
+
         if (prevSliderContent && !q(modal, ".ab-cloned-node")) {
             prevSliderContent.innerHTML = "";
             prevSliderContent?.parentNode.classList.add("hidden");
@@ -329,8 +244,6 @@
             quantityElem.insertAdjacentHTML("afterend", `<div class="ab-price-content">${priceContentHTML}</div>`);
             quantityElem.classList.add("hidden");
         }
-
-        // q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
         modal.classList.add("ab-modal-updated");
     }

@@ -7,9 +7,45 @@
       style.innerHTML = `.AB-PDP-ATC-MODAL--overflow-hidden {
   overflow: hidden;
 }
-.AB-PDP-ATC-MODAL input.add-to-cart[disabled] {
+.AB-PDP-ATC-MODAL input.add-to-cart {
+  display: none;
+}
+.AB-PDP-ATC-MODAL button.ab-add-to-cart[disabled] {
   pointer-events: none;
   opacity: 0.7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+.AB-PDP-ATC-MODAL button.ab-add-to-cart[disabled]:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: 5px solid;
+  border-color: rgba(17, 7, 7, 0.15) rgba(255, 255, 255, 0.25)
+    rgba(255, 255, 255, 0.35) rgba(255, 255, 255, 0.5);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: calc(50% + 60px);
+  z-index: 10;
+  opacity: 0.7;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product .ab-cloned-node .rfk_header {
   display: none;
@@ -265,12 +301,12 @@
     test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
     page_initials: "AB-PDP-ATC-MODAL",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-  function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
+  function waitForElement(predicate, callback, timer = 30000, frequency = 150) {
     if (timer <= 0) {
       return;
     } else if (predicate && predicate()) {
@@ -386,39 +422,69 @@
     }
   }
 
+  function handleCartUpdateAndView(result) {
+    waitForElement(
+      () =>
+        !!(
+          q("button.ab-add-to-cart") &&
+          qq(
+            "#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product",
+          ).length > 0
+        ),
+      async () => {
+        const htmlContent = result.htmlContent;
+        await insertHTMLContentNoScript(htmlContent);
+
+        await updateLayout();
+
+        openModal();
+        handleModalClose();
+
+        const submitBtn = q("button.ab-add-to-cart");
+        submitBtn.removeAttribute("disabled");
+      },
+    );
+  }
+
+  function getFormData() {
+    // Execute the cart addition and insert HTML
+    const token = q('form#cart-quantity input[name="_token"]').getAttribute(
+      "value",
+    );
+    const referrer = window.location.origin + window.location.pathname;
+    const productId = q("#products-grid").getAttribute(
+      "data-selected-products-id",
+    );
+    const productQuantity = q("#product_qty_display").innerText || 0;
+
+    return {
+      token,
+      referrer,
+      productId,
+      productQuantity,
+    };
+  }
+
   function handleAddToCartClick() {
-    const submitBtn = q("input.add-to-cart");
-    submitBtn.addEventListener("click", (e) => {
+    const submitBtn = document.createElement("button");
+    submitBtn.setAttribute("type", "button");
+    submitBtn.className =
+      "button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center";
+    submitBtn.innerText = "Add to Cart";
+
+    submitBtn.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
       submitBtn.setAttribute("disabled", "true");
 
-      // Execute the cart addition and insert HTML
-      const token = q('form#cart-quantity input[name="_token"]').getAttribute(
-        "value",
-      );
-      const referrer = window.location.origin + window.location.pathname;
-      const productId = q("#products-grid").getAttribute(
-        "data-selected-products-id",
-      );
-      const productQuantity = q("#product_qty_display").innerText || 0;
+      const { token, referrer, productId, productQuantity } = getFormData();
 
-      addToCart(token, productId, productQuantity, referrer)
-        .then(async (result) => {
-          // Insert HTML and execute all scripts in order
-          await insertHTMLContentNoScript(result.htmlContent);
-        })
-        .catch((error) => {
-          console.error("Failed to add to cart:", error);
-        })
-        .finally(async () => {
-          submitBtn.removeAttribute("disabled");
-          await updateLayout();
-          openModal();
-          handleModalClose();
-        });
+      const res = await addToCart(token, productId, productQuantity, referrer);
+      handleCartUpdateAndView(res);
     });
+
+    q("input.add-to-cart").insertAdjacentElement("afterend", submitBtn);
   }
 
   function updateMiniCartLayout(cartAmount) {
@@ -473,14 +539,14 @@
       );
     }
 
-    if (
-      q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") &&
-      !q(modal, ".ab-cloned-node")
-    ) {
-      q(
-        modal,
-        ".quick-view-addons div[data-rfkid='rfkid_32']:empty",
-      )?.parentNode.classList.add("hidden");
+    const prevSliderContent = q(
+      modal,
+      ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']",
+    );
+
+    if (prevSliderContent && !q(modal, ".ab-cloned-node")) {
+      prevSliderContent.innerHTML = "";
+      prevSliderContent?.parentNode.classList.add("hidden");
       const clonedNode = q(
         "#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div",
       ).cloneNode(true);
@@ -505,8 +571,6 @@
       );
       quantityElem.classList.add("hidden");
     }
-
-    // q(modal, ".w-full.md\\:w-2\\/5.border-l.px-4.border-t.pt-2")?.classList.add("pt-4");
 
     modal.classList.add("ab-modal-updated");
   }
