@@ -15,7 +15,7 @@
         test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
         page_initials: "AB-PDP-ATC-MODAL",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -24,7 +24,7 @@
         modal_updating: false,
     };
 
-    function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
+    function waitForElement(predicate, callback, timer = 30000, frequency = 150) {
         if (timer <= 0) {
             return;
         } else if (predicate && predicate()) {
@@ -222,34 +222,55 @@
         }
     }
 
+    function handleCartUpdateAndView(result) {
+        waitForElement(
+            () => {
+                console.log("waiting for:", qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product"));
+
+                return !!(q("input.add-to-cart") && qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0);
+            },
+            async () => {
+                const htmlContent = result.htmlContent;
+                await insertHTMLContentNoScript(htmlContent);
+
+                await updateLayout();
+
+                openModal();
+                handleModalClose();
+
+                const submitBtn = q("input.add-to-cart");
+                submitBtn.removeAttribute("disabled");
+            }
+        );
+    }
+
+    function getFormData() {
+        // Execute the cart addition and insert HTML
+        const token = q('form#cart-quantity input[name="_token"]').getAttribute("value");
+        const referrer = window.location.origin + window.location.pathname;
+        const productId = q("#products-grid").getAttribute("data-selected-products-id");
+        const productQuantity = q("#product_qty_display").innerText || 0;
+
+        return {
+            token,
+            referrer,
+            productId,
+            productQuantity,
+        };
+    }
+
     function handleAddToCartClick() {
-        const submitBtn = q("input.add-to-cart");
-        submitBtn.addEventListener("click", (e) => {
+        q("input.add-to-cart").addEventListener("click", async (e) => {
+            const submitBtn = e.currentTarget;
+            submitBtn.setAttribute("disabled", "true");
+
             e.preventDefault();
             e.stopPropagation();
 
-            submitBtn.setAttribute("disabled", "true");
+            const { token, referrer, productId, productQuantity } = getFormData();
 
-            // Execute the cart addition and insert HTML
-            const token = q('form#cart-quantity input[name="_token"]').getAttribute("value");
-            const referrer = window.location.origin + window.location.pathname;
-            const productId = q("#products-grid").getAttribute("data-selected-products-id");
-            const productQuantity = q("#product_qty_display").innerText || 0;
-
-            addToCart(token, productId, productQuantity, referrer)
-                .then(async (result) => {
-                    // Insert HTML and execute all scripts in order
-                    await insertHTMLContentNoScript(result.htmlContent);
-                })
-                .catch((error) => {
-                    console.error("Failed to add to cart:", error);
-                })
-                .finally(async () => {
-                    submitBtn.removeAttribute("disabled");
-                    await updateLayout();
-                    openModal();
-                    handleModalClose();
-                });
+            const res = await addToCart(token, productId, productQuantity, referrer);
+            handleCartUpdateAndView(res);
         });
     }
 
@@ -290,8 +311,11 @@
             q(modal, ".modal-content-header").insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-close-modal" rel="added-product">×</div>`);
         }
 
-        if (q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty") && !q(modal, ".ab-cloned-node")) {
-            q(modal, ".quick-view-addons div[data-rfkid='rfkid_32']:empty")?.parentNode.classList.add("hidden");
+        const prevSliderContent = q(modal, ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']");
+        console.log("prevSliderContent", prevSliderContent);
+        if (prevSliderContent && !q(modal, ".ab-cloned-node")) {
+            prevSliderContent.innerHTML = "";
+            prevSliderContent?.parentNode.classList.add("hidden");
             const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
             clonedNode.classList.add("ab-cloned-node");
             q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
