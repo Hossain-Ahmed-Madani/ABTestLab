@@ -15,7 +15,7 @@
         test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
         page_initials: "AB-PDP-ATC-MODAL",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -38,14 +38,9 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    async function insertHTMLContentNoScript(htmlContent) {
-        // Create a temporary container
-        const tempContainer = document.createElement("div");
-        tempContainer.innerHTML = htmlContent;
-
-        // Insert the HTML without scripts first
-        q("body").insertAdjacentHTML("afterbegin", htmlContent);
-        q("#modal-window-added-product").style.display = "block";
+    async function insertHtmlString(htmlString) {
+        q("body").insertAdjacentHTML("afterbegin", htmlString);
+        return true;
     }
 
     async function addToCart(token, productId, productQuantity, referrer) {
@@ -83,7 +78,7 @@
 
             return {
                 status: data.response,
-                htmlContent: data.content,
+                htmlString: data.content,
                 cartItems: data.cart,
                 dataLayer: data.dataLayer,
                 rfkData: data.rfk,
@@ -122,7 +117,7 @@
 
             return {
                 status: data.response,
-                htmlContent: data.content,
+                htmlString: data.content,
                 cartAmount: data.cartAmount,
             };
         } catch (error) {
@@ -131,12 +126,12 @@
         }
     }
 
-    function handleCartUpdateAndView(result) {
+    async function handleCartUpdateAndView(result) {
         waitForElement(
-            () => !!(q("button.ab-add-to-cart") && qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0),
+            () => qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0,
             async () => {
-                const htmlContent = result.htmlContent;
-                await insertHTMLContentNoScript(htmlContent);
+                const htmlString = result.htmlString;
+                await insertHtmlString(htmlString);
 
                 await updateLayout();
 
@@ -166,7 +161,8 @@
 
     function handleAddToCartClick() {
         const submitBtn = document.createElement("button");
-        submitBtn.setAttribute('type', 'button');
+        submitBtn.setAttribute("type", "button");
+        submitBtn.setAttribute("href", "javascript:void(0)");
         submitBtn.className = "button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center";
         submitBtn.innerText = "Add to Cart";
 
@@ -178,8 +174,8 @@
 
             const { token, referrer, productId, productQuantity } = getFormData();
 
-            const res = await addToCart(token, productId, productQuantity, referrer);
-            handleCartUpdateAndView(res);
+            const result = await addToCart(token, productId, productQuantity, referrer);
+            handleCartUpdateAndView(result);
         });
 
         q("input.add-to-cart").insertAdjacentElement("afterend", submitBtn);
@@ -200,42 +196,64 @@
         cartAmountEl.innerText = cartAmount;
     }
 
-    function getPriceContent(htmlContent) {
+    function getPriceContent(htmlString) {
         const tmpDiv = document.createElement("div");
-        tmpDiv.innerHTML = htmlContent;
+        tmpDiv.innerHTML = htmlString;
         const productId = q("#products-grid").getAttribute("data-selected-products-id");
         const priceContent = q(tmpDiv, `tr.product-item-${productId} .text-right.border-t.border-grey-light.align-top.font-bold.py-1`)?.innerHTML;
         return priceContent;
     }
 
-    function updateModalLayout(htmlContent) {
+    function getSkeletonLayout() {
+        return /* HTML */ `
+            <ul class="skeleton-loader">
+                ${Array.from({ length: 2 })
+                    .map(
+                        (_) => /* HTML */ `
+                            <li class="skeleton-product">
+                                <div class="skeleton-pulse skeleton-image"></div>
+                                <div class="skeleton-rating">
+                                    <div class="skeleton-pulse skeleton-star"></div>
+                                    <div class="skeleton-pulse skeleton-star"></div>
+                                    <div class="skeleton-pulse skeleton-star"></div>
+                                    <div class="skeleton-pulse skeleton-star"></div>
+                                    <div class="skeleton-pulse skeleton-review-count"></div>
+                                </div>
+                                <div class="skeleton-pulse skeleton-text medium"></div>
+                            </li>
+                        `
+                    )
+                    .join("")}
+            </ul>
+        `;
+    }
+
+    function updateModalLayout(htmlString) {
         const modal = q("#modal-window-added-product:not(.ab-modal-updated)");
 
-        const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
-        if (checkoutContainer) {
-            checkoutContainer.classList.remove("border-1");
-            checkoutContainer.classList.add("border-t", "pt-2");
-            q(modal, ".quick-view-addons")?.insertAdjacentElement("afterend", checkoutContainer);
+        const prevSliderContent = q(modal, ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']");
+        if (prevSliderContent) {
+            prevSliderContent?.parentNode.remove();
         }
 
         if (q(modal, ".modal-content-header") && !q(modal, ".ab-close-modal")) {
             q(modal, ".modal-content-header").insertAdjacentHTML("afterbegin", /* HTML */ `<div class="ab-close-modal" rel="added-product">×</div>`);
         }
 
-        const prevSliderContent = q(modal, ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']");
-
-        if (prevSliderContent && !q(modal, ".ab-cloned-node")) {
-            prevSliderContent.innerHTML = "";
-            prevSliderContent?.parentNode.classList.add("hidden");
-            const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
-            clonedNode.classList.add("ab-cloned-node");
-            q(modal, ".quick-view-addons")?.insertAdjacentElement("beforeend", clonedNode);
+        const checkoutContainer = q(modal, "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4");
+        const quickAddons = q(modal, ".quick-view-addons");
+        if (checkoutContainer) {
+            checkoutContainer.classList.remove("border-1");
+            checkoutContainer.classList.add("border-t", "pt-2");
+            quickAddons?.insertAdjacentElement("afterend", checkoutContainer);
         }
+
+        quickAddons.insertAdjacentHTML("beforeend", getSkeletonLayout());
 
         const quantityElem = q(modal, ".modal-content-body > div.flex.flex-wrap.md\\:flex-no-wrap > .w-full.md\\:w-2\\/3 p:last-of-type");
 
         if (quantityElem && !q(modal, ".ab-price-content")) {
-            const priceContentHTML = getPriceContent(htmlContent);
+            const priceContentHTML = getPriceContent(htmlString);
 
             quantityElem.insertAdjacentHTML("afterend", `<div class="ab-price-content">${priceContentHTML}</div>`);
             quantityElem.classList.add("hidden");
@@ -244,11 +262,29 @@
         modal.classList.add("ab-modal-updated");
     }
 
+    function updateModalCarouselLayout() {
+        waitForElement(
+            () => !!(qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0 && q(".skeleton-loader")),
+            () => {
+                const modal = q("#modal-window-added-product:not(.ab-modal-slider-updated)");
+                const quickAddons = q(modal, ".quick-view-addons");
+
+                if (!q(modal, ".ab-cloned-node")) {
+                    const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
+                    clonedNode.classList.add("ab-cloned-node");
+                    quickAddons?.insertAdjacentElement("beforeend", clonedNode);
+                    q(modal, ".skeleton-loader").classList.add("hidden");
+                    modal.classList.add("ab-modal-slider-updated");
+                }
+            }
+        );
+    }
+
     async function updateLayout() {
+        const { htmlString, cartAmount } = await miniCart();
 
-        const { htmlContent, cartAmount } = await miniCart();
-
-        updateModalLayout(htmlContent);
+        updateModalLayout(htmlString);
+        updateModalCarouselLayout();
         updateMiniCartLayout(cartAmount);
 
         return true;

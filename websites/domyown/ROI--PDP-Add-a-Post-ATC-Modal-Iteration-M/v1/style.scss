@@ -13,6 +13,11 @@
 }
 
 .AB-PDP-ATC-MODAL {
+
+    .hidden {
+        display: none;
+    }
+
     &--overflow-hidden {
         overflow: hidden;
     }
@@ -283,5 +288,105 @@
                 right: 0;
             }
         }
+    }
+
+    // Skeleton Loader
+    .skeleton-loader {
+        display: flex;
+        // flex-wrap: wrap;
+        // gap: 10px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        gap: 15px;
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    .skeleton-product {
+        flex-grow: 1;
+        width: auto;
+        background: white;
+        border-radius: 8px;
+        padding: 10px;
+        padding-left: 0;
+        padding-right: 0;
+        // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .skeleton-pulse {
+        animation: skeleton-pulse 1.5s ease-in-out infinite;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        border-radius: 4px;
+    }
+
+    @keyframes skeleton-pulse {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    .skeleton-checkbox {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 15px;
+    }
+
+    .skeleton-image {
+        width: 100%;
+        height: 130px;
+        margin-bottom: 15px;
+    }
+
+    .skeleton-text {
+        height: 16px;
+        margin-bottom: 10px;
+    }
+
+    .skeleton-text.short {
+        width: 60%;
+    }
+
+    .skeleton-text.medium {
+        width: 80%;
+    }
+
+    .skeleton-text.long {
+        width: 90%;
+    }
+
+    .skeleton-rating {
+        display: flex;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+
+    .skeleton-star {
+        width: 16px;
+        height: 16px;
+    }
+
+    .skeleton-review-count {
+        width: 40px;
+        height: 14px;
+        margin-left: 8px;
+    }
+
+    .skeleton-price {
+        height: 20px;
+        width: 80px;
+        margin-bottom: 15px;
+    }
+
+    .skeleton-button {
+        width: 100%;
+        height: 40px;
+        border-radius: 6px;
     }
 }
