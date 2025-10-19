@@ -15,14 +15,10 @@
         test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
         page_initials: "AB-PDP-ATC-MODAL",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    const COMPONENT_STATE = {
-        modal_updating: false,
-    };
 
     function waitForElement(predicate, callback, timer = 30000, frequency = 150) {
         if (timer <= 0) {
@@ -42,8 +38,26 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function removeScriptFromHTMLString(htmlString) {
+        // Pattern to match various script tag formats
+        const scriptPatterns = [
+            /<script\b[^>]*>[\s\S]*?<\/script>/gi, // Normal script tags with content
+            /<script\b[^>]*\/>/gi, // Self-closing script tags
+            /<script\b[^>]*>(.*?)<\/script>/gi, // Script tags with minimal content
+        ];
+
+        let result = htmlString;
+        scriptPatterns.forEach((pattern) => {
+            result = result.replace(pattern, "");
+        });
+
+        return result;
+    }
+
     async function insertHtmlString(htmlString) {
-        q("body").insertAdjacentHTML("afterbegin", htmlString);
+        const scriptRemovedHTMLString = removeScriptFromHTMLString(htmlString);
+
+        q("body").insertAdjacentHTML("afterbegin", scriptRemovedHTMLString);
         return true;
     }
 
@@ -131,21 +145,16 @@
     }
 
     async function handleCartUpdateAndView(result) {
-        waitForElement(
-            () => qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0,
-            async () => {
-                const htmlString = result.htmlString;
-                await insertHtmlString(htmlString);
+        const htmlString = result.htmlString;
+        await insertHtmlString(htmlString);
 
-                await updateLayout();
+        await updateLayout();
 
-                openModal();
-                handleModalClose();
+        openModal();
+        handleModalClose();
 
-                const submitBtn = q("button.ab-add-to-cart");
-                submitBtn.removeAttribute("disabled");
-            }
-        );
+        const submitBtn = q("button.ab-add-to-cart");
+        submitBtn.removeAttribute("disabled");
     }
 
     function getFormData() {
@@ -266,20 +275,15 @@
         modal.classList.add("ab-modal-updated");
     }
 
-    function updateModalCarouselLayout() {
+    function initializeCarousel() {
         waitForElement(
-            () => !!(qq("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product").length > 0 && q(".skeleton-loader")),
+            () => !!(typeof window.rfk.init === "function" && q("#modal-window-added-product .skeleton-loader")),
             () => {
-                const modal = q("#modal-window-added-product:not(.ab-modal-slider-updated)");
-                const quickAddons = q(modal, ".quick-view-addons");
-
-                if (!q(modal, ".ab-cloned-node")) {
-                    const clonedNode = q("#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div").cloneNode(true);
-                    clonedNode.classList.add("ab-cloned-node");
-                    quickAddons?.insertAdjacentElement("beforeend", clonedNode);
-                    q(modal, ".skeleton-loader").classList.add("hidden");
-                    modal.classList.add("ab-modal-slider-updated");
-                }
+                const modal = q("#modal-window-added-product");
+                const skeletonLoader = q(modal, ".skeleton-loader");
+                skeletonLoader?.insertAdjacentHTML("beforebegin", /* HTML */ `<div class="ab-modal-slider" data-rfkid="rfkid_32"></div>`);
+                window.rfk.init();
+                modal.classList.add("ab-carousel-initialized");
             }
         );
     }
@@ -288,7 +292,7 @@
         const { htmlString, cartAmount } = await miniCart();
 
         updateModalLayout(htmlString);
-        updateModalCarouselLayout();
+        initializeCarousel();
         updateMiniCartLayout(cartAmount);
 
         return true;

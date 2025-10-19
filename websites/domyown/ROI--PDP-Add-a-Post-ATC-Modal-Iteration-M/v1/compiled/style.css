@@ -218,6 +218,9 @@
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content.is-active {
   right: 0;
 }
+.AB-PDP-ATC-MODAL .ab-modal-slider:not(:empty) + .skeleton-loader {
+  display: none;
+}
 .AB-PDP-ATC-MODAL .skeleton-loader {
   display: flex;
   padding: 0;
@@ -258,7 +261,7 @@
 }
 .AB-PDP-ATC-MODAL .skeleton-image {
   width: 100%;
-  height: 130px;
+  height: 140px;
   margin-bottom: 15px;
 }
 .AB-PDP-ATC-MODAL .skeleton-text {
