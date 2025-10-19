@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-PDP-ATC-MODAL--overflow-hidden {
+      style.innerHTML = `.AB-PDP-ATC-MODAL .hidden {
+  display: none;
+}
+.AB-PDP-ATC-MODAL--overflow-hidden {
   overflow: hidden;
 }
 .AB-PDP-ATC-MODAL input.add-to-cart {
@@ -276,6 +279,89 @@
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content.is-active {
   right: 0;
 }
+.AB-PDP-ATC-MODAL .ab-modal-slider:not(:empty) + .skeleton-loader {
+  display: none;
+}
+.AB-PDP-ATC-MODAL .skeleton-loader {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  gap: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-loader.hidden {
+  display: none;
+}
+.AB-PDP-ATC-MODAL .skeleton-product {
+  flex-grow: 1;
+  width: auto;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+.AB-PDP-ATC-MODAL .skeleton-pulse {
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 4px;
+}
+@keyframes skeleton-pulse {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+.AB-PDP-ATC-MODAL .skeleton-checkbox {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-image {
+  width: 100%;
+  height: 140px;
+  margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-text {
+  height: 16px;
+  margin-bottom: 10px;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.short {
+  width: 60%;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.medium {
+  width: 80%;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.long {
+  width: 90%;
+}
+.AB-PDP-ATC-MODAL .skeleton-rating {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.AB-PDP-ATC-MODAL .skeleton-star {
+  width: 16px;
+  height: 16px;
+}
+.AB-PDP-ATC-MODAL .skeleton-review-count {
+  width: 40px;
+  height: 14px;
+  margin-left: 8px;
+}
+.AB-PDP-ATC-MODAL .skeleton-price {
+  height: 20px;
+  width: 80px;
+  margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-button {
+  width: 100%;
+  height: 40px;
+  border-radius: 6px;
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -301,7 +387,7 @@
     test_name: "PDP - Add a Post ATC Modal (Iteration) [M]",
     page_initials: "AB-PDP-ATC-MODAL",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -327,14 +413,26 @@
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
-  async function insertHTMLContentNoScript(htmlContent) {
-    // Create a temporary container
-    const tempContainer = document.createElement("div");
-    tempContainer.innerHTML = htmlContent;
+  function removeScriptFromHTMLString(htmlString) {
+    // Pattern to match various script tag formats
+    const scriptPatterns = [
+      /<script\b[^>]*>[\s\S]*?<\/script>/gi, // Normal script tags with content
+      /<script\b[^>]*\/>/gi, // Self-closing script tags
+      /<script\b[^>]*>(.*?)<\/script>/gi, // Script tags with minimal content
+    ];
 
-    // Insert the HTML without scripts first
-    q("body").insertAdjacentHTML("afterbegin", htmlContent);
-    q("#modal-window-added-product").style.display = "block";
+    let result = htmlString;
+    scriptPatterns.forEach((pattern) => {
+      result = result.replace(pattern, "");
+    });
+
+    return result;
+  }
+
+  function insertHtmlString(htmlString) {
+    const scriptRemovedHTMLString = removeScriptFromHTMLString(htmlString);
+    q("body").insertAdjacentHTML("afterbegin", scriptRemovedHTMLString);
+    return true;
   }
 
   async function addToCart(token, productId, productQuantity, referrer) {
@@ -373,7 +471,7 @@
 
       return {
         status: data.response,
-        htmlContent: data.content,
+        htmlString: data.content,
         cartItems: data.cart,
         dataLayer: data.dataLayer,
         rfkData: data.rfk,
@@ -413,7 +511,7 @@
 
       return {
         status: data.response,
-        htmlContent: data.content,
+        htmlString: data.content,
         cartAmount: data.cartAmount,
       };
     } catch (error) {
@@ -422,32 +520,20 @@
     }
   }
 
-  function handleCartUpdateAndView(result) {
-    waitForElement(
-      () =>
-        !!(
-          q("button.ab-add-to-cart") &&
-          qq(
-            "#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div:not(.ab-cloned-node) .rfk_product",
-          ).length > 0
-        ),
-      async () => {
-        const htmlContent = result.htmlContent;
-        await insertHTMLContentNoScript(htmlContent);
+  async function handleCartUpdateAndView(result) {
+    const htmlString = result.htmlString;
+    insertHtmlString(htmlString);
 
-        await updateLayout();
+    await updateLayout();
 
-        openModal();
-        handleModalClose();
+    openModal();
+    handleModalClose();
 
-        const submitBtn = q("button.ab-add-to-cart");
-        submitBtn.removeAttribute("disabled");
-      },
-    );
+    const submitBtn = q("button.ab-add-to-cart");
+    submitBtn.removeAttribute("disabled");
   }
 
   function getFormData() {
-    // Execute the cart addition and insert HTML
     const token = q('form#cart-quantity input[name="_token"]').getAttribute(
       "value",
     );
@@ -468,6 +554,7 @@
   function handleAddToCartClick() {
     const submitBtn = document.createElement("button");
     submitBtn.setAttribute("type", "button");
+    submitBtn.setAttribute("href", "javascript:void(0)");
     submitBtn.className =
       "button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center";
     submitBtn.innerText = "Add to Cart";
@@ -480,8 +567,13 @@
 
       const { token, referrer, productId, productQuantity } = getFormData();
 
-      const res = await addToCart(token, productId, productQuantity, referrer);
-      handleCartUpdateAndView(res);
+      const result = await addToCart(
+        token,
+        productId,
+        productQuantity,
+        referrer,
+      );
+      handleCartUpdateAndView(result);
     });
 
     q("input.add-to-cart").insertAdjacentElement("afterend", submitBtn);
@@ -503,9 +595,9 @@
     cartAmountEl.innerText = cartAmount;
   }
 
-  function getPriceContent(htmlContent) {
+  function getPriceContent(htmlString) {
     const tmpDiv = document.createElement("div");
-    tmpDiv.innerHTML = htmlContent;
+    tmpDiv.innerHTML = htmlString;
     const productId = q("#products-grid").getAttribute(
       "data-selected-products-id",
     );
@@ -516,20 +608,39 @@
     return priceContent;
   }
 
-  function updateModalLayout(htmlContent) {
+  function getSkeletonLayout() {
+    return /* HTML */ `
+      <ul class="skeleton-loader">
+        ${Array.from({ length: 2 })
+          .map(
+            (_) => /* HTML */ `
+              <li class="skeleton-product">
+                <div class="skeleton-pulse skeleton-image"></div>
+                <div class="skeleton-rating">
+                  <div class="skeleton-pulse skeleton-star"></div>
+                  <div class="skeleton-pulse skeleton-star"></div>
+                  <div class="skeleton-pulse skeleton-star"></div>
+                  <div class="skeleton-pulse skeleton-star"></div>
+                  <div class="skeleton-pulse skeleton-review-count"></div>
+                </div>
+                <div class="skeleton-pulse skeleton-text medium"></div>
+              </li>
+            `,
+          )
+          .join("")}
+      </ul>
+    `;
+  }
+
+  function updateModalLayout(htmlString) {
     const modal = q("#modal-window-added-product:not(.ab-modal-updated)");
 
-    const checkoutContainer = q(
+    const prevSliderContent = q(
       modal,
-      "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4",
+      ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']",
     );
-    if (checkoutContainer) {
-      checkoutContainer.classList.remove("border-1");
-      checkoutContainer.classList.add("border-t", "pt-2");
-      q(modal, ".quick-view-addons")?.insertAdjacentElement(
-        "afterend",
-        checkoutContainer,
-      );
+    if (prevSliderContent) {
+      prevSliderContent?.parentNode.remove();
     }
 
     if (q(modal, ".modal-content-header") && !q(modal, ".ab-close-modal")) {
@@ -539,23 +650,18 @@
       );
     }
 
-    const prevSliderContent = q(
+    const checkoutContainer = q(
       modal,
-      ".quick-view-addons .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 div[data-rfkid='rfkid_32']",
+      "section.modal-content-body > .flex.flex-wrap > .w-full.border-l.px-4",
     );
-
-    if (prevSliderContent && !q(modal, ".ab-cloned-node")) {
-      prevSliderContent.innerHTML = "";
-      prevSliderContent?.parentNode.classList.add("hidden");
-      const clonedNode = q(
-        "#page-content .mt-2.md\\:mt-4.pt-3.md\\:border-t.md\\:pb-4 > div",
-      ).cloneNode(true);
-      clonedNode.classList.add("ab-cloned-node");
-      q(modal, ".quick-view-addons")?.insertAdjacentElement(
-        "beforeend",
-        clonedNode,
-      );
+    const quickAddons = q(modal, ".quick-view-addons");
+    if (checkoutContainer) {
+      checkoutContainer.classList.remove("border-1");
+      checkoutContainer.classList.add("border-t", "pt-2");
+      quickAddons?.insertAdjacentElement("afterend", checkoutContainer);
     }
+
+    quickAddons.insertAdjacentHTML("beforeend", getSkeletonLayout());
 
     const quantityElem = q(
       modal,
@@ -563,7 +669,7 @@
     );
 
     if (quantityElem && !q(modal, ".ab-price-content")) {
-      const priceContentHTML = getPriceContent(htmlContent);
+      const priceContentHTML = getPriceContent(htmlString);
 
       quantityElem.insertAdjacentHTML(
         "afterend",
@@ -575,10 +681,34 @@
     modal.classList.add("ab-modal-updated");
   }
 
-  async function updateLayout() {
-    const { htmlContent, cartAmount } = await miniCart();
+  function initializeCarousel() {
+    waitForElement(
+      () =>
+        !!(
+          typeof window.rfk.init === "function" &&
+          q("#modal-window-added-product .skeleton-loader")
+        ),
+      () => {
+        const modal = q("#modal-window-added-product");
+        const skeletonLoader = q(modal, ".skeleton-loader");
+        skeletonLoader?.insertAdjacentHTML(
+          "beforebegin",
+          /* HTML */ `<div
+            class="ab-modal-slider"
+            data-rfkid="rfkid_32"
+          ></div>`,
+        );
+        window.rfk.init();
+        modal.classList.add("ab-carousel-initialized");
+      },
+    );
+  }
 
-    updateModalLayout(htmlContent);
+  async function updateLayout() {
+    const { htmlString, cartAmount } = await miniCart();
+
+    updateModalLayout(htmlString);
+    initializeCarousel();
     updateMiniCartLayout(cartAmount);
 
     return true;

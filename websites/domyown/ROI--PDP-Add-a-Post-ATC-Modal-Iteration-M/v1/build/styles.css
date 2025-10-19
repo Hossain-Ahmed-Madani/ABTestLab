@@ -1,3 +1,6 @@
+.AB-PDP-ATC-MODAL .hidden {
+    display: none;
+}
 .AB-PDP-ATC-MODAL--overflow-hidden {
     overflow: hidden;
 }
@@ -215,4 +218,87 @@
 }
 .AB-PDP-ATC-MODAL #modal-window-added-product .modal-content.is-active {
     right: 0;
+}
+.AB-PDP-ATC-MODAL .ab-modal-slider:not(:empty) + .skeleton-loader {
+    display: none;
+}
+.AB-PDP-ATC-MODAL .skeleton-loader {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-loader.hidden {
+    display: none;
+}
+.AB-PDP-ATC-MODAL .skeleton-product {
+    flex-grow: 1;
+    width: auto;
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+.AB-PDP-ATC-MODAL .skeleton-pulse {
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    border-radius: 4px;
+}
+@keyframes skeleton-pulse {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+.AB-PDP-ATC-MODAL .skeleton-checkbox {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-image {
+    width: 100%;
+    height: 140px;
+    margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-text {
+    height: 16px;
+    margin-bottom: 10px;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.short {
+    width: 60%;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.medium {
+    width: 80%;
+}
+.AB-PDP-ATC-MODAL .skeleton-text.long {
+    width: 90%;
+}
+.AB-PDP-ATC-MODAL .skeleton-rating {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.AB-PDP-ATC-MODAL .skeleton-star {
+    width: 16px;
+    height: 16px;
+}
+.AB-PDP-ATC-MODAL .skeleton-review-count {
+    width: 40px;
+    height: 14px;
+    margin-left: 8px;
+}
+.AB-PDP-ATC-MODAL .skeleton-price {
+    height: 20px;
+    width: 80px;
+    margin-bottom: 15px;
+}
+.AB-PDP-ATC-MODAL .skeleton-button {
+    width: 100%;
+    height: 40px;
+    border-radius: 6px;
 }

@@ -54,9 +54,8 @@
         return result;
     }
 
-    async function insertHtmlString(htmlString) {
+    function insertHtmlString(htmlString) {
         const scriptRemovedHTMLString = removeScriptFromHTMLString(htmlString);
-
         q("body").insertAdjacentHTML("afterbegin", scriptRemovedHTMLString);
         return true;
     }
@@ -146,7 +145,7 @@
 
     async function handleCartUpdateAndView(result) {
         const htmlString = result.htmlString;
-        await insertHtmlString(htmlString);
+        insertHtmlString(htmlString);
 
         await updateLayout();
 
@@ -158,7 +157,6 @@
     }
 
     function getFormData() {
-        // Execute the cart addition and insert HTML
         const token = q('form#cart-quantity input[name="_token"]').getAttribute("value");
         const referrer = window.location.origin + window.location.pathname;
         const productId = q("#products-grid").getAttribute("data-selected-products-id");
