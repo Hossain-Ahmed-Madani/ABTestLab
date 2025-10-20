@@ -11,6 +11,40 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const ASSETS = {
+        truck_svg: /* HTML */ `<svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12.166 14.9997V4.99967C12.166 4.55765 11.9904 4.13372 11.6779 3.82116C11.3653 3.5086 10.9414 3.33301 10.4993 3.33301H3.83268C3.39065 3.33301 2.96673 3.5086 2.65417 3.82116C2.34161 4.13372 2.16602 4.55765 2.16602 4.99967V14.1663C2.16602 14.3874 2.25381 14.5993 2.41009 14.7556C2.56637 14.9119 2.77834 14.9997 2.99935 14.9997H4.66602"
+                stroke="#1D1D1D"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path d="M13 15H8" stroke="#1D1D1D" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M16.3327 15.0003H17.9993C18.2204 15.0003 18.4323 14.9125 18.5886 14.7562C18.7449 14.6 18.8327 14.388 18.8327 14.167V11.1253C18.8323 10.9362 18.7677 10.7528 18.6493 10.6053L15.7493 6.98033C15.6714 6.88273 15.5725 6.80389 15.46 6.74966C15.3475 6.69542 15.2242 6.66717 15.0993 6.66699H12.166"
+                stroke="#1D1D1D"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M14.6667 16.6668C15.5871 16.6668 16.3333 15.9206 16.3333 15.0002C16.3333 14.0797 15.5871 13.3335 14.6667 13.3335C13.7462 13.3335 13 14.0797 13 15.0002C13 15.9206 13.7462 16.6668 14.6667 16.6668Z"
+                stroke="#1D1D1D"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+            <path
+                d="M6.33268 16.6663C7.25316 16.6663 7.99935 15.9201 7.99935 14.9997C7.99935 14.0792 7.25316 13.333 6.33268 13.333C5.41221 13.333 4.66602 14.0792 4.66602 14.9997C4.66602 15.9201 5.41221 16.6663 6.33268 16.6663Z"
+                stroke="#1D1D1D"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg> `,
+    };
+
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -120,6 +154,51 @@
         });
     }
 
+    function getProgressLayout() {
+        return /* HTML */ `
+            <div class="ab-subtotal-progress-container">
+                <div class="ab-subtotal-progress-heading">
+                    <div class="ab-subtotal-progress-heading__icon">${ASSETS.truck_svg}</div>
+                    <div class="ab-subtotal-progress-heading__text">Almost there! Unlock Free Shipping at $200!</div>
+                </div>
+                <div class="ab-subtotal-progress-bar">
+                    <div class="ab-subtotal-progress-bar__progress"></div>
+                </div>
+                <div class="ab-subtotal-progress-prices">
+                    <span class="ab-added-subtotal"></span>
+                    <span>&nbsp;of&nbsp;</span>
+                    <span>$200</span>
+                </div>
+            </div>
+        `;
+    }
+
+    function updateProgressContainer(sideCart) {
+        const subTotalSelector = "span[x-html='cart\\.subtotal'] .price";
+
+        if (!q(sideCart, subTotalSelector)) return;
+
+        const subTotalTxt = q(sideCart, subTotalSelector)?.innerText;
+        const subTotal = +subTotalTxt.replace("$", "");
+
+        const subTotalProgressContainer = q(sideCart, ".ab-subtotal-progress-container");
+        const abAddedSubtotal = q(sideCart, ".ab-added-subtotal");
+        const abProgressBar = q(sideCart, ".ab-subtotal-progress-bar__progress");
+
+        if (abAddedSubtotal.innerText === subTotalTxt) return;
+
+        if (subTotal >= 200) {
+            subTotalProgressContainer.classList.add("ab-subtotal-progress-container__hidden");
+        } else {
+            subTotalProgressContainer.classList.remove("ab-subtotal-progress-container__hidden");
+        }
+
+        abAddedSubtotal.innerText = subTotalTxt;
+        const calculatedPercentage = (subTotal / 200) * 100;
+        abProgressBar.style.width = `${calculatedPercentage >= 100 ? 100 : calculatedPercentage}%`;
+
+    }
+
     async function updateSideCartLayout() {
         qq("#cart-drawer").forEach(async (sideCart) => {
             const productLocatorItemSelector = "template[x-for='item in cartItems']";
@@ -129,11 +208,11 @@
 
             if (!hasRequiredItems) return;
 
-            const productContainer = q(sideCart, productLocatorItemSelector).parentNode;
-
             if (!q(sideCart, ".ab-product-section-container")) {
                 const div = document.createElement("div");
                 div.className = "ab-product-section-container";
+
+                const productContainer = q(sideCart, productLocatorItemSelector).parentNode;
                 productContainer.insertAdjacentElement("afterend", div);
                 div.appendChild(productContainer);
             }
@@ -150,6 +229,13 @@
 
                 checkoutButton.insertAdjacentElement("beforebegin", button);
             }
+
+            if (!q(sideCart, ".ab-subtotal-progress-container")) {
+                const layout = getProgressLayout();
+                checkoutButton.parentNode.insertAdjacentHTML("beforebegin", layout);
+            }
+
+            updateProgressContainer(sideCart);
         });
     }
 
