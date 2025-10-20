@@ -1,0 +1,13 @@
+{
+  "id": "1760951079770_4210_Added_to_cart_messaging_vs_mini_cart_slide_out",
+  "name": "Added-to-cart-messaging-vs-mini-cart-slide-out",
+  "type": "A/B",
+  "website": "hookandloop",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-20T09:04:39.770Z",
+  "createdAtReadable": "10/20/2025, 3:04:39 PM",
+  "lastUpdated": "2025-10-20T09:04:40.544Z"
+}
