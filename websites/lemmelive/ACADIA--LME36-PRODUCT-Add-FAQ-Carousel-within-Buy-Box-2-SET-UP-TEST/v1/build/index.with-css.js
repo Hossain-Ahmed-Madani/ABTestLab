@@ -5,14 +5,14 @@
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
       style.innerHTML = `.LME36 .ab-hidden {
-  display: none;
+  display: none !important;
 }
 .LME36 .faq-container {
   position: relative;
 }
 .LME36 .faq-title-container {
-  margin-left: -22px;
-  margin-right: -22px;
+  margin-left: -20px;
+  margin-right: -20px;
   padding-left: 22px;
   padding-right: 22px;
   gap: 5px;
@@ -78,6 +78,7 @@
 }
 @media screen and (min-width: 768px) {
   .LME36 .faq-dropdown-backdrop {
+    z-index: 9;
     opacity: 0;
     display: none !important;
   }
@@ -87,28 +88,50 @@
   z-index: 1000;
   border-radius: 24px;
   background: #dfc8e7;
-  width: 117%;
-  top: -26px;
-  left: -8%;
-  right: 0%;
-  min-width: 340px;
   display: none;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  min-height: 263px;
   padding: 25px 18px 25px;
+}
+@media screen and (max-width: 768px) {
+  .LME36 .faq-dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 285px;
+    margin-top: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 @media screen and (min-width: 768px) {
   .LME36 .faq-dropdown {
+    width: 117%;
+    top: -26px;
+    left: -8%;
+    right: 0%;
+    min-width: 340px;
+    position: absolute;
+    z-index: 10;
     top: 50px;
+    left: -7.5%;
+    right: 0%;
+    width: 115%;
+    gap: 18px;
+    padding: 28px 25px 28px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .LME36 .faq-dropdown {
     left: -5%;
     right: 0%;
     width: 110%;
-    gap: 18px;
-    min-height: 230px;
-    padding: 28px 25px 10px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   }
 }
 .LME36 .faq-dropdown__head {
@@ -116,7 +139,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 5px;
+  gap: 10px;
 }
 .LME36 .faq-dropdown__title-tab {
   padding: 10px 15px;
@@ -135,7 +158,6 @@
   font-weight: 700;
   line-height: 16px;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 .LME36 .faq-dropdown__close-cta {
   width: max-content;
@@ -166,12 +188,22 @@
   font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 150% */
+  text-align: left;
+  width: 100%;
 }
-.LME36 .faq-container--show-dropdown .faq-dropdown-backdrop {
+.LME36--show-faq-dropdown {
+  overflow: hidden;
+}
+.LME36--show-faq-dropdown .faq-dropdown-backdrop {
   display: block;
 }
-.LME36 .faq-container--show-dropdown .faq-dropdown {
+.LME36--show-faq-dropdown .faq-dropdown {
   display: flex;
+}
+@media screen and (max-width: 768px) {
+  .LME36--show-faq-dropdown .faq-dropdown {
+    animation: slideIn 0.3s ease-in-out;
+  }
 }
 
 .LME36--v1 .custom-benefit-controls {
@@ -180,6 +212,17 @@
 
 .LME36--v2 .faq-container {
   margin-top: 15px;
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -285px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
 `;
       document.head.appendChild(style);
@@ -194,9 +237,13 @@
 TEST INFO:
     Ticket: https://trello.com/c/RTPTT3Iq/4221-%F0%9F%92%99-lme36-product-add-faq-carousel-within-buy-box-2-set-up-test
     Test Data: https://docs.google.com/spreadsheets/d/12Xw4gg-15vp-CJ3IMeJ_0mmgYMcC73S_OEGfExADDRk/edit?gid=0#gid=0
-    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
     Figma: https://www.figma.com/design/KIxYJABuvWotw6vOTpc0Eo/LME36?node-id=17-2163&t=bry8ux3vKRhJ2kjG-0
-    Preview: 
+
+
+    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
+    Preview will all experiences: 
+        v1: https://marketer.monetate.net/control/preview/12706/U6QJK6OLHBT5N5C2LNY35A0N0U0NKZ12/lme36-product-add-faq-carousel-within-buy-box
+        v2: https://marketer.monetate.net/control/preview/12706/G6HYT5FZMAA6LKPT6I04JEU2YJU8EQBE/lme36-product-add-faq-carousel-within-buy-box
 
     Target urls:
         https://lemmelive.com/collections/all/products/lemme-glp-1
@@ -204,6 +251,20 @@ TEST INFO:
         https://lemmelive.com/collections/all/products/purr
         https://lemmelive.com/collections/all/products/lemme-greens-gummies
 */
+
+const TEST_ID = "LME36";
+const VARIANT_ID = "V1"; /* V1, V2 */
+
+function logInfo(message) {
+  console.log(
+    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    message,
+  );
+}
+
+logInfo("fired");
 
 (() => {
   const TEST_CONFIG = {
@@ -214,7 +275,7 @@ TEST INFO:
       "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
     page_initials: "LME36",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -344,20 +405,14 @@ TEST INFO:
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
-  function logInfo(message) {
-    console.log(
-      `%cAcadia%c${page_initials}-V${test_variation}`,
-      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-      message,
-    );
-  }
-
   function getFaqData() {
     const currentPath = window.location.pathname;
     const foundKey = Object.keys(DATA).find((key) =>
       currentPath.includes(key.toLowerCase()),
     );
+
+    console.log("foundKey:", foundKey);
+
     return foundKey ? DATA[foundKey] : null;
   }
 
@@ -481,15 +536,23 @@ TEST INFO:
     q(".product-benefits__content").insertAdjacentHTML("afterend", layout);
   }
 
+  function createV2Layout() {
+    getFaqData();
+
+    return;
+  }
+
   function handleDropdownView(action /* show, hide, toggle */) {
-    const targetNode = q(".faq-container");
+    const targetNode = q("body");
+
+    const className = page_initials + "--show-faq-dropdown";
 
     if (action === "show") {
-      targetNode.classList.add("faq-container--show-dropdown");
+      targetNode.classList.add(className);
     } else if (action === "hide") {
-      targetNode.classList.remove("faq-container--show-dropdown");
+      targetNode.classList.remove(className);
     } else if (action === "toggle") {
-      targetNode.classList.toggle("faq-container--show-dropdown");
+      targetNode.classList.toggle(className);
     }
   }
 
@@ -635,7 +698,6 @@ TEST INFO:
   }
 
   function init() {
-    logInfo("fired");
     document.body.classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
@@ -644,6 +706,7 @@ TEST INFO:
     console.table(TEST_CONFIG);
 
     createLayout();
+    createV2Layout();
     clickFunction();
     handleDrag();
   }

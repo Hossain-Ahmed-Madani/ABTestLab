@@ -3,9 +3,13 @@
 TEST INFO:
     Ticket: https://trello.com/c/RTPTT3Iq/4221-%F0%9F%92%99-lme36-product-add-faq-carousel-within-buy-box-2-set-up-test
     Test Data: https://docs.google.com/spreadsheets/d/12Xw4gg-15vp-CJ3IMeJ_0mmgYMcC73S_OEGfExADDRk/edit?gid=0#gid=0
-    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
     Figma: https://www.figma.com/design/KIxYJABuvWotw6vOTpc0Eo/LME36?node-id=17-2163&t=bry8ux3vKRhJ2kjG-0
-    Preview: 
+
+
+    Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
+    Preview will all experiences: 
+        v1: https://marketer.monetate.net/control/preview/12706/U6QJK6OLHBT5N5C2LNY35A0N0U0NKZ12/lme36-product-add-faq-carousel-within-buy-box
+        v2: https://marketer.monetate.net/control/preview/12706/G6HYT5FZMAA6LKPT6I04JEU2YJU8EQBE/lme36-product-add-faq-carousel-within-buy-box
 
     Target urls:
         https://lemmelive.com/collections/all/products/lemme-glp-1
@@ -13,6 +17,20 @@ TEST INFO:
         https://lemmelive.com/collections/all/products/purr
         https://lemmelive.com/collections/all/products/lemme-greens-gummies
 */
+
+const TEST_ID = "LME36";
+const VARIANT_ID = "V1"; /* V1, V2 */
+
+function logInfo(message) {
+  console.log(
+    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    message,
+  );
+}
+
+logInfo("fired");
 
 (() => {
   const TEST_CONFIG = {
@@ -23,7 +41,7 @@ TEST INFO:
       "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
     page_initials: "LME36",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -153,20 +171,14 @@ TEST INFO:
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
-  function logInfo(message) {
-    console.log(
-      `%cAcadia%c${page_initials}-V${test_variation}`,
-      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-      message,
-    );
-  }
-
   function getFaqData() {
     const currentPath = window.location.pathname;
     const foundKey = Object.keys(DATA).find((key) =>
       currentPath.includes(key.toLowerCase()),
     );
+
+    console.log("foundKey:", foundKey);
+
     return foundKey ? DATA[foundKey] : null;
   }
 
@@ -290,15 +302,23 @@ TEST INFO:
     q(".product-benefits__content").insertAdjacentHTML("afterend", layout);
   }
 
+  function createV2Layout() {
+    getFaqData();
+
+    return;
+  }
+
   function handleDropdownView(action /* show, hide, toggle */) {
-    const targetNode = q(".faq-container");
+    const targetNode = q("body");
+
+    const className = page_initials + "--show-faq-dropdown";
 
     if (action === "show") {
-      targetNode.classList.add("faq-container--show-dropdown");
+      targetNode.classList.add(className);
     } else if (action === "hide") {
-      targetNode.classList.remove("faq-container--show-dropdown");
+      targetNode.classList.remove(className);
     } else if (action === "toggle") {
-      targetNode.classList.toggle("faq-container--show-dropdown");
+      targetNode.classList.toggle(className);
     }
   }
 
@@ -444,7 +464,6 @@ TEST INFO:
   }
 
   function init() {
-    logInfo("fired");
     document.body.classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
@@ -453,6 +472,7 @@ TEST INFO:
     console.table(TEST_CONFIG);
 
     createLayout();
+    createV2Layout();
     clickFunction();
     handleDrag();
   }
