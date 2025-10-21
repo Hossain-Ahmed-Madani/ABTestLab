@@ -1,12 +1,12 @@
 .LME36 .ab-hidden {
-  display: none;
+  display: none !important;
 }
 .LME36 .faq-container {
   position: relative;
 }
 .LME36 .faq-title-container {
-  margin-left: -22px;
-  margin-right: -22px;
+  margin-left: -20px;
+  margin-right: -20px;
   padding-left: 22px;
   padding-right: 22px;
   gap: 5px;
@@ -68,6 +68,7 @@
 }
 @media screen and (min-width: 768px) {
   .LME36 .faq-dropdown-backdrop {
+    z-index: 9;
     opacity: 0;
     display: none !important;
   }
@@ -77,28 +78,50 @@
   z-index: 1000;
   border-radius: 24px;
   background: #dfc8e7;
-  width: 117%;
-  top: -26px;
-  left: -8%;
-  right: 0%;
-  min-width: 340px;
   display: none;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  min-height: 263px;
   padding: 25px 18px 25px;
+}
+@media screen and (max-width: 768px) {
+  .LME36 .faq-dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 285px;
+    margin-top: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 @media screen and (min-width: 768px) {
   .LME36 .faq-dropdown {
+    width: 117%;
+    top: -26px;
+    left: -8%;
+    right: 0%;
+    min-width: 340px;
+    position: absolute;
+    z-index: 10;
     top: 50px;
+    left: -7.5%;
+    right: 0%;
+    width: 115%;
+    gap: 18px;
+    padding: 28px 25px 28px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+}
+@media screen and (min-width: 1200px) {
+  .LME36 .faq-dropdown {
     left: -5%;
     right: 0%;
     width: 110%;
-    gap: 18px;
-    min-height: 230px;
-    padding: 28px 25px 10px;
-    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   }
 }
 .LME36 .faq-dropdown__head {
@@ -106,7 +129,7 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 5px;
+  gap: 10px;
 }
 .LME36 .faq-dropdown__title-tab {
   padding: 10px 15px;
@@ -121,7 +144,6 @@
   font-weight: 700;
   line-height: 16px;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 .LME36 .faq-dropdown__close-cta {
   width: max-content;
@@ -148,12 +170,22 @@
   font-style: normal;
   font-weight: 600;
   line-height: 24px; /* 150% */
+  text-align: left;
+  width: 100%;
 }
-.LME36 .faq-container--show-dropdown .faq-dropdown-backdrop {
+.LME36--show-faq-dropdown {
+  overflow: hidden;
+}
+.LME36--show-faq-dropdown .faq-dropdown-backdrop {
   display: block;
 }
-.LME36 .faq-container--show-dropdown .faq-dropdown {
+.LME36--show-faq-dropdown .faq-dropdown {
   display: flex;
+}
+@media screen and (max-width: 768px) {
+  .LME36--show-faq-dropdown .faq-dropdown {
+    animation: slideIn 0.3s ease-in-out;
+  }
 }
 
 .LME36--v1 .custom-benefit-controls {
@@ -162,4 +194,15 @@
 
 .LME36--v2 .faq-container {
   margin-top: 15px;
+}
+
+@keyframes slideIn {
+  from {
+    bottom: -285px;
+    opacity: 0;
+  }
+  to {
+    bottom: 0;
+    opacity: 1;
+  }
 }
