@@ -45,6 +45,17 @@
                 />
             </svg>
         `,
+        check_circle_svg: /* HTML */ `
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M5.41667 7.75L6.97222 9.30556L10.0833 6.19444M14.75 7.75C14.75 11.616 11.616 14.75 7.75 14.75C3.88401 14.75 0.75 11.616 0.75 7.75C0.75 3.88401 3.88401 0.75 7.75 0.75C11.616 0.75 14.75 3.88401 14.75 7.75Z"
+                    stroke="#158A03"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        `,
         delete_svg: /* HTML */ ` <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#eb0000" width="24" height="24" role="img">
             <path
                 stroke-linecap="round"
@@ -177,9 +188,13 @@
     function getProgressLayout() {
         return /* HTML */ `
             <div class="ab-subtotal-progress-container">
-                <div class="ab-subtotal-progress-heading">
+                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading__unlock-shipping">
                     <div class="ab-subtotal-progress-heading__icon">${ASSETS.truck_svg}</div>
                     <div class="ab-subtotal-progress-heading__text">Almost there! Unlock Free Shipping at $200!</div>
+                </div>
+                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading__free-shipping">
+                    <div class="ab-subtotal-progress-heading__icon">${ASSETS.check_circle_svg}</div>
+                    <div class="ab-subtotal-progress-heading__text">You’ve Earned Free Shipping!</div>
                 </div>
                 <div class="ab-subtotal-progress-bar">
                     <div class="ab-subtotal-progress-bar__progress"></div>
@@ -209,7 +224,7 @@
         if (!q(sideCart, subTotalSelector)) return;
 
         const subTotalTxt = q(sideCart, subTotalSelector)?.innerText;
-        const subTotal = +subTotalTxt.replace("$", "");
+        const subTotal = +subTotalTxt.replace("$", "").replace(",", "");
 
         const subTotalProgressContainer = q(sideCart, ".ab-subtotal-progress-container");
         const abAddedSubtotal = q(sideCart, ".ab-added-subtotal");
@@ -218,14 +233,17 @@
         if (abAddedSubtotal.innerText === subTotalTxt) return;
 
         if (subTotal >= 200) {
-            subTotalProgressContainer.classList.add("ab-subtotal-progress-container__hidden");
+            subTotalProgressContainer.classList.add("ab-subtotal-progress-container__free-shipping");
         } else {
-            subTotalProgressContainer.classList.remove("ab-subtotal-progress-container__hidden");
+            subTotalProgressContainer.classList.remove("ab-subtotal-progress-container__free-shipping");
         }
 
         abAddedSubtotal.innerText = subTotalTxt;
         const calculatedPercentage = (subTotal / 200) * 100;
+
         abProgressBar.style.width = `${calculatedPercentage >= 100 ? 100 : calculatedPercentage}%`;
+
+        console.log("updated progress container...")
     }
 
     function updateProductItems(sideCart) {
@@ -247,7 +265,6 @@
 
             // Create product quantity input
             const productQuantityElement = q(productItem, 'span[x-html="item.qty"]');
-            productQuantityElement.parentNode.classList.add('ab-hidden')
 
             if (!q(productItem, ".ab-product-quantity-container")) {
                 const layout = getProductQuantityLayout();
@@ -259,7 +276,7 @@
                 productQuantityInput.innerText = productQuantityElement.innerText;
             }
 
-            console.log("=========");
+            console.log("updated product items...")
         });
     }
 
@@ -307,6 +324,8 @@
 
             // Update Product Items
             updateProductItems(sideCart);
+
+            console.log("mutation end side cart updated...")
         });
     }
 

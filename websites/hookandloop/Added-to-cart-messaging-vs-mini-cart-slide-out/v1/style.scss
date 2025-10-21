@@ -27,7 +27,8 @@
     //     }
     // }
 
-    #cart-drawer .ab-hidden {
+    #cart-drawer .ab-hidden,
+    #cart-drawer p:has(span[x-html="item.qty"]) {
         display: none;
     }
 
@@ -332,8 +333,19 @@
         align-items: center;
         gap: 8px;
 
-        &__hidden {
+        .ab-subtotal-progress-heading__free-shipping {
             display: none;
+        }
+
+        &__free-shipping {
+            .ab-subtotal-progress-heading__unlock-shipping,
+            .ab-subtotal-progress-prices {
+                display: none;
+            }
+
+            .ab-subtotal-progress-heading__free-shipping {
+                display: flex;
+            }
         }
     }
 
@@ -342,6 +354,14 @@
         justify-content: center;
         align-items: center;
         gap: 4px;
+
+        &__free-shipping {
+            gap: 7px;
+            .ab-subtotal-progress-heading__icon svg {
+                width: 14px;
+                height: 14px;
+            }
+        }
     }
 
     .ab-subtotal-progress-heading__icon {
@@ -360,7 +380,7 @@
         font-weight: 700;
         font-size: 14px;
         line-height: 20px;
-        letter-spacing: 0%;
+        letter-spacing: 0px;
         text-align: center;
         color: #1d1d1d;
     }
@@ -381,6 +401,10 @@
         height: 8px;
         background: #1d1d1d;
         transition: all 0.2s;
+    }
+
+    .ab-subtotal-progress-bar__progress[style="width: 100%;"] {
+        background: #158a03;
     }
 
     .ab-subtotal-progress-prices {

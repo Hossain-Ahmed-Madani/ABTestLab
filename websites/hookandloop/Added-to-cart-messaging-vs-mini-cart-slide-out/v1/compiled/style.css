@@ -1,7 +1,8 @@
 .AB-MINI-CART section#messages[aria-live=assertive][role=alert] {
   display: none;
 }
-.AB-MINI-CART #cart-drawer .ab-hidden {
+.AB-MINI-CART #cart-drawer .ab-hidden,
+.AB-MINI-CART #cart-drawer p:has(span[x-html="item.qty"]) {
   display: none;
 }
 .AB-MINI-CART #cart-drawer header {
@@ -250,14 +251,28 @@
   align-items: center;
   gap: 8px;
 }
-.AB-MINI-CART .ab-subtotal-progress-container__hidden {
+.AB-MINI-CART .ab-subtotal-progress-container .ab-subtotal-progress-heading__free-shipping {
   display: none;
+}
+.AB-MINI-CART .ab-subtotal-progress-container__free-shipping .ab-subtotal-progress-heading__unlock-shipping,
+.AB-MINI-CART .ab-subtotal-progress-container__free-shipping .ab-subtotal-progress-prices {
+  display: none;
+}
+.AB-MINI-CART .ab-subtotal-progress-container__free-shipping .ab-subtotal-progress-heading__free-shipping {
+  display: flex;
 }
 .AB-MINI-CART .ab-subtotal-progress-heading {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 4px;
+}
+.AB-MINI-CART .ab-subtotal-progress-heading__free-shipping {
+  gap: 7px;
+}
+.AB-MINI-CART .ab-subtotal-progress-heading__free-shipping .ab-subtotal-progress-heading__icon svg {
+  width: 14px;
+  height: 14px;
 }
 .AB-MINI-CART .ab-subtotal-progress-heading__icon {
   display: flex;
@@ -273,7 +288,7 @@
   font-weight: 700;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   text-align: center;
   color: #1d1d1d;
 }
@@ -292,6 +307,9 @@
   height: 8px;
   background: #1d1d1d;
   transition: all 0.2s;
+}
+.AB-MINI-CART .ab-subtotal-progress-bar__progress[style="width: 100%;"] {
+  background: #158a03;
 }
 .AB-MINI-CART .ab-subtotal-progress-prices {
   display: flex;
