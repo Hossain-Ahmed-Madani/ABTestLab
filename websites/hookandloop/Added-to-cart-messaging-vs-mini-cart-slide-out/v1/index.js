@@ -43,6 +43,14 @@
                 stroke-linejoin="round"
             />
         </svg> `,
+        delete_svg: /* HTML */ `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#eb0000" width="24" height="24" role="img">
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+            ></path>
+            <title>trash</title>
+        </svg>`,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -196,7 +204,27 @@
         abAddedSubtotal.innerText = subTotalTxt;
         const calculatedPercentage = (subTotal / 200) * 100;
         abProgressBar.style.width = `${calculatedPercentage >= 100 ? 100 : calculatedPercentage}%`;
+    }
 
+    function updateProductItems(sideCart) {
+        const productList = qq(sideCart, ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
+        productList.forEach((productItem) => {
+            // if(q(productItem, ''))
+
+            const priceElement = q(productItem, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
+            const productSkuElement = q(productItem, 'p.text-sm span[x-html="item\\.product_sku"]');
+
+            console.log(priceElement);
+            if (priceElement && productSkuElement) {
+                const productSkuParentElement = productSkuElement.parentNode;
+                productSkuParentElement.classList.add("ab-product-sku-price-container");
+
+                const priceParentElement = priceElement.parentNode;
+                priceParentElement.classList.add("ab-price-container");
+
+                productSkuParentElement.appendChild(priceParentElement);
+            }
+        });
     }
 
     async function updateSideCartLayout() {
@@ -236,14 +264,30 @@
             }
 
             updateProgressContainer(sideCart);
+
+            updateProductItems(sideCart);
         });
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
 
+        const debouncedUpdate = debounce(updateSideCartLayout, 250);
+
         const observer = new MutationObserver((mutationList, observer) => {
-            updateSideCartLayout();
+            debouncedUpdate();
         }).observe(targetNode, { childList: true, subtree: true, attributes: true });
 
         return observer;

@@ -42,8 +42,7 @@
                 stroke-linecap="round"
                 stroke-linejoin="round"
             />
-        </svg> `,
-    };
+        </svg> `};
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -163,7 +162,27 @@
         abAddedSubtotal.innerText = subTotalTxt;
         const calculatedPercentage = (subTotal / 200) * 100;
         abProgressBar.style.width = `${calculatedPercentage >= 100 ? 100 : calculatedPercentage}%`;
+    }
 
+    function updateProductItems(sideCart) {
+        const productList = qq(sideCart, ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
+        productList.forEach((productItem) => {
+            // if(q(productItem, ''))
+
+            const priceElement = q(productItem, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
+            const productSkuElement = q(productItem, 'p.text-sm span[x-html="item\\.product_sku"]');
+
+            console.log(priceElement);
+            if (priceElement && productSkuElement) {
+                const productSkuParentElement = productSkuElement.parentNode;
+                productSkuParentElement.classList.add("ab-product-sku-price-container");
+
+                const priceParentElement = priceElement.parentNode;
+                priceParentElement.classList.add("ab-price-container");
+
+                productSkuParentElement.appendChild(priceParentElement);
+            }
+        });
     }
 
     async function updateSideCartLayout() {
@@ -203,14 +222,30 @@
             }
 
             updateProgressContainer(sideCart);
+
+            updateProductItems(sideCart);
         });
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
 
+        const debouncedUpdate = debounce(updateSideCartLayout, 250);
+
         const observer = new MutationObserver((mutationList, observer) => {
-            updateSideCartLayout();
+            debouncedUpdate();
         }).observe(targetNode, { childList: true, subtree: true, attributes: true });
 
         return observer;
