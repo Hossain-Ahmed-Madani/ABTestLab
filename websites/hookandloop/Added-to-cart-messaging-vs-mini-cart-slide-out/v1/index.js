@@ -76,6 +76,190 @@
         `,
     };
 
+    class ProductCarousel {
+        constructor(container) {
+            this.container = container;
+            if (!this.container) {
+                console.error("Carousel container not found");
+                return;
+            }
+
+            this.cardContainer = q(this.container, ".ab-related-products__card-container");
+            this.cards = qq(this.container, ".ab-related-product__card");
+            this.prevBtn = q(this.container, ".ab-carousel-btn--prev");
+            this.nextBtn = q(this.container, ".ab-carousel-btn--next");
+            this.gap = 12; // 12px gap between items
+
+            if (!this.cardContainer || !this.prevBtn || !this.nextBtn) {
+                console.error("Required carousel elements not found");
+                return;
+            }
+
+            this.init();
+        }
+
+        init() {
+            this.addCarouselStyles();
+            this.attachEventListeners();
+            this.updateNavigation();
+
+            // Handle window resize
+            this.resizeHandler = debounce(() => {
+                this.updateNavigation();
+            }, 250);
+            window.addEventListener("resize", this.resizeHandler);
+        }
+
+        addCarouselStyles() {
+            // Add necessary classes to elements
+            this.cardContainer.classList.add("ab-carousel-scroll");
+            this.container.classList.add("ab-carousel-wrapper");
+        }
+
+        attachEventListeners() {
+            this.prevBtn.addEventListener("click", () => this.slidePrev());
+            this.nextBtn.addEventListener("click", () => this.slideNext());
+
+            // Touch and mouse support for dragging
+            let startX = 0;
+            let scrollLeft = 0;
+            let isDragging = false;
+
+            // Touch Events
+            this.cardContainer.addEventListener("touchstart", (e) => {
+                startX = e.touches[0].pageX;
+                scrollLeft = this.cardContainer.scrollLeft;
+                isDragging = true;
+            });
+
+            this.cardContainer.addEventListener("touchmove", (e) => {
+                if (!isDragging) return;
+                const x = e.touches[0].pageX;
+                const walk = startX - x;
+                this.cardContainer.scrollLeft = scrollLeft + walk;
+            });
+
+            this.cardContainer.addEventListener("touchend", () => {
+                isDragging = false;
+                this.updateNavigation();
+            });
+
+            // Mouse Events
+            this.cardContainer.addEventListener("mousedown", (e) => {
+                e.preventDefault(); // Prevent unwanted selections
+                startX = e.pageX;
+                scrollLeft = this.cardContainer.scrollLeft;
+                isDragging = true;
+                this.cardContainer.classList.add("dragging");
+            });
+
+            this.cardContainer.addEventListener("mousemove", (e) => {
+                if (!isDragging) return;
+                const x = e.pageX;
+                const walk = startX - x;
+                this.cardContainer.scrollLeft = scrollLeft + walk;
+            });
+
+            this.cardContainer.addEventListener("mouseup", () => {
+                isDragging = false;
+                this.cardContainer.classList.remove("dragging");
+                this.updateNavigation();
+            });
+
+            this.cardContainer.addEventListener("mouseleave", () => {
+                if (isDragging) {
+                    isDragging = false;
+                    this.cardContainer.classList.remove("dragging");
+                    this.updateNavigation();
+                }
+            });
+
+            // Update navigation on scroll (debounced)
+            this.updateNavigationDebounced = debounce(() => {
+                this.updateNavigation();
+            }, 100);
+
+            this.cardContainer.addEventListener("scroll", this.updateNavigationDebounced);
+        }
+
+        getVisibleItems() {
+            // Mobile: 2.25 items, Desktop: 2.5 items (breakpoint at 768px)
+            const isMobile = window.innerWidth < 768;
+            return isMobile ? 2.25 : 2.5;
+        }
+
+        getCardWidth() {
+            if (this.cards.length === 0) return 0;
+            const visibleItems = this.getVisibleItems();
+            const containerWidth = this.cardContainer.offsetWidth;
+            const totalGap = this.gap * (visibleItems - 1);
+            return (containerWidth - totalGap) / visibleItems;
+        }
+
+        updateCardWidths() {
+            const cardWidth = this.getCardWidth();
+            this.cards.forEach((card) => {
+                card.style.width = `${cardWidth}px`;
+            });
+        }
+
+        slidePrev() {
+            const cardWidth = this.getCardWidth();
+            const scrollAmount = cardWidth + this.gap;
+            this.cardContainer.scrollBy({
+                left: -scrollAmount,
+                behavior: "smooth",
+            });
+        }
+
+        slideNext() {
+            const cardWidth = this.getCardWidth();
+            const scrollAmount = cardWidth + this.gap;
+            this.cardContainer.scrollBy({
+                left: scrollAmount,
+                behavior: "smooth",
+            });
+        }
+
+        updateNavigation() {
+            this.updateCardWidths();
+
+            const scrollLeft = this.cardContainer.scrollLeft;
+            const maxScroll = this.cardContainer.scrollWidth - this.cardContainer.clientWidth;
+
+            // Show/hide prev button
+            if (scrollLeft <= 1) {
+                this.prevBtn.classList.add("disabled");
+            } else {
+                this.prevBtn.classList.remove("disabled");
+            }
+
+            // Show/hide next button
+            if (scrollLeft >= maxScroll - 1) {
+                this.nextBtn.classList.add("disabled");
+            } else {
+                this.nextBtn.classList.remove("disabled");
+            }
+        }
+
+        destroy() {
+            // Remove event listeners
+            window.removeEventListener("resize", this.resizeHandler);
+            this.cardContainer.removeEventListener("scroll", this.updateNavigationDebounced);
+
+            // Remove classes
+            this.cardContainer.classList.remove("ab-carousel-scroll");
+            this.container.classList.remove("ab-carousel-wrapper");
+
+            // Reset card widths
+            this.cards.forEach((card) => {
+                card.style.width = "";
+            });
+
+            console.log("Carousel destroyed");
+        }
+    }
+    
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -188,7 +372,6 @@
     }
 
     async function updateProductQuantityFormData({ productId, sku, measurementUnit, quantity }) {
-
         const formData = new FormData();
         const formKey = hyva.getFormKey();
         const uenc = hyva.getUenc();
@@ -337,7 +520,7 @@
         return div;
     }
 
-    function updateProgressContainer(sideCart) {
+    function updateProgressSection(sideCart) {
         const subTotalSelector = "span[x-html='cart\\.subtotal'] .price";
 
         if (!q(sideCart, subTotalSelector)) return;
@@ -394,48 +577,147 @@
         });
     }
 
+    const carousel_data = [
+        {
+            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
+            link: "#",
+            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
+            price: "$21.50",
+        },
+        {
+            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
+            link: "#",
+            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
+            price: "$21.50",
+        },
+        {
+            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
+            link: "#",
+            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
+            price: "$21.50",
+        },
+        {
+            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
+            link: "#",
+            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
+            price: "$21.50",
+        },
+        {
+            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
+            link: "#",
+            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
+            price: "$21.50",
+        },
+    ];
+
+    function getRelatedProductsElement() {
+        const div = document.createElement("div");
+        div.className = "ab-related-products-container";
+        div.innerHTML = /* HTML */ `
+            <p class="ab-related-products-heading text-lg font-medium leading-7 text-gray-900">
+                <strong>Pairs Well With</strong>
+            </p>
+            <div class="ab-related-products ab-related-products--carousel">
+                <div class="ab-related-products__card-container">
+                    ${carousel_data
+                        .map(
+                            ({ imgUrl, link, title, price }) => /* HTML */ `
+                                <div class="ab-related-product ab-related-product__card">
+                                    <a href="${link}" class="ab-related-product__img">
+                                        <img src="${imgUrl}" alt="${title}/>
+                                    </a>
+                                    <a href="${link}" class="ab-related-product__title">${title}</a>
+                                    <div class="ab-related-product__price">${price}</div>
+                                </div>
+                            `
+                        )
+                        .join("")}
+                </div>
+
+                <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">&lt;</button>
+                <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">&gt;</button>
+            </div>
+        `;
+
+        return div;
+    }
+
+    function insertElementsInStickySection(sideCart) {
+        const checkoutButtonSelector = " a[href='https://www.hookandloop.com/checkout/']";
+        const checkoutButton = q(sideCart, checkoutButtonSelector);
+
+        if (!checkoutButton) return;
+
+        // Add Continue Shopping
+        if (!q(sideCart, ".ab-continue-shopping-btn")) {
+            const button = document.createElement("button");
+            button.className = "ab-continue-shopping-btn";
+            button.innerText = "Continue Shopping";
+            const sideCartCloseBtn = q(sideCart, "button.absolute.top-0.right-2.p-4.mt-2.text-black.transition-colors[aria-label='Close minicart']");
+            button.addEventListener("click", (e) => sideCartCloseBtn.click());
+            checkoutButton.insertAdjacentElement("beforebegin", button);
+        }
+
+        // Add Progress Bar
+        if (!q(sideCart, ".ab-subtotal-progress-container")) {
+            const htmlLayout = getProgressLayout();
+            checkoutButton.parentNode.insertAdjacentHTML("beforebegin", htmlLayout);
+        }
+    }
+
+    function updateProductContainer(sideCart) {
+        const productLocatorItemSelector = "template[x-for='item in cartItems']";
+        const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
+
+        console.log(productContainer);
+
+        if (!productContainer) return;
+
+        let sectionContainer = q(sideCart, ".ab-product-section-container") || null;
+
+        // Create Wrapper Section
+        if (!sectionContainer) {
+            sectionContainer = document.createElement("div");
+            sectionContainer.className = "ab-product-section-container";
+            productContainer.insertAdjacentElement("afterend", sectionContainer);
+        }
+
+        // Insert Product Items
+        if (!q(sectionContainer, ".relative.grid.gap-6.sm\\:gap-8.px-1.py-3.sm\\:px-3.bg-white.border-b.border-container.overflow-y-auto.overscroll-y-contain")) {
+            sectionContainer.insertAdjacentElement("afterbegin", productContainer);
+        }
+
+        // Create, Insert & initialize Related Products Slider and initialize
+        if (!q(sectionContainer, ".ab-related-products-container")) {
+            const relatedProductContainerElement = getRelatedProductsElement();
+            sectionContainer.insertAdjacentElement("beforeend", relatedProductContainerElement);
+            const sliderContainer = q(relatedProductContainerElement, ".ab-related-products--carousel");
+            const carousel = new ProductCarousel(sliderContainer);
+        }
+    }
+
+    function removeItemsOnCartEmpty(sideCart) {
+        const productLocatorItemSelector = "template[x-for='item in cartItems']";
+        const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
+
+        if (productContainer) return;
+
+        qq(".ab-product-section-container, ab-subtotal-progress-container, .ab-continue-shopping-btn").forEach((elem) => elem.remove());
+    }
+
     async function updateSideCartLayout() {
         qq("#cart-drawer").forEach(async (sideCart) => {
-            const productLocatorItemSelector = "template[x-for='item in cartItems']";
-            const checkoutButtonSelector = " a[href='https://www.hookandloop.com/checkout/']";
-            const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
-            const checkoutButton = q(sideCart, checkoutButtonSelector);
+            // Remove Items when side cart is empty
+            removeItemsOnCartEmpty(sideCart);
 
-            if (!(checkoutButtonSelector && productContainer && checkoutButton)) return;
+            // Put all added products in a container & add slider
+            updateProductContainer(sideCart);
 
-            // Put all added products in a container
-            if (!q(sideCart, ".ab-product-section-container")) {
-                const div = document.createElement("div");
-                div.className = "ab-product-section-container";
-
-                productContainer.insertAdjacentElement("afterend", div);
-                div.appendChild(productContainer);
-            }
-
-            if (q(sideCart, ".ab-product-section-container:empty") && productContainer) {
-                q(sideCart, ".ab-product-section-container:empty").appendChild(productContainer);
-            }
-
-            // Add Continue Shopping
-            if (!q(sideCart, ".ab-continue-shopping-btn")) {
-                const button = document.createElement("button");
-                button.className = "ab-continue-shopping-btn";
-                button.innerText = "Continue Shopping";
-
-                const sideCartCloseBtn = q(sideCart, "button.absolute.top-0.right-2.p-4.mt-2.text-black.transition-colors[aria-label='Close minicart']");
-                button.addEventListener("click", (e) => sideCartCloseBtn.click());
-
-                checkoutButton.insertAdjacentElement("beforebegin", button);
-            }
-
-            // Add Progress Bar
-            if (!q(sideCart, ".ab-subtotal-progress-container")) {
-                const layout = getProgressLayout();
-                checkoutButton.parentNode.insertAdjacentHTML("beforebegin", layout);
-            }
+            // Insert Layouts in sticky section
+            insertElementsInStickySection(sideCart);
 
             // Update Progress Bar
-            updateProgressContainer(sideCart);
+            updateProgressSection(sideCart);
 
             // Update Product Items
             updateProductElements(sideCart);
