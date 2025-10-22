@@ -321,8 +321,8 @@
 
     async function updateProductQuantityFormData({ productId, sku, measurementUnit, quantity }) {
         const formData = new FormData();
-        const formKey = hyva.getFormKey();
-        const uenc = hyva.getUenc();
+        const formKey = window.hyva.getFormKey();
+        const uenc = window.hyva.getUenc();
 
         formData.append("form_key", formKey);
         formData.append(`cart[${productId}][qty]`, (measurementUnit * quantity).toString());
@@ -678,8 +678,6 @@
     function updateProductContainer(sideCart) {
         const productLocatorItemSelector = "template[x-for='item in cartItems']";
         const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
-
-        console.log(productContainer);
 
         if (!productContainer) return;
 
