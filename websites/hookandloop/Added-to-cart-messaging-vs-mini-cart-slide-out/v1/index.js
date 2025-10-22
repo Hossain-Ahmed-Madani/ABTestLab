@@ -74,6 +74,20 @@
                 <path d="M10 6V10M10 10V14M10 10H14M10 10L6 10" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         `,
+        slider_prev_svg: /* HTML */ `
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" width="25" height="25" role="img">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
+                <title>chevron-left</title>
+            </svg>
+        `,
+        slider_next_svg: /* HTML */ ` <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="25" height="25" role="img">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
+            <title>chevron-right</title>
+        </svg>`,
+    };
+
+    const STATE = {
+        updating_quantity_on_user_interaction: false,
     };
 
     class ProductCarousel {
@@ -259,7 +273,7 @@
             console.log("Carousel destroyed");
         }
     }
-    
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -303,6 +317,38 @@
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
+    async function updateProductQuantityFormData({ productId, sku, measurementUnit, quantity }) {
+        const formData = new FormData();
+        const formKey = hyva.getFormKey();
+        const uenc = hyva.getUenc();
+
+        formData.append("form_key", formKey);
+        formData.append(`cart[${productId}][qty]`, (measurementUnit * quantity).toString());
+        formData.append("sku", sku);
+        formData.append("uenc", uenc);
+
+        const response = await fetch("https://www.hookandloop.com/checkout/cart/updatePost/", {
+            headers: {
+                accept: "*/*",
+                "accept-language": "en-US,en;q=0.9",
+                priority: "u=1, i",
+                "sec-ch-ua": '"Google Chrome";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": '"Windows"',
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-origin",
+            },
+            referrer: "https://www.hookandloop.com/checkout/cart",
+            body: formData,
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+        });
+
+        return response;
     }
 
     function eventListeners() {
@@ -371,38 +417,6 @@
         `;
     }
 
-    async function updateProductQuantityFormData({ productId, sku, measurementUnit, quantity }) {
-        const formData = new FormData();
-        const formKey = hyva.getFormKey();
-        const uenc = hyva.getUenc();
-
-        formData.append("form_key", formKey);
-        formData.append(`cart[${productId}][qty]`, (measurementUnit * quantity).toString());
-        formData.append("sku", sku);
-        formData.append("uenc", uenc);
-
-        const response = await fetch("https://www.hookandloop.com/checkout/cart/updatePost/", {
-            headers: {
-                accept: "*/*",
-                "accept-language": "en-US,en;q=0.9",
-                priority: "u=1, i",
-                "sec-ch-ua": '"Google Chrome";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
-                "sec-ch-ua-mobile": "?0",
-                "sec-ch-ua-platform": '"Windows"',
-                "sec-fetch-dest": "empty",
-                "sec-fetch-mode": "cors",
-                "sec-fetch-site": "same-origin",
-            },
-            referrer: "https://www.hookandloop.com/checkout/cart",
-            body: formData,
-            method: "POST",
-            mode: "cors",
-            credentials: "include",
-        });
-
-        return response;
-    }
-
     function getProductData(productElement) {
         const productId = productElement.getAttribute("data-item-id");
         const measurementUnit = +productElement.getAttribute("data-measurement-unit");
@@ -414,10 +428,6 @@
             measurementUnit,
         };
     }
-
-    const STATE = {
-        updating_quantity_on_user_interaction: false,
-    };
 
     const debouncedUpdateQuantity = debounce(async ({ productId, sku, measurementUnit, quantity }) => {
         const loaderElement = q(".z-50.fixed.inset-0.grid.place-items-center.bg-white\\/70.text-slate-800");
@@ -634,8 +644,8 @@
                         .join("")}
                 </div>
 
-                <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">&lt;</button>
-                <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">&gt;</button>
+                <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
+                <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
             </div>
         `;
 
