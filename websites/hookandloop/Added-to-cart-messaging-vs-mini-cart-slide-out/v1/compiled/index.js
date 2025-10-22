@@ -72,6 +72,7 @@
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
+            // Check immediately first
             if (typeof predicate === "function" && predicate()) {
                 return resolve(true);
             }
@@ -90,6 +91,18 @@
                 }
             }, frequency);
         });
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     function q(s, o) {
@@ -117,7 +130,6 @@
                         const loadingCompleted = await waitForElementAsync(() => !q("body .loader"));
 
                         if (loadingCompleted) {
-                            console.log("loading completed, clicking on side cart open button");
                             q("button#menu-cart-icon")?.click();
                         }
                     }, 100);
@@ -167,14 +179,154 @@
         `;
     }
 
-    function getProductQuantityLayout() {
-        return /* HTML */ `
-            <div class="ab-product-quantity-container">
-                <div class="ab-product-quantity-update-action ab-product-quantity-update-action__minus">${ASSETS.minus_svg}</div>
-                <div class="ab-product-quantity">0</div>
-                <div class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</div>
-            </div>
+    async function updateProductQuantityFormData({ productId, sku, measurementUnit, quantity }) {
+
+        const formData = new FormData();
+        const formKey = hyva.getFormKey();
+        const uenc = hyva.getUenc();
+
+        formData.append("form_key", formKey);
+        formData.append(`cart[${productId}][qty]`, (measurementUnit * quantity).toString());
+        formData.append("sku", sku);
+        formData.append("uenc", uenc);
+
+        const response = await fetch("https://www.hookandloop.com/checkout/cart/updatePost/", {
+            headers: {
+                accept: "*/*",
+                "accept-language": "en-US,en;q=0.9",
+                priority: "u=1, i",
+                "sec-ch-ua": '"Google Chrome";v="141", "Not?A_Brand";v="8", "Chromium";v="141"',
+                "sec-ch-ua-mobile": "?0",
+                "sec-ch-ua-platform": '"Windows"',
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-origin",
+            },
+            referrer: "https://www.hookandloop.com/checkout/cart",
+            body: formData,
+            method: "POST",
+            mode: "cors",
+            credentials: "include",
+        });
+
+        return response;
+    }
+
+    function getProductData(productElement) {
+        const productId = productElement.getAttribute("data-item-id");
+        const measurementUnit = +productElement.getAttribute("data-measurement-unit");
+        const sku = productElement.getAttribute("data-sku");
+
+        return {
+            productId,
+            sku,
+            measurementUnit,
+        };
+    }
+
+    const STATE = {
+        updating_quantity_on_user_interaction: false,
+    };
+
+    const debouncedUpdateQuantity = debounce(async ({ productId, sku, measurementUnit, quantity }) => {
+        const loaderElement = q(".z-50.fixed.inset-0.grid.place-items-center.bg-white\\/70.text-slate-800");
+
+        loaderElement.setAttribute("style", "display:block;");
+        const response = await updateProductQuantityFormData({ productId, sku, measurementUnit, quantity });
+        window.dispatchEvent(new CustomEvent("reload-customer-section-data"));
+        loaderElement.setAttribute("style", "display:none;");
+
+        return response;
+    }, 500);
+
+    async function handleProductSideCartQuantityUpdate(e) {
+        const currentTarget = e.currentTarget;
+        const productQuantityInput = q(currentTarget, "input.ab-product-quantity");
+        const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100 ");
+        const isValid = checkValidValue(productQuantityInput);
+
+        if (!e.target.closest(".ab-product-quantity-update-action") || !isValid) return;
+
+        let quantity = +productQuantityInput.value;
+
+        if (e.target.closest(".ab-product-quantity-update-action__minus") && quantity > 0) {
+            quantity--;
+        }
+        if (e.target.closest(".ab-product-quantity-update-action__plus")) {
+            quantity++;
+        }
+
+        STATE["updating_quantity_on_user_interaction"] = true;
+
+        productQuantityInput.value = quantity;
+
+        if (quantity === 0) {
+            const productRemoveButton = q(productElement, " button[type=button][aria-label='Close minicart'].text-black.transition-colors.hover\\:text-hnleb0 ");
+            productRemoveButton?.click();
+        } else {
+            const { productId, sku, measurementUnit } = getProductData(productElement);
+            debouncedUpdateQuantity({ productId, sku, measurementUnit, quantity });
+        }
+
+        setTimeout(() => {
+            STATE["updating_quantity_on_user_interaction"] = false;
+        }, 3000);
+    }
+
+    function checkValidValue(input) {
+        const min = input.getAttribute("min") || 0;
+        const max = input.getAttribute("max") || 1000000000;
+        const value = input.value;
+
+        return value && value >= min && +value <= max;
+    }
+
+    async function handleProductSideCartQuantityOnChange(e) {
+        STATE["updating_quantity_on_user_interaction"] = true;
+
+        const currentTarget = e.currentTarget;
+        const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
+        const productQuantityElement = q(productElement, "span[x-html='item.qty']");
+        const value = currentTarget.value;
+
+        const isValid = checkValidValue(currentTarget);
+
+        if (!isValid) {
+            currentTarget.value = productQuantityElement.innerText;
+        } else {
+            const quantity = Math.ceil(+value);
+            const { productId, sku, measurementUnit } = getProductData(productElement);
+            debouncedUpdateQuantity({ productId, sku, measurementUnit, quantity });
+        }
+
+        setTimeout(() => {
+            STATE["updating_quantity_on_user_interaction"] = false;
+        }, 3000);
+    }
+
+    function getProductNewQuantityElement() {
+        const div = document.createElement("div");
+        div.className = "ab-product-quantity-container";
+        div.innerHTML = /* HTML */ `
+            <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__minus">${ASSETS.minus_svg}</button>
+            <input
+                name="qty"
+                form="product_addtocart_form"
+                type="number"
+                pattern="[0-9]{0,10}"
+                inputmode="numeric"
+                min="0"
+                max="1000000000"
+                value="1"
+                class="ab-product-quantity text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
+            />
+            <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
         `;
+
+        div.addEventListener("click", handleProductSideCartQuantityUpdate);
+        q(div, "input.ab-product-quantity").addEventListener("change", handleProductSideCartQuantityOnChange);
+
+        return div;
     }
 
     function updateProgressContainer(sideCart) {
@@ -201,15 +353,14 @@
         const calculatedPercentage = (subTotal / 200) * 100;
 
         abProgressBar.style.width = `${calculatedPercentage >= 100 ? 100 : calculatedPercentage}%`;
-
-        console.log("updated progress container...");
     }
 
-    function updateProductItems(sideCart) {
+    function updateProductElements(sideCart) {
         const productList = qq(sideCart, ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
-        productList.forEach((productItem) => {
-            const priceElement = q(productItem, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
-            const productSkuElement = q(productItem, 'p.text-sm span[x-html="item\\.product_sku"]');
+        productList.forEach((productElement) => {
+            const priceElement = q(productElement, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
+            const productSkuElement = q(productElement, 'p.text-sm span[x-html="item\\.product_sku"]');
+            const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
 
             // Relocate Price Element
             if (priceElement && productSkuElement) {
@@ -223,19 +374,15 @@
             }
 
             // Create product quantity input
-            const productQuantityElement = q(productItem, 'span[x-html="item.qty"]');
-
-            if (!q(productItem, ".ab-product-quantity-container")) {
-                const layout = getProductQuantityLayout();
-                productQuantityElement.parentNode.insertAdjacentHTML("afterend", layout);
+            if (!q(productElement, ".ab-product-quantity-container")) {
+                const div = getProductNewQuantityElement();
+                productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
             }
 
-            const productQuantityInput = q(productItem, ".ab-product-quantity");
-            if (productQuantityInput && productQuantityInput.innerText !== productQuantityElement.innerText) {
-                productQuantityInput.innerText = productQuantityElement.innerText;
+            const productQuantityInput = q(productElement, ".ab-product-quantity");
+            if (STATE["updating_quantity_on_user_interaction"] === false && productQuantityInput && productQuantityInput.value !== +productQuantityElement.innerText) {
+                productQuantityInput.value = +productQuantityElement.innerText;
             }
-
-            console.log("updated product items...");
         });
     }
 
@@ -243,22 +390,23 @@
         qq("#cart-drawer").forEach(async (sideCart) => {
             const productLocatorItemSelector = "template[x-for='item in cartItems']";
             const checkoutButtonSelector = " a[href='https://www.hookandloop.com/checkout/']";
+            const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
+            const checkoutButton = q(sideCart, checkoutButtonSelector);
 
-            const hasRequiredItems = await waitForElementAsync(() => !!(q(sideCart, productLocatorItemSelector) && q(sideCart, checkoutButtonSelector)));
-
-            if (!hasRequiredItems) return;
+            if (!(productContainer && checkoutButton)) return;
 
             // Put all added products in a container
             if (!q(sideCart, ".ab-product-section-container")) {
                 const div = document.createElement("div");
                 div.className = "ab-product-section-container";
 
-                const productContainer = q(sideCart, productLocatorItemSelector).parentNode;
                 productContainer.insertAdjacentElement("afterend", div);
                 div.appendChild(productContainer);
             }
 
-            const checkoutButton = q(sideCart, checkoutButtonSelector);
+            if (q(sideCart, ".ab-product-section-container:empty") && productContainer) {
+                q(sideCart, ".ab-product-section-container:empty").appendChild(productContainer);
+            }
 
             // Add Continue Shopping
             if (!q(sideCart, ".ab-continue-shopping-btn")) {
@@ -282,22 +430,10 @@
             updateProgressContainer(sideCart);
 
             // Update Product Items
-            updateProductItems(sideCart);
+            updateProductElements(sideCart);
 
-            console.log("mutation end side cart updated...");
+            console.log("mutation completed all side cart elements updated...");
         });
-    }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
     }
 
     function mutationObserverFunction() {
