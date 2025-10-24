@@ -108,6 +108,7 @@
             this.cards = qq(this.container, ".ab-related-product__card");
             this.prevBtn = q(this.container, ".ab-carousel-btn--prev");
             this.nextBtn = q(this.container, ".ab-carousel-btn--next");
+            this.gap = 12; // 12px gap between items
 
             if (!this.cardContainer || !this.prevBtn || !this.nextBtn) {
                 console.error("Required carousel elements not found");
@@ -328,11 +329,13 @@
         const productId = productElement.getAttribute("data-item-id");
         const measurementUnit = +productElement.getAttribute("data-measurement-unit");
         const sku = productElement.getAttribute("data-sku");
+        const url = productElement.getAttribute("data-url");
 
         return {
             productId,
             sku,
             measurementUnit,
+            url,
         };
     }
 
@@ -379,14 +382,31 @@
         return response;
     }, 1000);
 
+    function checkInputValidity(input) {
+        const min = input.getAttribute("min") || 0;
+        const max = input.getAttribute("max") || 1000000000;
+        const value = +input.value;
+
+        const isValid = value >= min && value <= max && Number.isInteger(value);
+
+        const className = "ab-warning-border";
+        if (isValid) {
+            input.classList.remove(className);
+        } else {
+            input.classList.add(className);
+        }
+
+        return isValid;
+    }
+
     async function handleProductSideCartQuantityUpdate(e) {
         const currentTarget = e.currentTarget;
         const productQuantityInput = q(currentTarget, "input.ab-product-quantity");
         const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100 ");
         const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-        const isValid = checkValidValue(productQuantityInput);
+        const isValid = checkInputValidity(productQuantityInput);
 
-        if (!e.target.closest(".ab-product-quantity-update-action") || !isValid) return;
+        if (!e.target.closest(".ab-product-quantity-update-action")) return;
 
         let quantity = +productQuantityInput.value;
 
@@ -400,6 +420,8 @@
         productQuantityInput.value = quantity;
         productQuantityElement.innerText = quantity;
 
+        if (!isValid) return;
+
         if (quantity === 0) {
             const productRemoveButton = q(productElement, " button[type=button][aria-label='Close minicart'].text-black.transition-colors.hover\\:text-hnleb0 ");
             productRemoveButton?.click();
@@ -409,29 +431,17 @@
         }
     }
 
-    function checkValidValue(input) {
-        const min = input.getAttribute("min") || 0;
-        const max = input.getAttribute("max") || 1000000000;
-        const value = input.value;
-
-        return value && value >= min && +value <= max;
-    }
-
     async function handleProductSideCartQuantityOnChange(e) {
         const currentTarget = e.currentTarget;
         const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
         const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-        let value = currentTarget.value;
-
-        const isValid = checkValidValue(currentTarget);
-
-        if (!isValid) {
-            currentTarget.value = productQuantityElement.innerText;
-            value = currentTarget.value;
-        }
-
-        const quantity = Math.ceil(+value);
+        const quantity = +currentTarget.value;
         productQuantityElement.innerText = quantity;
+
+        const isValid = checkInputValidity(currentTarget);
+
+        if (!isValid) return;
+
         const { productId, sku, measurementUnit } = getProductData(productElement);
         debouncedUpdateQuantity({ productId, sku, measurementUnit, quantity });
     }
@@ -599,7 +609,7 @@
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
             }
 
-            // Update Product Quantity New lements
+            // Update Product Quantity New elements
             const productQuantityInput = q(productElement, ".ab-product-quantity");
             if (productQuantityInput && +productQuantityInput.value !== +productQuantityElement.innerText) {
                 productQuantityInput.value = +productQuantityElement.innerText;
@@ -662,6 +672,7 @@
 
     function destroyCarouselInstances() {
         STATE["carousel_instances"].forEach((carousel) => carousel.destroy());
+        STATE["carousel_instances"] = [];
     }
 
     function removeItemsOnCartEmpty(sideCart) {
@@ -698,12 +709,7 @@
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
         const debouncedUpdate = debounce(updateSideCartLayout, 250);
-
-        const observer = new MutationObserver((mutationList, observer) => {
-            debouncedUpdate();
-        }).observe(targetNode, { childList: true, subtree: true, attributes: true });
-
-        return observer;
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     async function handleAddToCart() {
@@ -715,7 +721,7 @@
         qq(selector).forEach((elem) =>
             elem.addEventListener("click", async (e) => {
                 let timer = 0;
-                /* delaying 150ms + */
+                /* delaying 150ms */
                 await waitForElementAsync(() => timer++ >= 1);
 
                 let invalidCount = 0;
@@ -723,11 +729,11 @@
 
                 if (invalidCount > 0) return;
 
-                await waitForElementAsync(() => !q("body .loader"));
+                const loadingCompleted = await waitForElementAsync(() => !q("body .loader"));
 
-                if (loadingCompleted) {
-                    q("button#menu-cart-icon")?.click();
-                }
+                if (!loadingCompleted) return;
+
+                q("button#menu-cart-icon")?.click();
             })
         );
     }

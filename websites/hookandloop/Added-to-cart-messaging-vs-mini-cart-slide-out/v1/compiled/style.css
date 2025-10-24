@@ -235,6 +235,13 @@
   --tw-shadow: none;
   --tw-shadow-colored: none;
   box-shadow: none;
+  margin-top: -4px;
+  margin-bottom: -4px;
+  height: 26px;
+}
+.AB-MINI-CART .ab-product-quantity.ab-warning-border {
+  border-width: 1px;
+  border-color: #eb0000;
 }
 .AB-MINI-CART .ab-continue-shopping-btn {
   height: 44px;

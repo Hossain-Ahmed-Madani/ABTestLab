@@ -313,6 +313,15 @@
         --tw-shadow: none;
         --tw-shadow-colored: none;
         box-shadow: none;
+
+        margin-top: -4px;
+        margin-bottom: -4px;
+        height: 26px;
+
+        &.ab-warning-border {
+            border-width: 1px;
+            border-color: #eb0000;
+        }
     }
 
     .ab-continue-shopping-btn {
