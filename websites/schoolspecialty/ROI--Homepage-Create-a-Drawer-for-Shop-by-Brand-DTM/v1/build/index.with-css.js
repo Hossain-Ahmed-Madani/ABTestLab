@@ -36,9 +36,6 @@
   .AB-HOME-BRAND-DRAWER .ab-brands-section.background-true.border-true {
     padding: 42px 30px 48px;
   }
-  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card {
-    padding: 20px;
-  }
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
   overflow: hidden;
@@ -53,8 +50,8 @@
     transform 0.4s ease-in-out;
   transition-delay: 0s;
   max-height: 0;
-  padding: 0 !important;
   pointer-events: none;
+  display: none;
 }
 .AB-HOME-BRAND-DRAWER
   .ab-brands-section
@@ -64,8 +61,9 @@
   transform: translateY(0);
   transition-delay: 0.2s;
   max-height: unset;
-  padding: 20px !important;
   pointer-events: all;
+  display: block;
+  display: block;
 }
 @media (max-width: 1280px) {
   .AB-HOME-BRAND-DRAWER .ab-brands-section .brands > div:nth-child(n + 5) {
@@ -76,8 +74,8 @@
       transform 0.4s ease-in-out;
     transition-delay: 0s;
     max-height: 0;
-    padding: 0 !important;
     pointer-events: none;
+    display: none;
   }
   .AB-HOME-BRAND-DRAWER
     .ab-brands-section
@@ -87,8 +85,8 @@
     transform: translateY(0);
     transition-delay: 0.2s;
     max-height: unset;
-    padding: 20px !important;
     pointer-events: all;
+    display: block;
   }
 }
 @media (max-width: 900px) {
@@ -100,7 +98,7 @@
       transform 0.4s ease-in-out;
     transition-delay: 0s;
     max-height: 0;
-    padding: 0 !important;
+    display: none;
   }
   .AB-HOME-BRAND-DRAWER
     .ab-brands-section
@@ -110,8 +108,8 @@
     transform: translateY(0);
     transition-delay: 0.2s;
     max-height: unset;
-    padding: 20px !important;
     pointer-events: all;
+    display: block;
   }
 }
 @media (max-width: 600px) {
@@ -123,8 +121,8 @@
       transform 0.4s ease-in-out;
     transition-delay: 0s;
     max-height: 0;
-    padding: 0 !important;
     pointer-events: none;
+    display: none;
   }
   .AB-HOME-BRAND-DRAWER
     .ab-brands-section
@@ -134,8 +132,8 @@
     transform: translateY(0);
     transition-delay: 0.2s;
     max-height: unset;
-    padding: 20px !important;
     pointer-events: all;
+    display: block;
   }
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands {
@@ -173,11 +171,34 @@
   background: #fff;
   border: 1px solid #2b94e6;
 }
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands .cat-circle:hover {
+  transform: translate(0);
+}
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands .cat-circle.cat-last {
   background: #e9d11f;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .more-brands .icon-inverted {
   transform: rotate(225deg);
+}
+.AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media screen and (min-width: 601px) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (min-width: 901px) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (min-width: 1281px) {
+  .AB-HOME-BRAND-DRAWER .ab-brands-section .brands {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 `;
       document.head.appendChild(style);
@@ -215,7 +236,7 @@ Test info:
     test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
     page_initials: "AB-HOME-BRAND-DRAWER",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -359,14 +380,23 @@ Test info:
   }
 
   function q(s, o) {
-    return document.querySelector(s);
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
   function createLayout() {
-    q(
-      'div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]',
-    ).insertAdjacentHTML(
-      "afterend",
+    // q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]')
+    const targetNode = qq(".contentRecommendationWidget").find(
+      (item) =>
+        q(item, "section > h2")?.innerText?.trim() ===
+        "Why Become a School Specialty Select Customer?",
+    );
+
+    targetNode.insertAdjacentHTML(
+      "beforebegin",
       /* HTML */ `
         <div class="ab-brands-section background-true border-true">
           <!-- BEGIN Content_UI.jspf -->
@@ -387,7 +417,7 @@ Test info:
               >
             </div>
 
-            <div class="fx-row fx-start fx-middle brands">
+            <div class="brands">
               ${DATA.brands
                 .map(
                   (
@@ -395,9 +425,7 @@ Test info:
                     index,
                   ) => /* HTML */ `
                     <!-- ITEM ${index + 1}-->
-                    <div
-                      class="brands-card fx-col-6 fx-col-sm-3 fx-col-md-3 fx-col-lg-2"
-                    >
+                    <div class="brands-card">
                       <a
                         href="${url}"
                         aria-label="${label}"
@@ -512,8 +540,10 @@ Test info:
       q(
         `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
       ) &&
-      q(
-        'div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]',
+      qq(".contentRecommendationWidget section > h2").some(
+        (h2) =>
+          h2.innerText.trim() ===
+          "Why Become a School Specialty Select Customer?",
       )
     );
   }

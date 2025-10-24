@@ -26,7 +26,7 @@ Test info:
     test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
     page_initials: "AB-HOME-BRAND-DRAWER",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -170,14 +170,23 @@ Test info:
   }
 
   function q(s, o) {
-    return document.querySelector(s);
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
   function createLayout() {
-    q(
-      'div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]',
-    ).insertAdjacentHTML(
-      "afterend",
+    // q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]')
+    const targetNode = qq(".contentRecommendationWidget").find(
+      (item) =>
+        q(item, "section > h2")?.innerText?.trim() ===
+        "Why Become a School Specialty Select Customer?",
+    );
+
+    targetNode.insertAdjacentHTML(
+      "beforebegin",
       /* HTML */ `
         <div class="ab-brands-section background-true border-true">
           <!-- BEGIN Content_UI.jspf -->
@@ -198,7 +207,7 @@ Test info:
               >
             </div>
 
-            <div class="fx-row fx-start fx-middle brands">
+            <div class="brands">
               ${DATA.brands
                 .map(
                   (
@@ -206,9 +215,7 @@ Test info:
                     index,
                   ) => /* HTML */ `
                     <!-- ITEM ${index + 1}-->
-                    <div
-                      class="brands-card fx-col-6 fx-col-sm-3 fx-col-md-3 fx-col-lg-2"
-                    >
+                    <div class="brands-card">
                       <a
                         href="${url}"
                         aria-label="${label}"
@@ -323,8 +330,10 @@ Test info:
       q(
         `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
       ) &&
-      q(
-        'div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]',
+      qq(".contentRecommendationWidget section > h2").some(
+        (h2) =>
+          h2.innerText.trim() ===
+          "Why Become a School Specialty Select Customer?",
       )
     );
   }

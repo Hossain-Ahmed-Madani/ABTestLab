@@ -26,7 +26,7 @@ Test info:
         test_name: "Homepage - Create a Drawer for Shop by Brand [DTM]",
         page_initials: "AB-HOME-BRAND-DRAWER",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -109,7 +109,7 @@ Test info:
                 brandName: "FOSS",
                 label: "Shop FOSS",
                 url: "https://www.foss-science.com/",
-                target: '_blank',
+                target: "_blank",
                 imgUrl: "/wcsstore/SSIB2BStorefrontAssetStore/images/corporate/brands/foss-logo.png",
             },
             {
@@ -158,8 +158,11 @@ Test info:
     }
 
     function createLayout() {
-        q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]').insertAdjacentHTML(
-            "afterend",
+        // q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]')
+        const targetNode = qq(".contentRecommendationWidget").find((item) => q(item, "section > h2")?.innerText?.trim() === "Why Become a School Specialty Select Customer?");
+
+        targetNode.insertAdjacentHTML(
+            "beforebegin",
             /* HTML */ `
                 <div class="ab-brands-section background-true border-true">
                     <!-- BEGIN Content_UI.jspf -->
@@ -170,13 +173,13 @@ Test info:
                             <a href="/brands" class="txt-16 ssi-font__bold ssi-color-text__pri-dk-blue link" style="display: inline-block">Learn More About Our Family of Brands</a>
                         </div>
 
-                        <div class="fx-row fx-start fx-middle brands">
+                        <div class="brands">
                             ${DATA.brands
                                 .map(
                                     ({ brandName, label, url, imgUrl, target }, index) => /* HTML */ `
                                         <!-- ITEM ${index + 1}-->
-                                        <div class="brands-card fx-col-6 fx-col-sm-3 fx-col-md-3 fx-col-lg-2">
-                                            <a href="${url}" aria-label="${label}" target="${target ? target : '_self'}">
+                                        <div class="brands-card">
+                                            <a href="${url}" aria-label="${label}" target="${target ? target : "_self"}">
                                                 <div class="cat-circle p-20">
                                                     <img loading="lazy" src="${imgUrl}" class="ssi-responsive-image" alt="${brandName} Logo" />
                                                 </div>
@@ -266,7 +269,8 @@ Test info:
 
     function hasAllTargetElements() {
         return !!(
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q('div[id^="catalogEntryRecommendationWidget"] ~ div[id^="contentRecommendationWidget"]')
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            qq(".contentRecommendationWidget section > h2").some((h2) => h2.innerText.trim() === "Why Become a School Specialty Select Customer?")
         );
     }
 
