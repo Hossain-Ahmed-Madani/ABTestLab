@@ -58,40 +58,6 @@ class ProductCarousel {
         this.container.classList.add("ab-carousel-wrapper");
     }
 
-    // attachEventListeners() {
-    //     this.prevBtn.addEventListener("click", () => this.slidePrev());
-    //     this.nextBtn.addEventListener("click", () => this.slideNext());
-
-    //     // Touch support for mobile swipe
-    //     let startX = 0;
-    //     let scrollLeft = 0;
-    //     let isDragging = false;
-
-    //     this.cardContainer.addEventListener("touchstart", (e) => {
-    //         startX = e.touches[0].pageX;
-    //         scrollLeft = this.cardContainer.scrollLeft;
-    //         isDragging = true;
-    //     });
-
-    //     this.cardContainer.addEventListener("touchmove", (e) => {
-    //         if (!isDragging) return;
-    //         const x = e.touches[0].pageX;
-    //         const walk = startX - x;
-    //         this.cardContainer.scrollLeft = scrollLeft + walk;
-    //     });
-
-    //     this.cardContainer.addEventListener("touchend", () => {
-    //         isDragging = false;
-    //         this.updateNavigation();
-    //     });
-
-    //     // Update navigation on scroll
-    //     this.updateNavigationDebounced = debounce(() => {
-    //         this.updateNavigation();
-    //     }, 100);
-
-    //     this.cardContainer.addEventListener("scroll", this.updateNavigationDebounced);
-    // }
 
     attachEventListeners() {
         this.prevBtn.addEventListener("click", () => this.slidePrev());
