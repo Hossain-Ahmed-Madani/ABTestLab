@@ -4,7 +4,7 @@ OLD TEST PREVIEW: https://select.schoolspecialty.com/?convert_action=convert_vpr
 
 Figma: https://www.figma.com/proto/ottpiyYbyizBuMhspjMFsx/A-B-Testing-Ideas?node-id=515-1139&t=POKsESukEq8uuzDv-0&scaling=scale-down&content-scaling=fixed&page-id=515%3A936&starting-point-node-id=515%3A1139
 Test container: https://app.convert.com/accounts/100414252/projects/100415740/experiences/1004170093/summary
-v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_campaign=qa5 
+v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_campaign=qa7
 
 */
 
@@ -16,7 +16,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
     test_name: "Navigation - Improve Dropdown Layout V2 [D]",
     page_initials: "AB-NAV-V2-D",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -40,6 +40,11 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
 
   function qq(s, o) {
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
+
+  function triggerConvertGoal(goalId) {
+    window._conv_q = window._conv_q || [];
+    _conv_q.push(["triggerConversion", goalId]);
   }
 
   function clickFunction() {
@@ -66,6 +71,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
         selector: "#departmentsMenu > li",
         event: "click",
         callback: (e) => {
+          triggerConvertGoal(1004107490);
           e.preventDefault();
           e.stopPropagation();
           const el = e.currentTarget;
@@ -89,6 +95,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
         selector: ".categoryList > li",
         event: "click",
         callback: (e) => {
+          triggerConvertGoal(1004107490);
           e.preventDefault();
           e.stopPropagation();
           const el = e.currentTarget;
@@ -118,6 +125,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
         selector: ".subcategoryList-level3",
         event: "click",
         callback: (e) => {
+          triggerConvertGoal(1004107490);
           e.preventDefault();
           e.stopPropagation();
           const el = e.currentTarget;

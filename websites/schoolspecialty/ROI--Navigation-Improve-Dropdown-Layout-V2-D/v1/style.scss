@@ -86,7 +86,8 @@
     }
     #departmentsMenu > li:has(> #departmentButton_QuickOrder),
     #departmentsMenu > li:has(> #departmentButton_Dashboard) {
-        display: none;
+        // display: none;
+        order: 2;
     }
     #departmentsMenu > li.selected,
     #departmentsMenu > li:hover {

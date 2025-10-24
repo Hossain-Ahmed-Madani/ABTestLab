@@ -89,7 +89,7 @@
 }
 .AB-NAV-V2-D #departmentsMenu > li:has(> #departmentButton_QuickOrder),
 .AB-NAV-V2-D #departmentsMenu > li:has(> #departmentButton_Dashboard) {
-  display: none;
+  order: 2;
 }
 .AB-NAV-V2-D #departmentsMenu > li.selected,
 .AB-NAV-V2-D #departmentsMenu > li:hover {
