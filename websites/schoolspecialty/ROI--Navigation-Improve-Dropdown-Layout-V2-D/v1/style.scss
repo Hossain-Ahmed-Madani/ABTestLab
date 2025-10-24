@@ -1,4 +1,18 @@
 .AB-NAV-V2-D {
+    &.AB-REDESIGN-NAV-DROPDOWN {
+        .roi-scrollbar-track {
+            display: none !important;
+        }
+
+        .categoryList span.icon-keyboard_arrow_right {
+            transform: scale(1) !important;
+        }
+
+        .categoryList li a.left-positioned {
+            padding: 10px 0 10px 10px !important;
+        }
+    }
+
     .departmentMenu {
         width: 326px;
     }
@@ -26,7 +40,7 @@
         padding: 10px 0 10px 10px;
     }
     .categoryList li a.left-positioned {
-        padding: 10px 0 10px 40px !important;
+        padding: 10px 0 10px 10px !important;
     }
     .subcategoryList-level3_title {
         display: none;
@@ -44,6 +58,7 @@
         font-size: 20px;
         display: block;
         margin-top: 4px;
+        transform: scale(1) !important;
     }
     .subcategoryList-level3 {
         position: fixed;

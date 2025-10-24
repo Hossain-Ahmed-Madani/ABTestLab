@@ -1,3 +1,13 @@
+
+.AB-NAV-V2-D.AB-REDESIGN-NAV-DROPDOWN .roi-scrollbar-track {
+    display: none !important;
+}
+.AB-NAV-V2-D.AB-REDESIGN-NAV-DROPDOWN .categoryList span.icon-keyboard_arrow_right {
+    transform: scale(1) !important;
+}
+.AB-NAV-V2-D.AB-REDESIGN-NAV-DROPDOWN .categoryList li a.left-positioned {
+    padding: 10px 0 10px 10px !important;
+}
 .AB-NAV-V2-D .departmentMenu {
     width: 326px;
 }
@@ -25,7 +35,7 @@
     padding: 10px 0 10px 10px;
 }
 .AB-NAV-V2-D .categoryList li a.left-positioned {
-    padding: 10px 0 10px 40px !important;
+    padding: 10px 0 10px 10px !important;
 }
 .AB-NAV-V2-D .subcategoryList-level3_title {
     display: none;
@@ -43,6 +53,7 @@
     font-size: 20px;
     display: block;
     margin-top: 4px;
+    transform: scale(1) !important;
 }
 .AB-NAV-V2-D .subcategoryList-level3 {
     position: fixed;
