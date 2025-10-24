@@ -79,206 +79,11 @@
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M10 6V10M10 10V14M10 10H14M10 10L6 10" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-        `,
-        slider_prev_svg: /* HTML */ `
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" width="25" height="25" role="img">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path>
-                <title>chevron-left</title>
-            </svg>
-        `,
-        slider_next_svg: /* HTML */ ` <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="25" height="25" role="img">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
-            <title>chevron-right</title>
-        </svg>`,
-    };
+        `};
 
     const STATE = {
         carousel_instances: [],
     };
-
-    class ProductCarousel {
-        constructor(container) {
-            this.container = container;
-            if (!this.container) {
-                console.error("Carousel container not found");
-                return;
-            }
-
-            this.cardContainer = q(this.container, ".ab-related-products__card-container");
-            this.cards = qq(this.container, ".ab-related-product__card");
-            this.prevBtn = q(this.container, ".ab-carousel-btn--prev");
-            this.nextBtn = q(this.container, ".ab-carousel-btn--next");
-            this.gap = 12; // 12px gap between items
-
-            if (!this.cardContainer || !this.prevBtn || !this.nextBtn) {
-                console.error("Required carousel elements not found");
-                return;
-            }
-
-            this.init();
-        }
-
-        init() {
-            this.addCarouselStyles();
-            this.attachEventListeners();
-            this.updateNavigation();
-
-            // Handle window resize
-            this.resizeHandler = debounce(() => {
-                this.updateNavigation();
-            }, 250);
-            window.addEventListener("resize", this.resizeHandler);
-        }
-
-        addCarouselStyles() {
-            // Add necessary classes to elements
-            this.cardContainer.classList.add("ab-carousel-scroll");
-            this.container.classList.add("ab-carousel-wrapper");
-        }
-
-        attachEventListeners() {
-            this.prevBtn.addEventListener("click", () => this.slidePrev());
-            this.nextBtn.addEventListener("click", () => this.slideNext());
-
-            // Touch and mouse support for dragging
-            let startX = 0;
-            let scrollLeft = 0;
-            let isDragging = false;
-
-            // Touch Events
-            this.cardContainer.addEventListener("touchstart", (e) => {
-                startX = e.touches[0].pageX;
-                scrollLeft = this.cardContainer.scrollLeft;
-                isDragging = true;
-            });
-
-            this.cardContainer.addEventListener("touchmove", (e) => {
-                if (!isDragging) return;
-                const x = e.touches[0].pageX;
-                const walk = startX - x;
-                this.cardContainer.scrollLeft = scrollLeft + walk;
-            });
-
-            this.cardContainer.addEventListener("touchend", () => {
-                isDragging = false;
-                this.updateNavigation();
-            });
-
-            // Mouse Events
-            this.cardContainer.addEventListener("mousedown", (e) => {
-                e.preventDefault(); // Prevent unwanted selections
-                startX = e.pageX;
-                scrollLeft = this.cardContainer.scrollLeft;
-                isDragging = true;
-                this.cardContainer.classList.add("dragging");
-            });
-
-            this.cardContainer.addEventListener("mousemove", (e) => {
-                if (!isDragging) return;
-                const x = e.pageX;
-                const walk = startX - x;
-                this.cardContainer.scrollLeft = scrollLeft + walk;
-            });
-
-            this.cardContainer.addEventListener("mouseup", () => {
-                isDragging = false;
-                this.cardContainer.classList.remove("dragging");
-                this.updateNavigation();
-            });
-
-            this.cardContainer.addEventListener("mouseleave", () => {
-                if (isDragging) {
-                    isDragging = false;
-                    this.cardContainer.classList.remove("dragging");
-                    this.updateNavigation();
-                }
-            });
-
-            // Update navigation on scroll (debounced)
-            this.updateNavigationDebounced = debounce(() => {
-                this.updateNavigation();
-            }, 100);
-
-            this.cardContainer.addEventListener("scroll", this.updateNavigationDebounced);
-        }
-
-        getVisibleItems() {
-            // Mobile: 2.25 items, Desktop: 2.5 items (breakpoint at 768px)
-            const isMobile = window.innerWidth < 768;
-            return isMobile ? 2.25 : 2.5;
-        }
-
-        getCardWidth() {
-            if (this.cards.length === 0) return 0;
-            const visibleItems = this.getVisibleItems();
-            const containerWidth = this.cardContainer.offsetWidth;
-            const totalGap = this.gap * (visibleItems - 1);
-            return (containerWidth - totalGap) / visibleItems;
-        }
-
-        updateCardWidths() {
-            const cardWidth = this.getCardWidth();
-            this.cards.forEach((card) => {
-                card.style.width = `${cardWidth}px`;
-            });
-        }
-
-        slidePrev() {
-            const cardWidth = this.getCardWidth();
-            const scrollAmount = cardWidth + this.gap;
-            this.cardContainer.scrollBy({
-                left: -scrollAmount,
-                behavior: "smooth",
-            });
-        }
-
-        slideNext() {
-            const cardWidth = this.getCardWidth();
-            const scrollAmount = cardWidth + this.gap;
-            this.cardContainer.scrollBy({
-                left: scrollAmount,
-                behavior: "smooth",
-            });
-        }
-
-        updateNavigation() {
-            this.updateCardWidths();
-
-            const scrollLeft = this.cardContainer.scrollLeft;
-            const maxScroll = this.cardContainer.scrollWidth - this.cardContainer.clientWidth;
-
-            // Show/hide prev button
-            if (scrollLeft <= 1) {
-                this.prevBtn.classList.add("disabled");
-            } else {
-                this.prevBtn.classList.remove("disabled");
-            }
-
-            // Show/hide next button
-            if (scrollLeft >= maxScroll - 1) {
-                this.nextBtn.classList.add("disabled");
-            } else {
-                this.nextBtn.classList.remove("disabled");
-            }
-        }
-
-        destroy() {
-            // Remove event listeners
-            window.removeEventListener("resize", this.resizeHandler);
-            this.cardContainer.removeEventListener("scroll", this.updateNavigationDebounced);
-
-            // Remove classes
-            this.cardContainer.classList.remove("ab-carousel-scroll");
-            this.container.classList.remove("ab-carousel-wrapper");
-
-            // Reset card widths
-            this.cards.forEach((card) => {
-                card.style.width = "";
-            });
-
-            console.log("Carousel destroyed!");
-        }
-    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -494,65 +299,32 @@
         return div;
     }
 
-    const carousel_data = [
-        {
-            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
-            link: "#",
-            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
-            price: "$21.50",
-        },
-        {
-            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
-            link: "#",
-            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
-            price: "$21.50",
-        },
-        {
-            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
-            link: "#",
-            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
-            price: "$21.50",
-        },
-        {
-            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
-            link: "#",
-            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
-            price: "$21.50",
-        },
-        {
-            imgUrl: "https://www.hookandloop.com/media/catalog/product/cache/74c1057f7991b4edb2bc7bdaa94de933/d/g/dg38whls_1.png",
-            link: "#",
-            title: 'DuraGrip® Brand - 3/4" Beige Loop: Peel & Stick - Rubber',
-            price: "$21.50",
-        },
-    ];
+    function destroyCarouselInstances() {
+        STATE["carousel_instances"]?.forEach((carousel) => carousel.destroy());
+        STATE["carousel_instances"] = [];
+    }
 
     function getRelatedProductsElement() {
         const div = document.createElement("div");
-        div.className = "ab-related-products-container";
+
+        div.className = "ab-related-products-container"; /* add when carousel initialized:  ab-related-products-carousel-initialized */
         div.innerHTML = /* HTML */ `
             <p class="ab-related-products-heading text-lg font-medium leading-7 text-gray-900">
                 <strong>Pairs Well With</strong>
             </p>
-            <div class="ab-related-products ab-related-products--carousel">
-                <div class="ab-related-products__card-container">
-                    ${carousel_data
-                        .map(
-                            ({ imgUrl, link, title, price }) => /* HTML */ `
-                                <div class="ab-related-product ab-related-product__card">
-                                    <a href="${link}" class="ab-related-product__img">
-                                        <img src="${imgUrl}" alt="${title}/>
-                                    </a>
-                                    <a href="${link}" class="ab-related-product__title">${title}</a>
-                                    <div class="ab-related-product__price">${price}</div>
-                                </div>
-                            `
-                        )
-                        .join("")}
-                </div>
-
-                <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
-                <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
+            <div class="ab-related-products-skeleton-loader">
+                ${Array.from({ length: 3 })
+                    .map(
+                        () => /* HTML */ `
+                            <div class="ab-related-products-skeleton-loader__card">
+                                <div class="ab-related-products-skeleton-loader__img"></div>
+                                <div class="ab-related-products-skeleton-loader__title ab-related-products-skeleton-loader__title--first"></div>
+                                <div class="ab-related-products-skeleton-loader__title ab-related-products-skeleton-loader__title--second"></div>
+                                <div class="ab-related-products-skeleton-loader__price"></div>
+                            </div>
+                        `
+                    )
+                    .join("")}
             </div>
         `;
 
@@ -664,16 +436,11 @@
         if (!q(sectionContainer, ".ab-related-products-container")) {
             const relatedProductContainerElement = getRelatedProductsElement();
             sectionContainer.insertAdjacentElement("beforeend", relatedProductContainerElement);
-            const sliderContainer = q(relatedProductContainerElement, ".ab-related-products--carousel");
-            const carousel = new ProductCarousel(sliderContainer);
-            STATE["carousel_instances"].push(carousel);
+            // insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
         }
     }
 
-    function destroyCarouselInstances() {
-        STATE["carousel_instances"].forEach((carousel) => carousel.destroy());
-        STATE["carousel_instances"] = [];
-    }
+    
 
     function removeItemsOnCartEmpty(sideCart) {
         const productLocatorItemSelector = "template[x-for='item in cartItems']";
@@ -682,6 +449,7 @@
         if (productContainer) return;
 
         destroyCarouselInstances();
+
         qq(".ab-product-section-container, ab-subtotal-progress-container, .ab-continue-shopping-btn").forEach((elem) => elem.remove());
     }
 

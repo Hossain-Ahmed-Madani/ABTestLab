@@ -1,3 +1,10 @@
+.AB-MINI-CART {
+  /* Related Products Skeleton Loader */
+  /* Shimmer animation */
+  /* Pulse animation for cards */
+  /* Optional: Different delays for staggered effect */
+  /* Responsive design */
+}
 .AB-MINI-CART section#messages[aria-live=assertive][role=alert] {
   display: none;
 }
@@ -349,6 +356,97 @@
 }
 .AB-MINI-CART .ab-related-products-heading {
   margin-bottom: 16px;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader:has(~ .ab-related-products) {
+  display: none;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__card {
+  width: 160px;
+  height: 240px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  flex-shrink: 0;
+  animation: pulse 2s infinite ease-in-out;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__img {
+  width: 100%;
+  height: 144px;
+  margin-bottom: 8px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__title {
+  width: 100%;
+  height: 14px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__title--first {
+  width: 90%; /* Slightly shorter for variation */
+  margin-bottom: 5px;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__title--second {
+  margin-bottom: 12px;
+  width: 70%; /* Even shorter */
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__price {
+  height: 14px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  width: 60px; /* Fixed width for price */
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+.AB-MINI-CART .ab-related-products-skeleton-loader__card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+@media (max-width: 768px) {
+  .AB-MINI-CART .ab-related-products-skeleton-loader__card {
+    width: 140px;
+    height: 220px;
+  }
+  .AB-MINI-CART .ab-related-products-skeleton-loader__img {
+    height: 120px;
+  }
 }
 .AB-MINI-CART .ab-related-products--carousel {
   position: relative;

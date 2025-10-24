@@ -562,18 +562,14 @@
         },
     ];
 
-    function getRelatedProductsElement() {
+    function createCarouselElement() {
         const div = document.createElement("div");
-        div.className = "ab-related-products-container";
+        div.className = "ab-related-products ab-related-products--carousel";
         div.innerHTML = /* HTML */ `
-            <p class="ab-related-products-heading text-lg font-medium leading-7 text-gray-900">
-                <strong>Pairs Well With</strong>
-            </p>
-            <div class="ab-related-products ab-related-products--carousel">
-                <div class="ab-related-products__card-container">
-                    ${carousel_data
-                        .map(
-                            ({ imgUrl, link, title, price }) => /* HTML */ `
+            <div class="ab-related-products__card-container">
+                ${carousel_data
+                    .map(
+                        ({ imgUrl, link, title, price }) => /* HTML */ `
                                 <div class="ab-related-product ab-related-product__card">
                                     <a href="${link}" class="ab-related-product__img">
                                         <img src="${imgUrl}" alt="${title}/>
@@ -582,12 +578,52 @@
                                     <div class="ab-related-product__price">${price}</div>
                                 </div>
                             `
-                        )
-                        .join("")}
-                </div>
+                    )
+                    .join("")}
+            </div>
 
-                <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
-                <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
+            <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
+            <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
+        `;
+
+        return div;
+    }
+
+    function insertAndInitializeCarousel(position, targetNode) {
+        const carouselContainer = createCarouselElement();
+        targetNode.insertAdjacentElement(position, carouselContainer);
+        const carousel = new ProductCarousel(carouselContainer);
+        STATE["carousel_instances"].push(carousel);
+
+        return carousel;
+    }
+
+    function destroyCarouselInstances() {
+        STATE["carousel_instances"]?.forEach((carousel) => carousel.destroy());
+        STATE["carousel_instances"] = [];
+    }
+
+    function getRelatedProductsElement() {
+        const div = document.createElement("div");
+
+        div.className = "ab-related-products-container"; /* add when carousel initialized:  ab-related-products-carousel-initialized */
+        div.innerHTML = /* HTML */ `
+            <p class="ab-related-products-heading text-lg font-medium leading-7 text-gray-900">
+                <strong>Pairs Well With</strong>
+            </p>
+            <div class="ab-related-products-skeleton-loader">
+                ${Array.from({ length: 3 })
+                    .map(
+                        () => /* HTML */ `
+                            <div class="ab-related-products-skeleton-loader__card">
+                                <div class="ab-related-products-skeleton-loader__img"></div>
+                                <div class="ab-related-products-skeleton-loader__title ab-related-products-skeleton-loader__title--first"></div>
+                                <div class="ab-related-products-skeleton-loader__title ab-related-products-skeleton-loader__title--second"></div>
+                                <div class="ab-related-products-skeleton-loader__price"></div>
+                            </div>
+                        `
+                    )
+                    .join("")}
             </div>
         `;
 
@@ -699,16 +735,11 @@
         if (!q(sectionContainer, ".ab-related-products-container")) {
             const relatedProductContainerElement = getRelatedProductsElement();
             sectionContainer.insertAdjacentElement("beforeend", relatedProductContainerElement);
-            const sliderContainer = q(relatedProductContainerElement, ".ab-related-products--carousel");
-            const carousel = new ProductCarousel(sliderContainer);
-            STATE["carousel_instances"].push(carousel);
+            // insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
         }
     }
 
-    function destroyCarouselInstances() {
-        STATE["carousel_instances"].forEach((carousel) => carousel.destroy());
-        STATE["carousel_instances"] = [];
-    }
+    
 
     function removeItemsOnCartEmpty(sideCart) {
         const productLocatorItemSelector = "template[x-for='item in cartItems']";
@@ -717,6 +748,7 @@
         if (productContainer) return;
 
         destroyCarouselInstances();
+
         qq(".ab-product-section-container, ab-subtotal-progress-container, .ab-continue-shopping-btn").forEach((elem) => elem.remove());
     }
 
