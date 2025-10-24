@@ -1,0 +1,13 @@
+{
+  "id": "1761312462534_9336_Sitewide_Personalize_Email_Popu_DTM",
+  "name": "Sitewide-Personalize-Email-Popu-DTM",
+  "type": "A/B",
+  "website": "domyown",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-24T13:27:42.534Z",
+  "createdAtReadable": "10/24/2025, 7:27:42 PM",
+  "lastUpdated": "2025-10-24T13:27:42.698Z"
+}

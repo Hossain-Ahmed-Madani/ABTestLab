@@ -1,0 +1,168 @@
+#newsletter-ribbon ~ #___ratingbadge_0 {
+  bottom: 35px !important;
+}
+
+#newsletter-signup-modal .modal-content {
+  padding: 0;
+  border: 0;
+}
+
+#desktop #newsletter-signup-modal .modal-content {
+  width: 800px !important;
+}
+
+#newsletter-signup-modal .modal-content-body > .newsletter-form-content {
+  display: none;
+}
+
+#newsletter-signup-modal img[alt="DoMyOwn - Do It Yourself Pest Control"] {
+  display: none;
+}
+
+#newsletter-signup-modal .modal-content-body > .flex:nth-child(1) {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+#newsletter-signup-modal .image-container {
+  background-size: cover;
+}
+
+#newsletter-signup-modal .newsletter-form-content {
+  padding: 32px 24px;
+}
+
+#newsletter-signup-modal .newsletter-form-content h2 {
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+#newsletter-signup-modal .newsletter-form-content p {
+  color: rgb(77, 77, 77);
+  font-size: 18px;
+}
+
+#newsletter-signup-modal form {
+  gap: 8px;
+  max-width: 200px;
+  margin: auto;
+}
+
+#newsletter-signup-modal form input[type=text] {
+  margin: 0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 12px;
+  padding: 12px;
+}
+
+#newsletter-signup-modal form input[type=submit] {
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+#newsletter-signup-modal .benefits-container {
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  max-width: 200px;
+  margin: 16px auto 24px;
+}
+
+#newsletter-signup-modal .benefits-container .benefit-item:nth-child(1) {
+  padding-right: 2px;
+  margin-right: 12px;
+  border-right: 1px solid #315caa;
+}
+
+#newsletter-signup-modal .benefit-item-icon svg {
+  max-height: 100%;
+  width: 28px;
+}
+
+#newsletter-signup-modal .benefit-item:nth-child(2) svg {
+  width: 24px;
+}
+
+#newsletter-signup-modal .benefit-item {
+  display: flex;
+  font-size: 12px;
+  line-height: 1.1;
+  align-items: center;
+  text-align: left;
+  gap: 8px;
+}
+
+#newsletter-signup-modal .benefit-item-text {
+  width: 64px;
+}
+
+#newsletter-signup-modal .newsletter-footer {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+#mobile #newsletter-signup-modal .modal-content-body > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+
+#mobile #newsletter-signup-modal .image-container {
+  height: 180px;
+}
+
+#mobile #newsletter-signup-modal h2.text-blue {
+  font-size: 2.25rem !important;
+}
+
+#mobile #newsletter-signup-modal .newsletter-form-content {
+  padding: 24px;
+}
+
+#mobile #newsletter-signup-modal .newsletter-form-content p {
+  font-size: 16px !important;
+  margin-bottom: 16px;
+}
+
+#mobile #newsletter-signup-modal .benefits-container {
+  margin: 16px auto;
+}
+
+#newsletter-signup-modal:has(.newsletter-form-content-message[style="display: block;"]) .modal-content-body .flex {
+  min-height: 355px;
+}
+
+#newsletter-signup-modal:has(.newsletter-form-content-message[style="display: block;"]) .image-container + div.w-full.text-center {
+  padding: 24px;
+}
+
+#newsletter-signup-modal .newsletter-form-content-message[style="display: block;"] {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+#mobile #newsletter-signup-modal .newsletter-form-content-message[style="display: block;"] {
+  padding: 24px;
+}
+
+#newsletter-signup-modal .modal-content-header {
+  padding: 0;
+}
+
+.newsletter-close-modal {
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+}
+
+#mobile .newsletter-close-modal {
+  margin-right: 0.5rem;
+  margin-top: 0;
+  color: #bdbdbd;
+  z-index: 10;
+}
