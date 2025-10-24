@@ -10,10 +10,11 @@
   margin-bottom: 20px !important;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section h2 {
-  color: #000;
+  color: #08365b;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section p.brands-subtitle {
   font-weight: 600;
+  font-size: 18px;
 }
 .AB-HOME-BRAND-DRAWER .ab-brands-section .brands-card {
   cursor: default;
