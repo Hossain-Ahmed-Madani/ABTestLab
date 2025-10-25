@@ -572,7 +572,6 @@
             const crossSellForm = q(dom, 'form[x-data^="initPDPCrossSellSection"]');
 
             if (!crossSellForm) {
-                console.log("No cross-sell form found");
                 return {};
             }
 
@@ -607,7 +606,10 @@
     }
 
     async function updatePairsWellWithProductsApi() {
-        await waitForElementAsync(() => STATE["added_products"].length > 0);
+        if (STATE["added_products"].length === 0) {
+            PRODUCT_DATA["pairs_well_with"] = [];
+            return false;
+        }
 
         const urls = STATE["added_products"].map((item) => item.url);
 
@@ -670,8 +672,6 @@
     }
 
     async function getSliderDataApi() {
-        await updatePairsWellWithProductsApi();
-
         const { pairs_well_with, recently_viewed, most_purchased } = PRODUCT_DATA;
         const added_products = STATE["added_products"];
 
@@ -682,13 +682,13 @@
             carousel_data.push(...tmp);
         }
 
-        if (carousel_data.length < 5 && recently_viewed.length > 0) {
+        if (carousel_data.length < 15 && recently_viewed.length > 0) {
             const tmp = recently_viewed.filter((item) => !added_products.some((productId) => productId === item.id));
             carousel_data.push(...tmp);
         }
 
-        if (carousel_data.length < 5 && most_purchased.length > 0) {
-            const tmp = most_purchased.filter((item) => !added_products.some((productId) => productId === item.id));
+        if (carousel_data.length < 15 && most_purchased.length > 0) {
+            const tmp = most_purchased.filter((item) => !added_products.some((productId) => productId === item.id)).slice(0, 15 - carousel_data.length);
             carousel_data.push(...tmp);
         }
 
@@ -823,7 +823,6 @@
 
         const div = document.createElement("div");
         div.className = "ab-related-products ab-related-products--carousel";
-
         div.innerHTML = /* HTML */ `
             <div class="ab-related-products__card-container">
                 ${carousel_data
@@ -844,6 +843,7 @@
             <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
             <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
         `;
+
         return div;
     }
 
@@ -862,10 +862,8 @@
     }
 
     async function addOrUpdateRelatedProductCarousel(sideCart) {
-        console.log("update carousel...");
         destroyCarouselInstances();
         const relatedProductContainerElement = q(sideCart, ".ab-related-products-container");
-        console.log(relatedProductContainerElement)
         insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
     }
 
@@ -1004,7 +1002,7 @@
         return sideCartStateUpdated;
     }
 
-    function updateProductContainer(sideCart) {
+    async function updateProductContainer(sideCart) {
         const productLocatorItemSelector = "template[x-for='item in cartItems']";
         const productContainer = q(sideCart, productLocatorItemSelector)?.parentNode;
         const sideCartStateUpdated = updateSideCartState(sideCart);
@@ -1031,9 +1029,11 @@
             sectionContainer.insertAdjacentElement("beforeend", relatedProductContainerElement);
         }
 
-        //  Destroy & Add Slider || WORKING SECTION .....
+        //  Update Data Destroy & Add Slider
         if (sideCartStateUpdated) {
-            addOrUpdateRelatedProductCarousel(sideCart);
+            await updatePairsWellWithProductsApi();
+            // State change in the carousel affects only one instance / #cart-drawer; other instances remain unchanged, causing the side card to stay outdated.
+            qq("#cart-drawer").forEach((cSideCart) => addOrUpdateRelatedProductCarousel(cSideCart));
         }
     }
 
@@ -1049,7 +1049,7 @@
     }
 
     async function updateSideCartLayout() {
-        qq("#cart-drawer").forEach(async (sideCart) => {
+        qq("#cart-drawer").forEach((sideCart) => {
             // Remove Items when side cart is empty
             removeItemsOnCartEmpty(sideCart);
 
@@ -1107,8 +1107,6 @@
         updateRecentlyViewedProductsApi();
         handleAddToCart();
         mutationObserverFunction();
-
-        console.log(PRODUCT_DATA);
     }
 
     function requiredItems() {
