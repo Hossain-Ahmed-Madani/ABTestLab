@@ -15,6 +15,23 @@
 .AB-MINI-CART #cart-drawer .absolute.left-1\/2.-translate-x-1\/2.-translate-y-1\/2.relative.px-4.py-6.bg-white.border-bs.sm\:px-6.border-container.flex.flex-col.items-center.justify-center.p-6.text-center ~ .ab-product-section-container {
   display: none;
 }
+.AB-MINI-CART #cart-drawer #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader {
+  position: absolute;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+}
+.AB-MINI-CART #cart-drawer #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader svg > circle {
+  background: #fff;
+  color: #eb0000;
+}
+.AB-MINI-CART #cart-drawer #cartDrawerContent[style="display:none;"] ~ .ab-show-loader {
+  display: none !important;
+}
+.AB-MINI-CART #cart-drawer #cartDrawerContent[style="display:none;"] ~ .z-50.fixed.inset-0.grid.place-items-center.bg-white\/70.text-slate-800 {
+  display: none !important;
+}
 .AB-MINI-CART #cart-drawer header {
   padding: 16px;
   border-bottom: 1px solid #e5e7eb;
@@ -386,6 +403,7 @@
 .AB-MINI-CART .ab-related-products-container {
   margin-top: auto;
   padding: 16px;
+  padding-right: 0;
 }
 .AB-MINI-CART .ab-related-products-heading {
   margin-bottom: 16px;
@@ -502,6 +520,9 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
+}
+.AB-MINI-CART .ab-related-product:last-child {
+  margin-right: 15px;
 }
 .AB-MINI-CART .ab-related-product:hover {
   border: 1px solid #e5e7eb;

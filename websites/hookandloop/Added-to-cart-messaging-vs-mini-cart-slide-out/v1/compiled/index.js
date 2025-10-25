@@ -667,17 +667,17 @@
         const carousel_data = [];
 
         if (pairs_well_with.length > 0) {
-            const tmp = pairs_well_with.filter((item) => !added_products.some((productId) => productId === item.id));
+            const tmp = pairs_well_with.filter((item) => !added_products.some(({ productId }) => productId === item.id));
             carousel_data.push(...tmp);
         }
 
         if (carousel_data.length < 15 && recently_viewed.length > 0) {
-            const tmp = recently_viewed.filter((item) => !added_products.some((productId) => productId === item.id));
+            const tmp = recently_viewed.filter((item) => !added_products.some(({ productId }) => productId === item.id));
             carousel_data.push(...tmp);
         }
 
         if (carousel_data.length < 15 && most_purchased.length > 0) {
-            const tmp = most_purchased.filter((item) => !added_products.some((productId) => productId === item.id)).slice(0, 15 - carousel_data.length);
+            const tmp = most_purchased.filter((item) => !added_products.some(({ productId }) => productId === item.id)).slice(0, 15 - carousel_data.length);
             carousel_data.push(...tmp);
         }
 
@@ -685,15 +685,15 @@
     }
 
     const debouncedUpdateQuantity = debounce(async ({ productId, sku, measurementUnit, quantity }) => {
-        const loaderElement = q(".z-50.fixed.inset-0.grid.place-items-center.bg-white\\/70.text-slate-800");
+        const loaderElements = qq("#cart-drawer .z-50.fixed.inset-0.grid.place-items-center.bg-white\\/70.text-slate-800");
+        loaderElements?.forEach((loaderElement) => loaderElement.classList.add("ab-show-loader"));
 
-        loaderElement.setAttribute("style", "display:block;");
         const response = await productQuantityUpdateRequestApi({ productId, sku, measurementUnit, quantity });
         window.dispatchEvent(new CustomEvent("reload-customer-section-data"));
-        loaderElement.setAttribute("style", "display:none;");
+        loaderElements?.forEach((loaderElement) => loaderElement.classList.remove("ab-show-loader"));
 
         return response;
-    }, 1000);
+    }, 500);
 
     function checkInputValidity(input) {
         const min = input.getAttribute("min") || 0;
@@ -1074,7 +1074,7 @@
     }
 
     async function handleAddToCart() {
-        const selector = "button[type='submit'][form='product_addtocart_form']";
+        const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
         const hasFoundRequiredItems = await waitForElementAsync(() => qq(selector).length > 0);
 
         if (!hasFoundRequiredItems) return;
@@ -1086,7 +1086,7 @@
                 await waitForElementAsync(() => timer++ >= 1);
 
                 let invalidCount = 0;
-                qq(`span.font-bold[x-text^="pdpAttrValidationerrors"]:not(:empty)`).forEach(() => (invalidCount += 1));
+                qq(`span.font-bold[x-text^="pdpAttrValidationerrors"]:not(:empty)`)?.forEach(() => (invalidCount += 1));
 
                 if (invalidCount > 0) return;
 
