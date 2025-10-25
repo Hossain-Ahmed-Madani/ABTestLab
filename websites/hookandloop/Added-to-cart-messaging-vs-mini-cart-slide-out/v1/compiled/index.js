@@ -915,6 +915,7 @@
             const priceElement = q(productElement, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
             const productSkuElement = q(productElement, 'p.text-sm span[x-html="item\\.product_sku"]');
             const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
+            const productOptionsElements = qq(productElement, "div[x-show='showOption(option)']");
 
             // Relocate Price Element
             if (priceElement && productSkuElement) {
@@ -930,6 +931,14 @@
             // Create product quantity input
             if (!q(productElement, ".ab-product-quantity-container")) {
                 const div = getProductNewQuantityElement();
+                productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
+            }
+
+            // Create Options Container & Append Options
+            if (!q(productElement, ".ab-product-options-container") && productOptionsElements.length > 0) {
+                const div = document.createElement("div");
+                div.className = "ab-product-options-container";
+                productOptionsElements.forEach((optionElement) => div.appendChild(optionElement));
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
             }
 
