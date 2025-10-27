@@ -226,36 +226,38 @@
   flex-direction: column;
   height: 70vh;
   overflow-y: auto;
+  position: relative;
+  z-index: 0;
   scrollbar-width: thin;
   scrollbar-color: #c1c1c1 #f1f1f1;
-  /* For Webkit browsers (Chrome, Safari, Edge) */
+  /* For Webkit browsers */
 }
 .AB-MINI-CART #cart-drawer .ab-product-section-container::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
+  position: relative;
+  z-index: 1000; /* Higher z-index for scrollbar */
 }
 .AB-MINI-CART
   #cart-drawer
   .ab-product-section-container::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
+  z-index: 1001;
 }
 .AB-MINI-CART
   #cart-drawer
   .ab-product-section-container::-webkit-scrollbar-thumb {
   background: #c1c1c1;
   border-radius: 10px;
-}
-.AB-MINI-CART
-  #cart-drawer
-  .ab-product-section-container::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  z-index: 1002; /* Highest z-index */
+  position: relative;
 }
 .AB-MINI-CART
   #cart-drawer
   .relative.grid.gap-6.sm\:gap-8.px-1.py-3.sm\:px-3.bg-white.border-b.border-container.overflow-y-auto.overscroll-y-contain {
   padding: 0;
   gap: 0;
-  overflow: hidden;
+  overflow: visible;
   border: 0;
   min-height: max-content;
   flex-grow: 1;
@@ -344,6 +346,7 @@
   letter-spacing: 0px;
   vertical-align: middle;
   color: #000000;
+  white-space: nowrap;
 }
 .AB-MINI-CART .ab-product-quantity-container {
   margin-top: 8px;
@@ -757,7 +760,10 @@
     https://www.hookandloop.com/brands/duragrip/sew-on/1-2-duragrip-brand-sew-on-loop-white
     https://www.hookandloop.com/brands/velcro/sew-on/4-velcro-brand-sew-on-hook-loop-black
     https://www.hookandloop.com/brands/velcro/sew-on/4-velcro-brand-sew-on-hook-loop-black
-    // cookie: recently_viewed_products
+
+    Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
+    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
+
 
 */
 

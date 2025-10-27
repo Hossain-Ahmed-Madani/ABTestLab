@@ -51,13 +51,12 @@
             }
         }
 
-
-            #cartDrawerContent[style="display:none;"] ~ .ab-show-loader {
-                display: none !important;
-            }
-            #cartDrawerContent[style="display:none;"] ~ .z-50.fixed.inset-0.grid.place-items-center.bg-white\/70.text-slate-800 {
-                display: none !important;
-            }
+        #cartDrawerContent[style="display:none;"] ~ .ab-show-loader {
+            display: none !important;
+        }
+        #cartDrawerContent[style="display:none;"] ~ .z-50.fixed.inset-0.grid.place-items-center.bg-white\/70.text-slate-800 {
+            display: none !important;
+        }
     }
 
     #cart-drawer header {
@@ -214,33 +213,60 @@
         height: 70vh;
         overflow-y: auto;
 
+        // scrollbar-width: thin;
+        // scrollbar-color: #c1c1c1 #f1f1f1;
+
+        // /* For Webkit browsers (Chrome, Safari, Edge) */
+        // &::-webkit-scrollbar {
+        //     width: 6px;
+        // }
+
+        // &::-webkit-scrollbar-track {
+        //     background: #f1f1f1;
+        //     border-radius: 10px;
+        // }
+
+        // &::-webkit-scrollbar-thumb {
+        //     background: #c1c1c1;
+        //     border-radius: 10px;
+        // }
+
+        // &::-webkit-scrollbar-thumb:hover {
+        //     background: #a8a8a8;
+        // }
+
+        position: relative;
+        z-index: 0;
+
         scrollbar-width: thin;
         scrollbar-color: #c1c1c1 #f1f1f1;
 
-        /* For Webkit browsers (Chrome, Safari, Edge) */
+        /* For Webkit browsers */
         &::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
+            position: relative;
+            z-index: 1000; /* Higher z-index for scrollbar */
         }
 
         &::-webkit-scrollbar-track {
             background: #f1f1f1;
             border-radius: 10px;
+            z-index: 1001;
         }
 
         &::-webkit-scrollbar-thumb {
             background: #c1c1c1;
             border-radius: 10px;
-        }
-
-        &::-webkit-scrollbar-thumb:hover {
-            background: #a8a8a8;
+            z-index: 1002; /* Highest z-index */
+            position: relative;
         }
     }
 
     #cart-drawer .relative.grid.gap-6.sm\:gap-8.px-1.py-3.sm\:px-3.bg-white.border-b.border-container.overflow-y-auto.overscroll-y-contain {
         padding: 0;
         gap: 0;
-        overflow: hidden;
+        // overflow: hidden;
+        overflow: visible;
         border: 0;
         min-height: max-content;
         flex-grow: 1;
@@ -325,6 +351,7 @@
             letter-spacing: 0px;
             vertical-align: middle;
             color: #000000;
+            white-space: nowrap;
         }
     }
 
