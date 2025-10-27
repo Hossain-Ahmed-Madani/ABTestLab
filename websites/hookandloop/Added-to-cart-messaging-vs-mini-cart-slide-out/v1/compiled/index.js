@@ -853,6 +853,7 @@
     async function addOrUpdateRelatedProductCarousel(sideCart) {
         destroyCarouselInstances();
         const relatedProductContainerElement = q(sideCart, ".ab-related-products-container");
+        if (!relatedProductContainerElement) return;
         insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
     }
 
@@ -1048,6 +1049,7 @@
 
     async function updateSideCartLayout() {
         qq("#cart-drawer").forEach((sideCart) => {
+            
             // Remove Items when side cart is empty
             removeItemsOnCartEmpty(sideCart);
 
@@ -1073,26 +1075,30 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    async function handleAddToCart() {
-        const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
-        const hasFoundRequiredItems = await waitForElementAsync(() => qq(selector).length > 0);
+    function checkPDPAddToCartFormValidity() {
+        if (q(" button#custom_strap_atc") && q(" button#custom_strap_atc:not(disabled)")) return true;
+        const form = q("form#product_addtocart_form");
+        const input = q(".product-info-main input[name='qty']");
+        const isValid = checkInputValidity(input) && qq(form, `span.font-bold[x-text^="pdpAttrValidationerrors"]:not(:empty)`).length === 0;
 
-        if (!hasFoundRequiredItems) return;
+        return isValid;
+    }
+
+    async function handlePDPAddToCart() {
+        const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
+        await waitForElementAsync(() => qq(selector).length > 0);
 
         qq(selector).forEach((elem) =>
             elem.addEventListener("click", async (e) => {
-                let timer = 0;
                 /* delaying 150ms */
+                let timer = 0;
                 await waitForElementAsync(() => timer++ >= 1);
 
-                let invalidCount = 0;
-                qq(`span.font-bold[x-text^="pdpAttrValidationerrors"]:not(:empty)`)?.forEach(() => (invalidCount += 1));
+                const isValid = checkPDPAddToCartFormValidity();
 
-                if (invalidCount > 0) return;
+                if (!isValid) return;
 
-                const loadingCompleted = await waitForElementAsync(() => !q("body .loader"));
-
-                if (!loadingCompleted) return;
+                await waitForElementAsync(() => !q("body .loader"));
 
                 q("button#menu-cart-icon")?.click();
             })
@@ -1103,7 +1109,7 @@
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         updateRecentlyViewedProductsApi();
-        handleAddToCart();
+        handlePDPAddToCart();
         mutationObserverFunction();
     }
 
