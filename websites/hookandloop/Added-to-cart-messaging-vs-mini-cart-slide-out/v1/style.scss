@@ -278,6 +278,11 @@
         .flex.items-start.justify-between.gap-1 {
             gap: 8px;
         }
+
+        a, a:hover, a:focus {
+            border: none;
+            outline: none;
+        }
     }
 
     #cart-drawer span[x-html="item.product_sku"] {
