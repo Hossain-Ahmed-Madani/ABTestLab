@@ -20,6 +20,10 @@ async function waitForPromiseOnMutation(predicate, maxCount = 100) {
     });
 }
 
-return waitForPromiseOnMutation(() => q("button#menu-cart-icon") && q("#cart-drawer"))
+function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+}
+
+return waitForPromiseOnMutation(() => !!(q("button#menu-cart-icon") && q("#cart-drawer")))
     .then(() => true)
     .catch(() => false);

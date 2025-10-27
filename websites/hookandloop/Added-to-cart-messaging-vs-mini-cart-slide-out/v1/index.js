@@ -8,7 +8,10 @@
     https://www.hookandloop.com/brands/duragrip/sew-on/1-2-duragrip-brand-sew-on-loop-white
     https://www.hookandloop.com/brands/velcro/sew-on/4-velcro-brand-sew-on-hook-loop-black
     https://www.hookandloop.com/brands/velcro/sew-on/4-velcro-brand-sew-on-hook-loop-black
-    // cookie: recently_viewed_products
+
+    Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
+    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
+
 
 */
 
