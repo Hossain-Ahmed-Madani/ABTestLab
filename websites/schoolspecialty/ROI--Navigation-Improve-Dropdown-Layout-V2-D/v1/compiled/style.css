@@ -206,7 +206,7 @@
   text-decoration: underline;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover {
-  background-color: transparent !important;
+  background-color: #055298 !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover p {
   color: #fff !important;

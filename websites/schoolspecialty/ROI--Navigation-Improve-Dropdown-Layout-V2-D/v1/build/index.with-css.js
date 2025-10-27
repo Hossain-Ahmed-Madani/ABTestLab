@@ -248,7 +248,7 @@
   text-decoration: underline;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover {
-  background-color: transparent !important;
+  background-color: #055298 !important;
 }
 .AB-NAV-V2-D #departmentsMenu > li:hover p {
   color: #fff !important;
@@ -310,7 +310,7 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
     test_name: "Navigation - Improve Dropdown Layout V2 [D]",
     page_initials: "AB-NAV-V2-D",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
