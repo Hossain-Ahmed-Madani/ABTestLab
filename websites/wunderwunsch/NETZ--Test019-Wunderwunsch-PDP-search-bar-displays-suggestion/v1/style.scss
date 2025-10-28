@@ -1,27 +1,274 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .TEST019-SEARCH-BAR {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    &.TEST019-SEARCH-BAR--show-suggestions-dropdown {
+        overflow: hidden;
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+        .ab-toggle-search,
+        .header__logo {
+            display: none;
+        }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+        .ab-search-bar-backdrop,
+        .ab-search-bar-section {
+            display: block;
+        }
+    }
+
+    .header {
+        position: relative;
+    }
+
+    .ab-search-bar-backdrop {
+        display: none;
+        position: fixed;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(#ffffff, 0.2);
+        z-index: 100;
+    }
+
+    .ab-search-bar-section {
+        display: none;
+        position: absolute;
+        width: 100%;
+        background-color: #fee7f1;
+        z-index: 101;
+    }
+
+    .ab-search-bar-container {
+        background-color: #fff;
+        padding: 7px 10px 13px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .ab-search-bar {
+        width: 100%;
+        // height: 33px;
+        border: 1px solid #60062e;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .ab-search-bar__input {
+        margin: 0;
+        padding: 0;
+        padding: 4px 26px 4px 13px;
+        width: 100%;
+        border: none;
+        outline: none;
+
+        &:hover,
+        &:active {
+            border: none;
+            outline: none;
+        }
+    }
+
+    .ab-search-bar__icon {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: 0;
+        bottom: 0;
+        right: 6.5px;
+        margin: auto;
+
+        border: none;
+        outline: none;
+
+        &:hover,
+        &:active {
+            border: none;
+            outline: none;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            object-fit: contain;
+        }
+    }
+
+    .ab-suggestions-container {
+        background: #fee7f1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ab-suggestions-content {
+        padding: 10px 12px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .ab-suggestions-content__heading {
+        height: 19px;
+        font-family: Nunito, sans-serif;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: #727272;
+    }
+
+    .ab-suggestions-content__items {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 5px;
+    }
+
+    .ab-suggestions-content__item {
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 4px;
+
+        border: none;
+        outline: none;
+
+        &:hover,
+        &:active {
+            border: none;
+            outline: none;
+        }
+    }
+
+    .ab-suggestions-content__item__img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        border: 0.5px solid #959595;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .ab-suggestions-content__item__img img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .ab-suggestions-content__item__title {
+        font-family: Nunito, sans-serif;
+        font-weight: 500;
+        font-size: 9px;
+        line-height: 12px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: #393939;
+
+        @media screen and (min-width: 400px) {
+            font-size: 10px;
+        }
+    }
+
+    .favorite-products {
+        .ab-suggestions-content__item {
+            gap: 4px;
+        }
+    }
+
+    .top-selection-of-categories {
+        background-color: #ffffff;
+
+        .ab-suggestions-content__item {
+            gap: 5px;
+        }
+    }
+
+    .popular-brands {
+        .ab-suggestions-content__item {
+            gap: 5px;
+
+            .ab-suggestions-content__item__img {
+                border: none;
+                width: 100%;
+                height: 23px;
+
+                img {
+                    width: 100%;
+                    height: 23px;
+                }
+            }
+        }
+    }
+
+    .ab-searched-content {
+        display: none;
+        background: #fee7f1;
+        padding: 10px 12px;
+        max-height: 76vh;
+        overflow-y: scroll;
+
+        .drawer__content {
+            padding: 0;
+        }
+
+        .predictive-search__menu-list {
+            display: none;
+        }
+    }
+
+    .ab-search-bar-section__show-search-results {
+        .ab-suggestions-container {
+            display: none;
+        }
+
+        .ab-searched-content {
+            display: block;
+        }
+    }
+
+    .tabs-nav__position.is-initialized[style="--scale: NaN; --translate: NaN%;"] {
+        --scale: 0.17 !important;
+        --translate: 30% !important;
+    }
+
+    .header__icon-list a.header__icon-wrapper[href="/search"] {
+        display: none;
+    }
+
+    .ab-toggle-search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg {
+            margin-bottom: -1px;
+            height: 23px;
+            width: 100%;
+        }
+    }
 }
