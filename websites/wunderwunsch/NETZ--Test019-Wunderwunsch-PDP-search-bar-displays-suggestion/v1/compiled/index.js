@@ -263,6 +263,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         searchButton.addEventListener("click", () => handleSuggestionsView("show"));
         backdrop.addEventListener("click", () => handleSuggestionsView("hide"));
         q(searchBarSection, "input.ab-search-bar__input").addEventListener("input", handleInputChange);
+        q(searchBarSection, "input.ab-search-bar__input").addEventListener("change", handleInputChange);
         mutationObserverFunction();
     }
 
