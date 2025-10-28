@@ -1,9 +1,9 @@
 .TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown {
   overflow: hidden;
 }
-.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .ab-toggle-search,
-.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .header__logo {
-  display: none;
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .header__logo,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .ab-toggle-search {
+  opacity: 0;
 }
 .TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .ab-search-bar-backdrop,
 .TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .ab-search-bar-section {
@@ -104,8 +104,8 @@
   color: #727272;
 }
 .TEST019-SEARCH-BAR .ab-suggestions-content__items {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  justify-content: space-between;
   gap: 5px;
 }
 .TEST019-SEARCH-BAR .ab-suggestions-content__item {
@@ -158,6 +158,9 @@
 }
 .TEST019-SEARCH-BAR .top-selection-of-categories .ab-suggestions-content__item {
   gap: 5px;
+}
+.TEST019-SEARCH-BAR .popular-brands {
+  padding: 10px 12px 11px;
 }
 .TEST019-SEARCH-BAR .popular-brands .ab-suggestions-content__item {
   gap: 5px;

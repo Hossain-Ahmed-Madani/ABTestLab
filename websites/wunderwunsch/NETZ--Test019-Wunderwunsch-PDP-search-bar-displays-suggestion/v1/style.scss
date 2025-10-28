@@ -16,9 +16,9 @@
     &.TEST019-SEARCH-BAR--show-suggestions-dropdown {
         overflow: hidden;
 
-        .ab-toggle-search,
-        .header__logo {
-            display: none;
+        .header__logo,
+        .ab-toggle-search {
+            opacity: 0;
         }
 
         .ab-search-bar-backdrop,
@@ -140,8 +140,8 @@
     }
 
     .ab-suggestions-content__items {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
+        display: flex;
+        justify-content: space-between;
         gap: 5px;
     }
 
@@ -209,6 +209,8 @@
     }
 
     .popular-brands {
+        padding: 10px 12px 11px;
+
         .ab-suggestions-content__item {
             gap: 5px;
 
