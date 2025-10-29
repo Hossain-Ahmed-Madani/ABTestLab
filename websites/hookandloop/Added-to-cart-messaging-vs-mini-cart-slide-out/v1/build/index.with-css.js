@@ -39,6 +39,20 @@
 }
 .AB-MINI-CART
   #cart-drawer
+  .ab-product-has-options
+  div[x-text="getHookLoopType(item.product_name)"] {
+  margin-top: 11px;
+}
+@media screen and (min-width: 991px) {
+  .AB-MINI-CART
+    #cart-drawer
+    .ab-product-has-options
+    div[x-text="getHookLoopType(item.product_name)"] {
+    margin-top: 23px;
+  }
+}
+.AB-MINI-CART
+  #cart-drawer
   #cartDrawerContent:not([style="display:none;"])
   ~ .ab-show-loader {
   position: absolute;
@@ -812,7 +826,7 @@
       "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
     page_initials: "AB-MINI-CART",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -969,43 +983,43 @@
       {
         id: "6283",
         name: "DuraGrip® Brand Sew On Hook and Loop Fasteners",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/sew-on",
         sku: "Fasteners-DG-Sew-On",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/e/d/edited-colors-roll-stack1-resized.png",
-        price: "$0.25",
+        price: "$9.75",
       },
       {
         id: "6284",
         name: "VELCRO® Brand Sew On Hook and Loop Fasteners",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on",
         sku: "VSEWON-181214",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-velcro_190431.jpg",
-        price: "$0.72",
+        price: "$18.00",
       },
       {
         id: "6288",
         name: "DuraGrip® Brand Adhesive Backed Hook and Loop Fasteners",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/peel-and-stick",
         sku: "Adhesive-DG-Brand-peel-and-stick",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/p/s/ps_rolls-duragrip_white_rubber_liner_1.jpg",
-        price: "$0.59",
+        price: "$14.75",
       },
       {
         id: "6863",
         name: "VELCRO® Brand Adhesive Backed Hook and Loop Fasteners",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/peel-and-stick",
         sku: "VADHESIVE-161885",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/p/s/ps_rolls-velcro_black_acrylic_release_liner_2.jpg",
-        price: "$1.35",
+        price: "$33.75",
       },
       {
         id: "6286",
         name: "DuraGrip® Brand Hook and Loop Coins",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/coins",
         sku: "DC-DGC78WHL",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-duragrip_dgc34blh_1.png",
@@ -1014,7 +1028,7 @@
       {
         id: "6285",
         name: "VELCRO® Brand VELCOIN® Hook and Loop Fasteners",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/coins",
         sku: "VVC-192342",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-velcro_dots_192245_angled_1.png",
@@ -1023,7 +1037,7 @@
       {
         id: "6751",
         name: "DuraGrip Brand Wide Loop",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/wide-loop/duragrip-brand-wide-loop",
         sku: "DWL-170783REGAL60",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/c/o/coyote_brown_wide_loop2.jpg",
@@ -1032,7 +1046,7 @@
       {
         id: "6298",
         name: "VELCRO® Brand Wide Sheets and Loop",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/wide-loop",
         sku: "VW-195872",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-wideloop_reshoot_1.jpg",
@@ -1041,25 +1055,25 @@
       {
         id: "6299",
         name: "DuraGrip® Brand Polypropylene Webbing",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/webbing",
         sku: "DW-DG20RDWEBB",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/e/red_7_1_.jpg",
-        price: "$0.25",
+        price: "$25.00",
       },
       {
         id: "6747",
         name: "VELCRO® Brand ONE-WRAP® Fastener",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/double-sided-cable-ties",
         sku: "VOWF-170",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/o/n/one-wrap-black_7_1.jpg",
-        price: "$1.10",
+        price: "$27.50",
       },
       {
         id: "6308",
         name: "DuraGrip Brand Rings",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/duragrip/ring",
         sku: "DGRLHE2",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/2/_/2_inch_black_ring_pair_bn401-0200.jpg",
@@ -1068,11 +1082,11 @@
       {
         id: "6307",
         name: "VELCRO® Brand ONE-WRAP® Cable Ties",
-        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        url: "https://www.hookandloop.com/brands/velcro/cable-ties",
         sku: "VOWF-1707",
         image:
           "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/b/l/black_cable_ties_4_1_1.jpg",
-        price: "$0.50",
+        price: "$25.00",
       },
       {
         id: "6977",
@@ -1277,8 +1291,6 @@
       });
 
       this.container.remove();
-
-      console.log("Carousel destroyed!");
     }
   }
 
@@ -1388,7 +1400,7 @@
       const dom = new DOMParser().parseFromString(html, "text/html");
       return dom;
     } catch (error) {
-      console.error("Analysis failed:", error);
+      console.error("Fetch and parse failed:", error);
       return null;
     }
   }
@@ -1495,7 +1507,7 @@
             ({ productId, url }) => productId === item.id || url === item.url,
           ),
       )
-      .slice(0, 15);
+      .slice(0, 10);
 
     return carousel_data;
   }
@@ -1903,7 +1915,7 @@
       sideCart,
       ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100",
     );
-    productList.forEach(async (productElement) => {
+    productList.forEach((productElement) => {
       const priceElement = q(
         productElement,
         '.w-3\\/4 > p > span[x-html*="$"]',
@@ -1925,10 +1937,8 @@
       if (priceElement && productSkuElement) {
         const productSkuParentElement = productSkuElement.parentNode;
         productSkuParentElement.classList.add("ab-product-sku-price-container");
-
         const priceParentElement = priceElement.parentNode;
         priceParentElement.classList.add("ab-price-container");
-
         productSkuParentElement.appendChild(priceParentElement);
       }
 
@@ -1956,6 +1966,13 @@
           "afterend",
           div,
         );
+        productElement.classList.add("ab-product-has-options");
+      }
+
+      // Remove Empty Options ELement
+      if (q(productElement, ".ab-product-options-container:empty")) {
+        q(productElement, ".ab-product-options-container:empty").remove();
+        productElement.classList.remove("ab-product-has-options");
       }
 
       // Update Product Quantity New elements
@@ -2104,8 +2121,6 @@
 
       // Update Product Items
       updateProductElements(sideCart);
-
-      console.log("mutation completed all side cart elements updated...");
     });
   }
 

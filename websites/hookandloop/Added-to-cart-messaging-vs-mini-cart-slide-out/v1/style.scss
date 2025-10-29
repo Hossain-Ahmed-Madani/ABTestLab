@@ -41,6 +41,13 @@
             margin-top: 18px;
         }
     }
+    #cart-drawer  .ab-product-has-options div[x-text="getHookLoopType(item.product_name)"] {
+        margin-top: 11px;
+
+        @media screen and (min-width: 991px) {
+            margin-top: 23px;
+        }
+    }
 
     #cart-drawer {
         #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader {

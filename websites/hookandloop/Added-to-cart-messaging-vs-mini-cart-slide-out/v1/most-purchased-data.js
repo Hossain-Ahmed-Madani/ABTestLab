@@ -85,7 +85,7 @@ const mostPurchasedItems = [
         url: "https://www.hookandloop.com/brands/duragrip/ring",
         sku: "DGRLHE2",
         image: "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/2/_/2_inch_black_ring_pair_bn401-0200.jpg",
-        price: "$70.00",
+        price: "$0.35",
     },
     {
         id: "6307",
@@ -101,6 +101,6 @@ const mostPurchasedItems = [
         url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
         sku: "194149",
         image: "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/roll-mil_spec_hook.jpg",
-        price: "$63.5",
+        price: "$63.50",
     },
 ];

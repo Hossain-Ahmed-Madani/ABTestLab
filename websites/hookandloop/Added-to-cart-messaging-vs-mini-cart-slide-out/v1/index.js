@@ -22,7 +22,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -202,7 +202,7 @@
                 url: "https://www.hookandloop.com/brands/duragrip/ring",
                 sku: "DGRLHE2",
                 image: "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/2/_/2_inch_black_ring_pair_bn401-0200.jpg",
-                price: "$70.00",
+                price: "$0.35",
             },
             {
                 id: "6307",
@@ -210,7 +210,7 @@
                 url: "https://www.hookandloop.com/brands/velcro/cable-ties",
                 sku: "VOWF-1707",
                 image: "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/b/l/black_cable_ties_4_1_1.jpg",
-                price: "$0.50",
+                price: "$25.00",
             },
             {
                 id: "6977",
@@ -218,7 +218,7 @@
                 url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
                 sku: "194149",
                 image: "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/roll-mil_spec_hook.jpg",
-                price: "$63.5",
+                price: "$63.50",
             },
         ],
     };
@@ -404,8 +404,6 @@
             });
 
             this.container.remove();
-
-            console.log("Carousel destroyed!");
         }
     }
 
@@ -507,7 +505,7 @@
             const dom = new DOMParser().parseFromString(html, "text/html");
             return dom;
         } catch (error) {
-            console.error("Analysis failed:", error);
+            console.error("Fetch and parse failed:", error);
             return null;
         }
     }
@@ -596,7 +594,7 @@
 
         const all_products = [...pairs_well_with, ...recently_viewed, ...most_purchased];
         const unique_products = all_products.filter((product, index, self) => index === self.findIndex((p) => p.id === product.id));
-        const carousel_data = unique_products.filter((item) => !added_products.some(({ productId, url }) => productId === item.id || url === item.url)).slice(0, 15);
+        const carousel_data = unique_products.filter((item) => !added_products.some(({ productId, url }) => productId === item.id || url === item.url)).slice(0, 10);
 
         return carousel_data;
     }
@@ -893,7 +891,7 @@
 
     function updateProductElements(sideCart) {
         const productList = qq(sideCart, ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
-        productList.forEach(async (productElement) => {
+        productList.forEach((productElement) => {
             const priceElement = q(productElement, '.w-3\\/4 > p > span[x-html*="$"]');
             const productSkuElement = q(productElement, 'p.text-sm span[x-html="item\\.product_sku"]');
             const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
@@ -903,10 +901,8 @@
             if (priceElement && productSkuElement) {
                 const productSkuParentElement = productSkuElement.parentNode;
                 productSkuParentElement.classList.add("ab-product-sku-price-container");
-
                 const priceParentElement = priceElement.parentNode;
                 priceParentElement.classList.add("ab-price-container");
-
                 productSkuParentElement.appendChild(priceParentElement);
             }
 
@@ -923,6 +919,13 @@
                 div.className = "ab-product-options-container";
                 productOptionsElements.forEach((optionElement) => div.appendChild(optionElement));
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
+                productElement.classList.add("ab-product-has-options");
+            }
+
+            // Remove Empty Options ELement
+            if (q(productElement, ".ab-product-options-container:empty")) {
+                q(productElement, ".ab-product-options-container:empty").remove();
+                productElement.classList.remove("ab-product-has-options");
             }
 
             // Update Product Quantity New elements
@@ -1045,8 +1048,6 @@
 
             // Update Product Items
             updateProductElements(sideCart);
-
-            console.log("mutation completed all side cart elements updated...");
         });
     }
 

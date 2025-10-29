@@ -27,6 +27,14 @@
     margin-top: 18px;
   }
 }
+.AB-MINI-CART #cart-drawer .ab-product-has-options div[x-text="getHookLoopType(item.product_name)"] {
+  margin-top: 11px;
+}
+@media screen and (min-width: 991px) {
+  .AB-MINI-CART #cart-drawer .ab-product-has-options div[x-text="getHookLoopType(item.product_name)"] {
+    margin-top: 23px;
+  }
+}
 .AB-MINI-CART #cart-drawer #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader {
   position: absolute;
   display: flex !important;
