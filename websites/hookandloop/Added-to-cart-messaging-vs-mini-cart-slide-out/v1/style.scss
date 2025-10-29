@@ -310,13 +310,10 @@
     }
 
     .ab-product-options-container {
+        margin-top: 8px;
         display: flex;
         flex-direction: column;
         gap: 4px;
-    }
-
-    .ab-product-options-container:not(:has > div[x-show="showOption(option)"]:not([style="display:none;"])) {
-        margin-top: 8px;
     }
 
     .ab-product-options-container div[x-show="showOption(option)"]:not([style="display:none;"]) {

@@ -794,7 +794,7 @@
         };
     }
 
-    function getProductNewQuantityElement({ min, max }) {
+    function getProductNewQuantityElement() {
         const div = document.createElement("div");
         div.className = "ab-product-quantity-container";
         div.innerHTML = /* HTML */ `
@@ -804,10 +804,10 @@
                 type="number"
                 pattern="[0-9]{0,10}"
                 inputmode="numeric"
-                min="${min}"
-                max="${max}"
-                value="${min}"
-                class="ab-product-quantity text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
+                min="0"
+                max="1000000000"
+                value="0"
+                class="ab-product-quantity ab-product-quantity--input text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
             />
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
         `;
@@ -866,6 +866,17 @@
         const relatedProductContainerElement = q(sideCart, ".ab-related-products-container");
         if (!relatedProductContainerElement) return;
         insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
+    }
+
+    async function updateProductNewQuantityElementMinMax(productElement) {
+        const productQuantityInput = q(productElement, ".ab-product-quantity--input");
+
+        if (productQuantityInput &&  productQuantityInput.classList.contains("ab-product-quantity--min-max-updated")) return;
+
+        const { min, max } = await getProductItemMinMaxValues(productElement);
+        productQuantityInput.setAttribute("min", min);
+        productQuantityInput.setAttribute("max", max);
+        productQuantityInput.classList.add("ab-product-quantity--min-max-updated");
     }
 
     function getRelatedProductsElement() {
@@ -927,8 +938,7 @@
             const priceElement = q(productElement, '.w-3\\/4 > p > span[x-html*="$"]');
             const productSkuElement = q(productElement, 'p.text-sm span[x-html="item\\.product_sku"]');
             const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
-            const productOptionsElements = qq(productElement, "div[x-show='showOption(option)']");
-            const { min, max } = await getProductItemMinMaxValues(productElement);
+            const productOptionsElements = qq(productElement, "div[x-show='showOption(option)']:not([style='display: none;'])");
 
             // Relocate Price Element
             if (priceElement && productSkuElement) {
@@ -943,8 +953,9 @@
 
             // Create product quantity input
             if (!q(productElement, ".ab-product-quantity-container")) {
-                const div = getProductNewQuantityElement({ min, max });
+                const div = getProductNewQuantityElement();
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
+                updateProductNewQuantityElementMinMax(productElement);
             }
 
             // Create Options Container & Append Options
