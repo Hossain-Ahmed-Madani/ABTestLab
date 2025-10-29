@@ -8,8 +8,8 @@ TEST INFO:
 
     Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
     Preview will all experiences: 
-        v1: https://marketer.monetate.net/control/preview/12706/U6QJK6OLHBT5N5C2LNY35A0N0U0NKZ12/lme36-product-add-faq-carousel-within-buy-box
-        v2: https://marketer.monetate.net/control/preview/12706/G6HYT5FZMAA6LKPT6I04JEU2YJU8EQBE/lme36-product-add-faq-carousel-within-buy-box
+        v1: https://marketer.monetate.net/control/preview/12706/9LOM92CSKSEXMWJEIRIO0K0VOU3GF0B8/lme36-product-add-faq-carousel-within-buy-box
+        v2: https://marketer.monetate.net/control/preview/12706/61JXRF7AH0M49JYIO54464HI80UMB624/lme36-product-add-faq-carousel-within-buy-box
 
     Target urls:
         https://lemmelive.com/collections/all/products/lemme-glp-1
@@ -39,7 +39,7 @@ logInfo("fired");
         site_url: "https://lemmelive.com/",
         test_name: "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
         page_initials: "LME36",
-        test_variation: 2,
+        test_variation: 1,
         test_version: 0.0003,
     };
 

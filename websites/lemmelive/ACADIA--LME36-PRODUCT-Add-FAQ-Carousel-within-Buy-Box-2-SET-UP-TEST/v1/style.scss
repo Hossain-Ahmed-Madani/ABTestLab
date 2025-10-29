@@ -223,10 +223,13 @@
         line-height: 24px; /* 150% */
         text-align: left;
         width: 100%;
+
+        @media screen and (max-width: 768px) {
+            padding-bottom: 20px;
+        }
     }
 
     &--show-faq-dropdown {
-
         overflow: hidden;
 
         .faq-dropdown-backdrop {
@@ -238,6 +241,10 @@
             @media screen and (max-width: 768px) {
                 animation: slideIn 0.3s ease-in-out;
             }
+        }
+
+        #chat-button {
+            display: none !important;
         }
     }
 }

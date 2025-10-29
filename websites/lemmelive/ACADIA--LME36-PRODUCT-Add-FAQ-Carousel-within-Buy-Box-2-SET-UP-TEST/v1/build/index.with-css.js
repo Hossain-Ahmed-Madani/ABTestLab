@@ -191,6 +191,11 @@
   text-align: left;
   width: 100%;
 }
+@media screen and (max-width: 768px) {
+  .LME36 .faq-dropdown__body {
+    padding-bottom: 20px;
+  }
+}
 .LME36--show-faq-dropdown {
   overflow: hidden;
 }
@@ -204,6 +209,9 @@
   .LME36--show-faq-dropdown .faq-dropdown {
     animation: slideIn 0.3s ease-in-out;
   }
+}
+.LME36--show-faq-dropdown #chat-button {
+  display: none !important;
 }
 
 .LME36--v1 .custom-benefit-controls {
@@ -242,8 +250,8 @@ TEST INFO:
 
     Container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2054686#c2580323:what
     Preview will all experiences: 
-        v1: https://marketer.monetate.net/control/preview/12706/U6QJK6OLHBT5N5C2LNY35A0N0U0NKZ12/lme36-product-add-faq-carousel-within-buy-box
-        v2: https://marketer.monetate.net/control/preview/12706/G6HYT5FZMAA6LKPT6I04JEU2YJU8EQBE/lme36-product-add-faq-carousel-within-buy-box
+        v1: https://marketer.monetate.net/control/preview/12706/9LOM92CSKSEXMWJEIRIO0K0VOU3GF0B8/lme36-product-add-faq-carousel-within-buy-box
+        v2: https://marketer.monetate.net/control/preview/12706/61JXRF7AH0M49JYIO54464HI80UMB624/lme36-product-add-faq-carousel-within-buy-box
 
     Target urls:
         https://lemmelive.com/collections/all/products/lemme-glp-1
