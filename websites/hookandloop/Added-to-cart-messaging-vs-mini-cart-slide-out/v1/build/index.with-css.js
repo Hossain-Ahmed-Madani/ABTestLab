@@ -11,6 +11,9 @@
   /* Optional: Different delays for staggered effect */
   /* Responsive design */
 }
+.AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot {
+  z-index: 1;
+}
 .AB-MINI-CART section#messages[aria-live="assertive"][role="alert"] {
   display: none;
 }
@@ -23,6 +26,15 @@
   .absolute.left-1\/2.-translate-x-1\/2.-translate-y-1\/2.relative.px-4.py-6.bg-white.border-bs.sm\:px-6.border-container.flex.flex-col.items-center.justify-center.p-6.text-center
   ~ .ab-product-section-container {
   display: none;
+}
+.AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
+  margin-top: 6px;
+  height: 28px;
+}
+@media screen and (min-width: 991px) {
+  .AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
+    margin-top: 18px;
+  }
 }
 .AB-MINI-CART
   #cart-drawer
@@ -128,6 +140,15 @@
   width: 15px;
   height: 15px;
 }
+.AB-MINI-CART
+  #cart-drawer
+  .relative.grid.mt-6.sm\:mt-6.py-3.px-1.sm\:px-3.bg-white
+  .w-full.pb-3.px-3
+  .bg-black.border-1.border-black.font-poppins.font-bold.text-sm.flex.px-4.py-1\.5.justify-center.items-center.text-white.rounded-\[3px\].shadow-lg
+  span[x-show="tooltip"] {
+  top: -48px !important;
+  left: 27px !important;
+}
 .AB-MINI-CART #cart-drawer .hover\:bg-gray-100:hover {
   background-color: #fff;
 }
@@ -174,6 +195,8 @@
 {
   padding: 12px 0;
   border: 0;
+  background-color: rgb(29, 29, 29);
+  border-color: rgb(29, 29, 29);
 }
 .AB-MINI-CART #cart-drawer .w-full.flex.items-center.flex-col.p-3.gap-2.transition.duration-150.ease-in-out.rounded-lg.hover\:bg-gray-100 a[href="https://www.hookandloop.com/checkout/cart/"]
 {
@@ -791,7 +814,7 @@
       "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
     page_initials: "AB-MINI-CART",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -946,184 +969,121 @@
     ],
     most_purchased: [
       {
-        id: "6959",
-        name: 'Tempo 60" Display Laminated Loop Fabric',
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/wide-loop\/tempo-60-display-laminated-loop-fabric",
-        sku: "DG-TEMPO",
+        id: "6283",
+        name: "DuraGrip® Brand Sew On Hook and Loop Fasteners",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "Fasteners-DG-Sew-On",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/t\/e\/tempo3_2.jpg",
-        price: "$45.45",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/e/d/edited-colors-roll-stack1-resized.png",
+        price: "$0.25",
+      },
+      {
+        id: "6284",
+        name: "VELCRO® Brand Sew On Hook and Loop Fasteners",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "VSEWON-181214",
+        image:
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-velcro_190431.jpg",
+        price: "$0.72",
+      },
+      {
+        id: "6288",
+        name: "DuraGrip® Brand Adhesive Backed Hook and Loop Fasteners",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "Adhesive-DG-Brand-peel-and-stick",
+        image:
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/p/s/ps_rolls-duragrip_white_rubber_liner_1.jpg",
+        price: "$0.59",
       },
       {
         id: "6863",
-        name: "VELCRO\u00ae Brand Adhesive Backed Hook and Loop Fasteners",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/peel-and-stick",
+        name: "VELCRO® Brand Adhesive Backed Hook and Loop Fasteners",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
         sku: "VADHESIVE-161885",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/p\/s\/ps_rolls-velcro_black_acrylic_release_liner_2.jpg",
-        price: "$33.75-$202.00",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/p/s/ps_rolls-velcro_black_acrylic_release_liner_2.jpg",
+        price: "$1.35",
       },
       {
-        id: "6753",
-        name: "DuraGrip Brand Display Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/wide-loop\/display-loop",
-        sku: "DWL-170783REGAL63",
+        id: "6286",
+        name: "DuraGrip® Brand Hook and Loop Coins",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "DC-DGC78WHL",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/w\/i\/wide_loop-electric_blue_regal_detail_2.jpg",
-        price: "$49.15",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-duragrip_dgc34blh_1.png",
+        price: "$33.75",
+      },
+      {
+        id: "6285",
+        name: "VELCRO® Brand VELCOIN® Hook and Loop Fasteners",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "VVC-192342",
+        image:
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-velcro_dots_192245_angled_1.png",
+        price: "$60.00",
       },
       {
         id: "6751",
         name: "DuraGrip Brand Wide Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/wide-loop\/duragrip-brand-wide-loop",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
         sku: "DWL-170783REGAL60",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/c\/o\/coyote_brown_wide_loop2.jpg",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/c/o/coyote_brown_wide_loop2.jpg",
         price: "$38.07",
       },
       {
-        id: "6747",
-        name: "VELCRO\u00ae Brand ONE-WRAP\u00ae Fastener",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/double-sided-cable-ties",
-        sku: "VOWF-170",
+        id: "6298",
+        name: "VELCRO® Brand Wide Sheets and Loop",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "VW-195872",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/o\/n\/one-wrap-black_7_1.jpg",
-        price: "$27.50-$193.25",
-      },
-      {
-        id: "6307",
-        name: "VELCRO\u00ae Brand ONE-WRAP\u00ae Cable Ties",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/cable-ties",
-        sku: "VOWF-1707",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/b\/l\/black_cable_ties_4_1_1.jpg",
-        price: "$0.50-$2.47",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/rolls-wideloop_reshoot_1.jpg",
+        price: "$14.55",
       },
       {
         id: "6299",
-        name: "DuraGrip\u00ae Brand Polypropylene Webbing",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/webbing",
+        name: "DuraGrip® Brand Polypropylene Webbing",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
         sku: "DW-DG20RDWEBB",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/e\/red_7_1_.jpg",
-        price: "$25.00-$118.00",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/e/red_7_1_.jpg",
+        price: "$0.25",
       },
       {
-        id: "6298",
-        name: "VELCRO\u00ae Brand Wide Sheets and Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/wide-loop",
-        sku: "VW-195872",
+        id: "6747",
+        name: "VELCRO® Brand ONE-WRAP® Fastener",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "VOWF-170",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-wideloop_reshoot_1.jpg",
-        price: "$14.55-$37.25",
-      },
-      {
-        id: "6288",
-        name: "DuraGrip\u00ae Brand Adhesive Backed Hook and Loop Fasteners",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/peel-and-stick",
-        sku: "Adhesive-DG-Brand-peel-and-stick",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/p\/s\/ps_rolls-duragrip_white_rubber_liner_1.jpg",
-        price: "$14.75-$146.75",
-      },
-      {
-        id: "6286",
-        name: "DuraGrip\u00ae Brand Hook and Loop Coins",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/coins",
-        sku: "DC-DGC78WHL",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-duragrip_dgc34blh_1.png",
-        price: "$33.75-$67.50",
-      },
-      {
-        id: "6285",
-        name: "VELCRO\u00ae Brand VELCOIN\u00ae Hook and Loop Fasteners",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/coins",
-        sku: "VVC-192342",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-velcro_dots_192245_angled_1.png",
-        price: "$60.00-$117.50",
-      },
-      {
-        id: "6284",
-        name: "VELCRO\u00ae Brand Sew On Hook and Loop Fasteners",
-        url: "https:\/\/www.hookandloop.com\/brands\/velcro\/sew-on",
-        sku: "VSEWON-181214",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-velcro_190431.jpg",
-        price: "$18.00-$271.75",
-      },
-      {
-        id: "6361",
-        name: "DuraGrip Brand Medical Channel Loop Fasteners",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/duragrip-brand-medical-channel-loop-fasteners",
-        sku: "DG10BLCL-CON",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/d\/g\/dg10channel_copy.png",
-        price: "$42.50-$106.25",
-      },
-      {
-        id: "6360",
-        name: "DuraGrip Brand Adhesive Backed Fire Retardant Hook and Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/specialty\/sew-on-fire-retardant-hook-and-loop",
-        sku: "DFR-DG10BLHFRA",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/p\/s\/ps_rolls-duragrip_black_rubber_shear_1.jpg",
-        price: "$50.88-$126.23",
-      },
-      {
-        id: "6341",
-        name: "DuraGrip Brand Back to Back Hook and Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/specialty\/back-to-back-hook-and-loop",
-        sku: "CON-DLTL-DG10BLL",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-hook_to_hook_detail_macro_1.jpg",
-        price: "$46.75-$93.75",
-      },
-      {
-        id: "6310",
-        name: "DuraGrip Brand Low-Profile Hook",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/specialty\/duragrip-brand-low-profile-hook",
-        sku: "DG-LOW-PROFILE",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/d\/g\/dg10h3_copy_3.png",
-        price: "$17.50-$102.00",
-      },
-      {
-        id: "6309",
-        name: "DuraGrip Brand Total Hook Fastener",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/specialty\/duragrip-brand-total-hook-fastener",
-        sku: "DTH-DG15BLTH",
-        image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/r\/o\/rolls-total_hook_detail_1_1_.jpg",
-        price: "$23.75-$57.50",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/o/n/one-wrap-black_7_1.jpg",
+        price: "$1.10",
       },
       {
         id: "6308",
         name: "DuraGrip Brand Rings",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/ring",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
         sku: "DGRLHE2",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/2\/_\/2_inch_black_ring_pair_bn401-0200.jpg",
-        price: "$70.00",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/2/_/2_inch_black_ring_pair_bn401-0200.jpg",
+        price: "$0.35",
       },
       {
-        id: "6303",
-        name: "DuraGrip Brand Stretch Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/stretch-loop",
-        sku: "DSTR-DG58BLS",
+        id: "6307",
+        name: "VELCRO® Brand ONE-WRAP® Cable Ties",
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "VOWF-1707",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/s\/t\/stretch_loop_1_.jpg",
-        price: "$70.00-$189.20",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/b/l/black_cable_ties_4_1_1.jpg",
+        price: "$0.50",
       },
       {
-        id: "6293",
-        name: "DuraGrip\u00ae Brand Electrically Conductive Hook and Loop",
-        url: "https:\/\/www.hookandloop.com\/brands\/duragrip\/specialty\/electrically-conductive-hook-and-loop",
-        sku: "DEC-DG20ELCL",
+        id: "6977",
+        name: 'VELCRO® Brand - 1" Black Hook 65 Sew-On',
+        url: "https://www.hookandloop.com/brands/velcro/sew-on/1-velcro-brand-sew-on-hook-black",
+        sku: "194149",
         image:
-          "https:\/\/www.hookandloop.com\/media\/catalog\/product\/cache\/74c1057f7991b4edb2bc7bdaa94de933\/d\/g\/dgelcl_2.jpg",
-        price: "$54.12-$87.57",
+          "https://www.hookandloop.com/media/catalog/product/cache/207e23213cf636ccdef205098cf3c8a3/r/o/roll-mil_spec_hook.jpg",
+        price: "$63.50",
       },
     ],
   };
@@ -1232,7 +1192,7 @@
       // Update navigation on scroll (debounced)
       this.updateNavigationDebounced = debounce(() => {
         this.updateNavigation();
-      }, 100);
+      }, 25);
 
       this.cardContainer.addEventListener(
         "scroll",
@@ -1324,37 +1284,12 @@
     }
   }
 
-  async function waitForElementAsync(
-    predicate,
-    timeout = 20000,
-    frequency = 150,
-  ) {
-    const startTime = Date.now();
+  function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
 
-    return new Promise((resolve, reject) => {
-      // Check immediately first
-      if (typeof predicate === "function" && predicate()) {
-        return resolve(true);
-      }
-
-      const interval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-
-        if (elapsed >= timeout) {
-          clearInterval(interval);
-          return reject(
-            new Error(
-              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
-            ),
-          );
-        }
-
-        if (typeof predicate === "function" && predicate()) {
-          clearInterval(interval);
-          return resolve(true);
-        }
-      }, frequency);
-    });
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
   function debounce(func, wait) {
@@ -1392,12 +1327,37 @@
     }
   }
 
-  function q(s, o) {
-    return o ? s.querySelector(o) : document.querySelector(s);
-  }
+  async function waitForElementAsync(
+    predicate,
+    timeout = 20000,
+    frequency = 150,
+  ) {
+    const startTime = Date.now();
 
-  function qq(s, o) {
-    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    return new Promise((resolve, reject) => {
+      // Check immediately first
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
+
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+
+        if (elapsed >= timeout) {
+          clearInterval(interval);
+          return reject(
+            new Error(
+              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
+            ),
+          );
+        }
+
+        if (typeof predicate === "function" && predicate()) {
+          clearInterval(interval);
+          return resolve(true);
+        }
+      }, frequency);
+    });
   }
 
   function getSideCartProductData(productElement) {
@@ -1512,6 +1472,31 @@
     return true;
   }
 
+  async function getSliderDataApi() {
+    const { pairs_well_with, recently_viewed, most_purchased } = PRODUCT_DATA;
+    const added_products = STATE["added_products"];
+
+    const all_products = [
+      ...pairs_well_with,
+      ...recently_viewed,
+      ...most_purchased,
+    ];
+    const unique_products = all_products.filter(
+      (product, index, self) =>
+        index === self.findIndex((p) => p.id === product.id),
+    );
+    const carousel_data = unique_products
+      .filter(
+        (item) =>
+          !added_products.some(
+            ({ productId, url }) => productId === item.id || url === item.url,
+          ),
+      )
+      .slice(0, 15);
+
+    return carousel_data;
+  }
+
   async function productQuantityUpdateRequestApi({
     productId,
     sku,
@@ -1554,41 +1539,6 @@
     );
 
     return response;
-  }
-
-  async function getSliderDataApi() {
-    const { pairs_well_with, recently_viewed, most_purchased } = PRODUCT_DATA;
-    const added_products = STATE["added_products"];
-
-    const carousel_data = [];
-
-    if (pairs_well_with.length > 0) {
-      const tmp = pairs_well_with.filter(
-        (item) =>
-          !added_products.some(({ productId }) => productId === item.id),
-      );
-      carousel_data.push(...tmp);
-    }
-
-    if (carousel_data.length < 15 && recently_viewed.length > 0) {
-      const tmp = recently_viewed.filter(
-        (item) =>
-          !added_products.some(({ productId }) => productId === item.id),
-      );
-      carousel_data.push(...tmp);
-    }
-
-    if (carousel_data.length < 15 && most_purchased.length > 0) {
-      const tmp = most_purchased
-        .filter(
-          (item) =>
-            !added_products.some(({ productId }) => productId === item.id),
-        )
-        .slice(0, 15 - carousel_data.length);
-      carousel_data.push(...tmp);
-    }
-
-    return carousel_data;
   }
 
   const debouncedUpdateQuantity = debounce(
@@ -1634,33 +1584,44 @@
   }
 
   async function handleProductSideCartQuantityUpdate(e) {
+    if (!e.target.closest(".ab-product-quantity-update-action")) return;
+
     const currentTarget = e.currentTarget;
     const productQuantityInput = q(currentTarget, "input.ab-product-quantity");
     const productElement = e.target.closest(
-      ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100 ",
+      ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100",
     );
     const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-    const isValid = checkInputValidity(productQuantityInput);
-
-    if (!e.target.closest(".ab-product-quantity-update-action")) return;
+    const min = +productQuantityInput.getAttribute("min");
+    const max = +productQuantityInput.getAttribute("max");
 
     let quantity = +productQuantityInput.value;
 
+    // Increment | Decrement Quantity
     if (
       e.target.closest(".ab-product-quantity-update-action__minus") &&
-      quantity > 0
+      quantity > min
     ) {
       quantity--;
     }
-    if (e.target.closest(".ab-product-quantity-update-action__plus")) {
+    if (
+      e.target.closest(".ab-product-quantity-update-action__plus") &&
+      quantity < max
+    ) {
       quantity++;
     }
 
+    // Check If Value Is Updated
+    if (+productQuantityInput.value === quantity) return;
+
+    // Update Value
     productQuantityInput.value = quantity;
     productQuantityElement.innerText = quantity;
+    const isValid = checkInputValidity(productQuantityInput);
 
     if (!isValid) return;
 
+    // Update SideCart
     if (quantity === 0) {
       const productRemoveButton = q(
         productElement,
@@ -1727,6 +1688,26 @@
     `;
   }
 
+  async function getProductItemMinMaxValues(productElement) {
+    const { url } = getSideCartProductData(productElement);
+    const dom = await fetchAndParseURLApi(url);
+    const inputElement = q(
+      dom,
+      "input[name='qty'][form='product_addtocart_form']",
+    );
+
+    const min =
+      inputElement?.getAttribute("min") ||
+      inputElement?.getAttribute("value") ||
+      0;
+    const max = inputElement?.getAttribute("max") || 0;
+
+    return {
+      min,
+      max,
+    };
+  }
+
   function getProductNewQuantityElement() {
     const div = document.createElement("div");
     div.className = "ab-product-quantity-container";
@@ -1738,15 +1719,14 @@
         ${ASSETS.minus_svg}
       </button>
       <input
-        name="qty"
-        form="product_addtocart_form"
+        name="sidecart-qty"
         type="number"
         pattern="[0-9]{0,10}"
         inputmode="numeric"
         min="0"
         max="1000000000"
-        value="1"
-        class="ab-product-quantity text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
+        value="0"
+        class="ab-product-quantity ab-product-quantity--input text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
       />
       <button
         type="button"
@@ -1794,7 +1774,7 @@
         ${ASSETS.slider_prev_svg}
       </button>
       <button
-        class="ab-carousel-btn ab-carousel-btn--next disabled"
+        class="ab-carousel-btn ab-carousel-btn--next"
         aria-label="Next products"
       >
         ${ASSETS.slider_next_svg}
@@ -1826,6 +1806,26 @@
     );
     if (!relatedProductContainerElement) return;
     insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
+  }
+
+  async function updateProductNewQuantityElementMinMax(productElement) {
+    const productQuantityInput = q(
+      productElement,
+      ".ab-product-quantity--input",
+    );
+
+    if (
+      productQuantityInput &&
+      productQuantityInput.classList.contains(
+        "ab-product-quantity--min-max-updated",
+      )
+    )
+      return;
+
+    const { min, max } = await getProductItemMinMaxValues(productElement);
+    productQuantityInput.setAttribute("min", min);
+    productQuantityInput.setAttribute("max", max);
+    productQuantityInput.classList.add("ab-product-quantity--min-max-updated");
   }
 
   function getRelatedProductsElement() {
@@ -1900,10 +1900,10 @@
       sideCart,
       ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100",
     );
-    productList.forEach((productElement) => {
+    productList.forEach(async (productElement) => {
       const priceElement = q(
         productElement,
-        '.w-3\\/4.space-y-2 > p > span[x-html*="$"]',
+        '.w-3\\/4 > p > span[x-html*="$"]',
       );
       const productSkuElement = q(
         productElement,
@@ -1915,7 +1915,7 @@
       );
       const productOptionsElements = qq(
         productElement,
-        "div[x-show='showOption(option)']",
+        "div[x-show='showOption(option)']:not([style='display: none;'])",
       );
 
       // Relocate Price Element
@@ -1936,6 +1936,7 @@
           "afterend",
           div,
         );
+        updateProductNewQuantityElementMinMax(productElement);
       }
 
       // Create Options Container & Append Options

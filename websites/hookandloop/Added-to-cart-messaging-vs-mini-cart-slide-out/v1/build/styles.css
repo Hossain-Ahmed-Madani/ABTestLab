@@ -1,3 +1,6 @@
+.AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot {
+    z-index: 1;
+}
 .AB-MINI-CART section#messages[aria-live="assertive"][role="alert"] {
     display: none;
 }
@@ -10,6 +13,15 @@
     .absolute.left-1\/2.-translate-x-1\/2.-translate-y-1\/2.relative.px-4.py-6.bg-white.border-bs.sm\:px-6.border-container.flex.flex-col.items-center.justify-center.p-6.text-center
     ~ .ab-product-section-container {
     display: none;
+}
+.AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
+    margin-top: 6px;
+    height: 28px;
+}
+@media screen and (min-width: 991px) {
+    .AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
+        margin-top: 18px;
+    }
 }
 .AB-MINI-CART #cart-drawer #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader {
     position: absolute;
@@ -96,6 +108,15 @@
     width: 15px;
     height: 15px;
 }
+.AB-MINI-CART
+    #cart-drawer
+    .relative.grid.mt-6.sm\:mt-6.py-3.px-1.sm\:px-3.bg-white
+    .w-full.pb-3.px-3
+    .bg-black.border-1.border-black.font-poppins.font-bold.text-sm.flex.px-4.py-1\.5.justify-center.items-center.text-white.rounded-\[3px\].shadow-lg
+    span[x-show="tooltip"] {
+    top: -48px !important;
+    left: 27px !important;
+}
 .AB-MINI-CART #cart-drawer .hover\:bg-gray-100:hover {
     background-color: #fff;
 }
@@ -135,6 +156,8 @@
 {
     padding: 12px 0;
     border: 0;
+    background-color: rgb(29, 29, 29);
+    border-color: rgb(29, 29, 29);
 }
 .AB-MINI-CART #cart-drawer .w-full.flex.items-center.flex-col.p-3.gap-2.transition.duration-150.ease-in-out.rounded-lg.hover\:bg-gray-100 a[href="https://www.hookandloop.com/checkout/cart/"]
 {

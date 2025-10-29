@@ -12,7 +12,6 @@
     Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
     Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
 
-
 */
 
 (async () => {
