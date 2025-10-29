@@ -331,6 +331,10 @@
         display: flex;
         flex-direction: column;
         gap: 4px;
+
+        &:empty {
+            display: none;
+        }
     }
 
     .ab-product-options-container div[x-show="showOption(option)"]:not([style="display:none;"]) {

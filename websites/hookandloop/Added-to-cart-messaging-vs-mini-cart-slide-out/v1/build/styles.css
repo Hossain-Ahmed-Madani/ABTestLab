@@ -289,6 +289,9 @@
     flex-direction: column;
     gap: 4px;
 }
+.AB-MINI-CART .ab-product-options-container:empty {
+    display: none;
+}
 .AB-MINI-CART .ab-product-options-container div[x-show="showOption(option)"]:not([style="display:none;"]) {
     display: flex;
     justify-content: flex-start;
