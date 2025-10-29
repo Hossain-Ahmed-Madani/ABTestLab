@@ -11,7 +11,8 @@
   /* Optional: Different delays for staggered effect */
   /* Responsive design */
 }
-.AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot {
+.AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot,
+.AB-MINI-CART[style="padding-right: 0px; overflow: hidden;"] #elx-chatbot {
   z-index: 1;
 }
 .AB-MINI-CART section#messages[aria-live="assertive"][role="alert"] {
@@ -801,7 +802,6 @@
 
     Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
     Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
-
 
 */
 
