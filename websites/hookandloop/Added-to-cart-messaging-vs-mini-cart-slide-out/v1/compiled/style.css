@@ -19,8 +19,13 @@
   display: none;
 }
 .AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
-  margin-top: 18px;
+  margin-top: 6px;
   height: 28px;
+}
+@media screen and (min-width: 991px) {
+  .AB-MINI-CART #cart-drawer div[x-text="getHookLoopType(item.product_name)"] {
+    margin-top: 18px;
+  }
 }
 .AB-MINI-CART #cart-drawer #cartDrawerContent:not([style="display:none;"]) ~ .ab-show-loader {
   position: absolute;
