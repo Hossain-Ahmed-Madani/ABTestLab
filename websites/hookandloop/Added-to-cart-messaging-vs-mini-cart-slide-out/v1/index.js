@@ -23,7 +23,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -466,29 +466,12 @@
         }
     }
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
-        const startTime = Date.now();
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
 
-        return new Promise((resolve, reject) => {
-            // Check immediately first
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            const interval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-
-                if (elapsed >= timeout) {
-                    clearInterval(interval);
-                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
-                }
-
-                if (typeof predicate === "function" && predicate()) {
-                    clearInterval(interval);
-                    return resolve(true);
-                }
-            }, frequency);
-        });
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
     function debounce(func, wait) {
@@ -528,12 +511,29 @@
         }
     }
 
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
-    }
+    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+        const startTime = Date.now();
 
-    function qq(s, o) {
-        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+        return new Promise((resolve, reject) => {
+            // Check immediately first
+            if (typeof predicate === "function" && predicate()) {
+                return resolve(true);
+            }
+
+            const interval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+
+                if (elapsed >= timeout) {
+                    clearInterval(interval);
+                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
+                }
+
+                if (typeof predicate === "function" && predicate()) {
+                    clearInterval(interval);
+                    return resolve(true);
+                }
+            }, frequency);
+        });
     }
 
     function getSideCartProductData(productElement) {
@@ -642,6 +642,17 @@
         return true;
     }
 
+    async function getSliderDataApi() {
+        const { pairs_well_with, recently_viewed, most_purchased } = PRODUCT_DATA;
+        const added_products = STATE["added_products"];
+
+        const all_products = [...pairs_well_with, ...recently_viewed, ...most_purchased];
+        const unique_products = all_products.filter((product, index, self) => index === self.findIndex((p) => p.id === product.id));
+        const carousel_data = unique_products.filter((item) => !added_products.some(({ productId, url }) => productId === item.id || url === item.url)).slice(0, 15);
+
+        return carousel_data;
+    }
+
     async function productQuantityUpdateRequestApi({ productId, sku, measurementUnit, quantity }) {
         const formData = new FormData();
         const formKey = window.hyva.getFormKey();
@@ -674,30 +685,6 @@
         return response;
     }
 
-    async function getSliderDataApi() {
-        const { pairs_well_with, recently_viewed, most_purchased } = PRODUCT_DATA;
-        const added_products = STATE["added_products"];
-
-        const carousel_data = [];
-
-        if (pairs_well_with.length > 0) {
-            const tmp = pairs_well_with.filter((item) => !added_products.some(({ productId }) => productId === item.id));
-            carousel_data.push(...tmp);
-        }
-
-        if (carousel_data.length < 15 && recently_viewed.length > 0) {
-            const tmp = recently_viewed.filter((item) => !added_products.some(({ productId }) => productId === item.id));
-            carousel_data.push(...tmp);
-        }
-
-        if (carousel_data.length < 15 && most_purchased.length > 0) {
-            const tmp = most_purchased.filter((item) => !added_products.some(({ productId }) => productId === item.id)).slice(0, 15 - carousel_data.length);
-            carousel_data.push(...tmp);
-        }
-
-        return carousel_data;
-    }
-
     const debouncedUpdateQuantity = debounce(async ({ productId, sku, measurementUnit, quantity }) => {
         const loaderElements = qq("#cart-drawer .z-50.fixed.inset-0.grid.place-items-center.bg-white\\/70.text-slate-800");
         loaderElements?.forEach((loaderElement) => loaderElement.classList.add("ab-show-loader"));
@@ -727,28 +714,36 @@
     }
 
     async function handleProductSideCartQuantityUpdate(e) {
+        if (!e.target.closest(".ab-product-quantity-update-action")) return;
+
         const currentTarget = e.currentTarget;
         const productQuantityInput = q(currentTarget, "input.ab-product-quantity");
-        const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100 ");
+        const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
         const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-        const isValid = checkInputValidity(productQuantityInput);
-
-        if (!e.target.closest(".ab-product-quantity-update-action")) return;
+        const min = +productQuantityInput.getAttribute("min");
+        const max = +productQuantityInput.getAttribute("max");
 
         let quantity = +productQuantityInput.value;
 
-        if (e.target.closest(".ab-product-quantity-update-action__minus") && quantity > 0) {
+        // Increment | Decrement Quantity
+        if (e.target.closest(".ab-product-quantity-update-action__minus") && quantity > min) {
             quantity--;
         }
-        if (e.target.closest(".ab-product-quantity-update-action__plus")) {
+        if (e.target.closest(".ab-product-quantity-update-action__plus") && quantity < max) {
             quantity++;
         }
 
+        // Check If Value Is Updated
+        if (+productQuantityInput.value === quantity) return;
+
+        // Update Value
         productQuantityInput.value = quantity;
         productQuantityElement.innerText = quantity;
+        const isValid = checkInputValidity(productQuantityInput);
 
         if (!isValid) return;
 
+        // Update SideCart
         if (quantity === 0) {
             const productRemoveButton = q(productElement, " button[type=button][aria-label='Close minicart'].text-black.transition-colors.hover\\:text-hnleb0 ");
             productRemoveButton?.click();
@@ -796,20 +791,33 @@
         `;
     }
 
-    function getProductNewQuantityElement() {
+    async function getProductItemMinMaxValues(productElement) {
+        const { url } = getSideCartProductData(productElement);
+        const dom = await fetchAndParseURLApi(url);
+        const inputElement = q(dom, "input[name='qty'][form='product_addtocart_form']");
+
+        const min = inputElement?.getAttribute("min") || inputElement?.getAttribute("value") || 0;
+        const max = inputElement?.getAttribute("max") || 0;
+
+        return {
+            min,
+            max,
+        };
+    }
+
+    function getProductNewQuantityElement({ min, max }) {
         const div = document.createElement("div");
         div.className = "ab-product-quantity-container";
         div.innerHTML = /* HTML */ `
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__minus">${ASSETS.minus_svg}</button>
             <input
-                name="qty"
-                form="product_addtocart_form"
+                name="sidecart-qty"
                 type="number"
                 pattern="[0-9]{0,10}"
                 inputmode="numeric"
-                min="0"
-                max="1000000000"
-                value="1"
+                min="${min}"
+                max="${max}"
+                value="${min}"
                 class="ab-product-quantity text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
             />
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
@@ -844,7 +852,7 @@
             </div>
 
             <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
-            <button class="ab-carousel-btn ab-carousel-btn--next disabled" aria-label="Next products">${ASSETS.slider_next_svg}</button>
+            <button class="ab-carousel-btn ab-carousel-btn--next" aria-label="Next products">${ASSETS.slider_next_svg}</button>
         `;
 
         return div;
@@ -926,11 +934,12 @@
 
     function updateProductElements(sideCart) {
         const productList = qq(sideCart, ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
-        productList.forEach((productElement) => {
-            const priceElement = q(productElement, '.w-3\\/4.space-y-2 > p > span[x-html*="$"]');
+        productList.forEach(async (productElement) => {
+            const priceElement = q(productElement, '.w-3\\/4 > p > span[x-html*="$"]');
             const productSkuElement = q(productElement, 'p.text-sm span[x-html="item\\.product_sku"]');
             const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
             const productOptionsElements = qq(productElement, "div[x-show='showOption(option)']");
+            const { min, max } = await getProductItemMinMaxValues(productElement);
 
             // Relocate Price Element
             if (priceElement && productSkuElement) {
@@ -945,7 +954,7 @@
 
             // Create product quantity input
             if (!q(productElement, ".ab-product-quantity-container")) {
-                const div = getProductNewQuantityElement();
+                const div = getProductNewQuantityElement({ min, max });
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
             }
 
@@ -1063,7 +1072,6 @@
 
     async function updateSideCartLayout() {
         qq("#cart-drawer").forEach((sideCart) => {
-            
             // Remove Items when side cart is empty
             removeItemsOnCartEmpty(sideCart);
 
