@@ -1,8 +1,5 @@
 /* 
     Figma: https://www.figma.com/design/r2kIVxrX2bkhta3IoxcG8i/H---L---A-B-test-idea---Added-to-cart-messaging-vs.-mini-cart-slide-out.?node-id=4060-3077&t=ix25ZW6SqnFUFMRQ-0
-    Test container: 
-    Preview: 
-
 
     urls: 
     https://www.hookandloop.com/brands/duragrip/sew-on/1-2-duragrip-brand-sew-on-loop-white
