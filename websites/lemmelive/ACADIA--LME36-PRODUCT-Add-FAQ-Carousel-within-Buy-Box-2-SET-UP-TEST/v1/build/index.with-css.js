@@ -100,7 +100,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 285px;
+    height: max-content;
     margin-top: auto;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -275,7 +275,7 @@ logInfo("fired");
       "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
     page_initials: "LME36",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

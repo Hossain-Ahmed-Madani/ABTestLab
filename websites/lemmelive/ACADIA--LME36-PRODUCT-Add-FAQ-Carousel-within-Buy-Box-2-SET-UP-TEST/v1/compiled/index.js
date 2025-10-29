@@ -39,8 +39,8 @@ logInfo("fired");
         site_url: "https://lemmelive.com/",
         test_name: "LME36: [PRODUCT] Add FAQ Carousel within Buy Box - (2) SET UP TEST",
         page_initials: "LME36",
-        test_variation: 1,
-        test_version: 0.0002,
+        test_variation: 2,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -129,7 +129,7 @@ logInfo("fired");
 
     const STATE = {
         previouslyClickedTabElement: null,
-        faqActive: true,
+        faqActive: false ,
     };
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
@@ -277,9 +277,14 @@ logInfo("fired");
     }
 
     function createV2Layout() {
-        getFaqData();
+        const found_data = getFaqData();
 
-        return;
+        if (!found_data) return;
+
+        q(".benefit-nav").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ ` <a href="javascript:void(0)" style="color: rgb(113, 75, 103); text-decoration: underline; display: inline-flex; align-items: center; gap: 4px;">FAQs</a> `
+        );
     }
 
     function handleDropdownView(action /* show, hide, toggle */) {

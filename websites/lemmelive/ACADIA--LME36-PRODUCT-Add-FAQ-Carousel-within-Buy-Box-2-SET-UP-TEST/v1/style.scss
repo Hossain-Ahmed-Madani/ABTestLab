@@ -125,7 +125,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            height: 285px;
+            // height: 285px;
+            height: max-content;
             margin-top: auto;
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
