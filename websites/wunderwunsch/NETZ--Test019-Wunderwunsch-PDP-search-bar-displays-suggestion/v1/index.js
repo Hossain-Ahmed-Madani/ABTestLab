@@ -131,6 +131,14 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         },
     ];
 
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -153,14 +161,6 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
                 }
             }, frequency);
         });
-    }
-
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
-    }
-
-    function qq(s, o) {
-        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
     function preventScroll(e) {
