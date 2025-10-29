@@ -23,7 +23,7 @@
       "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
     page_initials: "AB-MINI-CART",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -534,6 +534,11 @@
       console.error(`Error reading cookie "${key}":`, error);
       return null;
     }
+  }
+
+  function isSafari() {
+    const userAgent = navigator.userAgent;
+    return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
   }
 
   async function waitForElementAsync(
@@ -1369,6 +1374,9 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
+    if (isSafari()) {
+      q("body").classList.add(`${page_initials}--SAFARI`);
+    }
     console.table(TEST_CONFIG);
     updateRecentlyViewedProductsApi();
     handlePDPAddToCart();

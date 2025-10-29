@@ -13,7 +13,7 @@
 }
 
 .AB-MINI-CART {
-    &[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot ,
+    &[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot,
     &[style="padding-right: 0px; overflow: hidden;"] #elx-chatbot {
         z-index: 1;
     }
@@ -118,11 +118,16 @@
                 height: 15px;
             }
         }
+    }
 
-        span[x-show="tooltip"] {
-            top: -48px !important;
-            left: 27px !important;
+    &.AB-MINI-CART--SAFARI {
+        #cart-drawer span[x-show="tooltip"] {
+            top: -64px !important;
         }
+    }
+    #cart-drawer span[x-show="tooltip"] {
+        top: -48px !important;
+        left: 27px !important;
     }
 
     #cart-drawer .hover\:bg-gray-100:hover {

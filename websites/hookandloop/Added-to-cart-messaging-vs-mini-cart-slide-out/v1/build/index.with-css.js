@@ -141,12 +141,10 @@
   width: 15px;
   height: 15px;
 }
-.AB-MINI-CART
-  #cart-drawer
-  .relative.grid.mt-6.sm\:mt-6.py-3.px-1.sm\:px-3.bg-white
-  .w-full.pb-3.px-3
-  .bg-black.border-1.border-black.font-poppins.font-bold.text-sm.flex.px-4.py-1\.5.justify-center.items-center.text-white.rounded-\[3px\].shadow-lg
-  span[x-show="tooltip"] {
+.AB-MINI-CART.AB-MINI-CART--SAFARI #cart-drawer span[x-show="tooltip"] {
+  top: -64px !important;
+}
+.AB-MINI-CART #cart-drawer span[x-show="tooltip"] {
   top: -48px !important;
   left: 27px !important;
 }
@@ -814,7 +812,7 @@
       "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
     page_initials: "AB-MINI-CART",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1325,6 +1323,11 @@
       console.error(`Error reading cookie "${key}":`, error);
       return null;
     }
+  }
+
+  function isSafari() {
+    const userAgent = navigator.userAgent;
+    return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
   }
 
   async function waitForElementAsync(
@@ -2160,6 +2163,9 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
+    if (isSafari()) {
+      q("body").classList.add(`${page_initials}--SAFARI`);
+    }
     console.table(TEST_CONFIG);
     updateRecentlyViewedProductsApi();
     handlePDPAddToCart();
