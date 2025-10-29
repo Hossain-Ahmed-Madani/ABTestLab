@@ -13,7 +13,7 @@ async function fetchAndParseURLApi(url) {
     }
 
 
-async function getProductDataFromDom(dom) {
+async function getProductDataFromDom(dom, url) {
     try {
         if (!dom) {
             console.warn("No DOM provided to getProductDataFromDom");
@@ -37,11 +37,9 @@ async function getProductDataFromDom(dom) {
         const image = imageElement ? imageElement.getAttribute('src') : "";
 
         // Extract price
-        const priceElement = dom.querySelector('span.price .price');
-        const price = priceElement ? priceElement.textContent.trim() : "";
+        const priceElement = dom.querySelector('meta[itemprop="price"]');
+        const price = priceElement ?  "$" + priceElement.getAttribute('content') : "";
 
-        // Get current URL
-        const url = window.location.href;
 
         if (!productId) {
             console.warn("No product ID found in DOM");
@@ -77,7 +75,7 @@ async function getProductsFromUrls(urls) {
             const dom = await fetchAndParseURLApi(url);
             if (!dom) continue;
 
-            const productData = await getProductDataFromDom(dom);
+            const productData = await getProductDataFromDom(dom, url);
             if (productData) {
                 products.push(productData);
             }
