@@ -19,7 +19,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.00012,
+        test_version: 0.00014,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -670,16 +670,16 @@
         const productQuantityInput = q(currentTarget, "input.ab-product-quantity");
         const productElement = e.target.closest(".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100");
         const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-        const min = +productQuantityInput.getAttribute("min");
-        const max = +productQuantityInput.getAttribute("max");
+        // const min = +productQuantityInput.getAttribute("min");
+        // const max = +productQuantityInput.getAttribute("max");
 
         let quantity = +productQuantityInput.value;
 
         // Increment | Decrement Quantity
-        if (e.target.closest(".ab-product-quantity-update-action__minus") && quantity > min) {
+        if (e.target.closest(".ab-product-quantity-update-action__minus") && quantity > 0 /* && quantity > min */) {
             quantity--;
         }
-        if (e.target.closest(".ab-product-quantity-update-action__plus") && quantity < max) {
+        if (e.target.closest(".ab-product-quantity-update-action__plus") && quantity < 1000000000 /*   quantity < max */) {
             quantity++;
         }
 
@@ -755,12 +755,16 @@
         };
     }
 
-    function getProductNewQuantityElement() {
+    async function createProductNewQuantityComponent(productElement) {
+        const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
+        if (!productQuantityElement || q(productElement, ".ab-product-quantity-container")) return;
+
         const div = document.createElement("div");
         div.className = "ab-product-quantity-container";
         div.innerHTML = /* HTML */ `
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__minus">${ASSETS.minus_svg}</button>
             <input
+                id="qty"
                 name="sidecart-qty"
                 type="number"
                 pattern="[0-9]{0,10}"
@@ -768,17 +772,22 @@
                 min="0"
                 max="1000000000"
                 value="1"
-                class="ab-product-quantity ab-product-quantity--input text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
+                class="ab-product-quantity ab-product-quantity--input text-center [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
             />
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
         `;
 
-        const isTouch = "ontouchstart" in window;
-        const event = isTouch ? "touchstart" : "click";
-        div.addEventListener(event, handleProductSideCartQuantityUpdate);
-        q(div, "input.ab-product-quantity").addEventListener("change", handleProductSideCartQuantityOnChange);
+        productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
 
-        return div;
+        const isTouch = "ontouchstart" in window;
+        if (isTouch) {
+            div.addEventListener("touchstart", handleProductSideCartQuantityUpdate, { passive: true });
+        } else {
+            div.addEventListener("click", handleProductSideCartQuantityUpdate);
+        }
+
+        await waitForElementAsync(() => q(div, "input.ab-product-quantity"));
+        q(div, "input.ab-product-quantity").addEventListener("change", handleProductSideCartQuantityOnChange);
     }
 
     async function createCarouselElement() {
@@ -829,18 +838,6 @@
         const relatedProductContainerElement = q(sideCart, ".ab-related-products-container");
         if (!relatedProductContainerElement) return;
         insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
-    }
-
-    async function updateProductNewQuantityElementMinMax(productElement) {
-        const productQuantityInput = q(productElement, "input.ab-product-quantity--input");
-
-        if (productQuantityInput && productQuantityInput.classList.contains("ab-product-quantity--min-max-updated")) return;
-
-        const { min, max } = await getProductItemMinMaxValues(productElement);
-
-        productQuantityInput.setAttribute("min", min);
-        productQuantityInput.setAttribute("max", max);
-        productQuantityInput.classList.add("ab-product-quantity--min-max-updated");
     }
 
     function getRelatedProductsElement() {
@@ -914,11 +911,7 @@
             }
 
             // Create product quantity input
-            if (!q(productElement, ".ab-product-quantity-container")) {
-                const div = getProductNewQuantityElement();
-                productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
-                // updateProductNewQuantityElementMinMax(productElement);
-            }
+            createProductNewQuantityComponent(productElement);
 
             // Create Options Container & Append Options
             if (!q(productElement, ".ab-product-options-container") && productOptionsElements.length > 0) {
@@ -1081,13 +1074,14 @@
             elem.addEventListener("click", async (e) => {
                 /* delaying 150ms */
                 let timer = 0;
-                await waitForElementAsync(() => timer++ >= 1);
+                await waitForElementAsync(() => timer++ >= 7);
 
                 const isValid = checkPDPAddToCartFormValidity();
 
                 if (!isValid) return;
 
                 await waitForElementAsync(() => !q("body .loader"));
+
 
                 q("button#menu-cart-icon")?.click();
             })
@@ -1098,7 +1092,7 @@
         const device_type = isSafari() ? "SAFARI" : "CHROME";
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, `${page_initials}--${device_type}`);
 
-        // console.table(TEST_CONFIG);
+        console.table(TEST_CONFIG);
 
         updateRecentlyViewedProductsApi();
         handlePDPAddToCart();
