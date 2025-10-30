@@ -15,7 +15,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.00012,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -725,20 +725,6 @@
         `;
     }
 
-    async function getProductItemMinMaxValues(productElement) {
-        const { url } = getSideCartProductData(productElement);
-        const dom = await fetchAndParseURLApi(url);
-        const inputElement = q(dom, "input[name='qty'][form='product_addtocart_form']");
-
-        const min = inputElement?.getAttribute("min") || inputElement?.getAttribute("value") || 0;
-        const max = inputElement?.getAttribute("max") || 1000000000;
-
-        return {
-            min,
-            max,
-        };
-    }
-
     function getProductNewQuantityElement() {
         const div = document.createElement("div");
         div.className = "ab-product-quantity-container";
@@ -757,7 +743,9 @@
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
         `;
 
-        div.addEventListener("click", handleProductSideCartQuantityUpdate);
+        const isTouch = "ontouchstart" in window;
+        const event = isTouch ? "touchstart" : "click";
+        div.addEventListener(event, handleProductSideCartQuantityUpdate);
         q(div, "input.ab-product-quantity").addEventListener("change", handleProductSideCartQuantityOnChange);
 
         return div;
@@ -811,18 +799,6 @@
         const relatedProductContainerElement = q(sideCart, ".ab-related-products-container");
         if (!relatedProductContainerElement) return;
         insertAndInitializeCarousel("beforeend", relatedProductContainerElement);
-    }
-
-    async function updateProductNewQuantityElementMinMax(productElement) {
-        const productQuantityInput = q(productElement, "input.ab-product-quantity--input");
-
-        if (productQuantityInput && productQuantityInput.classList.contains("ab-product-quantity--min-max-updated")) return;
-
-        const { min, max } = await getProductItemMinMaxValues(productElement);
-
-        productQuantityInput.setAttribute("min", min);
-        productQuantityInput.setAttribute("max", max);
-        productQuantityInput.classList.add("ab-product-quantity--min-max-updated");
     }
 
     function getRelatedProductsElement() {
@@ -899,7 +875,7 @@
             if (!q(productElement, ".ab-product-quantity-container")) {
                 const div = getProductNewQuantityElement();
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
-                updateProductNewQuantityElementMinMax(productElement);
+                // updateProductNewQuantityElementMinMax(productElement);
             }
 
             // Create Options Container & Append Options

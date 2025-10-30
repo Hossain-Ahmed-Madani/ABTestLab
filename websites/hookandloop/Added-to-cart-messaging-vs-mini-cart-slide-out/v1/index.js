@@ -19,7 +19,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.00012,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -773,7 +773,9 @@
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
         `;
 
-        div.addEventListener("click", handleProductSideCartQuantityUpdate);
+        const isTouch = "ontouchstart" in window;
+        const event = isTouch ? "touchstart" : "click";
+        div.addEventListener(event, handleProductSideCartQuantityUpdate);
         q(div, "input.ab-product-quantity").addEventListener("change", handleProductSideCartQuantityOnChange);
 
         return div;
@@ -915,7 +917,7 @@
             if (!q(productElement, ".ab-product-quantity-container")) {
                 const div = getProductNewQuantityElement();
                 productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
-                updateProductNewQuantityElementMinMax(productElement);
+                // updateProductNewQuantityElementMinMax(productElement);
             }
 
             // Create Options Container & Append Options

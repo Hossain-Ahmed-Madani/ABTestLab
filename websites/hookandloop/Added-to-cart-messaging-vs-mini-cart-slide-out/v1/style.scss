@@ -340,7 +340,7 @@
     .ab-product-options-container div[x-show="showOption(option)"]:not([style="display:none;"]) {
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-items: flex-end;
         gap: 4px;
         padding-top: 0;
 
@@ -367,6 +367,11 @@
         }
     }
 
+    .ab-product-options-container div[x-show="showOption(option)"][style="display:none;"] {
+        overflow: hidden !important;
+        height: 0px !important;
+    }
+
     .ab-product-quantity-container {
         margin-top: 8px;
         display: flex;
@@ -376,6 +381,8 @@
         width: max-content;
         background: #e5e7eb;
         padding: 4px;
+        position: relative;
+        z-index: 1;
     }
 
     .ab-product-quantity-update-action {
