@@ -17,7 +17,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         test_name: "Test019 [Wunderwunsch] - PDP - search bar displays suggestions when activated (mobile only)",
         page_initials: "TEST019-SEARCH-BAR",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -131,6 +131,10 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         },
     ];
 
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -155,10 +159,6 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         });
     }
 
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
-    }
-
     function preventScroll(e) {
         e.preventDefault();
     }
@@ -168,6 +168,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
 
         const elem = q("#predictive-search-form .predictive-search__input");
         elem.value = value;
+
         elem.dispatchEvent(new Event("input", { bubbles: true }));
         elem.dispatchEvent(new Event("change", { bubbles: true }));
     }
@@ -209,7 +210,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         }).observe(targetNode, { attributes: true });
     }
 
-    function createComponent() {
+    async function createComponent() {
         // Create Layout
         const searchButton = document.createElement("div");
         searchButton.classList.add("ab-toggle-search");
@@ -262,8 +263,12 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         // Handle Events & Mutation
         searchButton.addEventListener("click", () => handleSuggestionsView("show"));
         backdrop.addEventListener("click", () => handleSuggestionsView("hide"));
-        q(searchBarSection, "input.ab-search-bar__input").addEventListener("input", handleInputChange);
+
+        const inputSelector = "input.ab-search-bar__input";
+        await waitForElementAsync(() => q(searchBarSection, inputSelector));
+        ["input", "change"].forEach((event) => q(searchBarSection, inputSelector).addEventListener(event, handleInputChange));
         q(searchBarSection, "input.ab-search-bar__input").addEventListener("change", handleInputChange);
+
         mutationObserverFunction();
     }
 
@@ -280,7 +285,8 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
             q("predictive-search-drawer .drawer__content") &&
             q("#predictive-search-form .predictive-search__input") &&
             q(".header__icon-list") &&
-            q("a.header__icon-wrapper[href='/search']")
+            q("a.header__icon-wrapper[href='/search']") &&
+            document.readyState === 'complete'
         );
     }
 
@@ -289,5 +295,6 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         init();
     } catch (error) {
         console.error(error);
+        return false;
     }
 })();

@@ -2,9 +2,10 @@
 
 Test doc: https://docs.google.com/document/d/1a9J4mlbqAJYVm8BmW5ZClUD2AZWb9qYZ6BImH8bAZbw/edit?tab=t.0
 Figma: https://www.figma.com/design/Jfp1I18s7V6o1lBFAXq1c3/Test019---Suchleiste---Produkt---Kategorie----Markenvorschl%C3%A4ge?node-id=0-1&t=QeiM6oOucLj9hzqn-1
-Test container: 
-Preview:
-Forced Variation: 
+
+Test container: https://app.convert.com/accounts/1004828/projects/10041371/experiences/1004174128/summary
+Preview: https://www.wunderwunsch.de/?convert_action=convert_vpreview&convert_e=1004174128&convert_v=1004410687
+Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.1004410687&utm_campaign=qa05
 
 */
 
@@ -17,7 +18,7 @@ Forced Variation:
       "Test019 [Wunderwunsch] - PDP - search bar displays suggestions when activated (mobile only)",
     page_initials: "TEST019-SEARCH-BAR",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -152,6 +153,10 @@ Forced Variation:
     },
   ];
 
+  function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
+
   async function waitForElementAsync(
     predicate,
     timeout = 20000,
@@ -184,10 +189,6 @@ Forced Variation:
     });
   }
 
-  function q(s, o) {
-    return o ? s.querySelector(o) : document.querySelector(s);
-  }
-
   function preventScroll(e) {
     e.preventDefault();
   }
@@ -197,6 +198,9 @@ Forced Variation:
 
     const elem = q("#predictive-search-form .predictive-search__input");
     elem.value = value;
+
+    console.log("handleInputChange:", value, elem.value);
+
     elem.dispatchEvent(new Event("input", { bubbles: true }));
     elem.dispatchEvent(new Event("change", { bubbles: true }));
   }
@@ -238,7 +242,7 @@ Forced Variation:
     }).observe(targetNode, { attributes: true });
   }
 
-  function createComponent() {
+  async function createComponent() {
     // Create Layout
     const searchButton = document.createElement("div");
     searchButton.classList.add("ab-toggle-search");
@@ -300,10 +304,20 @@ Forced Variation:
     // Handle Events & Mutation
     searchButton.addEventListener("click", () => handleSuggestionsView("show"));
     backdrop.addEventListener("click", () => handleSuggestionsView("hide"));
+
+    const inputSelector = "input.ab-search-bar__input";
+    await waitForElementAsync(() => q(searchBarSection, inputSelector));
+    ["input", "change"].forEach((event) =>
+      q(searchBarSection, inputSelector).addEventListener(
+        event,
+        handleInputChange,
+      ),
+    );
     q(searchBarSection, "input.ab-search-bar__input").addEventListener(
-      "input",
+      "change",
       handleInputChange,
     );
+
     mutationObserverFunction();
   }
 
