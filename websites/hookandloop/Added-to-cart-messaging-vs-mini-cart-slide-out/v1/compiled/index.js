@@ -13,13 +13,9 @@
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com",
-        test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -215,7 +211,7 @@
         constructor(container) {
             this.container = container;
             if (!this.container) {
-                console.error("Carousel container not found");
+                // console.error("Carousel container not found");
                 return;
             }
 
@@ -226,17 +222,23 @@
             this.gap = 12; // 12px gap between items
 
             if (!this.cardContainer || !this.prevBtn || !this.nextBtn) {
-                console.error("Required carousel elements not found");
+                // console.error("Required carousel elements not found");
                 return;
             }
 
-            this.init();
+            setTimeout(() => {
+                this.init();
+            }, 50);
         }
 
         init() {
             this.addCarouselStyles();
             this.attachEventListeners();
-            this.updateNavigation();
+
+            // Force re-check after a brief delay
+            setTimeout(() => {
+                this.updateNavigation();
+            }, 100);
 
             // Handle window resize
             this.resizeHandler = debounce(() => {
@@ -433,7 +435,7 @@
 
             return null;
         } catch (error) {
-            console.error(`Error reading cookie "${key}":`, error);
+            // console.error(`Error reading cookie "${key}":`, error);
             return null;
         }
     }
@@ -491,7 +493,7 @@
             const dom = new DOMParser().parseFromString(html, "text/html");
             return dom;
         } catch (error) {
-            console.error("Fetch and parse failed:", error);
+            // console.error("Fetch and parse failed:", error);
             return null;
         }
     }
@@ -499,7 +501,7 @@
     async function getPairsWellProductApi(dom) {
         try {
             if (!dom) {
-                console.warn("No DOM provided to getPairsWellProduct");
+                // console.warn("No DOM provided to getPairsWellProduct");
                 return {};
             }
 
@@ -729,7 +731,7 @@
         const inputElement = q(dom, "input[name='qty'][form='product_addtocart_form']");
 
         const min = inputElement?.getAttribute("min") || inputElement?.getAttribute("value") || 0;
-        const max = inputElement?.getAttribute("max") || 0;
+        const max = inputElement?.getAttribute("max") || 1000000000;
 
         return {
             min,
@@ -749,7 +751,7 @@
                 inputmode="numeric"
                 min="0"
                 max="1000000000"
-                value="0"
+                value="1"
                 class="ab-product-quantity ab-product-quantity--input text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
             />
             <button type="button" class="ab-product-quantity-update-action ab-product-quantity-update-action__plus">${ASSETS.plus_svg}</button>
@@ -812,11 +814,12 @@
     }
 
     async function updateProductNewQuantityElementMinMax(productElement) {
-        const productQuantityInput = q(productElement, ".ab-product-quantity--input");
+        const productQuantityInput = q(productElement, "input.ab-product-quantity--input");
 
         if (productQuantityInput && productQuantityInput.classList.contains("ab-product-quantity--min-max-updated")) return;
 
         const { min, max } = await getProductItemMinMaxValues(productElement);
+
         productQuantityInput.setAttribute("min", min);
         productQuantityInput.setAttribute("max", max);
         productQuantityInput.classList.add("ab-product-quantity--min-max-updated");
@@ -1077,7 +1080,7 @@
         const device_type = isSafari() ? "SAFARI" : "CHROME";
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, `${page_initials}--${device_type}`);
 
-        console.table(TEST_CONFIG);
+        // console.table(TEST_CONFIG);
 
         updateRecentlyViewedProductsApi();
         handlePDPAddToCart();
@@ -1092,6 +1095,7 @@
         await waitForElementAsync(requiredItems);
         init();
     } catch (error) {
-        console.warn(error);
+        // console.warn(error);
+        return false;
     }
 })();
