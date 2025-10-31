@@ -11,6 +11,9 @@
   /* Optional: Different delays for staggered effect */
   /* Responsive design */
 }
+.AB-MINI-CART #cart-drawer #cartDrawerContent {
+  top: 0;
+}
 .AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot,
 .AB-MINI-CART[style="padding-right: 0px; overflow: hidden;"] #elx-chatbot {
   z-index: 1;
@@ -435,7 +438,7 @@
 .AB-MINI-CART .ab-product-quantity {
   padding: 0;
   width: 32px;
-  height: 20px;
+  height: 26px;
   background-color: transparent;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -453,7 +456,6 @@
   box-shadow: none;
   margin-top: -4px;
   margin-bottom: -4px;
-  height: 26px;
 }
 .AB-MINI-CART .ab-product-quantity.ab-warning-border {
   border-width: 1px;
@@ -827,9 +829,14 @@
 
 (async () => {
   const TEST_CONFIG = {
+    client: "Hook & Loop",
+    project: "Hook & Loop",
+    site_url: "https://www.hookandloop.com",
+    test_name:
+      "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
     page_initials: "AB-MINI-CART",
     test_variation: 1,
-    test_version: 0.00011,
+    test_version: 0.00019,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1616,29 +1623,27 @@
       ".flex.items-start.p-3.space-x-4.transition.duration-150.ease-in-out.rounded-lg.hover\\:bg-gray-100",
     );
     const productQuantityElement = q(productElement, "span[x-html='item.qty']");
-    const min = +productQuantityInput.getAttribute("min");
-    const max = +productQuantityInput.getAttribute("max");
+    // const min = +productQuantityInput.getAttribute("min");
+    // const max = +productQuantityInput.getAttribute("max");
 
     let quantity = +productQuantityInput.value;
 
     // Increment | Decrement Quantity
     if (
       e.target.closest(".ab-product-quantity-update-action__minus") &&
-      quantity > min
+      quantity > 0 /* && quantity > min */
     ) {
       quantity--;
     }
     if (
       e.target.closest(".ab-product-quantity-update-action__plus") &&
-      quantity < max
+      quantity < 1000000000 /*   quantity < max */
     ) {
       quantity++;
     }
 
     // Check If Value Is Updated
     if (+productQuantityInput.value === quantity) return;
-
-    console.log("handleProductSideCartQuantityUpdate...", min, max, quantity);
 
     // Update Value
     productQuantityInput.value = quantity;
@@ -1714,7 +1719,14 @@
     `;
   }
 
-  function getProductNewQuantityElement() {
+  async function createProductNewQuantityComponent(productElement) {
+    const productQuantityElement = q(productElement, 'span[x-html="item.qty"]');
+    if (
+      !productQuantityElement ||
+      q(productElement, ".ab-product-quantity-container")
+    )
+      return;
+
     const div = document.createElement("div");
     div.className = "ab-product-quantity-container";
     div.innerHTML = /* HTML */ `
@@ -1725,6 +1737,7 @@
         ${ASSETS.minus_svg}
       </button>
       <input
+        id="qty"
         name="sidecart-qty"
         type="number"
         pattern="[0-9]{0,10}"
@@ -1732,7 +1745,7 @@
         min="0"
         max="1000000000"
         value="1"
-        class="ab-product-quantity ab-product-quantity--input text-center   [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
+        class="ab-product-quantity ab-product-quantity--input text-center [appearance:textfield] [&amp;::-webkit-outer-spin-button]:appearance-none [&amp;::-webkit-inner-spin-button]:appearance-none"
       />
       <button
         type="button"
@@ -1742,7 +1755,22 @@
       </button>
     `;
 
-    return div;
+    productQuantityElement.parentNode.insertAdjacentElement("afterend", div);
+
+    const isTouch = "ontouchstart" in window;
+    if (isTouch) {
+      div.addEventListener("touchstart", handleProductSideCartQuantityUpdate, {
+        passive: true,
+      });
+    } else {
+      div.addEventListener("click", handleProductSideCartQuantityUpdate);
+    }
+
+    await waitForElementAsync(() => q(div, "input.ab-product-quantity"));
+    q(div, "input.ab-product-quantity").addEventListener(
+      "change",
+      handleProductSideCartQuantityOnChange,
+    );
   }
 
   async function createCarouselElement() {
@@ -1908,21 +1936,7 @@
       }
 
       // Create product quantity input
-      if (!q(productElement, ".ab-product-quantity-container")) {
-        const div = getProductNewQuantityElement();
-        productQuantityElement.parentNode.insertAdjacentElement(
-          "afterend",
-          div,
-        );
-        setTimeout(() => {
-          div.addEventListener("click", handleProductSideCartQuantityUpdate);
-          q(div, "input.ab-product-quantity").addEventListener(
-            "change",
-            handleProductSideCartQuantityOnChange,
-          );
-        }, 50);
-        // updateProductNewQuantityElementMinMax(productElement);
-      }
+      createProductNewQuantityComponent(productElement);
 
       // Create Options Container & Append Options
       if (
@@ -2129,9 +2143,10 @@
 
     qq(selector).forEach((elem) =>
       elem.addEventListener("click", async (e) => {
-        /* delaying 150ms */
+        const currentTarget = e.currentTarget;
+        /* delaying 150ms * 3 = 0.45 seconds */
         let timer = 0;
-        await waitForElementAsync(() => timer++ >= 1);
+        await waitForElementAsync(() => timer++ >= 3);
 
         const isValid = checkPDPAddToCartFormValidity();
 
@@ -2140,6 +2155,13 @@
         await waitForElementAsync(() => !q("body .loader"));
 
         q("button#menu-cart-icon")?.click();
+
+        const device_type = isSafari() ? "SAFARI" : "CHROME";
+        const isTouch = "ontouchstart" in window;
+
+        if (!(device_type === "SAFARI" && isTouch)) return;
+
+        currentTarget.scrollIntoView({ behavior: "smooth", block: "end" });
       }),
     );
   }
@@ -2153,7 +2175,7 @@
       `${page_initials}--${device_type}`,
     );
 
-    // console.table(TEST_CONFIG);
+    console.table(TEST_CONFIG);
 
     updateRecentlyViewedProductsApi();
     handlePDPAddToCart();
@@ -2175,7 +2197,6 @@
     await waitForElementAsync(requiredItems);
     init();
   } catch (error) {
-    // console.warn(error);
     return false;
   }
 })();

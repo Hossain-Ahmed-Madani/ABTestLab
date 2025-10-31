@@ -5,6 +5,9 @@
   /* Optional: Different delays for staggered effect */
   /* Responsive design */
 }
+.AB-MINI-CART #cart-drawer #cartDrawerContent {
+  top: 0;
+}
 .AB-MINI-CART[style="padding-right: 15px; overflow: hidden;"] #elx-chatbot, .AB-MINI-CART[style="padding-right: 0px; overflow: hidden;"] #elx-chatbot {
   z-index: 1;
 }
@@ -325,7 +328,7 @@
 .AB-MINI-CART .ab-product-quantity {
   padding: 0;
   width: 32px;
-  height: 20px;
+  height: 26px;
   background-color: transparent;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -343,7 +346,6 @@
   box-shadow: none;
   margin-top: -4px;
   margin-bottom: -4px;
-  height: 26px;
 }
 .AB-MINI-CART .ab-product-quantity.ab-warning-border {
   border-width: 1px;

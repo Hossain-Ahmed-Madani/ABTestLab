@@ -19,7 +19,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.00014,
+        test_version: 0.00019,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1046,9 +1046,10 @@
 
         qq(selector).forEach((elem) =>
             elem.addEventListener("click", async (e) => {
-                /* delaying 150ms */
+                const currentTarget = e.currentTarget;
+                /* delaying 150ms * 3 = 0.45 seconds */
                 let timer = 0;
-                await waitForElementAsync(() => timer++ >= 7);
+                await waitForElementAsync(() => timer++ >= 3);
 
                 const isValid = checkPDPAddToCartFormValidity();
 
@@ -1056,8 +1057,14 @@
 
                 await waitForElementAsync(() => !q("body .loader"));
 
-
                 q("button#menu-cart-icon")?.click();
+
+                const device_type = isSafari() ? "SAFARI" : "CHROME";
+                const isTouch = "ontouchstart" in window;
+
+                if (!(device_type === "SAFARI" && isTouch)) return;
+
+                currentTarget.scrollIntoView({ behavior: "smooth", block: "end" });
             })
         );
     }
@@ -1081,7 +1088,6 @@
         await waitForElementAsync(requiredItems);
         init();
     } catch (error) {
-        // console.warn(error);
         return false;
     }
 })();
