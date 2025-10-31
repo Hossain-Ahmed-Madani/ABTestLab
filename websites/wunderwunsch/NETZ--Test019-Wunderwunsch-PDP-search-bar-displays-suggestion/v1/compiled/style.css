@@ -9,6 +9,12 @@
 .TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown .ab-search-bar-section {
   display: block;
 }
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown #chatbase-bubble-button,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown #Sea-Accessibility__ButtonWidget,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown #trustbadge-iframe,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown button[data-testid=minimized-trustbadge-floating] {
+  display: none !important;
+}
 .TEST019-SEARCH-BAR .header {
   position: relative;
 }
@@ -65,7 +71,7 @@
   line-height: 9px;
   letter-spacing: 0px;
   vertical-align: middle;
-  color: #A69A9A;
+  color: #a69a9a;
 }
 .TEST019-SEARCH-BAR .ab-search-bar__icon {
   position: absolute;
@@ -194,6 +200,13 @@
 }
 .TEST019-SEARCH-BAR .ab-searched-content .drawer__content {
   padding: 0;
+  padding-bottom: 25px;
+}
+.TEST019-SEARCH-BAR .ab-searched-content .drawer__footer {
+  padding-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
 }
 .TEST019-SEARCH-BAR .ab-searched-content .predictive-search__menu-list {
   display: none;
@@ -202,7 +215,8 @@
   display: none;
 }
 .TEST019-SEARCH-BAR .ab-search-bar-section__show-search-results .ab-searched-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 .TEST019-SEARCH-BAR .tabs-nav__position.is-initialized[style="--scale: NaN; --translate: NaN%;"] {
   --scale: 0.17 !important;

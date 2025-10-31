@@ -18,6 +18,16 @@
   .ab-search-bar-section {
   display: block;
 }
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown
+  #chatbase-bubble-button,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown
+  #Sea-Accessibility__ButtonWidget,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown
+  #trustbadge-iframe,
+.TEST019-SEARCH-BAR.TEST019-SEARCH-BAR--show-suggestions-dropdown
+  button[data-testid="minimized-trustbadge-floating"] {
+  display: none !important;
+}
 .TEST019-SEARCH-BAR .header {
   position: relative;
 }
@@ -213,6 +223,13 @@
 }
 .TEST019-SEARCH-BAR .ab-searched-content .drawer__content {
   padding: 0;
+  padding-bottom: 25px;
+}
+.TEST019-SEARCH-BAR .ab-searched-content .drawer__footer {
+  padding-bottom: 10px;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
 }
 .TEST019-SEARCH-BAR .ab-searched-content .predictive-search__menu-list {
   display: none;
@@ -225,7 +242,8 @@
 .TEST019-SEARCH-BAR
   .ab-search-bar-section__show-search-results
   .ab-searched-content {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 .TEST019-SEARCH-BAR
   .tabs-nav__position.is-initialized[style="--scale: NaN; --translate: NaN%;"] {
@@ -273,7 +291,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
       "Test019 [Wunderwunsch] - PDP - search bar displays suggestions when activated (mobile only)",
     page_initials: "TEST019-SEARCH-BAR",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -445,7 +463,12 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
   }
 
   function preventScroll(e) {
-    e.preventDefault();
+    if (
+      e.target === document.body ||
+      !e.target.closest(".ab-searched-content")
+    ) {
+      e.preventDefault();
+    }
   }
 
   function handleInputChange(e) {
@@ -453,8 +476,6 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
 
     const elem = q("#predictive-search-form .predictive-search__input");
     elem.value = value;
-
-    console.log("handleInputChange:", value, elem.value);
 
     elem.dispatchEvent(new Event("input", { bubbles: true }));
     elem.dispatchEvent(new Event("change", { bubbles: true }));
@@ -477,10 +498,12 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
 
     if (action === "show") {
       body.classList.add(selector);
-      body.addEventListener("touchmove", preventScroll, { passive: false });
+      document.addEventListener("touchmove", preventScroll, { passive: false });
     } else if (action === "hide") {
       body.classList.remove(selector);
-      body.removeEventListener("touchmove", preventScroll, { passive: false });
+      document.removeEventListener("touchmove", preventScroll, {
+        passive: false,
+      });
     }
   }
 
@@ -555,6 +578,9 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
     q(searchBarSection, ".ab-searched-content").appendChild(
       q("predictive-search-drawer .drawer__content"),
     );
+    q(searchBarSection, ".ab-searched-content").appendChild(
+      q("predictive-search-drawer .drawer__footer"),
+    );
 
     // Handle Events & Mutation
     searchButton.addEventListener("click", () => handleSuggestionsView("show"));
@@ -593,9 +619,11 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
       ) &&
       q(".header") &&
       q("predictive-search-drawer .drawer__content") &&
+      q("predictive-search-drawer .drawer__footer") &&
       q("#predictive-search-form .predictive-search__input") &&
       q(".header__icon-list") &&
-      q("a.header__icon-wrapper[href='/search']")
+      q("a.header__icon-wrapper[href='/search']") &&
+      document.readyState === "complete"
     );
   }
 
@@ -604,5 +632,6 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
     init();
   } catch (error) {
     console.error(error);
+    return false;
   }
 })();

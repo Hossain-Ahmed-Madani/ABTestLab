@@ -25,6 +25,13 @@
         .ab-search-bar-section {
             display: block;
         }
+
+        #chatbase-bubble-button,
+        #Sea-Accessibility__ButtonWidget,
+        #trustbadge-iframe,
+        button[data-testid="minimized-trustbadge-floating"] {
+            display: none !important;
+        }
     }
 
     .header {
@@ -91,7 +98,7 @@
             line-height: 9px;
             letter-spacing: 0px;
             vertical-align: middle;
-            color: #A69A9A;
+            color: #a69a9a;
         }
     }
 
@@ -213,7 +220,6 @@
 
     .top-selection-of-categories {
         background-color: #ffffff;
-        
 
         .ab-suggestions-content__item {
             gap: 5px;
@@ -248,6 +254,14 @@
 
         .drawer__content {
             padding: 0;
+            padding-bottom: 25px
+        }
+
+        .drawer__footer {
+            padding-bottom: 10px;
+            padding-left: 0;
+            padding-right: 0;
+            width: 100%;
         }
 
         .predictive-search__menu-list {
@@ -261,7 +275,8 @@
         }
 
         .ab-searched-content {
-            display: block;
+            display: flex;
+            flex-direction: column;
         }
     }
 
