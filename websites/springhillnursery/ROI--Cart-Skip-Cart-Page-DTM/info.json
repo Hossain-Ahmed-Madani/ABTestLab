@@ -1,0 +1,13 @@
+{
+  "id": "1762167003840_2852_ROI__Cart_Skip_Cart_Page_DTM",
+  "name": "ROI--Cart-Skip-Cart-Page-DTM",
+  "type": "A/B",
+  "website": "springhillnursery",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-11-03T10:50:03.840Z",
+  "createdAtReadable": "11/3/2025, 4:50:03 PM",
+  "lastUpdated": "2025-11-03T10:50:04.335Z"
+}
