@@ -131,7 +131,7 @@ dist
 
 # personal folder and files should be ignored
 # websites/
-skeleton/
+# skeleton/
 
 history.json
 settings.json
