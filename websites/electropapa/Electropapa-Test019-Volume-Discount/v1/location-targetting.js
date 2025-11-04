@@ -13,10 +13,10 @@
                 if (typeof predicate === "function" && predicate()) {
                     observer.disconnect();
                     resolve();
-                } else if (count >= 100) {
+                } else if (count >= 1000) {
                     observer.disconnect();
                 }
-            }).observe(q("body"), { childList: true, subtree: false });
+            }).observe(q("body"), { childList: true, subtree: true });
         });
     }
 
