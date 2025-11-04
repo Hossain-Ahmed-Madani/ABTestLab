@@ -2,7 +2,7 @@
     const TEST_KEY = "AB-SKIP-CART-PAGE";
     const IS_BUCKETED = window[TEST_KEY];
 
-    async function waitForPromiseCartMutation() {
+    async function waitForSideCartOpen() {
         const targetNode = q(".quick-cart__wrapper");
         let count = 0;
 
@@ -33,25 +33,26 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function checkConditionCallback() {
-        return q(".something");
-    }
-
     try {
+
+        if (!q(".quick-cart__wrapper")) {
+            throw new Error("No side cart");
+        }
+
         if (IS_BUCKETED) {
             return true;
         } else {
-            waitForPromiseCartMutation(checkConditionCallback, 100)
+            waitForSideCartOpen()
                 .then(() => {
                     window[TEST_KEY] = true;
                     convert_recheck_experiment();
                     return true;
                 })
                 .error(() => false);
+            return false;
         }
-        return false;
     } catch (error) {
         convert_recheck_experiment();
         return false;
     }
-})();
+})()
