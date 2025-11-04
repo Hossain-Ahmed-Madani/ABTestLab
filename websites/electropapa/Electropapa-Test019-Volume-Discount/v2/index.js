@@ -19,11 +19,25 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 2 /* 1, 2 */,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
     const BODY_CLASSLIST = [page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`];
+
+    async function fetchAndParseURLApi(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const html = await response.text();
+            const dom = new DOMParser().parseFromString(html, "text/html");
+            return dom;
+        } catch (error) {
+            // console.error("Fetch and parse failed:", error);
+            return null;
+        }
+    }
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
@@ -91,28 +105,23 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
             });
     }
 
-    // Note: Not in use | As we are fetching original price from PDS page to calculate total price more accurately
-    function calculateOriginalPrice(offerPrice, quantity) {
-        const percentage_by_quantity = [0, 0, 5, 5, 6, 6, 8, 8, 8, 8, 10];
-        const discount_percentage = quantity <= 10 ? percentage_by_quantity[quantity] : percentage_by_quantity[10];
-
-        const originalPrice = offerPrice / (1 - discount_percentage / 100);
-        return originalPrice;
-    }
-
     async function getPriceData(targetNode) {
         const productUrl = q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
+
+        const dom = await fetchAndParseURLApi(productUrl);
 
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
         const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
         const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
 
         // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        const hasVolumeDiscountTable = !!q(dom, ".table.product-block-prices-grid");
         const totalPricePerQuantity = await getProductOriginalPricePerQuantity(productUrl);
         const totalPrice = totalPricePerQuantity * quantity;
         const discount = totalPrice - offerPrice;
 
         return {
+            hasVolumeDiscountTable,
             totalPrice, // Original main price
             offerPrice, // Discounted price
             discount, // Actual amount saved
@@ -178,23 +187,23 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
             targetNode.insertAdjacentHTML("beforeend", createSingleItemProgressBtnLayout());
         }
 
-        if (!q(targetNode, ".ab-celebration-message-container") && quantity > 1) {
+        if (!q(targetNode, ".ab-celebration-message-container") && quantity > 1 && discount !== 0) {
             targetNode.insertAdjacentHTML(
                 "beforeend",
                 /* HTML */
                 `<div class="ab-celebration-message-container">${getCelebrationTxt({ targetNode, totalPrice, quantity, discount, offerPrice })}</div>`
             );
 
-            if (quantity > 1) {
-                fireConvertGoal("Shows Celebration Message | JS", 1004106272);
-            }
+            fireConvertGoal("Shows Celebration Message | JS", 1004106272);
         }
     }
 
     function createCelebrationMessageComponent() {
         const targetNodes = qq(".offcanvas-cart-items .line-item");
         targetNodes.forEach(async (targetNode) => {
-            const { totalPrice, quantity, discount, offerPrice } = await getPriceData(targetNode);
+            const { hasVolumeDiscountTable, totalPrice, quantity, discount, offerPrice } = await getPriceData(targetNode);
+
+            if (!hasVolumeDiscountTable) return;
 
             createReducedPriceLayout({ targetNode, totalPrice, quantity, discount, offerPrice });
             createCelebrationMessageLayoutV2({ targetNode, totalPrice, quantity, discount, offerPrice });
