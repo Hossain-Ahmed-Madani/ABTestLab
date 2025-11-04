@@ -4,10 +4,10 @@ Test doc: https://docs.google.com/document/d/13OFhHZ9n1KU_rWYOWWDacs2jVkpWrrBV2Y
 
 Test container: https://app.convert.com/accounts/1004828/projects/10047105/experiences/1004170195/summary
 
-V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa5
-v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5
+V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401763&utm_campaign=qa7
+v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa7
 
-without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?utm_campaign=qa5
+without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?utm_campaign=qa7
 // https://electropapa.com/de/4x-staubsauger-schlauch-passend-fuer-kaercher-3-5m-35-mm-889006354 - no discount
 */
 
@@ -15,7 +15,7 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     const TEST_CONFIG = {
         page_initials: "AB-TEST-019",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -56,6 +56,20 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         `,
     };
 
+    async function fetchAndParseURLApi(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+            const html = await response.text();
+            const dom = new DOMParser().parseFromString(html, "text/html");
+            return dom;
+        } catch (error) {
+            // console.error("Fetch and parse failed:", error);
+            return null;
+        }
+    }
+
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
             return;
@@ -91,6 +105,11 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         );
     }
 
+    function parseAmount(targetNode) {
+        if (!targetNode) return 0;
+        return parseFloat(targetNode.innerText?.replace(".", "")?.replace(",", ".")?.replace("€", ""));
+    }
+
     function formatPriceToGerman(price, trimInnerSpace = false) {
         const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
             style: "currency",
@@ -98,6 +117,29 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         }).format(price);
 
         return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
+    }
+
+    async function getPriceData(targetNode) {
+        const productUrl = q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
+        const dom = await fetchAndParseURLApi(productUrl);
+
+        const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
+        const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
+        const quantity = +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
+
+        // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
+        const hasVolumeDiscountTable = !!q(dom, ".table.product-block-prices-grid");
+        const totalPricePerQuantity = parseAmount(q(dom, ".product-detail-price"));
+        const totalPrice = totalPricePerQuantity * quantity;
+        const discount = totalPrice - offerPrice;
+
+        return {
+            hasVolumeDiscountTable,
+            totalPrice, // Original main price
+            offerPrice, // Discounted price
+            discount, // Actual amount saved
+            quantity,
+        };
     }
 
     function getCelebrationTxt({ targetNode, totalPrice, quantity, discount, offerPrice }) {
@@ -136,8 +178,8 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     function createCelebrationMessageComponent() {
         const targetNodes = qq(".offcanvas-cart-items .line-item");
         targetNodes.forEach(async (targetNode) => {
-            const { totalPrice, quantity, discount, offerPrice } = await getPriceData(targetNode);
-            if (discount === 0 || totalPrice === offerPrice) return;
+            const { hasVolumeDiscountTable, totalPrice, quantity, discount, offerPrice } = await getPriceData(targetNode);
+            if (!hasVolumeDiscountTable) return;
             createReducedPriceLayout({ targetNode, totalPrice, quantity, discount, offerPrice });
             createCelebrationMessageLayout({ targetNode, totalPrice, quantity, discount, offerPrice });
         });

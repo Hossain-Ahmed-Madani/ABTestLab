@@ -19,7 +19,7 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         test_name: "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
         page_initials: "AB-TEST-019",
         test_variation: 2 /* 1, 2 */,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -90,24 +90,8 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
         return trimInnerSpace ? formattedPriceTxt.replaceAll("\u00A0", "") : formattedPriceTxt;
     }
 
-    async function getProductOriginalPricePerQuantity(url) {
-        return fetch(url)
-            .then((res) => res.text())
-            .then((resTxt) => {
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(resTxt, "text/html");
-                const priceNode = doc.querySelector(".product-detail-price");
-                if (priceNode) {
-                    return parseAmount(priceNode);
-                } else {
-                    throw new Error("Price element not found");
-                }
-            });
-    }
-
     async function getPriceData(targetNode) {
         const productUrl = q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
-
         const dom = await fetchAndParseURLApi(productUrl);
 
         const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
@@ -116,7 +100,7 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
 
         // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
         const hasVolumeDiscountTable = !!q(dom, ".table.product-block-prices-grid");
-        const totalPricePerQuantity = await getProductOriginalPricePerQuantity(productUrl);
+        const totalPricePerQuantity = parseAmount(q(dom, ".product-detail-price"));
         const totalPrice = totalPricePerQuantity * quantity;
         const discount = totalPrice - offerPrice;
 

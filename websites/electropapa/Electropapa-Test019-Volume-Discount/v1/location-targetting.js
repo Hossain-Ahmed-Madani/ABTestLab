@@ -40,7 +40,7 @@
             return true;
         } else {
             // Start mutation observer, but return false synchronously
-            waitForPromise(() => qq("body.is-ctl-product, body.is-ctl-checkout, .offcanvas")?.length > 0)
+            waitForPromise(() => qq("body.is-ctl-product table.product-block-prices-grid, body.is-ctl-checkout, .offcanvas")?.length > 0)
                 .then(() => {
                     window[TEST_KEY] = true;
                     convert_recheck_experiment();
