@@ -65,118 +65,20 @@
   }
 }
 
-.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-table
+.AB-TEST-019--v1.AB-TEST-019--has-volume-discount-table.AB-TEST-019--show-volume-discount-table
   .product-detail-price-container
   .product-block-prices {
   display: block;
 }
-.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-table .product-block-prices {
+.AB-TEST-019--v1.AB-TEST-019--has-volume-discount-table.AB-TEST-019--show-volume-discount-table
+  .product-block-prices {
   width: 100%;
   max-width: 488px;
 }
-.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-modal {
-  overflow: hidden;
-  padding-right: 15px;
-}
-.AB-TEST-019--v1.AB-TEST-019--show-volume-discount-modal
-  .ab-quantity-modal-layout {
-  opacity: 1;
-  z-index: 1000;
-}
-.AB-TEST-019--v1 .ab-quantity-modal-layout {
-  opacity: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  z-index: -1;
-  transition: all 0.3s ease-in-out;
-}
-.AB-TEST-019--v1 .ab-quantity-modal-backdrop {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, 0.5882352941);
-}
-.AB-TEST-019--v1 .ab-quantity-modal {
-  width: 100%;
-  max-width: 456px;
-  height: max-content;
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-.AB-TEST-019--v1 .ab-quantity-modal__container {
-  position: relative;
-  background: #fff;
-  border-radius: 7px;
-  padding: 40px 20px 20px;
-}
-.AB-TEST-019--v1 .ab-quantity-modal__close-cta {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 5px;
-  height: 5px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0px;
-  text-align: center;
-  vertical-align: middle;
-  color: #4a545b;
-}
-.AB-TEST-019--v1 .ab-quantity-modal__heading {
-  min-height: 33px;
-  font-family: Inter, sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 21px;
-  letter-spacing: 0.5px;
-  text-align: center;
-  vertical-align: middle;
-  color: #47b4eb;
-}
-.AB-TEST-019--v1 .ab-quantity-modal__sub-heading {
-  min-height: 21px;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0px;
-  text-align: center;
-  vertical-align: middle;
-  color: #4a545b;
-  margin-bottom: 15px;
-}
+
 .AB-TEST-019--v1 .product-detail-tax-container {
   display: flex;
   flex-direction: column;
-}
-@media screen and (min-width: 768px) {
-  .AB-TEST-019--v1 .ab-quantity-modal {
-    top: 100px;
-    padding-left: 0;
-    padding-right: 0;
-  }
-  .AB-TEST-019--v1 .ab-quantity-modal__container {
-    padding: 20px 30px 28px;
-  }
-  .AB-TEST-019--v1 .ab-quantity-modal__heading {
-    line-height: 33px;
-  }
 }
 .AB-TEST-019--v1 .ab-quantity-dropdown-layout {
   width: 100%;
@@ -248,11 +150,6 @@
   text-align: center;
   vertical-align: middle;
   color: #4a545b;
-}
-.AB-TEST-019--v1
-  .product-detail-delivery-information
-  > .product-delivery-available {
-  display: none;
 }
 .AB-TEST-019--v1 .ab-free-delivery-txt-cta-container {
   display: flex;
@@ -344,19 +241,14 @@ V1: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-
 v2: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?_conv_eforce=1004170195.1004401764&utm_campaign=qa5
 
 without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-gd-ssdi-e24b-sdi-2510b-7inr19-65-4-10inr19-65-4-8-8-ah-24v-li-ion-800108614?utm_campaign=qa5
-
+// https://electropapa.com/de/4x-staubsauger-schlauch-passend-fuer-kaercher-3-5m-35-mm-889006354 - no discount
 */
 
 (() => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "Project Name",
-    site_url: "https://electropapa.com/de",
-    test_name:
-      "Test019 [Electropapa] A/B/C - Followup016 - PDS & Side Cart - Textlink Popup and Volume discount nudge cart",
     page_initials: "AB-TEST-019",
     test_variation: 1 /* 1, 2 */,
-    test_version: 0.0007,
+    test_version: 0.0008,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -468,16 +360,6 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     );
   }
 
-  function parseAmount(targetNode) {
-    if (!targetNode) return 0;
-    return parseFloat(
-      targetNode.innerText
-        ?.replace(".", "")
-        ?.replace(",", ".")
-        ?.replace("€", ""),
-    );
-  }
-
   function formatPriceToGerman(price, trimInnerSpace = false) {
     const formattedPriceTxt = new Intl.NumberFormat("de-DE", {
       style: "currency",
@@ -487,44 +369,6 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     return trimInnerSpace
       ? formattedPriceTxt.replaceAll("\u00A0", "")
       : formattedPriceTxt;
-  }
-
-  async function getProductOriginalPricePerQuantity(url) {
-    return fetch(url)
-      .then((res) => res.text())
-      .then((resTxt) => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(resTxt, "text/html");
-        const priceNode = doc.querySelector(".product-detail-price");
-        if (priceNode) {
-          return parseAmount(priceNode);
-        } else {
-          throw new Error("Price element not found");
-        }
-      });
-  }
-
-  async function getPriceData(targetNode) {
-    const productUrl =
-      q(targetNode, "a.line-item-label")?.getAttribute("href") || "";
-
-    const offerPriceContainer = q(targetNode, ".line-item-total-price-value");
-    const offerPrice = parseAmount(offerPriceContainer); // This is DISCOUNTED price
-    const quantity =
-      +q(targetNode, "input.quantity-selector-group-input")?.value || 0;
-
-    // const totalPrice = calculateOriginalPrice(offerPrice, quantity);
-    const totalPricePerQuantity =
-      await getProductOriginalPricePerQuantity(productUrl);
-    const totalPrice = totalPricePerQuantity * quantity;
-    const discount = totalPrice - offerPrice;
-
-    return {
-      totalPrice, // Original main price
-      offerPrice, // Discounted price
-      discount, // Actual amount saved
-      quantity,
-    };
   }
 
   function getCelebrationTxt({
@@ -601,6 +445,7 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     targetNodes.forEach(async (targetNode) => {
       const { totalPrice, quantity, discount, offerPrice } =
         await getPriceData(targetNode);
+      if (discount === 0 || totalPrice === offerPrice) return;
       createReducedPriceLayout({
         targetNode,
         totalPrice,
@@ -671,85 +516,16 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
     }
   }
 
-  function clickEvents() {
-    document.body.addEventListener("click", (e) => {
-      // ==== Variation 1 ====
-      if (e.target.closest(".ab-free-delivery-txt-cta")) {
-        q(".product-detail-tax-link").click();
-      }
-
-      if (e.target.closest(".ab-volume-discount-modal-cta")) {
-        toggleHideVolumeDiscountTable();
-      }
-    });
-  }
-
   // ==== Variation 1 ====
-  function createV1PriceModal() {
-    const SELECT_OPTIONS = [
-      {
-        value: 1,
-        label: 1,
-        discount_percentage: 0,
-      },
-      {
-        value: 2,
-        label: 2,
-        discount_percentage: 5,
-      },
-      {
-        value: 3,
-        label: 3,
-        discount_percentage: 5,
-      },
-      {
-        value: 4,
-        label: 4,
-        discount_percentage: 6,
-      },
-      {
-        value: 5,
-        label: 5,
-        discount_percentage: 6,
-      },
-      {
-        value: 6,
-        label: 6,
-        discount_percentage: 8,
-      },
-      {
-        value: 7,
-        label: 7,
-        discount_percentage: 8,
-      },
-      {
-        value: 8,
-        label: 8,
-        discount_percentage: 8,
-      },
-      {
-        value: 9,
-        label: 9,
-        discount_percentage: 8,
-      },
-      {
-        value: 10,
-        label: 10,
-        discount_percentage: 10,
-      },
-      {
-        value: 11,
-        label: "11+",
-        discount_percentage: 10,
-      },
-    ];
-
+  function createV1Layout() {
     const selector =
-      ".product-detail-tax, .product-detail-tax-link, .product-delivery-available";
+      "table.product-block-prices-grid, .product-detail-tax, .product-detail-tax-link, .product-delivery-available";
 
     waitForElement(
-      () => qq(selector).length === 3,
+      () => qq(selector).length === 4,
       () => {
+        q("body").classList.add(page_initials + "--has-volume-discount-table");
+
         // ======  Modal Cta Link ======
         q(".product-detail-tax-link").innerText = "Kostenfreie Lieferung in DE";
         q(".product-detail-tax").insertAdjacentHTML(
@@ -763,74 +539,9 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
                     </span>`,
         );
 
-        // ====== Delivery Layout ======
-        q(".product-delivery-available").insertAdjacentHTML(
-          "afterend",
-          /* HTML */ `
-            <div class="ab-free-delivery-txt-cta-container">
-              <div class="product-delivery-available">
-                <div>
-                  <span class="delivery-status-indicator bg-success"></span>
-                </div>
-                <div class="high-availability">
-                  <span class="text-success fw-bold">Auf Lager</span>
-                </div>
-              </div>
-              <div class="product-delivery-available ab-free-delivery-txt-cta">
-                <div>
-                  <span class="delivery-status-indicator bg-success"></span>
-                </div>
-                <div class="high-availability">
-                  <span class="text-success fw-bold"
-                    >Kostenfreie Lieferung in DE</span
-                  >
-                </div>
-              </div>
-            </div>
-          `,
-        );
-
-        // ====== Modal Layout ======
-        q("body").insertAdjacentHTML(
-          "afterbegin",
-          /* HTML */ `
-            <!-- MODAL  -->
-            <div class="ab-quantity-modal-layout">
-              <div class="ab-quantity-modal-backdrop"></div>
-              <div class="ab-quantity-modal">
-                <div class="ab-quantity-modal__container">
-                  <div
-                    class="ab-quantity-modal__close-cta btn-close close"
-                  ></div>
-                  <div class="ab-quantity-modal__heading">
-                    Jetzt zum Sparpreis immer Ersatz parat haben
-                  </div>
-                  <div class="ab-quantity-modal__sub-heading">
-                    Clever sein und sparen!
-                  </div>
-                  <div class="ab-quantity-dropdown-layout">
-                    <ul class="ab-quantity-dropdown-options">
-                      ${SELECT_OPTIONS.map(
-                        ({ value, label, discount_percentage }) => /* HTML */ `
-                          <li
-                            class="ab-quantity-dropdown-option"
-                            value="${value}"
-                          >
-                            <span class="ab-quantity-dropdown-option__value"
-                              >${label} Stk.</span
-                            >
-                            ${value <= 10
-                              ? `<span class="ab-quantity-dropdown-option__green-badge">Spare ${discount_percentage}%</span>`
-                              : `<span class="ab-quantity-dropdown-option__ten-plus-badge"><i>Bitte Mail an uns</i></span>`}
-                          </li>
-                        `,
-                      ).join("")}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `,
+        // ===== Click Event =====
+        q(".ab-volume-discount-modal-cta").addEventListener("click", (e) =>
+          toggleHideVolumeDiscountTable(),
         );
       },
     );
@@ -900,17 +611,15 @@ without forced: https://electropapa.com/de/e-bike-akku-als-ersatz-fuer-samsung-g
 
   function init() {
     document.body.classList.add(...BODY_CLASSLIST);
-    console.table(TEST_CONFIG);
+
+    // V1 PDP Layout
+    createV1Layout();
 
     // Observing body -> when side cart appears in dom -> Observing Side Cart
     bodyObserver();
 
     // Handle when test buckets on side cart open
     cartObserver();
-
-    // Other functionalities
-    createV1PriceModal();
-    clickEvents();
 
     // Cart page layout
     createCartPageLayout();
