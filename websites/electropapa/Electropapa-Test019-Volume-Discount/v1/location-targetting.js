@@ -1,4 +1,6 @@
 (function () {
+    console.log("Test Location JS");
+
     async function waitForPromise(predicate) {
         let count = 0;
 
@@ -29,6 +31,7 @@
     }
 
     try {
+        
         if (!q("body")) {
             throw new Error("No body");
         }
@@ -37,14 +40,14 @@
         const IS_BUCKETED = window[TEST_KEY];
 
         if (IS_BUCKETED) {
+            console.log("Test Location JS | Bucketed");
             return true;
         } else {
             // Start mutation observer, but return false synchronously
-            waitForPromise(() => qq("body.is-ctl-product table.product-block-prices-grid, body.is-ctl-checkout, .offcanvas")?.length > 0)
-                .then(() => {
-                    window[TEST_KEY] = true;
-                    convert_recheck_experiment();
-                });
+            waitForPromise(() => qq("body.is-ctl-product table.product-block-prices-grid, body.is-ctl-checkout, .offcanvas")?.length > 0).then(() => {
+                window[TEST_KEY] = true;
+                convert_recheck_experiment();
+            });
 
             return false;
         }
@@ -52,4 +55,4 @@
         convert_recheck_experiment();
         return false;
     }
-})()
+})();
