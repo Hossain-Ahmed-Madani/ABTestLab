@@ -16,7 +16,7 @@ v2: https://springhillnursery.com/products/centennial-tulip?_conv_eforce=1004174
         test_name: "Cart - Skip Cart Page [DTM]",
         page_initials: "AB-SKIP-CART-PAGE",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
