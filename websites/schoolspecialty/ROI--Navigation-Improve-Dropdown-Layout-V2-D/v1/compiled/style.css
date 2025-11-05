@@ -3,6 +3,9 @@
   /* Webkit browsers (Chrome, Safari, Edge) */
   /* Firefox */
 }
+.AB-NAV-V2-D.AB-REDESIGN-NAV-DROPDOWN .subcategoryList-level3 li:has(> a.allCategories) {
+  display: none !important;
+}
 .AB-NAV-V2-D.AB-REDESIGN-NAV-DROPDOWN .roi-scrollbar-track {
   display: none !important;
 }

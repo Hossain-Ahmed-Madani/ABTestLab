@@ -1,5 +1,9 @@
 .AB-NAV-V2-D {
     &.AB-REDESIGN-NAV-DROPDOWN {
+        .subcategoryList-level3 li:has(> a.allCategories) {
+            display: none !important;
+        }
+
         .roi-scrollbar-track {
             display: none !important;
         }

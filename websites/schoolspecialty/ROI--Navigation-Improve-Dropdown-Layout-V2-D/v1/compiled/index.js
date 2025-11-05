@@ -7,16 +7,11 @@ Test container: https://app.convert.com/accounts/100414252/projects/100415740/ex
 v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_campaign=qa7
 
 */
-
 (() => {
     const TEST_CONFIG = {
-        client: "ROI Revolution",
-        project: "select.schoolspecialty",
-        site_url: "https://select.schoolspecialty.com/",
-        test_name: "Navigation - Improve Dropdown Layout V2 [D]",
         page_initials: "AB-NAV-V2-D",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -66,8 +61,14 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
                     e.preventDefault();
                     e.stopPropagation();
                     const el = e.currentTarget;
-                    const isActive = el.classList.contains("ab-click-active");
 
+                    if (!q(el, ".departmentMenu")) {
+                        const href = e.target.closest("a").href;
+                        window.location.href = href;
+                        return;
+                    }
+
+                    const isActive = el.classList.contains("ab-click-active");
 
                     q("body").classList.remove("AB-NAV-V2-D--nav-opened");
                     qq("#departmentsMenu > li, .departmentMenu, .categoryList, .categoryList > li, .subcategoryList-level3").forEach((item) => {
@@ -170,7 +171,6 @@ v1: https://select.schoolspecialty.com/?_conv_eforce=1004170093.1004401545&utm_c
 
     function init() {
         document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         updateLayout();
         clickFunction();
     }
