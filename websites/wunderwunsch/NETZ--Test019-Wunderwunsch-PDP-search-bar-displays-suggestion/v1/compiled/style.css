@@ -195,7 +195,7 @@
   display: none;
   background: #fee7f1;
   padding: 10px 12px;
-  max-height: 75vh;
+  max-height: 65vh;
   overflow-y: scroll;
 }
 .TEST019-SEARCH-BAR .ab-searched-content .drawer__content {

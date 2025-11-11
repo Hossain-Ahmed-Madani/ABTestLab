@@ -17,7 +17,7 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
         test_name: "Test019 [Wunderwunsch] - PDP - search bar displays suggestions when activated (mobile only)",
         page_initials: "TEST019-SEARCH-BAR",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -53,12 +53,12 @@ Forced Variation: https://www.wunderwunsch.de/?_conv_eforce=1004174128.100441068
                 {
                     title: "TRIXIE Kindergartenrucksack personalisiert",
                     link: "https://www.wunderwunsch.de/products/trixie-kindergartenrucksack-personalisiert?_pos=1&_sid=5337d88b8&_ss=r",
-                    imgUrl: "https://www.wunderwunsch.de/cdn/shop/files/trixie-grosser-kindergartenrucksack-personalisiert-tiere-wunderwunsch-261264.jpg?v=1744408445&width=700",
+                    imgUrl: "https://www.wunderwunsch.de/cdn/shop/files/trixie-grosser-kindergartenrucksack-personalisiert-tiere-wunderwunsch-261264.jpg?v=1744408445&width=500",
                 },
                 {
                     title: "JOLLEIN Schmusetuch personalisiert",
                     link: "https://www.wunderwunsch.de/products/schmusetuch-bar-giraffe-oder-fuchs?_pos=2&_sid=a5dde11b3&_ss=r",
-                    imgUrl: "https://www.wunderwunsch.de/cdn/shop/files/trixie-grosser-kindergartenrucksack-personalisiert-tiere-wunderwunsch-261264.jpg?v=1744408445&width=500",
+                    imgUrl: "https://www.wunderwunsch.de/cdn/shop/files/jollein-schmusetuch-personalisiert-bar-giraffe-lowe-oder-fuchs-wunderwunsch-639267.jpg?v=1744792772&width=500",
                 },
                 {
                     title: "Erinnerungs-box Holz mit Wunschdaten",
