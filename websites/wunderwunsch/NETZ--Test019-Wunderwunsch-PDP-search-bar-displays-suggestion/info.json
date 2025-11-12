@@ -1,0 +1,13 @@
+{
+  "id": "1761641082980_4877_NETZ__Test019_Wunderwunsch_PDP_search_bar_displays_suggestion",
+  "name": "NETZ--Test019-Wunderwunsch-PDP-search-bar-displays-suggestion",
+  "type": "A/B",
+  "website": "wunderwunsch",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-10-28T08:44:42.980Z",
+  "createdAtReadable": "10/28/2025, 2:44:42 PM",
+  "lastUpdated": "2025-10-28T08:44:43.249Z"
+}
