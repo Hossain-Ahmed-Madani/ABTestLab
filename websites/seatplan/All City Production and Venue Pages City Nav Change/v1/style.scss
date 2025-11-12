@@ -1,17 +1,108 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-ECX-162-CITY-NAV {
-    //
+    #page-wrap > .trust-bar {
+        display: none;
+    }
+
+    .ab-sub-nav {
+        width: 100%;
+        background: #0576ae;
+        color: #fff;
+    }
+
+    .ab-sub-nav__container {
+        height: 100%;
+    }
+
+    .ab-sub-nav__list {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        overflow-y: auto;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &--align-center {
+            justify-content: center;
+        }
+    }
+
+    .ab-sub-nav__item:last-child .ab-sub-nav__link {
+        margin-right: 0;
+    }
+
+    .ab-sub-nav__link {
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        color: #fff;
+        font-size: 15px;
+        line-height: 15px;
+        padding: 15px 11px;
+        margin-right: 13px;
+    }
+
+    .city-nav__item:has(> .city-nav__link[href="/london/"]),
+    .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+        background: #0576ae;
+    }
+
+    &.venue-page-wrapper {
+        .city-nav__item:has(> .city-nav__link[href="/london/"]),
+        .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+            background: none;
+        }
+    }
+
+    .city-nav__item:has(> .city-nav__link[href*="whats-on/musicals/"]),
+    .city-nav__item:has(> .city-nav__link[href*="whats-on/plays/"]),
+    .city-nav__item:has(> .city-nav__link[href*="whats-on/christmas/"]),
+    .city-nav__item:has(> .city-nav__link.city-nav__link--for-dropdown-no-icon) {
+        display: none;
+    }
+
+    @media screen and (max-width: 539.5px) {
+        .ab-sub-nav__container {
+            padding-left: 0;
+        }
+    }
+
+    @media screen and (min-width: 540px) {
+        .ab-sub-nav__list {
+            justify-content: center;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-sub-nav__item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ab-sub-nav__link {
+            min-width: 100px;
+            font-size: 16px;
+            line-height: 16px;
+            padding: 17px 16px;
+            padding: 17px 20px;
+            margin: auto;
+            text-align: center;
+        }
+    }
 }
