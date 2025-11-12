@@ -1,0 +1,14 @@
+{
+  "id": "1758277344684_9127_Electropapa_Test018_Volume_Discount",
+  "name": "Electropapa-Test019-Volume-Discount",
+  "type": "A/B",
+  "website": "electropapa",
+  "variations": [
+    "control",
+    "v1",
+    "v2"
+  ],
+  "createdAt": "2025-09-19T10:22:24.684Z",
+  "createdAtReadable": "19/09/2025, 4:22:24 pm",
+  "lastUpdated": "2025-09-29T11:17:59.297Z"
+}
