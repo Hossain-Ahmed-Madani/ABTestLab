@@ -1,0 +1,156 @@
+<section id="messages" x-data="initMessages" x-bind="eventListeners" aria-live="assertive" role="alert">
+    <template x-if="isNotEmpty">
+        <div class="w-full">
+            <div class="messages container mx-auto py-3 px-0">
+                <template x-for="(message, index) in messages" :key="index">
+                    <div>
+                        <template x-if="message">
+                            <div class="message" :class="message.type" :ui-id="'message-' + message.type">
+                                <span x-html="message.text"></span>
+                                <button type="button" class="text-gray-600 hover:text-black" aria-label="Close message" @click.prevent="removeMessageByDataId" :data-id="index">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke-width="2"
+                                        stroke="currentColor"
+                                        class="stroke-current"
+                                        width="18"
+                                        height="18"
+                                        aria-hidden="true"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </template>
+    <div class="w-full">
+        <div class="messages container mx-auto py-3 px-0">
+            <template x-for="(message, index) in messages" :key="index">
+                <div>
+                    <template x-if="message">
+                        <div class="message" :class="message.type" :ui-id="'message-' + message.type">
+                            <span x-html="message.text"></span>
+                            <button type="button" class="text-gray-600 hover:text-black" aria-label="Close message" @click.prevent="removeMessageByDataId" :data-id="index">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="2"
+                                    stroke="currentColor"
+                                    class="stroke-current"
+                                    width="18"
+                                    height="18"
+                                    aria-hidden="true"
+                                >
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <div>
+                <template x-if="message">
+                    <div class="message" :class="message.type" :ui-id="'message-' + message.type">
+                        <span x-html="message.text"></span>
+                        <button type="button" class="text-gray-600 hover:text-black" aria-label="Close message" @click.prevent="removeMessageByDataId" :data-id="index">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke-width="2"
+                                stroke="currentColor"
+                                class="stroke-current"
+                                width="18"
+                                height="18"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </template>
+                <div class="message success" :class="message.type" :ui-id="'message-' + message.type" ui-id="message-success">
+                    <span x-html="message.text">You added the item DuraGrip® Brand - 5" Black Hook Sew-On.</span>
+                    <button type="button" class="text-gray-600 hover:text-black" aria-label="Close message" @click.prevent="removeMessageByDataId" :data-id="index" data-id="0">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="2"
+                            stroke="currentColor"
+                            class="stroke-current"
+                            width="18"
+                            height="18"
+                            aria-hidden="true"
+                        >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="loader bg-[#d3d3d3c4] flex flex-row justify-center items-center w-full h-full fixed select-none z-50 left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 57 57" width="57" height="57" fill="none" stroke="currentColor" stroke-width="2" class="text-primary" role="img">
+        <style>
+            @keyframes spinner-ball-triangle1 {
+                0% {
+                    transform: translate(0%, 0%);
+                }
+                33% {
+                    transform: translate(38%, -79%);
+                }
+                66% {
+                    transform: translate(77%, 0%);
+                }
+                100% {
+                    transform: translate(0%, 0%);
+                }
+            }
+
+            @keyframes spinner-ball-triangle2 {
+                0% {
+                    transform: translate(0%, 0%);
+                }
+                33% {
+                    transform: translate(38%, 79%);
+                }
+                66% {
+                    transform: translate(-38%, 79%);
+                }
+                100% {
+                    transform: translate(0%, 0%);
+                }
+            }
+
+            @keyframes spinner-ball-triangle3 {
+                0% {
+                    transform: translate(0%, 0%);
+                }
+                33% {
+                    transform: translate(-77%, 0%);
+                }
+                66% {
+                    transform: translate(-38%, -79%);
+                }
+                100% {
+                    transform: translate(0%, 0%);
+                }
+            }
+        </style>
+        <circle cx="5" cy="50" r="5" style="animation: spinner-ball-triangle1 2.2s linear infinite"></circle>
+        <circle cx="27" cy="5" r="5" style="animation: spinner-ball-triangle2 2.2s linear infinite"></circle>
+        <circle cx="49" cy="50" r="5" style="animation: spinner-ball-triangle3 2.2s linear infinite"></circle>
+        <title>loader</title>
+    </svg>
+    <div class="ml-10 text-primary text-xl">Loading...</div>
+</div>
