@@ -129,6 +129,7 @@ v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign
     try {
         await waitForElementAsync(checkForItems);
         init();
+        return true;
     } catch (error) {
         console.warn(error);
         return false;
