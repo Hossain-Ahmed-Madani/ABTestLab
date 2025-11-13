@@ -13,6 +13,7 @@
 }
 
 .AB-ECX-162-CITY-NAV {
+    main.body-content > .trust-bar ,
     #page-wrap > .trust-bar {
         display: none;
     }
@@ -55,6 +56,13 @@
         line-height: 15px;
         padding: 15px 11px;
         margin-right: 13px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 7px;
+        } 
     }
 
     .city-nav__item:has(> .city-nav__link[href="/london/"]),
@@ -80,6 +88,10 @@
         .ab-sub-nav__container {
             padding-left: 0;
         }
+
+        .city-nav__list .city-nav__item:first-child .city-nav__link {
+            margin-right: 0;
+        }
     }
 
     @media screen and (min-width: 540px) {
@@ -99,7 +111,6 @@
             min-width: 100px;
             font-size: 16px;
             line-height: 16px;
-            padding: 17px 16px;
             padding: 17px 20px;
             margin: auto;
             text-align: center;

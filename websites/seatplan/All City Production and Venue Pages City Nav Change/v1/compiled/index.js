@@ -1,15 +1,23 @@
+/* 
+Ticket: https://trello.com/c/lQarYbLO/4374-all-city-production-and-venue-pages-city-nav-change?filter=label%3ATeam+Titans
+
+Container:https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004176421/summary
+v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign=qa5
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "SeatPlan",
         project: "SeatPlan",
-        site_url: "https://seatplan.com/",
+        host: "https://seatplan.com",
         test_name: "All | City, Production and Venue Pages | City Nav Change",
         page_initials: "AB-ECX-162-CITY-NAV",
         test_variation: 1,
         test_version: 0.0001,
     };
 
-    const { page_initials, test_variation, test_version } = TEST_CONFIG;
+    const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const DATA = [
         {
@@ -69,7 +77,6 @@
 
     function createLayout() {
         const city = getCityFromDataLayer();
-        const host = "https://seatplan.com";
 
         if (!city) return;
 
@@ -80,8 +87,6 @@
                 <li class="city-nav__item"><a class="city-nav__link" href="${host}/${city}/news/" data-js="city-nav-city-link">News</a></li>
             `
         );
-
-        console.log("City detected:", city);
 
         q(".city-nav").insertAdjacentHTML(
             "afterend",
