@@ -65,28 +65,36 @@ v2: https://springhillnursery.com/products/centennial-tulip?_conv_eforce=1004174
         };
     }
 
-    function createLayout() {
-        if ((q(".ab-side-cart-checkout-btn") && q(".ab-cta-btn")) || !q(".quick-cart a.quick-cart__submit[href='/cart']")) return;
-
+    function getCtaBtn() {
         const ctaBtn = document.createElement("a");
         ctaBtn.href = test_variation === 1 ? "/cart" : "javascript:void(0)";
         ctaBtn.className = "ab-cta-btn";
         ctaBtn.setAttribute("aria-label", test_variation === 1 ? "View Cart" : "Continue Shopping");
         ctaBtn.textContent = test_variation === 1 ? "View Cart" : "Continue Shopping";
 
+        return ctaBtn;
+    }
+
+    function getCheckoutBtn() {
         const checkoutBtn = document.createElement("a");
         checkoutBtn.href = "/checkout";
         checkoutBtn.className = "ab-side-cart-checkout-btn  btn btn--full btn--primary";
         checkoutBtn.setAttribute("aria-label", "Go To Checkout");
         checkoutBtn.textContent = "Go To Checkout";
 
+        return checkoutBtn;
+    }
+
+    function createLayout() {
+        if ((q(".ab-side-cart-checkout-btn") && q(".ab-cta-btn")) || !q(".quick-cart a.quick-cart__submit[href='/cart']")) return;
+
+        const ctaBtn = getCtaBtn();
+        const checkoutBtn = getCheckoutBtn();
         const targetNode = q(".quick-cart a.quick-cart__submit[href='/cart']");
         targetNode.insertAdjacentElement("afterend", ctaBtn);
         targetNode.insertAdjacentElement("afterend", checkoutBtn);
 
-        if (test_variation !== 2) return;
-
-        ctaBtn.addEventListener("click", (e) => q(".quick-cart button.quick-cart__close-icon").click());
+        if (test_variation === 2) ctaBtn.addEventListener("click", (e) => q(".quick-cart button.quick-cart__close-icon").click());
     }
 
     function init() {
