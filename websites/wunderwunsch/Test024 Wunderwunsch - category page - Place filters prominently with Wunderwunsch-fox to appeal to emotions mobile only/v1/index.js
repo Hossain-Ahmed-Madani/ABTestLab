@@ -5,7 +5,7 @@ Description: https://docs.google.com/document/u/1/d/1dR0MCsXf3qTMZp7JNHDcUpYLQ8z
 Figma: https://www.figma.com/design/orfdp8oj34kNQKPPDoDw7k/Test024---Kategorieseite---Filter-prominenter-platzieren?node-id=0-1&t=1QjTm1HMH7DUWwYa-1
 
 Test Container:  https://app.convert.com/accounts/1004828/projects/10041371/experiences/1004176673/summary
-V1: https://www.wunderwunsch.de/collections/weihnachten&utm_campaign=qa05
+V1: https://www.wunderwunsch.de/collections/weihnachten?utm_campaign=qa05
 
 */
 
