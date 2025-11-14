@@ -1,0 +1,13 @@
+{
+  "id": "1763118279005_9944_Test024_Wunderwunsch___category_page___Place_filters_prominently_with_Wunderwunsch_fox_to_appeal_to_emotions_mobile_only",
+  "name": "Test024 Wunderwunsch - category page - Place filters prominently with Wunderwunsch-fox to appeal to emotions mobile only",
+  "type": "A/B",
+  "website": "wunderwunsch",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-11-14T11:04:39.005Z",
+  "createdAtReadable": "11/14/2025, 5:04:39 PM",
+  "lastUpdated": "2025-11-14T11:04:39.307Z"
+}
