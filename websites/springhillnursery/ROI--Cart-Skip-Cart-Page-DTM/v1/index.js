@@ -12,7 +12,7 @@ v2: https://springhillnursery.com/products/centennial-tulip?_conv_eforce=1004174
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "springhillnursery",
-        site_url: "https://springhillnursery.com/",
+        host: "https://springhillnursery.com",
         test_name: "Cart - Skip Cart Page [DTM]",
         page_initials: "AB-SKIP-CART-PAGE",
         test_variation: 1 /* 1, 2 */,
