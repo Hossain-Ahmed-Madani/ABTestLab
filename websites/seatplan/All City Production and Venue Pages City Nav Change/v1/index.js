@@ -81,7 +81,7 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
     }
 
     function isTargetCityUrl() {
-        const CITY_URL_REGEX = /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/|\/whats-on(?:\/.*)?)$/i;
+        const CITY_URL_REGEX = /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/(?:whats-on(?:\/.*)?)?)?(?:[?#].*)?$/i;
         try {
             return CITY_URL_REGEX.test(window.location.href);
         } catch (e) {
