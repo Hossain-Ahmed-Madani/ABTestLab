@@ -3,6 +3,7 @@ Ticket: https://trello.com/c/lQarYbLO/4374-all-city-production-and-venue-pages-c
 
 Container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004176421/summary
 v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign=qa5
+v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert_e=1004176421&convert_v=1004415730
 
 */
 
