@@ -13,9 +13,15 @@
 }
 
 .AB-ECX-162-CITY-NAV {
-    main.body-content > .trust-bar ,
+    main.body-content > .trust-bar,
     #page-wrap > .trust-bar {
         display: none;
+    }
+
+    &.venue-homepage-wrapper {
+        .ab-sub-nav {
+            z-index: 1;
+        }
     }
 
     .ab-sub-nav {
@@ -62,7 +68,7 @@
             text-decoration: underline;
             text-decoration-thickness: 2px;
             text-underline-offset: 7px;
-        } 
+        }
     }
 
     .city-nav__item:has(> .city-nav__link[href="/london/"]),
@@ -70,7 +76,7 @@
         background: #0576ae;
     }
 
-    &.venue-page-wrapper {
+    &.venue-page-wrapper:not(.venue-homepage-wrapper) {
         .city-nav__item:has(> .city-nav__link[href="/london/"]),
         .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
             background: none;
@@ -80,6 +86,7 @@
     .city-nav__item:has(> .city-nav__link[href*="whats-on/musicals/"]),
     .city-nav__item:has(> .city-nav__link[href*="whats-on/plays/"]),
     .city-nav__item:has(> .city-nav__link[href*="whats-on/christmas/"]),
+    .city-nav__item:has(> .city-nav__link[href*="whats-on/kids/"]),
     .city-nav__item:has(> .city-nav__link.city-nav__link--for-dropdown-no-icon) {
         display: none;
     }
@@ -89,14 +96,29 @@
             padding-left: 0;
         }
 
+        .city-nav__item > .city-nav__link[href="/london/"],
+        .city-nav__item > .city-nav__link[href="/new-york/"] {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .city-nav__item > .city-nav__link[href="/london/"],
+        .city-nav__item > .city-nav__link[href="/new-york/"],
         .city-nav__list .city-nav__item:first-child .city-nav__link {
             margin-right: 0;
         }
     }
 
-    @media screen and (min-width: 540px) {
+    @media screen and (min-width: 400px) {
         .ab-sub-nav__list {
             justify-content: center;
+            padding-right: 0;
+        }
+    }
+
+    @media screen and (min-width: 651px) and (max-width: 768px) {
+        .city-nav__list {
+            justify-content: flex-start;
         }
     }
 

@@ -2,6 +2,9 @@
 .AB-ECX-162-CITY-NAV #page-wrap > .trust-bar {
     display: none;
 }
+.AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
+    z-index: 1;
+}
 .AB-ECX-162-CITY-NAV .ab-sub-nav {
     width: 100%;
     background: #0576ae;
@@ -46,13 +49,14 @@
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
     background: #0576ae;
 }
-.AB-ECX-162-CITY-NAV.venue-page-wrapper .city-nav__item:has(> .city-nav__link[href="/london/"]),
-.AB-ECX-162-CITY-NAV.venue-page-wrapper .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+.AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper) .city-nav__item:has(> .city-nav__link[href="/london/"]),
+.AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper) .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
     background: none;
 }
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/musicals/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/plays/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/christmas/"]),
+.AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/kids/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link.city-nav__link--for-dropdown-no-icon) {
     display: none;
 }
@@ -60,13 +64,26 @@
     .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
         padding-left: 0;
     }
+    .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
+    .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"] {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
+    .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"],
     .AB-ECX-162-CITY-NAV .city-nav__list .city-nav__item:first-child .city-nav__link {
         margin-right: 0;
     }
 }
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 400px) {
     .AB-ECX-162-CITY-NAV .ab-sub-nav__list {
         justify-content: center;
+        padding-right: 0;
+    }
+}
+@media screen and (min-width: 651px) and (max-width: 768px) {
+    .AB-ECX-162-CITY-NAV .city-nav__list {
+        justify-content: flex-start;
     }
 }
 @media screen and (min-width: 991px) {

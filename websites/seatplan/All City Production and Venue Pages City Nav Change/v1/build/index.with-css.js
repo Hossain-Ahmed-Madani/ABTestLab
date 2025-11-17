@@ -8,6 +8,9 @@
 .AB-ECX-162-CITY-NAV #page-wrap > .trust-bar {
   display: none;
 }
+.AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
+  z-index: 1;
+}
 .AB-ECX-162-CITY-NAV .ab-sub-nav {
   width: 100%;
   background: #0576ae;
@@ -52,9 +55,9 @@
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
   background: #0576ae;
 }
-.AB-ECX-162-CITY-NAV.venue-page-wrapper
+.AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper)
   .city-nav__item:has(> .city-nav__link[href="/london/"]),
-.AB-ECX-162-CITY-NAV.venue-page-wrapper
+.AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper)
   .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
   background: none;
 }
@@ -65,6 +68,8 @@
 .AB-ECX-162-CITY-NAV
   .city-nav__item:has(> .city-nav__link[href*="whats-on/christmas/"]),
 .AB-ECX-162-CITY-NAV
+  .city-nav__item:has(> .city-nav__link[href*="whats-on/kids/"]),
+.AB-ECX-162-CITY-NAV
   .city-nav__item:has(> .city-nav__link.city-nav__link--for-dropdown-no-icon) {
   display: none;
 }
@@ -72,6 +77,13 @@
   .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
     padding-left: 0;
   }
+  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
+  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"] {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
+  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"],
   .AB-ECX-162-CITY-NAV
     .city-nav__list
     .city-nav__item:first-child
@@ -79,9 +91,15 @@
     margin-right: 0;
   }
 }
-@media screen and (min-width: 540px) {
+@media screen and (min-width: 400px) {
   .AB-ECX-162-CITY-NAV .ab-sub-nav__list {
     justify-content: center;
+    padding-right: 0;
+  }
+}
+@media screen and (min-width: 651px) and (max-width: 768px) {
+  .AB-ECX-162-CITY-NAV .city-nav__list {
+    justify-content: flex-start;
   }
 }
 @media screen and (min-width: 991px) {
@@ -94,7 +112,6 @@
     min-width: 100px;
     font-size: 16px;
     line-height: 16px;
-    padding: 17px 16px;
     padding: 17px 20px;
     margin: auto;
     text-align: center;
@@ -108,18 +125,26 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+Ticket: https://trello.com/c/lQarYbLO/4374-all-city-production-and-venue-pages-city-nav-change?filter=label%3ATeam+Titans
+
+Container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004176421/summary
+v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign=qa5
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "SeatPlan",
     project: "SeatPlan",
-    site_url: "https://seatplan.com/",
+    host: "https://seatplan.com",
     test_name: "All | City, Production and Venue Pages | City Nav Change",
     page_initials: "AB-ECX-162-CITY-NAV",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
-  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+  const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
   const DATA = [
     {
@@ -192,9 +217,18 @@
     );
   }
 
+  function isTargetCityUrl() {
+    const CITY_URL_REGEX =
+      /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/|\/whats-on(?:\/.*)?)$/i;
+    try {
+      return CITY_URL_REGEX.test(window.location.href);
+    } catch (e) {
+      return false;
+    }
+  }
+
   function createLayout() {
     const city = getCityFromDataLayer();
-    const host = "https://seatplan.com";
 
     if (!city) return;
 
@@ -220,7 +254,7 @@
       `,
     );
 
-    console.log("City detected:", city);
+    if (!isTargetCityUrl()) return;
 
     q(".city-nav").insertAdjacentHTML(
       "afterend",
@@ -281,6 +315,7 @@
   try {
     await waitForElementAsync(checkForItems);
     init();
+    return true;
   } catch (error) {
     console.warn(error);
     return false;

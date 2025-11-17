@@ -1,7 +1,7 @@
 /* 
 Ticket: https://trello.com/c/lQarYbLO/4374-all-city-production-and-venue-pages-city-nav-change?filter=label%3ATeam+Titans
 
-Container:https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004176421/summary
+Container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004176421/summary
 v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign=qa5
 
 */
@@ -14,7 +14,7 @@ v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign
         test_name: "All | City, Production and Venue Pages | City Nav Change",
         page_initials: "AB-ECX-162-CITY-NAV",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -75,6 +75,15 @@ v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign
         return pageViewEvent?.eventPayload?.content_city.toLowerCase().replace(" ", "-") || null;
     }
 
+    function isTargetCityUrl() {
+        const CITY_URL_REGEX = /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/|\/whats-on(?:\/.*)?)$/i;
+        try {
+            return CITY_URL_REGEX.test(window.location.href);
+        } catch (e) {
+            return false;
+        }
+    }
+
     function createLayout() {
         const city = getCityFromDataLayer();
 
@@ -87,6 +96,8 @@ v1: https://seatplan.com/london/?_conv_eforce=1004176421.1004415730&utm_campaign
                 <li class="city-nav__item"><a class="city-nav__link" href="${host}/${city}/news/" data-js="city-nav-city-link">News</a></li>
             `
         );
+
+        if (!isTargetCityUrl()) return;
 
         q(".city-nav").insertAdjacentHTML(
             "afterend",
