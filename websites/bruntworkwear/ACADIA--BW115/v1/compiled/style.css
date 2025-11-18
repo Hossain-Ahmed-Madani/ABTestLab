@@ -1,0 +1,42 @@
+.AB-BW115 .product__optionWrapper ~ .ab-sold-out-message {
+  margin-top: 12px;
+}
+.AB-BW115 .ab-show-sold-out-message .ab-sold-out-message {
+  display: flex;
+}
+.AB-BW115 .ab-sold-out-message {
+  background-color: #f2f2f2;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 10px 10px;
+}
+.AB-BW115 .ab-sold-out-message__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-BW115 .ab-sold-out-message__icon svg {
+  width: 22px;
+  height: 22px;
+}
+.AB-BW115 .ab-sold-out-message__message {
+  font-family: "Interstate Bold", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #121212;
+  display: inline-block;
+}
+.AB-BW115 .ab-sold-out-message__message a {
+  border: none;
+  outline: none;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-thickness: 0%;
+  text-decoration-skip-ink: auto;
+}
