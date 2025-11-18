@@ -22,6 +22,19 @@
         .ab-sub-nav {
             z-index: 1;
         }
+
+        @media screen and (max-width: 950px) {
+            .city-nav__item:has(> .city-nav__link[href="/london/"]),
+            .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+                background-color: transparent;
+            }
+
+            // .city-nav__item > .city-nav__link[href="/london/"],
+            // .city-nav__item > .city-nav__link[href="/new-york/"] {
+            //     padding: 17px 11px;
+            //     margin-right: 13px;
+            // }
+        }
     }
 
     .ab-sub-nav {

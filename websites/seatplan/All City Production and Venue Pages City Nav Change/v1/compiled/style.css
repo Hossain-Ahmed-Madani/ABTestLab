@@ -5,6 +5,12 @@
 .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
   z-index: 1;
 }
+@media screen and (max-width: 950px) {
+  .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/london/"]),
+  .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+    background-color: transparent;
+  }
+}
 .AB-ECX-162-CITY-NAV .ab-sub-nav {
   width: 100%;
   background: #0576ae;
