@@ -1,13 +1,29 @@
 /* 
-Ticket: 
-Figma: 
+Ticket: https://trello.com/c/akpjADfQ/4388-%E2%9D%A4%EF%B8%8F-bw115-products-sold-out-product-redirect-2-set-up-test
+Figma: https://www.figma.com/design/ytUOvD9mVG4uoPPtMVm6oq/BW115---PRODUCTS--Sold-Out-Product-Redirect?node-id=3-2177&t=cQEyQu2Wvm2bBB8q-0
 
-Container:
+Container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear.com/experience/2061571#
+
+control: https://marketer.monetate.net/control/preview/12090/S1ED8FMQFA1LSXI77B69G3AXSSHTL2JZ/bw115-products-sold-out-product-redirect
 v1:
-    excluding all experiences:
-    including all experiences:
+    excluding all experiences: https://marketer.monetate.net/control/preview/12090/FW0TDWCKO0OO8TC8DPINL8T06WBYXV96/bw115-products-sold-out-product-redirect
+    including all experiences: https://marketer.monetate.net/control/preview/12090/RRCQMM1YVHC0TZLB1ULDTUY9PWSDFXFZ/bw115-products-sold-out-product-redirect
 
 */
+
+const TEST_ID = "BW115";
+const VARIANT_ID = "V1";
+
+function logInfo(message) {
+    console.log(
+        `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+        "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        message
+    );
+}
+
+logInfo("fired");
 
 (async () => {
     const TEST_CONFIG = {
@@ -33,6 +49,61 @@ v1:
         `,
     };
 
+    const DATA = {
+        matched_category: "#",
+        matched_category_url: "#",
+        product_category_urls: [
+            {
+                title: "Boots",
+                url: "https://bruntworkwear.com/collections/boots?sort=MANUAL&reverse=false",
+                related_categories: ["Boot", "Insole"],
+            },
+            {
+                title: "Pants & Shorts",
+                url: "https://bruntworkwear.com/collections/pants-shorts?sort=MANUAL&reverse=false",
+                related_categories: ["Pant"],
+            },
+            {
+                title: "Shirts",
+                url: "https://bruntworkwear.com/collections/t-shirts?sort=MANUAL&reverse=false",
+                related_categories: ["T-shirt", "T-shirts"],
+            },
+            {
+                title: "Hoodies & Jackets",
+                url: "https://bruntworkwear.com/collections/hoodies-jackets?sort=MANUAL&reverse=false",
+                related_categories: ["Sweatshirt", "Jacket", "Vest"],
+            },
+            {
+                title: "Hats & Beanies",
+                url: "https://bruntworkwear.com/collections/hats-beanie?sort=MANUAL&reverse=false",
+                related_categories: ["Hats"],
+            },
+            {
+                title: "Accessories",
+                url: "https://bruntworkwear.com/collections/accessories?sort=MANUAL&reverse=false",
+                related_categories: ["Accessories", "Sock"],
+            },
+            {
+                title: "Packs & Bundles",
+                url: "https://bruntworkwear.com/collections/packs-bundles?sort=MANUAL&reverse=false",
+                related_categories: ["Pack"],
+            },
+        ],
+    };
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event:", eventName, eventLabel);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
+
     async function fetchAndParseToJSONApi(url) {
         try {
             const response = await fetch(url);
@@ -44,16 +115,22 @@ v1:
             const jsonData = await response.json();
             return jsonData;
         } catch (error) {
-            console.error(`Failed to fetch JSON from ${url}:`, error.message);
             return null;
         }
     }
 
-    async function getProductType() {
+    async function setRelatedCategoryURL() {
         url = host + window.location.pathname + ".json";
         const res = await fetchAndParseToJSONApi(url);
         const productType = res?.["product"]?.["product_type"] ?? null;
-        return productType;
+
+        const allCategories = DATA["product_category_urls"];
+        DATA["matched_category"] = productType;
+        DATA["matched_category_url"] = allCategories.filter((item) => item.related_categories.some((ct) => ct.toLowerCase() === productType.toLowerCase()))?.[0]?.url ?? "#";
+        return {
+            productType,
+            matchedCategoryURL: DATA["matched_category_url"],
+        };
     }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -100,6 +177,11 @@ v1:
         };
     }
 
+    function createAndUpdateSoldOutLayout() {
+        createLayout();
+        updateSoldOutLayout();
+    }
+
     function updateSoldOutLayout() {
         const targetNode = q(".product__additionalStyleParent");
         const className = "ab-show-sold-out-message";
@@ -113,11 +195,12 @@ v1:
 
     function mutationObserverFunction() {
         const targetNode = q(".product__additionalStyleParent");
-        const debouncedUpdate = debounce(updateSoldOutLayout, 150);
+        const debouncedUpdate = debounce(createAndUpdateSoldOutLayout, 150);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     function createLayout() {
+        if (q(".ab-sold-out-message")) return;
         const targetNodes = qq(".product__additionalStyleParent .product__optionWrapper");
         const targetNode = targetNodes[targetNodes.length - 1];
 
@@ -128,25 +211,57 @@ v1:
                     <div class="ab-sold-out-message__icon">${ASSETS.magnifying_glass_svg}</div>
                     <div class="ab-sold-out-message__message">
                         <span>Size Sold Out?</span>
-                        <a href="#">Shop Similar Items</a>
+                        <a href="${DATA["matched_category_url"]}">Shop Similar Items</a>
                     </div>
                 </div>
             `
         );
     }
 
-    // product__optionButton isOOS size isSelected isUnavailable
-    // product__optionButton isOOS size
+    const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
+    let OUT_OF_STOCK_CLICKED = false;
+    let SIMILAR_CATEGORY_CTA_CLICKED = false;
 
-    function init() {
+    function handleGa4Events(e) {
+        if (e.target.closest(".product__optionButton")) {
+            setTimeout(() => {
+                if (e.target.closest(".product__optionButton").classList.contains("isUnavailable")) {
+                    fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
+                    OUT_OF_STOCK_CLICKED = true;
+                }
+            }, 100);
+        }
+
+        if (e.target.closest(".ab-sold-out-message__message a")) {
+            e.preventDefault();
+            const href = e.target.closest(".ab-sold-out-message__message a").getAttribute("href");
+            fireGA4Event("BW115_CTAClick", "Shop Similar Items");
+            SIMILAR_CATEGORY_CTA_CLICKED = true;
+            setTimeout(() => {
+                window.location.replace(href);
+            }, 100);
+        }
+
+        if (OUT_OF_STOCK_CLICKED && SIMILAR_CATEGORY_CTA_CLICKED) {
+            q("body").removeEventListener(EVENT_TYPE, handleGa4Events);
+        }
+    }
+
+    function clickFunction() {
+        q("body").addEventListener(EVENT_TYPE, handleGa4Events);
+    }
+
+    async function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
-        getProductType();
+        const { productType, matchedCategoryURL } = await setRelatedCategoryURL();
 
-        createLayout();
-        updateSoldOutLayout();
+        console.log("productType", productType, "matchedCategoryURL", matchedCategoryURL);
+
+        createAndUpdateSoldOutLayout();
         mutationObserverFunction();
+        clickFunction();
     }
 
     function checkForItems() {

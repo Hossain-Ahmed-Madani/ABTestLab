@@ -23,11 +23,11 @@
   height: 22px;
 }
 .AB-BW115 .ab-sold-out-message__message {
-  font-family: "Interstate Bold", sans-serif;
+  font-family: "Interstate Regular", sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   vertical-align: middle;
   color: #121212;
   display: inline-block;
@@ -39,4 +39,17 @@
   text-decoration-style: solid;
   text-decoration-thickness: 0%;
   text-decoration-skip-ink: auto;
+}
+@media screen and (min-width: 991px) {
+  .AB-BW115 .product__optionWrapper ~ .ab-sold-out-message {
+    margin-top: 14px;
+  }
+  .AB-BW115 .ab-sold-out-message {
+    padding: 10px 10px 8px;
+    gap: 21px;
+  }
+  .AB-BW115 .ab-sold-out-message__icon svg {
+    width: 27px;
+    height: 27px;
+  }
 }
