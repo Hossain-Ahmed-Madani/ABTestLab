@@ -8,7 +8,6 @@ control: https://marketer.monetate.net/control/preview/12090/S1ED8FMQFA1LSXI77B6
 v1:
     excluding all experiences: https://marketer.monetate.net/control/preview/12090/FW0TDWCKO0OO8TC8DPINL8T06WBYXV96/bw115-products-sold-out-product-redirect
     including all experiences: https://marketer.monetate.net/control/preview/12090/RRCQMM1YVHC0TZLB1ULDTUY9PWSDFXFZ/bw115-products-sold-out-product-redirect
-
 */
 
 const TEST_ID = "BW115";
@@ -33,7 +32,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -50,8 +49,8 @@ logInfo("fired");
     };
 
     const DATA = {
-        matched_category: "#",
-        matched_category_url: "#",
+        matched_category: "",
+        matched_category_url: "",
         product_category_urls: [
             {
                 title: "Boots",
@@ -81,7 +80,7 @@ logInfo("fired");
             {
                 title: "Accessories",
                 url: "https://bruntworkwear.com/collections/accessories?sort=MANUAL&reverse=false",
-                related_categories: ["Accessories", "Sock"],
+                related_categories: ["Accessories", "Sock", "BRUNT Box"],
             },
             {
                 title: "Packs & Bundles",
@@ -124,9 +123,11 @@ logInfo("fired");
         const res = await fetchAndParseToJSONApi(url);
         const productType = res?.["product"]?.["product_type"] ?? null;
 
+        const defaultUrl = "https://bruntworkwear.com/collections/accessories?sort=MANUAL&reverse=false";
+
         const allCategories = DATA["product_category_urls"];
         DATA["matched_category"] = productType;
-        DATA["matched_category_url"] = allCategories.filter((item) => item.related_categories.some((ct) => ct.toLowerCase() === productType.toLowerCase()))?.[0]?.url ?? "#";
+        DATA["matched_category_url"] = allCategories.filter((item) => item.related_categories.some((ct) => ct.toLowerCase() === productType.toLowerCase()))?.[0]?.url ?? defaultUrl;
         return {
             productType,
             matchedCategoryURL: DATA["matched_category_url"],
@@ -238,7 +239,14 @@ logInfo("fired");
             fireGA4Event("BW115_CTAClick", "Shop Similar Items");
             SIMILAR_CATEGORY_CTA_CLICKED = true;
             setTimeout(() => {
-                window.location.replace(href);
+                const isCtrlPressed = e.ctrlKey;
+
+                if (isCtrlPressed) {
+                    window.open(href, "_blank");
+                    return;
+                }
+
+                window.location.href = href;
             }, 100);
         }
 

@@ -37,8 +37,6 @@
     outline: none;
     text-decoration: underline;
     text-decoration-style: solid;
-    text-decoration-thickness: 0%;
-    text-decoration-skip-ink: auto;
 }
 @media screen and (min-width: 991px) {
     .AB-BW115 .product__optionWrapper ~ .ab-sold-out-message {
