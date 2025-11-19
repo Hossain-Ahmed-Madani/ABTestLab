@@ -84,9 +84,20 @@
         }
     }
 
-    .city-nav__item:has(> .city-nav__link[href="/london/"]),
-    .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
-        background: #0576ae;
+    &.AB-ECX-162-CITY-NAV--show-highlighted {
+        .city-nav__item:has(> .city-nav__link[href="/london/"]),
+        .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+            background: #0576ae;
+        }
+
+        @media screen and (max-width: 539.5px) {
+            .city-nav__item > .city-nav__link[href="/london/"],
+            .city-nav__item > .city-nav__link[href="/new-york/"] {
+                padding-left: 20px;
+                padding-right: 20px;
+                margin-right: 0;
+            }
+        }
     }
 
     &.venue-page-wrapper:not(.venue-homepage-wrapper) {
@@ -109,14 +120,6 @@
             padding-left: 0;
         }
 
-        .city-nav__item > .city-nav__link[href="/london/"],
-        .city-nav__item > .city-nav__link[href="/new-york/"] {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .city-nav__item > .city-nav__link[href="/london/"],
-        .city-nav__item > .city-nav__link[href="/new-york/"],
         .city-nav__list .city-nav__item:first-child .city-nav__link {
             margin-right: 0;
         }

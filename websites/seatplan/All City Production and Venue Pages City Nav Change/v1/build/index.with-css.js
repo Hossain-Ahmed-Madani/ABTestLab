@@ -59,9 +59,23 @@
   text-decoration-thickness: 2px;
   text-underline-offset: 7px;
 }
-.AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href="/london/"]),
-.AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+  .city-nav__item:has(> .city-nav__link[href="/london/"]),
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+  .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
   background: #0576ae;
+}
+@media screen and (max-width: 539.5px) {
+  .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+    .city-nav__item
+    > .city-nav__link[href="/london/"],
+  .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+    .city-nav__item
+    > .city-nav__link[href="/new-york/"] {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 0;
+  }
 }
 .AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper)
   .city-nav__item:has(> .city-nav__link[href="/london/"]),
@@ -85,13 +99,6 @@
   .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
     padding-left: 0;
   }
-  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
-  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"] {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/london/"],
-  .AB-ECX-162-CITY-NAV .city-nav__item > .city-nav__link[href="/new-york/"],
   .AB-ECX-162-CITY-NAV
     .city-nav__list
     .city-nav__item:first-child
@@ -228,7 +235,7 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
 
   function isTargetCityUrl() {
     const CITY_URL_REGEX =
-      /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/(?:whats-on(?:\/.*)?)?)?(?:[?#].*)?$/i;
+      /^https?:\/\/(?:www\.)?seatplan\.com\/(london|new\-york)(?:\/(?:whats-on(?:\/(?:musicals|plays|christmas|kids|opera))?)?)?(?:\/)?(?:\?.*)?$/;
     try {
       return CITY_URL_REGEX.test(window.location.href);
     } catch (e) {
@@ -238,7 +245,6 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
 
   function createLayout() {
     const city = getCityFromDataLayer();
-
     if (!city) return;
 
     q(".city-nav__list").insertAdjacentHTML(
@@ -264,6 +270,8 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
     );
 
     if (!isTargetCityUrl()) return;
+
+    q("body").classList.add(page_initials + "--show-highlighted");
 
     q(".city-nav").insertAdjacentHTML(
       "afterend",
