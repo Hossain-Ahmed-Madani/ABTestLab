@@ -91,7 +91,6 @@ logInfo("fired");
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -185,7 +184,6 @@ logInfo("fired");
     function getCookie(key) {
         try {
             if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
                 return null;
             }
 
@@ -203,7 +201,6 @@ logInfo("fired");
 
             return null;
         } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
             return null;
         }
     }
@@ -300,11 +297,8 @@ logInfo("fired");
 
     async function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
-        const { productType, matchedCategoryURL } = await setRelatedCategoryURL();
-
-        console.log("productType", productType, "matchedCategoryURL", matchedCategoryURL);
+        await setRelatedCategoryURL();
 
         createAndUpdateSoldOutLayout();
         mutationObserverFunction();
@@ -320,7 +314,6 @@ logInfo("fired");
         init();
         return false;
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

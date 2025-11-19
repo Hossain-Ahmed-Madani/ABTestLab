@@ -26,10 +26,7 @@ logInfo("fired");
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "bruntworkwear",
         host: "https://bruntworkwear.com",
-        test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 1,
         test_version: 0.0002,
@@ -91,7 +88,6 @@ logInfo("fired");
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -261,11 +257,8 @@ logInfo("fired");
 
     async function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
-        const { productType, matchedCategoryURL } = await setRelatedCategoryURL();
-
-        console.log("productType", productType, "matchedCategoryURL", matchedCategoryURL);
+        await setRelatedCategoryURL();
 
         createAndUpdateSoldOutLayout();
         mutationObserverFunction();
@@ -281,7 +274,6 @@ logInfo("fired");
         init();
         return false;
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
