@@ -1,10 +1,10 @@
 @charset "UTF-8";
-
 .AB-0124 #mobile-facet-toolbar {
     display: none;
 }
 .AB-0124 a.tag-link.link.text--subdued[data-action="clear-filters"] {
     font-size: 0;
+    text-decoration: none;
 }
 .AB-0124 a.tag-link.link.text--subdued[data-action="clear-filters"]:after {
     content: "Auswahl zurücksetzen";
@@ -12,6 +12,8 @@
     font-size: 14px;
     font-weight: 300;
     -webkit-font-smoothing: antialiased;
+    text-decoration: underline;
+    color: #747374;
 }
 .AB-0124 .product-facet__active-list .tag {
     min-width: 73px;
@@ -89,8 +91,6 @@
     vertical-align: middle;
     text-decoration: underline;
     text-decoration-style: solid;
-    text-decoration-thickness: 0%;
-    text-decoration-skip-ink: auto;
     color: rgb(255, 255, 255);
 }
 @media screen and (max-width: 740px) {

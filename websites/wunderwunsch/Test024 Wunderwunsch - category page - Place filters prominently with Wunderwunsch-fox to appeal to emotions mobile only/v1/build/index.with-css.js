@@ -10,6 +10,7 @@
 }
 .AB-0124 a.tag-link.link.text--subdued[data-action="clear-filters"] {
   font-size: 0;
+  text-decoration: none;
 }
 .AB-0124 a.tag-link.link.text--subdued[data-action="clear-filters"]:after {
   content: "Auswahl zurücksetzen";
@@ -17,6 +18,8 @@
   font-size: 14px;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
+  text-decoration: underline;
+  color: #747374;
 }
 .AB-0124 .product-facet__active-list .tag {
   min-width: 73px;
@@ -94,8 +97,6 @@
   vertical-align: middle;
   text-decoration: underline;
   text-decoration-style: solid;
-  text-decoration-thickness: 0%;
-  text-decoration-skip-ink: auto;
   color: rgb(255, 255, 255);
 }
 @media screen and (max-width: 740px) {
@@ -118,8 +119,8 @@ Ticket: https://trello.com/c/D5qcEwSA/4372-test024-wunderwunsch-category-page-pl
 Description: https://docs.google.com/document/u/1/d/1dR0MCsXf3qTMZp7JNHDcUpYLQ8zk5k7cgodC71CJTZ0/edit?usp=sharing
 Figma: https://www.figma.com/design/orfdp8oj34kNQKPPDoDw7k/Test024---Kategorieseite---Filter-prominenter-platzieren?node-id=0-1&t=1QjTm1HMH7DUWwYa-1
 
-Test Container: 
-V1: 
+Test Container:  https://app.convert.com/accounts/1004828/projects/10041371/experiences/1004176673/summary
+V1: https://www.wunderwunsch.de/collections/weihnachten?utm_campaign=qa05
 
 */
 
@@ -132,7 +133,7 @@ V1:
       "Test024 [Wunderwunsch] - category page - Place filters prominently with Wunderwunsch-fox to appeal to emotions (mobile only)",
     page_initials: "AB-0124",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

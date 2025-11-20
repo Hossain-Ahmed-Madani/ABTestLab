@@ -17,7 +17,7 @@ V1: https://www.wunderwunsch.de/collections/weihnachten?utm_campaign=qa05
         test_name: "Test024 [Wunderwunsch] - category page - Place filters prominently with Wunderwunsch-fox to appeal to emotions (mobile only)",
         page_initials: "AB-0124",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

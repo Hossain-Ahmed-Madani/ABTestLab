@@ -20,12 +20,15 @@
 
     a.tag-link.link.text--subdued[data-action="clear-filters"] {
         font-size: 0;
+        text-decoration: none;
         &:after {
             content: "Auswahl zurücksetzen";
             font-family: Nunito, sans-serif;
             font-size: 14px;
             font-weight: 300;
             -webkit-font-smoothing: antialiased;
+            text-decoration: underline;
+            color: #747374;
         }
     }
 
@@ -125,8 +128,6 @@
         vertical-align: middle;
         text-decoration: underline;
         text-decoration-style: solid;
-        text-decoration-thickness: 0%;
-        text-decoration-skip-ink: auto;
         color: rgba(255, 255, 255, 1);
     }
 
