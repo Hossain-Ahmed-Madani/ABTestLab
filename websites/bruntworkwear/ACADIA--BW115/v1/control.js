@@ -20,7 +20,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 0 /* 0 -> Control */,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -92,34 +92,28 @@ logInfo("fired");
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: true });
     }
 
-    function clickFunction() {
-        const ACTION_LIST = [
-            {
-                selector: ".product__optionButton",
-                callback: (e, callback) => {
-                    const currentTarget = e.currentTarget;
+    const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
+    const debouncedGa4Trigger = debounce(fireGA4Event, 50);
 
-                    setTimeout(() => {
-                        if (currentTarget.classList.contains("isUnavailable")) {
-                            // qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
-                            fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
-                        }
-                    }, 100);
-                },
+    const ACTION_LIST = [
+        {
+            selector: ".product__additionalStyleParent",
+            callback: (e) => {
+                const currentTarget = e.currentTarget;
+                if (e.target.closest(".isOOS")) {
+                    debouncedGa4Trigger("BW115_OutofStock", "Clicked Out Of Stock");
+                }
             },
-        ];
+        },
+    ];
 
-        const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
-        ACTION_LIST.forEach(async ({ selector, callback }) => {
-            try {
-                await waitForElementAsync(() => q(selector + ":not(.click-attached)"), 5000);
-                qq(selector).forEach((item) => {
-                    item.classList.add("click-attached");
-                    item.addEventListener(EVENT_TYPE, (e) => callback(e, callback));
-                });
-            } catch (err) {
-                return false;
-            }
+    function clickFunction() {
+        ACTION_LIST.forEach(({ selector, callback }) => {
+            qq(`${selector}:not(.click-attached)`)?.forEach((item) => {
+                console.log("item found:", item);
+                item.addEventListener(EVENT_TYPE, callback);
+                item.classList.add("click-attached");
+            });
         });
     }
 

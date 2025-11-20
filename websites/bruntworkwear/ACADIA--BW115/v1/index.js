@@ -32,7 +32,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -264,14 +264,13 @@ logInfo("fired");
 
     const ACTION_LIST = [
         {
-            selector: ".product__optionButton",
+            // selector: ".product__optionButton",
+            selector: ".product__additionalStyleParent",
             callback: (e) => {
                 const currentTarget = e.currentTarget;
-                setTimeout(() => {
-                    if (currentTarget.classList.contains("isUnavailable")) {
-                        debouncedGa4Trigger("BW115_OutofStock", "Clicked Out Of Stock");
-                    }
-                }, 100);
+                if (e.target.closest(".isOOS")) {
+                    debouncedGa4Trigger("BW115_OutofStock", "Clicked Out Of Stock");
+                }
             },
         },
         {
@@ -296,17 +295,13 @@ logInfo("fired");
     ];
 
     function clickFunction() {
-        ACTION_LIST.forEach(async ({ selector, callback }) => {
-            try {
-                await waitForElementAsync(() => q(selector + ":not(.click-attached)"), 5000);
-                qq(selector).forEach((item) => {
-                    item.classList.add("click-attached");
-                    item.addEventListener(EVENT_TYPE, callback);
-                });
-                return true;
-            } catch (err) {
-                return false;
-            }
+
+        ACTION_LIST.forEach(({ selector, callback }) => {
+            qq(`${selector}:not(.click-attached)`)?.forEach((item) => {
+                console.log("item found:", item);
+                item.addEventListener(EVENT_TYPE, callback);
+                item.classList.add("click-attached");
+            });
         });
     }
 
