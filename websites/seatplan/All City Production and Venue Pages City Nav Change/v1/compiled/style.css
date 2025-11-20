@@ -1,110 +1,110 @@
-.AB-ECX-162-CITY-NAV main.body-content > .trust-bar,
-.AB-ECX-162-CITY-NAV #page-wrap > .trust-bar {
-    display: none;
-}
 .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
-    z-index: 1;
+  z-index: 1;
 }
 @media screen and (max-width: 950px) {
-    .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/london/"]),
-    .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
-        background-color: transparent;
-    }
+  .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/london/"]),
+  .AB-ECX-162-CITY-NAV.venue-homepage-wrapper .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
+    background-color: transparent;
+  }
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav {
-    width: 100%;
-    background: #0576ae;
-    color: #fff;
+  width: 100%;
+  background: #0576ae;
+  color: #fff;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
-    height: 100%;
+  height: 100%;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__list {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    height: 100%;
-    overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  overflow-y: auto;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__list::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__list--align-center {
-    justify-content: center;
+  justify-content: center;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__item:last-child .ab-sub-nav__link {
-    margin-right: 0;
+  margin-right: 0;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__link {
-    display: inline-block;
-    text-decoration: none;
-    border: none;
-    color: #fff;
-    font-size: 15px;
-    line-height: 15px;
-    padding: 15px 11px;
-    margin-right: 13px;
-    transition: all 0.2s ease-in-out;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 15px 11px;
+  margin-right: 13px;
+  transition: all 0.2s ease-in-out;
 }
 .AB-ECX-162-CITY-NAV .ab-sub-nav__link:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 7px;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 7px;
+}
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted main.body-content > .trust-bar,
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted #page-wrap > .trust-bar {
+  display: none;
 }
 .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item:has(> .city-nav__link[href="/london/"]),
 .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
-    background: #0576ae;
+  background: #0576ae;
 }
 @media screen and (max-width: 539.5px) {
-    .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item > .city-nav__link[href="/london/"],
-    .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item > .city-nav__link[href="/new-york/"] {
-        padding-left: 20px;
-        padding-right: 20px;
-        margin-right: 0;
-    }
+  .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item > .city-nav__link[href="/london/"],
+  .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted .city-nav__item > .city-nav__link[href="/new-york/"] {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 0;
+  }
 }
 .AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper) .city-nav__item:has(> .city-nav__link[href="/london/"]),
 .AB-ECX-162-CITY-NAV.venue-page-wrapper:not(.venue-homepage-wrapper) .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
-    background: none;
+  background: none;
 }
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/musicals/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/plays/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/christmas/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link[href*="whats-on/kids/"]),
 .AB-ECX-162-CITY-NAV .city-nav__item:has(> .city-nav__link.city-nav__link--for-dropdown-no-icon) {
-    display: none;
+  display: none;
 }
 @media screen and (max-width: 539.5px) {
-    .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
-        padding-left: 0;
-    }
-    .AB-ECX-162-CITY-NAV .city-nav__list .city-nav__item:first-child .city-nav__link {
-        margin-right: 0;
-    }
+  .AB-ECX-162-CITY-NAV .ab-sub-nav__container {
+    padding-left: 0;
+  }
+  .AB-ECX-162-CITY-NAV .city-nav__list .city-nav__item:first-child .city-nav__link {
+    margin-right: 0;
+  }
 }
 @media screen and (min-width: 400px) {
-    .AB-ECX-162-CITY-NAV .ab-sub-nav__list {
-        justify-content: center;
-        padding-right: 0;
-    }
+  .AB-ECX-162-CITY-NAV .ab-sub-nav__list {
+    justify-content: center;
+    padding-right: 0;
+  }
 }
 @media screen and (min-width: 651px) and (max-width: 768px) {
-    .AB-ECX-162-CITY-NAV .city-nav__list {
-        justify-content: flex-start;
-    }
+  .AB-ECX-162-CITY-NAV .city-nav__list {
+    justify-content: flex-start;
+  }
 }
 @media screen and (min-width: 991px) {
-    .AB-ECX-162-CITY-NAV .ab-sub-nav__item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .AB-ECX-162-CITY-NAV .ab-sub-nav__link {
-        min-width: 100px;
-        font-size: 16px;
-        line-height: 16px;
-        padding: 17px 20px;
-        margin: auto;
-        text-align: center;
-    }
+  .AB-ECX-162-CITY-NAV .ab-sub-nav__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .AB-ECX-162-CITY-NAV .ab-sub-nav__link {
+    min-width: 100px;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 17px 20px;
+    margin: auto;
+    text-align: center;
+  }
 }

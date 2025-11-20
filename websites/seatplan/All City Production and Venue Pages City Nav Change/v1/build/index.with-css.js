@@ -4,11 +4,7 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-ECX-162-CITY-NAV main.body-content > .trust-bar,
-.AB-ECX-162-CITY-NAV #page-wrap > .trust-bar {
-  display: none;
-}
-.AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
+      style.innerHTML = `.AB-ECX-162-CITY-NAV.venue-homepage-wrapper .ab-sub-nav {
   z-index: 1;
 }
 @media screen and (max-width: 950px) {
@@ -58,6 +54,14 @@
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 7px;
+}
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+  main.body-content
+  > .trust-bar,
+.AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
+  #page-wrap
+  > .trust-bar {
+  display: none;
 }
 .AB-ECX-162-CITY-NAV.AB-ECX-162-CITY-NAV--show-highlighted
   .city-nav__item:has(> .city-nav__link[href="/london/"]),
@@ -157,7 +161,7 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
     test_name: "All | City, Production and Venue Pages | City Nav Change",
     page_initials: "AB-ECX-162-CITY-NAV",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { host, page_initials, test_variation, test_version } = TEST_CONFIG;

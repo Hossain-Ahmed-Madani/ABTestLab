@@ -15,7 +15,7 @@ v1 preview: https://seatplan.com/london/?convert_action=convert_vpreview&convert
         test_name: "All | City, Production and Venue Pages | City Nav Change",
         page_initials: "AB-ECX-162-CITY-NAV",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;

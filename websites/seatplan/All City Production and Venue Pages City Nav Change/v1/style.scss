@@ -13,10 +13,10 @@
 }
 
 .AB-ECX-162-CITY-NAV {
-    main.body-content > .trust-bar,
-    #page-wrap > .trust-bar {
-        display: none;
-    }
+    // main.body-content > .trust-bar,
+    // #page-wrap > .trust-bar {
+    //     display: none;
+    // }
 
     &.venue-homepage-wrapper {
         .ab-sub-nav {
@@ -85,6 +85,11 @@
     }
 
     &.AB-ECX-162-CITY-NAV--show-highlighted {
+        main.body-content > .trust-bar,
+        #page-wrap > .trust-bar {
+            display: none;
+        }
+
         .city-nav__item:has(> .city-nav__link[href="/london/"]),
         .city-nav__item:has(> .city-nav__link[href="/new-york/"]) {
             background: #0576ae;
