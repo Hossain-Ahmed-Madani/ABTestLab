@@ -32,7 +32,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0008,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -218,6 +218,7 @@ logInfo("fired");
     function createAndUpdateSoldOutLayout() {
         createLayout();
         updateSoldOutLayout();
+        clickFunction();
     }
 
     function updateSoldOutLayout() {
@@ -233,13 +234,15 @@ logInfo("fired");
 
     function mutationObserverFunction() {
         const targetNode = q(".product__additionalStyleParent");
-        const debouncedUpdate = debounce(createAndUpdateSoldOutLayout, 150);
+        const debouncedUpdate = debounce(createAndUpdateSoldOutLayout, 100);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     function createLayout() {
-        if (q(".ab-sold-out-message")) return;
         const targetNodes = qq(".product__additionalStyleParent .product__optionWrapper");
+
+        if (q(".ab-sold-out-message") || targetNodes.length === 0) return;
+
         const targetNode = targetNodes[targetNodes.length - 1];
 
         targetNode.insertAdjacentHTML(
@@ -257,17 +260,16 @@ logInfo("fired");
     }
 
     const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
+    const debouncedGa4Trigger = debounce(fireGA4Event, 50);
 
     const ACTION_LIST = [
         {
             selector: ".product__optionButton",
             callback: (e) => {
                 const currentTarget = e.currentTarget;
-
                 setTimeout(() => {
                     if (currentTarget.classList.contains("isUnavailable")) {
-                        // qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
-                        fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
+                        debouncedGa4Trigger("BW115_OutofStock", "Clicked Out Of Stock");
                     }
                 }, 100);
             },
@@ -276,8 +278,9 @@ logInfo("fired");
             selector: ".ab-sold-out-message__message a",
             callback: (e) => {
                 e.preventDefault();
+                debouncedGa4Trigger("BW115_CTAClick", "Shop Similar Items");
+
                 const href = e.currentTarget.getAttribute("href");
-                fireGA4Event("BW115_CTAClick", "Shop Similar Items");
                 setTimeout(() => {
                     const isCtrlPressed = e.ctrlKey;
 
@@ -313,7 +316,6 @@ logInfo("fired");
         await setRelatedCategoryURL();
         createAndUpdateSoldOutLayout();
         mutationObserverFunction();
-        clickFunction();
     }
 
     function checkForItems() {
