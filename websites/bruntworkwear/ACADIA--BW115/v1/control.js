@@ -20,7 +20,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 0 /* 0 -> Control */,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
