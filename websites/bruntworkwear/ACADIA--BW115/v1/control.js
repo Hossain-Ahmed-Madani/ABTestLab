@@ -19,12 +19,11 @@ logInfo("fired");
         host: "https://bruntworkwear.com",
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
-        test_variation: 0, /* 0 -> Control */
-        test_version: 0.0003,
+        test_variation: 0 /* 0 -> Control */,
+        test_version: 0.0007,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
-
 
     function fireGA4Event(eventName, eventLabel = "") {
         console.log("fireGA4Event:", eventName, eventLabel);
@@ -38,7 +37,6 @@ logInfo("fired");
             "ga4-event-p2-value": eventLabel,
         });
     }
-
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -88,12 +86,10 @@ logInfo("fired");
         };
     }
 
-
-
     function mutationObserverFunction() {
         const targetNode = q(".product__additionalStyleParent");
         const debouncedUpdate = debounce(clickFunction, 150);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: true });
     }
 
     function clickFunction() {
@@ -105,7 +101,7 @@ logInfo("fired");
 
                     setTimeout(() => {
                         if (currentTarget.classList.contains("isUnavailable")) {
-                            qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
+                            // qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
                             fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
                         }
                     }, 100);
@@ -115,8 +111,15 @@ logInfo("fired");
 
         const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
         ACTION_LIST.forEach(async ({ selector, callback }) => {
-            await waitForElementAsync(() => q(selector), 5000);
-            qq(selector).forEach((item) => item.addEventListener(EVENT_TYPE, (e) => callback(e, callback)));
+            try {
+                await waitForElementAsync(() => q(selector + ":not(.click-attached)"), 5000);
+                qq(selector).forEach((item) => {
+                    item.classList.add("click-attached");
+                    item.addEventListener(EVENT_TYPE, (e) => callback(e, callback));
+                });
+            } catch (err) {
+                return false;
+            }
         });
     }
 
@@ -127,7 +130,7 @@ logInfo("fired");
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".product__additionalStyleParent .product__optionWrapper:last-child"));
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".product__additionalStyleParent .product__optionWrapper"));
     }
 
     try {

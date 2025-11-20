@@ -29,7 +29,7 @@ logInfo("fired");
         host: "https://bruntworkwear.com",
         page_initials: "AB-BW115",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0006,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -160,7 +160,7 @@ logInfo("fired");
     }
 
     function qq(s, o) {
-        return [...document.querySelectorAll(s)];
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
     function debounce(func, wait) {
@@ -178,7 +178,6 @@ logInfo("fired");
     function createAndUpdateSoldOutLayout() {
         createLayout();
         updateSoldOutLayout();
-        clickFunction();
     }
 
     function updateSoldOutLayout() {
@@ -217,45 +216,54 @@ logInfo("fired");
         );
     }
 
+    const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
+
+    const ACTION_LIST = [
+        {
+            selector: ".product__optionButton",
+            callback: (e) => {
+                const currentTarget = e.currentTarget;
+
+                setTimeout(() => {
+                    if (currentTarget.classList.contains("isUnavailable")) {
+                        // qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
+                        fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
+                    }
+                }, 100);
+            },
+        },
+        {
+            selector: ".ab-sold-out-message__message a",
+            callback: (e) => {
+                e.preventDefault();
+                const href = e.currentTarget.getAttribute("href");
+                fireGA4Event("BW115_CTAClick", "Shop Similar Items");
+                setTimeout(() => {
+                    const isCtrlPressed = e.ctrlKey;
+
+                    if (isCtrlPressed) {
+                        window.open(href, "_blank");
+                        return;
+                    }
+
+                    window.location.href = href;
+                }, 100);
+            },
+        },
+    ];
+
     function clickFunction() {
-        const ACTION_LIST = [
-            {
-                selector: ".product__optionButton",
-                callback: (e, callback) => {
-                    const currentTarget = e.currentTarget;
-
-                    setTimeout(() => {
-                        if (currentTarget.classList.contains("isUnavailable")) {
-                            qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
-                            fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
-                        }
-                    }, 100);
-                },
-            },
-            {
-                selector: ".ab-sold-out-message__message a",
-                callback: (e, callback) => {
-                    e.preventDefault();
-                    const href = e.currentTarget.getAttribute("href");
-                    fireGA4Event("BW115_CTAClick", "Shop Similar Items");
-                    setTimeout(() => {
-                        const isCtrlPressed = e.ctrlKey;
-
-                        if (isCtrlPressed) {
-                            window.open(href, "_blank");
-                            return;
-                        }
-
-                        window.location.href = href;
-                    }, 100);
-                },
-            },
-        ];
-
-        const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
         ACTION_LIST.forEach(async ({ selector, callback }) => {
-            await waitForElementAsync(() => q(selector), 5000);
-            qq(selector).forEach((item) => item.addEventListener(EVENT_TYPE, (e) => callback(e, callback)));
+            try {
+                await waitForElementAsync(() => q(selector + ":not(.click-attached)"), 5000);
+                qq(selector).forEach((item) => {
+                    item.classList.add("click-attached");
+                    item.addEventListener(EVENT_TYPE, callback);
+                });
+                return true;
+            } catch (err) {
+                return false;
+            }
         });
     }
 
@@ -265,6 +273,7 @@ logInfo("fired");
         await setRelatedCategoryURL();
         createAndUpdateSoldOutLayout();
         mutationObserverFunction();
+        clickFunction();
     }
 
     function checkForItems() {
