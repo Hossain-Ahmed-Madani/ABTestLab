@@ -32,7 +32,7 @@ logInfo("fired");
         test_name: "BW115: [PRODUCTS] Sold Out Product Redirect (2) SET UP TEST",
         page_initials: "AB-BW115",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -91,6 +91,7 @@ logInfo("fired");
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -217,6 +218,7 @@ logInfo("fired");
     function createAndUpdateSoldOutLayout() {
         createLayout();
         updateSoldOutLayout();
+        clickFunction();
     }
 
     function updateSoldOutLayout() {
@@ -255,54 +257,54 @@ logInfo("fired");
         );
     }
 
-    const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
-    let OUT_OF_STOCK_CLICKED = false;
-    let SIMILAR_CATEGORY_CTA_CLICKED = false;
-
-    function handleGa4Events(e) {
-        if (e.target.closest(".product__optionButton")) {
-            setTimeout(() => {
-                if (e.target.closest(".product__optionButton").classList.contains("isUnavailable")) {
-                    fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
-                    OUT_OF_STOCK_CLICKED = true;
-                }
-            }, 100);
-        }
-
-        if (e.target.closest(".ab-sold-out-message__message a")) {
-            e.preventDefault();
-            const href = e.target.closest(".ab-sold-out-message__message a").getAttribute("href");
-            fireGA4Event("BW115_CTAClick", "Shop Similar Items");
-            SIMILAR_CATEGORY_CTA_CLICKED = true;
-            setTimeout(() => {
-                const isCtrlPressed = e.ctrlKey;
-
-                if (isCtrlPressed) {
-                    window.open(href, "_blank");
-                    return;
-                }
-
-                window.location.href = href;
-            }, 100);
-        }
-
-        if (OUT_OF_STOCK_CLICKED && SIMILAR_CATEGORY_CTA_CLICKED) {
-            q("body").removeEventListener(EVENT_TYPE, handleGa4Events);
-        }
-    }
-
     function clickFunction() {
-        q("body").addEventListener(EVENT_TYPE, handleGa4Events);
+        const ACTION_LIST = [
+            {
+                selector: ".product__optionButton",
+                callback: (e, callback) => {
+                    const currentTarget = e.currentTarget;
+
+                    setTimeout(() => {
+                        if (currentTarget.classList.contains("isUnavailable")) {
+                            qq(".product__optionButton").forEach((item) => item.removeEventListener("click", callback));
+                            fireGA4Event("BW115_OutofStock", "Clicked Out Of Stock");
+                        }
+                    }, 100);
+                },
+            },
+            {
+                selector: ".ab-sold-out-message__message a",
+                callback: (e, callback) => {
+                    e.preventDefault();
+                    const href = e.currentTarget.getAttribute("href");
+                    fireGA4Event("BW115_CTAClick", "Shop Similar Items");
+                    setTimeout(() => {
+                        const isCtrlPressed = e.ctrlKey;
+
+                        if (isCtrlPressed) {
+                            window.open(href, "_blank");
+                            return;
+                        }
+
+                        window.location.href = href;
+                    }, 100);
+                },
+            },
+        ];
+
+        const EVENT_TYPE = "ontouchstart" in window ? "touchstart" : "click";
+        ACTION_LIST.forEach(async ({ selector, callback }) => {
+            await waitForElementAsync(() => q(selector), 5000);
+            qq(selector).forEach((item) => item.addEventListener(EVENT_TYPE, (e) => callback(e, callback)));
+        });
     }
 
     async function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
         await setRelatedCategoryURL();
-
         createAndUpdateSoldOutLayout();
         mutationObserverFunction();
-        clickFunction();
     }
 
     function checkForItems() {
