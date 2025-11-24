@@ -174,8 +174,14 @@ https://www.steinertractor.com/checkout#/address
 
         const formsContainer = q(".ab-content-forms");
         qq(".row.content-body > *:not(.ab-content-wrapper)").forEach((item) => {
-            if (q(item, ".Head")?.innerText.includes("Account Login")) item.classList.add("ab-login-form-container");
+
+            if (q(item, ".Head")?.innerText.includes("Account Login")) {
+                item.classList.add("ab-login-form-container");
+            } else if (q(item, "#guestCheckoutWrapper")) {
+                item.classList.add("ab-guest-checkout-form-container");
+            }
             qq(item, "input").forEach((item) => item.setAttribute("placeholder", ""));
+            
             formsContainer.appendChild(item);
         });
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
