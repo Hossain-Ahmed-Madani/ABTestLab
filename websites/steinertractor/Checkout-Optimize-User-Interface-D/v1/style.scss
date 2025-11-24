@@ -1,17 +1,264 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-Checkout-Step-1 {
-    //     background-color: #f8f9fa;
+    background-color: #fff;
+
+    & > form > .container.pl-0.pr-0 {
+        background-color: #fff;
+    }
+
+    .ab-hidden {
+        display: none;
+    }
+
+    .guest-checkout-optn {
+        margin: auto;
+        flex-direction: row;
+        gap: 25px;
+    }
+
+    .guest-checkout-optn button {
+        min-width: 167px;
+    }
+
+    .row.content-body {
+        // position: relative;
+        // background-color: #f3f5f6;
+    }
+
+    .ab-content-wrapper {
+        width: 100%;
+        position: relative;
+        background-color: #f3f5f6;
+
+        & > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        &:after {
+            content: "";
+            width: 50%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 1px solid #dddddd;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 50%;
+            z-index: 0;
+        }
+    }
+
+    .ab-content-top {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 49px;
+        border-bottom: 1px solid #dddddd;
+        background-color: #fff;
+    }
+
+    .ab-content-top h1 {
+        text-align: center;
+    }
+
+    .ab-content-forms {
+        padding: 0;
+    }
+
+    .ab-content-added-product {
+        background-color: #f3f5f6;
+    }
+    
+
+    .ab-login-form-container {
+        padding: 49px 59px 135px 0 !important;
+        width: 100% !important;
+    }
+
+    .ab-login-form-container #loginSlogan {
+        display: none;
+    }
+
+    .ab-login-form-container h2 {
+        padding-bottom: 49px;
+        margin-bottom: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0;
+        color: #333333;
+    }
+
+    .ab-login-form-container .dnnFormMessage {
+        margin-top: 0;
+    }
+
+    .ab-login-form-container .dnnForm,
+    .ab-login-form-container .dnnLabel {
+        margin: 0;
+        text-align: left;
+    }
+
+    .ab-login-form-container .dnnFormItem:has(> input) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        border: 1px solid #ced4da;
+        overflow: hidden;
+        height: 51px;
+        padding: 7px 10px;
+        margin-bottom: 12px;
+        position: relative;
+    }
+
+    .ab-login-form-container .dnnFormItem:has(> .dnnLoginActions) {
+        display: none;
+    }
+
+    .ab-login-form-container .dnnFormItem:not(:has(> input)) {
+        .dnnFormLabel,
+        .dnnSecondaryAction {
+            display: none;
+        }
+
+        .dnnPrimaryAction {
+            margin-top: 22px;
+            margin-bottom: 17px;
+            margin-left: 0;
+            padding: 16px 47px 17px;
+            width: max-content;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+            border: none;
+
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #ffffff;
+
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .ab-login-form-container .dnnLabel {
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        width: 100%;
+        font-family: Inter, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: #767676;
+
+        label {
+            white-space: nowrap;
+            margin-bottom: 0px;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 16px;
+        }
+
+        label:after {
+            display: none;
+        }
+
+        &:has(~ input:focus),
+        &:has(~ input:active),
+        &:has(~ input:not(:placeholder-shown)) {
+            // &:has(~ input:not([value=""])) {
+            position: static;
+            font-size: 14px;
+
+            label {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .ab-login-form-container input {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        border: none;
+        outline: none;
+        height: 100%;
+        width: 100%;
+        background-color: #fff;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+
+        font-family: Inter, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: #000000;
+
+        &:focus,
+        &:active,
+        &:not(:placeholder-shown) {
+            position: static;
+            border: none;
+            outline: none;
+            background-color: #fff;
+            box-shadow: none;
+        }
+    }
+
+    .ab-login-form-container #socialControls {
+        display: none;
+    }
+
+    .ab-login-form-container p:has(> a[href="./ResetPassword"]),
+    .ab-login-form-container p:has(> a[href="/create-account"]) {
+        padding-left: 0;
+        margin-bottom: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0%;
+        text-decoration: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: auto;
+        color: #0078d7;
+    }
 }

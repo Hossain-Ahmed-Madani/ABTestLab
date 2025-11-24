@@ -1,3 +1,8 @@
+/* 
+
+https://www.steinertractor.com/checkout#/address
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -137,24 +142,61 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
+    function updateLayoutOnMutation() {
+        //
+    }
+
     function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
+        const targetNode = q(".my-new-selector");
+        if (!targetNode) return;
+        const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    }
+
+    async function createAndUpdateContentLayout() {
+        /* ab-show-login, ab-show-registration */
+        const html = /* HTML */ `
+            <div class="ab-content-wrapper">
+                <div class="ab-content-top"></div>
+                <div class="ab-content-bottom container">
+                    <div class="row">
+                        <div class="ab-content-forms col-6"></div>
+                        <div class="ab-content-added-product col-6" style="display:flex;justify-content:center;align-items:center;">Added Product</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        q(".row.content-body").insertAdjacentHTML("afterbegin", html);
+        const contentTop = q(".ab-content-top");
+        contentTop.appendChild(q(".guest-checkout-optn > h1"));
+        contentTop.appendChild(q(".guest-checkout-optn"));
+
+        const formsContainer = q(".ab-content-forms");
+        qq(".row.content-body > *:not(.ab-content-wrapper)").forEach((item) => {
+            if (q(item, ".Head")?.innerText.includes("Account Login")) item.classList.add("ab-login-form-container");
+            qq(item, "input").forEach((item) => item.setAttribute("placeholder", ""));
+            formsContainer.appendChild(item);
+        });
+        qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
+
+        q("#showLogin").click();
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+        createAndUpdateContentLayout();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".progress-stepper .checkout-wrap"));
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
+        return true;
     } catch (error) {
         console.warn(error);
         return false;
