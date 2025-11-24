@@ -1,0 +1,13 @@
+{
+  "id": "1763979515610_897_Checkout_Optimize_User_Interface_D",
+  "name": "Checkout-Optimize-User-Interface-D",
+  "type": "A/B",
+  "website": "steinertractor",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-11-24T10:18:35.610Z",
+  "createdAtReadable": "11/24/2025, 4:18:35 PM",
+  "lastUpdated": "2025-11-24T10:18:35.923Z"
+}
