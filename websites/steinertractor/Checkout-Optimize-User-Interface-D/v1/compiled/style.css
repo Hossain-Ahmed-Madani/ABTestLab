@@ -228,7 +228,7 @@
   line-height: 100%;
   letter-spacing: 0px;
   color: #333333;
-  margin-bottom: 17px;
+  margin-bottom: 20px;
 }
 .AB-Checkout-Step-1 form#personal-information {
   margin-bottom: 50px;
@@ -238,6 +238,43 @@
 }
 .AB-Checkout-Step-1 form#shipping-address {
   margin-bottom: 0;
+}
+.AB-Checkout-Step-1 form#shipping-address .ab-form-input-container {
+  margin-bottom: 26px;
+}
+.AB-Checkout-Step-1 form#shipping-address #ab-continue-as-guest {
+  width: 100%;
+  height: 51px;
+  padding: 17px 20px;
+  border: none;
+  outline: none;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #ffffff;
+  background-color: #b3b3b3;
+}
+.AB-Checkout-Step-1 form#shipping-address #ab-continue-as-guest:not(disabled) {
+  background-color: #9cca5a;
+}
+.AB-Checkout-Step-1 form#shipping-address #ab-need-help {
+  width: 100%;
+  height: 51px;
+  padding: 17px 20px;
+  border: none;
+  outline: none;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #ffffff;
+  background-color: #6c757d;
+}
+.AB-Checkout-Step-1 form#shipping-address #ab-need-help:hover {
+  opacity: 0.7;
 }
 .AB-Checkout-Step-1 .ab-form-group {
   margin: 0;
@@ -249,7 +286,7 @@
 .AB-Checkout-Step-1 .ab-pl-0 {
   padding-left: 0;
 }
-.AB-Checkout-Step-1 .ab-form-group:has(> input) {
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -260,7 +297,59 @@
   padding: 7px 10px;
   position: relative;
 }
-.AB-Checkout-Step-1 .ab-form-group .ab-label {
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]),
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) input[type=checkbox],
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) input[type=checkbox] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+  min-height: 18px;
+  border: 2px solid #767676;
+  background-color: #fff;
+  margin-top: 5px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) input[type=checkbox]:checked,
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) input[type=checkbox]:checked {
+  border: none;
+  background-color: #0078d7;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) input[type=checkbox]:checked:after,
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) input[type=checkbox]:checked:after {
+  content: "";
+  margin-top: -3px;
+  width: 6px;
+  height: 11px;
+  border-right: 2.5px solid #fff;
+  border-bottom: 2.5px solid #fff;
+  transform: rotate(45deg);
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) label,
+.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) label {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #333333;
+  cursor: pointer;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -282,11 +371,11 @@
   padding: 0 !important;
   font-size: 16px;
 }
-.AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:focus), .AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:active), .AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:not(:placeholder-shown)) {
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):focus), .AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):active), .AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):not(:placeholder-shown)) {
   position: static;
   font-size: 14px;
 }
-.AB-Checkout-Step-1 .ab-form-group input {
+.AB-Checkout-Step-1 .ab-form-group input:not([type=radio]):not([type=checkbox]) {
   width: 100%;
   height: 100%;
   border: none;
@@ -318,13 +407,13 @@
   color: #dc3545;
   display: none;
 }
-.AB-Checkout-Step-1 .ab-form-group:has(> input:placeholder-shown[required]) {
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):placeholder-shown[required]) {
   border: 2px solid #dc3545;
 }
-.AB-Checkout-Step-1 .ab-form-group:has(> input:placeholder-shown[required]) + .ab-error-message {
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):placeholder-shown[required]) + .ab-error-message {
   display: block;
 }
-.AB-Checkout-Step-1 .ab-form-group:has(> input:focus),
-.AB-Checkout-Step-1 .ab-form-group:has(> input:active) {
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):focus),
+.AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):active) {
   border: 2px solid #333333;
 }

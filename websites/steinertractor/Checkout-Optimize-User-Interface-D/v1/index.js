@@ -226,36 +226,43 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                 ],
-                actionList: [
-                    {
-                        id: "",
-                        label: "",
-                        callback: () => {},
-                        className: "",
-                    },
-                ],
             },
             shipping_address: {
-                title: "Test Name",
+                title: "Shipping Address",
                 id: "shipping-address",
                 inputList: [
                     {
-                        id: "auto",
-                        name: "Company",
-                        type: "text",
-                        label: "Company",
-                        required: false,
-                        className: "",
-                        targetNode: "",
-                        errorMessage: "",
+                        id: "ab-same-as-billing",
+                        type: "checkbox",
+                        label: "Use the same address for delivery.",
+                        className: "col-12",
+                        targetNode: "#sameAsBilling",
+                        checked: true
+                    },
+                    {
+                        id: "ab-create-account",
+                        type: "checkbox",
+                        label: "Register as a customer. Customers can view order history and shipping status and track previous orders.",
+                        className: "col-12",
+                        targetNode: "#createAccount",
+                        checked: false
                     },
                 ],
                 actionList: [
                     {
-                        id: "",
-                        label: "",
-                        action: () => {},
-                        targetNode: "",
+                        id: "ab-continue-as-guest",
+                        label: "Continue as Guest",
+                        className: "col-8",
+                        disabled: true,
+                        callback: () => {},
+                        targetNode: "#guestCheckoutWrapper button[type='submit']",
+                    },
+                    {
+                        id: "ab-need-help",
+                        className: "col-4 ab-pl-0",
+                        label: "Need help?",
+                        callback: () => {},
+                        targetNode: "#validation-errors",
                     },
                 ],
             },
@@ -284,9 +291,9 @@ https://www.steinertractor.com/checkout#/address
                                             class="ab-input"
                                             type="${type}"
                                             placeholder=""
-                                            ${value ? `value="${value}"` : ''}
-                                            ${required ? `required` : ''}
-                                            ${pattern ? `pattern="${pattern}"` : ''}
+                                            ${value ? `value="${value}"` : ""}
+                                            ${required ? `required` : ""}
+                                            ${pattern ? `pattern="${pattern}"` : ""}
                                         />
                                     </label>
                                     <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
@@ -300,16 +307,22 @@ https://www.steinertractor.com/checkout#/address
 
         if (actionList && actionList.length > 0) {
             const actionContainer = document.createElement("div");
-            actionContainer.className = "ab-form-action-container";
 
-            actionList.forEach(({ id, label, callback, className }) => {
+            actionContainer.className = "ab-form-action-container row";
+
+            actionList.forEach(({ id, label, callback, disabled, className }) => {
+                const div = document.createElement("div");
+                div.className = `ab-action-col col ${className}`;
+
                 const button = document.createElement("button");
                 button.setAttribute("id", id);
                 button.setAttribute("type", "button");
-                button.className = className;
+                if (disabled) button.setAttribute("disabled", "true");
                 button.innerText = label;
                 button.addEventListener("click", callback);
-                actionContainer.appendChild(button);
+
+                div.appendChild(button);
+                actionContainer.appendChild(div);
             });
 
             form.appendChild(actionContainer);
