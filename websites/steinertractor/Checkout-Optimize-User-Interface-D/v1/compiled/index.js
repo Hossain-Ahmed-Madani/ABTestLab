@@ -48,50 +48,267 @@ https://www.steinertractor.com/checkout#/address
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    async function createAndUpdateContentLayout() {
+    const DATA = {
+        forms: {
+            personal_information: {
+                title: "Personal Information",
+                id: "personal-information",
+                inputList: [
+                    {
+                        id: "ab-company",
+                        type: "text",
+                        label: "Company",
+                        required: false,
+                        className: "col-12",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-first-name",
+                        type: "text",
+                        label: "First name",
+                        required: true,
+                        className: "col-6",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-last-name",
+                        type: "text",
+                        label: "Last name",
+                        required: true,
+                        className: "col-6 ab-pl-0",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-phone",
+                        type: "text",
+                        label: "Phone",
+                        required: true,
+                        className: "col-6",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-ext",
+                        type: "tel",
+                        label: "Ext",
+                        required: true,
+                        className: "col-6 ab-pl-0",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-email",
+                        type: "email",
+                        label: "Email",
+                        required: true,
+                        pattern: "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}",
+                        className: "col-12",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "Please enter a valid email address",
+                    },
+                ],
+            },
+            billing_address: {
+                title: "Test Name",
+                id: "billing-address",
+                inputList: [
+                    {
+                        id: "auto",
+                        name: "Company",
+                        type: "text",
+                        label: "Company",
+                        required: false,
+                        className: "",
+                        targetNode: "",
+                        errorMessage: "",
+                    },
+                ],
+                actionList: [
+                    {
+                        id: "",
+                        label: "",
+                        callback: () => {},
+                        className: "",
+                    },
+                ],
+            },
+            shipping_address: {
+                title: "Test Name",
+                id: "shipping-address",
+                inputList: [
+                    {
+                        id: "auto",
+                        name: "Company",
+                        type: "text",
+                        label: "Company",
+                        required: false,
+                        className: "",
+                        targetNode: "",
+                        errorMessage: "",
+                    },
+                ],
+                actionList: [
+                    {
+                        id: "",
+                        label: "",
+                        action: () => {},
+                        targetNode: "",
+                    },
+                ],
+            },
+        },
+    };
+
+    function getFormComponent(formObj) {
+        const { title, id: formId, inputList, actionList } = formObj;
+        const form = document.createElement("form");
+        form.setAttribute("id", formId);
+        form.className = "ab-form";
+
+        form.insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <h2 class="ab-form-heading">${title}</h2>
+                <div class="ab-form-input-container row">
+                    ${inputList
+                        .map(({ id, type, label, required, pattern, className, targetNode, value, errorMessage }) => {
+                            return /* HTML */ `
+                                <div class="ab-col ab-form-col col ${className}">
+                                    <label for="${id}" class="ab-form-group" targetNode="${targetNode}">
+                                        <span class="ab-label">${label}</span>
+                                        <input
+                                            id="${id}"
+                                            class="ab-input"
+                                            type="${type}"
+                                            placeholder=""
+                                            ${value ? `value="${value}"` : ''}
+                                            ${required ? `required` : ''}
+                                            ${pattern ? `pattern="${pattern}"` : ''}
+                                        />
+                                    </label>
+                                    <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
+                                </div>
+                            `;
+                        })
+                        .join("")}
+                </div>
+            `
+        );
+
+        if (actionList && actionList.length > 0) {
+            const actionContainer = document.createElement("div");
+            actionContainer.className = "ab-form-action-container";
+
+            actionList.forEach(({ id, label, callback, className }) => {
+                const button = document.createElement("button");
+                button.setAttribute("id", id);
+                button.setAttribute("type", "button");
+                button.className = className;
+                button.innerText = label;
+                button.addEventListener("click", callback);
+                actionContainer.appendChild(button);
+            });
+
+            form.appendChild(actionContainer);
+        }
+
+        return form;
+    }
+
+    function getGuestCheckoutFormLayout() {
+        const { personal_information, billing_address, shipping_address } = DATA["forms"];
+
+        const div = document.createElement("div");
+        div.classList.add("ab-guest-checkout-form");
+
+        const personalInformationForm = getFormComponent(personal_information);
+        const billingAddressForm = getFormComponent(billing_address);
+        const shippingAddressForm = getFormComponent(shipping_address);
+
+        div.insertAdjacentHTML("afterbegin", /* HTML */ ` <h1 class="ab-guest-checkout-header">Checkout with New Account</h1> `);
+        div.appendChild(personalInformationForm);
+        div.appendChild(billingAddressForm);
+        div.appendChild(shippingAddressForm);
+
+        return div;
+    }
+
+    function getGuestCheckoutLayout() {
+        const div = document.createElement("div");
+        div.className = "ab-guest-checkout-wrapper";
+
+        const controlGuestCheckoutForm = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, "#guest-checkout-form"));
+        const abGuestCheckoutForm = getGuestCheckoutFormLayout();
+
+        div.appendChild(abGuestCheckoutForm);
+        div.appendChild(controlGuestCheckoutForm);
+
+        return div;
+    }
+
+    function getLoginLayoutElement() {
+        const targetNode = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
+        targetNode.classList.add("ab-login-form-container");
+        return targetNode;
+    }
+
+    function getWrapperElement() {
         /* ab-show-login, ab-show-registration */
-        const html = /* HTML */ `
-            <div class="ab-content-wrapper">
-                <div class="ab-content-top"></div>
-                <div class="ab-content-bottom container">
-                    <div class="row">
-                        <div class="ab-content-forms col-6"></div>
-                        <div class="ab-content-added-product col-6" style="display:flex;justify-content:center;align-items:center;">Added Product</div>
-                    </div>
+        const div = document.createElement("div");
+        div.className = "ab-content-wrapper";
+        div.innerHTML = /* HTML */ `
+            <div class="ab-content-top"></div>
+            <div class="ab-content-bottom container">
+                <div class="row">
+                    <div class="ab-content-forms col-6"></div>
+                    <div class="ab-content-added-product col-6" style="display:flex;justify-content:center;align-items:center;">Added Product</div>
                 </div>
             </div>
         `;
 
-        q(".row.content-body").insertAdjacentHTML("afterbegin", html);
-        const contentTop = q(".ab-content-top");
-        contentTop.appendChild(q(".guest-checkout-optn > h1"));
-        contentTop.appendChild(q(".guest-checkout-optn"));
+        q(".row.content-body").insertAdjacentElement("afterbegin", div);
 
-        const formsContainer = q(".ab-content-forms");
-        qq(".row.content-body > *:not(.ab-content-wrapper)").forEach((item) => {
+        return div;
+    }
 
-            if (q(item, ".Head")?.innerText.includes("Account Login")) {
-                item.classList.add("ab-login-form-container");
-            } else if (q(item, "#guestCheckoutWrapper")) {
-                item.classList.add("ab-guest-checkout-form-container");
-            }
-            qq(item, "input").forEach((item) => item.setAttribute("placeholder", ""));
-            
-            formsContainer.appendChild(item);
-        });
+    async function createLayout() {
+        const mainWrapperElement = getWrapperElement();
+        const loginLayoutElement = getLoginLayoutElement();
+        const guestCheckoutLayoutElement = getGuestCheckoutLayout();
+
+        const contentTop = q(mainWrapperElement, ".ab-content-top");
+        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
+
+        const formsContainer = q(mainWrapperElement, ".ab-content-forms");
+        formsContainer.appendChild(loginLayoutElement);
+        formsContainer.appendChild(guestCheckoutLayoutElement);
+
+        q("#showLogin")?.click();
+    }
+
+    function updateLayout() {
+        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
-
-        q("#showLogin").click();
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createAndUpdateContentLayout();
+        updateLayout();
+        createLayout();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".progress-stepper .checkout-wrap"));
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".progress-stepper .checkout-wrap") && q("input#coAddress"));
     }
 
     try {

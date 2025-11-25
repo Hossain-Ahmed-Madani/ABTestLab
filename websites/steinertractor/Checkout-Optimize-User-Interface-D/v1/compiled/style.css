@@ -201,40 +201,55 @@
   text-decoration-skip-ink: auto;
   color: #0078d7;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container {
-  width: 100% !important;
-  padding: 54px 59px 73px 0px !important;
+.AB-Checkout-Step-1 #guest-checkout-form {
+  border: 1px solid red;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .dnnClear h2,
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container #validation-errors {
-  display: none;
+.AB-Checkout-Step-1 #guest-checkout-form:before {
+  content: "Control Form, Hide when test is completed";
+  color: red;
+  font-size: 16px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container #guestCheckoutWrapper > h4 {
-  margin-top: 0 !important;
+.AB-Checkout-Step-1 .ab-guest-checkout-wrapper {
+  padding: 49px 59px 97px 0;
+}
+.AB-Checkout-Step-1 h1.ab-guest-checkout-header {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
-  font-style: Bold;
   font-size: 24px;
   line-height: 100%;
   letter-spacing: 0px;
   color: #333333;
   margin-bottom: 38px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container #guestCheckoutWrapper > h5,
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container #guestCheckoutWrapper form h4 {
-  margin-top: 0 !important;
-  margin-bottom: 17px !important;
-  font-family: Arial, Helvetica, sans-serif;
+.AB-Checkout-Step-1 h2.ab-form-heading {
+  font-family: Arial;
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
-  letter-spacing: 0%;
+  letter-spacing: 0px;
   color: #333333;
+  margin-bottom: 17px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .mt-5 {
-  margin-top: 0 !important;
+.AB-Checkout-Step-1 form#personal-information {
+  margin-bottom: 50px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group:has(> input) {
+.AB-Checkout-Step-1 form#billing-address {
+  margin-bottom: 46px;
+}
+.AB-Checkout-Step-1 form#shipping-address {
+  margin-bottom: 0;
+}
+.AB-Checkout-Step-1 .ab-form-group {
+  margin: 0;
+  text-align: left;
+}
+.AB-Checkout-Step-1 .ab-form-col {
+  margin-bottom: 12px;
+}
+.AB-Checkout-Step-1 .ab-pl-0 {
+  padding-left: 0;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input) {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -243,13 +258,9 @@
   overflow: hidden;
   height: 51px;
   padding: 7px 10px;
-  margin-bottom: 12px;
   position: relative;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group:has(> input) .text-danger {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label {
+.AB-Checkout-Step-1 .ab-form-group .ab-label {
   position: absolute;
   z-index: 1;
   top: 0;
@@ -258,7 +269,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 0 !important;
   width: 100%;
   font-family: Inter, sans-serif;
   font-weight: 400;
@@ -266,43 +276,55 @@
   line-height: 100%;
   letter-spacing: 0px;
   color: #767676;
+  white-space: nowrap;
+  margin-bottom: 0px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:focus), .AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:active), .AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:not(:placeholder-shown)) {
+.AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:focus), .AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:active), .AB-Checkout-Step-1 .ab-form-group .ab-label:has(~ input:not(:placeholder-shown)) {
   position: static;
   font-size: 14px;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:focus) label, .AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:active) label, .AB-Checkout-Step-1 .ab-guest-checkout-form-container .form-group label:has(~ input:not(:placeholder-shown)) label {
-  font-size: 14px;
-}
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container input {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.AB-Checkout-Step-1 .ab-form-group input {
+  width: 100%;
+  height: 100%;
   border: none;
   outline: none;
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
+  z-index: 2;
   background: transparent;
   font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 100%;
-  letter-spacing: 0px;
-  color: #000000;
+  color: #333333;
 }
-.AB-Checkout-Step-1 .ab-guest-checkout-form-container input:focus, .AB-Checkout-Step-1 .ab-guest-checkout-form-container input:active, .AB-Checkout-Step-1 .ab-guest-checkout-form-container input:not(:placeholder-shown) {
-  position: static;
-  border: none;
-  outline: none;
-  background-color: #fff;
-  box-shadow: none;
+.AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill,
+.AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill:hover,
+.AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill:focus,
+.AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+.AB-Checkout-Step-1 .ab-error-message {
+  margin-top: 6px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #dc3545;
+  display: none;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input:placeholder-shown[required]) {
+  border: 2px solid #dc3545;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input:placeholder-shown[required]) + .ab-error-message {
+  display: block;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input:focus),
+.AB-Checkout-Step-1 .ab-form-group:has(> input:active) {
+  border: 2px solid #333333;
 }
