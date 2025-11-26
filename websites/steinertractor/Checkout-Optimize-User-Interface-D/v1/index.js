@@ -180,7 +180,7 @@ https://www.steinertractor.com/checkout#/address
                     },
                     {
                         id: "ab-phone",
-                        type: "text",
+                        type: "tel",
                         label: "Phone",
                         required: true,
                         className: "col-6",
@@ -212,17 +212,91 @@ https://www.steinertractor.com/checkout#/address
                 ],
             },
             billing_address: {
-                title: "Test Name",
+                title: "Billing Address",
                 id: "billing-address",
                 inputList: [
                     {
-                        id: "auto",
-                        name: "Company",
-                        type: "text",
-                        label: "Company",
+                        id: "ab-country",
+                        type: "select" /* Dropdown/Select */,
+                        optionList: [],
+                        label: "Country",
+                        className: "col-6",
                         required: false,
-                        className: "",
+                        targetNode: "select[name='CountryId']",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-phone-bill",
+                        type: "tel",
+                        label: "Phone",
+                        required: false,
+                        className: "col-6 ab-pl-0",
                         targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-street-address",
+                        type: "text",
+                        label: "Street Address",
+                        required: true,
+                        className: "col-12",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-street-address-two",
+                        type: "text",
+                        label: "Street address 2",
+                        required: true,
+                        className: "col-12",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-city",
+                        type: "text",
+                        label: "City",
+                        required: true,
+                        className: "col-4",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-state",
+                        type: "select" /* Dropdown/Select */,
+                        label: "State",
+                        optionList: [],
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-zip-code",
+                        type: "text",
+                        label: "Zip code",
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        targetNode: "",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-carriers",
+                        subtitle: "Which carriers offer delivery service to this address?",
+                        type: "select" /* Dropdown/Select */,
+                        label: "All Carriers",
+                        optionList: [],
+                        required: true,
+                        className: "col-12",
+                        targetNode: "select#ShipMethod",
+                        value: "",
                         errorMessage: "",
                     },
                 ],
@@ -237,7 +311,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Use the same address for delivery.",
                         className: "col-12",
                         targetNode: "#sameAsBilling",
-                        checked: true
+                        checked: true,
                     },
                     {
                         id: "ab-create-account",
@@ -245,7 +319,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Register as a customer. Customers can view order history and shipping status and track previous orders.",
                         className: "col-12",
                         targetNode: "#createAccount",
-                        checked: false
+                        checked: false,
                     },
                 ],
                 actionList: [
@@ -254,14 +328,12 @@ https://www.steinertractor.com/checkout#/address
                         label: "Continue as Guest",
                         className: "col-8",
                         disabled: true,
-                        callback: () => {},
                         targetNode: "#guestCheckoutWrapper button[type='submit']",
                     },
                     {
                         id: "ab-need-help",
                         className: "col-4 ab-pl-0",
                         label: "Need help?",
-                        callback: () => {},
                         targetNode: "#validation-errors",
                     },
                 ],
@@ -279,54 +351,78 @@ https://www.steinertractor.com/checkout#/address
             "afterbegin",
             /* HTML */ `
                 <h2 class="ab-form-heading">${title}</h2>
-                <div class="ab-form-input-container row">
-                    ${inputList
-                        .map(({ id, type, label, required, pattern, className, targetNode, value, errorMessage }) => {
-                            return /* HTML */ `
-                                <div class="ab-col ab-form-col col ${className}">
-                                    <label for="${id}" class="ab-form-group" targetNode="${targetNode}">
-                                        <span class="ab-label">${label}</span>
-                                        <input
-                                            id="${id}"
-                                            class="ab-input"
-                                            type="${type}"
-                                            placeholder=""
-                                            ${value ? `value="${value}"` : ""}
-                                            ${required ? `required` : ""}
-                                            ${pattern ? `pattern="${pattern}"` : ""}
-                                        />
-                                    </label>
-                                    <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
-                                </div>
-                            `;
-                        })
-                        .join("")}
-                </div>
+                ${inputList && inputList.length > 0
+                    ? `
+                        <div class="ab-form-input-container row">
+                        ${inputList
+                            .map(({ id, title, subtitle, type: inputType, optionList, label, required, pattern, className, targetNode, value, errorMessage }) => {
+                                if (inputType === "select") {
+                                    console.log(optionList);
+                                }
+
+                                return /* HTML */ `
+                                    <div class="ab-col ab-form-col col ${className}">
+                                        ${title ? `<span class="ab-form-title">${title}</span>` : ""} 
+                                        ${subtitle ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
+                                        <label for="${id}" class="ab-form-group">
+                                            <span class="ab-label">${label}</span>
+                                            ${inputType === "select"
+                                                ? ` 
+                                                <select
+                                                    id="${id}"
+                                                    class="ab-input"
+                                                    type="${inputType}"
+                                                    targetNode="${targetNode}"
+                                                    placeholder=""
+                                                    ${value ? `value="${value}"` : ""}
+                                                    ${required ? `required` : ""}
+                                                    ${pattern ? `pattern="${pattern}"` : ""}
+                                                >
+                                                    <option value>${label}</option>
+                                                    ${
+                                                        targetNode && q(targetNode)
+                                                            ? `${qq(targetNode + "> option:not(:first-child)").map((item) => item.outerHTML).join("")}`
+                                                            : ""
+                                                    }
+                                                </select>`
+                                                : `
+                                                    <input
+                                                        id="${id}"
+                                                        class="ab-input"
+                                                        type="${inputType}"
+                                                        placeholder=""
+                                                        ${value ? `value="${value}"` : ""}
+                                                        ${required ? `required` : ""}
+                                                        ${pattern ? `pattern="${pattern}"` : ""}
+                                                        targetNode="${targetNode}"
+                                                    />
+                                                `}
+                                        </label>
+                                        <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
+                                    </div>
+                                `;
+                            })
+                            .join("")}
+
+                        </div>
+                    `
+                    : ""}
+                ${actionList && actionList.length > 0
+                    ? `
+                        <div class="ab-form-action-container row">
+                            ${actionList
+                                .map(
+                                    ({ id, label, disabled, className, targetNode }) => /* HTML */ `
+                                        <div class="ab-action-col col ${className}">
+                                            <button type="button" id="${id}" ${disabled ? "disabled" : ""} targetNode="${targetNode}">${label}</button>
+                                        </div>
+                                    `
+                                )
+                                .join("")}
+                        </div>`
+                    : ""}
             `
         );
-
-        if (actionList && actionList.length > 0) {
-            const actionContainer = document.createElement("div");
-
-            actionContainer.className = "ab-form-action-container row";
-
-            actionList.forEach(({ id, label, callback, disabled, className }) => {
-                const div = document.createElement("div");
-                div.className = `ab-action-col col ${className}`;
-
-                const button = document.createElement("button");
-                button.setAttribute("id", id);
-                button.setAttribute("type", "button");
-                if (disabled) button.setAttribute("disabled", "true");
-                button.innerText = label;
-                button.addEventListener("click", callback);
-
-                div.appendChild(button);
-                actionContainer.appendChild(div);
-            });
-
-            form.appendChild(actionContainer);
-        }
 
         return form;
     }
@@ -410,12 +506,19 @@ https://www.steinertractor.com/checkout#/address
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
         updateLayout();
         createLayout();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".progress-stepper .checkout-wrap") && q("input#coAddress"));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(".progress-stepper .checkout-wrap") &&
+            q("input#coAddress") &&
+            qq("select[name='CountryId'] > option").length > 1 &&
+            qq("select#ShipMethod > option").length > 1
+        );
     }
 
     try {
