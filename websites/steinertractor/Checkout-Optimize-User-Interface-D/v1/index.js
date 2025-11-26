@@ -221,7 +221,7 @@ https://www.steinertractor.com/checkout#/address
                         optionList: [],
                         label: "Country",
                         className: "col-6",
-                        required: false,
+                        required: true,
                         targetNode: "select[name='CountryId']",
                         value: "",
                         errorMessage: "",
@@ -343,6 +343,7 @@ https://www.steinertractor.com/checkout#/address
 
     function getFormComponent(formObj) {
         const { title, id: formId, inputList, actionList } = formObj;
+
         const form = document.createElement("form");
         form.setAttribute("id", formId);
         form.className = "ab-form";
