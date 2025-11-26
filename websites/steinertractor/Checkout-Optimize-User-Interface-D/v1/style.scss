@@ -357,6 +357,17 @@
         margin-bottom: 12px;
     }
 
+    .ab-form-subtitle {
+        display: block;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        margin-bottom: 10px;
+        color: #333333;
+    }
+
     .ab-pl-0 {
         padding-left: 0;
     }
@@ -495,6 +506,14 @@
         display: none;
     }
 
+    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) {
+        border: 2px solid #dc3545;
+
+        & + .ab-error-message {
+            display: block;
+        }
+    }
+
     .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"]):placeholder-shown[required]) {
         border: 2px solid #dc3545;
 
@@ -516,7 +535,6 @@
             display: none;
         }
 
-
         &:before {
             content: "";
             position: absolute;
@@ -535,12 +553,11 @@
             transition: all 0.2s;
         }
 
-        &:has(>select:open) {
+        &:has(> select:open) {
             &:before {
                 transform: rotate(-135deg);
             }
         }
-        
 
         select {
             display: flex;
@@ -567,6 +584,10 @@
             appearance: none; /* Hide default arrow */
             -webkit-appearance: none; /* For Webkit browsers */
             -moz-appearance: none; /* For Firefox */
+
+            &[area-invalid] {
+                border: 2px solid #dc3545;
+            }
 
             &:focus-within,
             &:active {

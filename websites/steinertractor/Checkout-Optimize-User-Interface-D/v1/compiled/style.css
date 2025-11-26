@@ -283,6 +283,16 @@
 .AB-Checkout-Step-1 .ab-form-col {
   margin-bottom: 12px;
 }
+.AB-Checkout-Step-1 .ab-form-subtitle {
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  margin-bottom: 10px;
+  color: #333333;
+}
 .AB-Checkout-Step-1 .ab-pl-0 {
   padding-left: 0;
 }
@@ -407,6 +417,12 @@
   color: #dc3545;
   display: none;
 }
+.AB-Checkout-Step-1 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) {
+  border: 2px solid #dc3545;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
+  display: block;
+}
 .AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):placeholder-shown[required]) {
   border: 2px solid #dc3545;
 }
@@ -466,6 +482,9 @@
   appearance: none; /* Hide default arrow */
   -webkit-appearance: none; /* For Webkit browsers */
   -moz-appearance: none; /* For Firefox */
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select[area-invalid] {
+  border: 2px solid #dc3545;
 }
 .AB-Checkout-Step-1 .ab-form-group:has(> select) select:focus-within, .AB-Checkout-Step-1 .ab-form-group:has(> select) select:active {
   border: 2px solid #333333;

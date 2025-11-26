@@ -269,8 +269,7 @@ https://www.steinertractor.com/checkout#/address
 
                                 return /* HTML */ `
                                     <div class="ab-col ab-form-col col ${className}">
-                                        ${title ? `<span class="ab-form-title">${title}</span>` : ""} 
-                                        ${subtitle ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
+                                        ${title ? `<span class="ab-form-title">${title}</span>` : ""} ${subtitle ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
                                         <label for="${id}" class="ab-form-group">
                                             <span class="ab-label">${label}</span>
                                             ${inputType === "select"
@@ -288,7 +287,11 @@ https://www.steinertractor.com/checkout#/address
                                                     <option value>${label}</option>
                                                     ${
                                                         targetNode && q(targetNode)
-                                                            ? `${qq(targetNode + "> option:not(:first-child)").map((item) => item.outerHTML).join("")}`
+                                                            ? `
+                                                            ${qq(targetNode + "> option:not(:first-child)")
+                                                                .map((item) => item.outerHTML)
+                                                                .join("")}
+                                                            `
                                                             : ""
                                                     }
                                                 </select>`
@@ -390,7 +393,12 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    async function createLayout() {
+    async function createAndUpdateLayout() {
+        // Update
+        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
+        qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
+
+        // Create
         const mainWrapperElement = getWrapperElement();
         const loginLayoutElement = getLoginLayoutElement();
         const guestCheckoutLayoutElement = getGuestCheckoutLayout();
@@ -401,21 +409,18 @@ https://www.steinertractor.com/checkout#/address
         const formsContainer = q(mainWrapperElement, ".ab-content-forms");
         formsContainer.appendChild(loginLayoutElement);
         formsContainer.appendChild(guestCheckoutLayoutElement);
-
-        q("#showLogin")?.click();
     }
 
-    function updateLayout() {
-        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
-        qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
+    function eventHandler() {
+        q("#showLogin")?.click();
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
-        updateLayout();
-        createLayout();
+        createAndUpdateLayout();
+        eventHandler();
     }
 
     function checkForItems() {
