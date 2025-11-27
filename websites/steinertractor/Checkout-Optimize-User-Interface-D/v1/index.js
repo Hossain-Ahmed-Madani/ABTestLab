@@ -640,9 +640,9 @@ https://www.steinertractor.com/checkout#/address
                 q(dependencyNode, " option:first-child").selected = true;
             }
 
-            const dataObj = getElementData(dependencyNode);
-            handleFormErrorMessage(dataObj);
-            updateSelectInputView(dataObj);
+            const dependencyDataObj = getElementData(dependencyNode);
+            handleFormErrorMessage(dependencyDataObj);
+            updateSelectInputView(dependencyDataObj);
         });
     }
 
