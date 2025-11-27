@@ -7,14 +7,14 @@ https://www.steinertractor.com/checkout#/address
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "steinertractor",
-        host: "https://www.steinertractor.com/",
+        host: "https://www.steinertractor.com",
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1",
         test_variation: 1,
         test_version: 0.0001,
     };
 
-    const { page_initials, test_variation, test_version } = TEST_CONFIG;
+    const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     async function fetchAndParseURLApi(url) {
         try {
@@ -28,6 +28,21 @@ https://www.steinertractor.com/checkout#/address
             // console.error("Fetch and parse failed:", error);
             return null;
         }
+    }
+
+    async function fetchCartData() {
+        const response = await fetch("https://www.steinertractor.com/api/carts/carts_read", {
+            method: "GET",
+            headers: {
+                accept: "application/json, text/plain, */*",
+                "accept-language": "en-US,en;q=0.9",
+                // authorization: "Bearer your-token-here", // If needed
+                "x-requested-with": "XMLHttpRequest",
+            },
+            credentials: "include",
+        });
+
+        return await response.json();
     }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -509,31 +524,40 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function getProductSummaryLayoutElement() {
+    async function getProductSummaryLayoutElement() {
+        const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
+
         const div = document.createElement("div");
         div.className = "ab-product-summary";
 
         div.innerHTML = /* HTML */ `
             <h3 class="ab-product-summary__heading">Your Order</h3>
             <div class="ab-product-summary__added-products">
-                <div class="ab-product-summary__product">
-                    <a class="ab-product-summary__product-img" href="#">
-                        <img src="https://s7d2.scene7.com/is/image/SteinerTractor/JDS3370?$lg$" src=""/>
-                        <p class="ab-product-summary__product-sku">FDS7179</p>
-                    </a>
-                    <div class="ab-product-summary__product-info">
-                        <p class="ab-product-summary__product-title">Hydraulic Lift Repair Kit, Ford 9N, 2N, 8N; Ferguson TO20, TO30</p>
-                        <p class="ab-product-summary__product-availability">Available</p>
-                        <p class="ab-product-summary__product-quantity">Quantity: 1</p>
-                        <p class="ab-product-summary__product-price">$119.99</p>
-                    </div>
-                </div>
+                ${CartLine.map(
+                    ({ Image, Code, SEOUrl, Name, ProductStatus, UnitOfMeasure }) => /* HTML */ `
+                        <div class="ab-product-summary__product">
+                            <a class="ab-product-summary__product-img" href="${host}/${SEOUrl}">
+                                <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png"/>
+                                <p class="ab-product-summary__product-sku">${Code}</p>
+                            </a>
+                            <div class="ab-product-summary__product-info">
+                                <p class="ab-product-summary__product-title">${Name}</p>
+                                ${ProductStatus === "Active"
+                                    ? '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--available">Available</p>'
+                                    : '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--stock-out">Stock Out</p>'}
+
+                                <p class="ab-product-summary__product-quantity">Quantity: ${UnitOfMeasure[0].Quantity}</p>
+                                <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
+                            </div>
+                        </div>
+                    `
+                ).join("")}
             </div>
             <div class="ab-product-summary__border"></div>
             <div class="ab-product-summary__calculation-table">
                 <div class="ab-product-summary__row row">
                     <div class="ab-product-summary__col col-6">Items in Cart</div>
-                    <div class="ab-product-summary__col col-6">1</div>
+                    <div class="ab-product-summary__col col-6">${UnitTotals[0].Quantity}</div>
                 </div>
                 <div class="ab-product-summary__row row">
                     <div class="ab-product-summary__col col-6">Delivery</div>
@@ -541,19 +565,19 @@ https://www.steinertractor.com/checkout#/address
                 </div>
                 <div class="ab-product-summary__row row">
                     <div class="ab-product-summary__col col-6">Sub Total</div>
-                    <div class="ab-product-summary__col col-6">$119.99</div>
+                    <div class="ab-product-summary__col col-6">$${SubTotal}</div>
                 </div>
                 <div class="ab-product-summary__row row">
                     <div class="ab-product-summary__col col-6">Promotion Discount</div>
-                    <div class="ab-product-summary__col col-6">$0.00</div>
+                    <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
                 </div>
                 <div class="ab-product-summary__row row">
                     <div class="ab-product-summary__col col-6">Estimated Tax</div>
-                    <div class="ab-product-summary__col col-6">$9.00</div>
+                    <div class="ab-product-summary__col col-6">$${TaxTotal}</div>
                 </div>
                 <div class="ab-product-summary__row ab-product-summary__row--total row">
                     <div class="ab-product-summary__col col-6">Total</div>
-                    <div class="ab-product-summary__col col-6">$128.90</div>
+                    <div class="ab-product-summary__col col-6">$${Total}</div>
                 </div>
             </div>
         `;
@@ -561,7 +585,7 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function createAndUpdateLayout() {
+    async function createAndUpdateLayout() {
         // Update
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
@@ -574,13 +598,16 @@ https://www.steinertractor.com/checkout#/address
         const contentTop = q(mainWrapperElement, ".ab-content-top");
         qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
 
+        // Add login form
         const loginLayoutElement = getLoginLayoutElement();
-        const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
         if (loginLayoutElement) formsContainer.appendChild(loginLayoutElement);
+        
+        // Add registration form
+        const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
         if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
 
-        // This will be async
-        const productSummaryLayoutElement = getProductSummaryLayoutElement();
+        // Add product summary element
+        const productSummaryLayoutElement = await getProductSummaryLayoutElement();
         if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
     }
 

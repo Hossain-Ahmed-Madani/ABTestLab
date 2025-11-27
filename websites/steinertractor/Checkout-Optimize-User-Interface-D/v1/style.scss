@@ -689,6 +689,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        padding: 0 15px 25px;
 
         position: relative;
 
@@ -737,7 +738,14 @@
 
     p.ab-product-summary__product-availability {
         font-weight: 700;
-        color: #9cca5a;
+
+        &--available {
+            color: #9cca5a;
+        }
+
+        &--stock-out {
+            color: #dc3545;
+        }
     }
 
     .ab-product-summary__border {

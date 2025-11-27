@@ -18,3 +18,5 @@ async function fetchCartData() {
 fetchCartData().then((res) => {
     console.log(res);
 });
+
+// null
