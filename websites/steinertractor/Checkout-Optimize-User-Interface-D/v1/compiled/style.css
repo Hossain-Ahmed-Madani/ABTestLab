@@ -489,6 +489,9 @@
 .AB-Checkout-Step-1 .ab-form-group:has(> select) select[area-invalid] {
   border: 2px solid #dc3545;
 }
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select[area-selected] {
+  color: #333333;
+}
 .AB-Checkout-Step-1 .ab-form-group:has(> select) select:focus-within, .AB-Checkout-Step-1 .ab-form-group:has(> select) select:active {
   border: 2px solid #333333;
   box-shadow: none;

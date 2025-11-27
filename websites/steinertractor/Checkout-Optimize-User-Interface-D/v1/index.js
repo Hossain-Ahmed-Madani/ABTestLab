@@ -295,7 +295,7 @@ https://www.steinertractor.com/checkout#/address
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "select#ShipMethod",
                         value: "",
@@ -394,7 +394,7 @@ https://www.steinertractor.com/checkout#/address
                                                     ${pattern ? `pattern="${pattern}"` : ""}
                                                     ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                 >
-                                                    <option value>${label}</option>
+                                                    <option value="${q(control_node_selector + "> option:first-child").value || ''}" selected>${label}</option>
                                                     ${
                                                         control_node_selector && q(control_node_selector)
                                                             ? `
@@ -509,7 +509,7 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    async function createAndUpdateLayout() {
+    function createAndUpdateLayout() {
         // Update
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
@@ -547,12 +547,21 @@ https://www.steinertractor.com/checkout#/address
         };
     }
 
-    function handleError({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
-
+    function handleFormErrorMessage({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         if (controlNodes?.some((controlNode) => controlNode.classList.contains("is-invalid"))) {
             currentTarget.setAttribute("area-invalid", "");
         } else {
             currentTarget?.removeAttribute("area-invalid");
+        }
+    }
+
+    function updateSelectInputView({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+        if (inputType !== "select") return;
+
+        if (currentTarget.value) {
+            currentTarget.setAttribute("area-selected", "");
+        } else {
+            currentTarget.removeAttribute("area-selected");
         }
     }
 
@@ -576,7 +585,7 @@ https://www.steinertractor.com/checkout#/address
         window.scrollTo(scrollPos.x, scrollPos.y);
     }
 
-    function handleCheckBoxInputs({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function handleCheckBoxInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         controlNodes.forEach((controlNode) => {
             controlNode.click();
             controlNode.checked = checked;
@@ -586,9 +595,8 @@ https://www.steinertractor.com/checkout#/address
 
     function handleSelectInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
 
-        controlNodes.forEach((controlNode) => (controlNode.value = value));
-
         qq(`${controlNodeSelector} > option`).forEach((option) => {
+
             if (option.value === value) {
                 option.selected = true;
                 option.click();
@@ -601,9 +609,11 @@ https://www.steinertractor.com/checkout#/address
         });
 
         controlNodes.forEach((controlNode) => {
-            controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
+            controlNode.value = value;
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
         });
+
+        updateSelectInputView({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes });
     }
 
     function updateDependencyNodes({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
@@ -614,6 +624,8 @@ https://www.steinertractor.com/checkout#/address
             if (DATA["text_based_input_list"].some((type) => type === inputType)) {
                 dependencyNode.value = controlNode.value;
             } else if (inputType === "checkbox") {
+                //
+            } else if (inputType === "radio") {
                 //
             } else if (inputType === "select") {
                 const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
@@ -628,17 +640,18 @@ https://www.steinertractor.com/checkout#/address
                 q(dependencyNode, " option:first-child").selected = true;
             }
 
-            const dataObj = getElementData(dependencyNode)
-            handleError(dataObj);
+            const dataObj = getElementData(dependencyNode);
+            handleFormErrorMessage(dataObj);
+            updateSelectInputView(dataObj);
         });
     }
 
-    function updateFormActions() {
+    function updateFormActionElements() {
         qq(".ab-action-button").forEach((item) => {
             const selector = item.getAttribute("control_node_selector");
             const controlNode = q(selector);
-
             const isDisabled = controlNode.disabled;
+
             if (isDisabled) {
                 item.setAttribute("disabled", "");
             } else {
@@ -659,29 +672,33 @@ https://www.steinertractor.com/checkout#/address
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
 
-                    if (dataObj["controlNodes"]?.length === 0) {
-                        console.error("Target node not found:", dataObj['controlNodeSelector']);
+                    // Check For Control inputs
+                    if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
+                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
                         return;
                     }
 
+                    // Handle control input updates
                     if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
                         handleTextBasedInputs(dataObj);
                     } else if (dataObj["inputType"] === "radio") {
                         // Add logic here
                     } else if (dataObj["inputType"] === "checkbox") {
-                        handleCheckBoxInputs(dataObj);
+                        handleCheckBoxInput(dataObj);
                     } else if (dataObj["inputType"] === "select") {
                         handleSelectInput(dataObj);
                     }
 
-                    handleError(dataObj);
-
-                    // Enable / Disable Buttons
-                    updateFormActions();
-
+                    // Update dependent fields on interval
                     if (dataObj["dependencyNodes"]?.length > 0) {
                         setTimeout(() => updateDependencyNodes(dataObj), 1000);
                     }
+                    
+                    // Handle error message 
+                    handleFormErrorMessage(dataObj);
+
+                    // Update actions items
+                    updateFormActionElements();
                 },
             },
             {
@@ -697,7 +714,6 @@ https://www.steinertractor.com/checkout#/address
         ];
 
         ACTION_LIST.forEach(({ selector, events, callback }) => {
-            const debouncedCallback = debounce(callback, 150);
             qq(selector)?.forEach((item) => events.forEach((event) => item.addEventListener(event, callback)));
         });
     }

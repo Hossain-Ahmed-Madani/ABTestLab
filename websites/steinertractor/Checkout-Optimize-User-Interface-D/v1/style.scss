@@ -592,6 +592,11 @@
                 border: 2px solid #dc3545;
             }
 
+            &[area-selected] {
+                color: #333333;
+
+            }
+
             &:focus-within,
             &:active {
                 border: 2px solid #333333;
