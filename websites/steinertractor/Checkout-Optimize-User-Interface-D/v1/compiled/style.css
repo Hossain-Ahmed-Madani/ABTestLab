@@ -460,6 +460,9 @@
 .AB-Checkout-Step-1 .ab-form-group:has(> select):has(> select:open):before {
   transform: rotate(-135deg);
 }
+.AB-Checkout-Step-1 .ab-form-group:has(> select):has(> select[area-invalid]) ~ .ab-error-message {
+  display: block;
+}
 .AB-Checkout-Step-1 .ab-form-group:has(> select) select {
   display: flex;
   justify-content: center;

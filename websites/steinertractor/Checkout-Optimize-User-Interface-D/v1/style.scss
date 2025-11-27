@@ -508,7 +508,6 @@
 
     .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) {
         border: 2px solid #dc3545;
-
         & + .ab-error-message {
             display: block;
         }
@@ -557,6 +556,10 @@
             &:before {
                 transform: rotate(-135deg);
             }
+        }
+
+        &:has(> select[area-invalid]) ~ .ab-error-message {
+            display: block;
         }
 
         select {

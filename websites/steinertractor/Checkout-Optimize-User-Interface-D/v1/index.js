@@ -1,5 +1,5 @@
 /* 
-
+https://www.steinertractor.com/guestcheckout?returnurl=/checkout
 https://www.steinertractor.com/checkout#/address
 */
 
@@ -154,7 +154,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Company",
                         required: false,
                         className: "col-12",
-                        targetNode: "#company",
+                        control_node_selector: "#company",
                         value: "",
                         errorMessage: "",
                     },
@@ -164,7 +164,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "First name",
                         required: true,
                         className: "col-6",
-                        targetNode: "input[name='FirstName']",
+                        control_node_selector: "input[name='FirstName']",
                         value: "",
                         errorMessage: "",
                     },
@@ -174,7 +174,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Last name",
                         required: true,
                         className: "col-6 ab-pl-0",
-                        targetNode: "#lastName",
+                        control_node_selector: "#lastName",
                         value: "",
                         errorMessage: "",
                     },
@@ -184,7 +184,8 @@ https://www.steinertractor.com/checkout#/address
                         label: "Phone",
                         required: true,
                         className: "col-6",
-                        targetNode: "#phonereg",
+                        control_node_selector: "#phonereg, #phone",
+                        dependency_node_selector: "#ab-phone-bill",
                         value: "",
                         errorMessage: "",
                     },
@@ -194,7 +195,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Ext",
                         required: true,
                         className: "col-6 ab-pl-0",
-                        targetNode: "#ext",
+                        control_node_selector: "#ext",
                         value: "",
                         errorMessage: "",
                     },
@@ -204,7 +205,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Email",
                         required: true,
                         className: "col-12",
-                        targetNode: "#ResetEmail",
+                        control_node_selector: "#ResetEmail",
                         value: "",
                         errorMessage: "Please enter a valid email address",
                     },
@@ -221,8 +222,8 @@ https://www.steinertractor.com/checkout#/address
                         label: "Country",
                         className: "col-6",
                         required: true,
-                        targetNode: "select[name='CountryId']",
-                        dependencyNode: "select#ab-state",
+                        control_node_selector: "select[name='CountryId']",
+                        dependency_node_selector: "select#ab-state",
                         value: "",
                         errorMessage: "",
                     },
@@ -232,7 +233,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Phone",
                         required: false,
                         className: "col-6 ab-pl-0",
-                        targetNode: "#phone",
+                        control_node_selector: "#phone",
                         value: "",
                         errorMessage: "",
                     },
@@ -242,7 +243,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Street Address",
                         required: true,
                         className: "col-12",
-                        targetNode: "#coAddress",
+                        control_node_selector: "#coAddress",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
@@ -252,7 +253,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Street address 2",
                         required: true,
                         className: "col-12",
-                        targetNode: "#coAddress2",
+                        control_node_selector: "#coAddress2",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
@@ -262,7 +263,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "City",
                         required: true,
                         className: "col-4",
-                        targetNode: "#coCity",
+                        control_node_selector: "#coCity",
                         value: "",
                         errorMessage: "",
                     },
@@ -273,7 +274,7 @@ https://www.steinertractor.com/checkout#/address
                         optionList: [],
                         required: true,
                         className: "col-4 ab-pl-0",
-                        targetNode: "select[name='StateId']",
+                        control_node_selector: "select[name='StateId']",
                         value: "",
                         errorMessage: "",
                     },
@@ -283,7 +284,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Zip code",
                         required: true,
                         className: "col-4 ab-pl-0",
-                        targetNode: "#coZip",
+                        control_node_selector: "#coZip",
                         value: "",
                         errorMessage: "",
                     },
@@ -295,7 +296,7 @@ https://www.steinertractor.com/checkout#/address
                         optionList: [],
                         required: true,
                         className: "col-12",
-                        targetNode: "select#ShipMethod",
+                        control_node_selector: "select#ShipMethod",
                         value: "",
                         errorMessage: "",
                     },
@@ -310,7 +311,7 @@ https://www.steinertractor.com/checkout#/address
                         type: "checkbox",
                         label: "Use the same address for delivery.",
                         className: "col-12",
-                        targetNode: "#sameAsBilling",
+                        control_node_selector: "#sameAsBilling",
                         checked: true,
                     },
                     {
@@ -318,7 +319,7 @@ https://www.steinertractor.com/checkout#/address
                         type: "checkbox",
                         label: "Register as a customer. Customers can view order history and shipping status and track previous orders.",
                         className: "col-12",
-                        targetNode: "#createAccount",
+                        control_node_selector: "#createAccount",
                         checked: false,
                     },
                 ],
@@ -328,13 +329,13 @@ https://www.steinertractor.com/checkout#/address
                         label: "Continue as Guest",
                         className: "col-8",
                         disabled: true,
-                        targetNode: "#guestCheckoutWrapper button[type='submit']",
+                        control_node_selector: "#guestCheckoutWrapper button[type='submit']",
                     },
                     {
                         id: "ab-need-help",
                         className: "col-4 ab-pl-0",
                         label: "Need help?",
-                        targetNode: "#help-button",
+                        control_node_selector: "#help-button",
                     },
                 ],
             },
@@ -367,16 +368,12 @@ https://www.steinertractor.com/checkout#/address
                                     required,
                                     pattern,
                                     className,
-                                    targetNode,
-                                    dependencyNode,
+                                    control_node_selector,
+                                    dependency_node_selector,
                                     value,
                                     checked,
                                     errorMessage,
                                 }) => {
-                                    if (inputType === "select") {
-                                        console.log(optionList);
-                                    }
-
                                     return /* HTML */ `
                                         <div class="ab-col ab-form-col col ${className}">
                                             ${title ? `<span class="ab-form-title">${title}</span>` : ""} ${subtitle ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
@@ -388,18 +385,19 @@ https://www.steinertractor.com/checkout#/address
                                                     id="${id}"
                                                     class="ab-input"
                                                     type="${inputType}"
-                                                    targetNode="${targetNode}"
+                                                    control_node_selector="${control_node_selector}"
                                                     placeholder=""
-                                                    ${dependencyNode ? `dependencyNode="${dependencyNode}"` : ""}
+                                                    ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
                                                     ${value ? `value="${value}"` : ""}
                                                     ${required ? `required` : ""}
                                                     ${pattern ? `pattern="${pattern}"` : ""}
+                                                    ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                 >
                                                     <option value>${label}</option>
                                                     ${
-                                                        targetNode && q(targetNode)
+                                                        control_node_selector && q(control_node_selector)
                                                             ? `
-                                                            ${qq(targetNode + "> option:not(:first-child)")
+                                                            ${qq(control_node_selector + "> option:not(:first-child)")
                                                                 .map((item) => item.outerHTML)
                                                                 .join("")}
                                                             `
@@ -412,12 +410,13 @@ https://www.steinertractor.com/checkout#/address
                                                         class="ab-input"
                                                         type="${inputType}"
                                                         placeholder=""
-                                                        targetNode="${targetNode}"
-                                                        ${dependencyNode ? `dependencyNode="${dependencyNode}"` : ""}
+                                                        control_node_selector="${control_node_selector}"
+                                                        ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
                                                         ${value ? `value="${value}"` : ""}
                                                         ${required ? `required` : ""}
                                                         ${pattern ? `pattern="${pattern}"` : ""}
-                                                        ${inputType === "checkbox" && q(targetNode + "[checked]") ? "checked" : ""}
+                                                        ${inputType === "checkbox" && q(control_node_selector + "[checked]") ? "checked" : ""}
+                                                        ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                     />
                                                 `}
                                             </label>
@@ -436,9 +435,11 @@ https://www.steinertractor.com/checkout#/address
                         <div class="ab-form-action-container row">
                             ${actionList
                                 .map(
-                                    ({ id, label, disabled, className, targetNode }) => /* HTML */ `
+                                    ({ id, label, disabled, className, control_node_selector }) => /* HTML */ `
                                         <div class="ab-action-col col ${className}">
-                                            <button class="ab-action-button" type="button" id="${id}" ${disabled ? "disabled" : ""} targetNode="${targetNode}">${label}</button>
+                                            <button class="ab-action-button" type="button" id="${id}" ${disabled ? "disabled" : ""} control_node_selector="${control_node_selector}">
+                                                ${label}
+                                            </button>
                                         </div>
                                     `
                                 )
@@ -526,7 +527,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function handleError(currentTarget) {
-        const selector = currentTarget.getAttribute("targetNode");
+        const selector = currentTarget.getAttribute("control_node_selector");
 
         if (q(selector)?.classList.contains("is-invalid")) {
             currentTarget.setAttribute("area-invalid", "");
@@ -538,10 +539,10 @@ https://www.steinertractor.com/checkout#/address
     function handleTextBasedInputs(currentTarget) {
         const value = currentTarget.value;
         const inputType = currentTarget.getAttribute("type");
-        const selector = currentTarget.getAttribute("targetNode");
-        const targetNode = q(selector);
+        const selector = currentTarget.getAttribute("control_node_selector");
+        const controlNodes = qq(selector);
 
-        if (!targetNode) {
+        if (controlNodes.length === 0) {
             console.error("Target node not found:", selector);
             return;
         }
@@ -550,82 +551,114 @@ https://www.steinertractor.com/checkout#/address
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
 
         if (nativeInputValueSetter) {
-            nativeInputValueSetter.call(targetNode, value);
+            controlNodes.forEach((controlNode) => {
+                nativeInputValueSetter.call(controlNode, value);
+            });
         } else {
-            targetNode.value = value;
+            controlNodes.forEach((controlNode) => (controlNode.value = value));
         }
 
-        targetNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
-        targetNode.dispatchEvent(new Event("change", { bubbles: true }));
+        controlNodes.forEach((controlNode) => {
+            controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
+            controlNode.dispatchEvent(new Event("change", { bubbles: true }));
+        });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
-        // console.log("targetNode:", inputType, selector, currentTarget, "value: ", currentTarget.value);
+        // console.log("controlNode:", inputType, selector, currentTarget, "value: ", currentTarget.value);
     }
 
     function handleCheckBoxInputs(currentTarget) {
         const checked = currentTarget?.checked;
-        const selector = currentTarget.getAttribute("targetNode");
-        const targetNode = document.querySelector(selector);
+        const selector = currentTarget.getAttribute("control_node_selector");
+        const controlNodes = qq(selector);
 
-        targetNode.click();
-        targetNode.checked = checked;
-    }
-
-    function updateDependencyNode(currentTarget) {
-        const selector = currentTarget.getAttribute("dependencyNode");
-        const dependencyNode = q(selector);
-        
-        if (!dependencyNode) {
-            console.error("dependencyNode node not found:", selector);
-            return;
-        }
-
-        const options = qq(`${selector} > option:not(:first-child)`);
-
-        if (options.length === 0) {
-            console.error("Options node not found:", selector);
-            return;
-        }
-
-        dependencyNode.innerHTML = /* HTML */ ` ${q(dependencyNode, "option:first-child").outerHTML} ${options.map((option) => option.outerHTML).join("")} `;
-    }
-
-    function handleSelectInput(currentTarget) {
-        const value = currentTarget.value;
-        const selector = currentTarget.getAttribute("targetNode");
-        const targetNode = q(selector);
-
-        if (!targetNode) {
+        if (controlNodes.length === 0) {
             console.error("Target node not found:", selector);
             return;
         }
 
-        targetNode.value = value;
+        controlNodes.forEach((controlNode) => {
+            controlNode.click();
+            controlNode.checked = checked;
+        });
+    }
 
-        console.log(value, selector)
+    function handleSelectInput(currentTarget) {
+        const value = currentTarget.value;
+        const selector = currentTarget.getAttribute("control_node_selector");
+        const controlNodes = qq(selector);
 
-        q(`${selector} > option[value="${value}"]`).click();
+        if (controlNodes.length === 0) {
+            console.error("Target node not found:", selector);
+            return;
+        }
 
-        targetNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
-        targetNode.dispatchEvent(new Event("change", { bubbles: true }));
+        controlNodes.forEach((controlNode) => (controlNode.value = value));
 
-        // Handle Dependencies with delay
-        setTimeout(() => {
-            updateDependencyNode(currentTarget);
-        }, 2000);
+        qq(`${selector} > option`).forEach((option) => {
+            if (option.value === value) {
+                option.selected = true;
+                option.click();
+                option.dispatchEvent(new Event("change", { bubbles: true }));
+                option.dispatchEvent(new Event("click", { bubbles: true }));
+                return;
+            }
+
+            option.selected = false;
+        });
+
+        controlNodes.forEach((controlNode) => {
+            controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
+            controlNode.dispatchEvent(new Event("change", { bubbles: true }));
+        });
+    }
+
+    function updateDependencyNodes(currentTarget) {
+        const dependencySelector = currentTarget.getAttribute("dependency_node_selector");
+        const dependencyNodes = qq(dependencySelector);
+        const inputType = currentTarget.getAttribute("type");
+
+        if (dependencyNodes && dependencyNodes.length === 0) {
+            console.error("dependency_node_selector node not found:", dependencySelector);
+            return;
+        }
+
+        dependencyNodes.forEach((dependencyNode) => {
+            const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
+            const controlNode = q(controlNodeSelector);
+
+            if (["text", "tel", "number", "email", "password", "url", "search"].some((type) => type === inputType)) {
+                dependencyNode.value = controlNode.value;
+            } else if (inputType === "checkbox") {
+                //
+            } else if (inputType === "select") {
+                const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
+
+                if (controlOptions.length === 0) {
+                    console.error("Options node not found:", controlNodeSelector);
+                    return;
+                }
+
+                dependencyNode.innerHTML = /* HTML */ ` ${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                dependencyNode.value = "";
+                q(dependencyNode, " option:first-child").selected = true;
+            }
+
+            handleError(dependencyNode);
+        });
     }
 
     function updateFormActions() {
         qq(".ab-action-button").forEach((item) => {
-            const selector = item.getAttribute("targetNode");
-            const targetNode = q(selector);
+            const selector = item.getAttribute("control_node_selector");
+            const controlNode = q(selector);
 
-            if (!targetNode) {
+            if (!controlNode) {
                 console.error("Target node not found:", selector);
                 return;
             }
 
-            const isDisabled = targetNode.disabled;
+            const isDisabled = controlNode.disabled;
             if (isDisabled) {
                 item.setAttribute("disabled", "");
             } else {
@@ -636,12 +669,12 @@ https://www.steinertractor.com/checkout#/address
 
     function eventHandler() {
         // Force Click
-        q("#showLogin")?.click();
+        q("#showCheckout")?.click();
 
         const ACTION_LIST = [
             {
-                selector: "input.ab-input:is([type='text'], [type='number'], [type='tel'],  [type='checkbox']), select.ab-input",
-                event: "input",
+                selector: "input.ab-input:is([type='text'], [type='email'], [type='url'],  [type='password'], [type='number'], [type='tel'],  [type='checkbox']), select.ab-input",
+                events: ["input"],
                 callback: (e) => {
                     const currentTarget = e.target;
                     const inputType = currentTarget.getAttribute("type");
@@ -657,14 +690,30 @@ https://www.steinertractor.com/checkout#/address
                     }
 
                     handleError(currentTarget);
+                    // Enable / Disable Buttons
                     updateFormActions();
+                    // Handle Dependencies with delay
+
+                    if (currentTarget.getAttribute("dependency_node_selector")) {
+                        setTimeout(() => updateDependencyNodes(currentTarget), 1000);
+                    }
+                },
+            },
+            {
+                selector: ".ab-action-button",
+                events: ["click"],
+                callback: (e) => {
+                    const currentTarget = e.target;
+                    const selector = currentTarget.getAttribute("control_node_selector");
+                    const controlNodes = qq(selector);
+                    controlNodes.forEach((controlNode) => controlNode.click());
                 },
             },
         ];
 
-        ACTION_LIST.forEach(({ selector, event, callback }) => {
+        ACTION_LIST.forEach(({ selector, events, callback }) => {
             const debouncedCallback = debounce(callback, 150);
-            qq(selector)?.forEach((item) => item.addEventListener(event, debouncedCallback));
+            qq(selector)?.forEach((item) => events.forEach((event) => item.addEventListener(event, callback)));
         });
     }
 
