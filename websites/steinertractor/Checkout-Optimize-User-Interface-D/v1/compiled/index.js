@@ -49,6 +49,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     const DATA = {
+        text_based_input_list: ["text", "tel", "number", "email", "password", "url", "search"],
         forms: {
             personal_information: {
                 title: "Personal Information",
@@ -432,37 +433,46 @@ https://www.steinertractor.com/checkout#/address
         formsContainer.appendChild(guestCheckoutLayoutElement);
     }
 
-    function handleError(currentTarget) {
-        const selector = currentTarget.getAttribute("control_node_selector");
+    function getElementData(currentTarget) {
+        const value = currentTarget.value;
+        const inputType = currentTarget.getAttribute("type");
+        const controlNodeSelector = currentTarget.getAttribute("control_node_selector");
+        const controlNodes = qq(controlNodeSelector);
 
-        if (q(selector)?.classList.contains("is-invalid")) {
+        const dependencySelector = currentTarget.getAttribute("dependency_node_selector");
+        const dependencyNodes = qq(dependencySelector);
+
+        return {
+            currentTarget,
+            value,
+            inputType,
+            controlNodeSelector,
+            controlNodes,
+            dependencySelector,
+            dependencyNodes,
+        };
+    }
+
+    function handleError({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+
+        if (controlNodes?.some((controlNode) => controlNode.classList.contains("is-invalid"))) {
             currentTarget.setAttribute("area-invalid", "");
         } else {
-            currentTarget.removeAttribute("area-invalid");
+            currentTarget?.removeAttribute("area-invalid");
         }
     }
 
-    function handleTextBasedInputs(currentTarget) {
-        const value = currentTarget.value;
-        currentTarget.getAttribute("type");
-        const selector = currentTarget.getAttribute("control_node_selector");
-        const controlNodes = qq(selector);
-
-        if (controlNodes.length === 0) {
-            console.error("Target node not found:", selector);
-            return;
-        }
-
+    function handleTextBasedInputs({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         const scrollPos = { x: window.scrollX, y: window.scrollY };
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
 
-        if (nativeInputValueSetter) {
-            controlNodes.forEach((controlNode) => {
+        controlNodes.forEach((controlNode) => {
+            if (nativeInputValueSetter) {
                 nativeInputValueSetter.call(controlNode, value);
-            });
-        } else {
-            controlNodes.forEach((controlNode) => (controlNode.value = value));
-        }
+            } else {
+                controlNode.value = value;
+            }
+        });
 
         controlNodes.forEach((controlNode) => {
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
@@ -470,38 +480,21 @@ https://www.steinertractor.com/checkout#/address
         });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
-        // console.log("controlNode:", inputType, selector, currentTarget, "value: ", currentTarget.value);
     }
 
-    function handleCheckBoxInputs(currentTarget) {
-        const checked = currentTarget?.checked;
-        const selector = currentTarget.getAttribute("control_node_selector");
-        const controlNodes = qq(selector);
-
-        if (controlNodes.length === 0) {
-            console.error("Target node not found:", selector);
-            return;
-        }
-
+    function handleCheckBoxInputs({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         controlNodes.forEach((controlNode) => {
             controlNode.click();
             controlNode.checked = checked;
+            controlNode.dispatchEvent(new Event("change", { bubbles: true }));
         });
     }
 
-    function handleSelectInput(currentTarget) {
-        const value = currentTarget.value;
-        const selector = currentTarget.getAttribute("control_node_selector");
-        const controlNodes = qq(selector);
-
-        if (controlNodes.length === 0) {
-            console.error("Target node not found:", selector);
-            return;
-        }
+    function handleSelectInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
 
         controlNodes.forEach((controlNode) => (controlNode.value = value));
 
-        qq(`${selector} > option`).forEach((option) => {
+        qq(`${controlNodeSelector} > option`).forEach((option) => {
             if (option.value === value) {
                 option.selected = true;
                 option.click();
@@ -519,21 +512,12 @@ https://www.steinertractor.com/checkout#/address
         });
     }
 
-    function updateDependencyNodes(currentTarget) {
-        const dependencySelector = currentTarget.getAttribute("dependency_node_selector");
-        const dependencyNodes = qq(dependencySelector);
-        const inputType = currentTarget.getAttribute("type");
-
-        if (dependencyNodes && dependencyNodes.length === 0) {
-            console.error("dependency_node_selector node not found:", dependencySelector);
-            return;
-        }
-
+    function updateDependencyNodes({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         dependencyNodes.forEach((dependencyNode) => {
             const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
             const controlNode = q(controlNodeSelector);
 
-            if (["text", "tel", "number", "email", "password", "url", "search"].some((type) => type === inputType)) {
+            if (DATA["text_based_input_list"].some((type) => type === inputType)) {
                 dependencyNode.value = controlNode.value;
             } else if (inputType === "checkbox") ; else if (inputType === "select") {
                 const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
@@ -543,12 +527,13 @@ https://www.steinertractor.com/checkout#/address
                     return;
                 }
 
-                dependencyNode.innerHTML = /* HTML */ ` ${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                dependencyNode.innerHTML = /* HTML */ `${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
                 dependencyNode.value = "";
                 q(dependencyNode, " option:first-child").selected = true;
             }
 
-            handleError(dependencyNode);
+            const dataObj = getElementData(dependencyNode);
+            handleError(dataObj);
         });
     }
 
@@ -556,11 +541,6 @@ https://www.steinertractor.com/checkout#/address
         qq(".ab-action-button").forEach((item) => {
             const selector = item.getAttribute("control_node_selector");
             const controlNode = q(selector);
-
-            if (!controlNode) {
-                console.error("Target node not found:", selector);
-                return;
-            }
 
             const isDisabled = controlNode.disabled;
             if (isDisabled) {
@@ -577,27 +557,32 @@ https://www.steinertractor.com/checkout#/address
 
         const ACTION_LIST = [
             {
-                selector: "input.ab-input:is([type='text'], [type='email'], [type='url'],  [type='password'], [type='number'], [type='tel'],  [type='checkbox']), select.ab-input",
+                selector: ".ab-input",
                 events: ["input"],
                 callback: (e) => {
                     const currentTarget = e.target;
-                    const inputType = currentTarget.getAttribute("type");
+                    const dataObj = getElementData(currentTarget);
 
-                    if (["text", "tel", "number", "email", "password", "url", "search"].some((type) => type === inputType)) {
-                        handleTextBasedInputs(currentTarget);
-                    } else if (inputType === "radio") ; else if (inputType === "checkbox") {
-                        handleCheckBoxInputs(currentTarget);
-                    } else if (inputType === "select") {
-                        handleSelectInput(currentTarget);
+                    if (dataObj["controlNodes"]?.length === 0) {
+                        console.error("Target node not found:", dataObj['controlNodeSelector']);
+                        return;
                     }
 
-                    handleError(currentTarget);
+                    if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
+                        handleTextBasedInputs(dataObj);
+                    } else if (dataObj["inputType"] === "radio") ; else if (dataObj["inputType"] === "checkbox") {
+                        handleCheckBoxInputs(dataObj);
+                    } else if (dataObj["inputType"] === "select") {
+                        handleSelectInput(dataObj);
+                    }
+
+                    handleError(dataObj);
+
                     // Enable / Disable Buttons
                     updateFormActions();
-                    // Handle Dependencies with delay
 
-                    if (currentTarget.getAttribute("dependency_node_selector")) {
-                        setTimeout(() => updateDependencyNodes(currentTarget), 1000);
+                    if (dataObj["dependencyNodes"]?.length > 0) {
+                        setTimeout(() => updateDependencyNodes(dataObj), 1000);
                     }
                 },
             },
