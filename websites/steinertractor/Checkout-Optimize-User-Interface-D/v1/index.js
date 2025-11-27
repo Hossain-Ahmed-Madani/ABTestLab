@@ -394,7 +394,7 @@ https://www.steinertractor.com/checkout#/address
                                                     ${pattern ? `pattern="${pattern}"` : ""}
                                                     ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                 >
-                                                    <option value="${q(control_node_selector + "> option:first-child").value || ''}" selected>${label}</option>
+                                                    <option value="${q(control_node_selector + "> option:first-child").value || ""}" selected>${label}</option>
                                                     ${
                                                         control_node_selector && q(control_node_selector)
                                                             ? `
@@ -471,9 +471,9 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function getGuestCheckoutLayout() {
+    function getGuestCheckoutLayoutElement() {
         const div = document.createElement("div");
-        div.className = "ab-guest-checkout-wrapper";
+        div.className = "ab-guest-checkout-section";
 
         const controlGuestCheckoutForm = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, "#guest-checkout-form"));
         const abGuestCheckoutForm = getGuestCheckoutFormLayout();
@@ -486,25 +486,77 @@ https://www.steinertractor.com/checkout#/address
 
     function getLoginLayoutElement() {
         const targetNode = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
-        targetNode.classList.add("ab-login-form-container");
+        targetNode.classList.add("ab-login-section");
         return targetNode;
     }
 
-    function getWrapperElement() {
-        /* ab-show-login, ab-show-registration */
+    function getMainWrapperElement() {
+        /* ab-content-wrapper--show-login, ab-content-wrapper--show-guest-checkout */
         const div = document.createElement("div");
-        div.className = "ab-content-wrapper";
+        div.className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout";
         div.innerHTML = /* HTML */ `
             <div class="ab-content-top"></div>
             <div class="ab-content-bottom container">
                 <div class="row">
-                    <div class="ab-content-forms col-6"></div>
-                    <div class="ab-content-added-product col-6" style="display:flex;justify-content:center;align-items:center;">Added Product</div>
+                    <div class="ab-content-forms-wrapper col-6"></div>
+                    <div class="ab-content-product-summary-wrapper col-6"></div>
                 </div>
             </div>
         `;
 
         q(".row.content-body").insertAdjacentElement("afterbegin", div);
+
+        return div;
+    }
+
+    function getProductSummaryLayoutElement() {
+        const div = document.createElement("div");
+        div.className = "ab-product-summary";
+
+        div.innerHTML = /* HTML */ `
+            <h3 class="ab-product-summary__heading">Your Order</h3>
+            <div class="ab-product-summary__added-products">
+                <div class="ab-product-summary__product">
+                    <a class="ab-product-summary__product-img" href="#">
+                        <img src="https://s7d2.scene7.com/is/image/SteinerTractor/JDS3370?$lg$" src=""/>
+                        <p class="ab-product-summary__product-sku">FDS7179</p>
+                    </a>
+                    <div class="ab-product-summary__product-info">
+                        <p class="ab-product-summary__product-title">Hydraulic Lift Repair Kit, Ford 9N, 2N, 8N; Ferguson TO20, TO30</p>
+                        <p class="ab-product-summary__product-availability">Available</p>
+                        <p class="ab-product-summary__product-quantity">Quantity: 1</p>
+                        <p class="ab-product-summary__product-price">$119.99</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ab-product-summary__border"></div>
+            <div class="ab-product-summary__calculation-table">
+                <div class="ab-product-summary__row row">
+                    <div class="ab-product-summary__col col-6">Items in Cart</div>
+                    <div class="ab-product-summary__col col-6">1</div>
+                </div>
+                <div class="ab-product-summary__row row">
+                    <div class="ab-product-summary__col col-6">Delivery</div>
+                    <div class="ab-product-summary__col col-6">$0.00</div>
+                </div>
+                <div class="ab-product-summary__row row">
+                    <div class="ab-product-summary__col col-6">Sub Total</div>
+                    <div class="ab-product-summary__col col-6">$119.99</div>
+                </div>
+                <div class="ab-product-summary__row row">
+                    <div class="ab-product-summary__col col-6">Promotion Discount</div>
+                    <div class="ab-product-summary__col col-6">$0.00</div>
+                </div>
+                <div class="ab-product-summary__row row">
+                    <div class="ab-product-summary__col col-6">Estimated Tax</div>
+                    <div class="ab-product-summary__col col-6">$9.00</div>
+                </div>
+                <div class="ab-product-summary__row ab-product-summary__row--total row">
+                    <div class="ab-product-summary__col col-6">Total</div>
+                    <div class="ab-product-summary__col col-6">$128.90</div>
+                </div>
+            </div>
+        `;
 
         return div;
     }
@@ -515,16 +567,21 @@ https://www.steinertractor.com/checkout#/address
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
-        const mainWrapperElement = getWrapperElement();
-        const loginLayoutElement = getLoginLayoutElement();
-        const guestCheckoutLayoutElement = getGuestCheckoutLayout();
+        const mainWrapperElement = getMainWrapperElement();
+        const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
+        const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
 
         const contentTop = q(mainWrapperElement, ".ab-content-top");
         qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
 
-        const formsContainer = q(mainWrapperElement, ".ab-content-forms");
-        formsContainer.appendChild(loginLayoutElement);
-        formsContainer.appendChild(guestCheckoutLayoutElement);
+        const loginLayoutElement = getLoginLayoutElement();
+        const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
+        if (loginLayoutElement) formsContainer.appendChild(loginLayoutElement);
+        if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
+
+        // This will be async
+        const productSummaryLayoutElement = getProductSummaryLayoutElement();
+        if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
     }
 
     function getElementData(currentTarget) {
@@ -594,9 +651,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function handleSelectInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
-
         qq(`${controlNodeSelector} > option`).forEach((option) => {
-
             if (option.value === value) {
                 option.selected = true;
                 option.click();
@@ -616,6 +671,7 @@ https://www.steinertractor.com/checkout#/address
         updateSelectInputView({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes });
     }
 
+    // PENDING : Needs to be updated with waitForElement , idea is to compare between input values or dependent nodes and their corresponding control node
     function updateDependencyNodes({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         dependencyNodes.forEach((dependencyNode) => {
             const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
@@ -661,10 +717,19 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function eventHandler() {
-        // Force Click
-        q("#showCheckout")?.click();
-
         const ACTION_LIST = [
+            // Others
+            {
+                selector: "#showLogin",
+                events: ["click"],
+                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-login"),
+            },
+            {
+                selector: "#showCheckout",
+                events: ["click"],
+                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout"),
+            },
+            // Form Input
             {
                 selector: ".ab-input",
                 events: ["input"],
@@ -693,14 +758,15 @@ https://www.steinertractor.com/checkout#/address
                     if (dataObj["dependencyNodes"]?.length > 0) {
                         setTimeout(() => updateDependencyNodes(dataObj), 1000);
                     }
-                    
-                    // Handle error message 
+
+                    // Handle error message
                     handleFormErrorMessage(dataObj);
 
                     // Update actions items
                     updateFormActionElements();
                 },
             },
+            // Form Actions
             {
                 selector: ".ab-action-button",
                 events: ["click"],
