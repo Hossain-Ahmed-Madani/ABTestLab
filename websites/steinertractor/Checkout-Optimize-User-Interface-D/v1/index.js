@@ -557,7 +557,7 @@ https://www.steinertractor.com/checkout#/address
                                                         ${value ? `value="${value}"` : ""}
                                                         ${required ? `required` : ""}
                                                         ${pattern ? `pattern="${pattern}"` : ""}
-                                                        ${inputType === "checkbox" && q(control_node_selector + "[checked]") ? "checked" : ""}
+                                                        ${inputType === "checkbox" && (q(control_node_selector + ":checked")) ? "checked" : ""}
                                                         ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                     />
                                                 `}
@@ -612,7 +612,7 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function getGuestCheckoutLayoutElement() {
+    function getGuestCheckoutSection() {
         const div = document.createElement("div");
         div.className = "ab-guest-checkout-section";
 
@@ -625,7 +625,7 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function getLoginLayoutElement() {
+    function getLoginSection() {
         const targetNode = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
         targetNode.classList.add("ab-login-section");
         return targetNode;
@@ -650,7 +650,7 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    async function getProductSummaryLayoutElement() {
+    async function getProductSummarySection() {
         const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
 
         const div = document.createElement("div");
@@ -728,15 +728,15 @@ https://www.steinertractor.com/checkout#/address
         qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
 
         // Add login form
-        const loginLayoutElement = getLoginLayoutElement();
+        const loginLayoutElement = getLoginSection();
         if (loginLayoutElement) formsContainer.appendChild(loginLayoutElement);
 
         // Add registration form
-        const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
+        const guestCheckoutLayoutElement = getGuestCheckoutSection();
         if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
 
         // Add product summary element
-        const productSummaryLayoutElement = await getProductSummaryLayoutElement();
+        const productSummaryLayoutElement = await getProductSummarySection();
         if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
     }
 
@@ -755,21 +755,17 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    function getAddressCheckoutLayoutElement() {
+    function getAddressCheckoutSection() {
         const div = document.createElement("div");
         div.className = "ab-address-checkout-section";
-
         const abGuestCheckoutForm = getAddressCheckoutFormLayout();
-
         div.appendChild(abGuestCheckoutForm);
-
         return div;
     }
 
     async function createAndUpdateAddressLayout() {
         q("body").classList.add("AB-Address-Checkout");
 
-        console.log("Create Address Layout");
         // Update
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
@@ -782,11 +778,11 @@ https://www.steinertractor.com/checkout#/address
         qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
 
         // Add checkout form
-        const guestCheckoutLayoutElement = getAddressCheckoutLayoutElement();
+        const guestCheckoutLayoutElement = getAddressCheckoutSection();
         if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
 
         // Add product summary element
-        const productSummaryLayoutElement = await getProductSummaryLayoutElement();
+        const productSummaryLayoutElement = await getProductSummarySection();
         if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
     }
 
