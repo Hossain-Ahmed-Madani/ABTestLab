@@ -41,7 +41,7 @@
     // Checkout
     &.AB-Checkout-Address {
         app-address-management > *:not(app-progress-stepper) {
-            display: none !important;
+            // display: none !important;
         }
     }
 
