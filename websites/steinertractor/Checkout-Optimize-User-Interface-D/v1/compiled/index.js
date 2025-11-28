@@ -389,6 +389,7 @@ https://www.steinertractor.com/checkout#/address
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    //  ========= FORM BUILDER =========
     function getFormComponent(formObj) {
         const { title, id: formId, inputList, actionList } = formObj;
 
@@ -539,7 +540,7 @@ https://www.steinertractor.com/checkout#/address
     function getMainWrapperElement() {
         /* ab-content-wrapper--show-login, ab-content-wrapper--show-guest-checkout */
         const div = document.createElement("div");
-        div.className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout";
+        div.className = "ab-content-wrapper ";
         div.innerHTML = /* HTML */ `
             <div class="ab-content-top"></div>
             <div class="ab-content-bottom container">
@@ -625,6 +626,7 @@ https://www.steinertractor.com/checkout#/address
 
         // Create
         const mainWrapperElement = getMainWrapperElement();
+        mainWrapperElement.classList.add('ab-content-wrapper--show-guest-checkout');
         const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
         const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
 
@@ -671,7 +673,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     async function createAndUpdateAddressLayout() {
-        q("body").classList.add("AB-Checkout-Address");
+        q("body").classList.add("AB-Address-Checkout");
 
         console.log("Create Address Layout");
         // Update
@@ -823,6 +825,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function eventHandler() {
+        // =========== FROM AND OTHER ACTIONS ============
         const ACTION_LIST = [
             // Others
             {
@@ -888,7 +891,7 @@ https://www.steinertractor.com/checkout#/address
         });
     }
 
-    //  MAIN JS 
+    // ===========  MAIN JS =========== 
     const FORM_CONFIG = {
         "/guestcheckout": {
             inputList: [

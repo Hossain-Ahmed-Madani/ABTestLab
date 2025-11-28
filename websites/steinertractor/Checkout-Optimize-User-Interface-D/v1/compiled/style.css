@@ -10,14 +10,6 @@
 .AB-Checkout-Step-1 .ab-hidden {
   display: none;
 }
-.AB-Checkout-Step-1 .guest-checkout-optn {
-  margin: auto;
-  flex-direction: row;
-  gap: 25px;
-}
-.AB-Checkout-Step-1 .guest-checkout-optn button {
-  min-width: 167px;
-}
 .AB-Checkout-Step-1 .ab-content-wrapper {
   width: 100%;
   position: relative;
@@ -40,18 +32,6 @@
   right: 50%;
   z-index: 0;
 }
-.AB-Checkout-Step-1 .ab-content-wrapper--show-login {
-  background-color: #fff;
-}
-.AB-Checkout-Step-1 .ab-content-wrapper--show-login .ab-login-section {
-  display: block !important;
-}
-.AB-Checkout-Step-1 .ab-content-wrapper--show-login .ab-content-product-summary-wrapper {
-  display: none !important;
-}
-.AB-Checkout-Step-1 .ab-content-wrapper--show-guest-checkout .ab-guest-checkout-section {
-  display: block !important;
-}
 .AB-Checkout-Step-1 .ab-content-top {
   display: flex;
   flex-direction: column;
@@ -64,182 +44,6 @@
 }
 .AB-Checkout-Step-1 .ab-content-forms-wrapper {
   padding: 0;
-}
-.AB-Checkout-Step-1 .ab-login-section,
-.AB-Checkout-Step-1 .ab-guest-checkout-section {
-  display: none !important;
-}
-.AB-Checkout-Step-1 .ab-login-section {
-  padding: 49px 59px 135px 0 !important;
-  width: 100% !important;
-}
-.AB-Checkout-Step-1 .ab-login-section #loginSlogan {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-login-section h2 {
-  padding-bottom: 49px;
-  margin-bottom: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0;
-  color: #333333;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormMessage {
-  margin-top: 0;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnForm,
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel {
-  margin: 0;
-  text-align: left;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:has(> input) {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  border: 1px solid #ced4da;
-  overflow: hidden;
-  height: 51px;
-  padding: 7px 10px;
-  margin-bottom: 12px;
-  position: relative;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:has(> .dnnLoginActions) {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:not(:has(> input)) .dnnFormLabel,
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:not(:has(> input)) .dnnSecondaryAction {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:not(:has(> input)) .dnnPrimaryAction {
-  margin-top: 22px;
-  margin-bottom: 17px;
-  margin-left: 0;
-  padding: 16px 47px 17px;
-  width: max-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 0;
-  border: none;
-  font-family: Inter, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #ffffff;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnFormItem:not(:has(> input)) .dnnPrimaryAction:hover {
-  text-decoration: none;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #767676;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel label {
-  white-space: nowrap;
-  margin-bottom: 0px;
-  margin: 0 !important;
-  padding: 0 !important;
-  font-size: 16px;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel label:after {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:focus), .AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:active), .AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) {
-  position: static;
-  font-size: 14px;
-}
-.AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:focus) label, .AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:active) label, .AB-Checkout-Step-1 .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) label {
-  font-size: 14px;
-}
-.AB-Checkout-Step-1 .ab-login-section input {
-  position: absolute;
-  z-index: 2;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  border: none;
-  outline: none;
-  height: 100%;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: none;
-  margin: 0;
-  padding: 0;
-  background: transparent;
-  font-family: Inter, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #000000;
-}
-.AB-Checkout-Step-1 .ab-login-section input:focus, .AB-Checkout-Step-1 .ab-login-section input:active, .AB-Checkout-Step-1 .ab-login-section input:not(:placeholder-shown) {
-  position: static;
-  border: none;
-  outline: none;
-  background-color: #fff;
-  box-shadow: none;
-}
-.AB-Checkout-Step-1 .ab-login-section #socialControls {
-  display: none;
-}
-.AB-Checkout-Step-1 .ab-login-section p:has(> a[href="./ResetPassword"]),
-.AB-Checkout-Step-1 .ab-login-section p:has(> a[href="/create-account"]) {
-  padding-left: 0;
-  margin-bottom: 12px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 28px;
-  letter-spacing: 0%;
-  text-decoration: underline;
-  text-decoration-style: solid;
-  text-decoration-skip-ink: auto;
-  color: #0078d7;
-}
-.AB-Checkout-Step-1 #guest-checkout-form {
-  display: none;
-  border: 1px solid red;
-}
-.AB-Checkout-Step-1 #guest-checkout-form:before {
-  content: "Control Form, Hide when test is completed";
-  color: red;
-  font-size: 16px;
-}
-.AB-Checkout-Step-1 .ab-guest-checkout-section {
-  padding: 49px 59px 97px 0;
-}
-.AB-Checkout-Step-1 .ab-guest-checkout-section > .pl-0.pr-0 {
-  display: none !important;
-}
-.AB-Checkout-Step-1 h1.ab-guest-checkout-header {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #333333;
-  margin-bottom: 38px;
 }
 .AB-Checkout-Step-1 .ab-content-product-summary-wrapper {
   background-color: #f3f5f6;
@@ -364,52 +168,231 @@
   text-align: right;
 }
 
-.AB-Checkout-Step-1 form#personal-information {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-login {
+  background-color: #fff;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-login .ab-login-section {
+  display: block !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-login .ab-content-product-summary-wrapper {
+  display: none !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-guest-checkout .ab-guest-checkout-section {
+  display: block !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .guest-checkout-optn {
+  margin: auto;
+  flex-direction: row;
+  gap: 25px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .guest-checkout-optn button {
+  min-width: 167px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section,
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section {
+  display: none !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section {
+  padding: 49px 59px 135px 0 !important;
+  width: 100% !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section #loginSlogan {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section h2 {
+  padding-bottom: 49px;
+  margin-bottom: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0;
+  color: #333333;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormMessage {
+  margin-top: 0;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnForm,
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel {
+  margin: 0;
+  text-align: left;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:has(> input) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid #ced4da;
+  overflow: hidden;
+  height: 51px;
+  padding: 7px 10px;
+  margin-bottom: 12px;
+  position: relative;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:has(> .dnnLoginActions) {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:not(:has(> input)) .dnnFormLabel,
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:not(:has(> input)) .dnnSecondaryAction {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:not(:has(> input)) .dnnPrimaryAction {
+  margin-top: 22px;
+  margin-bottom: 17px;
+  margin-left: 0;
+  padding: 16px 47px 17px;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;
+  border: none;
+  font-family: Inter, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #ffffff;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnFormItem:not(:has(> input)) .dnnPrimaryAction:hover {
+  text-decoration: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #767676;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel label {
+  white-space: nowrap;
+  margin-bottom: 0px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 16px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel label:after {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus), .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active), .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) {
+  position: static;
+  font-size: 14px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus) label, .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active) label, .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) label {
+  font-size: 14px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section input {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: none;
+  outline: none;
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Inter, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #000000;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section input:focus, .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section input:active, .AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section input:not(:placeholder-shown) {
+  position: static;
+  border: none;
+  outline: none;
+  background-color: #fff;
+  box-shadow: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section #socialControls {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section p:has(> a[href="./ResetPassword"]),
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-login-section p:has(> a[href="/create-account"]) {
+  padding-left: 0;
+  margin-bottom: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  letter-spacing: 0%;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  color: #0078d7;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout #guest-checkout-form {
+  display: none;
+  border: 1px solid red;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout #guest-checkout-form:before {
+  content: "Control Form, Hide when test is completed";
+  color: red;
+  font-size: 16px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section {
+  padding: 49px 59px 97px 0;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section > .pl-0.pr-0 {
+  display: none !important;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout h1.ab-guest-checkout-header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #333333;
+  margin-bottom: 38px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout form#personal-information {
   margin-bottom: 50px;
 }
-.AB-Checkout-Step-1 form#billing-address {
+.AB-Checkout-Step-1.AB-Guest-Checkout form#billing-address {
   margin-bottom: 46px;
 }
-.AB-Checkout-Step-1 form#shipping-address {
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address {
   margin-bottom: 0;
 }
-.AB-Checkout-Step-1 form#shipping-address .ab-form-input-container {
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address .ab-form-input-container {
   margin-bottom: 26px;
 }
-.AB-Checkout-Step-1 form#shipping-address #ab-continue-as-guest {
-  width: 100%;
-  height: 51px;
-  padding: 17px 20px;
-  border: none;
-  outline: none;
-  font-family: Inter, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #ffffff;
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address #ab-continue-as-guest {
   background-color: #b3b3b3;
 }
-.AB-Checkout-Step-1 form#shipping-address #ab-continue-as-guest:not(disabled) {
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address #ab-continue-as-guest:not(disabled) {
   background-color: #9cca5a;
 }
-.AB-Checkout-Step-1 form#shipping-address #ab-need-help {
-  width: 100%;
-  height: 51px;
-  padding: 17px 20px;
-  border: none;
-  outline: none;
-  font-family: Inter, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #ffffff;
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address #ab-need-help {
   background-color: #6c757d;
 }
-.AB-Checkout-Step-1 form#shipping-address #ab-need-help:hover {
+.AB-Checkout-Step-1.AB-Guest-Checkout form#shipping-address #ab-need-help:hover {
   opacity: 0.7;
 }
+
+.AB-Checkout-Step-1.AB-Address-Checkout .ab-address-checkout-section {
+  padding: 54px 59px 73px 0;
+}
+
 .AB-Checkout-Step-1 h2.ab-form-heading {
   font-family: Arial;
   font-weight: 700;
