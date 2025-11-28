@@ -225,7 +225,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Full name",
                         required: true,
                         className: "col-12",
-                        control_node_selector: "input[name='DisplayName']",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form input[name='DisplayName']",
                         value: "",
                         errorMessage: "",
                     },
@@ -237,7 +237,7 @@ https://www.steinertractor.com/checkout#/address
                         className: "col-6",
                         required: true,
                         control_node_selector: "select[name='CountryId']",
-                        dependency_node_selector: "select#ab-state",
+                        dependency_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#ab-state",
                         value: "",
                         errorMessage: "",
                     },
@@ -247,7 +247,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Phone",
                         required: false,
                         className: "col-6 ab-pl-0",
-                        control_node_selector: "#coPhone",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coPhone",
                         value: "",
                         errorMessage: "",
                     },
@@ -257,7 +257,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Street Address",
                         required: true,
                         className: "col-12",
-                        control_node_selector: "#coAddress",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coAddress",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
@@ -267,7 +267,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Street address 2",
                         required: true,
                         className: "col-12",
-                        control_node_selector: "#coAddress2",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coAddress2",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
@@ -277,7 +277,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "City",
                         required: true,
                         className: "col-4",
-                        control_node_selector: "#coCity",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coCity",
                         value: "",
                         errorMessage: "",
                     },
@@ -288,7 +288,7 @@ https://www.steinertractor.com/checkout#/address
                         optionList: [],
                         required: true,
                         className: "col-4 ab-pl-0",
-                        control_node_selector: "select[name='StateId']",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select[name='StateId']",
                         value: "",
                         errorMessage: "",
                     },
@@ -298,7 +298,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Zip code",
                         required: true,
                         className: "col-4 ab-pl-0",
-                        control_node_selector: "#coZip",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coZip",
                         value: "",
                         errorMessage: "",
                     },
@@ -310,7 +310,7 @@ https://www.steinertractor.com/checkout#/address
                         optionList: [],
                         required: false,
                         className: "col-12",
-                        control_node_selector: "select#carrier",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#carrier",
                         value: "",
                         errorMessage: "",
                     },
@@ -321,10 +321,111 @@ https://www.steinertractor.com/checkout#/address
                 id: "shipping-address",
                 inputList: [
                     {
+                        id: "ab-full-name",
+                        type: "text",
+                        label: "Full name",
+                        required: true,
+                        className: "col-12",
+                        control_node_selector: " input[name='DisplayName']",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-country",
+                        type: "select" /* Dropdown/Select */,
+                        optionList: [],
+                        label: "Country",
+                        className: "col-6",
+                        required: true,
+                        control_node_selector: " select[name='CountryId']",
+                        dependency_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#ab-state",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-phone-bill",
+                        type: "tel",
+                        label: "Phone",
+                        required: false,
+                        className: "col-6 ab-pl-0",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coPhone",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-street-address",
+                        type: "text",
+                        label: "Street Address",
+                        required: true,
+                        className: "col-12",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coAddress",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-street-address-two",
+                        type: "text",
+                        label: "Street address 2",
+                        required: true,
+                        className: "col-12",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coAddress2",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-city",
+                        type: "text",
+                        label: "City",
+                        required: true,
+                        className: "col-4",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coCity",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-state",
+                        type: "select" /* Dropdown/Select */,
+                        label: "State",
+                        optionList: [],
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select[name='StateId']",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-zip-code",
+                        type: "text",
+                        label: "Zip code",
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coZip",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-carriers",
+                        subtitle: "Which carriers offer delivery service to this address?",
+                        type: "select" /* Dropdown/Select */,
+                        label: "All Carriers",
+                        optionList: [],
+                        required: false,
+                        className: "col-12",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier",
+                        value: "",
+                        errorMessage: "",
+                    },
+                ],
+            },
+            checkout_same_billing: {
+                title: "",
+                id: "same-billing",
+                inputList: [
+                    {
                         id: "ab-same-as-billing",
                         type: "checkbox",
                         label: "Use the same address for delivery.",
-                        className: "col-12",
+                        className: "col-8 col-lg-7",
                         control_node_selector: "#sameShip",
                         checked: true,
                     },
@@ -463,7 +564,7 @@ https://www.steinertractor.com/checkout#/address
                                                         ${value ? `value="${value}"` : ""}
                                                         ${required ? `required` : ""}
                                                         ${pattern ? `pattern="${pattern}"` : ""}
-                                                        ${inputType === "checkbox" && (q(control_node_selector + ":checked")) ? "checked" : ""}
+                                                        ${inputType === "checkbox" && q(control_node_selector + ":checked") ? "checked" : ""}
                                                         ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                     />
                                                 `}
@@ -626,7 +727,7 @@ https://www.steinertractor.com/checkout#/address
 
         // Create
         const mainWrapperElement = getMainWrapperElement();
-        mainWrapperElement.classList.add('ab-content-wrapper--show-guest-checkout');
+        mainWrapperElement.classList.add("ab-content-wrapper--show-guest-checkout");
         const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
         const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
 
@@ -647,16 +748,17 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function getAddressCheckoutFormLayout() {
-        const { checkout_billing_address, checkout_shipping_address } = DATA["forms"];
+        const { checkout_billing_address, checkout_same_billing } = DATA["forms"];
 
         const div = document.createElement("div");
         div.classList.add("ab-address-checkout-form");
 
         const billingAddressForm = getFormComponent(checkout_billing_address);
-        const shippingAddressForm = getFormComponent(checkout_shipping_address);
+        const sameBillingForm = getFormComponent(checkout_same_billing);
 
         div.appendChild(billingAddressForm);
-        div.appendChild(shippingAddressForm);
+        // div.appendChild(shippingAddressForm);
+        div.appendChild(sameBillingForm);
 
         return div;
     }
@@ -677,6 +779,7 @@ https://www.steinertractor.com/checkout#/address
 
         // Create
         const mainWrapperElement = getMainWrapperElement();
+
         const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
         const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
 
@@ -692,8 +795,34 @@ https://www.steinertractor.com/checkout#/address
         if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
     }
 
+    async function handleAddressShippingFormShowHide(e) {
+        const contentWrapper = q(".ab-content-wrapper");
+        const billingAddressForm = q("form#billing-address");
+        const shippingFormExits = q("form#shipping-address");
+
+        const { checkout_shipping_address } = DATA.forms;
+
+        if (!shippingFormExits) {
+            await waitForElementAsync(() => validateAllControlNodesExist(checkout_shipping_address.inputList));
+
+            console.log(qq("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier"));
+
+            const shippingAddressForm = getFormComponent(checkout_shipping_address);
+            billingAddressForm.insertAdjacentElement("afterend", shippingAddressForm);
+            eventHandler();
+        }
+
+        if (!e.target.checked) {
+            contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
+        } else {
+            contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
+            setTimeout(() => q("#billing-address").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+    }
+
     function getElementData(currentTarget) {
         const value = currentTarget.value;
+        const checked = currentTarget?.checked;
         const inputType = currentTarget.getAttribute("type");
         const controlNodeSelector = currentTarget.getAttribute("control_node_selector");
         const controlNodes = qq(controlNodeSelector);
@@ -704,6 +833,7 @@ https://www.steinertractor.com/checkout#/address
         return {
             currentTarget,
             value,
+            checked,
             inputType,
             controlNodeSelector,
             controlNodes,
@@ -712,7 +842,7 @@ https://www.steinertractor.com/checkout#/address
         };
     }
 
-    function handleFormErrorMessage({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function handleFormErrorMessage({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         if (controlNodes?.some((controlNode) => controlNode.classList.contains("is-invalid"))) {
             currentTarget.setAttribute("area-invalid", "");
         } else {
@@ -720,7 +850,7 @@ https://www.steinertractor.com/checkout#/address
         }
     }
 
-    function updateSelectInputView({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function updateSelectInputView({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         if (inputType !== "select") return;
 
         if (currentTarget.value) {
@@ -730,7 +860,7 @@ https://www.steinertractor.com/checkout#/address
         }
     }
 
-    function handleTextBasedInputs({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function handleTextBasedInputs({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         const scrollPos = { x: window.scrollX, y: window.scrollY };
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
 
@@ -750,7 +880,7 @@ https://www.steinertractor.com/checkout#/address
         window.scrollTo(scrollPos.x, scrollPos.y);
     }
 
-    function handleCheckBoxInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function handleCheckBoxInput({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         controlNodes.forEach((controlNode) => {
             controlNode.click();
             controlNode.checked = checked;
@@ -758,7 +888,7 @@ https://www.steinertractor.com/checkout#/address
         });
     }
 
-    function handleSelectInput({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function handleSelectInput({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         qq(`${controlNodeSelector} > option`).forEach((option) => {
             if (option.value === value) {
                 option.selected = true;
@@ -780,7 +910,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     // PENDING : Needs to be updated with waitForElement , idea is to compare between input values or dependent nodes and their corresponding control node
-    function updateDependencyNodes({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    function updateDependencyNodes({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         dependencyNodes.forEach((dependencyNode) => {
             const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
             const controlNode = q(controlNodeSelector);
@@ -823,17 +953,6 @@ https://www.steinertractor.com/checkout#/address
     function eventHandler() {
         // =========== FROM AND OTHER ACTIONS ============
         const ACTION_LIST = [
-            // Others
-            {
-                selector: "#showLogin",
-                events: ["click"],
-                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-login"),
-            },
-            {
-                selector: "#showCheckout",
-                events: ["click"],
-                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout"),
-            },
             // Form Input
             {
                 selector: ".ab-input",
@@ -880,28 +999,45 @@ https://www.steinertractor.com/checkout#/address
                     controlNodes.forEach((controlNode) => controlNode.click());
                 },
             },
+            // Others
+            {
+                selector: "#showLogin",
+                events: ["click"],
+                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-login"),
+            },
+            {
+                selector: "#showCheckout",
+                events: ["click"],
+                callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout"),
+            },
+            {
+                selector: ".AB-Address-Checkout #ab-same-as-billing",
+                events: ["click"],
+                callback: handleAddressShippingFormShowHide,
+            },
         ];
 
         ACTION_LIST.forEach(({ selector, events, callback }) => {
-            qq(selector)?.forEach((item) => events.forEach((event) => item.addEventListener(event, callback)));
+            qq(selector)?.forEach((item) =>
+                events.forEach((event) => {
+                    const className = `ab-${event}-event-attached`;
+                    if (!item.classList.contains(className)) {
+                        item.classList.add(className);
+                        item.addEventListener(event, callback);
+                    }
+                })
+            );
         });
     }
 
-    // ===========  MAIN JS =========== 
+    // ===========  MAIN JS ===========
     const FORM_CONFIG = {
         "/guestcheckout": {
-            inputList: [
-                ...DATA.forms.guest_personal_information.inputList,
-                ...DATA.forms.guest_billing_address.inputList,
-                ...DATA.forms.guest_shipping_address.inputList,
-            ],
+            inputList: [...DATA.forms.guest_personal_information.inputList, ...DATA.forms.guest_billing_address.inputList, ...DATA.forms.guest_shipping_address.inputList],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },
         "/checkout": {
-            inputList: [
-                ...DATA.forms.checkout_billing_address.inputList,
-                ...DATA.forms.checkout_shipping_address.inputList,
-            ],
+            inputList: [...DATA.forms.checkout_billing_address.inputList, ...DATA.forms.checkout_same_billing.inputList],
             layoutFunction: createAndUpdateAddressLayout,
         },
     };

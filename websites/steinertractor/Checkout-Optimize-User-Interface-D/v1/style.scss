@@ -310,7 +310,6 @@
     // =========== FORM BUILDER END =========
 }
 
-
 // =================== COMMON ================
 .AB-Checkout-Step-1 {
     background-color: #fff;
@@ -799,6 +798,14 @@
 
 // ============== ADDRESS CHECKOUT ============
 .AB-Checkout-Step-1.AB-Address-Checkout {
+    .ab-content-wrapper {
+        &--show-shipping-address {
+            form#shipping-address {
+                display: block;
+            }
+        }
+    }
+
     app-address-management > *:not(app-progress-stepper) {
         // display: none !important;
     }
@@ -812,12 +819,16 @@
         margin-bottom: 31px;
     }
 
-
     form#billing-address {
         margin-bottom: 32px;
     }
 
     form#shipping-address {
+        display: none;
+        margin-bottom: 32px;
+    }
+
+    form#same-billing {
         margin-bottom: 0;
 
         .ab-form-heading {
@@ -845,4 +856,3 @@
         }
     }
 }
-

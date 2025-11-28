@@ -641,6 +641,9 @@
   opacity: 0.7;
 }
 
+.AB-Checkout-Step-1.AB-Address-Checkout .ab-content-wrapper--show-shipping-address form#shipping-address {
+  display: block;
+}
 .AB-Checkout-Step-1.AB-Address-Checkout .ab-address-checkout-section {
   padding: 54px 59px 73px 0;
 }
@@ -651,23 +654,27 @@
   margin-bottom: 32px;
 }
 .AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address {
+  display: none;
+  margin-bottom: 32px;
+}
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing {
   margin-bottom: 0;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address .ab-form-heading {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing .ab-form-heading {
   display: none;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address .ab-form-input-container {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing .ab-form-input-container {
   margin-bottom: 42px;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address #ab-continue-as-guest {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing #ab-continue-as-guest {
   background-color: #b3b3b3;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address #ab-continue-as-guest:not(disabled) {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing #ab-continue-as-guest:not(disabled) {
   background-color: #9cca5a;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address #ab-need-help {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing #ab-need-help {
   background-color: #6c757d;
 }
-.AB-Checkout-Step-1.AB-Address-Checkout form#shipping-address #ab-need-help:hover {
+.AB-Checkout-Step-1.AB-Address-Checkout form#same-billing #ab-need-help:hover {
   opacity: 0.7;
 }
