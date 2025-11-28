@@ -33,8 +33,17 @@
         gap: 25px;
     }
 
+    // Guest Checkout 
     .guest-checkout-optn button {
         min-width: 167px;
+    }
+
+    // Checkout 
+    &.AB-Checkout-Address {
+        app-address-management > *:not(app-progress-stepper) {
+            display: none !important;
+        }
+
     }
 
     .row.content-body {

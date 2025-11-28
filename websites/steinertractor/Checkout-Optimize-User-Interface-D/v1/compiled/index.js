@@ -8,65 +8,19 @@ https://www.steinertractor.com/checkout#/address
         client: "ROI Revolutions",
         project: "steinertractor",
         host: "https://www.steinertractor.com",
+        path: window.location.pathname,
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1",
         test_variation: 1,
         test_version: 0.0001,
     };
 
-    const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    async function fetchCartData() {
-        const response = await fetch("https://www.steinertractor.com/api/carts/carts_read", {
-            method: "GET",
-            headers: {
-                accept: "application/json, text/plain, */*",
-                "accept-language": "en-US,en;q=0.9",
-                // authorization: "Bearer your-token-here", // If needed
-                "x-requested-with": "XMLHttpRequest",
-            },
-            credentials: "include",
-        });
-
-        return await response.json();
-    }
-
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
-        const startTime = Date.now();
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            const interval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
-
-                if (elapsed >= timeout) {
-                    clearInterval(interval);
-                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
-                }
-
-                if (typeof predicate === "function" && predicate()) {
-                    clearInterval(interval);
-                    return resolve(true);
-                }
-            }, frequency);
-        });
-    }
-
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
-    }
-
-    function qq(s, o) {
-        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
-    }
+    const { host, path, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const DATA = {
         text_based_input_list: ["text", "tel", "number", "email", "password", "url", "search"],
         forms: {
-            personal_information: {
+            guest_personal_information: {
                 title: "Personal Information",
                 id: "personal-information",
                 inputList: [
@@ -133,7 +87,7 @@ https://www.steinertractor.com/checkout#/address
                     },
                 ],
             },
-            billing_address: {
+            guest_billing_address: {
                 title: "Billing Address",
                 id: "billing-address",
                 inputList: [
@@ -224,7 +178,7 @@ https://www.steinertractor.com/checkout#/address
                     },
                 ],
             },
-            shipping_address: {
+            guest_shipping_address: {
                 title: "Shipping Address",
                 id: "shipping-address",
                 inputList: [
@@ -263,6 +217,53 @@ https://www.steinertractor.com/checkout#/address
             },
         },
     };
+
+    async function fetchCartData() {
+        const response = await fetch("https://www.steinertractor.com/api/carts/carts_read", {
+            method: "GET",
+            headers: {
+                accept: "application/json, text/plain, */*",
+                "accept-language": "en-US,en;q=0.9",
+                // authorization: "Bearer your-token-here", // If needed
+                "x-requested-with": "XMLHttpRequest",
+            },
+            credentials: "include",
+        });
+
+        return await response.json();
+    }
+
+    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+        const startTime = Date.now();
+
+        return new Promise((resolve, reject) => {
+            if (typeof predicate === "function" && predicate()) {
+                return resolve(true);
+            }
+
+            const interval = setInterval(() => {
+                const elapsed = Date.now() - startTime;
+
+                if (elapsed >= timeout) {
+                    clearInterval(interval);
+                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
+                }
+
+                if (typeof predicate === "function" && predicate()) {
+                    clearInterval(interval);
+                    return resolve(true);
+                }
+            }, frequency);
+        });
+    }
+
+    function q(s, o) {
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
+    function qq(s, o) {
+        return [...document.querySelectorAll(s)];
+    }
 
     function getFormComponent(formObj) {
         const { title, id: formId, inputList, actionList } = formObj;
@@ -375,14 +376,14 @@ https://www.steinertractor.com/checkout#/address
     }
 
     function getGuestCheckoutFormLayout() {
-        const { personal_information, billing_address, shipping_address } = DATA["forms"];
+        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         const div = document.createElement("div");
         div.classList.add("ab-guest-checkout-form");
 
-        const personalInformationForm = getFormComponent(personal_information);
-        const billingAddressForm = getFormComponent(billing_address);
-        const shippingAddressForm = getFormComponent(shipping_address);
+        const personalInformationForm = getFormComponent(guest_personal_information);
+        const billingAddressForm = getFormComponent(guest_billing_address);
+        const shippingAddressForm = getFormComponent(guest_shipping_address);
 
         div.insertAdjacentHTML("afterbegin", /* HTML */ `<h1 class="ab-guest-checkout-header">Checkout with New Account</h1>`);
         div.appendChild(personalInformationForm);
@@ -443,7 +444,7 @@ https://www.steinertractor.com/checkout#/address
                     ({ Image, Code, SEOUrl, Name, ProductStatus, UnitOfMeasure }) => /* HTML */ `
                         <div class="ab-product-summary__product">
                             <a class="ab-product-summary__product-img" href="${host}/${SEOUrl}">
-                                <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png"/>
+                                <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png" />
                                 <p class="ab-product-summary__product-sku">${Code}</p>
                             </a>
                             <div class="ab-product-summary__product-info">
@@ -491,7 +492,9 @@ https://www.steinertractor.com/checkout#/address
         return div;
     }
 
-    async function createAndUpdateLayout() {
+    async function createAndUpdateGuestCheckoutLayout() {
+        q("body").classList.add("AB-Guest-Checkout");
+
         // Update
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
@@ -507,10 +510,34 @@ https://www.steinertractor.com/checkout#/address
         // Add login form
         const loginLayoutElement = getLoginLayoutElement();
         if (loginLayoutElement) formsContainer.appendChild(loginLayoutElement);
-        
+
         // Add registration form
         const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
         if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
+
+        // Add product summary element
+        const productSummaryLayoutElement = await getProductSummaryLayoutElement();
+        if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
+    }
+
+    async function createAndUpdateAddressLayout() {
+        q("body").classList.add("AB-Checkout-Address");
+        
+        console.log("Create Address Layout");
+        // Update
+        qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
+
+        // Create
+        const mainWrapperElement = getMainWrapperElement();
+        q(mainWrapperElement, ".ab-content-forms-wrapper");
+        const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
+
+        const contentTop = q(mainWrapperElement, ".ab-content-top");
+        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
+
+        // // Add registration form
+        // const guestCheckoutLayoutElement = getGuestCheckoutLayoutElement();
+        // if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
 
         // Add product summary element
         const productSummaryLayoutElement = await getProductSummaryLayoutElement();
@@ -715,18 +742,39 @@ https://www.steinertractor.com/checkout#/address
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
-        createAndUpdateLayout();
+        switch (path) {
+            case "/guestcheckout":
+                createAndUpdateGuestCheckoutLayout();
+                break;
+            case "/checkout":
+                createAndUpdateAddressLayout();
+                break;
+
+            default:
+                console.log("No Layout Created");
+                break;
+        }
+
         eventHandler();
     }
 
     function checkForItems() {
+        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
+
+        const hasAllGuestCheckoutControlInputs = [...guest_personal_information.inputList, ...guest_billing_address.inputList, ...guest_shipping_address.inputList].every(
+            ({ type, control_node_selector }) => {
+                if (type === "select") {
+                    return qq(`${control_node_selector} > option`).length > 1;
+                }
+                return !!q(control_node_selector);
+            }
+        );
+
         return !!(
             q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
             q(".progress-stepper .checkout-wrap") &&
-            q("input#coAddress") &&
-            qq("select[name='CountryId'] > option").length > 1 &&
-            qq("select#ShipMethod > option").length > 1 &&
-            qq("select[name='StateId'] > option").length > 1
+            q(".row.content-body") &&
+            ((path === "/guestcheckout" && hasAllGuestCheckoutControlInputs) || (path === "/checkout" && true))
         );
     }
 

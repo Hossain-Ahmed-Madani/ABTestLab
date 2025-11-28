@@ -18,6 +18,9 @@
 .AB-Checkout-Step-1 .guest-checkout-optn button {
   min-width: 167px;
 }
+.AB-Checkout-Step-1.AB-Checkout-Address app-address-management > *:not(app-progress-stepper) {
+  display: none !important;
+}
 .AB-Checkout-Step-1 .ab-content-wrapper {
   width: 100%;
   position: relative;
