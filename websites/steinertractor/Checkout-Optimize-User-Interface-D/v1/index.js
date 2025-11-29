@@ -918,9 +918,6 @@ https://www.steinertractor.com/checkout#/address
             } else {
                 controlNode.value = value;
             }
-        });
-
-        controlNodes.forEach((controlNode) => {
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
         });
@@ -954,10 +951,10 @@ https://www.steinertractor.com/checkout#/address
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
         });
 
+        // Show Hide Borders
         updateSelectInputView({ currentTarget, value, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes });
     }
 
-    // PENDING : Needs to be updated with waitForElement , idea is to compare between input values or dependent nodes and their corresponding control node
     function updateDependencyNodes({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         if (dependencyNodes?.length === 0) return;
 
@@ -1039,10 +1036,7 @@ https://www.steinertractor.com/checkout#/address
                         handleSelectInput(dataObj);
                     }
 
-                    // Update dependent fields on interval
-                    // if (dataObj["dependencyNodes"]?.length > 0) {
-                    //     setTimeout(() => updateDependencyNodes(dataObj), 1000);
-                    // }
+                    // Update dependent fields 
                     updateDependencyNodes(dataObj);
 
                     // Handle error message

@@ -374,6 +374,8 @@
   letter-spacing: 0px;
   font-size: 14px;
   color: #333333;
+  padding: 0;
+  margin: 0;
 }
 .AB-Checkout-Step-1 .ab-product-summary__product-info {
   display: flex;
@@ -389,6 +391,7 @@
   color: #333333;
   text-align: left;
   padding: 0;
+  margin: 0;
 }
 .AB-Checkout-Step-1 p.ab-product-summary__product-availability {
   font-weight: 700;
@@ -616,7 +619,7 @@
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section .ab-control-guest-checkout-form {
   width: 100%;
-  display: none !important;
+  display: block !important;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout h1.ab-guest-checkout-header {
   font-family: Arial, Helvetica, sans-serif;
