@@ -321,7 +321,7 @@ https://www.steinertractor.com/checkout#/address
                 id: "shipping-address",
                 inputList: [
                     {
-                        id: "ab-full-name",
+                        id: "ab-shipping-full-name",
                         type: "text",
                         label: "Full name",
                         required: true,
@@ -331,19 +331,19 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-country",
+                        id: "ab-shipping-country",
                         type: "select" /* Dropdown/Select */,
                         optionList: [],
                         label: "Country",
                         className: "col-6",
                         required: true,
-                        control_node_selector: " select[name='CountryId']",
-                        dependency_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#ab-state",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select[name='CountryId']",
+                        dependency_node_selector: "select#ab-shipping-state",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-phone-bill",
+                        id: "ab-shipping-phone-bill",
                         type: "tel",
                         label: "Phone",
                         required: false,
@@ -353,7 +353,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-street-address",
+                        id: "ab-shipping-street-address",
                         type: "text",
                         label: "Street Address",
                         required: true,
@@ -363,7 +363,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-street-address-two",
+                        id: "ab-shipping-street-address-two",
                         type: "text",
                         label: "Street address 2",
                         required: true,
@@ -373,7 +373,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-city",
+                        id: "ab-shipping-city",
                         type: "text",
                         label: "City",
                         required: true,
@@ -383,7 +383,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-state",
+                        id: "ab-shipping-state",
                         type: "select" /* Dropdown/Select */,
                         label: "State",
                         optionList: [],
@@ -394,7 +394,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-zip-code",
+                        id: "ab-shipping-zip-code",
                         type: "text",
                         label: "Zip code",
                         required: true,
@@ -404,7 +404,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-carriers",
+                        id: "ab-shipping-carriers",
                         subtitle: "Which carriers offer delivery service to this address?",
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
@@ -585,17 +585,12 @@ https://www.steinertractor.com/checkout#/address
     }
 
     //  ========= FORM BUILDER =========
-    function getFormComponent(formObj) {
+    function getFormLayout(formObj) {
         const { title, id: formId, inputList, actionList } = formObj;
 
-        const form = document.createElement("form");
-        form.setAttribute("id", formId);
-        form.className = "ab-form";
-
-        form.insertAdjacentHTML(
-            "afterbegin",
-            /* HTML */ `
-                <h2 class="ab-form-heading">${title}</h2>
+        const layout = /* HTML */ `
+            <div id="${formId}" class="ab-form">
+                ${title ? `<h2 class="ab-form-heading">${title}</h2>` : ""}
                 ${inputList && inputList.length > 0
                     ? `
                         <div class="ab-form-input-container row">
@@ -689,228 +684,189 @@ https://www.steinertractor.com/checkout#/address
                                 .join("")}
                         </div>`
                     : ""}
-            `
-        );
-
-        return form;
-    }
-
-    function getGuestCheckoutFormLayout() {
-        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
-
-        const div = document.createElement("div");
-        div.classList.add("ab-guest-checkout-form");
-
-        const personalInformationForm = getFormComponent(guest_personal_information);
-        const billingAddressForm = getFormComponent(guest_billing_address);
-        const shippingAddressForm = getFormComponent(guest_shipping_address);
-
-        div.insertAdjacentHTML("afterbegin", /* HTML */ `<h1 class="ab-guest-checkout-header">Checkout with New Account</h1>`);
-        div.appendChild(personalInformationForm);
-        div.appendChild(billingAddressForm);
-        div.appendChild(shippingAddressForm);
-
-        return div;
-    }
-
-    function getGuestCheckoutSection() {
-        const div = document.createElement("div");
-        div.className = "ab-guest-checkout-section";
-
-        const controlGuestCheckoutForm = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, "#guest-checkout-form"));
-        const abGuestCheckoutForm = getGuestCheckoutFormLayout();
-
-        div.appendChild(abGuestCheckoutForm);
-        div.appendChild(controlGuestCheckoutForm);
-
-        return div;
-    }
-
-    function getLoginSection() {
-        const targetNode = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
-        targetNode.classList.add("ab-login-section");
-        return targetNode;
-    }
-
-    function getMainWrapperElement() {
-        /* ab-content-wrapper--show-login, ab-content-wrapper--show-guest-checkout */
-        const div = document.createElement("div");
-        div.className = "ab-content-wrapper ";
-        div.innerHTML = /* HTML */ `
-            <div class="ab-content-top"></div>
-            <div class="ab-content-bottom container">
-                <div class="row">
-                    <div class="ab-content-forms-wrapper col-6"></div>
-                    <div class="ab-content-product-summary-wrapper col-6"></div>
-                </div>
             </div>
         `;
 
-        q(".row.content-body").insertAdjacentElement("afterbegin", div);
-
-        return div;
+        return layout;
     }
 
-    async function getProductSummarySection() {
+    //  ========= PRODUCT SUMMARY =========
+    async function getProductSummaryLayout() {
         const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
 
-        const div = document.createElement("div");
-        div.className = "ab-product-summary";
+        const layout = /* HTML */ `
+            <div class="ab-product-summary">
+                <h3 class="ab-product-summary__heading">Your Order</h3>
+                <div class="ab-product-summary__added-products">
+                    ${CartLine.map(
+                        ({ Image, Code, SEOUrl, Name, ProductStatus, UnitOfMeasure }) => /* HTML */ `
+                            <div class="ab-product-summary__product">
+                                <a class="ab-product-summary__product-img" href="${host}/${SEOUrl}">
+                                    <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png" />
+                                    <p class="ab-product-summary__product-sku">${Code}</p>
+                                </a>
+                                <div class="ab-product-summary__product-info">
+                                    <p class="ab-product-summary__product-title">${Name}</p>
+                                    ${ProductStatus === "Active"
+                                        ? '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--available">Available</p>'
+                                        : '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--stock-out">Stock Out</p>'}
 
-        div.innerHTML = /* HTML */ `
-            <h3 class="ab-product-summary__heading">Your Order</h3>
-            <div class="ab-product-summary__added-products">
-                ${CartLine.map(
-                    ({ Image, Code, SEOUrl, Name, ProductStatus, UnitOfMeasure }) => /* HTML */ `
-                        <div class="ab-product-summary__product">
-                            <a class="ab-product-summary__product-img" href="${host}/${SEOUrl}">
-                                <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png" />
-                                <p class="ab-product-summary__product-sku">${Code}</p>
-                            </a>
-                            <div class="ab-product-summary__product-info">
-                                <p class="ab-product-summary__product-title">${Name}</p>
-                                ${ProductStatus === "Active"
-                                    ? '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--available">Available</p>'
-                                    : '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--stock-out">Stock Out</p>'}
-
-                                <p class="ab-product-summary__product-quantity">Quantity: ${UnitOfMeasure[0].Quantity}</p>
-                                <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
+                                    <p class="ab-product-summary__product-quantity">Quantity: ${UnitOfMeasure[0].Quantity}</p>
+                                    <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
+                                </div>
                             </div>
-                        </div>
-                    `
-                ).join("")}
-            </div>
-            <div class="ab-product-summary__border"></div>
-            <div class="ab-product-summary__calculation-table">
-                <div class="ab-product-summary__row row">
-                    <div class="ab-product-summary__col col-6">Items in Cart</div>
-                    <div class="ab-product-summary__col col-6">${UnitTotals[0].Quantity}</div>
+                        `
+                    ).join("")}
                 </div>
-                <div class="ab-product-summary__row row">
-                    <div class="ab-product-summary__col col-6">Delivery</div>
-                    <div class="ab-product-summary__col col-6">$0.00</div>
-                </div>
-                <div class="ab-product-summary__row row">
-                    <div class="ab-product-summary__col col-6">Sub Total</div>
-                    <div class="ab-product-summary__col col-6">$${SubTotal}</div>
-                </div>
-                <div class="ab-product-summary__row row">
-                    <div class="ab-product-summary__col col-6">Promotion Discount</div>
-                    <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
-                </div>
-                <div class="ab-product-summary__row row">
-                    <div class="ab-product-summary__col col-6">Estimated Tax</div>
-                    <div class="ab-product-summary__col col-6">$${TaxTotal}</div>
-                </div>
-                <div class="ab-product-summary__row ab-product-summary__row--total row">
-                    <div class="ab-product-summary__col col-6">Total</div>
-                    <div class="ab-product-summary__col col-6">$${Total}</div>
+                <div class="ab-product-summary__border"></div>
+                <div class="ab-product-summary__calculation-table">
+                    <div class="ab-product-summary__row row">
+                        <div class="ab-product-summary__col col-6">Items in Cart</div>
+                        <div class="ab-product-summary__col col-6">${UnitTotals[0].Quantity}</div>
+                    </div>
+                    <div class="ab-product-summary__row row">
+                        <div class="ab-product-summary__col col-6">Delivery</div>
+                        <div class="ab-product-summary__col col-6">$0.00</div>
+                    </div>
+                    <div class="ab-product-summary__row row">
+                        <div class="ab-product-summary__col col-6">Sub Total</div>
+                        <div class="ab-product-summary__col col-6">$${SubTotal}</div>
+                    </div>
+                    <div class="ab-product-summary__row row">
+                        <div class="ab-product-summary__col col-6">Promotion Discount</div>
+                        <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
+                    </div>
+                    <div class="ab-product-summary__row row">
+                        <div class="ab-product-summary__col col-6">Estimated Tax</div>
+                        <div class="ab-product-summary__col col-6">$${TaxTotal}</div>
+                    </div>
+                    <div class="ab-product-summary__row ab-product-summary__row--total row">
+                        <div class="ab-product-summary__col col-6">Total</div>
+                        <div class="ab-product-summary__col col-6">$${Total}</div>
+                    </div>
                 </div>
             </div>
         `;
 
-        return div;
+        return layout;
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
-        q("body").classList.add("AB-Guest-Checkout");
+        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
+        q("body").classList.add("AB-Guest-Checkout");
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
-        const mainWrapperElement = getMainWrapperElement();
-        mainWrapperElement.classList.add("ab-content-wrapper--show-guest-checkout");
-        const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
-        const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
+        /* ab-content-wrapper--show-login, ab-content-wrapper--show-guest-checkout */
+        q(".row.content-body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-content-wrapper ab-content-wrapper--show-guest-checkout">
+                    <div class="ab-content-top"></div>
+                    <div class="ab-content-bottom container">
+                        <div class="row">
+                            <div class="ab-content-forms-wrapper col-6">
+                                <div class="ab-guest-checkout-section">
+                                    <div class="ab-guest-checkout-form">
+                                        <h1 class="ab-guest-checkout-header">Checkout with New Account</h1>
+                                        ${getFormLayout(guest_personal_information) + getFormLayout(guest_billing_address) + getFormLayout(guest_shipping_address)}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ab-content-product-summary-wrapper col-6"></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        );
 
-        const contentTop = q(mainWrapperElement, ".ab-content-top");
-        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
+        const mainWrapperElement = q(".ab-content-wrapper");
 
-        // Add login form
-        const loginLayoutElement = getLoginSection();
-        if (loginLayoutElement) formsContainer.appendChild(loginLayoutElement);
+        // Insert Heading Items
+        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => q(mainWrapperElement, ".ab-content-top").insertAdjacentElement("afterbegin", item));
 
-        // Add registration form
-        const guestCheckoutLayoutElement = getGuestCheckoutSection();
-        if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
+        // Insert Login Form
+        const controlLoginElement = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
+        if (controlLoginElement) {
+            controlLoginElement.classList.add("ab-login-section");
+            q(mainWrapperElement, ".ab-content-forms-wrapper").insertAdjacentElement("afterbegin", controlLoginElement);
+        }
+
+        // Insert Control Guest Checkout Form
+        const controlGuestCheckoutElement = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, "#guest-checkout-form"));
+        if (controlGuestCheckoutElement) {
+            controlGuestCheckoutElement.classList.add("ab-control-guest-checkout-form");
+            q(mainWrapperElement, ".ab-guest-checkout-section").insertAdjacentElement("afterbegin", controlGuestCheckoutElement);
+        }
 
         // Add product summary element
-        const productSummaryLayoutElement = await getProductSummarySection();
-        if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
-    }
-
-    function getAddressCheckoutFormLayout() {
-        const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
-
-        const div = document.createElement("div");
-        div.classList.add("ab-address-checkout-form");
-
-        const billingAddressForm = getFormComponent(checkout_billing_address);
-        const sameBillingForm = getFormComponent(checkout_same_billing);
-
-        div.appendChild(billingAddressForm);
-        // div.appendChild(shippingAddressForm);
-        div.appendChild(sameBillingForm);
-
-        return div;
-    }
-
-    function getAddressCheckoutSection() {
-        const div = document.createElement("div");
-        div.className = "ab-address-checkout-section";
-        const abGuestCheckoutForm = getAddressCheckoutFormLayout();
-        div.appendChild(abGuestCheckoutForm);
-        return div;
+        const productSummaryLayout = await getProductSummaryLayout();
+        if (productSummaryLayout) {
+            q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
+        }
     }
 
     async function createAndUpdateAddressLayout() {
-        q("body").classList.add("AB-Address-Checkout");
+        const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
 
         // Update
+        q("body").classList.add("AB-Address-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
+        console.log(checkout_billing_address);
+
         // Create
-        const mainWrapperElement = getMainWrapperElement();
+        q(".row.content-body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-content-wrapper ">
+                    <div class="ab-content-top"></div>
+                    <div class="ab-content-bottom container">
+                        <div class="row">
+                            <div class="ab-content-forms-wrapper col-6">
+                                <div class="ab-address-checkout-section">
+                                    <div class="ab-address-checkout-form">${getFormLayout(checkout_billing_address)} ${getFormLayout(checkout_same_billing)}</div>
+                                </div>
+                            </div>
+                            <div class="ab-content-product-summary-wrapper col-6"></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        );
 
-        const formsContainer = q(mainWrapperElement, ".ab-content-forms-wrapper");
-        const productSummaryContainer = q(mainWrapperElement, ".ab-content-product-summary-wrapper");
+        const mainWrapperElement = q(".ab-content-wrapper");
 
-        const contentTop = q(mainWrapperElement, ".ab-content-top");
-        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => contentTop.insertAdjacentElement("afterbegin", item));
-
-        // Add checkout form
-        const guestCheckoutLayoutElement = getAddressCheckoutSection();
-        if (guestCheckoutLayoutElement) formsContainer.appendChild(guestCheckoutLayoutElement);
+        // Add heading items
+        qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => q(mainWrapperElement, ".ab-content-top").insertAdjacentElement("afterbegin", item));
 
         // Add product summary element
-        const productSummaryLayoutElement = await getProductSummarySection();
-        if (productSummaryContainer) productSummaryContainer.appendChild(productSummaryLayoutElement);
+        const productSummaryLayout = await getProductSummaryLayout();
+        if (productSummaryLayout) {
+            q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
+        }
     }
 
     async function handleAddressShippingFormShowHide(e) {
-        const contentWrapper = q(".ab-content-wrapper");
-        const billingAddressForm = q("form#billing-address");
-        const shippingFormExits = q("form#shipping-address");
+        q(".ab-form#shipping-address")?.remove();
 
         const { checkout_shipping_address } = DATA.forms;
-
-        if (!shippingFormExits) {
-            await waitForElementAsync(() => validateAllControlNodesExist(checkout_shipping_address.inputList));
-
-            console.log(qq("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier"))
-
-            const shippingAddressForm = getFormComponent(checkout_shipping_address);
-            billingAddressForm.insertAdjacentElement("afterend", shippingAddressForm);
-            eventHandler();
-        }
+        const contentWrapper = q(".ab-content-wrapper");
+        const billingAddressForm = q(".ab-form#billing-address");
 
         if (!e.target.checked) {
+            await waitForElementAsync(
+                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList))
+            );
             contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
+            billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
+            eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
-            setTimeout(() => q("#billing-address").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+            setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
     }
 

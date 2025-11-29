@@ -735,7 +735,8 @@
     }
 
     #guest-checkout-form {
-        display: none;
+        // display: none;
+        width: 500px;
         border: 1px solid red;
         &:before {
             content: "Control Form, Hide when test is completed";
@@ -747,7 +748,12 @@
     .ab-guest-checkout-section {
         padding: 49px 59px 97px 0;
 
-        > .pl-0.pr-0 {
+        // > .pl-0.pr-0 {
+        //     display: none !important;
+        // }
+
+        .ab-control-guest-checkout-form {
+            width: 100%;
             display: none !important;
         }
     }

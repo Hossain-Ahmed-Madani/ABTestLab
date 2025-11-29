@@ -593,7 +593,7 @@
   color: #0078d7;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout #guest-checkout-form {
-  display: none;
+  width: 500px;
   border: 1px solid red;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout #guest-checkout-form:before {
@@ -604,7 +604,8 @@
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section {
   padding: 49px 59px 97px 0;
 }
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section > .pl-0.pr-0 {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section .ab-control-guest-checkout-form {
+  width: 100%;
   display: none !important;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout h1.ab-guest-checkout-header {
