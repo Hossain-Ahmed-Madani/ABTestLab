@@ -490,6 +490,18 @@ https://www.steinertractor.com/checkout#/address
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     //  ========= FORM BUILDER =========
     function getFormLayout(formObj) {
         const { title, id: formId, inputList, actionList } = formObj;
@@ -910,7 +922,7 @@ https://www.steinertractor.com/checkout#/address
             // Form Input
             {
                 selector: ".ab-input",
-                events: ["input"],
+                events: ["input", "change"],
                 callback: (e) => {
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
@@ -972,15 +984,16 @@ https://www.steinertractor.com/checkout#/address
         ];
 
         ACTION_LIST.forEach(({ selector, events, callback }) => {
-            qq(selector)?.forEach((item) =>
+            qq(selector)?.forEach((item) => {
+                const debouncedCallback = debounce(callback, 150);
                 events.forEach((event) => {
                     const className = `ab-${event}-event-attached`;
                     if (!item.classList.contains(className)) {
                         item.classList.add(className);
-                        item.addEventListener(event, callback);
+                        item.addEventListener(event, debouncedCallback);
                     }
-                })
-            );
+                });
+            });
         });
     }
 

@@ -155,7 +155,7 @@
 .AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill:focus,
 .AB-Checkout-Step-1 .ab-form-group input:-webkit-autofill:active {
   -webkit-text-fill-color: black !important;
-  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+  -webkit-box-shadow: none !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
 }
@@ -248,6 +248,16 @@
   border: 2px solid #333333;
   box-shadow: none;
   color: #333333;
+}
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select:-webkit-autofill,
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select option:-webkit-autofill, .AB-Checkout-Step-1 .ab-form-group:has(> select) select:-webkit-autofill:hover,
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select option:-webkit-autofill:hover, .AB-Checkout-Step-1 .ab-form-group:has(> select) select:-webkit-autofill:focus,
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select option:-webkit-autofill:focus, .AB-Checkout-Step-1 .ab-form-group:has(> select) select:-webkit-autofill:active,
+.AB-Checkout-Step-1 .ab-form-group:has(> select) select option:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  -webkit-box-shadow: none !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
 }
 
 .AB-Checkout-Step-1 {

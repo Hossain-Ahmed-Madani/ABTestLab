@@ -192,7 +192,7 @@
     .ab-form-group input:-webkit-autofill:focus,
     .ab-form-group input:-webkit-autofill:active {
         -webkit-text-fill-color: black !important;
-        -webkit-box-shadow: 0 0 0 1000px white inset !important;
+        -webkit-box-shadow: none !important;
         -webkit-background-clip: text !important;
         background-clip: text !important;
     }
@@ -303,6 +303,20 @@
                 border: 2px solid #333333;
                 box-shadow: none;
                 color: #333333;
+            }
+
+            &:-webkit-autofill,
+            option:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            option:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            option:-webkit-autofill:focus,
+            &:-webkit-autofill:active ,
+            option:-webkit-autofill:active {
+                -webkit-text-fill-color: black !important;
+                -webkit-box-shadow: none !important;
+                -webkit-background-clip: text !important;
+                background-clip: text !important;
             }
         }
     }
