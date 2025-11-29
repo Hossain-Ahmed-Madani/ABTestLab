@@ -826,8 +826,12 @@
         }
     }
 
+    .ab-content-top {
+        display: none;
+    }
+
     app-address-management > *:not(app-progress-stepper) {
-        // display: none !important;
+        display: none !important;
     }
 
     .ab-address-checkout-section {

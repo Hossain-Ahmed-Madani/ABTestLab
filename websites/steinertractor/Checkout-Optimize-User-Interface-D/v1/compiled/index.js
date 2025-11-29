@@ -877,28 +877,46 @@ https://www.steinertractor.com/checkout#/address
 
     // PENDING : Needs to be updated with waitForElement , idea is to compare between input values or dependent nodes and their corresponding control node
     function updateDependencyNodes({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
-        dependencyNodes.forEach((dependencyNode) => {
-            const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
-            const controlNode = q(controlNodeSelector);
+        if (dependencyNodes?.length === 0) return;
 
-            if (DATA["text_based_input_list"].some((type) => type === inputType)) {
-                dependencyNode.value = controlNode.value;
-            } else if (inputType === "checkbox") ; else if (inputType === "radio") ; else if (inputType === "select") {
-                const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
+        dependencyNodes.forEach(async (dependencyNode) => {
+            try {
+                const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
+                const controlNode = q(controlNodeSelector);
+                const dependencyNodeInputType = dependencyNode.getAttribute("type");
+                const dependencyDataObj = getElementData(dependencyNode);
+                
+                await waitForElementAsync(
+                    () =>
+                        !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode.value !== dependencyNode.value) ||
+                        (dependencyNodeInputType === "select" && controlNode?.options[1].innerText.trim().toLowerCase() !== dependencyNode?.options[1].innerText.trim().toLowerCase()),
+                    5000
+                );
 
-                if (controlOptions.length === 0) {
-                    console.error("Options node not found:", controlNodeSelector);
-                    return;
+                if (DATA["text_based_input_list"].some((type) => type === inputType)) {
+                    dependencyNode.value = controlNode.value;
+                } else if (inputType === "checkbox") {
+                    //
+                } else if (inputType === "radio") {
+                    //
+                } else if (inputType === "select") {
+                    const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
+
+                    if (controlOptions.length === 0) {
+                        console.error("Options node not found:", controlNodeSelector);
+                        return;
+                    }
+
+                    dependencyNode.innerHTML = /* HTML */ `${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                    dependencyNode.value = "";
+                    q(dependencyNode, " option:first-child").selected = true;
+                    updateSelectInputView(dependencyDataObj);
                 }
 
-                dependencyNode.innerHTML = /* HTML */ `${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
-                dependencyNode.value = "";
-                q(dependencyNode, " option:first-child").selected = true;
+                handleFormErrorMessage(dependencyDataObj);
+            } catch (error) {
+                return false;
             }
-
-            const dependencyDataObj = getElementData(dependencyNode);
-            handleFormErrorMessage(dependencyDataObj);
-            updateSelectInputView(dependencyDataObj);
         });
     }
 
@@ -943,9 +961,10 @@ https://www.steinertractor.com/checkout#/address
                     }
 
                     // Update dependent fields on interval
-                    if (dataObj["dependencyNodes"]?.length > 0) {
-                        setTimeout(() => updateDependencyNodes(dataObj), 1000);
-                    }
+                    // if (dataObj["dependencyNodes"]?.length > 0) {
+                    //     setTimeout(() => updateDependencyNodes(dataObj), 1000);
+                    // }
+                    updateDependencyNodes(dataObj);
 
                     // Handle error message
                     handleFormErrorMessage(dataObj);
@@ -1024,7 +1043,6 @@ https://www.steinertractor.com/checkout#/address
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-
         mainLayoutFunction();
         eventHandler();
     }

@@ -655,6 +655,12 @@
 .AB-Checkout-Step-1.AB-Address-Checkout .ab-content-wrapper--show-shipping-address .ab-form#shipping-address {
   display: block;
 }
+.AB-Checkout-Step-1.AB-Address-Checkout .ab-content-top {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Address-Checkout app-address-management > *:not(app-progress-stepper) {
+  display: none !important;
+}
 .AB-Checkout-Step-1.AB-Address-Checkout .ab-address-checkout-section {
   padding: 54px 59px 73px 0;
 }
