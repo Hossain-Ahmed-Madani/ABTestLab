@@ -769,15 +769,15 @@
     }
 
     // ============ FORM BUILDER EXTRA  =======
-    form#personal-information {
+    .ab-form#personal-information {
         margin-bottom: 50px;
     }
 
-    form#billing-address {
+    .ab-form#billing-address {
         margin-bottom: 46px;
     }
 
-    form#shipping-address {
+    .ab-form#shipping-address {
         margin-bottom: 0;
 
         .ab-form-input-container {
@@ -806,7 +806,7 @@
 .AB-Checkout-Step-1.AB-Address-Checkout {
     .ab-content-wrapper {
         &--show-shipping-address {
-            form#shipping-address {
+            .ab-form#shipping-address {
                 display: block;
             }
         }
@@ -825,16 +825,16 @@
         margin-bottom: 31px;
     }
 
-    form#billing-address {
+    .ab-form#billing-address {
         margin-bottom: 32px;
     }
 
-    form#shipping-address {
+    .ab-form#shipping-address {
         display: none;
         margin-bottom: 32px;
     }
 
-    form#same-billing {
+    .ab-form#same-billing {
         margin-bottom: 0;
 
         .ab-form-heading {

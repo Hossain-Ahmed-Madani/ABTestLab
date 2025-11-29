@@ -326,7 +326,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Full name",
                         required: true,
                         className: "col-12",
-                        control_node_selector: " input[name='DisplayName']",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type   > eve-address-form input[name='DisplayName']",
                         value: "",
                         errorMessage: "",
                     },
@@ -337,7 +337,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Country",
                         className: "col-6",
                         required: true,
-                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select[name='CountryId']",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type   > eve-address-form select[name='CountryId']",
                         dependency_node_selector: "select#ab-shipping-state",
                         value: "",
                         errorMessage: "",
@@ -815,8 +815,6 @@ https://www.steinertractor.com/checkout#/address
         // Update
         q("body").classList.add("AB-Address-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
-
-        console.log(checkout_billing_address);
 
         // Create
         q(".row.content-body").insertAdjacentHTML(
