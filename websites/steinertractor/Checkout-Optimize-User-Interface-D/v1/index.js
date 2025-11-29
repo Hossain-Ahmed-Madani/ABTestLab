@@ -967,7 +967,7 @@ https://www.steinertractor.com/checkout#/address
                 const controlNode = q(controlNodeSelector);
                 const dependencyNodeInputType = dependencyNode.getAttribute("type");
                 const dependencyDataObj = getElementData(dependencyNode);
-                
+
                 await waitForElementAsync(
                     () =>
                         !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode.value !== dependencyNode.value) ||
@@ -976,18 +976,13 @@ https://www.steinertractor.com/checkout#/address
                 );
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
-                    dependencyNode.value = controlNode.value;
+                    dependencyNode.value = inputType === 'tel' ? controlNode.value.replace(/\D/g, '') : controlNode.value;
                 } else if (inputType === "checkbox") {
                     //
                 } else if (inputType === "radio") {
                     //
                 } else if (inputType === "select") {
                     const controlOptions = qq(controlNodeSelector + "> option:not(:first-child)");
-
-                    if (controlOptions.length === 0) {
-                        console.error("Options node not found:", controlNodeSelector);
-                        return;
-                    }
 
                     dependencyNode.innerHTML = /* HTML */ `${q(dependencyNode, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
                     dependencyNode.value = "";
