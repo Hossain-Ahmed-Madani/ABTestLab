@@ -220,7 +220,7 @@ https://www.steinertractor.com/checkout#/address
                 id: "billing-address",
                 inputList: [
                     {
-                        id: "ab-full-name",
+                        id: "ab-billing-full-name",
                         type: "text",
                         label: "Full name",
                         required: true,
@@ -230,19 +230,19 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-country",
+                        id: "ab-billing-country",
                         type: "select" /* Dropdown/Select */,
                         optionList: [],
                         label: "Country",
                         className: "col-6",
                         required: true,
-                        control_node_selector: "select[name='CountryId']",
-                        dependency_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#ab-state",
+                        control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type  > eve-address-form select[name='CountryId']",
+                        dependency_node_selector: "select#ab-billing-state",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-phone-bill",
+                        id: "ab-billing-phone-bill",
                         type: "tel",
                         label: "Phone",
                         required: false,
@@ -252,7 +252,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-street-address",
+                        id: "ab-billing-street-address",
                         type: "text",
                         label: "Street Address",
                         required: true,
@@ -262,7 +262,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-street-address-two",
+                        id: "ab-billing-street-address-two",
                         type: "text",
                         label: "Street address 2",
                         required: true,
@@ -272,7 +272,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-city",
+                        id: "ab-billing-city",
                         type: "text",
                         label: "City",
                         required: true,
@@ -282,7 +282,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-state",
+                        id: "ab-billing-state",
                         type: "select" /* Dropdown/Select */,
                         label: "State",
                         optionList: [],
@@ -293,7 +293,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-zip-code",
+                        id: "ab-billing-zip-code",
                         type: "text",
                         label: "Zip code",
                         required: true,
@@ -303,7 +303,7 @@ https://www.steinertractor.com/checkout#/address
                         errorMessage: "",
                     },
                     {
-                        id: "ab-carriers",
+                        id: "ab-billing-carriers",
                         subtitle: "Which carriers offer delivery service to this address?",
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
