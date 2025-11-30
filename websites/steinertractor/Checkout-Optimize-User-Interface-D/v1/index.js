@@ -1057,6 +1057,11 @@ https://www.steinertractor.com/checkout#/address
         } else {
             currentTarget?.removeAttribute("area-invalid");
         }
+
+        // Exception | Guest Password input
+        if (currentTarget.getAttribute("id") === "ab-guest-password" && currentTarget.value.length >= 7) {
+            currentTarget?.removeAttribute("area-invalid");
+        }
     }
 
     function updateSelectInputView({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
@@ -1177,6 +1182,7 @@ https://www.steinertractor.com/checkout#/address
                 selector: ".ab-input",
                 events: ["input", "change"],
                 callback: (e) => {
+                    console.log("input, changes");
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
 
@@ -1230,11 +1236,6 @@ https://www.steinertractor.com/checkout#/address
                 callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout"),
             },
             {
-                selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
-                events: ["click"],
-                callback: handleAddressShippingFormShowHide,
-            },
-            {
                 selector: ".AB-Guest-Checkout #ab-guest-same-as-billing",
                 events: ["click"],
                 callback: handleAddressDeliveryFormShowHide,
@@ -1243,6 +1244,11 @@ https://www.steinertractor.com/checkout#/address
                 selector: ".AB-Guest-Checkout #createAccount",
                 events: ["click"],
                 callback: handleAddressCreateAccountFormShowHide,
+            },
+            {
+                selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
+                events: ["click"],
+                callback: handleAddressShippingFormShowHide,
             },
         ];
 
