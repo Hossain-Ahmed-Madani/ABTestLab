@@ -557,7 +557,7 @@
 
         &--show-delivery-address {
             .ab-form#delivery-address {
-                display: none;
+                display: block;
             }
         }
 
@@ -808,7 +808,11 @@
     }
 
     .ab-form#shipping-address {
-        margin-bottom: 26px;
+        margin-bottom: 0px;
+
+        .ab-form-input-container {
+            margin-bottom: 26px;
+        }
     }
 
     .ab-form#delivery-address {

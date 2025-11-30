@@ -313,6 +313,21 @@ https://www.steinertractor.com/checkout#/address
                         checked: false,
                     },
                 ],
+                actionList: [
+                    {
+                        id: "ab-continue-as-guest",
+                        label: "Continue as Guest",
+                        className: "col-8",
+                        disabled: true,
+                        control_node_selector: "#guestCheckoutWrapper button[type='submit']",
+                    },
+                    {
+                        id: "ab-need-help",
+                        className: "col-4 ab-pl-0",
+                        label: "Need help?",
+                        control_node_selector: "#help-button",
+                    },
+                ],
             },
             guest_action_container: {
                 title: "",
@@ -872,7 +887,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
-        const { guest_personal_information, guest_billing_address, guest_shipping_address, guest_action_container } = DATA["forms"];
+        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
         q("body").classList.add("AB-Guest-Checkout");
@@ -892,10 +907,8 @@ https://www.steinertractor.com/checkout#/address
                                 <div class="ab-guest-checkout-section">
                                     <div class="ab-guest-checkout-form">
                                         <h1 class="ab-guest-checkout-header">Checkout with New Account</h1>
-                                        ${getFormLayout(guest_personal_information) +
-                                        getFormLayout(guest_billing_address) +
-                                        getFormLayout(guest_shipping_address) +
-                                        getFormLayout(guest_action_container)}
+                                        ${getFormLayout(guest_personal_information)} ${getFormLayout(guest_billing_address)} ${getFormLayout(guest_shipping_address)}
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -1272,7 +1285,6 @@ https://www.steinertractor.com/checkout#/address
                 ...DATA.forms.guest_personal_information.inputList,
                 ...DATA.forms.guest_billing_address.inputList,
                 ...DATA.forms.guest_shipping_address.inputList,
-                ...DATA.forms.guest_action_container.inputList,
             ],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },

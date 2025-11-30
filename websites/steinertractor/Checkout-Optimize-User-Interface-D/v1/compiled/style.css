@@ -444,7 +444,7 @@
   display: block !important;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-delivery-address .ab-form#delivery-address {
-  display: none;
+  display: block;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-guest-create-account .ab-form#guest-create-account {
   display: block;
@@ -642,6 +642,9 @@
   margin-bottom: 34px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address {
+  margin-bottom: 0px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address .ab-form-input-container {
   margin-bottom: 26px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#delivery-address {
