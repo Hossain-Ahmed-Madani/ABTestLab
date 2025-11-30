@@ -288,7 +288,7 @@ https://www.steinertractor.com/checkout#/address
                         label: "Confirm Password",
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#confirmPassword",
-                        errorMessage: "Password must match with confirm password",
+                        errorMessage: "Passwords do not match",
                     },
                 ],
             },
@@ -1100,7 +1100,6 @@ https://www.steinertractor.com/checkout#/address
                 selector: ".ab-input",
                 events: ["input", "change"],
                 callback: (e) => {
-                    console.log("input, changes");
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
 

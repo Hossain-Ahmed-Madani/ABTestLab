@@ -61,6 +61,14 @@
 }
 .AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]),
 .AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  color: #333333;
+  cursor: pointer;
+  margin-bottom: 3px;
   display: flex;
   flex-direction: row-reverse;
   justify-content: flex-end;
@@ -78,9 +86,8 @@
   min-height: 18px;
   border: 2px solid #767676;
   background-color: #fff;
-  margin-top: 3px;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 .AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) input[type=checkbox]:checked,
 .AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) input[type=checkbox]:checked {
@@ -100,16 +107,6 @@
   border-right: 2.5px solid #fff;
   border-bottom: 2.5px solid #fff;
   transform: rotate(45deg);
-}
-.AB-Checkout-Step-1 .ab-form-group:has(> input[type=radio]) label,
-.AB-Checkout-Step-1 .ab-form-group:has(> input[type=checkbox]) label {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #333333;
-  cursor: pointer;
 }
 .AB-Checkout-Step-1 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label {
   position: absolute;
@@ -446,6 +443,12 @@
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-guest-checkout .ab-guest-checkout-section {
   display: block !important;
 }
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-delivery-address .ab-form#delivery-address {
+  display: none;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-content-wrapper--show-guest-create-account .ab-form#guest-create-account {
+  display: block;
+}
 .AB-Checkout-Step-1.AB-Guest-Checkout .guest-checkout-optn {
   margin: auto;
   flex-direction: row;
@@ -618,9 +621,10 @@
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section {
   padding: 49px 59px 97px 0;
 }
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section .pr-0.pl-0.col-md-12.col-sm-6,
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-guest-checkout-section .ab-control-guest-checkout-form {
   width: 100%;
-  display: block !important;
+  display: none !important;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout h1.ab-guest-checkout-header {
   font-family: Arial, Helvetica, sans-serif;
@@ -641,6 +645,11 @@
   margin-bottom: 26px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#delivery-address {
+  display: none;
+  margin-bottom: 34px;
+}
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-create-account {
+  display: none;
   margin-bottom: 34px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-continue-as-guest {
