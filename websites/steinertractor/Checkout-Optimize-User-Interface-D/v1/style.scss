@@ -813,19 +813,7 @@
         .ab-form-input-container {
             margin-bottom: 26px;
         }
-    }
 
-    .ab-form#delivery-address {
-        display: none;
-        margin-bottom: 34px;
-    }
-
-    .ab-form#guest-create-account {
-        display: none;
-        margin-bottom: 34px;
-    }
-
-    .ab-form#guest-submit-actions {
         #ab-continue-as-guest {
             background-color: #b3b3b3;
 
@@ -841,6 +829,16 @@
                 opacity: 0.7;
             }
         }
+    }
+
+    .ab-form#delivery-address {
+        display: none;
+        margin-bottom: 34px;
+    }
+
+    .ab-form#guest-create-account {
+        display: none;
+        margin-bottom: 34px;
     }
 }
 
