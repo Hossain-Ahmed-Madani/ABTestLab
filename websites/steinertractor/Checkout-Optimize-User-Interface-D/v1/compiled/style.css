@@ -639,6 +639,9 @@
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address {
   margin-bottom: 26px;
 }
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#delivery-address {
+  margin-bottom: 26px;
+}
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-continue-as-guest {
   background-color: #b3b3b3;
 }
