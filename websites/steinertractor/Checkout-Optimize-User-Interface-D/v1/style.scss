@@ -149,6 +149,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        cursor: pointer;
 
         width: 100%;
         font-family: Inter, sans-serif;
@@ -555,6 +556,10 @@
                 display: block !important;
             }
         }
+
+        &--show-delivery-address {
+            //
+        }
     }
 
     .guest-checkout-optn {
@@ -800,7 +805,7 @@
     }
 
     .ab-form#delivery-address {
-        margin-bottom: 26px;
+        margin-bottom: 34px;
     }
 
     .ab-form#guest-submit-actions {

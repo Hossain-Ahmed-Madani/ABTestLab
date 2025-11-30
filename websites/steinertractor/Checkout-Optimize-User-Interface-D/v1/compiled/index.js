@@ -270,6 +270,28 @@ https://www.steinertractor.com/checkout#/address
                     },
                 ],
             },
+            guest_create_account: {
+                title: "Create Account",
+                id: "guest-create-account",
+                inputList: [
+                    {
+                        id: "ab-guest-password",
+                        type: "password",
+                        label: "Password",
+                        className: "col-6",
+                        control_node_selector: "#Password",
+                        errorMessage: "Password must be at least 7 characters long",
+                    },
+                    {
+                        id: "ab-guest-retype-password",
+                        type: "password",
+                        label: "Confirm Password",
+                        className: "col-6 ab-pl-0",
+                        control_node_selector: "#confirmPassword",
+                        errorMessage: "Password must match with confirm password",
+                    },
+                ],
+            },
             guest_shipping_address: {
                 title: "Shipping Address",
                 id: "shipping-address",
@@ -283,7 +305,7 @@ https://www.steinertractor.com/checkout#/address
                         checked: true,
                     },
                     {
-                        id: "ab-create-account",
+                        id: "ab-guest-create-account",
                         type: "checkbox",
                         label: "Register as a customer. Customers can view order history and shipping status and track previous orders.",
                         className: "col-12",
@@ -312,7 +334,6 @@ https://www.steinertractor.com/checkout#/address
                     },
                 ],
             },
-
             // Checkout
             checkout_billing_address: {
                 title: "Billing Address",
@@ -893,16 +914,36 @@ https://www.steinertractor.com/checkout#/address
 
         const { guest_delivery_address } = DATA.forms;
         const contentWrapper = q(".ab-content-wrapper");
-        const deliveryAddressForm = q(".ab-form#shipping-address");
+        const billingAddressForm = q(".ab-form#billing-address");
 
         if (!e.target.checked) {
-            await waitForElementAsync(() => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList)));
+            await waitForElementAsync(
+                () => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList))
+            );
             contentWrapper.classList.add("ab-content-wrapper--show-delivery-address");
-            deliveryAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
+            billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
             eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-delivery-address");
-            setTimeout(() => deliveryAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+            setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+    }
+
+    async function handleAddressCreateAccountFormShowHide(e) {
+        q(".ab-form#guest-create-account")?.remove();
+
+        const { guest_create_account } = DATA.forms;
+        const contentWrapper = q(".ab-content-wrapper");
+        const shippingAddressForm = q(".ab-form#shipping-address");
+
+        if (e.target.checked) {
+            await waitForElementAsync(() => !!validateAllControlNodesExist(guest_create_account.inputList));
+            contentWrapper.classList.add("ab-content-wrapper--show-guest-create-account");
+            shippingAddressForm.insertAdjacentHTML("beforebegin", getFormLayout(guest_create_account));
+            eventHandler();
+        } else {
+            contentWrapper.classList.remove("ab-content-wrapper--show-guest-create-account");
+            setTimeout(() => shippingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
     }
 
@@ -1113,6 +1154,11 @@ https://www.steinertractor.com/checkout#/address
                 selector: ".AB-Guest-Checkout #ab-guest-same-as-billing",
                 events: ["click"],
                 callback: handleAddressDeliveryFormShowHide,
+            },
+            {
+                selector: ".AB-Guest-Checkout #createAccount",
+                events: ["click"],
+                callback: handleAddressCreateAccountFormShowHide,
             },
         ];
 
