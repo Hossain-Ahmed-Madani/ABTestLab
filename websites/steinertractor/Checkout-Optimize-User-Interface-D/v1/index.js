@@ -20,6 +20,7 @@ https://www.steinertractor.com/checkout#/address
     const DATA = {
         text_based_input_list: ["text", "tel", "number", "email", "password", "url", "search"],
         forms: {
+            // Guest Checkout
             guest_personal_information: {
                 title: "Personal Information",
                 id: "personal-information",
@@ -61,7 +62,7 @@ https://www.steinertractor.com/checkout#/address
                         required: true,
                         className: "col-6",
                         control_node_selector: "#phonereg, #phone",
-                        dependency_node_selector: "#ab-phone-bill",
+                        dependency_node_selector: "#ab-billing-phone-bill",
                         value: "",
                         errorMessage: "",
                     },
@@ -92,87 +93,178 @@ https://www.steinertractor.com/checkout#/address
                 id: "billing-address",
                 inputList: [
                     {
-                        id: "ab-country",
+                        id: "ab-billing-country",
                         type: "select" /* Dropdown/Select */,
                         optionList: [],
                         label: "Country",
                         className: "col-6",
                         required: true,
-                        control_node_selector: "select[name='CountryId']",
-                        dependency_node_selector: "select#ab-state",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) select[name='CountryId']",
+                        dependency_node_selector: "select#ab-billing-state",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-phone-bill",
+                        id: "ab-billing-phone-bill",
                         type: "tel",
                         label: "Phone",
                         required: false,
                         className: "col-6 ab-pl-0",
-                        control_node_selector: "#phone",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #phone",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-street-address",
+                        id: "ab-billing-street-address",
                         type: "text",
                         label: "Street Address",
                         required: true,
                         className: "col-12",
-                        control_node_selector: "#coAddress",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coAddress",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-street-address-two",
+                        id: "ab-billing-street-address-two",
                         type: "text",
                         label: "Street address 2",
                         required: true,
                         className: "col-12",
-                        control_node_selector: "#coAddress2",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coAddress2",
                         value: "",
                         errorMessage: "Enter a valid address",
                     },
                     {
-                        id: "ab-city",
+                        id: "ab-billing-city",
                         type: "text",
                         label: "City",
                         required: true,
                         className: "col-4",
-                        control_node_selector: "#coCity",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coCity",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-state",
+                        id: "ab-billing-state",
                         type: "select" /* Dropdown/Select */,
                         label: "State",
                         optionList: [],
                         required: true,
                         className: "col-4 ab-pl-0",
-                        control_node_selector: "select[name='StateId']",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) select[name='StateId']",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-zip-code",
+                        id: "ab-billing-zip-code",
                         type: "text",
                         label: "Zip code",
                         required: true,
                         className: "col-4 ab-pl-0",
-                        control_node_selector: "#coZip",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coZip",
                         value: "",
                         errorMessage: "",
                     },
                     {
-                        id: "ab-carriers",
+                        id: "ab-billing-carriers",
                         subtitle: "Which carriers offer delivery service to this address?",
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
                         required: false,
                         className: "col-12",
-                        control_node_selector: "select#ShipMethod",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) select#ShipMethod",
+                        value: "",
+                        errorMessage: "",
+                    },
+                ],
+            },
+            guest_delivery_address: {
+                title: "Delivery Address",
+                id: "delivery-address",
+                inputList: [
+                    {
+                        id: "ab-delivery-country",
+                        type: "select" /* Dropdown/Select */,
+                        optionList: [],
+                        label: "Country",
+                        className: "col-6",
+                        required: true,
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']",
+                        dependency_node_selector: "select#ab-delivery-state",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-delivery-phone-bill",
+                        type: "tel",
+                        label: "Phone",
+                        required: false,
+                        className: "col-6 ab-pl-0",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #phone",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-delivery-street-address",
+                        type: "text",
+                        label: "Street Address",
+                        required: true,
+                        className: "col-12",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coAddress",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-delivery-street-address-two",
+                        type: "text",
+                        label: "Street address 2",
+                        required: true,
+                        className: "col-12",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coAddress2",
+                        value: "",
+                        errorMessage: "Enter a valid address",
+                    },
+                    {
+                        id: "ab-delivery-city",
+                        type: "text",
+                        label: "City",
+                        required: true,
+                        className: "col-4",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coCity",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-delivery-state",
+                        type: "select" /* Dropdown/Select */,
+                        label: "State",
+                        optionList: [],
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) select[name='StateId']",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-delivery-zip-code",
+                        type: "text",
+                        label: "Zip code",
+                        required: true,
+                        className: "col-4 ab-pl-0",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coZip",
+                        value: "",
+                        errorMessage: "",
+                    },
+                    {
+                        id: "ab-delivery-carriers",
+                        subtitle: "Which carriers offer delivery service to this address?",
+                        type: "select" /* Dropdown/Select */,
+                        label: "All Carriers",
+                        optionList: [],
+                        required: false,
+                        className: "col-12",
+                        control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) select#ShipMethod",
                         value: "",
                         errorMessage: "",
                     },
@@ -183,7 +275,7 @@ https://www.steinertractor.com/checkout#/address
                 id: "shipping-address",
                 inputList: [
                     {
-                        id: "ab-same-as-billing",
+                        id: "ab-guest-same-as-billing",
                         type: "checkbox",
                         label: "Use the same address for delivery.",
                         className: "col-12",
@@ -199,6 +291,11 @@ https://www.steinertractor.com/checkout#/address
                         checked: false,
                     },
                 ],
+            },
+            guest_action_container: {
+                title: "",
+                id: "guest-submit-actions",
+                inputList: [],
                 actionList: [
                     {
                         id: "ab-continue-as-guest",
@@ -215,6 +312,8 @@ https://www.steinertractor.com/checkout#/address
                     },
                 ],
             },
+
+            // Checkout
             checkout_billing_address: {
                 title: "Billing Address",
                 id: "billing-address",
@@ -422,7 +521,7 @@ https://www.steinertractor.com/checkout#/address
                 id: "same-billing",
                 inputList: [
                     {
-                        id: "ab-same-as-billing",
+                        id: "ab-checkout-same-as-billing",
                         type: "checkbox",
                         label: "Use the same address for delivery.",
                         className: "col-8 col-lg-7",
@@ -752,7 +851,7 @@ https://www.steinertractor.com/checkout#/address
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
-        const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
+        const { guest_personal_information, guest_billing_address, guest_shipping_address, guest_action_container } = DATA["forms"];
 
         // Update
         q("body").classList.add("AB-Guest-Checkout");
@@ -772,7 +871,10 @@ https://www.steinertractor.com/checkout#/address
                                 <div class="ab-guest-checkout-section">
                                     <div class="ab-guest-checkout-form">
                                         <h1 class="ab-guest-checkout-header">Checkout with New Account</h1>
-                                        ${getFormLayout(guest_personal_information) + getFormLayout(guest_billing_address) + getFormLayout(guest_shipping_address)}
+                                        ${getFormLayout(guest_personal_information) +
+                                        getFormLayout(guest_billing_address) +
+                                        getFormLayout(guest_shipping_address) +
+                                        getFormLayout(guest_action_container)}
                                     </div>
                                 </div>
                             </div>
@@ -865,6 +967,24 @@ https://www.steinertractor.com/checkout#/address
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
             setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+    }
+
+    async function handleAddressDeliveryFormShowHide(e) {
+        q(".ab-form#delivery-address")?.remove();
+
+        const { guest_delivery_address } = DATA.forms;
+        const contentWrapper = q(".ab-content-wrapper");
+        const deliveryAddressForm = q(".ab-form#shipping-address");
+
+        if (!e.target.checked) {
+            await waitForElementAsync(() => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList)));
+            contentWrapper.classList.add("ab-content-wrapper--show-delivery-address");
+            deliveryAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
+            eventHandler();
+        } else {
+            contentWrapper.classList.remove("ab-content-wrapper--show-delivery-address");
+            setTimeout(() => deliveryAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
     }
 
@@ -973,7 +1093,7 @@ https://www.steinertractor.com/checkout#/address
                 );
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
-                    dependencyNode.value = inputType === 'tel' ? controlNode.value.replace(/\D/g, '') : controlNode.value;
+                    dependencyNode.value = inputType === "tel" ? controlNode.value.replace(/\D/g, "") : controlNode.value;
                 } else if (inputType === "checkbox") {
                     //
                 } else if (inputType === "radio") {
@@ -1036,7 +1156,7 @@ https://www.steinertractor.com/checkout#/address
                         handleSelectInput(dataObj);
                     }
 
-                    // Update dependent fields 
+                    // Update dependent fields
                     updateDependencyNodes(dataObj);
 
                     // Handle error message
@@ -1069,9 +1189,14 @@ https://www.steinertractor.com/checkout#/address
                 callback: (e) => (q(".ab-content-wrapper").className = "ab-content-wrapper ab-content-wrapper--show-guest-checkout"),
             },
             {
-                selector: ".AB-Address-Checkout #ab-same-as-billing",
+                selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
                 events: ["click"],
                 callback: handleAddressShippingFormShowHide,
+            },
+            {
+                selector: ".AB-Guest-Checkout #ab-guest-same-as-billing",
+                events: ["click"],
+                callback: handleAddressDeliveryFormShowHide,
             },
         ];
 
@@ -1092,7 +1217,12 @@ https://www.steinertractor.com/checkout#/address
     // ===========  MAIN JS ===========
     const FORM_CONFIG = {
         "/guestcheckout": {
-            inputList: [...DATA.forms.guest_personal_information.inputList, ...DATA.forms.guest_billing_address.inputList, ...DATA.forms.guest_shipping_address.inputList],
+            inputList: [
+                ...DATA.forms.guest_personal_information.inputList,
+                ...DATA.forms.guest_billing_address.inputList,
+                ...DATA.forms.guest_shipping_address.inputList,
+                ...DATA.forms.guest_action_container.inputList,
+            ],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },
         "/checkout": {

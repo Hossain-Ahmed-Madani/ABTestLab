@@ -104,7 +104,7 @@
             min-height: 18px;
             border: 2px solid #767676;
             background-color: #fff;
-            margin-top: 5px;
+            margin-top: 3px;
             cursor: pointer;
             border-radius: 3px;
 
@@ -788,20 +788,18 @@
 
     // ============ FORM BUILDER EXTRA  =======
     .ab-form#personal-information {
-        margin-bottom: 50px;
+        margin-bottom: 38px;
     }
 
     .ab-form#billing-address {
-        margin-bottom: 46px;
+        margin-bottom: 34px;
     }
 
     .ab-form#shipping-address {
-        margin-bottom: 0;
+        margin-bottom: 26px;
+    }
 
-        .ab-form-input-container {
-            margin-bottom: 26px;
-        }
-
+    .ab-form#guest-submit-actions {
         #ab-continue-as-guest {
             background-color: #b3b3b3;
 

@@ -78,7 +78,7 @@
   min-height: 18px;
   border: 2px solid #767676;
   background-color: #fff;
-  margin-top: 5px;
+  margin-top: 3px;
   cursor: pointer;
   border-radius: 3px;
 }
@@ -631,27 +631,24 @@
   margin-bottom: 38px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#personal-information {
-  margin-bottom: 50px;
+  margin-bottom: 38px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#billing-address {
-  margin-bottom: 46px;
+  margin-bottom: 34px;
 }
 .AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address {
-  margin-bottom: 0;
-}
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address .ab-form-input-container {
   margin-bottom: 26px;
 }
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address #ab-continue-as-guest {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-continue-as-guest {
   background-color: #b3b3b3;
 }
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address #ab-continue-as-guest:not(disabled) {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-continue-as-guest:not(disabled) {
   background-color: #9cca5a;
 }
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address #ab-need-help {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-need-help {
   background-color: #6c757d;
 }
-.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#shipping-address #ab-need-help:hover {
+.AB-Checkout-Step-1.AB-Guest-Checkout .ab-form#guest-submit-actions #ab-need-help:hover {
   opacity: 0.7;
 }
 
