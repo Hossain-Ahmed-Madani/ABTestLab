@@ -468,7 +468,7 @@
     }
 
 
-    &:has( [data-free_shipping="0"])   .ab-subtotal-progress-container {
+    &:has([data-free_shipping="0"]) .ab-subtotal-progress-container {
         display: none;
     }
 
