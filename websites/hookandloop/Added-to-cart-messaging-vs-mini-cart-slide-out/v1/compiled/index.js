@@ -7,6 +7,7 @@
     https://www.hookandloop.com/brands/velcro/sew-on/4-velcro-brand-sew-on-hook-loop-black
 
     Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
+    Control Preview: https://www.hookandloop.com/brands/duragrip/sew-on?varify-preview=original
     Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
 
 */
@@ -19,7 +20,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.00019,
+        test_version: 0.00021,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -479,12 +480,18 @@
         const measurementUnit = +productElement.getAttribute("data-measurement-unit");
         const sku = productElement.getAttribute("data-sku");
         const url = productElement.getAttribute("data-url");
+        const min = productElement.getAttribute("data-min-qty");
+        const max = productElement.getAttribute("data-max-qty");
+        const freeShipping = !!+productElement.getAttribute("data-free_shipping") ?? false;
 
         return {
             productId,
             sku,
             measurementUnit,
             url,
+            min,
+            max,
+            freeShipping,
         };
     }
 
@@ -709,11 +716,11 @@
     function getProgressLayout() {
         return /* HTML */ `
             <div class="ab-subtotal-progress-container">
-                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading__unlock-shipping">
+                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading--unlock-shipping">
                     <div class="ab-subtotal-progress-heading__icon">${ASSETS.truck_svg}</div>
                     <div class="ab-subtotal-progress-heading__text">Almost there! Unlock Free Shipping at $200!</div>
                 </div>
-                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading__free-shipping">
+                <div class="ab-subtotal-progress-heading ab-subtotal-progress-heading--show-free-shipping">
                     <div class="ab-subtotal-progress-heading__icon">${ASSETS.check_circle_svg}</div>
                     <div class="ab-subtotal-progress-heading__text">You’ve Earned Free Shipping!</div>
                 </div>
@@ -842,23 +849,25 @@
     }
 
     function updateProgressSection(sideCart) {
+
         const subTotalSelector = "span[x-html='cart\\.subtotal'] .price";
 
         if (!q(sideCart, subTotalSelector)) return;
-
-        const subTotalTxt = q(sideCart, subTotalSelector)?.innerText;
-        const subTotal = +subTotalTxt.replace("$", "").replace(",", "");
 
         const subTotalProgressContainer = q(sideCart, ".ab-subtotal-progress-container");
         const abAddedSubtotal = q(sideCart, ".ab-added-subtotal");
         const abProgressBar = q(sideCart, ".ab-subtotal-progress-bar__progress");
 
+
+        const subTotalTxt = q(sideCart, subTotalSelector)?.innerText;
+        const subTotal = +subTotalTxt.replace("$", "").replace(",", "");
+
         if (abAddedSubtotal.innerText === subTotalTxt) return;
 
         if (subTotal >= 200) {
-            subTotalProgressContainer.classList.add("ab-subtotal-progress-container__free-shipping");
+            subTotalProgressContainer.classList.add("ab-subtotal-progress-container--show-free-shipping");
         } else {
-            subTotalProgressContainer.classList.remove("ab-subtotal-progress-container__free-shipping");
+            subTotalProgressContainer.classList.remove("ab-subtotal-progress-container--show-free-shipping");
         }
 
         abAddedSubtotal.innerText = subTotalTxt;

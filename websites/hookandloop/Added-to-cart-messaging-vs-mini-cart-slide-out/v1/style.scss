@@ -465,20 +465,25 @@
         justify-content: center;
         align-items: center;
         gap: 8px;
+    }
 
-        .ab-subtotal-progress-heading__free-shipping {
+
+    &:has( [data-free_shipping="0"])   .ab-subtotal-progress-container {
+        display: none;
+    }
+
+    .ab-subtotal-progress-container.ab-subtotal-progress-container--no-free-shipping {
+        display: none;
+    }
+
+    .ab-subtotal-progress-container.ab-subtotal-progress-container--show-free-shipping {
+        .ab-subtotal-progress-heading--unlock-shipping,
+        .ab-subtotal-progress-prices {
             display: none;
         }
 
-        &__free-shipping {
-            .ab-subtotal-progress-heading__unlock-shipping,
-            .ab-subtotal-progress-prices {
-                display: none;
-            }
-
-            .ab-subtotal-progress-heading__free-shipping {
-                display: flex;
-            }
+        .ab-subtotal-progress-heading--show-free-shipping {
+            display: flex;
         }
     }
 
@@ -487,13 +492,14 @@
         justify-content: center;
         align-items: center;
         gap: 4px;
+    }
 
-        &__free-shipping {
-            gap: 7px;
-            .ab-subtotal-progress-heading__icon svg {
-                width: 14px;
-                height: 14px;
-            }
+    .ab-subtotal-progress-heading.ab-subtotal-progress-heading--show-free-shipping {
+        display: none;
+        gap: 7px;
+        .ab-subtotal-progress-heading__icon svg {
+            width: 14px;
+            height: 14px;
         }
     }
 
