@@ -8,7 +8,7 @@
 
     Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
     Control Preview: https://www.hookandloop.com/brands/duragrip/sew-on?varify-preview=original
-    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
+    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?varify-preview=41812-variation-1
 
 */
 
