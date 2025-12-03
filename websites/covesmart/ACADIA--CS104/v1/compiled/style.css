@@ -143,6 +143,27 @@ Array.from($0.classList).join('.')
 .AB-CS104 .flex.w-full.max-w-\[160px\].items-center.justify-center.gap-cove-10.rounded-full.border.px-cove-15.py-cove-5.border-cove-dark-grey.bg-cove-baby-dove svg path {
   fill: rgb(0, 35, 52);
 }
+.AB-CS104 .py-cove-10.absolute.flex.w-full.items-center.justify-center .select-none {
+  background: rgba(62, 190, 176, 0.1);
+  border: 1px solid rgb(62, 190, 176);
+  height: 34px;
+  padding: 5px 22px;
+  font-family: Poppins, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21.01px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(0, 35, 52);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.AB-CS104 .py-cove-10.absolute.flex.w-full.items-center.justify-center .select-none svg {
+  width: 14px;
+}
 @media screen and (min-width: 768px) {
   .AB-CS104 .flex.w-full.items-center.justify-start h3.text-h3 {
     font-family: Poppins, sans-serif;
@@ -252,5 +273,26 @@ Array.from($0.classList).join('.')
   }
   .AB-CS104 .flex.w-full.max-w-\[160px\].items-center.justify-center.gap-cove-10.rounded-full.border.px-cove-15.py-cove-5.border-cove-dark-grey.bg-cove-baby-dove svg path {
     fill: rgb(0, 35, 52);
+  }
+  .AB-CS104 .py-cove-10.absolute.flex.w-full.items-center.justify-center .select-none {
+    background: rgba(62, 190, 176, 0.1);
+    border: 1px solid rgb(62, 190, 176);
+    height: 34px;
+    padding: 4px 22px;
+    font-family: Poppins, sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21.01px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    color: rgb(0, 35, 52);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+  }
+  .AB-CS104 .py-cove-10.absolute.flex.w-full.items-center.justify-center .select-none svg {
+    width: 30px;
   }
 }
