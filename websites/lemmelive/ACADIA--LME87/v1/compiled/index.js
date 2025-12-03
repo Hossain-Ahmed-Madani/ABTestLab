@@ -16,10 +16,10 @@ https://lemmelive.com/products/byob-5-pack
     const TEST_CONFIG = {
         client: "Acadia",
         project: "lemmelive",
-        host: "https://www.example.com",
+        host: "https://lemmelive.com",
         test_name: "LME87: [BYOB] Add Steps to Bundle Builder - (2) SET UP TEST",
         page_initials: "AB-LME87",
-        test_variation: 1 /* 1, 2, 3 */,
+        test_variation: 3 /* 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -65,36 +65,34 @@ https://lemmelive.com/products/byob-5-pack
     function getProgressBarLayout() {
         return /* HTML */ `
             <div class="ab-progress">
-                <div class="ab-progress-step ab-progress-step--start">0</div>
+                <div class="ab-progress-step ab-progress-step--start">${q(".bundle-builder__form span[data-bundle-builder-item-count-current]").innerText}</div>
                 <div class="ab-progress__bar">
-                <div class="ab-progress__progress"></div>
+                    <div class="ab-progress__progress"></div>
                 </div>
-                <div class="ab-progress-step ab-progress-step--end">4</div>
+                <div class="ab-progress-step ab-progress-step--end">${q(".bundle-builder__form span[data-bundle-builder-total-count]").innerText}</div>
             </div>
         `;
     }
 
-    const CONTENTS = [
-        {
-            htmlContent: getStepHeading(1, "Build Your Bundle"),
-            targetNodeSelector: ".bundle-builder__form > h3.heading-4.text-center",
-            insertPosition: "afterend",
-        },
-
-        {
-            htmlContent: `<div class="ab-border"></div> ${getStepHeading(2, "Choose Your Products")} ${getProgressBarLayout()}`,
-            targetNodeSelector: ".bundle-builder__form > .bundle-builder__pack-size-options",
-            insertPosition: "afterend",
-        },
-        {
-            htmlContent: `<div class="ab-border"></div> ${getStepHeading(3, "Choose Your Frequency")}`,
-            targetNodeSelector: ".bundle-builder__form > .bundle-builder__items",
-            insertPosition: "afterend",
-        },
-    ];
-
     function createLayout() {
-        CONTENTS.forEach(({ htmlContent, targetNodeSelector, insertPosition }) => q(targetNodeSelector).insertAdjacentHTML(insertPosition, htmlContent));
+        [
+            {
+                htmlContent: getStepHeading(1, "Build Your Bundle"),
+                targetNodeSelector: ".bundle-builder__form > h3.heading-4.text-center",
+                insertPosition: "afterend",
+            },
+
+            {
+                htmlContent: `<div class="ab-border"></div> ${getStepHeading(2, "Choose Your Products")} ${getProgressBarLayout()}`,
+                targetNodeSelector: ".bundle-builder__form > .bundle-builder__pack-size-options",
+                insertPosition: "afterend",
+            },
+            {
+                htmlContent: `<div class="ab-border"></div> ${getStepHeading(3, "Choose Your Frequency")}`,
+                targetNodeSelector: ".bundle-builder__form > .bundle-builder__items",
+                insertPosition: "afterend",
+            },
+        ].forEach(({ htmlContent, targetNodeSelector, insertPosition }) => q(targetNodeSelector).insertAdjacentHTML(insertPosition, htmlContent));
     }
 
     function init() {
@@ -104,7 +102,12 @@ https://lemmelive.com/products/byob-5-pack
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".bundle-builder__form"));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(".bundle-builder__form") &&
+            q(".bundle-builder__form span[data-bundle-builder-item-count-current]").innerText &&
+            q(".bundle-builder__form span[data-bundle-builder-total-count]").innerText
+        );
     }
 
     try {

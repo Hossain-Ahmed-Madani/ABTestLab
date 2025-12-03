@@ -16,10 +16,10 @@ https://lemmelive.com/products/byob-5-pack
     const TEST_CONFIG = {
         client: "Acadia",
         project: "lemmelive",
-        host: "https://www.example.com",
+        host: "https://lemmelive.com",
         test_name: "LME87: [BYOB] Add Steps to Bundle Builder - (2) SET UP TEST",
         page_initials: "AB-LME87",
-        test_variation: 1 /* 1, 2, 3 */,
+        test_variation: 3 /* 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -41,6 +41,14 @@ https://lemmelive.com/products/byob-5-pack
         </svg> `,
     };
 
+    const DATA = {
+        pack_size: {
+            "/products/byob-3-pack": 3,
+            "/products/byob-4-pack": 4,
+            "/products/byob-5-pack": 5,
+        },
+    };
+
     async function fetchAndParseURLApi(url) {
         try {
             const response = await fetch(url);
@@ -52,17 +60,6 @@ https://lemmelive.com/products/byob-5-pack
         } catch (error) {
             // console.error("Fetch and parse failed:", error);
             return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
         }
     }
 
@@ -87,28 +84,6 @@ https://lemmelive.com/products/byob-5-pack
                     return resolve(true);
                 }
             }, frequency);
-        });
-    }
-
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
         });
     }
 
@@ -189,36 +164,34 @@ https://lemmelive.com/products/byob-5-pack
     function getProgressBarLayout() {
         return /* HTML */ `
             <div class="ab-progress">
-                <div class="ab-progress-step ab-progress-step--start">0</div>
+                <div class="ab-progress-step ab-progress-step--start">${q(".bundle-builder__form span[data-bundle-builder-item-count-current]").innerText}</div>
                 <div class="ab-progress__bar">
-                <div class="ab-progress__progress"></div>
+                    <div class="ab-progress__progress"></div>
                 </div>
-                <div class="ab-progress-step ab-progress-step--end">4</div>
+                <div class="ab-progress-step ab-progress-step--end">${q(".bundle-builder__form span[data-bundle-builder-total-count]").innerText}</div>
             </div>
         `;
     }
 
-    const CONTENTS = [
-        {
-            htmlContent: getStepHeading(1, "Build Your Bundle"),
-            targetNodeSelector: ".bundle-builder__form > h3.heading-4.text-center",
-            insertPosition: "afterend",
-        },
-
-        {
-            htmlContent: `<div class="ab-border"></div> ${getStepHeading(2, "Choose Your Products")} ${getProgressBarLayout()}`,
-            targetNodeSelector: ".bundle-builder__form > .bundle-builder__pack-size-options",
-            insertPosition: "afterend",
-        },
-        {
-            htmlContent: `<div class="ab-border"></div> ${getStepHeading(3, "Choose Your Frequency")}`,
-            targetNodeSelector: ".bundle-builder__form > .bundle-builder__items",
-            insertPosition: "afterend",
-        },
-    ];
-
     function createLayout() {
-        CONTENTS.forEach(({ htmlContent, targetNodeSelector, insertPosition }) => q(targetNodeSelector).insertAdjacentHTML(insertPosition, htmlContent));
+        [
+            {
+                htmlContent: getStepHeading(1, "Build Your Bundle"),
+                targetNodeSelector: ".bundle-builder__form > h3.heading-4.text-center",
+                insertPosition: "afterend",
+            },
+
+            {
+                htmlContent: `<div class="ab-border"></div> ${getStepHeading(2, "Choose Your Products")} ${getProgressBarLayout()}`,
+                targetNodeSelector: ".bundle-builder__form > .bundle-builder__pack-size-options",
+                insertPosition: "afterend",
+            },
+            {
+                htmlContent: `<div class="ab-border"></div> ${getStepHeading(3, "Choose Your Frequency")}`,
+                targetNodeSelector: ".bundle-builder__form > .bundle-builder__items",
+                insertPosition: "afterend",
+            },
+        ].forEach(({ htmlContent, targetNodeSelector, insertPosition }) => q(targetNodeSelector).insertAdjacentHTML(insertPosition, htmlContent));
     }
 
     function init() {
@@ -228,7 +201,12 @@ https://lemmelive.com/products/byob-5-pack
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".bundle-builder__form"));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(".bundle-builder__form") &&
+            q(".bundle-builder__form span[data-bundle-builder-item-count-current]").innerText &&
+            q(".bundle-builder__form span[data-bundle-builder-total-count]").innerText
+        );
     }
 
     try {
