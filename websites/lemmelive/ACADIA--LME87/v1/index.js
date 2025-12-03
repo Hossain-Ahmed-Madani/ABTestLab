@@ -176,6 +176,11 @@ https://lemmelive.com/products/byob-5-pack
     function createLayout() {
         [
             {
+                htmlContent: `<div class="ab-bundle-builder-form-wrapper"></div>`,
+                targetNodeSelector: ".bundle-builder__form",
+                insertPosition: "afterbegin",
+            },
+            {
                 htmlContent: getStepHeading(1, "Build Your Bundle"),
                 targetNodeSelector: ".bundle-builder__form > h3.heading-4.text-center",
                 insertPosition: "afterend",
@@ -192,6 +197,10 @@ https://lemmelive.com/products/byob-5-pack
                 insertPosition: "afterend",
             },
         ].forEach(({ htmlContent, targetNodeSelector, insertPosition }) => q(targetNodeSelector).insertAdjacentHTML(insertPosition, htmlContent));
+
+        qq(".bundle-builder__form > *:not(button.bundle-builder__form-toggle):not(.ab-bundle-builder-form-wrapper)").forEach((item) =>
+            q(".ab-bundle-builder-form-wrapper").appendChild(item)
+        );
     }
 
     function init() {

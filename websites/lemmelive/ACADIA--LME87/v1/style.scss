@@ -19,7 +19,7 @@
     }
 
     .bundle-builder__form {
-        padding-top: 30px;
+        padding: 0;
         overflow: visible;
 
         & > .heading-4.text-center {
@@ -32,6 +32,10 @@
                     margin-top: 2px;
                     transform: rotate(-135deg);
                 }
+            }
+
+            .ab-bundle-builder-form-wrapper {
+                max-height: calc(var(--viewport-height) - 96px);
             }
         }
 
@@ -66,6 +70,21 @@
             overflow-x: scroll;
             margin-left: -20px;
             margin-right: -20px;
+        }
+    }
+
+    .ab-bundle-builder-form-wrapper {
+        border-radius: 32px;
+        border-bottom: none;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+
+        overflow: auto;
+        padding: 22px 20px 24px;
+        padding-top: 30px;
+
+        & > .heading-4.text-center {
+            display: none;
         }
     }
 
@@ -313,7 +332,6 @@
             margin-bottom: 0;
 
             &.active {
-
                 display: flex;
                 justify-content: center;
                 align-items: center;
