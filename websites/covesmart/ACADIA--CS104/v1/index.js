@@ -134,9 +134,13 @@ Test container: https://app.convert.com/accounts/10049195/projects/100410617/exp
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
+    function updateLayoutOnMutation() {
+        //
+    }
+
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
+        const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
