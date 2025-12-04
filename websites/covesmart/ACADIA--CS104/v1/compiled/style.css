@@ -36,6 +36,7 @@ Array.from($0.classList).join('.')
   letter-spacing: 0px;
   vertical-align: middle;
   color: rgb(0, 35, 52);
+  margin-bottom: 10px;
 }
 .AB-CS104 .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold .ml-cove-10.flex.items-center.justify-center,
 .AB-CS104 .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold .ml-cove-30.flex.items-center.justify-center,
@@ -58,6 +59,12 @@ Array.from($0.classList).join('.')
   width: 9px;
   height: 9px;
 }
+.AB-CS104 .flex.h-auto.w-auto.items-center.justify-center.mt-\[6px\] {
+  margin-bottom: 10px;
+  margin-top: 3px;
+  width: 9px;
+  height: 9px;
+}
 .AB-CS104 .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
 .AB-CS104 .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4 + .text-cove-dark-grey.text-xs.font-light,
 .AB-CS104 .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4 {
@@ -68,6 +75,7 @@ Array.from($0.classList).join('.')
   letter-spacing: 0px;
   vertical-align: middle;
   color: rgb(0, 35, 52);
+  margin-top: 0;
 }
 .AB-CS104 .relative.text-sm.text-cove-dark-grey.after\:absolute.after\:left-0.after\:right-0.after\:top-\[calc\(50\%-1px\)\].after\:-translate-y-1\/2.after\:border-t.after\:border-t-cove-dark-grey,
 .AB-CS104 .mr-cove-5.relative.m-0.text-sm.font-light.leading-\[14px\].text-inherit.before\:absolute.before\:top-\[42\%\].before\:h-\[1px\].before\:w-full.before\:translate-y-\[50\%\].before\:bg-black.before\:content-\[\'\'\].md\:mr-0 {
@@ -158,6 +166,8 @@ Array.from($0.classList).join('.')
   text-align: center;
   vertical-align: middle;
   color: rgb(0, 35, 52);
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .AB-CS104 .mb-cove-10.mt-cove-15.flex.w-full.max-w-\[160px\].items-center.rounded-full.border.border-cove-blue.px-cove-5.shadow svg,
 .AB-CS104 .border-cove-blue.px-cove-5.flex.w-full.max-w-\[160px\].items-center.rounded-full.border.shadow svg {
@@ -183,6 +193,16 @@ Array.from($0.classList).join('.')
 }
 .AB-CS104 .py-cove-10.absolute.flex.w-full.items-center.justify-center .select-none svg {
   width: 20px;
+}
+.AB-CS104 .mb-auto.mt-cove-15.w-full {
+  margin-top: 20px;
+}
+.AB-CS104 .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white {
+  gap: 20px;
+}
+.AB-CS104 .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 @media screen and (min-width: 768px) {
   .AB-CS104 .flex.w-full.items-center.justify-start h3.text-h3 {
@@ -218,6 +238,8 @@ Array.from($0.classList).join('.')
     letter-spacing: 0px;
     vertical-align: middle;
     color: rgb(0, 35, 52);
+    padding-bottom: 0;
+    margin-bottom: 13px;
   }
   .AB-CS104 .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
   .AB-CS104 .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4 + .text-cove-dark-grey.text-xs.font-light,
@@ -326,9 +348,21 @@ Array.from($0.classList).join('.')
     text-align: center;
     vertical-align: middle;
     color: rgb(0, 35, 52);
+    margin-top: 16px;
+    margin-bottom: 10px;
   }
   .AB-CS104 .mb-cove-10.mt-cove-15.flex.w-full.max-w-\[160px\].items-center.rounded-full.border.border-cove-blue.px-cove-5.shadow svg,
   .AB-CS104 .border-cove-blue.px-cove-5.flex.w-full.max-w-\[160px\].items-center.rounded-full.border.shadow svg {
     height: 25px;
+  }
+  .AB-CS104 .mb-auto.mt-cove-15.w-full {
+    margin-top: 17px;
+  }
+  .AB-CS104 .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white {
+    gap: 17px;
+  }
+  .AB-CS104 .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {
+    margin-top: 16px;
+    margin-bottom: 10px;
   }
 }
