@@ -1,3 +1,4 @@
+
 .AB-CS104 .flex.w-full.items-center.justify-start h3.text-h3 {
     font-family: Poppins, sans-serif;
     font-weight: 700;
@@ -34,6 +35,7 @@
     vertical-align: middle;
     color: rgb(0, 35, 52);
     margin-bottom: 10px;
+    text-align: center;
     display: inline-block;
 }
 .AB-CS104 .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold *,
