@@ -29,7 +29,7 @@ logInfo("fired");
         test_name: "CS104: [QUIZ RESULTS] Card Clean Up - (2) SET UP TEST",
         page_initials: "AB-CS104",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -79,7 +79,6 @@ logInfo("fired");
     }
 
     function updateLayout() {
-        console.log("updateLayout....");
 
         // Strike through pricing
         qq(
@@ -89,9 +88,7 @@ logInfo("fired");
             item.classList.add("ab-ea-removed");
         });
 
-        // Replace modal button
-
-        // Update Badges
+        // Relocate Badges
         qq(".flex.flex-wrap.items-center").forEach((item) => {
             const badges = qq(
                 item,

@@ -29,7 +29,7 @@ logInfo("fired");
         test_name: "CS104: [QUIZ RESULTS] Card Clean Up - (2) SET UP TEST",
         page_initials: "AB-CS104",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -150,7 +150,6 @@ logInfo("fired");
     }
 
     function updateLayout() {
-        console.log("updateLayout....");
 
         // Strike through pricing
         qq(

@@ -50,6 +50,15 @@ Array.from($0.classList).join('.')
   vertical-align: middle;
   color: rgb(0, 35, 52);
   margin-bottom: 10px;
+  display: inline-block;
+}
+.AB-CS104
+  .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold
+  *,
+.AB-CS104
+  .text-cove-dark-grey.mb-cove-5.m-0.flex.text-\[12px\].font-bold.leading-4.sm\:text-sm.sm\:font-bold
+  * {
+  display: inline-block;
 }
 .AB-CS104
   .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold
@@ -71,12 +80,9 @@ Array.from($0.classList).join('.')
 .AB-CS104
   .text-cove-dark-grey.mb-cove-5.m-0.flex.text-\[12px\].font-bold.leading-4.sm\:text-sm.sm\:font-bold
   button {
-  width: 14px;
-  height: 14px;
-  padding: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 0px;
+  padding-left: 2px;
+  display: inline-block;
 }
 .AB-CS104
   .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold
@@ -86,9 +92,9 @@ Array.from($0.classList).join('.')
   .text-cove-dark-grey.mb-cove-5.m-0.flex.text-\[12px\].font-bold.leading-4.sm\:text-sm.sm\:font-bold
   button
   svg {
-  margin-top: 0;
-  width: 9px;
-  height: 9px;
+  margin-bottom: -1px;
+  width: 12px;
+  height: 12px;
 }
 .AB-CS104 .flex.h-auto.w-auto.items-center.justify-center.mt-\[6px\] {
   margin-bottom: 10px;
@@ -315,6 +321,16 @@ Array.from($0.classList).join('.')
     margin-bottom: 13px;
   }
   .AB-CS104
+    .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold
+    button
+    svg,
+  .AB-CS104
+    .text-cove-dark-grey.mb-cove-5.m-0.flex.text-\[12px\].font-bold.leading-4.sm\:text-sm.sm\:font-bold
+    button
+    svg {
+    margin-bottom: 0;
+  }
+  .AB-CS104
     .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
   .AB-CS104
     .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4
@@ -478,7 +494,8 @@ Array.from($0.classList).join('.')
 URL: https://www.covesmart.com/quiz-results/
 Figma: https://www.figma.com/design/6kGIV8C7MvldVxOx8N3EHb/CS104---QUIZ-RESULTS--Card-Clean-Up?node-id=2001-3683&p=f&t=bHhinD1kOtBsyoSs-0
 Test container: https://app.convert.com/accounts/10049195/projects/100410617/experiences/1004177293/summary
-
+Forced variation: https://www.covesmart.com/quiz-results/?utm_campaign=acadia
+Preview: https://www.covesmart.com/quiz-results/?convert_action=convert_vpreview&convert_e=1004177293&convert_v=1004417797
 */
 
 const TEST_ID = "CS104";
@@ -571,9 +588,7 @@ logInfo("fired");
       item.classList.add("ab-ea-removed");
     });
 
-    // Replace modal button
-
-    // Update Badges
+    // Relocate Badges
     qq(".flex.flex-wrap.items-center").forEach((item) => {
       const badges = qq(
         item,

@@ -59,23 +59,28 @@ Array.from($0.classList).join('.')
         color: rgba(0, 35, 52, 1);
         margin-bottom: 10px;
 
+        display: inline-block;
+
+        * {
+            display: inline-block;
+        }
+
         .ml-cove-10.flex.items-center.justify-center,
         .ml-cove-30.flex.items-center.justify-center {
             margin-left: 1px;
         }
 
         button {
-            width: 14px;
-            height: 14px;
-            padding: 2px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
+            padding: 0px;
+            padding-left: 2px;
+            display: inline-block;
+            
+            
             svg {
-                margin-top: 0;
-                width: 9px;
-                height: 9px;
+                // border: 1px solid red;
+                margin-bottom: -1px;
+                width: 12px;
+                height: 12px;
             }
         }
     }
@@ -289,6 +294,12 @@ Array.from($0.classList).join('.')
             color: rgba(0, 35, 52, 1);
             padding-bottom: 0;
             margin-bottom: 13px;
+
+            button {
+                svg {
+                    margin-bottom: 0;
+                }
+            }
         }
 
         .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
