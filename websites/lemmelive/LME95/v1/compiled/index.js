@@ -6,7 +6,6 @@ Targetting: /collections/
 
 */
 
-
 const TEST_ID = "LME95";
 const VARIANT_ID = "V1";
 
@@ -33,6 +32,13 @@ logInfo("fired");
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+    const ASSETS = {
+        // img_url_mobile: "https://sb.monetate.net/img/1/1597/5939747.png",
+        // img_url_desktop: "https://sb.monetate.net/img/1/1597/5939509.png",
+        img_url_mobile: "https://sb.monetate.net/img/1/1597/5939840.png",
+        img_url_desktop: "https://sb.monetate.net/img/1/1597/5939840.png",
+    };
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -62,13 +68,34 @@ logInfo("fired");
         return document.querySelector(s);
     }
 
+    function createLayout() {
+        //  style="grid-column: span 2; border:1px solid red;"
+        const selector = ".collection__items > .collection-item:nth-child(3)";
+        const layout = /* HTML */ `
+            <div class="ab-inline-ad">
+                <div class="ab-inline-ad__container">
+                    <div class="ab-inline-ad__image">
+                        <img class="ab-inline-ad__img--mobile" src="${ASSETS['img_url_mobile']}" alt="${page_initials}--image"/>
+                        <img class="ab-inline-ad__img--desktop" src="${ASSETS['img_url_desktop']}" alt="${page_initials}--image"/>
+                    </div>
+                    <div class="ab-inline-ad__content">
+                        <div class="ab-inline-ad__heading">New Muscle </br> Toning Gummies</div>
+                        <div class="ab-inline-ad__cta">Shop Now</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        q(selector).insertAdjacentHTML("afterend", layout);
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+        createLayout();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".collection__items > .collection-item:nth-child(3)"));
     }
 
     try {
