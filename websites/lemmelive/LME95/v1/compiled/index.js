@@ -7,7 +7,7 @@ Targetting: /collections/
 */
 
 const TEST_ID = "LME95";
-const VARIANT_ID = "V1";
+const VARIANT_ID = "V1"; /* V1, V2 */
 
 function logInfo(message) {
     console.log(
@@ -34,11 +34,22 @@ logInfo("fired");
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const ASSETS = {
-        // img_url_mobile: "https://sb.monetate.net/img/1/1597/5939747.png",
-        // img_url_desktop: "https://sb.monetate.net/img/1/1597/5939509.png",
-        img_url_mobile: "https://sb.monetate.net/img/1/1597/5939840.png",
-        img_url_desktop: "https://sb.monetate.net/img/1/1597/5939840.png",
+        img_url_mobile: "https://cdn.shopify.com/s/files/1/0654/8042/5686/files/muscle_toning_gummies_mobile.png?v=1764866569",
+        img_url_desktop: "https://cdn.shopify.com/s/files/1/0654/8042/5686/files/muscle_toning_gummies_desktop.png?v=1764866569",
     };
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log(`Firing GA4 Event: ${eventName} - ${eventLabel}`);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -68,24 +79,45 @@ logInfo("fired");
         return document.querySelector(s);
     }
 
+    const SELECTOR = {
+        1: {
+            "(max-width: 1199px)": ".collection__items > *:nth-child(2)",
+            "(min-width: 1200px)": ".collection__items > *:nth-child(3)",
+        },
+        2: {
+            "(max-width: 749px)": ".collection__items > *:nth-child(4)",
+            "(min-width: 750px) and (max-width: 1199px)": ".collection__items > *:nth-child(5)",
+            "(min-width: 1200px)": ".collection__items > *:nth-child(7)",
+        },
+    };
+
+    function getTargetSelector() {
+        const mediaQuery = Object.keys(SELECTOR[test_variation]).find((mq) => window.matchMedia(mq).matches);
+        return SELECTOR[test_variation]?.[mediaQuery] || null;
+    }
+
     function createLayout() {
-        //  style="grid-column: span 2; border:1px solid red;"
-        const selector = ".collection__items > .collection-item:nth-child(3)";
+        const selector = getTargetSelector();
+
         const layout = /* HTML */ `
-            <div class="ab-inline-ad">
+            <a class="ab-inline-ad" href="#" rel="noopener noreferrer">
                 <div class="ab-inline-ad__container">
-                    <div class="ab-inline-ad__image">
-                        <img class="ab-inline-ad__img--mobile" src="${ASSETS['img_url_mobile']}" alt="${page_initials}--image"/>
-                        <img class="ab-inline-ad__img--desktop" src="${ASSETS['img_url_desktop']}" alt="${page_initials}--image"/>
-                    </div>
-                    <div class="ab-inline-ad__content">
-                        <div class="ab-inline-ad__heading">New Muscle </br> Toning Gummies</div>
-                        <div class="ab-inline-ad__cta">Shop Now</div>
-                    </div>
+                    <img class="ab-inline-ad__img--mobile" src="${ASSETS["img_url_mobile"]}" alt="${page_initials}--image" />
+                    <img class="ab-inline-ad__img--desktop" src="${ASSETS["img_url_desktop"]}" alt="${page_initials}--image" />
                 </div>
-            </div>
+            </a>
         `;
         q(selector).insertAdjacentHTML("afterend", layout);
+
+        q(".ab-inline-ad").addEventListener("click", (e) => {
+            e.preventDefault();
+            fireGA4Event(`LME95_InLineAdClick`, `Variation ${test_variation},  user clicks on the in-line ad card`);
+            setTimeout(() => {
+                const redirectUrl = "https://lemmelive.com/products/lemme-greens-gummies";
+                console.log("Redirecting to:", redirectUrl);
+                window.location.href = redirectUrl;
+            }, 100);
+        });
     }
 
     function init() {
@@ -95,7 +127,7 @@ logInfo("fired");
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".collection__items > .collection-item:nth-child(3)"));
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && getTargetSelector() && q(getTargetSelector()));
     }
 
     try {
