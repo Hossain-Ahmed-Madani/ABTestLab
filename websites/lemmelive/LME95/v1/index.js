@@ -52,6 +52,20 @@ logInfo("fired");
         }
     }
 
+    const DATA = {
+        sibling_selector: {
+            1: {
+                "(max-width: 1199px)": ".collection__items > *:nth-child(2)",
+                "(min-width: 1200px)": ".collection__items > *:nth-child(3)",
+            },
+            2: {
+                "(max-width: 749px)": ".collection__items > *:nth-child(4)",
+                "(min-width: 750px) and (max-width: 1199px)": ".collection__items > *:nth-child(5)",
+                "(min-width: 1200px)": ".collection__items > *:nth-child(7)",
+            },
+        },
+    };
+
     function fireGA4Event(eventName, eventLabel = "") {
         console.log(`Firing GA4 Event: ${eventName} - ${eventLabel}`);
         window.dataLayer = window.dataLayer || [];
@@ -89,28 +103,6 @@ logInfo("fired");
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -119,99 +111,33 @@ logInfo("fired");
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function updateLayoutOnMutation() {
-        //
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
-
-    const SELECTOR = {
-        1: {
-            "(max-width: 1199px)": ".collection__items > *:nth-child(2)",
-            "(min-width: 1200px)": ".collection__items > *:nth-child(3)",
-        },
-        2: {
-            "(max-width: 749px)": ".collection__items > *:nth-child(4)",
-            "(min-width: 750px) and (max-width: 1199px)": ".collection__items > *:nth-child(5)",
-            "(min-width: 1200px)": ".collection__items > *:nth-child(7)",
-        },
-    };
-
     function getTargetSelector() {
-        const mediaQuery = Object.keys(SELECTOR[test_variation]).find((mq) => window.matchMedia(mq).matches);
-        return SELECTOR[test_variation]?.[mediaQuery] || null;
+        const mediaQuery = Object.keys(DATA['sibling_selector'][test_variation]).find((mq) => window.matchMedia(mq).matches);
+        return DATA['sibling_selector'][test_variation]?.[mediaQuery] || null;
     }
 
     function createLayout() {
         const selector = getTargetSelector();
 
-        const layout = /* HTML */ `
-            <a class="ab-inline-ad" href="#" rel="noopener noreferrer">
-                <div class="ab-inline-ad__container">
-                    <img class="ab-inline-ad__img--mobile" src="${ASSETS["img_url_mobile"]}" alt="${page_initials}--image" />
-                    <img class="ab-inline-ad__img--desktop" src="${ASSETS["img_url_desktop"]}" alt="${page_initials}--image" />
-                </div>
-            </a>
-        `;
-        q(selector).insertAdjacentHTML("afterend", layout);
+        if (!selector) return;
+
+        q(selector).insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <a class="ab-inline-ad" href="#" rel="noopener noreferrer">
+                    <div class="ab-inline-ad__container">
+                        <img class="ab-inline-ad__img--mobile" src="${ASSETS["img_url_mobile"]}" alt="${page_initials}--image" />
+                        <img class="ab-inline-ad__img--desktop" src="${ASSETS["img_url_desktop"]}" alt="${page_initials}--image" />
+                    </div>
+                </a>
+            `
+        );
 
         q(".ab-inline-ad").addEventListener("click", (e) => {
             e.preventDefault();
             fireGA4Event(`LME95_InLineAdClick`, `Variation ${test_variation},  user clicks on the in-line ad card`);
             setTimeout(() => {
                 const redirectUrl = "https://lemmelive.com/products/lemme-greens-gummies";
-                console.log("Redirecting to:", redirectUrl);
                 window.location.href = redirectUrl;
             }, 100);
         });
