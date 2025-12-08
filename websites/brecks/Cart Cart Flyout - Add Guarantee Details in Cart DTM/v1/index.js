@@ -11,6 +11,10 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const ASSETS = {
+        guarantee_image: "https://www.brecks.com/cdn/shop/files/LF_gurantee_logo.png?crop=center&height=100&v=1723133651&width=100",
+    };
+
     async function fetchAndParseURLApi(url) {
         try {
             const response = await fetch(url);
@@ -137,19 +141,54 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
+    function updateLayout() {
+        console.log("Mutation observed - updating layout");
+        createSideCartLayout();
+        // createCartPageLayout
+    }
+
     function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
+        const targetNode = q("body");
+        const debouncedUpdate = debounce(updateLayout, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    }
+
+    function createSideCartLayout() {
+        if (q(".ab-cart-flyout--side-cart") || !q(".quick-cart__item")) return;
+
+        q(".quick-cart__header").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-cart-flyout ab-cart-flyout--side-cart">
+                    <div class="ab-cart-flyout__heading">
+                        <div class="ab-cart-flyout__logo">
+                            <img src="${ASSETS["guarantee_image"]}" alt="Guarantee Logo" />
+                        </div>
+                        <div class="ab-cart-flyout__title">What if my bulbs don’t grow?</div>
+                    </div>
+                    <div class="ab-cart-flyout__description">
+                        No worries! Every Breck’s bulb, bareroot, and potted plant comes with our <b>no-risk lifetime guarantee</b>. If your purchase doesn’t bring you joy, reach out to our
+                        Customer Service team and we’ll gladly replace your plant or provide a merchandise credit.
+                    </div>
+                </div>
+            `
+        );
+    }
+
+    function createCartPageLayout() {
+        //
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+        createSideCartLayout();
+        createCartPageLayout();
+        mutationObserverFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".quick-cart__header"));
     }
 
     try {
