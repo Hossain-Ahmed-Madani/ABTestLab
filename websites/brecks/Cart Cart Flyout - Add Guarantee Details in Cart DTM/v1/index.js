@@ -142,7 +142,6 @@
     }
 
     function updateLayout() {
-        console.log("Mutation observed - updating layout");
         createSideCartLayout();
         createCartPageLayout();
     }
