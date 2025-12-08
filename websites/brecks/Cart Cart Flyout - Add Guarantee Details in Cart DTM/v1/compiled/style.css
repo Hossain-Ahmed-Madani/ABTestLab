@@ -1,3 +1,6 @@
+.AB-CART-FLYOUT .ab-span-desktop {
+  display: none;
+}
 .AB-CART-FLYOUT .ab-cart-flyout {
   display: flex;
   flex-direction: column;
@@ -44,6 +47,9 @@
   color: rgb(0, 0, 0);
 }
 @media screen and (min-width: 991px) {
+  .AB-CART-FLYOUT .ab-cart-flyout--side-cart .ab-span-desktop {
+    display: inline;
+  }
   .AB-CART-FLYOUT .ab-cart-flyout--side-cart .ab-cart-flyout__heading {
     gap: 6px;
   }
@@ -65,5 +71,70 @@
   }
   .AB-CART-FLYOUT .ab-cart-flyout--side-cart .ab-cart-flyout__description b {
     font-weight: 400;
+  }
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page {
+  max-width: var(--side-bar-width);
+  padding: 20px 0;
+  gap: 9.5px;
+  border-bottom: 1px solid var(--color-border);
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__heading {
+  gap: 7px;
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__logo img {
+  width: 24px;
+  height: 24px;
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__title {
+  font-family: "EB Garamond", serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description--mobile {
+  display: block;
+}
+.AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description--desktop {
+  display: none;
+}
+@media screen and (min-width: 991px) {
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page {
+    gap: 8px;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__heading {
+    gap: 6px;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__logo img {
+    width: 25px;
+    height: 25px;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__title {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0px;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    letter-spacing: 0px;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description--mobile {
+    display: none;
+  }
+  .AB-CART-FLYOUT .ab-cart-flyout--cart-page .ab-cart-flyout__description--desktop {
+    display: block;
   }
 }

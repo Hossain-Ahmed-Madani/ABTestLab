@@ -13,6 +13,10 @@
 }
 
 .AB-CART-FLYOUT {
+    .ab-span-desktop {
+        display: none;
+    }
+
     .ab-cart-flyout {
         display: flex;
         flex-direction: column;
@@ -68,6 +72,10 @@
         }
 
         @media screen and (min-width: 991px) {
+            .ab-span-desktop {
+                display: inline;
+            }
+
             .ab-cart-flyout__heading {
                 gap: 6px;
             }
@@ -91,8 +99,84 @@
                 letter-spacing: 0px;
 
                 b {
-                font-weight: 400;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
 
+    .ab-cart-flyout--cart-page {
+        max-width: var(--side-bar-width);
+        padding: 20px 0;
+        gap: 9.5px;
+        border-bottom: 1px solid var(--color-border);
+
+        .ab-cart-flyout__heading {
+            gap: 7px;
+        }
+
+        .ab-cart-flyout__logo img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .ab-cart-flyout__title {
+            font-family: "EB Garamond", serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+        }
+
+        .ab-cart-flyout__description {
+            font-family: "DM Sans", sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+
+            &--mobile {
+                display: block;
+            }
+
+            &--desktop {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 991px) {
+            gap: 8px;
+
+            .ab-cart-flyout__heading {
+                gap: 6px;
+            }
+
+            .ab-cart-flyout__logo img {
+                width: 25px;
+                height: 25px;
+            }
+
+            .ab-cart-flyout__title {
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 100%;
+                letter-spacing: 0px;
+            }
+
+            .ab-cart-flyout__description {
+                font-weight: 400;
+                font-size: 13px;
+                line-height: 18px;
+                letter-spacing: 0px;
+
+                &--mobile {
+                    display: none;
+                }
+
+                &--desktop {
+                    display: block;
                 }
             }
         }

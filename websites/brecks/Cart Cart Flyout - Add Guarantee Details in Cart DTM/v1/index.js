@@ -144,7 +144,7 @@
     function updateLayout() {
         console.log("Mutation observed - updating layout");
         createSideCartLayout();
-        // createCartPageLayout
+        createCartPageLayout();
     }
 
     function mutationObserverFunction() {
@@ -156,7 +156,7 @@
     function createSideCartLayout() {
         if (q(".ab-cart-flyout--side-cart") || !q(".quick-cart__item")) return;
 
-        q(".quick-cart__header").insertAdjacentHTML(
+        q(".quick-cart__header")?.insertAdjacentHTML(
             "afterend",
             /* HTML */ `
                 <div class="ab-cart-flyout ab-cart-flyout--side-cart">
@@ -167,8 +167,8 @@
                         <div class="ab-cart-flyout__title">What if my bulbs don’t grow?</div>
                     </div>
                     <div class="ab-cart-flyout__description">
-                        No worries! Every Breck’s bulb, bareroot, and potted plant comes with our <b>no-risk lifetime guarantee</b>. If your purchase doesn’t bring you joy, reach out to our
-                        Customer Service team and we’ll gladly replace your plant or provide a merchandise credit.
+                        No worries! Every Breck’s bulb, bareroot, and potted plant comes with our <b>no-risk lifetime guarantee</b>. If your purchase doesn’t bring you joy, reach out to
+                        our Customer Service team and we’ll gladly replace your plant or provide a merchandise credit.
                     </div>
                 </div>
             `
@@ -176,7 +176,26 @@
     }
 
     function createCartPageLayout() {
-        //
+        if (q(".ab-cart-flyout--cart-page") || !q(".cart__form-item")) return;
+
+        q(".cart.page .cart__footer")?.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-cart-flyout ab-cart-flyout--cart-page">
+                    <div class="ab-cart-flyout__heading">
+                        <div class="ab-cart-flyout__logo">
+                            <img src="${ASSETS["guarantee_image"]}" alt="Guarantee Logo" />
+                        </div>
+                        <div class="ab-cart-flyout__title">What if my bulbs don’t grow?</div>
+                    </div>
+                    <div class="ab-cart-flyout__description ab-cart-flyout__description--mobile"> 
+                        No worries! Every Breck’s bulb, bareroot, and potted plant comes with our <b>no-risk lifetime guarantee.</b>  If your purchase doesn’t bring you joy,  reach out to our Customer Service team and we’ll gladly replace your plant or provide a merchandise credit. No time limit, no need to return the plant.
+                    </div>
+                    <div class="ab-cart-flyout__description ab-cart-flyout__description--desktop"> 
+                        No worries! Every Breck’s bulb, bareroot, and potted plant comes with our <b>no-risk lifetime guarantee.</b> If your purchase doesn’t bring you joy,  reach out to our Customer Service team and we’ll gladly replace your plant or provide a merchandise credit. No time limit, no need to return the plant.
+                    </div>
+                </div>
+            `);
     }
 
     function init() {
