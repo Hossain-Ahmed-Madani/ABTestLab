@@ -1,0 +1,13 @@
+{
+  "id": "1765185920039_1290_Cart_Cart_Flyout___Add_Guarantee_Details_in_Cart_DTM",
+  "name": "Cart Cart Flyout - Add Guarantee Details in Cart DTM",
+  "type": "A/B",
+  "website": "brecks",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-12-08T09:25:20.039Z",
+  "createdAtReadable": "12/8/2025, 3:25:20 PM",
+  "lastUpdated": "2025-12-08T09:25:20.423Z"
+}
