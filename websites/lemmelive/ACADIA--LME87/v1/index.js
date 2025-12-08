@@ -12,6 +12,20 @@ https://lemmelive.com/products/byob-5-pack
 
 */
 
+const TEST_ID = "LME87";
+const VARIANT_ID = "V1"; /* V1, V2, V3 */
+
+function logInfo(message) {
+    console.log(
+        `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+        "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        message
+    );
+}
+
+logInfo("fired");
+
 (async () => {
     const TEST_CONFIG = {
         client: "Acadia",
@@ -19,7 +33,7 @@ https://lemmelive.com/products/byob-5-pack
         host: "https://lemmelive.com",
         test_name: "LME87: [BYOB] Add Steps to Bundle Builder - (2) SET UP TEST",
         page_initials: "AB-LME87",
-        test_variation: 3 /* 1, 2, 3 */,
+        test_variation: 1 /* 1, 2, 3 */,
         test_version: 0.0001,
     };
 
