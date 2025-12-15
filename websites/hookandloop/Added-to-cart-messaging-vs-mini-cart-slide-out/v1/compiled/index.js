@@ -8,7 +8,7 @@
 
     Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=27530&variation_id=41258
     Control Preview: https://www.hookandloop.com/brands/duragrip/sew-on?varify-preview=original
-    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
+    Preview: https://www.hookandloop.com/brands/duragrip/sew-on?varify-preview=41812-variation-1
 
 */
 
@@ -20,7 +20,7 @@
         test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.00021,
+        test_version: 0.00022,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -849,7 +849,6 @@
     }
 
     function updateProgressSection(sideCart) {
-
         const subTotalSelector = "span[x-html='cart\\.subtotal'] .price";
 
         if (!q(sideCart, subTotalSelector)) return;
@@ -857,7 +856,6 @@
         const subTotalProgressContainer = q(sideCart, ".ab-subtotal-progress-container");
         const abAddedSubtotal = q(sideCart, ".ab-added-subtotal");
         const abProgressBar = q(sideCart, ".ab-subtotal-progress-bar__progress");
-
 
         const subTotalTxt = q(sideCart, subTotalSelector)?.innerText;
         const subTotal = +subTotalTxt.replace("$", "").replace(",", "");
@@ -1040,31 +1038,15 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function checkPDPAddToCartFormValidity() {
-        if (q(" button#custom_strap_atc") && q(" button#custom_strap_atc:not(disabled)")) return true;
-        const form = q("form#product_addtocart_form");
-        const input = q(".product-info-main input[name='qty']");
-        const isValid = checkInputValidity(input) && qq(form, `span.font-bold[x-text^="pdpAttrValidationerrors"]:not(:empty)`).length === 0;
-
-        return isValid;
-    }
-
     async function handlePDPAddToCart() {
         const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
         await waitForElementAsync(() => qq(selector).length > 0);
 
         qq(selector).forEach((elem) =>
             elem.addEventListener("click", async (e) => {
+                await waitForElementAsync(() => q('.message.success') && !q("body .loader"));
+
                 const currentTarget = e.currentTarget;
-                /* delaying 150ms * 3 = 0.45 seconds */
-                let timer = 0;
-                await waitForElementAsync(() => timer++ >= 3);
-
-                const isValid = checkPDPAddToCartFormValidity();
-
-                if (!isValid) return;
-
-                await waitForElementAsync(() => !q("body .loader"));
 
                 q("button#menu-cart-icon")?.click();
 
