@@ -496,7 +496,10 @@
   font-size: 16px;
   line-height: 100%;
   letter-spacing: 0px;
-  color: rgb(118, 118, 118);
+  color: #333333;
+}
+.AB-Checkout-Step-1-2 .ab-product-summary__coupons-input::placeholder, .AB-Checkout-Step-1-2 .ab-product-summary__coupons-input::-ms-input-placeholder, .AB-Checkout-Step-1-2 .ab-product-summary__coupons-input::-ms-input-placeholder {
+  color: rgb(59, 59, 59);
 }
 .AB-Checkout-Step-1-2 .ab-product-summary__coupons-button {
   width: 76px;
@@ -516,6 +519,7 @@
 }
 .AB-Checkout-Step-1-2 .ab-product-summary__coupons-button:hover {
   background-color: #ffe8a6;
+  color: #333333;
 }
 .AB-Checkout-Step-1-2 .ab-product-summary__calculation-table {
   display: flex;
