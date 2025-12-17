@@ -873,8 +873,15 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     <div class="ab-product-summary__coupons">
                         <div class="ab-product-summary__coupons-heading">Coupons</div>
                         <label for="ab-coupons" class="ab-product-summary__coupons-form-group">
-                            <input id="ab-coupons" placeholder="Please enter coupon code" class="ab-product-summary__coupons-input" type="text" />
-                            <button class="ab-product-summary__coupons-button">Apply</button>
+                            <input
+                                id="ab-coupons"
+                                placeholder="Please enter coupon code"
+                                class="ab-product-summary__coupons-input"
+                                type="text"
+                                control_node_selector="cart-coupon input[name='coupon']"
+                                ${`cart-coupon p.text-danger` ? "area-invalid" : ""}
+                            />
+                            <button type="button" class="ab-product-summary__coupons-button">Apply</button>
                         </label>
                     </div>
                 </div>
@@ -908,6 +915,59 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         `;
 
         return layout;
+    }
+
+    async function updateProductSummaryLayout() {
+        const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
+
+        q(".ab-product-summary__added-products").innerHTML = /* HTML */ `
+            ${CartLine.map(
+                ({ Image, Code, SEOUrl, Name, ProductStatus, UnitOfMeasure }) => /* HTML */ `
+                    <div class="ab-product-summary__product">
+                        <a class="ab-product-summary__product-img" href="${host}/${SEOUrl}">
+                            <img src="${Image[0].CdnUrl}" alt="${Name}" onerror="this.src='/images/no-image-available.png'" alt="/images/no-image-available.png" />
+                            <p class="ab-product-summary__product-sku">${Code}</p>
+                        </a>
+                        <div class="ab-product-summary__product-info">
+                            <p class="ab-product-summary__product-title">${Name}</p>
+                            ${ProductStatus === "Active"
+                                ? '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--available">Available</p>'
+                                : '<p class="ab-product-summary__product-availability ab-product-summary__product-availability--stock-out">Stock Out</p>'}
+
+                            <p class="ab-product-summary__product-quantity">Quantity: ${UnitOfMeasure[0].Quantity}</p>
+                            <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
+                        </div>
+                    </div>
+                `
+            ).join("")}
+        `;
+
+        q(".ab-product-summary__calculation-table").innerHTML = /* HTML */ `
+            <div class="ab-product-summary__row row">
+                <div class="ab-product-summary__col col-6">Items in Cart</div>
+                <div class="ab-product-summary__col col-6">${UnitTotals[0].Quantity}</div>
+            </div>
+            <div class="ab-product-summary__row row">
+                <div class="ab-product-summary__col col-6">Delivery</div>
+                <div class="ab-product-summary__col col-6">$0.00</div>
+            </div>
+            <div class="ab-product-summary__row row">
+                <div class="ab-product-summary__col col-6">Sub Total</div>
+                <div class="ab-product-summary__col col-6">$${SubTotal}</div>
+            </div>
+            <div class="ab-product-summary__row row">
+                <div class="ab-product-summary__col col-6">Promotion Discount</div>
+                <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
+            </div>
+            <div class="ab-product-summary__row row">
+                <div class="ab-product-summary__col col-6">Estimated Tax</div>
+                <div class="ab-product-summary__col col-6">$${TaxTotal}</div>
+            </div>
+            <div class="ab-product-summary__row ab-product-summary__row--total row">
+                <div class="ab-product-summary__col col-6">Total</div>
+                <div class="ab-product-summary__col col-6">$${Total}</div>
+            </div>
+        `;
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
@@ -1012,7 +1072,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
 
-        await waitForElementAsync(() => !!q("eve-shipping-address"));
+        await waitForElementAsync(() => q("eve-shipping-address"));
 
         // Update
         q("body").classList.add("AB-Shipping-Checkout");
@@ -1058,7 +1118,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         const productSummaryLayout = await getProductSummaryLayout();
         if (productSummaryLayout) {
             q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
+            q("#ab-addons.ab-product-summary__addons-checkbox").checked = q("#newsletter").checked;
         }
+
+        return true;
     }
 
     async function handleAddressShippingFormShowHide(e) {
@@ -1334,10 +1397,40 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                 events: ["click"],
                 callback: handleAddressCreateAccountFormShowHide,
             },
+            // Add Ons
             {
-                selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
+                selector: ".AB-Shipping-Checkout .ab-product-summary__addons-checkbox",
                 events: ["click"],
-                callback: handleAddressShippingFormShowHide,
+                callback: (e) => {
+                    const targetNode = q("#newsletter");
+                    targetNode.click();
+                    updateProductSummaryLayout();
+                },
+            },
+            // Coupons
+            {
+                selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-input",
+                events: ["input", "change"],
+                callback: async (e) => {
+                    const currentTarget = e.target;
+                    const dataObj = getElementData(currentTarget);
+
+                    // Check For Control inputs
+                    if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
+                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
+                        return;
+                    }
+
+                    handleTextBasedInputs(dataObj);
+                },
+            },
+            {
+                selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-button",
+                events: ["click"],
+                callback: async (e) => {
+                    q("cart-coupon input[name='coupon']").focus();
+                    q("cart-coupon div.btn").click();
+                },
             },
         ];
 
@@ -1386,10 +1479,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         });
     }
 
-    function init() {
+    async function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        mainLayoutFunction();
+        await mainLayoutFunction();
         eventHandler();
     }
 

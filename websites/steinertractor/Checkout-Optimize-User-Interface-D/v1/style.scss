@@ -529,6 +529,7 @@
         align-items: center;
         width: max-content;
         gap: 10px;
+        cursor: pointer;
     }
 
     input[type="checkbox"].ab-product-summary__addons-checkbox {
@@ -593,6 +594,7 @@
         justify-content: flex-start;
         width: 100%;
         gap: 12px;
+        margin-bottom: 0;
     }
 
     .ab-product-summary__coupons-input {

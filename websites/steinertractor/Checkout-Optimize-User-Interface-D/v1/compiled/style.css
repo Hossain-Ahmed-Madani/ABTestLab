@@ -427,6 +427,7 @@
   align-items: center;
   width: max-content;
   gap: 10px;
+  cursor: pointer;
 }
 .AB-Checkout-Step-1-2 input[type=checkbox].ab-product-summary__addons-checkbox {
   -moz-appearance: none;
@@ -483,6 +484,7 @@
   justify-content: flex-start;
   width: 100%;
   gap: 12px;
+  margin-bottom: 0;
 }
 .AB-Checkout-Step-1-2 .ab-product-summary__coupons-input {
   outline: none;
