@@ -391,7 +391,7 @@
     }
 
     .ab-product-summary {
-        max-width: 407px;
+        // max-width: 407px;
         padding-top: 53px;
         padding-bottom: 53px;
         padding-left: 61px;
@@ -504,6 +504,136 @@
         margin-bottom: 29px;
     }
 
+    .ab-product-summary__addons-and-coupon {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ab-product-summary__addons {
+        margin-bottom: 35px;
+    }
+
+    .ab-product-summary__addons-heading {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(51, 51, 51, 1);
+        margin-bottom: 14px;
+    }
+
+    .ab-product-summary__addons-form-group {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: max-content;
+        gap: 10px;
+    }
+
+    input[type="checkbox"].ab-product-summary__addons-checkbox {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        min-width: 18px;
+        height: 18px;
+        min-height: 18px;
+        border: 2px solid #767676;
+        background-color: #fff;
+        cursor: pointer;
+        border-radius: 2px;
+
+        &:checked {
+            border: none;
+            background-color: #0078d7;
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            &:after {
+                content: "";
+                margin-top: -3px;
+                width: 6px;
+                height: 11px;
+                border-right: 2.5px solid #fff;
+                border-bottom: 2.5px solid #fff;
+                transform: rotate(45deg);
+            }
+        }
+    }
+
+    .ab-product-summary__addons-label {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(51, 51, 51, 1);
+    }
+
+    .ab-product-summary__coupons {
+        margin-bottom: 31px;
+    }
+
+    .ab-product-summary__coupons-heading {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        color: rgba(0, 0, 0, 1);
+        margin-bottom: 15px;
+    }
+
+    .ab-product-summary__coupons-form-group {
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .ab-product-summary__coupons-input {
+        outline: none;
+        height: 51px;
+        flex-grow: 1;
+        background-color: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(221, 221, 221, 1);
+        padding: 16px 10px;
+
+        font-family: Inter, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(118, 118, 118, 1);
+    }
+
+    .ab-product-summary__coupons-button {
+        width: 76px;
+        height: 51px;
+        background-color: rgba(255, 242, 204, 1);
+        border: 1px solid rgba(221, 221, 221, 1);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: Inter, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(59, 59, 59, 1);
+        
+        transition: all 0.2s;
+
+        &:hover {
+            background-color: #ffe8a6;
+        }
+    }
+
     .ab-product-summary__calculation-table {
         display: flex;
         flex-direction: column;
@@ -537,6 +667,10 @@
 
 // ============== GUEST CHECKOUT ==============
 .AB-Checkout-Step-1-2.AB-Guest-Checkout {
+    .ab-product-summary__addons-and-coupon {
+        display: none;
+    }
+
     .ab-content-wrapper {
         &--show-login {
             background-color: #fff;
@@ -845,6 +979,10 @@
 
 // ============== ADDRESS CHECKOUT ============
 .AB-Checkout-Step-1-2.AB-Address-Checkout {
+    .ab-product-summary__addons-and-coupon {
+        display: none;
+    }
+
     .ab-content-wrapper {
         &--show-shipping-address {
             .ab-form#shipping-address {

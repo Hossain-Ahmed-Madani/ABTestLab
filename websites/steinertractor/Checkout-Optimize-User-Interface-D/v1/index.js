@@ -862,6 +862,22 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     ).join("")}
                 </div>
                 <div class="ab-product-summary__border"></div>
+                <div class="ab-product-summary__addons-and-coupon">
+                    <div class="ab-product-summary__addons">
+                        <div class="ab-product-summary__addons-heading">Optional Add-ons:</div>
+                        <label for="ab-addons" class="ab-product-summary__addons-form-group">
+                            <input id="ab-addons" class="ab-product-summary__addons-checkbox" type="checkbox" />
+                            <span class="ab-product-summary__addons-label">FREE Catalog</span>
+                        </label>
+                    </div>
+                    <div class="ab-product-summary__coupons">
+                        <div class="ab-product-summary__coupons-heading">Coupons</div>
+                        <label for="ab-coupons" class="ab-product-summary__coupons-form-group">
+                            <input id="ab-coupons" placeholder="Please enter coupon code" class="ab-product-summary__coupons-input" type="text" />
+                            <button class="ab-product-summary__coupons-button">Apply</button>
+                        </label>
+                    </div>
+                </div>
                 <div class="ab-product-summary__calculation-table">
                     <div class="ab-product-summary__row row">
                         <div class="ab-product-summary__col col-6">Items in Cart</div>
@@ -1028,8 +1044,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         // Add heading items
         qq("eve-shipping-address .address-text").forEach((item) => {
-
-            q(item, 'div:not(.btn)').appendChild(q(item, '.btn'));
+            q(item, "div:not(.btn)").appendChild(q(item, ".btn"));
 
             const div = document.createElement("div");
             div.className = "ab-shipping-address-wrapper";
