@@ -13,7 +13,7 @@
 }
 
 // ================ FORM BUILDER ==============
-.AB-Checkout-Step-1 {
+.AB-Checkout-Step-1-2 {
     // ============ FORM BUILDER START ========
     h2.ab-form-heading {
         font-family: Arial;
@@ -324,7 +324,7 @@
 }
 
 // =================== COMMON ================
-.AB-Checkout-Step-1 {
+.AB-Checkout-Step-1-2 {
     background-color: #fff;
 
     .free-delivery-btn {
@@ -393,6 +393,7 @@
     .ab-product-summary {
         max-width: 407px;
         padding-top: 53px;
+        padding-bottom: 53px;
         padding-left: 61px;
     }
 
@@ -535,7 +536,7 @@
 }
 
 // ============== GUEST CHECKOUT ==============
-.AB-Checkout-Step-1.AB-Guest-Checkout {
+.AB-Checkout-Step-1-2.AB-Guest-Checkout {
     .ab-content-wrapper {
         &--show-login {
             background-color: #fff;
@@ -843,7 +844,7 @@
 }
 
 // ============== ADDRESS CHECKOUT ============
-.AB-Checkout-Step-1.AB-Address-Checkout {
+.AB-Checkout-Step-1-2.AB-Address-Checkout {
     .ab-content-wrapper {
         &--show-shipping-address {
             .ab-form#shipping-address {
@@ -902,6 +903,139 @@
 
             &:hover {
                 opacity: 0.7;
+            }
+        }
+    }
+}
+
+// ============== SHIPPING & REVIEW CHECKOUT ============
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout {
+    .ab-content-top {
+        padding-bottom: 30px;
+    }
+
+    .ab-content-wrapper {
+        // border: 1px solid red;
+    }
+
+    eve-shipping-address {
+        & > .btn.btn-primary {
+            // background-color: rgba(156, 202, 90, 1);
+            margin-top: 13px;
+            width: 214px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 0px;
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
+    .address-text {
+        height: auto;
+    }
+
+    .ab-shipping-address-wrapper {
+        height: 100%;
+        gap: 10px;
+        padding: 20px;
+        border: 1px solid rgba(206, 212, 218, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0;
+
+        & > br {
+            display: none;
+        }
+
+        & > p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 1.2;
+            letter-spacing: 0px;
+            color: rgba(51, 51, 51, 1);
+            margin-bottom: 15px;
+        }
+
+        & > div {
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: rgba(118, 118, 118, 1);
+            margin-bottom: 15px;
+
+            position: relative;
+
+            strong {
+                font-weight: 400;
+            }
+
+            *:not(.btn) {
+                width: 50%;
+            }
+        }
+
+        .btn {
+            position: absolute;
+            // top: 0;
+            bottom: 0;
+            right: 0;
+
+            width: 76px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0;
+
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        select.form-control {
+            height: 51px;
+            min-width: 100%;
+            border: 1px solid rgba(222, 222, 222, 1);
+            padding-left: 10px;
+            border-radius: 0;
+            margin-top: auto !important;
+
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 0px;
+            color: rgba(118, 118, 118, 1);
+            text-align: left;
+
+            appearance: none; /* Disable the default arrow */
+            -webkit-appearance: none; /* For WebKit-based browsers */
+            -moz-appearance: none; /* For Firefox */
+
+            background-color: #fff;
+            background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.330173 0.344159C0.541647 0.123794 0.828428 0 1.12745 0C1.42648 0 1.71326 0.123794 1.92473 0.344159L7.50681 6.16269L13.0889 0.344159C13.3016 0.130039 13.5864 0.0115592 13.8821 0.0142373C14.1778 0.0169155 14.4606 0.140538 14.6697 0.358478C14.8788 0.576418 14.9974 0.871238 15 1.17944C15.0025 1.48764 14.8889 1.78457 14.6834 2.00626L8.30409 8.65584C8.09261 8.87621 7.80583 9 7.50681 9C7.20778 9 6.921 8.87621 6.70953 8.65584L0.330173 2.00626C0.118763 1.78583 0 1.4869 0 1.17521C0 0.863519 0.118763 0.564591 0.330173 0.344159Z" fill="black"/></svg>') !important;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+            cursor: pointer;
+
+            &:open {
+                background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6698 8.65584C14.4584 8.87621 14.1716 9 13.8725 9C13.5735 9 13.2867 8.87621 13.0753 8.65584L7.49319 2.83731L1.91111 8.65584C1.69843 8.86996 1.41357 8.98844 1.11789 8.98576C0.822215 8.98308 0.539376 8.85946 0.330292 8.64152C0.121209 8.42358 0.00261186 8.12876 4.24806e-05 7.82056C-0.0025269 7.51236 0.111138 7.21544 0.316556 6.99374L6.69591 0.344159C6.90739 0.123794 7.19417 -9.68142e-08 7.49319 -1.22956e-07C7.79221 -1.49097e-07 8.079 0.123794 8.29047 0.344159L14.6698 6.99374C14.8812 7.21417 15 7.5131 15 7.82479C15 8.13648 14.8812 8.43541 14.6698 8.65584Z" fill="%23333333"/></svg>') !important;
             }
         }
     }

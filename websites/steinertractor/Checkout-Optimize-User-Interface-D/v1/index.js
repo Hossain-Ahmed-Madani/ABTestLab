@@ -1,6 +1,9 @@
 /* 
 https://www.steinertractor.com/guestcheckout?returnurl=/checkout
 https://www.steinertractor.com/checkout#/address
+https://www.steinertractor.com/checkout#/main
+
+Figma: https://www.figma.com/design/8qOYEM40DrLkcFtP6ZFY3N/Steiner-Tractor?node-id=3492-2&p=f&t=ZD282H7VVVlTJ2FM-0
 
 Test container: https://app.convert.com/accounts/100412165/projects/10043124/experiences/1004178648/summary
 Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=1004178648.1004420738&utm_campaign=qa5&returnurl=%2Fcheckout
@@ -13,13 +16,14 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         project: "steinertractor",
         host: "https://www.steinertractor.com",
         path: window.location.pathname,
+        hash: window.location.hash,
         test_name: "Checkout - Optimize User Interface [D]",
-        page_initials: "AB-Checkout-Step-1",
+        page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
-    const { host, path, page_initials, test_variation, test_version } = TEST_CONFIG;
+    const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const DATA = {
         text_based_input_list: ["text", "tel", "number", "email", "password", "url", "search"],
@@ -912,7 +916,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                     <div class="ab-guest-checkout-form">
                                         <h1 class="ab-guest-checkout-header">Checkout with New Account</h1>
                                         ${getFormLayout(guest_personal_information)} ${getFormLayout(guest_billing_address)} ${getFormLayout(guest_shipping_address)}
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -960,7 +963,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         q(".row.content-body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
-                <div class="ab-content-wrapper ">
+                <div class="ab-content-wrapper">
                     <div class="ab-content-top"></div>
                     <div class="ab-content-bottom container">
                         <div class="row">
@@ -980,6 +983,61 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         // Add heading items
         qq(".guest-checkout-optn > h1, .guest-checkout-optn").forEach((item) => q(mainWrapperElement, ".ab-content-top").insertAdjacentElement("afterbegin", item));
+
+        // Add product summary element
+        const productSummaryLayout = await getProductSummaryLayout();
+        if (productSummaryLayout) {
+            q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
+        }
+    }
+
+    async function createAndUpdateShippingLayout() {
+        console.log("Shipping & Review...");
+
+        // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
+
+        await waitForElementAsync(() => !!q("eve-shipping-address"));
+
+        // Update
+        q("body").classList.add("AB-Shipping-Checkout");
+        qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
+
+        // Create
+        q(".row.content-body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-content-wrapper">
+                    <div class="ab-content-top">
+                        <div class="container"></div>
+                    </div>
+                    <div class="ab-content-bottom container">
+                        <div class="row">
+                            <div class="ab-content-forms-wrapper col-6">
+                                <div class="ab-address-checkout-section">
+                                    <div class="ab-address-checkout-form">THIS IS FORM FOR SHIPPING STEP TWO</div>
+                                </div>
+                            </div>
+                            <div class="ab-content-product-summary-wrapper col-6"></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        );
+
+        const mainWrapperElement = q(".ab-content-wrapper");
+
+        // Add heading items
+        qq("eve-shipping-address .address-text").forEach((item) => {
+
+            q(item, 'div:not(.btn)').appendChild(q(item, '.btn'));
+
+            const div = document.createElement("div");
+            div.className = "ab-shipping-address-wrapper";
+            qq(item, ":scope > *").forEach((child) => div.appendChild(child));
+            item.appendChild(div);
+        });
+
+        qq("eve-shipping-address").forEach((item) => q(mainWrapperElement, ".ab-content-top > .container").insertAdjacentElement("afterbegin", item));
 
         // Add product summary element
         const productSummaryLayout = await getProductSummaryLayout();
@@ -1285,23 +1343,26 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     // ===========  MAIN JS ===========
     const FORM_CONFIG = {
         "/guestcheckout": {
-            inputList: [
-                ...DATA.forms.guest_personal_information.inputList,
-                ...DATA.forms.guest_billing_address.inputList,
-                ...DATA.forms.guest_shipping_address.inputList,
-            ],
+            inputList: [...DATA.forms.guest_personal_information.inputList, ...DATA.forms.guest_billing_address.inputList, ...DATA.forms.guest_shipping_address.inputList],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },
-        "/checkout": {
+        "/checkout#/address": {
             inputList: [...DATA.forms.checkout_billing_address.inputList, ...DATA.forms.checkout_same_billing.inputList],
             layoutFunction: createAndUpdateAddressLayout,
         },
+        "/checkout#/main": {
+            inputList: [],
+            layoutFunction: createAndUpdateShippingLayout,
+        },
     };
 
-    const config = FORM_CONFIG[path] || { inputList: [], layoutFunction: () => console.log("No matching path") };
+    const config = FORM_CONFIG[path + hash] || { inputList: [], layoutFunction: () => console.log("No matching path") };
     const { inputList, mainLayoutFunction } = { inputList: config.inputList, mainLayoutFunction: config.layoutFunction };
 
     function validateAllControlNodesExist(inputList) {
+        // Temporary Solution
+        if (inputList.length === 0) return true;
+
         return inputList?.every(({ type, control_node_selector }) => {
             if (type === "select") {
                 return qq(`${control_node_selector} > option`).length > 1;
