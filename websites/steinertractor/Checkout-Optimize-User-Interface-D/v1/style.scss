@@ -1057,6 +1057,14 @@
 
 // ============== SHIPPING & REVIEW CHECKOUT ============
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout {
+    .checkout-promo {
+        padding-bottom: 50px;
+    }
+
+    app-progress-stepper + h4 {
+        display: none;
+    }
+
     .ab-content-top {
         padding-bottom: 30px;
     }
@@ -1155,6 +1163,8 @@
         }
 
         select.form-control {
+            outline: none;
+            box-shadow: none;
             height: 51px;
             min-width: 100%;
             border: 1px solid rgba(222, 222, 222, 1);
@@ -1185,6 +1195,262 @@
                 background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6698 8.65584C14.4584 8.87621 14.1716 9 13.8725 9C13.5735 9 13.2867 8.87621 13.0753 8.65584L7.49319 2.83731L1.91111 8.65584C1.69843 8.86996 1.41357 8.98844 1.11789 8.98576C0.822215 8.98308 0.539376 8.85946 0.330292 8.64152C0.121209 8.42358 0.00261186 8.12876 4.24806e-05 7.82056C-0.0025269 7.51236 0.111138 7.21544 0.316556 6.99374L6.69591 0.344159C6.90739 0.123794 7.19417 -9.68142e-08 7.49319 -1.22956e-07C7.79221 -1.49097e-07 8.079 0.123794 8.29047 0.344159L14.6698 6.99374C14.8812 7.21417 15 7.5131 15 7.82479C15 8.13648 14.8812 8.43541 14.6698 8.65584Z" fill="%23333333"/></svg>') !important;
             }
         }
+    }
+
+    shipping-rates {
+        select.form-control {
+            margin-bottom: 5px;
+        }
+
+        .row > .col-lg-12.mb-4 {
+            margin: 0;
+            margin-bottom: 0 !important;
+            padding-top: 0;
+            padding-bottom: 0;
+
+            & > br {
+                display: none !important;
+            }
+
+            span,
+            p {
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 28px;
+                letter-spacing: 0px;
+                color: rgba(51, 51, 51, 1);
+                margin-bottom: 0;
+            }
+
+            b {
+                font-weight: 700;
+            }
+        }
+    }
+
+    // ============ CONTROL |  FORM SECTION   =======
+    .ab-control-forms-section {
+        padding: 44px 63px 0 0;
+
+        > div {
+            width: 100%;
+            max-width: 100%;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        > .col-lg-4.col-md-12.mb-4 {
+            margin-bottom: 36px !important;
+
+            & > h6,
+            & > h4:first-of-type,
+            label[for="shipping"] {
+                display: none;
+            }
+
+            & > h4 {
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                font-style: Bold;
+                font-size: 20px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                color: rgba(51, 51, 51, 1);
+                margin-bottom: 17px;
+            }
+        }
+
+        > .row {
+            .col-12 > h4.mb-4.mx-3 {
+                font-family: Arial, Helvetica, sans-serif;
+                font-weight: 700;
+                font-size: 20px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                color: rgba(51, 51, 51, 1);
+                margin-left: 0 !important;
+                margin-bottom: 17px !important;
+            }
+        }
+
+        .payment-row {
+            padding-left: 0 !important;
+            margin-left: 0 !important;
+            margin-bottom: 18px !important;
+            margin-right: -30px !important;
+            .col-lg-6.col-sm-12 {
+                min-width: 100%;
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+        }
+
+        select.form-control {
+            outline: none;
+            box-shadow: none;
+            margin-left: 0 !important;
+            height: 51px;
+            min-width: 100%;
+            border: 1px solid rgba(222, 222, 222, 1);
+            padding-left: 10px;
+            border-radius: 0;
+            margin-top: auto !important;
+
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 1.2;
+            letter-spacing: 0px;
+            color: rgba(118, 118, 118, 1);
+            text-align: left;
+
+            appearance: none; /* Disable the default arrow */
+            -webkit-appearance: none; /* For WebKit-based browsers */
+            -moz-appearance: none; /* For Firefox */
+
+            background-color: #fff;
+            background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.330173 0.344159C0.541647 0.123794 0.828428 0 1.12745 0C1.42648 0 1.71326 0.123794 1.92473 0.344159L7.50681 6.16269L13.0889 0.344159C13.3016 0.130039 13.5864 0.0115592 13.8821 0.0142373C14.1778 0.0169155 14.4606 0.140538 14.6697 0.358478C14.8788 0.576418 14.9974 0.871238 15 1.17944C15.0025 1.48764 14.8889 1.78457 14.6834 2.00626L8.30409 8.65584C8.09261 8.87621 7.80583 9 7.50681 9C7.20778 9 6.921 8.87621 6.70953 8.65584L0.330173 2.00626C0.118763 1.78583 0 1.4869 0 1.17521C0 0.863519 0.118763 0.564591 0.330173 0.344159Z" fill="black"/></svg>') !important;
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 15px;
+            cursor: pointer;
+
+            &:open {
+                background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6698 8.65584C14.4584 8.87621 14.1716 9 13.8725 9C13.5735 9 13.2867 8.87621 13.0753 8.65584L7.49319 2.83731L1.91111 8.65584C1.69843 8.86996 1.41357 8.98844 1.11789 8.98576C0.822215 8.98308 0.539376 8.85946 0.330292 8.64152C0.121209 8.42358 0.00261186 8.12876 4.24806e-05 7.82056C-0.0025269 7.51236 0.111138 7.21544 0.316556 6.99374L6.69591 0.344159C6.90739 0.123794 7.19417 -9.68142e-08 7.49319 -1.22956e-07C7.79221 -1.49097e-07 8.079 0.123794 8.29047 0.344159L14.6698 6.99374C14.8812 7.21417 15 7.5131 15 7.82479C15 8.13648 14.8812 8.43541 14.6698 8.65584Z" fill="%23333333"/></svg>') !important;
+            }
+        }
+    }
+
+    eve-payment-options {
+        & > div {
+            margin-left: 0 !important;
+        }
+
+        & > div.ml-5 {
+            display: flex;
+            flex-direction: column;
+            width: 103%;
+
+            div:has(> eve-paypal) {
+                order: 1;
+            }
+        }
+
+        .col-lg-2.mb-3:has(> input#poNumber) {
+            min-width: 100% !important;
+            width: 100% !important;
+
+            // INPUT STYLES
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            border: 1px solid #ced4da;
+            overflow: hidden;
+            height: 51px;
+            padding: 7px 10px;
+            position: relative;
+
+            label {
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                cursor: pointer;
+
+                width: 100%;
+                font-family: Inter, sans-serif;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                color: #767676;
+
+                white-space: nowrap;
+                margin-bottom: 0px;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 16px;
+
+                &:has(~ input:focus),
+                &:has(~ input:active),
+                &:has(~ input:not(:placeholder-shown)) {
+                    position: static;
+                    font-size: 14px;
+                }
+            }
+
+            input {
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                background: transparent;
+
+                font-family: Inter, sans-serif;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 100%;
+                color: #333333;
+
+                &:focus,
+                &:active,
+                &:not(:placeholder-shown) {
+                    border: none !important;
+                    outline: none !important;
+                    box-shadow: none !important;
+                    
+                }
+            }
+        }
+
+        .btn.btn-primary {
+            border-radius: 0px;
+            outline: none;
+            width: 103%;
+            height: 51px;
+            padding: 17px 20px;
+            border: none;
+            outline: none;
+
+            font-family: Inter, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #ffffff;
+            background-color: #b3b3b3;
+
+            &:not(disabled) {
+                background-color: #9cca5a;
+            }
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+        .ml-5 .row {
+            margin-left: 0 !important;
+            margin-left: 0 !important;
+        }
+
+        // .paypal-button {
+        //     .zoid-outlet{
+        //         width: 100% !important;
+        //         min-width: 100% !important;
+        //     }
+        // }
     }
 
     //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | START =========
