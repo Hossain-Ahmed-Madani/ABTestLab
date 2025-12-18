@@ -1089,8 +1089,9 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     <div class="ab-content-bottom container">
                         <div class="row">
                             <div class="ab-content-forms-wrapper col-6">
-                                <div class="ab-address-checkout-section">
-                                    <div class="ab-address-checkout-form">THIS IS FORM FOR SHIPPING STEP TWO</div>
+                                <div class="ab-control-forms-section">This is control forms container</div>
+                                <div class="ab-shipping-forms-section">
+                                    <div class="ab-shipping-form">This is Shipping Form Section</div>
                                 </div>
                             </div>
                             <div class="ab-content-product-summary-wrapper col-6"></div>
@@ -1114,14 +1115,20 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         qq("eve-shipping-address").forEach((item) => q(mainWrapperElement, ".ab-content-top > .container").insertAdjacentElement("afterbegin", item));
 
+        // Add form elements
+        qq("eve-checkout-page > hr ~ div").forEach((item) => {
+            q(mainWrapperElement, ".ab-control-forms-section").appendChild(item);
+        });
+
         // Add product summary element
         const productSummaryLayout = await getProductSummaryLayout();
         if (productSummaryLayout) {
             q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
-            q("#ab-addons.ab-product-summary__addons-checkbox").checked = q("#newsletter").checked;
+            q(mainWrapperElement, "#ab-addons.ab-product-summary__addons-checkbox").checked = q("#newsletter").checked;
+            q(mainWrapperElement, '.ab-product-summary__coupons').appendChild(q('cart-coupon'))
         }
 
-        return true;
+        // return true;
     }
 
     async function handleAddressShippingFormShowHide(e) {

@@ -1186,4 +1186,85 @@
             }
         }
     }
+
+ 
+    .ab-product-summary__coupons-form-group {
+        display: none;
+    }
+
+    cart-coupon {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px 12px;
+
+        .text-danger {
+            margin-bottom: 0;
+        }
+
+        div:empty {
+            display: none;
+        }
+
+        div:not(:empty):not([class]) {
+            width: 100%;
+            order: 3;
+        }
+
+        input.form-control {
+            margin: 0 !important;
+            border-radius: 0;
+
+            width: 70%;
+            // flex-grow: 1;
+            order: 1;
+
+            outline: none;
+            height: 51px;
+            flex-grow: 1;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(221, 221, 221);
+            padding: 16px 10px;
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #333333;
+        }
+
+        .btn.btn-warning.w-100.mt-3.mb-3 {
+            
+            // width: 30%;
+            order: 2;
+
+            margin: 0 !important;
+            // flex-grow: 1;
+
+            width: 76px !important;
+            height: 51px;
+            background-color: rgb(255, 242, 204);
+            border: 1px solid rgb(221, 221, 221);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: rgb(59, 59, 59);
+            transition: all 0.2s;
+            border-radius: 0;
+            font-size: 0px;
+
+
+            &:after {
+                content: "Apply";
+                font-size: 14px;
+            }
+
+
+        }
+    }
 }
