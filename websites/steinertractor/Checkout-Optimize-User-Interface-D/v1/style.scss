@@ -383,10 +383,12 @@
 
     .ab-content-forms-wrapper {
         padding: 0;
+        padding-left: 15px;
     }
 
     // Product summary
     .ab-content-product-summary-wrapper {
+        padding-left: 0 !important;
         background-color: #f3f5f6;
     }
 
@@ -1057,20 +1059,20 @@
 
 // ============== SHIPPING & REVIEW CHECKOUT ============
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout {
-    .checkout-promo {
-        padding-bottom: 50px;
-    }
-
+    eve-checkout-page hr,
+    eve-checkout-page .col-12 > .text-center.mb-5,
+    eve-checkout-page .col-12 > .row,
+    eve-checkout-page .col-12 > .col-sm-12,
     app-progress-stepper + h4 {
         display: none;
     }
 
-    .ab-content-top {
-        padding-bottom: 30px;
+    .checkout-promo {
+        padding-bottom: 50px;
     }
 
-    .ab-content-wrapper {
-        // border: 1px solid red;
+    .ab-content-top {
+        padding-bottom: 30px;
     }
 
     eve-shipping-address {
@@ -1097,6 +1099,7 @@
         height: auto;
     }
 
+    // Top Address Section
     .ab-shipping-address-wrapper {
         height: 100%;
         gap: 10px;
@@ -1194,7 +1197,24 @@
             &:open {
                 background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6698 8.65584C14.4584 8.87621 14.1716 9 13.8725 9C13.5735 9 13.2867 8.87621 13.0753 8.65584L7.49319 2.83731L1.91111 8.65584C1.69843 8.86996 1.41357 8.98844 1.11789 8.98576C0.822215 8.98308 0.539376 8.85946 0.330292 8.64152C0.121209 8.42358 0.00261186 8.12876 4.24806e-05 7.82056C-0.0025269 7.51236 0.111138 7.21544 0.316556 6.99374L6.69591 0.344159C6.90739 0.123794 7.19417 -9.68142e-08 7.49319 -1.22956e-07C7.79221 -1.49097e-07 8.079 0.123794 8.29047 0.344159L14.6698 6.99374C14.8812 7.21417 15 7.5131 15 7.82479C15 8.13648 14.8812 8.43541 14.6698 8.65584Z" fill="%23333333"/></svg>') !important;
             }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+            }
         }
+    }
+
+    // Form Section
+
+    .ab-shipping-header {
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(51, 51, 51, 1);
+        margin-bottom: 35px;
     }
 
     shipping-rates {
@@ -1249,10 +1269,10 @@
                 display: none;
             }
 
-            & > h4 {
+            & > h4,
+            & > h4 > strong {
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 700;
-                font-style: Bold;
                 font-size: 20px;
                 line-height: 100%;
                 letter-spacing: 0px;
@@ -1262,7 +1282,8 @@
         }
 
         > .row {
-            .col-12 > h4.mb-4.mx-3 {
+            .col-12 > h4.mb-4.mx-3,
+            .col-12 > h4.mb-4.mx-3 > strong {
                 font-family: Arial, Helvetica, sans-serif;
                 font-weight: 700;
                 font-size: 20px;
@@ -1301,7 +1322,7 @@
 
             font-family: Inter, sans-serif;
             font-weight: 400;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.2;
             letter-spacing: 0px;
             color: rgba(118, 118, 118, 1);
@@ -1320,6 +1341,11 @@
 
             &:open {
                 background-image: url('data:image/svg+xml,<svg width="15" height="9" viewBox="0 0 15 9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.6698 8.65584C14.4584 8.87621 14.1716 9 13.8725 9C13.5735 9 13.2867 8.87621 13.0753 8.65584L7.49319 2.83731L1.91111 8.65584C1.69843 8.86996 1.41357 8.98844 1.11789 8.98576C0.822215 8.98308 0.539376 8.85946 0.330292 8.64152C0.121209 8.42358 0.00261186 8.12876 4.24806e-05 7.82056C-0.0025269 7.51236 0.111138 7.21544 0.316556 6.99374L6.69591 0.344159C6.90739 0.123794 7.19417 -9.68142e-08 7.49319 -1.22956e-07C7.79221 -1.49097e-07 8.079 0.123794 8.29047 0.344159L14.6698 6.99374C14.8812 7.21417 15 7.5131 15 7.82479C15 8.13648 14.8812 8.43541 14.6698 8.65584Z" fill="%23333333"/></svg>') !important;
+            }
+
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
             }
         }
     }
@@ -1355,8 +1381,8 @@
             padding: 7px 10px;
             position: relative;
 
-            &:has( input:focus),
-            &:has( input:active) {
+            &:has(input:focus),
+            &:has(input:active) {
                 border: 2px solid #333333;
             }
 
@@ -1458,6 +1484,10 @@
         // }
     }
 
+    .ab-credit-or-debit-forms-section {
+        padding: 0 63px 123px 0;
+    }
+
     //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | START =========
     .ab-product-summary__coupons-form-group,
     .ab-product-summary__addons-form-group {
@@ -1500,7 +1530,7 @@
 
                 &:after {
                     content: "";
-                    margin-top: -3px;
+                    margin-top: -2px;
                     width: 6px;
                     height: 11px;
                     border-right: 2.5px solid #fff;

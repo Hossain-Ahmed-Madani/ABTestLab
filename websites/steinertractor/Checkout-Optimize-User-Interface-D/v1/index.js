@@ -586,7 +586,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             // Shipping & Review
             payment_options_credit_or_debit: {
                 title: "",
-                id: "payment-options",
+                id: "payment-options-credit-or-debit",
                 inputList: [
                     {
                         id: "ab-name-on-card",
@@ -624,7 +624,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         type: "select" /* Dropdown/Select */,
                         optionList: [],
                         label: "YY",
-                        className: "col-6",
+                        className: "col-6 ab-pl-0",
                         required: true,
                         control_node_selector: "#year",
                         value: "",
@@ -645,7 +645,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         type: "tel",
                         label: "PO Number",
                         required: true,
-                        className: "col-6",
+                        className: "col-6 ab-pl-0",
                         control_node_selector: "input[formcontrolname='ExternalPurchaseOrderNumber']",
                         value: "",
                         errorMessage: "",
@@ -687,7 +687,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         label: "Country",
                         className: "col-12",
                         required: true,
-                        control_node_selector: "input[formcontrolname='country']",
+                        control_node_selector: "select[formcontrolname='country']",
                         dependency_node_selector: "select#ab-state",
                         value: "",
                         errorMessage: "",
@@ -706,10 +706,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-state",
                         type: "select" /* Dropdown/Select */,
                         optionList: [],
-                        label: "Country",
-                        className: "col-4",
+                        label: "State",
+                        className: "col-4 ab-pl-0",
                         required: true,
-                        control_node_selector: "input[formcontrolname='state']",
+                        control_node_selector: "select[formcontrolname='state']",
                         value: "",
                         errorMessage: "",
                     },
@@ -717,7 +717,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-zip-code",
                         type: "text",
                         label: "ZIP code",
-                        className: "col-4",
+                        className: "col-4 ab-pl-0",
                         required: true,
                         control_node_selector: "input[formcontrolname='zip']",
                         value: "",
@@ -728,9 +728,9 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     {
                         id: "ab-place-order",
                         label: "Place Order",
-                        className: "col-8",
+                        className: "col-12",
                         disabled: true,
-                        control_node_selector: "eve-authorizenet form.ng-untouched.ng-pristine.ng-invalid .btn.btn-primary",
+                        control_node_selector: "eve-authorizenet .btn.btn-primary",
                     },
                 ],
             },
@@ -1240,10 +1240,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     <div class="ab-content-bottom container">
                         <div class="row">
                             <div class="ab-content-forms-wrapper col-6">
-                                <div class="ab-control-forms-section"></div>
-                                <div class="ab-shipping-forms-section">
-                                    <div class="ab-shipping-form">This is Shipping Form Section</div>
+                                <div class="ab-control-forms-section">
+                                    <h1 class="ab-shipping-header">Delivery</h1>
                                 </div>
+                                <div class="ab-credit-or-debit-forms-section"></div>
                             </div>
                             <div class="ab-content-product-summary-wrapper col-6"></div>
                         </div>
@@ -1276,6 +1276,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         if (productSummaryLayout) {
             q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
             q(mainWrapperElement, "#ab-addons.ab-product-summary__addons-checkbox").checked = q("#newsletter").checked;
+            q("label[for='newsletter']").innerText = "FREE Catalog";
             q(mainWrapperElement, ".ab-product-summary__addons").appendChild(q("div:has(> input#newsletter)"));
             q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
@@ -1338,6 +1339,31 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-guest-create-account");
             setTimeout(() => shippingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+    }
+
+    async function handleCreditDebitFormShowHide(e) {
+        let count = 0;
+        await waitForElementAsync(() => ++count > 10);
+
+        const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
+        optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
+
+        q(".ab-form#payment-options-credit-or-debit")?.remove();
+
+        const { payment_options_credit_or_debit } = DATA.forms;
+        const contentWrapper = q(".ab-content-wrapper");
+        const targetFormSection = q(".ab-credit-or-debit-forms-section");
+
+
+        if (optionTxt === "Credit/Debit Card") {
+            await waitForElementAsync(() => !!validateAllControlNodesExist(payment_options_credit_or_debit.inputList));
+            contentWrapper.classList.add("ab-content-wrapper--show-credit-debit");
+            targetFormSection.insertAdjacentHTML("afterbegin", getFormLayout(payment_options_credit_or_debit));
+            eventHandler();
+        } else {
+            contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
+            setTimeout(() => q('.ab-control-forms-section').scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
     }
 
@@ -1438,17 +1464,26 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         dependencyNodes.forEach(async (dependencyNode) => {
             try {
+                console.log("updateDependencyNodes...");
+
                 const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
                 const controlNode = q(controlNodeSelector);
                 const dependencyNodeInputType = dependencyNode.getAttribute("type");
                 const dependencyDataObj = getElementData(dependencyNode);
 
+                // console.log(
+                //     "updating dependencynode...",
+                //     dependencyNodeInputType === "select" && controlNode?.options[1].innerText.trim().toLowerCase() !== dependencyNode?.options[1].innerText.trim().toLowerCase()
+                // );
+
                 await waitForElementAsync(
                     () =>
-                        !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode.value !== dependencyNode.value) ||
-                        (dependencyNodeInputType === "select" && controlNode?.options[1].innerText.trim().toLowerCase() !== dependencyNode?.options[1].innerText.trim().toLowerCase()),
+                        !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode?.value !== dependencyNode?.value) ||
+                        (dependencyNodeInputType === "select" && controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase()),
                     5000
                 );
+
+                console.log("Control value got  updated....", dependencyNodeInputType, dependencyNode);
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
                     dependencyNode.value = inputType === "tel" ? controlNode.value.replace(/\D/g, "") : controlNode.value;
@@ -1467,6 +1502,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
                 handleFormErrorMessage(dependencyDataObj);
             } catch (error) {
+                console.error( error)
                 return false;
             }
         });
@@ -1556,41 +1592,52 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                 events: ["click"],
                 callback: handleAddressCreateAccountFormShowHide,
             },
-            // Add Ons
             {
-                selector: ".AB-Shipping-Checkout .ab-product-summary__addons-checkbox",
+                selector: ".AB-Shipping-Checkout  select#shipping, .AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control",
+                events: ["change"],
+                callback: handleCreditDebitFormShowHide,
+            },
+            // Add Ons | Control
+            {
+                selector: ".AB-Shipping-Checkout input[type='checkbox']#newsletter",
                 events: ["click"],
-                callback: (e) => {
-                    const targetNode = q("#newsletter");
-                    targetNode.click();
-                    updateProductSummaryLayout();
-                },
+                callback: updateProductSummaryLayout,
             },
-            // Coupons
-            {
-                selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-input",
-                events: ["input", "change"],
-                callback: async (e) => {
-                    const currentTarget = e.target;
-                    const dataObj = getElementData(currentTarget);
+            // Add Ons | New Form
+            // {
+            //     selector: ".AB-Shipping-Checkout .ab-product-summary__addons-checkbox",
+            //     events: ["click"],
+            //     callback: (e) => {
+            //         const targetNode = q("#newsletter");
+            //         targetNode.click();
+            //         updateProductSummaryLayout();
+            //     },
+            // },
+            // Coupons  | New Form
+            // {
+            //     selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-input",
+            //     events: ["input", "change"],
+            //     callback: async (e) => {
+            //         const currentTarget = e.target;
+            //         const dataObj = getElementData(currentTarget);
 
-                    // Check For Control inputs
-                    if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
-                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
-                        return;
-                    }
+            //         // Check For Control inputs
+            //         if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
+            //             console.error("Target node not found:", dataObj["controlNodeSelector"]);
+            //             return;
+            //         }
 
-                    handleTextBasedInputs(dataObj);
-                },
-            },
-            {
-                selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-button",
-                events: ["click"],
-                callback: async (e) => {
-                    q("cart-coupon input[name='coupon']").focus();
-                    q("cart-coupon div.btn").click();
-                },
-            },
+            //         handleTextBasedInputs(dataObj);
+            //     },
+            // },
+            // {
+            //     selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-button",
+            //     events: ["click"],
+            //     callback: async (e) => {
+            //         q("cart-coupon input[name='coupon']").focus();
+            //         q("cart-coupon div.btn").click();
+            //     },
+            // },
         ];
 
         ACTION_LIST.forEach(({ selector, events, callback }) => {
