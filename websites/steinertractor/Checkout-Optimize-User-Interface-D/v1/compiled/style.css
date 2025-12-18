@@ -35,6 +35,7 @@
   margin-bottom: 12px;
 }
 .AB-Checkout-Step-1-2 .ab-form-subtitle {
+  min-height: 13px;
   display: block;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
@@ -842,6 +843,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .text-center.mb-5,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .row,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .col-sm-12,
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-authorizenet,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout app-progress-stepper + h4 {
   display: none !important;
 }
@@ -1000,6 +1002,25 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-credit-or-debit-forms-section .card-icons {
   margin-top: 10px;
   margin-bottom: 24px;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-check-same-as-billing) {
+  margin-top: 22px;
+  margin-bottom: 18px;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-check-same-as-billing) label {
+  align-items: center;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-check-same-as-billing) input[type=checkbox]:checked:after {
+  margin-top: -2px;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-check-same-as-billing) .ab-label {
+  margin-bottom: -3px;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-city),
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(select#ab-state),
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout div.ab-form-col:has(input#ab-zip-code) {
+  margin-top: 73px;
+  margin-bottom: 63px;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-control-forms-section {
   padding: 44px 63px 0 0;

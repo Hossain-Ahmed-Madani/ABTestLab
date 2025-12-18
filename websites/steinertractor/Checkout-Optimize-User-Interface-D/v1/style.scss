@@ -59,6 +59,7 @@
     }
 
     .ab-form-subtitle {
+        min-height: 13px;
         display: block;
         font-family: Arial, Helvetica, sans-serif;
         font-weight: 400;
@@ -1063,7 +1064,7 @@
     eve-checkout-page .col-12 > .text-center.mb-5,
     eve-checkout-page .col-12 > .row,
     eve-checkout-page .col-12 > .col-sm-12,
-    // eve-authorizenet,
+    eve-authorizenet,
     app-progress-stepper + h4 {
         display: none !important;
     }
@@ -1267,6 +1268,31 @@
             margin-top: 10px;
             margin-bottom: 24px;
         }
+    }
+
+    // ============ FORM BUILDER EXTRA  =======
+    div.ab-form-col:has(input#ab-check-same-as-billing) {
+        margin-top: 22px;
+        margin-bottom: 18px;
+
+        label {
+            align-items: center;
+        }
+
+        input[type="checkbox"]:checked:after {
+            margin-top: -2px;
+        }
+
+        .ab-label {
+            margin-bottom: -3px;
+        }
+    }
+
+    div.ab-form-col:has(input#ab-city),
+    div.ab-form-col:has(select#ab-state),
+    div.ab-form-col:has(input#ab-zip-code) {
+        margin-top: 73px;
+        margin-bottom: 63px;
     }
 
     // ============ CONTROL |  FORM SECTION   =======

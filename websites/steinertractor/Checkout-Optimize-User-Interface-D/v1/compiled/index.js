@@ -602,6 +602,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-credit-debit",
                         type: "text",
                         label: "Credit/Debit Card Number",
+
                         required: true,
                         className: "col-12",
                         control_node_selector: "#creditCardNumber",
@@ -611,6 +612,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     {
                         id: "ab-month",
                         type: "select" /* Dropdown/Select */,
+                        subtitle: "Expiration Date",
                         optionList: [],
                         label: "MM",
                         className: "col-6",
@@ -622,6 +624,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     {
                         id: "ab-year",
                         type: "select" /* Dropdown/Select */,
+                        subtitle: "",
                         optionList: [],
                         label: "YY",
                         className: "col-6 ab-pl-0",
@@ -823,7 +826,8 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                 }) => {
                                     return /* HTML */ `
                                         <div class="ab-col ab-form-col col ${className}">
-                                            ${title ? `<span class="ab-form-title">${title}</span>` : ""} ${subtitle ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
+                                            ${title ? `<span class="ab-form-title">${title}</span>` : ""}
+                                            ${subtitle !== undefined ? `<span class="ab-form-subtitle">${subtitle}</span>` : ""}
                                             <label for="${id}" class="ab-form-group">
                                                 <span class="ab-label">${label}</span>
                                                 ${inputType === "select"
@@ -1431,13 +1435,16 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         qq(".ab-action-button").forEach((item) => {
             const selector = item.getAttribute("control_node_selector");
             const controlNode = q(selector);
-            const isDisabled = controlNode.disabled;
+            
+            setTimeout(() => {
+                const isDisabled = controlNode.disabled;
 
-            if (isDisabled) {
-                item.setAttribute("disabled", "");
-            } else {
-                item.removeAttribute("disabled", "");
-            }
+                if (isDisabled) {
+                    item.setAttribute("disabled", "");
+                } else {
+                    item.removeAttribute("disabled", "");
+                }
+            }, 500);
         });
     }
 
