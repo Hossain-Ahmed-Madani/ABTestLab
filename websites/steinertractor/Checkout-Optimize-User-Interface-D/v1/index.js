@@ -1089,7 +1089,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     <div class="ab-content-bottom container">
                         <div class="row">
                             <div class="ab-content-forms-wrapper col-6">
-                                <div class="ab-control-forms-section">This is control forms container</div>
+                                <div class="ab-control-forms-section"></div>
                                 <div class="ab-shipping-forms-section">
                                     <div class="ab-shipping-form">This is Shipping Form Section</div>
                                 </div>
@@ -1125,7 +1125,8 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         if (productSummaryLayout) {
             q(mainWrapperElement, ".ab-content-product-summary-wrapper").insertAdjacentHTML("afterbegin", productSummaryLayout);
             q(mainWrapperElement, "#ab-addons.ab-product-summary__addons-checkbox").checked = q("#newsletter").checked;
-            q(mainWrapperElement, '.ab-product-summary__coupons').appendChild(q('cart-coupon'))
+            q(mainWrapperElement, ".ab-product-summary__addons").appendChild(q("div:has(> input#newsletter)"));
+            q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
 
         // return true;

@@ -1187,9 +1187,69 @@
         }
     }
 
- 
-    .ab-product-summary__coupons-form-group {
+    //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | START =========
+    .ab-product-summary__coupons-form-group,
+    .ab-product-summary__addons-form-group {
         display: none;
+    }
+
+    div:has(> input#newsletter) {
+        margin: 0 !important;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: max-content;
+        gap: 10px;
+        cursor: pointer;
+
+        input[type="checkbox"]#newsletter {
+            position: relative;
+            margin: 0 !important;
+
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            min-width: 18px;
+            height: 18px;
+            min-height: 18px;
+            border: 2px solid #767676;
+            background-color: #fff;
+            cursor: pointer;
+            border-radius: 2px;
+
+            &:checked {
+                border: none;
+                background-color: #0078d7;
+                position: relative;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                &:after {
+                    content: "";
+                    margin-top: -3px;
+                    width: 6px;
+                    height: 11px;
+                    border-right: 2.5px solid #fff;
+                    border-bottom: 2.5px solid #fff;
+                    transform: rotate(45deg);
+                }
+            }
+        }
+
+        label[for="newsletter"] {
+            margin: 0 !important;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: rgb(51, 51, 51);
+            cursor: pointer;
+        }
     }
 
     cart-coupon {
@@ -1234,7 +1294,6 @@
         }
 
         .btn.btn-warning.w-100.mt-3.mb-3 {
-            
             // width: 30%;
             order: 2;
 
@@ -1258,13 +1317,12 @@
             border-radius: 0;
             font-size: 0px;
 
-
             &:after {
                 content: "Apply";
                 font-size: 14px;
             }
-
-
         }
     }
+
+    //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | END =========
 }
