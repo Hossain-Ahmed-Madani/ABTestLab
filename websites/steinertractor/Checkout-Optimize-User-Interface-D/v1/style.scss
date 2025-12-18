@@ -1355,6 +1355,11 @@
             padding: 7px 10px;
             position: relative;
 
+            &:has( input:focus),
+            &:has( input:active) {
+                border: 2px solid #333333;
+            }
+
             label {
                 position: absolute;
                 z-index: 1;
@@ -1380,7 +1385,7 @@
                 padding: 0 !important;
                 font-size: 16px;
 
-                &:has(~ input:not(:placeholder-shown)) ,
+                &:has(~ input:not(:placeholder-shown)),
                 &:has(~ input:focus),
                 &:has(~ input:active) {
                     position: static;
@@ -1410,7 +1415,6 @@
                     border: none !important;
                     outline: none !important;
                     box-shadow: none !important;
-                    
                 }
             }
         }

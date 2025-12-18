@@ -1,0 +1,4 @@
+The placeholder not shown needs to be updated
+    &:has(~ input:not(:placeholder-shown)) , 
+    replace this with custom attribute while there is no value, 
+    and this does not work properly specially in safari. As a result the label always stays up

@@ -1075,6 +1075,9 @@
   padding: 7px 10px;
   position: relative;
 }
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber):has(input:focus), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber):has(input:active) {
+  border: 2px solid #333333;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label {
   position: absolute;
   z-index: 1;
