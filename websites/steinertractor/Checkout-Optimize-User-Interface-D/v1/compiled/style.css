@@ -1098,7 +1098,7 @@
   padding: 0 !important;
   font-size: 16px;
 }
-.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:active), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:not(:placeholder-shown)) {
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:not(:placeholder-shown)), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:active) {
   position: static;
   font-size: 14px;
 }
@@ -1110,6 +1110,7 @@
   height: 100%;
   z-index: 2;
   background: transparent;
+  padding: 0;
   font-family: Inter, sans-serif;
   font-weight: 400;
   font-size: 14px;
