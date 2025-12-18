@@ -843,7 +843,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .row,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .col-sm-12,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout app-progress-stepper + h4 {
-  display: none;
+  display: none !important;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .checkout-promo {
   padding-bottom: 50px;
@@ -957,6 +957,9 @@
   opacity: 0.7;
   cursor: not-allowed;
 }
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-content-wrapper--show-credit-debit .ab-credit-or-debit-forms-section {
+  display: block;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-header {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
@@ -990,6 +993,13 @@
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout shipping-rates .row > .col-lg-12.mb-4 b {
   font-weight: 700;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-credit-or-debit-forms-section {
+  display: none;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-credit-or-debit-forms-section .card-icons {
+  margin-top: 10px;
+  margin-bottom: 24px;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-control-forms-section {
   padding: 44px 63px 0 0;

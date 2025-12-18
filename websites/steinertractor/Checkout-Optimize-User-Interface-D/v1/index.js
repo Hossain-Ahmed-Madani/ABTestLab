@@ -644,7 +644,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-po-number",
                         type: "tel",
                         label: "PO Number",
-                        required: true,
                         className: "col-6 ab-pl-0",
                         control_node_selector: "input[formcontrolname='ExternalPurchaseOrderNumber']",
                         value: "",
@@ -654,7 +653,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-check-same-as-billing",
                         type: "checkbox",
                         label: "Check if billing address is same as above",
-                        required: true,
                         className: "col-12",
                         control_node_selector: "input[type='checkbox'].form-check.ng-valid",
                         value: "",
@@ -674,7 +672,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         id: "ab-address-line-2",
                         type: "text",
                         label: "Address Line 2",
-                        required: true,
                         className: "col-12",
                         control_node_selector: "input[formcontrolname='addressTwo']",
                         value: "",
@@ -1243,7 +1240,14 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                 <div class="ab-control-forms-section">
                                     <h1 class="ab-shipping-header">Delivery</h1>
                                 </div>
-                                <div class="ab-credit-or-debit-forms-section"></div>
+                                <div class="ab-credit-or-debit-forms-section">
+                                    <div _ngcontent-c9="" class="card-icons">
+                                        <img _ngcontent-c9="" alt="" src="/portals/0/visa.png" />
+                                        <img _ngcontent-c9="" alt="" src="/portals/0/mastercard.png" />
+                                        <img _ngcontent-c9="" alt="" src="/portals/0/discover.png" />
+                                        <img _ngcontent-c9="" alt="" src="/portals/0/amex.png" />
+                                    </div>
+                                </div>
                             </div>
                             <div class="ab-content-product-summary-wrapper col-6"></div>
                         </div>
@@ -1343,8 +1347,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     }
 
     async function handleCreditDebitFormShowHide(e) {
-        let count = 0;
-        await waitForElementAsync(() => ++count > 10);
+        await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
         const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
         optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
@@ -1355,16 +1358,41 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         const contentWrapper = q(".ab-content-wrapper");
         const targetFormSection = q(".ab-credit-or-debit-forms-section");
 
-
         if (optionTxt === "Credit/Debit Card") {
             await waitForElementAsync(() => !!validateAllControlNodesExist(payment_options_credit_or_debit.inputList));
             contentWrapper.classList.add("ab-content-wrapper--show-credit-debit");
-            targetFormSection.insertAdjacentHTML("afterbegin", getFormLayout(payment_options_credit_or_debit));
+            targetFormSection.insertAdjacentHTML("beforeend", getFormLayout(payment_options_credit_or_debit));
             eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
-            setTimeout(() => q('.ab-control-forms-section').scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+            setTimeout(() => q(".ab-control-forms-section").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
+    }
+
+    async function handleSameAsBillingCheckboxClick(e) {
+        const isChecked = e.target.checked;
+        const controlCheckSelector = e.target.getAttribute("control_node_selector");
+
+        await waitForElementAsync(() => q(controlCheckSelector) && q(controlCheckSelector).checked === isChecked);
+
+        qq("input#ab-address-line-1, input#ab-address-line-2, select#ab-country, input#ab-city, select#ab-state, input#ab-zip-code").forEach((currentTarget) => {
+            const dataObj = getElementData(currentTarget);
+
+            if (dataObj["inputType"] === "select") {
+                setTimeout(() => {
+                    const controlOptions = qq(dataObj["controlNodeSelector"] + " > option:not(:first-child)");
+                    currentTarget.innerHTML = `${q(currentTarget, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                    const selectedOption = controlOptions.find((option) => option.selected);
+                    currentTarget.value = selectedOption.value;
+
+                    handleFormErrorMessage(dataObj);
+                    updateSelectInputView(dataObj);
+                }, 1500);
+            } else {
+                currentTarget.value = q(dataObj["controlNodeSelector"]).value;
+                handleFormErrorMessage(dataObj);
+            }
+        });
     }
 
     function getElementData(currentTarget) {
@@ -1464,26 +1492,19 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         dependencyNodes.forEach(async (dependencyNode) => {
             try {
-                console.log("updateDependencyNodes...");
-
                 const controlNodeSelector = dependencyNode.getAttribute("control_node_selector");
                 const controlNode = q(controlNodeSelector);
                 const dependencyNodeInputType = dependencyNode.getAttribute("type");
                 const dependencyDataObj = getElementData(dependencyNode);
 
-                // console.log(
-                //     "updating dependencynode...",
-                //     dependencyNodeInputType === "select" && controlNode?.options[1].innerText.trim().toLowerCase() !== dependencyNode?.options[1].innerText.trim().toLowerCase()
-                // );
-
                 await waitForElementAsync(
                     () =>
                         !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode?.value !== dependencyNode?.value) ||
-                        (dependencyNodeInputType === "select" && controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase()),
+                        (dependencyNodeInputType === "select" &&
+                            controlNode?.options.length > 1 &&
+                            controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase()),
                     5000
                 );
-
-                console.log("Control value got  updated....", dependencyNodeInputType, dependencyNode);
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
                     dependencyNode.value = inputType === "tel" ? controlNode.value.replace(/\D/g, "") : controlNode.value;
@@ -1502,7 +1523,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
                 handleFormErrorMessage(dependencyDataObj);
             } catch (error) {
-                console.error( error)
+                console.error(error);
                 return false;
             }
         });
@@ -1602,6 +1623,11 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                 selector: ".AB-Shipping-Checkout input[type='checkbox']#newsletter",
                 events: ["click"],
                 callback: updateProductSummaryLayout,
+            },
+            {
+                selector: "label[for='ab-check-same-as-billing']",
+                events: ["click"],
+                callback: handleSameAsBillingCheckboxClick,
             },
             // Add Ons | New Form
             // {

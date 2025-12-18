@@ -1063,8 +1063,9 @@
     eve-checkout-page .col-12 > .text-center.mb-5,
     eve-checkout-page .col-12 > .row,
     eve-checkout-page .col-12 > .col-sm-12,
+    // eve-authorizenet,
     app-progress-stepper + h4 {
-        display: none;
+        display: none !important;
     }
 
     .checkout-promo {
@@ -1207,6 +1208,15 @@
 
     // Form Section
 
+    .ab-content-wrapper {
+        &--show-credit-debit {
+            .ab-credit-or-debit-forms-section {
+                display: block;
+            }
+        }
+    }
+
+    // Control Forms
     .ab-shipping-header {
         font-family: Arial, Helvetica, sans-serif;
         font-weight: 700;
@@ -1246,6 +1256,16 @@
             b {
                 font-weight: 700;
             }
+        }
+    }
+
+    // Show Credit Or Debit Forms
+    .ab-credit-or-debit-forms-section {
+        display: none;
+
+        .card-icons {
+            margin-top: 10px;
+            margin-bottom: 24px;
         }
     }
 
