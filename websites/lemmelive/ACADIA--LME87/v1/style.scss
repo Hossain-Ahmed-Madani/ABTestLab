@@ -29,8 +29,8 @@
         &.active {
             button.bundle-builder__form-toggle {
                 &:after {
-                    margin-top: 2px;
-                    transform: rotate(-135deg);
+                    transform: rotate(45deg);
+                    margin-top: -4px;
                 }
             }
 
@@ -59,8 +59,9 @@
                 height: 10px;
                 border-right: 3px solid #fff;
                 border-bottom: 3px solid #fff;
-                transform: rotate(45deg);
-                margin-top: -4px;
+
+                margin-top: 2px;
+                transform: rotate(-135deg);
             }
         }
 
@@ -71,6 +72,21 @@
             margin-left: -20px;
             margin-right: -20px;
         }
+    }
+
+    .bundle-builder__pack-option .badge {
+        width: 32px;
+        height: 32px;
+        top: -15px;
+        right: -4px;
+        font-family: "Mier A";
+        font-weight: 700;
+        font-size: 8px;
+        line-height: 8px;
+        letter-spacing: 0px;
+        text-align: center;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 1);
     }
 
     .ab-bundle-builder-form-wrapper {

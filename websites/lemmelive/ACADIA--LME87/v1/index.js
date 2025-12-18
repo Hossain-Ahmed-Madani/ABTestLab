@@ -47,7 +47,7 @@ logInfo("fired");
         test_name: "LME87: [BYOB] Add Steps to Bundle Builder - (2) SET UP TEST",
         page_initials: "AB-LME87",
         test_variation: 1 /* 1, 2, 3 */,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

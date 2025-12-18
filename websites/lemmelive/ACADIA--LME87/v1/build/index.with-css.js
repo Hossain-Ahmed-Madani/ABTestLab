@@ -18,8 +18,8 @@
 .AB-LME87
   .bundle-builder__form.active
   button.bundle-builder__form-toggle:after {
-  margin-top: 2px;
-  transform: rotate(-135deg);
+  transform: rotate(45deg);
+  margin-top: -4px;
 }
 .AB-LME87 .bundle-builder__form.active .ab-bundle-builder-form-wrapper {
   max-height: calc(var(--viewport-height) - 96px);
@@ -43,8 +43,8 @@
   height: 10px;
   border-right: 3px solid #fff;
   border-bottom: 3px solid #fff;
-  transform: rotate(45deg);
-  margin-top: -4px;
+  margin-top: 2px;
+  transform: rotate(-135deg);
 }
 .AB-LME87 .bundle-builder__form .bundle-builder__items {
   width: auto;
@@ -52,6 +52,20 @@
   overflow-x: scroll;
   margin-left: -20px;
   margin-right: -20px;
+}
+.AB-LME87 .bundle-builder__pack-option .badge {
+  width: 32px;
+  height: 32px;
+  top: -15px;
+  right: -4px;
+  font-family: "Mier A";
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 8px;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
 }
 .AB-LME87 .ab-bundle-builder-form-wrapper {
   border-radius: 32px;
@@ -463,7 +477,7 @@ logInfo("fired");
     test_name: "LME87: [BYOB] Add Steps to Bundle Builder - (2) SET UP TEST",
     page_initials: "AB-LME87",
     test_variation: 1 /* 1, 2, 3 */,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
