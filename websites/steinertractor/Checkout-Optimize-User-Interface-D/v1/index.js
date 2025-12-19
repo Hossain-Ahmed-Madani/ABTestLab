@@ -20,7 +20,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1232,7 +1232,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
 
-        await waitForElementAsync(() => q("eve-shipping-address"));
+        await waitForElementAsync(() => q("body:not(.AB-Shipping-Checkout) eve-shipping-address"));
 
         // Update
         q("body").classList.add("AB-Shipping-Checkout");
