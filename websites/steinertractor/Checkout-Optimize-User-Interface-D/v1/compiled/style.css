@@ -136,6 +136,10 @@
   position: static;
   font-size: 14px;
 }
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input[required][area-empty]):after {
+  content: " *";
+  color: red;
+}
 .AB-Checkout-Step-1-2 .ab-form-group input:not([type=radio]):not([type=checkbox]) {
   width: 100%;
   height: 100%;
@@ -174,10 +178,10 @@
 .AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
   display: block;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):placeholder-shown[required]) {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) {
   border: 2px solid #dc3545;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):placeholder-shown[required]) + .ab-error-message {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
   display: block;
 }
 .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):focus),

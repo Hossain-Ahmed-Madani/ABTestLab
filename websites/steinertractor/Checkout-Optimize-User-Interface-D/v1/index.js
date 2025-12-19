@@ -81,7 +81,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         control_node_selector: "#phonereg, #phone",
                         dependency_node_selector: "#ab-billing-phone-bill",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Please enter a valid phone number",
                     },
                     {
                         id: "ab-ext",
@@ -129,7 +129,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #phone",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Please enter a valid phone number",
                     },
                     {
                         id: "ab-billing-street-address",
@@ -220,7 +220,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #phone",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Please enter a valid phone number",
                     },
                     {
                         id: "ab-delivery-street-address",
@@ -401,7 +401,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         className: "col-6 ab-pl-0",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coPhone",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Please enter a valid phone number",
                     },
                     {
                         id: "ab-billing-street-address",
@@ -502,7 +502,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                         className: "col-6 ab-pl-0",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coPhone",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Please enter a valid phone number",
                     },
                     {
                         id: "ab-shipping-street-address",
@@ -933,7 +933,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                                     ${value ? `value="${value}"` : ""}
                                                     ${required ? `required` : ""}
                                                     ${pattern ? `pattern="${pattern}"` : ""}
-                                                    ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
                                                 >
                                                     <option value="${q(control_node_selector + "> option:first-child").value || ""}" selected>${label}</option>
                                                     ${
@@ -958,7 +957,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                                         ${required ? `required` : ""}
                                                         ${pattern ? `pattern="${pattern}"` : ""}
                                                         ${inputType === "checkbox" && q(control_node_selector + ":checked") ? "checked" : ""}
-                                                        ${qq(control_node_selector).some((item) => item.classList.contains("is-invalid")) || required ? "area-invalid" : ""}
+                                                        area-empty
                                                     />
                                                 `}
                                             </label>
@@ -1450,6 +1449,12 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             currentTarget?.removeAttribute("area-invalid");
         }
 
+        if (!currentTarget.value) {
+            currentTarget?.setAttribute("area-empty", "");
+        } else {
+            currentTarget?.removeAttribute("area-empty");
+        }
+
         // Exception | Guest Password input
         if (currentTarget.getAttribute("id") === "ab-guest-password" && currentTarget.value.length >= 7) {
             currentTarget?.removeAttribute("area-invalid");
@@ -1523,12 +1528,15 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                 const dependencyNodeInputType = dependencyNode.getAttribute("type");
                 const dependencyDataObj = getElementData(dependencyNode);
 
+                let count = 0;
+
                 await waitForElementAsync(
                     () =>
                         !!(DATA["text_based_input_list"].some((type) => type === dependencyNodeInputType) && controlNode?.value !== dependencyNode?.value) ||
                         (dependencyNodeInputType === "select" &&
                             controlNode?.options.length > 1 &&
-                            controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase()),
+                            controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase() &&
+                            ++count > 3),
                     5000
                 );
 

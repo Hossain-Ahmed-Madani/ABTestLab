@@ -170,6 +170,13 @@
             position: static;
             font-size: 14px;
         }
+
+        &:has(~ input[required][area-empty]) {
+            &:after {
+                content: " *";
+                color: red;
+            }
+        }
     }
 
     .ab-form-group input:not([type="radio"]):not([type="checkbox"]) {
@@ -215,7 +222,15 @@
         }
     }
 
-    .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"]):placeholder-shown[required]) {
+    // .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"]):placeholder-shown[required]) {
+    //     border: 2px solid #dc3545;
+
+    //     & + .ab-error-message {
+    //         display: block;
+    //     }
+    // }
+
+    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) {
         border: 2px solid #dc3545;
 
         & + .ab-error-message {
