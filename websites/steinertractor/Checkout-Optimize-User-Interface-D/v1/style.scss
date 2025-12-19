@@ -230,7 +230,7 @@
     //     }
     // }
 
-    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) {
+    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) , .ab-form-group:has(> select[required]:not([area-selected]) ){
         border: 2px solid #dc3545;
 
         & + .ab-error-message {
@@ -305,16 +305,20 @@
             -webkit-appearance: none; /* For Webkit browsers */
             -moz-appearance: none; /* For Firefox */
 
-            &[area-invalid] {
-                border: 2px solid #dc3545;
-            }
+            // &[area-invalid] {
+            //     border: 2px solid #dc3545;
+            // }
+
+            // &[required]:not([area-selected]) {
+            //     border: 2px solid #dc3545;
+            // }
 
             &[area-selected] {
                 color: #333333;
             }
 
-            &:focus-within,
-            &:active {
+            &:focus-within:not([area-invalid]) ,
+            &:active:not([area-invalid]) {
                 border: 2px solid #333333;
                 box-shadow: none;
                 color: #333333;

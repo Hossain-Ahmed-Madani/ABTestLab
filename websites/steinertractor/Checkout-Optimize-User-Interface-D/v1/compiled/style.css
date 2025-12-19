@@ -178,10 +178,10 @@
 .AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
   display: block;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])), .AB-Checkout-Step-1-2 .ab-form-group:has(> select[required]:not([area-selected])) {
   border: 2px solid #dc3545;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message, .AB-Checkout-Step-1-2 .ab-form-group:has(> select[required]:not([area-selected])) + .ab-error-message {
   display: block;
 }
 .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox]):focus),
@@ -241,13 +241,10 @@
   -webkit-appearance: none; /* For Webkit browsers */
   -moz-appearance: none; /* For Firefox */
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> select) select[area-invalid] {
-  border: 2px solid #dc3545;
-}
 .AB-Checkout-Step-1-2 .ab-form-group:has(> select) select[area-selected] {
   color: #333333;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> select) select:focus-within, .AB-Checkout-Step-1-2 .ab-form-group:has(> select) select:active {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> select) select:focus-within:not([area-invalid]), .AB-Checkout-Step-1-2 .ab-form-group:has(> select) select:active:not([area-invalid]) {
   border: 2px solid #333333;
   box-shadow: none;
   color: #333333;
