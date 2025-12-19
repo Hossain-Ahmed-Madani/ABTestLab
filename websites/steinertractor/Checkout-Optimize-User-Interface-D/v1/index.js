@@ -20,7 +20,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1774,6 +1774,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
     function checkForItems() {
         return !!(
+            document.readyState === 'complete' && 
             q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
             q(".progress-stepper .checkout-wrap") &&
             q(".row.content-body") &&
