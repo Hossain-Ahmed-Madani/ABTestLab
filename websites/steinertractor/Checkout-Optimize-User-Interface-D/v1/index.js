@@ -20,7 +20,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1720,15 +1720,15 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     function reInitializeTest() {
         console.log("No matching path...");
 
-        setTimeout(() => {
-            console.log("Re Initializing Test...");
-            if (window.location.pathname === "/checkout") {
-                q("body").classList.remove(page_initials);
-                q("body").classList.remove(`${page_initials}--v${test_variation}`);
-                q("body").classList.remove(`${page_initials}--version:${test_version}`);
-                AB_CHECKOUT_TEST();
-            }
-        }, 250);
+        // setTimeout(() => {
+        //     console.log("Re Initializing Test...");
+        //     if (window.location.pathname === "/checkout") {
+        //         q("body").classList.remove(page_initials);
+        //         q("body").classList.remove(`${page_initials}--v${test_variation}`);
+        //         q("body").classList.remove(`${page_initials}--version:${test_version}`);
+        //         AB_CHECKOUT_TEST();
+        //     }
+        // }, 250);
     }
 
     // ===========  MAIN JS ===========
