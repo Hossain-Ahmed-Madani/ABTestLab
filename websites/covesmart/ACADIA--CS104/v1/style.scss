@@ -93,6 +93,11 @@ Array.from($0.classList).join('.')
         height: 9px;
     }
 
+    .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5 {
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
     .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
     .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4 + .text-cove-dark-grey.text-xs.font-light,
     .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4 {

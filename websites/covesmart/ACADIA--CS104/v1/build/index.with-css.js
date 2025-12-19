@@ -104,6 +104,11 @@ Array.from($0.classList).join('.')
   height: 9px;
 }
 .AB-CS104
+  .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5 {
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.AB-CS104
   .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
 .AB-CS104
   .text-cove-dark-grey.ml-cove-5.mb-0.text-base.font-medium.leading-4
@@ -521,7 +526,7 @@ logInfo("fired");
     test_name: "CS104: [QUIZ RESULTS] Card Clean Up - (2) SET UP TEST",
     page_initials: "AB-CS104",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
