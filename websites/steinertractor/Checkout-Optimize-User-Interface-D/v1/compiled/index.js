@@ -10,7 +10,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
 */
 
-(async () => {
+(async function AB_CHECKOUT_TEST() {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "steinertractor",
@@ -23,7 +23,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         test_version: 0.0002,
     };
 
-    const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
+    const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const DATA = {
         text_based_input_list: ["text", "tel", "number", "email", "password", "url", "search"],
@@ -1435,7 +1435,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         qq(".ab-action-button").forEach((item) => {
             const selector = item.getAttribute("control_node_selector");
             const controlNode = q(selector);
-            
+
             setTimeout(() => {
                 const isDisabled = controlNode.disabled;
 
@@ -1583,6 +1583,20 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         });
     }
 
+    function reInitializeTest() {
+        console.log("No matching path...");
+
+        setTimeout(() => {
+            console.log("Re Initializing Test...");
+            if (window.location.pathname === "/checkout") {
+                q("body").classList.remove(page_initials);
+                q("body").classList.remove(`${page_initials}--v${test_variation}`);
+                q("body").classList.remove(`${page_initials}--version:${test_version}`);
+                AB_CHECKOUT_TEST();
+            }
+        }, 250);
+    }
+
     // ===========  MAIN JS ===========
     const FORM_CONFIG = {
         "/guestcheckout": {
@@ -1599,7 +1613,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         },
     };
 
-    const config = FORM_CONFIG[path + hash] || { inputList: [], layoutFunction: () => console.log("No matching path") };
+    const config = FORM_CONFIG[window.location.pathname + window.location.hash] || {
+        inputList: [],
+        layoutFunction: reInitializeTest,
+    };
     const { inputList, mainLayoutFunction } = { inputList: config.inputList, mainLayoutFunction: config.layoutFunction };
 
     function validateAllControlNodesExist(inputList) {
