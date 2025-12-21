@@ -1060,7 +1060,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                     </div>
                     <div class="ab-product-summary__row row">
                         <div class="ab-product-summary__col col-6">Promotion Discount</div>
-                        <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
+                        <div class="ab-product-summary__col col-6">${PromotionTotal && PromotionTotal !== 0 ? `-$${PromotionTotal}` : `$0`}</div>
                     </div>
                     <div class="ab-product-summary__row row">
                         <div class="ab-product-summary__col col-6">Estimated Tax</div>
@@ -1117,7 +1117,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             </div>
             <div class="ab-product-summary__row row">
                 <div class="ab-product-summary__col col-6">Promotion Discount</div>
-                <div class="ab-product-summary__col col-6">$${PromotionTotal}</div>
+                <div class="ab-product-summary__col col-6">${PromotionTotal && PromotionTotal !== 0 ? `-$${PromotionTotal}` : `$0`}</div>
             </div>
             <div class="ab-product-summary__row row">
                 <div class="ab-product-summary__col col-6">Estimated Tax</div>
@@ -1128,13 +1128,15 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                 <div class="ab-product-summary__col col-6">$${Total}</div>
             </div>
         `;
+
+        eventHandler();
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
         const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
-        q("body").classList.add("AB-Guest-Checkout");
+        // q("body").classList.add("AB-Guest-Checkout");
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
@@ -1192,7 +1194,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
 
         // Update
-        q("body").classList.add("AB-Address-Checkout");
+        // q("body").classList.add("AB-Address-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1232,10 +1234,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
         // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
 
-        await waitForElementAsync(() => q("body:not(.AB-Shipping-Checkout) eve-shipping-address"));
+        // await waitForElementAsync(() => q("body:not(.AB-Shipping-Checkout) eve-shipping-address"));
 
         // Update
-        q("body").classList.add("AB-Shipping-Checkout");
+        // q("body").classList.add("AB-Shipping-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1298,26 +1300,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         }
 
         // return true;
-    }
-
-    async function handleAddressShippingFormShowHide(e) {
-        q(".ab-form#shipping-address")?.remove();
-
-        const { checkout_shipping_address } = DATA.forms;
-        const contentWrapper = q(".ab-content-wrapper");
-        const billingAddressForm = q(".ab-form#billing-address");
-
-        if (!e.target.checked) {
-            await waitForElementAsync(
-                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList))
-            );
-            contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
-            billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
-            eventHandler();
-        } else {
-            contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
-            setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
-        }
     }
 
     async function handleAddressDeliveryFormShowHide(e) {
@@ -1657,59 +1639,35 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             },
             // Add Ons | Control
             {
-                selector: ".AB-Shipping-Checkout input[type='checkbox']#newsletter",
+                selector: ".AB-Shipping-Checkout input#newsletter[type='checkbox']",
                 events: ["click"],
-                callback: updateProductSummaryLayout,
+                callback: (e) => setTimeout(updateProductSummaryLayout, 1500),
             },
             {
                 selector: "label[for='ab-check-same-as-billing']",
                 events: ["click"],
                 callback: handleSameAsBillingCheckboxClick,
             },
-            // Add Ons | New Form
-            // {
-            //     selector: ".AB-Shipping-Checkout .ab-product-summary__addons-checkbox",
-            //     events: ["click"],
-            //     callback: (e) => {
-            //         const targetNode = q("#newsletter");
-            //         targetNode.click();
-            //         updateProductSummaryLayout();
-            //     },
-            // },
-            // Coupons  | New Form
-            // {
-            //     selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-input",
-            //     events: ["input", "change"],
-            //     callback: async (e) => {
-            //         const currentTarget = e.target;
-            //         const dataObj = getElementData(currentTarget);
-
-            //         // Check For Control inputs
-            //         if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
-            //             console.error("Target node not found:", dataObj["controlNodeSelector"]);
-            //             return;
-            //         }
-
-            //         handleTextBasedInputs(dataObj);
-            //     },
-            // },
-            // {
-            //     selector: ".AB-Shipping-Checkout .ab-product-summary__coupons-button",
-            //     events: ["click"],
-            //     callback: async (e) => {
-            //         q("cart-coupon input[name='coupon']").focus();
-            //         q("cart-coupon div.btn").click();
-            //     },
-            // },
+            // Coupon
+            {
+                selector: "cart-coupon .btn.btn-warning.w-100.mt-3.mb-3, .coupon-wrapper a.pull-right",
+                events: ["click"],
+                callback: async (e) => {
+                    await waitForElementAsync(() => q("cart-coupon .coupon-wrapper"));
+                    updateProductSummaryLayout();
+                },
+            },
         ];
 
-        ACTION_LIST.forEach(({ selector, events, callback }) => {
+        ACTION_LIST.forEach(async ({ selector, events, callback }) => {
+            await waitForElementAsync(() => qq(selector), 5000);
             qq(selector)?.forEach((item) => {
                 const debouncedCallback = debounce(callback, 150);
                 events.forEach((event) => {
-                    const className = `ab-${event}-event-attached`;
-                    if (!item.classList.contains(className)) {
-                        item.classList.add(className);
+                    const flagClassName = `ab-${event}-event-attached`;
+                    if (!item.classList.contains(flagClassName)) {
+                        console.log("Action Loop running....");
+                        item.classList.add(flagClassName);
                         item.addEventListener(event, debouncedCallback);
                     }
                 });
@@ -1717,46 +1675,33 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         });
     }
 
-    function reInitializeTest() {
-        console.log("No matching path...");
-
-        // setTimeout(() => {
-        //     console.log("Re Initializing Test...");
-        //     if (window.location.pathname === "/checkout") {
-        //         q("body").classList.remove(page_initials);
-        //         q("body").classList.remove(`${page_initials}--v${test_variation}`);
-        //         q("body").classList.remove(`${page_initials}--version:${test_version}`);
-        //         AB_CHECKOUT_TEST();
-        //     }
-        // }, 250);
-    }
-
     // ===========  MAIN JS ===========
     const FORM_CONFIG = {
         "/guestcheckout": {
+            stepClassName: "AB-Guest-Checkout",
             inputList: [...DATA.forms.guest_personal_information.inputList, ...DATA.forms.guest_billing_address.inputList, ...DATA.forms.guest_shipping_address.inputList],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },
         "/checkout#/address": {
+            stepClassName: "AB-Address-Checkout",
             inputList: [...DATA.forms.checkout_billing_address.inputList, ...DATA.forms.checkout_same_billing.inputList],
             layoutFunction: createAndUpdateAddressLayout,
         },
         "/checkout#/main": {
+            stepClassName: "AB-Shipping-Checkout",
             inputList: [],
             layoutFunction: createAndUpdateShippingLayout,
         },
     };
 
     const config = FORM_CONFIG[window.location.pathname + window.location.hash] || {
+        bodyClassName: "",
         inputList: [],
-        layoutFunction: reInitializeTest,
+        layoutFunction: () => console.log("No matching path..."),
     };
-    const { inputList, mainLayoutFunction } = { inputList: config.inputList, mainLayoutFunction: config.layoutFunction };
+    const { stepClassName, inputList, mainLayoutFunction } = { stepClassName: config.stepClassName, inputList: config.inputList, mainLayoutFunction: config.layoutFunction };
 
     function validateAllControlNodesExist(inputList) {
-        // Temporary Solution
-        if (inputList.length === 0) return true;
-
         return inputList?.every(({ type, control_node_selector }) => {
             if (type === "select") {
                 return qq(`${control_node_selector} > option`).length > 1;
@@ -1766,19 +1711,24 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     }
 
     async function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, stepClassName);
         console.table(TEST_CONFIG);
         await mainLayoutFunction();
         eventHandler();
     }
 
     function checkForItems() {
+        const currentPath = window.location.pathname + window.location.hash;
+
+        console.log(currentPath, stepClassName);
+
         return !!(
-            document.readyState === 'complete' && 
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
-            q(".progress-stepper .checkout-wrap") &&
-            q(".row.content-body") &&
-            validateAllControlNodesExist(inputList)
+            (q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation}):not(.${stepClassName})`) &&
+                q(".progress-stepper .checkout-wrap") &&
+                q(".row.content-body") &&
+                (currentPath === "/guestcheckout" || currentPath === "/checkout#/address") &&
+                validateAllControlNodesExist(inputList)) ||
+            (currentPath === "/checkout#/main" && q("select#shipping") && q("eve-payment-options"))
         );
     }
 

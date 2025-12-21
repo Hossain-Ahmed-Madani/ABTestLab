@@ -230,7 +230,8 @@
     //     }
     // }
 
-    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) , .ab-form-group:has(> select[required]:not([area-selected]) ){
+    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])),
+    .ab-form-group:has(> select[required]:not([area-selected])) {
         border: 2px solid #dc3545;
 
         & + .ab-error-message {
@@ -317,7 +318,7 @@
                 color: #333333;
             }
 
-            &:focus-within:not([area-invalid]) ,
+            &:focus-within:not([area-invalid]),
             &:active:not([area-invalid]) {
                 border: 2px solid #333333;
                 box-shadow: none;
@@ -1088,6 +1089,10 @@
         display: none !important;
     }
 
+    .ab-product-summary {
+        padding-bottom: 123px;
+    }
+
     .checkout-promo {
         padding-bottom: 50px;
     }
@@ -1610,7 +1615,8 @@
         padding: 0 63px 123px 0;
     }
 
-    //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | START =========
+
+    // ========== Product Summary Extra ==========
     .ab-product-summary__coupons-form-group,
     .ab-product-summary__addons-form-group {
         display: none;
@@ -1703,6 +1709,7 @@
             order: 1;
 
             outline: none;
+            box-shadow: none;
             height: 51px;
             flex-grow: 1;
             background-color: rgb(255, 255, 255);
@@ -1740,12 +1747,38 @@
             border-radius: 0;
             font-size: 0px;
 
+            &:hover {
+                color: #212529;
+                background-color: #ffe8a6;
+                border-color: #ffe599;
+            }
+
             &:after {
                 content: "Apply";
                 font-size: 14px;
             }
         }
-    }
 
-    //  ====== NEEDS FINAL CHECK AFTER COUPON IS PROVIDED | END =========
+        .coupon-wrapper {
+            margin-top: 10px;
+            margin-bottom: 0px !important;
+            padding: 16px 10px 5px;
+            height: 100%;
+            font-family: Inter, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #333333;
+        }
+
+        .coupon-link {
+            margin-bottom: 0px !important;
+            text-decoration: underline;
+        }
+
+        .text-success {
+            margin-bottom: 0 !important;
+        }
+    }
 }
