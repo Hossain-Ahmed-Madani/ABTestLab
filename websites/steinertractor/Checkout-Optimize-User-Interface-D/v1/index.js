@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
