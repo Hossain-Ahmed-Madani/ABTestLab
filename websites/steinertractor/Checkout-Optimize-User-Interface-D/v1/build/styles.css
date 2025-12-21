@@ -864,6 +864,9 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout app-progress-stepper + h4 {
     display: none !important;
 }
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-product-summary {
+    padding-bottom: 123px;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .checkout-promo {
     padding-bottom: 50px;
 }
@@ -1357,6 +1360,7 @@
     width: 70%;
     order: 1;
     outline: none;
+    box-shadow: none;
     height: 51px;
     flex-grow: 1;
     background-color: rgb(255, 255, 255);
@@ -1389,7 +1393,31 @@
     border-radius: 0;
     font-size: 0px;
 }
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout cart-coupon .btn.btn-warning.w-100.mt-3.mb-3:hover {
+    color: #212529;
+    background-color: #ffe8a6;
+    border-color: #ffe599;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout cart-coupon .btn.btn-warning.w-100.mt-3.mb-3:after {
     content: "Apply";
     font-size: 14px;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout cart-coupon .coupon-wrapper {
+    margin-top: 10px;
+    margin-bottom: 0px !important;
+    padding: 16px 10px 5px;
+    height: 100%;
+    font-family: Inter, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: #333333;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout cart-coupon .coupon-link {
+    margin-bottom: 0px !important;
+    text-decoration: underline;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout cart-coupon .text-success {
+    margin-bottom: 0 !important;
 }

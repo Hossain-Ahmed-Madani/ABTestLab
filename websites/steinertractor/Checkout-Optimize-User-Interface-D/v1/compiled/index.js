@@ -20,7 +20,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1592,29 +1592,43 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     }
 
     // ===========  MAIN JS ===========
+
+    const PATHS = {
+        guest_checkout: "/guestcheckout",
+        address_checkout: "/checkout#/address",
+        shipping_checkout: "/checkout#/main",
+    };
+
     const FORM_CONFIG = {
-        "/guestcheckout": {
+        [PATHS.guest_checkout]: {
             stepClassName: "AB-Guest-Checkout",
             inputList: [...DATA.forms.guest_personal_information.inputList, ...DATA.forms.guest_billing_address.inputList, ...DATA.forms.guest_shipping_address.inputList],
             layoutFunction: createAndUpdateGuestCheckoutLayout,
         },
-        "/checkout#/address": {
+        [PATHS.address_checkout]: {
             stepClassName: "AB-Address-Checkout",
             inputList: [...DATA.forms.checkout_billing_address.inputList, ...DATA.forms.checkout_same_billing.inputList],
             layoutFunction: createAndUpdateAddressLayout,
         },
-        "/checkout#/main": {
+        [PATHS.shipping_checkout]: {
             stepClassName: "AB-Shipping-Checkout",
             inputList: [],
             layoutFunction: createAndUpdateShippingLayout,
         },
     };
 
-    const config = FORM_CONFIG[window.location.pathname + window.location.hash] || {
-        inputList: [],
-        layoutFunction: () => console.log("No matching path..."),
-    };
-    const { stepClassName, inputList, mainLayoutFunction } = { stepClassName: config.stepClassName, inputList: config.inputList, mainLayoutFunction: config.layoutFunction };
+    function getLayoutConfig() {
+        const config = FORM_CONFIG[window.location.pathname + window.location.hash] || {
+            stepClassName: "",
+            inputList: [],
+            layoutFunction: () => console.log("No matching path..."),
+        };
+        return {
+            stepClassName: config.stepClassName,
+            inputList: config.inputList,
+            mainLayoutFunction: config.layoutFunction,
+        };
+    }
 
     function validateAllControlNodesExist(inputList) {
         return inputList?.every(({ type, control_node_selector }) => {
@@ -1626,6 +1640,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     }
 
     async function init() {
+        const { stepClassName, mainLayoutFunction } = getLayoutConfig();
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, stepClassName);
         console.table(TEST_CONFIG);
         await mainLayoutFunction();
@@ -1634,16 +1649,27 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
     function checkForItems() {
         const currentPath = window.location.pathname + window.location.hash;
+        
+        if (!Object.keys(PATHS).some(key => currentPath === PATHS[key])) {
+            // console.warn("No matching path found for:", currentPath);
+            return;
+        }
+        
+        const { stepClassName, inputList } = getLayoutConfig();
 
-        console.log(currentPath, stepClassName);
+        const hasRequiredContents =
+            !!((currentPath === PATHS.guest_checkout || currentPath === PATHS.address_checkout) && validateAllControlNodesExist(inputList)) ||
+            (currentPath === PATHS.shipping_checkout && q("select#shipping") && q("eve-payment-options"));
+
 
         return !!(
-            (q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation}):not(.${stepClassName})`) &&
-                q(".progress-stepper .checkout-wrap") &&
-                q(".row.content-body") &&
-                (currentPath === "/guestcheckout" || currentPath === "/checkout#/address") &&
-                validateAllControlNodesExist(inputList)) ||
-            (currentPath === "/checkout#/main" && q("select#shipping") && q("eve-payment-options"))
+            stepClassName &&
+            hasRequiredContents &&
+            q(`body:not(.${page_initials})`) &&
+            q(`body:not(.${page_initials}--v${test_variation})`) &&
+            q(`body:not(.${stepClassName})`) &&
+            q(".progress-stepper .checkout-wrap") &&
+            q(".row.content-body")
         );
     }
 
