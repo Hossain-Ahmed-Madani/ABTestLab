@@ -10,7 +10,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
 */
 
-(async function AB_CHECKOUT_TEST() {
+(async function() {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "steinertractor",
