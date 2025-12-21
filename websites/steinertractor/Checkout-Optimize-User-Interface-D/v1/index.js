@@ -7,10 +7,11 @@ Figma: https://www.figma.com/design/8qOYEM40DrLkcFtP6ZFY3N/Steiner-Tractor?node-
 
 Test container: https://app.convert.com/accounts/100412165/projects/10043124/experiences/1004178648/summary
 Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=1004178648.1004420738&utm_campaign=qa5&returnurl=%2Fcheckout
+Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpreview&convert_e=1004178648&convert_v=1004420738&returnurl=%2Fcheckout
 
 */
 
-(async function() {
+(async function () {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "steinertractor",
@@ -1724,6 +1725,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     }
 
     async function init() {
+        if (window[page_initials]) return;
+
+        window[page_initials] = true;
+
         const { stepClassName, mainLayoutFunction } = getLayoutConfig();
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, stepClassName);
         console.table(TEST_CONFIG);
@@ -1733,18 +1738,16 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
     function checkForItems() {
         const currentPath = window.location.pathname + window.location.hash;
-        
-        if (!Object.keys(PATHS).some(key => currentPath === PATHS[key])) {
-            // console.warn("No matching path found for:", currentPath);
-            return;
+
+        if (!Object.keys(PATHS).some((key) => currentPath === PATHS[key])) {
+            return false;
         }
-        
+
         const { stepClassName, inputList } = getLayoutConfig();
 
         const hasRequiredContents =
             !!((currentPath === PATHS.guest_checkout || currentPath === PATHS.address_checkout) && validateAllControlNodesExist(inputList)) ||
             (currentPath === PATHS.shipping_checkout && q("select#shipping") && q("eve-payment-options"));
-
 
         return !!(
             stepClassName &&
