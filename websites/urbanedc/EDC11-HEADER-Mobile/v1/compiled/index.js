@@ -152,6 +152,9 @@ logInfo("fired");
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function isTouchEnabled() {
+        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    }
 
     function animate(targetElement, className, interval) {
         if (!targetElement) return;
@@ -191,7 +194,7 @@ logInfo("fired");
         // Search Open Cta
         q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5").insertAdjacentHTML(
             "afterbegin",
-            `<button class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</button>`
+            `<div class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</div>`
         );
 
         // Modal
@@ -237,14 +240,19 @@ logInfo("fired");
         );
 
         // Event Listeners
-        q(`.${page_initials}__modal__show-cta`).addEventListener("click", () => handleModalView("show"));
-        q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => handleModalView("hide"));
-        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+        const eventName = isTouchEnabled() ? "touchstart" : "click";
+        q(`.${page_initials}__modal__show-cta`).addEventListener(eventName, (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            handleModalView("show");
+        });
+        q(`.${page_initials}__modal__close-cta`).addEventListener(eventName, () => handleModalView("hide"));
+        q(`.${page_initials}__modal-backdrop`).addEventListener(eventName, (e) => {
             if (!e.target.closest(`.${page_initials}__modal`)) {
                 handleModalView("hide");
             }
         });
-        q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => {
+        q(`.${page_initials}__modal__search-cta`).addEventListener(eventName, () => {
             fireGA4Event("EDC11_ClickedSearch");
             q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click();
         });
@@ -252,7 +260,7 @@ logInfo("fired");
             qq('#DrawerMenu form[action="/search"] input[type="search"][name="q"]').forEach((item) => (item.value = e.target.value));
         });
         qq(`.${page_initials}__modal__featured-item`).forEach((item) => {
-            item.addEventListener("click", (e) => {
+            item.addEventListener(eventName, (e) => {
                 e.preventDefault();
                 fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
                 setTimeout(() => (window.location.href = e.target.getAttribute("href")), 150);
