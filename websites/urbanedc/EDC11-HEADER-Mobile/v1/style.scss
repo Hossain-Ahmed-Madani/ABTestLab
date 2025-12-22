@@ -13,14 +13,43 @@
 }
 
 .AB-EDC11 {
+    header {
+        padding-top: 15px !important;
+        padding-bottom: 25px !important;
+    }
+
+    header a[href="/"] img {
+        width: auto;
+        height: 35px;
+        object-fit: cover;
+        margin-left: -45px;
+    }
+
+    .text-scheme-text.bg-scheme-background.pt-top-section-vertical-spacing.pb-bottom-section-vertical-spacing {
+        padding-top: 75px;
+    }
+
     // Nav Container
     .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 {
         flex-wrap: nowrap;
+        gap: 15px;
     }
 
     // Cart Button
     .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 a[href="/account/login"] + button {
         white-space: nowrap;
+    }
+
+    // Nav Buttons
+    .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button {
+        font-family: "PT Mono";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-align: center;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 1);
     }
 
     /**
@@ -60,14 +89,12 @@
 
     &__modal {
         opacity: 1;
-
         border: 1px solid rgba(0, 0, 0, 1);
         background-color: rgba(232, 232, 232, 1);
         border-radius: 5px;
 
         width: 100%;
         min-height: max-content;
-        background: #ffffff;
         position: relative;
         z-index: 1;
         padding: 7px 5px 6px;
@@ -87,12 +114,6 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-
-            font-family: Roboto, sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 132%;
-            text-align: left;
 
             height: 28px;
             max-height: 28px;
@@ -235,7 +256,7 @@
             font-weight: 400;
             font-size: 12px;
             line-height: 100%;
-            letter-spacing: 0%;
+            letter-spacing: 0px;
             text-align: center;
             text-transform: uppercase;
             color: rgba(0, 0, 0, 1);
@@ -261,7 +282,7 @@
         }
 
         &__gear-drop-items {
-            padding: 0 15px;
+            padding: 0 14px;
             display: flex;
             gap: 10px;
             justify-content: flex-start;
