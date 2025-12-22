@@ -127,8 +127,8 @@
         }
 
         &__search-cta {
-            width: 16px;
-            height: 16px;
+            width: max-content;
+            // height: 16px;
             padding: 2px;
 
             display: flex;
@@ -137,8 +137,8 @@
             cursor: pointer;
 
             svg {
-                width: 12px;
-                height: 11px;
+                width: 100%;
+                height: 12px;
                 object-fit: contain;
             }
         }
@@ -152,6 +152,17 @@
             box-shadow: none !important;
             background: none !important;
             height: 100% !important;
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus {
+                -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important; /* Change #ffffff to your desired background color */
+                -webkit-text-fill-color: rgba(0, 0, 0, 1) !important;
+                background: none !important;
+                box-shadow: none !important;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
 
             &:hover,
             &:focus,

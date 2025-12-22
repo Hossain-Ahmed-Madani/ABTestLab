@@ -94,8 +94,7 @@
   flex-grow: 1;
 }
 .AB-EDC11__modal__search-cta {
-  width: 16px;
-  height: 16px;
+  width: max-content;
   padding: 2px;
   display: flex;
   justify-content: center;
@@ -103,8 +102,8 @@
   cursor: pointer;
 }
 .AB-EDC11__modal__search-cta svg {
-  width: 12px;
-  height: 11px;
+  width: 100%;
+  height: 12px;
   object-fit: contain;
 }
 .AB-EDC11__modal__search-input {
@@ -122,6 +121,14 @@
   letter-spacing: 0px;
   color: rgb(0, 0, 0);
   /* For Edge */
+}
+.AB-EDC11__modal__search-input:-webkit-autofill, .AB-EDC11__modal__search-input:-webkit-autofill:hover, .AB-EDC11__modal__search-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important; /* Change #ffffff to your desired background color */
+  -webkit-text-fill-color: rgb(0, 0, 0) !important;
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 .AB-EDC11__modal__search-input:hover, .AB-EDC11__modal__search-input:focus, .AB-EDC11__modal__search-input:active {
   border: none !important;

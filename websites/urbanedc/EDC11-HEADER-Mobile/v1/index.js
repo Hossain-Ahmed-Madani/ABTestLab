@@ -71,6 +71,19 @@ logInfo("fired");
         ],
     };
 
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("GA4 Event Fired:", eventName, eventLabel);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
+
     async function fetchAndParseURLApi(url) {
         try {
             const response = await fetch(url);
@@ -241,7 +254,7 @@ logInfo("fired");
                             <div class="${page_initials}__modal__top">
                                 <div class="${page_initials}__modal__search">
                                     <button class="${page_initials}__modal__search-cta" type="button">${ASSETS.search_svg}</button>
-                                    <input id="ab-search" type="text" class="${page_initials}__modal__search-input" placeholder="Search" />
+                                    <input id="ab-search" type="text" class="${page_initials}__modal__search-input" placeholder="Search" autocomplete="off" />
                                 </div>
                                 <button class="${page_initials}__modal__close-cta" type="button">${ASSETS.cross_svg}</button>
                             </div>
@@ -275,10 +288,19 @@ logInfo("fired");
         // Event Listeners
         q(`.${page_initials}__modal__show-cta`).addEventListener("click", () => handleModalView("show"));
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => handleModalView("hide"));
-        q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click());
+        q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => {
+            fireGA4Event("EDC11_ClickedSearch");
+            q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click();
+        });
         q(`.${page_initials}__modal__search-input`).addEventListener("input", (e) => {
-            const targetInput = q('#DrawerMenu form[action="/search"] input[type="search"][name="q"]');
-            targetInput.value =  e.target.value;;
+            qq('#DrawerMenu form[action="/search"] input[type="search"][name="q"]').forEach((item) => (item.value = e.target.value));
+        });
+        qq(`.${page_initials}__modal__featured-item`).forEach((item) => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
+                setTimeout(() => (window.location.href = e.target.getAttribute("href")), 150);
+            });
         });
     }
 
@@ -291,7 +313,7 @@ logInfo("fired");
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
-            q("  .row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
+            q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
             q('#DrawerMenu form[action="/search"] button[aria-label="Search"]')
         );
     }
