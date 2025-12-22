@@ -71,10 +71,12 @@
         position: relative;
         z-index: 1;
         padding: 7px 5px 6px;
+        overflow: hidden;
 
         &__container {
             border: 1px solid rgba(0, 0, 0, 1);
             border-radius: 4px;
+            overflow: hidden;
         }
 
         &__top {
@@ -173,7 +175,7 @@
         }
 
         &__featured-collections-container {
-            padding: 0 15px 20px;
+            margin: 0 15px 20px;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -221,6 +223,93 @@
             text-align: center;
             text-transform: uppercase;
             color: rgba(0, 0, 0, 1);
+        }
+
+        &__gear-drop-container {
+            margin-bottom: 38px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        &__gear-drop-title {
+            padding: 0 15px;
+            font-family: "PT Mono";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 1);
+        }
+
+        &__gear-drop-items {
+            padding: 0 15px;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            overflow: scroll;
+
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Hide scrollbar for IE, Edge and Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        &__gear-drop-item {
+            width: 200px;
+            min-width: 200px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 9px;
+            padding: 5px 12px 5px 5px;
+
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 1);
+            outline: none;
+
+            &:hover,
+            &:active {
+                border: 1px solid rgba(0, 0, 0, 1);
+                outline: none;
+            }
+        }
+
+        &__gear-drop-item-img {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 60px;
+                min-width: 60px;
+                height: 60px;
+                object-fit: cover;
+                object-position: center;
+                border-radius: 5px;
+            }
+        }
+
+        &__gear-drop-item-title {
+            font-family: "PT Mono";
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-transform: capitalize;
+            text-wrap: pretty;
+            color: rgba(0, 0, 0, 1);
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     }
 }

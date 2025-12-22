@@ -16,14 +16,14 @@ logInfo("fired");
     const TEST_CONFIG = {
         client: "Acadia",
         project: "urbanedc",
-        host: "https://urbanedc.com/",
+        host: "https://urbanedc.com",
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
         test_version: 0.0001,
     };
 
-    const { page_initials, test_variation, test_version } = TEST_CONFIG;
+    const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const ASSETS = {
         cross_svg: /* HTML */ `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -77,7 +77,9 @@ logInfo("fired");
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
             const html = await response.text();
+
             const dom = new DOMParser().parseFromString(html, "text/html");
+
             return dom;
         } catch (error) {
             // console.error("Fetch and parse failed:", error);
@@ -85,15 +87,17 @@ logInfo("fired");
         }
     }
 
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
+    async function getGearDropData() {
+        const doc = await fetchAndParseURLApi(host);
+        const targetSection = qq(doc, "section").find((section) =>
+            qq(section, "h2.font-heading.text-heading-standard.break-words").some((h2) => h2.innerText.includes("This Week's Gear Drop:"))
+        );
+
+        return qq(targetSection, "ul.carousel-track.flex.overflow-x-scroll.scroll-smooth.gap-media-grid.items-start.snap-x.snap-mandatory.snap-always.relative li").map((item) => ({
+            title: q(item, ".break-words")?.innerText?.trim(),
+            link: q(item, "a").getAttribute("href"),
+            imgUrl: q(item, "img.tile-media").getAttribute("src"),
+        }));
     }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -117,28 +121,6 @@ logInfo("fired");
                     return resolve(true);
                 }
             }, frequency);
-        });
-    }
-
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
         });
     }
 
@@ -215,7 +197,9 @@ logInfo("fired");
     }
 
     function preventScroll(e) {
-        e.preventDefault();
+        if ((e.target === document.body || document.body.contains(e.target)) && !e.target.closest('.AB-EDC11__modal__gear-drop-items')) {
+            e.preventDefault();
+        }
     }
 
     function handleModalView(action = "show") {
@@ -237,11 +221,13 @@ logInfo("fired");
         }
     }
 
-    function createLayout() {
+    async function createComponent() {
+        const gear_drop_data = await getGearDropData();
+
         // Search Open Cta
         q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5").insertAdjacentHTML(
             "afterbegin",
-            /* HTML */ `<button class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</button>`
+            `<button class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</button>`
         );
 
         // Modal
@@ -259,14 +245,25 @@ logInfo("fired");
                                 </div>
                                 <button class="${page_initials}__modal__close-cta" type="button">${ASSETS.cross_svg}</button>
                             </div>
+                            <div class="${page_initials}__modal__gear-drop-container">
+                                <div class="${page_initials}__modal__gear-drop-title">This Week's Gear Drop</div>
+                                <div class="${page_initials}__modal__gear-drop-items">
+                                    ${gear_drop_data
+                                        .map(
+                                            ({ title, link, imgUrl }) => /* HTML */ `
+                                                <a href="${host + link}" class="${page_initials}__modal__gear-drop-item">
+                                                    <span class="${page_initials}__modal__gear-drop-item-img"><img src="${imgUrl}" alt="${title}" /></span>
+                                                    <span class="${page_initials}__modal__gear-drop-item-title">${title}</span>
+                                                </a>
+                                            `
+                                        )
+                                        .join("")}
+                                </div>
+                            </div>
                             <div class="${page_initials}__modal__featured-collections-container">
                                 <div class="${page_initials}__modal__featured-collections-title">Featured Collections</div>
                                 <div class="${page_initials}__modal__featured-collections">
-                                    ${DATA.featured_collections
-                                        .map(({ title, link }) => /* HTML */ `
-                                            <a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>
-                                        `)
-                                        .join("")}
+                                    ${DATA.featured_collections.map(({ title, link }) => `<a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>`).join("")}
                                 </div>
                             </div>
                         </div>
@@ -283,7 +280,7 @@ logInfo("fired");
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createLayout();
+        createComponent();
     }
 
     function checkForItems() {
