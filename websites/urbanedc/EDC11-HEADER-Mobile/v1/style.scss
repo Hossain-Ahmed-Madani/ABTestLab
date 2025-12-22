@@ -104,6 +104,8 @@
             border: 1px solid rgba(0, 0, 0, 1);
             border-radius: 4px;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         &__top {
@@ -351,6 +353,27 @@
     }
 }
 
+.AB-EDC11--v2.AB-EDC11 {
+    .AB-EDC11__modal {
+        padding: 6px 5px;
+
+        &__top {
+            margin-top: 7px;
+        }
+        
+        &__featured-collections-container {
+            margin-bottom: 38px;
+        }
+
+        &__gear-drop-container {
+            order: 1;
+            margin-bottom: 22px;
+        }
+
+    }
+}
+
+// Modal Show
 .AB-EDC11--modal-show {
     overflow: hidden;
 

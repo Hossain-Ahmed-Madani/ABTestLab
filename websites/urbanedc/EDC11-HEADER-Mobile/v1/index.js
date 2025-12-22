@@ -1,3 +1,10 @@
+/* 
+Ticket: https://trello.com/c/j2PxXsIC/4531-%F0%9F%92%9B-edc11-header-mobile-add-search-into-header-with-panel-2-set-up-test
+Figma: https://www.figma.com/design/ReKRtumDvt1KvlTHNTaS9b/EDC11--Mobile-Search?node-id=2-39&t=ZbKb6ocUX4U7OqN1-0
+Test container: https://marketer.monetate.net/control/a-34c408c5/p/urbanedc.com/experience/2077901#c2609543:what
+
+*/
+
 const TEST_ID = "EDC11";
 const VARIANT_ID = "V1"; /* V1, V2 */
 
@@ -288,6 +295,11 @@ logInfo("fired");
         // Event Listeners
         q(`.${page_initials}__modal__show-cta`).addEventListener("click", () => handleModalView("show"));
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => handleModalView("hide"));
+        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+            if (!e.target.closest(`.${page_initials}__modal`)) {
+                handleModalView("hide");
+            }
+        });
         q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => {
             fireGA4Event("EDC11_ClickedSearch");
             q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click();
