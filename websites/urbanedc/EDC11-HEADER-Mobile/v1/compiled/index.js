@@ -19,7 +19,7 @@ logInfo("fired");
         host: "https://urbanedc.com/",
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
-        test_variation: 1, /* 1, 2 */
+        test_variation: 1 /* 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -53,13 +53,90 @@ logInfo("fired");
         return document.querySelector(s);
     }
 
+    function createCtaLayout() {
+        const btn = document.createElement("button");
+        btn.className = " uppercase js-enabled block lg:hidden";
+        btn.type = "button";
+        btn.innerText = "Search";
+        q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5").insertAdjacentElement("afterbegin", btn);
+
+        btn.addEventListener("click", () => handleModalView("show"));
+    }
+
+    function createModalLayout() {
+        const layout = /* HTML */ `
+            <div class="${page_initials}__modal-layout">
+                <div class="${page_initials}__modal-backdrop"></div>
+                <div class="${page_initials}__modal">
+                    <div class="${page_initials}__modal__container">
+                        <div class="${page_initials}__modal__head">
+                            Modal
+                            <!-- Modal Close Cta -->
+                        </div>
+                        <div class="${page_initials}__modal__body">Modal Body Content</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        q("body").insertAdjacentHTML("afterbegin", layout);
+
+        const btn = document.createElement("button");
+        btn.className = `${page_initials}__modal__head__close-cta`;
+        btn.type = "button";
+        btn.innerHTML = /* HTML */ `
+            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+        `;
+
+        btn.addEventListener("click", () => handleModalView("hide"));
+        q(`.${page_initials}__modal__head`).insertAdjacentElement("beforeend", btn);
+    }
+
+    function animate(targetElement, className, interval) {
+        if (!targetElement) return;
+        if (className.includes(".")) className.replace(".", "");
+        targetElement.classList.add(className);
+        setTimeout(() => targetElement.classList.remove(className), interval);
+    }
+
+    function preventScroll(e) {
+        e.preventDefault();
+    }
+
+    function handleModalView(action = "show") {
+        const modalShowClass = `${page_initials}--modal-show`;
+        const body = document.body;
+
+        const modal = q(`.${page_initials}__modal`);
+        if (action === "show" && !body.classList.contains(modalShowClass)) {
+            animate(modal, "slide-bottom", 200);
+            modal.classList.add("slide-bottom");
+            body.classList.add(modalShowClass);
+            document.addEventListener("touchmove", preventScroll, { passive: false });
+        }
+
+        if (action === "hide") {
+            animate(modal, "slide-top", 200);
+            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            document.removeEventListener("touchmove", preventScroll);
+        }
+    }
+
+    function createLayout() {
+        createCtaLayout();
+        createModalLayout();
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+        createLayout();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q("  .row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]"));
     }
 
     try {
