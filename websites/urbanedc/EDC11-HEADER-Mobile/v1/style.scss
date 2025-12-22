@@ -22,37 +22,12 @@
     .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 a[href="/account/login"] + button {
         white-space: nowrap;
     }
-}
 
-/**
- * ----------------------------------------
-		 *			MODAL
- * ----------------------------------------
- */
-
-.AB-EDC11--modal-show {
-    overflow: hidden;
-
-    .swell-tab {
-        display: none !important;
-    }
-
-    .AB-EDC11 {
-        &__modal-layout {
-            display: flex;
-        }
-
-        &__modal-backdrop {
-            display: block;
-        }
-
-        &__modal {
-            // ADD CSS
-        }
-    }
-}
-
-.AB-EDC11 {
+    /**
+    * ----------------------------------------
+            *			MODAL
+    * ----------------------------------------
+    */
     &__modal-layout {
         display: none;
 
@@ -95,91 +70,179 @@
         background: #ffffff;
         position: relative;
         z-index: 1;
-        padding: 6px 5px;
+        padding: 7px 5px 6px;
 
         &__container {
             border: 1px solid rgba(0, 0, 0, 1);
             border-radius: 4px;
         }
 
-        &__head {
+        &__top {
+            border: 1px solid rgba(0, 0, 0, 1);
+            border-radius: 3px;
+            margin: 6px 8px 23px;
+            padding: 3px 7px;
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            justify-content: flex-start;
 
             font-family: Roboto, sans-serif;
             font-size: 18px;
             font-weight: 700;
             line-height: 132%;
             text-align: left;
+        }
 
-            &__close-cta {
-                margin: 0;
-                padding: 0;
-                position: absolute;
-                top: 15px;
-                right: 18px;
-                cursor: pointer;
+        &__close-cta {
+            margin: 0;
+            margin-left: auto;
+            padding: 5.22px;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
 
-                svg {
-                    width: 18px;
-                    height: 18px;
-                }
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 11.5px;
+                height: 11.5px;
             }
         }
 
-        &__body {
+        &__search {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        &__search-cta {
+            width: 16px;
+            height: 16px;
+            padding: 2px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+                width: 12px;
+                height: 11px;
+                object-fit: contain;
+            }
+        }
+
+        &__search-input {
             width: 100%;
-            font-family: Roboto, sans-serif;
+            padding: 4px 6px;
 
-            font-size: 14px;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            background: none;
+
+            &:hover,
+            &:focus,
+            &:active {
+                border: none;
+                outline: none;
+                box-shadow: none;
+                background: none;
+            }
+
+            font-family: "PT Mono";
             font-weight: 400;
-            line-height: 150%; /* 24px */
+            font-size: 12px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
 
-            text-align: left;
-            text-wrap: pretty;
+            &::placeholder {
+                color: rgba(51, 51, 51, 1);
+            }
+
+            /* For Edge */
+            &::-ms-input-placeholder {
+                color: rgba(51, 51, 51, 1);
+            }
+        }
+
+        &__featured-collections-container {
+            padding: 0 15px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        &__featured-collections-title {
+            font-family: "PT Mono";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 1);
+        }
+
+        &__featured-collections {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        &__featured-item {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 13.5px;
+
+            border-radius: 3px;
+            border: 1px solid rgba(0, 0, 0, 1);
+            outline: none;
+
+            &:hover,
+            &:active {
+                border: 1px solid rgba(0, 0, 0, 1);
+                outline: none;
+            }
+
+            font-family: "PT Mono";
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            text-align: center;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 1);
         }
     }
 }
 
-// RESPONSIVE
-@media screen and (min-width: 650px) {
+.AB-EDC11--modal-show {
+    overflow: hidden;
+
+    .swell-tab {
+        display: none !important;
+    }
+
     .AB-EDC11 {
         &__modal-layout {
-            // ADD CSS HERE
+            display: flex;
         }
 
         &__modal-backdrop {
-            // ADD CSS HERE
+            display: block;
         }
 
         &__modal {
-            width: 643px;
-            padding: 48px 32px 32px 32px;
-            min-height: 298px;
-
-            &__head {
-                font-size: 32px;
-                font-weight: 700;
-                line-height: 42.24px;
-                margin-bottom: 32px;
-
-                &__close-cta {
-                    top: 32px;
-                    right: 32px;
-
-                    svg {
-                        width: 24px;
-                        height: 24px;
-                    }
-                }
-            }
-
-            &__body {
-                font-size: 16px;
-                font-weight: 400;
-                line-height: 24px;
-            }
+            // ADD CSS
         }
     }
 }

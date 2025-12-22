@@ -25,6 +25,52 @@ logInfo("fired");
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const ASSETS = {
+        cross_svg: /* HTML */ `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0.649 11.5647L0 10.9157L5.13333 5.78233L0 0.649L0.649 0L5.78233 5.13333L10.9157 0L11.5647 0.649L6.43133 5.78233L11.5647 10.9157L10.9157 11.5647L5.78233 6.43133L0.649 11.5647Z"
+                fill="black"
+            />
+        </svg> `,
+        search_svg: /* HTML */ `<svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12.5001 12.5001L9.6048 9.6048M9.6048 9.6048C10.1001 9.10955 10.4929 8.52159 10.761 7.8745C11.029 7.22742 11.1669 6.53387 11.1669 5.83347C11.1669 5.13307 11.029 4.43953 10.761 3.79244C10.4929 3.14535 10.1001 2.5574 9.6048 2.06214C9.10955 1.56688 8.52159 1.17402 7.8745 0.905986C7.22742 0.637954 6.53387 0.5 5.83347 0.5C5.13307 0.5 4.43953 0.637954 3.79244 0.905986C3.14535 1.17402 2.5574 1.56688 2.06214 2.06214C1.06192 3.06236 0.5 4.41895 0.5 5.83347C0.5 7.248 1.06192 8.60458 2.06214 9.6048C3.06236 10.605 4.41895 11.1669 5.83347 11.1669C7.248 11.1669 8.60458 10.605 9.6048 9.6048Z"
+                stroke="black"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+        </svg> `,
+    };
+
+    const DATA = {
+        featured_collections: [
+            {
+                title: "Knife",
+                link: "https://urbanedc.com/collections/in-stock-knives",
+            },
+            {
+                title: "Patch",
+                link: "https://urbanedc.com/collections/urban-edc-ranger-eye-patches",
+            },
+            {
+                title: "Fidget",
+                link: "https://urbanedc.com/collections/in-stock-games",
+            },
+            {
+                title: "Mutitool",
+                link: "https://urbanedc.com/collections/in-stock-keychains-multitools",
+            },
+            {
+                title: "Flashlight",
+                link: "https://urbanedc.com/collections/in-stock-flashlights",
+            },
+            {
+                title: "Lanyard",
+                link: "https://urbanedc.com/collections/in-stock-lanyard-beads",
+            },
+        ],
+    };
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -51,47 +97,6 @@ logInfo("fired");
 
     function q(s, o) {
         return document.querySelector(s);
-    }
-
-    function createCtaLayout() {
-        const btn = document.createElement("button");
-        btn.className = " uppercase js-enabled block lg:hidden";
-        btn.type = "button";
-        btn.innerText = "Search";
-        q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5").insertAdjacentElement("afterbegin", btn);
-
-        btn.addEventListener("click", () => handleModalView("show"));
-    }
-
-    function createModalLayout() {
-        const layout = /* HTML */ `
-            <div class="${page_initials}__modal-layout">
-                <div class="${page_initials}__modal-backdrop"></div>
-                <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal__container">
-                        <div class="${page_initials}__modal__head">
-                            Modal
-                            <!-- Modal Close Cta -->
-                        </div>
-                        <div class="${page_initials}__modal__body">Modal Body Content</div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        q("body").insertAdjacentHTML("afterbegin", layout);
-
-        const btn = document.createElement("button");
-        btn.className = `${page_initials}__modal__head__close-cta`;
-        btn.type = "button";
-        btn.innerHTML = /* HTML */ `
-            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
-            </svg>
-        `;
-
-        btn.addEventListener("click", () => handleModalView("hide"));
-        q(`.${page_initials}__modal__head`).insertAdjacentElement("beforeend", btn);
     }
 
     function animate(targetElement, className, interval) {
@@ -125,8 +130,46 @@ logInfo("fired");
     }
 
     function createLayout() {
-        createCtaLayout();
-        createModalLayout();
+        // Search Open Cta
+        q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `<button class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</button>`
+        );
+
+        // Modal
+        q("body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="${page_initials}__modal-layout">
+                    <div class="${page_initials}__modal-backdrop"></div>
+                    <div class="${page_initials}__modal">
+                        <div class="${page_initials}__modal__container">
+                            <div class="${page_initials}__modal__top">
+                                <div class="${page_initials}__modal__search">
+                                    <button class="${page_initials}__modal__search-cta" type="button">${ASSETS.search_svg}</button>
+                                    <input id="ab-search" type="text" class="${page_initials}__modal__search-input" placeholder="Search" />
+                                </div>
+                                <button class="${page_initials}__modal__close-cta" type="button">${ASSETS.cross_svg}</button>
+                            </div>
+                            <div class="${page_initials}__modal__featured-collections-container">
+                                <div class="${page_initials}__modal__featured-collections-title">Featured Collections</div>
+                                <div class="${page_initials}__modal__featured-collections">
+                                    ${DATA.featured_collections
+                                        .map(({ title, link }) => /* HTML */ `
+                                            <a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>
+                                        `)
+                                        .join("")}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        );
+
+        // Event Listeners
+        q(`.${page_initials}__modal__show-cta`).addEventListener("click", () => handleModalView("show"));
+        q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => handleModalView("hide"));
     }
 
     function init() {
