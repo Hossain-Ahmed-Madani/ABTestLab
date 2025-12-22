@@ -197,7 +197,7 @@ logInfo("fired");
     }
 
     function preventScroll(e) {
-        if ((e.target === document.body || document.body.contains(e.target)) && !e.target.closest('.AB-EDC11__modal__gear-drop-items')) {
+        if ((e.target === document.body || document.body.contains(e.target)) && !e.target.closest(".AB-EDC11__modal__gear-drop-items")) {
             e.preventDefault();
         }
     }
@@ -275,6 +275,11 @@ logInfo("fired");
         // Event Listeners
         q(`.${page_initials}__modal__show-cta`).addEventListener("click", () => handleModalView("show"));
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => handleModalView("hide"));
+        q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click());
+        q(`.${page_initials}__modal__search-input`).addEventListener("input", (e) => {
+            const targetInput = q('#DrawerMenu form[action="/search"] input[type="search"][name="q"]');
+            targetInput.value =  e.target.value;;
+        });
     }
 
     function init() {
@@ -284,7 +289,11 @@ logInfo("fired");
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q("  .row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]"));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q("  .row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
+            q('#DrawerMenu form[action="/search"] button[aria-label="Search"]')
+        );
     }
 
     try {

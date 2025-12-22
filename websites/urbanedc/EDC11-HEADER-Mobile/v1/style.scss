@@ -93,6 +93,10 @@
             font-weight: 700;
             line-height: 132%;
             text-align: left;
+
+            height: 28px;
+            max-height: 28px;
+            overflow: hidden;
         }
 
         &__close-cta {
@@ -141,20 +145,21 @@
 
         &__search-input {
             width: 100%;
-            padding: 4px 6px;
+            padding: 4px 6px !important;
 
-            border: none;
-            outline: none;
-            box-shadow: none;
-            background: none;
+            border: none !important;
+            outline: none !important;
+            box-shadow: none !important;
+            background: none !important;
+            height: 100% !important;
 
             &:hover,
             &:focus,
             &:active {
-                border: none;
-                outline: none;
-                box-shadow: none;
-                background: none;
+                border: none !important;
+                outline: none !important;
+                box-shadow: none !important;
+                background: none !important;
             }
 
             font-family: "PT Mono";
