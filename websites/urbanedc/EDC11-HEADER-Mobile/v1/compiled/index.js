@@ -152,6 +152,7 @@ logInfo("fired");
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+
     function animate(targetElement, className, interval) {
         if (!targetElement) return;
         if (className.includes(".")) className.replace(".", "");
