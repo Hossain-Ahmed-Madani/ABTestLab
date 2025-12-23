@@ -18,6 +18,12 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    ASSETS = {
+        cross_svg: /* HTML */ `<svg class="sc-1uf0igr-1 fjHZYk" xmlns="http://www.w3.org/2000/svg" width="28" height="28" focusable="false" viewBox="0 0 28 28">
+            <path stroke="currentColor" stroke-linecap="round" d="M3 13L13 3m0 10L3 3"></path>
+        </svg>`,
+    };
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -80,40 +86,32 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     }
 
     function createLayout() {
+
+        q("#pr-review-snippet").outerHTML;
+
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
-                <div class="${page_initials}__modal-layout">
-                    <div class="${page_initials}__modal-backdrop"></div>
-                    <div class="${page_initials}__modal">
-                        <div class="${page_initials}__modal__head">
-                            <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
-                            <div class="${page_initials}__modal__head__close-cta">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                                    <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
-                            </div>
+                <div class="${page_initials}__modal">
+                    <div class="${page_initials}__modal__top">
+                        <div class="${page_initials}__modal__head__progress">
+                            <div class="${page_initials}__modal__head__progress-value" style="width:30%;"></div>
                         </div>
-                        <div class="${page_initials}__modal__body">
-                            <div class="${page_initials}__modal__body__text-content">
-                                Frisches Hähnchenfleisch 70 %, Bruchreis, Mais (gentechnikfrei), Bierhefe*, Apfelpulpe*, Lachsöl** (Omega-3), Yucca-Extrakt, Leinsamenöl** (Omega-3),
-                                Olivenöl**, Grünlippmuschel-Extrakt, Karotten*, Tomaten*, Aufrechte Studentenblume*, Löwenzahn*, Brokkoli*, grüner Tee*, Kamille*, Oregano*,
-                                Mariendistelsamen*, Cranberrysamen*, Algen*, Kaliumchlorid. (*getrocknet, **kaltgepresst, nativ)
-                            </div>
-                        </div>
+                        <div class="${page_initials}__modal__close-cta"></div>
                     </div>
+                    <div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet").outerHTML}</div>
+                    <div class="${page_initials}__modal__review-header">Great wedges!</div>
+                    <div class="${page_initials}__modal__review-description">
+                        The wedges perform great. They are easy to hit and have a smooth feel about them. I especially like the 50 degree the best. Every time I purchase a new Cleveland
+                        wedge I fall in love with it. Don't hesitate to get one!
+                    </div>
+                    <a href="#" class="${page_initials}__modal__review-see-more-cta"> See More Reviews </a>
                 </div>
             `
         );
 
-        q(`.${page_initials}__modal__head__close-cta`).addEventListener("click", (e) => {
+        q(`.${page_initials}__modal__close-cta`).addEventListener("click", (e) => {
             handleModalView("hide");
-        });
-
-        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
-            if (!e.target.closest(`.${page_initials}__modal`)) {
-                handleModalView("hide");
-            }
         });
     }
 
@@ -125,7 +123,7 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".pr-rating-stars"));
     }
 
     try {
