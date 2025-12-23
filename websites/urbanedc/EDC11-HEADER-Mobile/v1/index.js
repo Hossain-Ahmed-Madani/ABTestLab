@@ -193,7 +193,7 @@ logInfo("fired");
         }
     }
 
-    async function createComponent() {
+    async function createLayout() {
         const gear_drop_data = await getGearDropData();
 
         // Search Open Cta
@@ -213,7 +213,7 @@ logInfo("fired");
                             <div class="${page_initials}__modal__top">
                                 <div class="${page_initials}__modal__search">
                                     <button class="${page_initials}__modal__search-cta" type="button">${ASSETS.search_svg}</button>
-                                    <input id="ab-search" type="text" class="${page_initials}__modal__search-input" placeholder="Search" autocomplete="off" />
+                                    <input id="ab-search" type="search" class="${page_initials}__modal__search-input" placeholder="Search" autocomplete="off" />
                                 </div>
                                 <button class="${page_initials}__modal__close-cta" type="button">${ASSETS.cross_svg}</button>
                             </div>
@@ -243,32 +243,77 @@ logInfo("fired");
                 </div>
             `
         );
+    }
 
-        // Event Listeners
-        const eventName = isTouchEnabled() ? "touchstart" : "click";
-        q(`.${page_initials}__modal__show-cta`).addEventListener(eventName, (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleModalView("show")
-        });
-        q(`.${page_initials}__modal__close-cta`).addEventListener(eventName, () => handleModalView("hide"));
-        q(`.${page_initials}__modal-backdrop`).addEventListener(eventName, (e) => {
-            if (!e.target.closest(`.${page_initials}__modal`)) {
-                handleModalView("hide");
-            }
-        });
-        q(`.${page_initials}__modal__search-cta`).addEventListener(eventName, () => {
-            fireGA4Event("EDC11_ClickedSearch");
-            q('#DrawerMenu form[action="/search"] button[aria-label="Search"]').click();
-        });
-        q(`.${page_initials}__modal__search-input`).addEventListener("input", (e) => {
-            qq('#DrawerMenu form[action="/search"] input[type="search"][name="q"]').forEach((item) => (item.value = e.target.value));
-        });
-        qq(`.${page_initials}__modal__featured-item`).forEach((item) => {
-            item.addEventListener(eventName, (e) => {
+    const clickEventName = isTouchEnabled() ? "touchend" : "click";
+
+
+    function handleSearch(e) {
+        const currentTarget = e.currentTarget;
+        
+        e.preventDefault();
+        fireGA4Event("EDC11_ClickedSearch");
+        
+        const parentNode = currentTarget.parentNode;
+        const searchInput = q(parentNode, "input[type='search']");
+        const value = searchInput.value.replace(" ", "+");
+
+        setTimeout(() => (window.location.href = `/search?q=${value}`), 150);
+    }
+
+    const INITIAL_ACTION_LIST = [
+        {
+            selector: `.${page_initials}__modal__show-cta`,
+            event: clickEventName,
+            callback: (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleModalView("show");
+            },
+        },
+        {
+            selector: `.${page_initials}__modal__close-cta`,
+            event: clickEventName,
+            callback: (e) => handleModalView("hide"),
+        },
+        {
+            selector: `.${page_initials}__modal-backdrop`,
+            event: clickEventName,
+            callback: (e) => {
+                if (!e.target.closest(`.${page_initials}__modal`)) {
+                    handleModalView("hide");
+                }
+            },
+        },
+        {
+            selector: `.${page_initials}__modal__search-cta`,
+            event: clickEventName,
+            callback: handleSearch,
+        },
+        {
+            selector: `form[action="/search"] button[aria-label="Search"]`,
+            event: clickEventName,
+            callback: handleSearch,
+        },
+        {
+            selector: `.${page_initials}__modal__featured-item`,
+            event: clickEventName,
+            callback: (e) => {
                 e.preventDefault();
                 fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
                 setTimeout(() => (window.location.href = e.target.getAttribute("href")), 150);
+            },
+        },
+    ];
+
+    function eventHandler(action_list) {
+        action_list.forEach(async ({ selector, event, callback }) => {
+            const flagClassName = `ab-${event})-attached`;
+            await waitForElementAsync(() => qq(selector).length > 0, 5000, 200);
+            qq(selector).forEach((item) => {
+                if (item.classList.contains(flagClassName)) return;
+                item.classList.add(flagClassName);
+                item.addEventListener(event, callback);
             });
         });
     }
@@ -276,7 +321,8 @@ logInfo("fired");
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createComponent();
+        createLayout();
+        eventHandler(INITIAL_ACTION_LIST);
     }
 
     function checkForItems() {
