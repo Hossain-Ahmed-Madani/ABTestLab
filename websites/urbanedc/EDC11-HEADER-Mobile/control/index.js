@@ -90,10 +90,17 @@ logInfo("fired");
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
-        const eventName = isTouchEnabled() ? "touchstart" : "click";
+        const eventName = isTouchEnabled() ? "touchend" : "click";
         qq('form[action="/search"] button[aria-label="Search"]').forEach((item) => {
             item.addEventListener(eventName, (e) => {
+                e.preventDefault();
                 fireGA4Event("EDC11_ClickedSearch");
+
+                const parentNode = item.parentNode;
+                const searchInput = q(parentNode, "input[type='search']");
+                const value = searchInput.value.replace(" ", "+");
+
+                setTimeout(() => (window.location.href = `/search?q=${value}`), 150);
             });
         });
     }
