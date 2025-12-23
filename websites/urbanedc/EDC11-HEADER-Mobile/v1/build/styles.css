@@ -1,4 +1,10 @@
-
+.AB-EDC11 {
+    /**
+  * ----------------------------------------
+          *			MODAL
+  * ----------------------------------------
+  */
+}
 .AB-EDC11 header {
     padding-top: 15px !important;
     padding-bottom: 25px !important;
@@ -19,7 +25,8 @@
 .AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 a[href="/account/login"] + button {
     white-space: nowrap;
 }
-.AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button {
+.AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button,
+.AB-EDC11__modal__show-cta {
     font-family: "PT Mono";
     font-weight: 400;
     font-size: 12px;

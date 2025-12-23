@@ -41,7 +41,8 @@
     }
 
     // Nav Buttons
-    .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button {
+    .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button,
+    &__modal__show-cta {
         font-family: "PT Mono";
         font-weight: 400;
         font-size: 12px;
@@ -360,7 +361,7 @@
         &__top {
             margin-top: 7px;
         }
-        
+
         &__featured-collections-container {
             margin-bottom: 38px;
         }
@@ -369,7 +370,6 @@
             order: 1;
             margin-bottom: 22px;
         }
-
     }
 }
 

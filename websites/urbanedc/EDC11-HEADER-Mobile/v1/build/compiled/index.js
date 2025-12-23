@@ -1,3 +1,24 @@
+/* 
+Ticket: https://trello.com/c/j2PxXsIC/4531-%F0%9F%92%9B-edc11-header-mobile-add-search-into-header-with-panel-2-set-up-test
+Figma: https://www.figma.com/design/ReKRtumDvt1KvlTHNTaS9b/EDC11--Mobile-Search?node-id=2-39&t=ZbKb6ocUX4U7OqN1-0
+Test container: https://marketer.monetate.net/control/a-34c408c5/p/urbanedc.com/experience/2077901#c2609543:what
+
+Preview urls:
+
+Excluding All Experiences:
+Control: https://marketer.monetate.net/control/preview/13265/8EHM7DIZQHE33VI1E6GPGD6RYRKESO0K/edc11-header-mobile-add-search-into-header-with-panel
+V1: https://marketer.monetate.net/control/preview/13265/6ZVJGMFSWYCIQI9MPOHIE5W0JZEDEUNA/edc11-header-mobile-add-search-into-header-with-panel
+V2: https://marketer.monetate.net/control/preview/13265/4MLAFQD7KVLEGNIUI4PBT2N2D417JR59/edc11-header-mobile-add-search-into-header-with-panel
+
+
+Including All Experiences:
+Control: https://marketer.monetate.net/control/preview/13265/XIJ57Z5LEZBCTM9JKBWO3IRGSM5QN4I0/edc11-header-mobile-add-search-into-header-with-panel
+V1: https://marketer.monetate.net/control/preview/13265/IJFNW5LMXJHM0DNZOGTQGX5OLQDFV8ZJ/edc11-header-mobile-add-search-into-header-with-panel
+V2: https://marketer.monetate.net/control/preview/13265/F8D4CZQTTKBTDHVVL9F4EJRJDTZB3J74/edc11-header-mobile-add-search-into-header-with-panel
+
+
+*/
+
 const TEST_ID = "EDC11";
 const VARIANT_ID = "V1"; /* V1, V2 */
 
@@ -171,6 +192,14 @@ logInfo("fired");
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
+  function isTouchEnabled() {
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
+
   function animate(targetElement, className, interval) {
     if (!targetElement) return;
     if (className.includes(".")) className.replace(".", "");
@@ -206,7 +235,7 @@ logInfo("fired");
     }
   }
 
-  async function createComponent() {
+  async function createLayout() {
     const gear_drop_data = await getGearDropData();
 
     // Search Open Cta
@@ -214,7 +243,7 @@ logInfo("fired");
       ".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\] > .flex.flex-wrap.justify-end.items-top.gap-5",
     ).insertAdjacentHTML(
       "afterbegin",
-      `<button class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</button>`,
+      `<div class="${page_initials}__modal__show-cta uppercase js-enabled block lg:hidden" type="button">Search</div>`,
     );
 
     // Modal
@@ -235,7 +264,7 @@ logInfo("fired");
                   </button>
                   <input
                     id="ab-search"
-                    type="text"
+                    type="search"
                     class="${page_initials}__modal__search-input"
                     placeholder="Search"
                     autocomplete="off"
@@ -296,41 +325,79 @@ logInfo("fired");
         </div>
       `,
     );
+  }
 
-    // Event Listeners
-    q(`.${page_initials}__modal__show-cta`).addEventListener("click", () =>
-      handleModalView("show"),
-    );
-    q(`.${page_initials}__modal__close-cta`).addEventListener("click", () =>
-      handleModalView("hide"),
-    );
-    q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
-      if (!e.target.closest(`.${page_initials}__modal`)) {
-        handleModalView("hide");
-      }
-    });
-    q(`.${page_initials}__modal__search-cta`).addEventListener("click", () => {
-      fireGA4Event("EDC11_ClickedSearch");
-      q(
-        '#DrawerMenu form[action="/search"] button[aria-label="Search"]',
-      ).click();
-    });
-    q(`.${page_initials}__modal__search-input`).addEventListener(
-      "input",
-      (e) => {
-        qq(
-          '#DrawerMenu form[action="/search"] input[type="search"][name="q"]',
-        ).forEach((item) => (item.value = e.target.value));
+  const clickEventName = isTouchEnabled() ? "touchend" : "click";
+
+  function handleSearch(e) {
+    const currentTarget = e.currentTarget;
+
+    e.preventDefault();
+    fireGA4Event("EDC11_ClickedSearch");
+
+    const parentNode = currentTarget.parentNode;
+    const searchInput = q(parentNode, "input[type='search']");
+    const value = searchInput.value.replace(" ", "+");
+
+    setTimeout(() => (window.location.href = `/search?q=${value}`), 150);
+  }
+
+  const INITIAL_ACTION_LIST = [
+    {
+      selector: `.${page_initials}__modal__show-cta`,
+      event: clickEventName,
+      callback: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        handleModalView("show");
       },
-    );
-    qq(`.${page_initials}__modal__featured-item`).forEach((item) => {
-      item.addEventListener("click", (e) => {
+    },
+    {
+      selector: `.${page_initials}__modal__close-cta`,
+      event: clickEventName,
+      callback: (e) => handleModalView("hide"),
+    },
+    {
+      selector: `.${page_initials}__modal-backdrop`,
+      event: clickEventName,
+      callback: (e) => {
+        if (!e.target.closest(`.${page_initials}__modal`)) {
+          handleModalView("hide");
+        }
+      },
+    },
+    {
+      selector: `.${page_initials}__modal__search-cta`,
+      event: clickEventName,
+      callback: handleSearch,
+    },
+    {
+      selector: `form[action="/search"] button[aria-label="Search"]`,
+      event: clickEventName,
+      callback: handleSearch,
+    },
+    {
+      selector: `.${page_initials}__modal__featured-item`,
+      event: clickEventName,
+      callback: (e) => {
         e.preventDefault();
         fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
         setTimeout(
           () => (window.location.href = e.target.getAttribute("href")),
           150,
         );
+      },
+    },
+  ];
+
+  function eventHandler(action_list) {
+    action_list.forEach(async ({ selector, event, callback }) => {
+      const flagClassName = `ab-${event})-attached`;
+      await waitForElementAsync(() => qq(selector).length > 0, 5000, 200);
+      qq(selector).forEach((item) => {
+        if (item.classList.contains(flagClassName)) return;
+        item.classList.add(flagClassName);
+        item.addEventListener(event, callback);
       });
     });
   }
@@ -342,7 +409,8 @@ logInfo("fired");
       `${page_initials}--version:${test_version}`,
     );
     console.table(TEST_CONFIG);
-    createComponent();
+    createLayout();
+    eventHandler(INITIAL_ACTION_LIST);
   }
 
   function checkForItems() {
