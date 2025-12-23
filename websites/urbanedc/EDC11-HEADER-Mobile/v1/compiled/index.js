@@ -3,6 +3,20 @@ Ticket: https://trello.com/c/j2PxXsIC/4531-%F0%9F%92%9B-edc11-header-mobile-add-
 Figma: https://www.figma.com/design/ReKRtumDvt1KvlTHNTaS9b/EDC11--Mobile-Search?node-id=2-39&t=ZbKb6ocUX4U7OqN1-0
 Test container: https://marketer.monetate.net/control/a-34c408c5/p/urbanedc.com/experience/2077901#c2609543:what
 
+Preview urls:
+
+Excluding All Experiences:
+Control: https://marketer.monetate.net/control/preview/13265/8EHM7DIZQHE33VI1E6GPGD6RYRKESO0K/edc11-header-mobile-add-search-into-header-with-panel
+V1: https://marketer.monetate.net/control/preview/13265/6ZVJGMFSWYCIQI9MPOHIE5W0JZEDEUNA/edc11-header-mobile-add-search-into-header-with-panel
+V2: https://marketer.monetate.net/control/preview/13265/4MLAFQD7KVLEGNIUI4PBT2N2D417JR59/edc11-header-mobile-add-search-into-header-with-panel
+
+
+Including All Experiences:
+Control: https://marketer.monetate.net/control/preview/13265/XIJ57Z5LEZBCTM9JKBWO3IRGSM5QN4I0/edc11-header-mobile-add-search-into-header-with-panel
+V1: https://marketer.monetate.net/control/preview/13265/IJFNW5LMXJHM0DNZOGTQGX5OLQDFV8ZJ/edc11-header-mobile-add-search-into-header-with-panel
+V2: https://marketer.monetate.net/control/preview/13265/F8D4CZQTTKBTDHVVL9F4EJRJDTZB3J74/edc11-header-mobile-add-search-into-header-with-panel
+
+
 */
 
 const TEST_ID = "EDC11";
