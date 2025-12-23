@@ -46,9 +46,82 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
         return document.querySelector(s);
     }
 
+    function animate(targetElement, className, interval) {
+        if (!targetElement) return;
+        if (className.includes(".")) className.replace(".", "");
+        targetElement.classList.add(className);
+        setTimeout(() => targetElement.classList.remove(className), interval);
+    }
+
+    function preventScroll(e) {
+        e.preventDefault();
+    }
+
+    async function handleModalView(action = "show") {
+        const modalShowClass = `${page_initials}--modal-show`;
+        const body = q("body");
+
+        await waitForElementAsync(() => q(`.${page_initials}__modal`));
+
+        const modal = q(`.${page_initials}__modal`);
+
+        if (action === "show" && !body.classList.contains(modalShowClass)) {
+            animate(modal, "slide-to-top", 200);
+            modal.classList.add("slide-to-top");
+            body.classList.add(modalShowClass);
+            document.addEventListener("touchmove", preventScroll, { passive: false });
+        }
+
+        if (action === "hide") {
+            animate(modal, "slide-to-bottom", 200);
+            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            document.removeEventListener("touchmove", preventScroll);
+        }
+    }
+
+    function createLayout() {
+        q("body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="${page_initials}__modal-layout">
+                    <div class="${page_initials}__modal-backdrop"></div>
+                    <div class="${page_initials}__modal">
+                        <div class="${page_initials}__modal__head">
+                            <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
+                            <div class="${page_initials}__modal__head__close-cta">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                                    <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="${page_initials}__modal__body">
+                            <div class="${page_initials}__modal__body__text-content">
+                                Frisches Hähnchenfleisch 70 %, Bruchreis, Mais (gentechnikfrei), Bierhefe*, Apfelpulpe*, Lachsöl** (Omega-3), Yucca-Extrakt, Leinsamenöl** (Omega-3),
+                                Olivenöl**, Grünlippmuschel-Extrakt, Karotten*, Tomaten*, Aufrechte Studentenblume*, Löwenzahn*, Brokkoli*, grüner Tee*, Kamille*, Oregano*,
+                                Mariendistelsamen*, Cranberrysamen*, Algen*, Kaliumchlorid. (*getrocknet, **kaltgepresst, nativ)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `
+        );
+
+        q(`.${page_initials}__modal__head__close-cta`).addEventListener("click", (e) => {
+            handleModalView("hide");
+        });
+
+        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+            if (!e.target.closest(`.${page_initials}__modal`)) {
+                handleModalView("hide");
+            }
+        });
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+        createLayout();
+        handleModalView("show");
     }
 
     function checkForItems() {

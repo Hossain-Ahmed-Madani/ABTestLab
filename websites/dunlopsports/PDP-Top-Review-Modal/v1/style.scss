@@ -1,17 +1,284 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-PDP-TOP-REVIEW {
     //
+}
+
+/**
+ * ----------------------------------------
+		 *			MODAL
+ * ----------------------------------------
+ */
+
+$pageInitials: "kombinierter-teaser-inkl-minis";
+
+.AB-PDP-TOP-REVIEW {
+    &__modal-layout {
+        display: none;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: transparent;
+        z-index: 10000;
+        overflow: hidden;
+
+        display: none;
+        // display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    &__modal-backdrop {
+        display: none;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+    }
+
+    &__modal {
+        opacity: 1;
+        box-shadow: 0px 4px 23.9px 0px #00000029;
+
+        width: 100%;
+        min-height: max-content;
+        max-height: auto;
+        background: #ffffff;
+        position: relative;
+        z-index: 1;
+        padding: 15px 15px 15px 15px;
+
+        &__head {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+
+            font-family: Roboto, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 132%;
+            text-align: left;
+            color: #547351;
+
+            &__close-cta {
+                margin: 0;
+                padding: 0;
+                position: absolute;
+                top: 15px;
+                right: 18px;
+                cursor: pointer;
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+        }
+
+        &__body {
+            width: 100%;
+            font-family: Roboto, sans-serif;
+
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 150%; /* 24px */
+
+            text-align: left;
+            text-wrap: pretty;
+
+            // ADDITIONAL STYLES
+            .table.table-bordered {
+                width: 100%;
+                margin-bottom: 0;
+                tr td {
+                    background: none;
+                }
+            }
+        }
+    }
+}
+
+.AB-PDP-TOP-REVIEW--modal-show {
+    overflow: hidden;
+
+    .AB-PDP-TOP-REVIEW {
+        &__modal-layout {
+            display: flex;
+        }
+
+        &__modal-backdrop {
+            display: block;
+        }
+
+        &__modal {
+            // ADD CSS
+        }
+    }
+}
+
+// RESPONSIVE
+@media screen and (min-width: 650px) {
+    .AB-PDP-TOP-REVIEW {
+        &__modal-layout {
+            // ADD CSS HERE
+        }
+
+        &__modal-backdrop {
+            // ADD CSS HERE
+        }
+
+        &__modal {
+            width: 643px;
+            padding: 48px 32px 32px 32px;
+            min-height: 298px;
+
+            &__head {
+                font-size: 32px;
+                font-weight: 700;
+                line-height: 42.24px;
+                margin-bottom: 32px;
+
+                &__close-cta {
+                    top: 32px;
+                    right: 32px;
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+            }
+
+            &__body {
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 24px;
+            }
+        }
+    }
+}
+
+// ANIMATION
+
+.slide-to-top {
+    -webkit-animation: slide-to-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-to-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+
+.slide-to-bottom {
+    -webkit-animation: slide-to-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: slide-to-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+
+/**
+  * ----------------------------------------
+  * animation slide-bottom
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-to-top  {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(200px);
+        transform: translateY(200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-to-top  {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(200px);
+        transform: translateY(200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+/**
+  * ----------------------------------------
+  * animation slide-top
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-to-bottom {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(200px);
+        transform: translateY(200px);
+    }
+}
+@keyframes slide-to-bottom {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(200px);
+        transform: translateY(200px);
+    }
+}
+
+/**
+  * ----------------------------------------
+  * animation fade-in
+  * ----------------------------------------
+  */
+
+@-webkit-keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
 }
