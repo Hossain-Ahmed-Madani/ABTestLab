@@ -292,7 +292,7 @@ logInfo("fired");
         },
         {
             selector: `.${page_initials}__modal-backdrop`,
-            event: clickEventName,
+            event: 'click',
             callback: (e) => {
                 if (!e.target.closest(`.${page_initials}__modal`)) {
                     handleModalView("hide");
