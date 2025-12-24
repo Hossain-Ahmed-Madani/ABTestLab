@@ -78,7 +78,7 @@ logInfo("fired");
                 link: "https://urbanedc.com/collections/in-stock-games",
             },
             {
-                title: "Mutitool",
+                title: "Multitool",
                 link: "https://urbanedc.com/collections/in-stock-keychains-multitools",
             },
             {
@@ -225,10 +225,10 @@ logInfo("fired");
                     <div class="${page_initials}__modal">
                         <div class="${page_initials}__modal__container">
                             <div class="${page_initials}__modal__top">
-                                <div class="${page_initials}__modal__search">
-                                    <button class="${page_initials}__modal__search-cta" type="button">${ASSETS.search_svg}</button>
+                                <form action="/search" method="get" role="search" class="${page_initials}__modal__search">
+                                    <button class="${page_initials}__modal__search-cta" type="submit">${ASSETS.search_svg}</button>
                                     <input id="ab-search" type="search" class="${page_initials}__modal__search-input" placeholder="Search" autocomplete="off" />
-                                </div>
+                                </form>
                                 <button class="${page_initials}__modal__close-cta" type="button">${ASSETS.cross_svg}</button>
                             </div>
                             <div class="${page_initials}__modal__gear-drop-container">
@@ -261,18 +261,14 @@ logInfo("fired");
 
     const clickEventName = isTouchEnabled() ? "touchend" : "click";
 
-
     function handleSearch(e) {
-        const currentTarget = e.currentTarget;
-        
+
         e.preventDefault();
-        fireGA4Event("EDC11_ClickedSearch");
-        
-        const parentNode = currentTarget.parentNode;
-        const searchInput = q(parentNode, "input[type='search']");
+
+        const searchInput = q( "input#ab-search[type='search']");
         const value = searchInput.value.replace(" ", "+");
 
-        setTimeout(() => (window.location.href = `/search?q=${value}`), 150);
+        window.location.href = `/search?q=${value}`;
     }
 
     const INITIAL_ACTION_LIST = [
@@ -292,7 +288,7 @@ logInfo("fired");
         },
         {
             selector: `.${page_initials}__modal-backdrop`,
-            event: 'click',
+            event: "click",
             callback: (e) => {
                 if (!e.target.closest(`.${page_initials}__modal`)) {
                     handleModalView("hide");
@@ -300,14 +296,24 @@ logInfo("fired");
             },
         },
         {
+            selector: `form.${page_initials}__modal__search`,
+            event: "submit",
+            callback: handleSearch,
+        },
+        {
             selector: `.${page_initials}__modal__search-cta`,
             event: clickEventName,
             callback: handleSearch,
         },
         {
-            selector: `form[action="/search"] button[aria-label="Search"]`,
+            selector: `input#ab-search[type="search"]`,
             event: clickEventName,
-            callback: handleSearch,
+            callback: () => fireGA4Event("EDC11_ClickedSearch"),
+        },
+        {
+            selector: `form[action="/search"] input[type="search"]`,
+            event: clickEventName,
+            callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
         {
             selector: `.${page_initials}__modal__featured-item`,
@@ -322,7 +328,7 @@ logInfo("fired");
 
     function eventHandler(action_list) {
         action_list.forEach(async ({ selector, event, callback }) => {
-            const flagClassName = `ab-${event})-attached`;
+            const flagClassName = `ab-${event}-event-attached`;
             await waitForElementAsync(() => qq(selector).length > 0, 5000, 200);
             qq(selector).forEach((item) => {
                 if (item.classList.contains(flagClassName)) return;
