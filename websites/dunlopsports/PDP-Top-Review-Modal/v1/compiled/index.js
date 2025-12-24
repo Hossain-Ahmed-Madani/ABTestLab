@@ -322,7 +322,7 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
             `
         );
 
-        const clickEventName = isTouchEnabled() ? "touchend" : 'click';
+        const clickEventName = isTouchEnabled() ? "touchend" : "click";
         q(`.${page_initials}__modal__close-cta`).addEventListener(clickEventName, (e) => handleModalView("hide"));
         q(`.${page_initials}__modal__review-see-more-cta`).addEventListener(clickEventName, (e) => q("#reviews-anchor").scrollIntoView({ behavior: "smooth", block: "start" }));
     }
