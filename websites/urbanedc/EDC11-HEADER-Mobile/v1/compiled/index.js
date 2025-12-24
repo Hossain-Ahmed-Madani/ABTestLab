@@ -41,7 +41,7 @@ logInfo("fired");
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
