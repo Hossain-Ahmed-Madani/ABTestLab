@@ -103,6 +103,7 @@
   cursor: pointer;
   font-family: Libre Franklin;
   font-weight: 700;
+  font-size: 16px;
   line-height: 100%;
   letter-spacing: 0px;
   text-decoration: underline;
@@ -142,6 +143,7 @@
   padding: 0;
 }
 .AB-PDP-TOP-REVIEW__modal .p-w-r .pr-snippet .pr-snippet-stars-png .pr-snippet-rating-decimal {
+  padding: 0;
   padding-left: 12px;
   font-family: Libre Franklin;
   font-weight: 500;
@@ -162,7 +164,7 @@
     bottom: 80px;
   }
   .AB-PDP-TOP-REVIEW__modal__top {
-    margin-bottom: 15px;
+    margin-bottom: 14px;
   }
   .AB-PDP-TOP-REVIEW__modal__review-stars {
     margin-bottom: 19px;
@@ -195,6 +197,7 @@
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
     height: 25px;
+    margin: 0;
     margin-left: -5px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
@@ -204,6 +207,7 @@
     top: -7px;
   }
   .AB-PDP-TOP-REVIEW__modal .p-w-r .pr-snippet .pr-snippet-stars-png .pr-snippet-rating-decimal {
+    padding: 0;
     padding-left: 14px;
     font-weight: 500;
     font-size: 16px;
