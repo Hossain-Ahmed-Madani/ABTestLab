@@ -72,30 +72,137 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
         const modal = q(`.${page_initials}__modal`);
 
         if (action === "show" && !body.classList.contains(modalShowClass)) {
-            animate(modal, "slide-to-top", 200);
+            animate(modal, "slide-to-top", 300);
             modal.classList.add("slide-to-top");
             body.classList.add(modalShowClass);
             document.addEventListener("touchmove", preventScroll, { passive: false });
         }
 
         if (action === "hide") {
-            animate(modal, "slide-to-bottom", 200);
-            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            animate(modal, "slide-to-bottom", 300);
+            setTimeout(() => body.classList.remove(modalShowClass), 300);
             document.removeEventListener("touchmove", preventScroll);
         }
     }
 
+    async function updateProgressAndHideModal() {
+        await waitForElementAsync(() => q(`.${page_initials}--modal-show .${page_initials}__modal`));
+
+        const targetNode = q(`.${page_initials}__modal__head__progress-value`);
+        const modalElement = q(`.${page_initials}--modal-show .${page_initials}__modal`);
+
+        if (!targetNode || !modalElement) return;
+
+        const duration = 8000;
+        let isPaused = false;
+        let remainingTime = duration;
+        let transitionTimeout = null;
+        let isAnimating = false;
+
+        // Set up CSS for smooth transition
+        targetNode.style.transition = `width ${duration}ms linear`;
+        targetNode.style.width = "0%";
+
+        // Force reflow to ensure transition starts from 0
+        void targetNode.offsetWidth;
+
+        // Pause/Resume handlers
+        const pauseAnimation = () => {
+            if (!isAnimating || isPaused) return;
+
+            isPaused = true;
+
+            // Get computed style to calculate current progress
+            const computedWidth = parseFloat(getComputedStyle(targetNode).width);
+            const containerWidth = targetNode.parentElement.clientWidth;
+            const progress = computedWidth / containerWidth;
+
+            // Calculate remaining time
+            remainingTime = duration * (1 - progress);
+
+            // Pause the transition
+            targetNode.style.transition = "none";
+            targetNode.style.width = `${progress * 100}%`;
+
+            // Clear any pending timeouts
+            if (transitionTimeout) {
+                clearTimeout(transitionTimeout);
+                transitionTimeout = null;
+            }
+        };
+
+        const resumeAnimation = () => {
+            if (!isPaused) return;
+
+            isPaused = false;
+
+            // Force reflow before starting new transition
+            void targetNode.offsetWidth;
+
+            // Start new transition with remaining time
+            targetNode.style.transition = `width ${remainingTime}ms linear`;
+            targetNode.style.width = "100%";
+
+            // Set timeout to hide modal when transition completes
+            transitionTimeout = setTimeout(() => {
+                handleModalView("hide");
+                cleanup();
+            }, remainingTime);
+        };
+
+        // Event listeners
+        modalElement.addEventListener("mouseenter", pauseAnimation);
+        modalElement.addEventListener("mouseleave", resumeAnimation);
+
+        // Mobile touch events
+        modalElement.addEventListener("touchstart", (e) => {
+            pauseAnimation();
+            e.preventDefault();
+        });
+
+        modalElement.addEventListener("touchend", (e) => {
+            resumeAnimation();
+            e.preventDefault();
+        });
+
+        // Start animation
+        isAnimating = true;
+        targetNode.style.width = "100%";
+
+        // Set timeout to hide modal
+        transitionTimeout = setTimeout(() => {
+            if (!isPaused) {
+                handleModalView("hide")();
+                cleanup();
+            }
+        }, duration);
+
+        // Cleanup function
+        const cleanup = () => {
+            isAnimating = false;
+
+            // Remove event listeners
+            modalElement.removeEventListener("mouseenter", pauseAnimation);
+            modalElement.removeEventListener("mouseleave", resumeAnimation);
+            modalElement.removeEventListener("touchstart", pauseAnimation);
+            modalElement.removeEventListener("touchend", resumeAnimation);
+
+            // Clear timeout
+            if (transitionTimeout) {
+                clearTimeout(transitionTimeout);
+                transitionTimeout = null;
+            }
+        };
+    }
+
     function createLayout() {
-
-        q("#pr-review-snippet").outerHTML;
-
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
                 <div class="${page_initials}__modal">
                     <div class="${page_initials}__modal__top">
                         <div class="${page_initials}__modal__head__progress">
-                            <div class="${page_initials}__modal__head__progress-value" style="width:30%;"></div>
+                            <div class="${page_initials}__modal__head__progress-value" style="width:0%;"></div>
                         </div>
                         <div class="${page_initials}__modal__close-cta"></div>
                     </div>
@@ -120,6 +227,7 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
         console.table(TEST_CONFIG);
         createLayout();
         handleModalView("show");
+        updateProgressAndHideModal();
     }
 
     function checkForItems() {

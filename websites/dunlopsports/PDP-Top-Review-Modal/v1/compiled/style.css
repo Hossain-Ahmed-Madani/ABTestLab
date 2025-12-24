@@ -72,7 +72,8 @@
   overflow: hidden;
 }
 .AB-PDP-TOP-REVIEW__modal__head__progress-value {
-  transition: all 0.2s;
+  width: 0%;
+  transition: width 0.3s ease-in-out;
   height: 100%;
   background-color: rgb(187, 187, 187);
 }
@@ -229,13 +230,13 @@
 }
 
 .slide-to-top {
-  -webkit-animation: slide-to-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-to-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-to-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-to-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .slide-to-bottom {
-  -webkit-animation: slide-to-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-to-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-to-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-to-bottom 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /**
@@ -321,5 +322,26 @@
   }
   100% {
     opacity: 1;
+  }
+}
+/**
+      * ----------------------------------------
+      * animation progress
+      * ----------------------------------------
+      */
+@-webkit-keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
   }
 }
