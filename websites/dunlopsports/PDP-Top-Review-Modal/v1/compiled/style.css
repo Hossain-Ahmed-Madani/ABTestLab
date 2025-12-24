@@ -112,6 +112,7 @@
   outline: none;
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
+  margin-left: -3px;
   height: 21px;
   display: flex;
   justify-content: center;
@@ -137,6 +138,7 @@
   padding: 0;
 }
 .AB-PDP-TOP-REVIEW__modal .p-w-r .pr-snippet .pr-snippet-stars-png .pr-snippet-rating-decimal {
+  padding-left: 12px;
   font-family: Libre Franklin;
   font-weight: 500;
   font-size: 15px;
@@ -189,12 +191,25 @@
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
     height: 25px;
+    margin-left: -5px;
+  }
+  .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
+    top: -7px;
+  }
+  .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4:before {
+    top: -7px;
   }
   .AB-PDP-TOP-REVIEW__modal .p-w-r .pr-snippet .pr-snippet-stars-png .pr-snippet-rating-decimal {
+    padding-left: 14px;
     font-weight: 500;
     font-size: 16px;
     line-height: 28.48px;
     letter-spacing: 0px;
+  }
+  .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4 {
+    width: 25px;
+    height: 25px;
+    margin-right: 0px;
   }
 }
 
