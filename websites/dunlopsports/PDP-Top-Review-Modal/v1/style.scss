@@ -19,6 +19,9 @@
  */
 
 .AB-PDP-TOP-REVIEW {
+
+    scroll-behavior: smooth;
+
     &__modal {
         opacity: 0;
         display: none;
@@ -42,7 +45,7 @@
         right: 10px;
         margin: auto;
 
-        z-index: 999;
+        z-index: 9999;
         overflow: hidden;
 
         flex-direction: column;

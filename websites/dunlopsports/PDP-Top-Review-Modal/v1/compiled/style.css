@@ -3,6 +3,9 @@
 		 *			MODAL
  * ----------------------------------------
  */
+.AB-PDP-TOP-REVIEW {
+  scroll-behavior: smooth;
+}
 .AB-PDP-TOP-REVIEW__modal {
   opacity: 0;
   display: none;
@@ -21,7 +24,7 @@
   left: 10px;
   right: 10px;
   margin: auto;
-  z-index: 999;
+  z-index: 9999;
   overflow: hidden;
   flex-direction: column;
   justify-content: center;
