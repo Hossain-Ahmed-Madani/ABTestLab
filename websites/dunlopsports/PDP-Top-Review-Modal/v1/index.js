@@ -2,6 +2,8 @@
 Ticket: https://trello.com/c/JeFHZwPS/4541-pdp-top-review-modal-dtm
 Test container: https://app.optimizely.com/v2/projects/30347390156/experiments/4655644880404480/pages
 Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=101-189&t=q0FXhNstxiR9NZF2-0
+Preview link: https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=5046240749027328&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6333187299737600&optimizely_snippet=s3-30347390156&optimizely_embed_editor=false
+QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html?qa5=true
 
 */
 
