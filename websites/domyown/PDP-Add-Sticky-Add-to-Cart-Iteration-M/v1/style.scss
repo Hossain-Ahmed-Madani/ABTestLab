@@ -1,17 +1,45 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-STICKY-ADD-TO-CART {
-    //
+    .ab-sticky-cart-container {
+        position: fixed;
+        bottom: -100px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+        padding: 10px 15px 15px;
+        border-top: 1px solid #ebebeb;
+        background-color: #fff;
+        transition: all 0.3s;
+    }
+
+    .ab-sticky-cart-container button {
+        font-family:
+            "Open Sans",
+            Helvetica,
+            Arial,
+            -apple-system,
+            BlinkMacSyste;
+
+        border-radius: 5px;
+    }
+
+    &--show-sticky {
+        .ab-sticky-cart-container {
+            bottom: 0;
+        }
+    }
 }

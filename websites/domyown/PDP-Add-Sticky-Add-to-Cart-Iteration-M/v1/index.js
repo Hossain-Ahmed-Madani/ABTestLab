@@ -154,18 +154,63 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function createElement() {
-        //
+    function intersectionObserverFunction() {
+        const targetElement = q("#add-to-cart-area input.add-to-cart");
+
+        return new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Element is visible in viewport
+                        handleStickyCartShowHide("hide");
+                    } else if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+                        // Element is out of viewport and has scrolled past (top)
+                        handleStickyCartShowHide("show");
+                    } else {
+                        // Element hasn't been reached yet or other cases
+                        handleStickyCartShowHide("hide");
+                    }
+                });
+            },
+            {
+                root: null, // viewport
+                rootMargin: "0px",
+                threshold: 0,
+            }
+        ).observe(targetElement);
+    }
+
+    function handleStickyCartShowHide(action /* show, hide */) {
+        const body = q("body");
+        modifierClassName = `${page_initials}--show-sticky`;
+
+        if (action === "show") {
+            body.classList.add(modifierClassName);
+        } else if (action === "hide") {
+            body.classList.remove(modifierClassName);
+        }
+    }
+
+    function createLayout() {
+        q("body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-sticky-cart-container">
+                    <button type="button" class="button-primary add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
+                </div>
+            `
+        );
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createElement();
+        createLayout();
+        intersectionObserverFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q("#add-to-cart-area input.add-to-cart"));
     }
 
     try {
