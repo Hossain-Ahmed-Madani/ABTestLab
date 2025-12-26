@@ -12,6 +12,9 @@ v1: https://marketer.monetate.net/control/preview/12090/WFESTJ6UTASVLO2R3NXWYBNK
 v2: https://marketer.monetate.net/control/preview/12090/Z41RKUTWBS1KYF6N4XIJ2VY721UQTIRQ/bw102-collections-update-badge-copy
 
 
+https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=false
+
+
 
 */
 
