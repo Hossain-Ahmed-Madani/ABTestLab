@@ -1,3 +1,20 @@
+/* 
+Test container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear.com/experience/2078585
+
+Preview excluding all experiences:
+control: https://marketer.monetate.net/control/preview/12090/IV3WQDFT8TG69GGDZNGEJIV1KR4SPWYT/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/2XNXPIC3UDWHIQUXKK6ZHAPA15AQHF6Q/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/NEFJYTCDX4F3TZ2QXZQPXQA9S019CIYK/bw102-collections-update-badge-copy
+
+Preview including all experiences:
+control: https://marketer.monetate.net/control/preview/12090/6UTII247S9IBAIFDT2KE68IZFJQEMLEI/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/WFESTJ6UTASVLO2R3NXWYBNK3FV6N5ZM/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/Z41RKUTWBS1KYF6N4XIJ2VY721UQTIRQ/bw102-collections-update-badge-copy
+
+
+
+*/
+
 const TEST_ID = "BW102";
 const VARIANT_ID = "V1"; /* Control, V1, V2 */
 
@@ -123,8 +140,8 @@ logInfo("fired");
         q(".collection__content").addEventListener("click", (e) => {
             const linkItem = e.target.closest(".ab-selling-fast-product a.productCard__link");
             if (linkItem) {
-                const productItem = e.target.closest(".productCard");
                 e.preventDefault();
+                const productItem = e.target.closest(".productCard");
                 const href = linkItem.getAttribute("href");
                 const title = q(productItem, ".productCard__title p").innerText;
                 fireGA4Event("BW102_ClickBadge", title);
