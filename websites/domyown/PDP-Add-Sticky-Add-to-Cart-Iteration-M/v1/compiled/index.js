@@ -2,7 +2,6 @@
 Ticket: https://trello.com/c/q8ZdiK0H/4522-pdp-add-sticky-add-to-cart-iteration-m?search_id=8f2d25f5-996e-407f-8b24-04e50f0bf188
 Test container: https://app.vwo.com/#/test/ab/275/edit/urls/?accountId=348406
 QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
-
 */
 
 (async () => {
@@ -46,8 +45,19 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
         return document.querySelector(s);
     }
 
-    function intersectionObserverFunction() {
-        const targetElement = q("#add-to-cart-area input.add-to-cart");
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
+    function isSafari() {
+        const userAgent = navigator.userAgent;
+        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+    }
+
+    async function intersectionObserverFunction() {
+        await waitForElementAsync(() => q("#add-to-cart-area .ab-add-to-cart"));
+
+        const targetElement = q("#add-to-cart-area .ab-add-to-cart");
 
         return new IntersectionObserver(
             (entries) => {
@@ -84,18 +94,30 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
     }
 
     function createLayout() {
+        q("#add-to-cart-area input.add-to-cart").insertAdjacentHTML(
+            "afterend",
+            `<button type="button" class="button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>`
+        );
+
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
                 <div class="ab-sticky-cart-container">
-                    <button type="button" class="button-primary add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
+                    <button type="button" class="button-primary ab-sticky-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
                 </div>
             `
         );
+
+        qq(".ab-add-to-cart, .ab-sticky-add-to-cart").forEach((item) => item.addEventListener("click", () => q("#add-to-cart-area input.add-to-cart").click()));
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+        if (isSafari()) {
+            q("body").classList.add(`${page_initials}--safari`);
+        }
+
         console.table(TEST_CONFIG);
         createLayout();
         intersectionObserverFunction();

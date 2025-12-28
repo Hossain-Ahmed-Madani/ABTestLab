@@ -2,7 +2,6 @@
 Ticket: https://trello.com/c/q8ZdiK0H/4522-pdp-add-sticky-add-to-cart-iteration-m?search_id=8f2d25f5-996e-407f-8b24-04e50f0bf188
 Test container: https://app.vwo.com/#/test/ab/275/edit/urls/?accountId=348406
 QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
-
 */
 
 (async () => {
@@ -17,31 +16,6 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -67,28 +41,6 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -97,65 +49,15 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
     }
 
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
+    async function intersectionObserverFunction() {
+        await waitForElementAsync(() => q("#add-to-cart-area .ab-add-to-cart"));
 
-    function updateLayout() {
-        //
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
-
-    function intersectionObserverFunction() {
-        const targetElement = q("#add-to-cart-area input.add-to-cart");
+        const targetElement = q("#add-to-cart-area .ab-add-to-cart");
 
         return new IntersectionObserver(
             (entries) => {
@@ -192,18 +94,30 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
     }
 
     function createLayout() {
+        q("#add-to-cart-area input.add-to-cart").insertAdjacentHTML(
+            "afterend",
+            `<button type="button" class="button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>`
+        );
+
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
                 <div class="ab-sticky-cart-container">
-                    <button type="button" class="button-primary add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
+                    <button type="button" class="button-primary ab-sticky-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
                 </div>
             `
         );
+
+        qq(".ab-add-to-cart, .ab-sticky-add-to-cart").forEach((item) => item.addEventListener("click", () => q("#add-to-cart-area input.add-to-cart").click()));
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+        if (isSafari()) {
+            q("body").classList.add(`${page_initials}--safari`);
+        }
+
         console.table(TEST_CONFIG);
         createLayout();
         intersectionObserverFunction();
