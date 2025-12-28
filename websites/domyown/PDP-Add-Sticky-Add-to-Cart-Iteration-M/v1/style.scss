@@ -30,7 +30,7 @@
         left: 0;
         right: 0;
         width: 100%;
-        z-index: 9999;
+        z-index: 99999;
         padding: 10px 15px 15px;
         border-top: 1px solid #ebebeb;
         background-color: #fff;
@@ -54,6 +54,11 @@
     }
 
     &--show-sticky {
+
+        #___ratingbadge_0 {
+            z-index: 0 !important;
+        }
+
         .ab-sticky-cart-container {
             bottom: 0;
         }
