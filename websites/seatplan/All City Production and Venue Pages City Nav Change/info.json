@@ -1,0 +1,13 @@
+{
+  "id": "1762950462151_7677_All_City_Production_and_Venue_Pages_City_Nav_Change",
+  "name": "All City Production and Venue Pages City Nav Change",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2025-11-12T12:27:42.151Z",
+  "createdAtReadable": "11/12/2025, 6:27:42 PM",
+  "lastUpdated": "2025-11-12T12:27:42.780Z"
+}
