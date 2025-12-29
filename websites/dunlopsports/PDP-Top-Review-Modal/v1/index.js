@@ -339,6 +339,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
             // Check after scrolling if we reached the correct position
             setTimeout(() => {
+                console.log('handleScroll, setTimeout...')
                 const newRect = reviewsAnchor.getBoundingClientRect();
                 const newScroll = window.scrollY || document.documentElement.scrollTop;
                 const expectedPosition = newScroll + newRect.top;
