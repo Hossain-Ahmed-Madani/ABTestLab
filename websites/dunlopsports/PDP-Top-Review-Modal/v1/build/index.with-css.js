@@ -9,9 +9,11 @@
 		 *			MODAL
  * ----------------------------------------
  */
-.AB-PDP-TOP-REVIEW {
+html,
+body {
   scroll-behavior: smooth;
 }
+
 .AB-PDP-TOP-REVIEW__modal {
   opacity: 0;
   display: none;
@@ -380,10 +382,11 @@
 Ticket: https://trello.com/c/JeFHZwPS/4541-pdp-top-review-modal-dtm
 Test container: https://app.optimizely.com/v2/projects/30347390156/experiments/4655644880404480/pages
 Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=101-189&t=q0FXhNstxiR9NZF2-0
-
+Preview link: https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=5046240749027328&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6333187299737600&optimizely_snippet=s3-30347390156&optimizely_embed_editor=false
+QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html?qa5=true
 */
 
-(async () => {
+(function () {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
     project: "Dunlopsports",
@@ -391,7 +394,7 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -506,36 +509,20 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     ],
   };
 
-  async function waitForElementAsync(
-    predicate,
-    timeout = 20000,
-    frequency = 150,
-  ) {
-    const startTime = Date.now();
-
-    return new Promise((resolve, reject) => {
-      if (typeof predicate === "function" && predicate()) {
-        return resolve(true);
-      }
-
-      const interval = setInterval(() => {
-        const elapsed = Date.now() - startTime;
-
-        if (elapsed >= timeout) {
-          clearInterval(interval);
-          return reject(
-            new Error(
-              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
-            ),
-          );
-        }
-
-        if (typeof predicate === "function" && predicate()) {
-          clearInterval(interval);
-          return resolve(true);
-        }
-      }, frequency);
-    });
+  function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
+    if (timer <= 0) {
+      console.warn(
+        `Timeout reached while waiting for condition: ${predicate.toString()}`,
+      );
+      return;
+    } else if (predicate && predicate()) {
+      callback();
+    } else {
+      setTimeout(
+        () => waitForElement(predicate, callback, timer - frequency, frequency),
+        frequency,
+      );
+    }
   }
 
   function q(s, o) {
@@ -557,138 +544,142 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     setTimeout(() => targetElement.classList.remove(className), interval);
   }
 
-  async function handleModalView(action = "show") {
+  function handleModalView(action = "show") {
     const modalShowClass = `${page_initials}--modal-show`;
     const body = q("body");
 
-    await waitForElementAsync(() => q(`.${page_initials}__modal`));
+    waitForElement(
+      () => q(`.${page_initials}__modal`),
+      () => {
+        const modal = q(`.${page_initials}__modal`);
 
-    const modal = q(`.${page_initials}__modal`);
+        if (action === "show" && !body.classList.contains(modalShowClass)) {
+          animate(modal, "slide-to-top", 300);
+          modal.classList.add("slide-to-top");
+          body.classList.add(modalShowClass);
+        }
 
-    if (action === "show" && !body.classList.contains(modalShowClass)) {
-      animate(modal, "slide-to-top", 300);
-      modal.classList.add("slide-to-top");
-      body.classList.add(modalShowClass);
-    }
-
-    if (action === "hide") {
-      animate(modal, "slide-to-bottom", 300);
-      setTimeout(() => body.classList.remove(modalShowClass), 300);
-    }
+        if (action === "hide") {
+          animate(modal, "slide-to-bottom", 300);
+          setTimeout(() => body.classList.remove(modalShowClass), 300);
+        }
+      },
+    );
   }
 
-  async function updateProgressAndHideModal() {
-    await waitForElementAsync(() =>
-      q(`.${page_initials}--modal-show .${page_initials}__modal`),
+  function updateProgressAndHideModal() {
+    waitForElement(
+      () => q(`.${page_initials}--modal-show .${page_initials}__modal`),
+      () => {
+        const targetNode = q(`.${page_initials}__modal__head__progress-value`);
+        const modalElement = q(
+          `.${page_initials}--modal-show .${page_initials}__modal`,
+        );
+
+        if (!targetNode || !modalElement) return;
+
+        const duration = 8000;
+        let isPaused = false;
+        let remainingTime = duration;
+        let transitionTimeout = null;
+        let isAnimating = false;
+
+        // Set up CSS for smooth transition
+        targetNode.style.transition = `width ${duration}ms linear`;
+        targetNode.style.width = "0%";
+
+        // Force reflow to ensure transition starts from 0
+        void targetNode.offsetWidth;
+
+        // Pause/Resume handlers
+        const pauseAnimation = () => {
+          if (!isAnimating || isPaused) return;
+
+          isPaused = true;
+
+          // Get computed style to calculate current progress
+          const computedWidth = parseFloat(getComputedStyle(targetNode).width);
+          const containerWidth = targetNode.parentElement.clientWidth;
+          const progress = computedWidth / containerWidth;
+
+          // Calculate remaining time
+          remainingTime = duration * (1 - progress);
+
+          // Pause the transition
+          targetNode.style.transition = "none";
+          targetNode.style.width = `${progress * 100}%`;
+
+          // Clear any pending timeouts
+          if (transitionTimeout) {
+            clearTimeout(transitionTimeout);
+            transitionTimeout = null;
+          }
+        };
+
+        const resumeAnimation = () => {
+          if (!isPaused) return;
+
+          isPaused = false;
+
+          // Force reflow before starting new transition
+          void targetNode.offsetWidth;
+
+          // Start new transition with remaining time
+          targetNode.style.transition = `width ${remainingTime}ms linear`;
+          targetNode.style.width = "100%";
+
+          // Set timeout to hide modal when transition completes
+          transitionTimeout = setTimeout(() => {
+            handleModalView("hide");
+            cleanup();
+          }, remainingTime);
+        };
+
+        // Event listeners
+        modalElement.addEventListener("mouseenter", pauseAnimation);
+        modalElement.addEventListener("mouseleave", resumeAnimation);
+
+        // Mobile touch events
+        modalElement.addEventListener("touchstart", (e) => {
+          pauseAnimation();
+          e.preventDefault();
+        });
+
+        modalElement.addEventListener("touchend", (e) => {
+          resumeAnimation();
+          e.preventDefault();
+        });
+
+        // Start animation
+        isAnimating = true;
+        targetNode.style.width = "100%";
+
+        // Set timeout to hide modal
+        transitionTimeout = setTimeout(() => {
+          if (!isPaused) {
+            handleModalView("hide");
+            cleanup();
+          }
+        }, duration);
+
+        // Cleanup function
+        const cleanup = () => {
+          isAnimating = false;
+
+          // Remove event listeners
+          modalElement.removeEventListener("mouseenter", pauseAnimation);
+          modalElement.removeEventListener("mouseleave", resumeAnimation);
+          modalElement.removeEventListener("touchstart", pauseAnimation);
+          modalElement.removeEventListener("touchend", resumeAnimation);
+
+          // Clear timeout
+          if (transitionTimeout) {
+            clearTimeout(transitionTimeout);
+            transitionTimeout = null;
+          }
+        };
+      },
     );
-
-    const targetNode = q(`.${page_initials}__modal__head__progress-value`);
-    const modalElement = q(
-      `.${page_initials}--modal-show .${page_initials}__modal`,
-    );
-
-    if (!targetNode || !modalElement) return;
-
-    const duration = 8000;
-    let isPaused = false;
-    let remainingTime = duration;
-    let transitionTimeout = null;
-    let isAnimating = false;
-
-    // Set up CSS for smooth transition
-    targetNode.style.transition = `width ${duration}ms linear`;
-    targetNode.style.width = "0%";
-
-    // Force reflow to ensure transition starts from 0
-    void targetNode.offsetWidth;
-
-    // Pause/Resume handlers
-    const pauseAnimation = () => {
-      if (!isAnimating || isPaused) return;
-
-      isPaused = true;
-
-      // Get computed style to calculate current progress
-      const computedWidth = parseFloat(getComputedStyle(targetNode).width);
-      const containerWidth = targetNode.parentElement.clientWidth;
-      const progress = computedWidth / containerWidth;
-
-      // Calculate remaining time
-      remainingTime = duration * (1 - progress);
-
-      // Pause the transition
-      targetNode.style.transition = "none";
-      targetNode.style.width = `${progress * 100}%`;
-
-      // Clear any pending timeouts
-      if (transitionTimeout) {
-        clearTimeout(transitionTimeout);
-        transitionTimeout = null;
-      }
-    };
-
-    const resumeAnimation = () => {
-      if (!isPaused) return;
-
-      isPaused = false;
-
-      // Force reflow before starting new transition
-      void targetNode.offsetWidth;
-
-      // Start new transition with remaining time
-      targetNode.style.transition = `width ${remainingTime}ms linear`;
-      targetNode.style.width = "100%";
-
-      // Set timeout to hide modal when transition completes
-      transitionTimeout = setTimeout(() => {
-        handleModalView("hide");
-        cleanup();
-      }, remainingTime);
-    };
-
-    // Event listeners
-    modalElement.addEventListener("mouseenter", pauseAnimation);
-    modalElement.addEventListener("mouseleave", resumeAnimation);
-
-    // Mobile touch events
-    modalElement.addEventListener("touchstart", (e) => {
-      pauseAnimation();
-      e.preventDefault();
-    });
-
-    modalElement.addEventListener("touchend", (e) => {
-      resumeAnimation();
-      e.preventDefault();
-    });
-
-    // Start animation
-    isAnimating = true;
-    targetNode.style.width = "100%";
-
-    // Set timeout to hide modal
-    transitionTimeout = setTimeout(() => {
-      if (!isPaused) {
-        handleModalView("hide");
-        cleanup();
-      }
-    }, duration);
-
-    // Cleanup function
-    const cleanup = () => {
-      isAnimating = false;
-
-      // Remove event listeners
-      modalElement.removeEventListener("mouseenter", pauseAnimation);
-      modalElement.removeEventListener("mouseleave", resumeAnimation);
-      modalElement.removeEventListener("touchstart", pauseAnimation);
-      modalElement.removeEventListener("touchend", resumeAnimation);
-
-      // Clear timeout
-      if (transitionTimeout) {
-        clearTimeout(transitionTimeout);
-        transitionTimeout = null;
-      }
-    };
   }
 
   function getReviewData() {
@@ -697,7 +688,45 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
       currentUrl.includes(url),
     );
 
-    return matchedReview ?? null;
+    if (!matchedReview) return null;
+
+    return matchedReview;
+  }
+
+  function handleScroll() {
+    const reviewsAnchor = q(`#reviews-anchor`);
+
+    // Function to attempt scrolling
+    const scrollToReviewsAnchor = (retryCount = 0) => {
+      if (!reviewsAnchor) return;
+
+      // Get current position
+      const rect = reviewsAnchor.getBoundingClientRect();
+      const currentScroll =
+        window.scrollY || document.documentElement.scrollTop;
+      const targetScroll = currentScroll + rect.top - 50; // Offset of 50px from top
+
+      // Scroll to the element with offset
+      window.scrollTo({
+        top: targetScroll,
+        behavior: "smooth",
+      });
+
+      // Check after scrolling if we reached the correct position
+      setTimeout(() => {
+        const newRect = reviewsAnchor.getBoundingClientRect();
+        const newScroll = window.scrollY || document.documentElement.scrollTop;
+        newScroll + newRect.top;
+
+        // If element is not in the expected position (more than 50px off) and we haven't retried too many times
+        if (Math.abs(newRect.top - 50) > 50 && retryCount < 3) {
+          scrollToReviewsAnchor(retryCount + 1);
+        }
+      }, 500); // Wait for smooth scroll to complete plus some buffer
+    };
+
+    // Start the scroll process
+    scrollToReviewsAnchor();
   }
 
   function createLayout() {
@@ -716,9 +745,9 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
             </div>
             <div class="${page_initials}__modal__close-cta"></div>
           </div>
-          <div class="${page_initials}__modal__review-stars">
-            ${q("#pr-review-snippet").outerHTML}
-          </div>
+          ${q("#pr-review-snippet")
+            ? ` <div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet")?.outerHTML}</div>`
+            : ""}
           <div class="${page_initials}__modal__review-header">
             ${review_header}
           </div>
@@ -739,11 +768,7 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     );
     q(`.${page_initials}__modal__review-see-more-cta`).addEventListener(
       clickEventName,
-      (e) =>
-        q("#reviews-anchor").scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        }),
+      handleScroll,
     );
   }
 
@@ -771,11 +796,5 @@ Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America
     );
   }
 
-  try {
-    await waitForElementAsync(checkForItems);
-    init();
-  } catch (error) {
-    console.warn(error);
-    return false;
-  }
+  waitForElement(checkForItems, init);
 })();

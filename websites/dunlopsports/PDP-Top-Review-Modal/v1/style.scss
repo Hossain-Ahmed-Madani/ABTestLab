@@ -18,9 +18,12 @@
  * ----------------------------------------
  */
 
-.AB-PDP-TOP-REVIEW {
+html,
+body {
     scroll-behavior: smooth;
+}
 
+.AB-PDP-TOP-REVIEW {
     &__modal {
         opacity: 0;
         display: none;
