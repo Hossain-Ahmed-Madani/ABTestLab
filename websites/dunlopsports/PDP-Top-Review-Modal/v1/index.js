@@ -156,7 +156,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
             timeout = setTimeout(later, wait);
         };
     }
-    
+
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -346,7 +346,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
                 // If element is not in the expected position (more than 50px off) and we haven't retried too many times
                 if (Math.abs(newRect.top - 50) > 50 && retryCount < 3) {
                     scrollToReviewsAnchor(retryCount + 1);
-                } 
+                }
             }, 500); // Wait for smooth scroll to complete plus some buffer
         };
 
@@ -356,6 +356,8 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
     function createLayout() {
         const { review_header, review_description } = getReviewData();
+
+        const startRatingHTML = q("#pr-review-snippet") ? /* HTML */ `<div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet").outerHTML}</div>` : "";
 
         q("body").insertAdjacentHTML(
             "afterbegin",
@@ -367,7 +369,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
                         </div>
                         <div class="${page_initials}__modal__close-cta"></div>
                     </div>
-                    ${q("#pr-review-snippet") ? ` <div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet")?.outerHTML}</div>` : ""}
+                    ${startRatingHTML}
                     <div class="${page_initials}__modal__review-header">${review_header}</div>
                     <div class="${page_initials}__modal__review-description">${review_description}</div>
                     <div class="${page_initials}__modal__review-see-more-cta">See More Reviews</div>
