@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1341,6 +1341,26 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         }
     }
 
+    async function handleAddressShippingFormShowHide(e) {
+        q(".ab-form#shipping-address")?.remove();
+
+        const { checkout_shipping_address } = DATA.forms;
+        const contentWrapper = q(".ab-content-wrapper");
+        const billingAddressForm = q(".ab-form#billing-address");
+
+        if (!e.target.checked) {
+            await waitForElementAsync(
+                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList))
+            );
+            contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
+            billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
+            eventHandler();
+        } else {
+            contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
+            setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
+        }
+    }
+
     async function handleCreditDebitFormShowHide(e) {
         await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
@@ -1633,6 +1653,12 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                 events: ["click"],
                 callback: handleAddressCreateAccountFormShowHide,
             },
+            {
+                selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
+                events: ["click"],
+                callback: handleAddressShippingFormShowHide,
+            },
+
             {
                 selector: ".AB-Shipping-Checkout  select#shipping, .AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control",
                 events: ["change"],
