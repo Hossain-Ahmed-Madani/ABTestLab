@@ -13,7 +13,6 @@ Then
 
 v1 (excluding all experiences) :  https://marketer.monetate.net/control/preview/12997/S45SU5SOG5CKUC09UC0G8XEO0111AJ58/vc115-collection-filter-quantities
 
-
 control (including all experiences) :  https://marketer.monetate.net/control/preview/12997/3B1PUOYF9Y2A6L41H7IWAN1P97HUY0VF/vc115-collection-filter-quantities
 v1 (including all experiences) :  https://marketer.monetate.net/control/preview/12997/AZNA8QHF6WDHKKOLZK2QUBBDKSW1TNLT/vc115-collection-filter-quantities
 
