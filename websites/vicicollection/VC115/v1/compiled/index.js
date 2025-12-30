@@ -4,6 +4,19 @@ URL:https://www.vicicollection.com/?preview_theme_id=137131098174&pb=1 , https:/
 Figma: https://www.figma.com/design/OqFHShfnjCQzW7JHGAf9vT/VC_---COLLECTION--Filter-Quantities?node-id=2002-9&t=zIfUG0iOTtzAFOjq-0
 Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollection.com/experience/2073784#
 
+
+Preview
+
+Enter this to enable theme: https://www.vicicollection.com/?preview_theme_id=137131098174&pb=1
+
+Then
+
+v1 (excluding all experiences) :  https://marketer.monetate.net/control/preview/12997/S45SU5SOG5CKUC09UC0G8XEO0111AJ58/vc115-collection-filter-quantities
+
+
+control (including all experiences) :  https://marketer.monetate.net/control/preview/12997/3B1PUOYF9Y2A6L41H7IWAN1P97HUY0VF/vc115-collection-filter-quantities
+v1 (including all experiences) :  https://marketer.monetate.net/control/preview/12997/AZNA8QHF6WDHKKOLZK2QUBBDKSW1TNLT/vc115-collection-filter-quantities
+
 */
 
 const TEST_ID = "VC115";
@@ -27,7 +40,7 @@ logInfo("fired");
         host: "https://www.vicicollection.com/",
         test_name: "VC115: [COLLECTION] Filter Quantities - (2) SET UP TEST",
         page_initials: "AB-VC115",
-        test_variation: 1, /* 0, 1 */
+        test_variation: 1 /* 0, 1 */,
         test_version: 0.0001,
     };
 
