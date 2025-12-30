@@ -6,6 +6,20 @@ Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollectio
 
 */
 
+const TEST_ID = "VC115";
+const VARIANT_ID = "V1"; /* Control, V1 */
+
+function logInfo(message) {
+    console.log(
+        `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+        "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        message
+    );
+}
+
+logInfo("fired");
+
 (async () => {
     const TEST_CONFIG = {
         client: "Acadia",
@@ -13,7 +27,7 @@ Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollectio
         host: "https://www.vicicollection.com/",
         test_name: "VC115: [COLLECTION] Filter Quantities - (2) SET UP TEST",
         page_initials: "AB-VC115",
-        test_variation: 1,
+        test_variation: 1, /* 0, 1 */
         test_version: 0.0001,
     };
 
@@ -98,11 +112,21 @@ Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollectio
     }
 
     function clickFunction() {
-        q(".collection-filter-sort").addEventListener("click", (e) => {
-            if (e.target.closest(".collection-filter-sort__filter, .collection-filter-sort__more-filters-cta-wrapper, .collection-filter-sort__filter-button")) {
-                fireGA4Event("VC115_FilterView");
-            }
-        });
+        // Users opens a filter dropdown (Desktop Only)
+        if (window.innerWidth >= 991 || !isTouchEnabled()) {
+            qq(".collection-filters-modal__content, .collection-filter-sort__filter-list").forEach((item) =>
+                item.addEventListener("click", (e) => {
+                    if (e.target.closest(".multi-select__button, .vue-accordion__trigger.btn")) {
+                        fireGA4Event("VC115_FilterView");
+                    }
+                })
+            );
+        }
+
+        // Filter Click (All Device)
+        qq(".collection-filter-sort__more-filters-cta, .collection-filter-sort__filter-button").forEach((item) =>
+            item.addEventListener("click", () => fireGA4Event("VC115_FilterView"))
+        );
     }
 
     function init() {
@@ -117,8 +141,10 @@ Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollectio
         return !!(
             q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
             q(".collection-filters-modal__content input[type='checkbox'][data-count]") &&
-            q('input[type="checkbox"][data-count]') &&
-            q(".collection-filter-sort")
+            q("input[type='checkbox'][data-count]") &&
+            q(".collection-filter-sort__filter-list") &&
+            q(".collection-filter-sort__more-filters-cta") &&
+            q(".collection-filter-sort__filter-button")
         );
     }
 
