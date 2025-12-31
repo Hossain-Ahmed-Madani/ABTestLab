@@ -295,6 +295,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-guest-password",
                         type: "password",
+                        required: true,
                         label: "Password",
                         className: "col-6",
                         control_node_selector: "#Password",
@@ -303,6 +304,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-guest-retype-password",
                         type: "password",
+                        required: true,
                         label: "Confirm Password",
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#confirmPassword",
@@ -1275,7 +1277,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
             const div = document.createElement("div");
             div.className = "ab-shipping-address-wrapper";
-            qq(item, ":scope > *").forEach((child) => div.appendChild(child));
+            console.log("address box:", qq(item, ":scope > *"));
+            qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => div.appendChild(child));
             item.appendChild(div);
         });
 
@@ -1320,6 +1323,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function handleAddressCreateAccountFormShowHide(e) {
+
         q(".ab-form#guest-create-account")?.remove();
 
         const { guest_create_account } = DATA.forms;
@@ -1608,7 +1612,41 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const ACTION_LIST = [
             // Form Input
             {
-                selector: ".ab-input",
+                selector: ".ab-input:not([inputtype='tel'])",
+                events: ["input", "change"],
+                callback: (e) => {
+                    const currentTarget = e.target;
+                    const dataObj = getElementData(currentTarget);
+
+                    // Check For Control inputs
+                    if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
+                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
+                        return;
+                    }
+
+                    // Handle control input updates
+                    if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
+                        handleTextBasedInputs(dataObj);
+                    } else if (dataObj["inputType"] === "radio") {
+                        // Add logic here
+                    } else if (dataObj["inputType"] === "checkbox") {
+                        handleCheckBoxInput(dataObj);
+                    } else if (dataObj["inputType"] === "select") {
+                        handleSelectInput(dataObj);
+                    }
+
+                    // Update dependent fields
+                    updateDependencyNodes(dataObj);
+
+                    // Handle error message
+                    handleFormErrorMessage(dataObj);
+
+                    // Update actions items
+                    updateFormActionElements();
+                },
+            },
+            {
+                selector: ".ab-input[inputtype='tel']",
                 events: ["input", "change", "keypress"],
                 callback: (e) => {
                     const currentTarget = e.target;
@@ -1625,16 +1663,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         e.preventDefault();
                     }
 
-                    // Handle control input updates
-                    if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
-                        handleTextBasedInputs(dataObj);
-                    } else if (dataObj["inputType"] === "radio") {
-                        // Add logic here
-                    } else if (dataObj["inputType"] === "checkbox") {
-                        handleCheckBoxInput(dataObj);
-                    } else if (dataObj["inputType"] === "select") {
-                        handleSelectInput(dataObj);
-                    }
+                    handleTextBasedInputs(dataObj);
 
                     // Update dependent fields
                     updateDependencyNodes(dataObj);
@@ -1675,6 +1704,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             },
             {
                 selector: ".AB-Guest-Checkout #createAccount",
+                // selector: ".AB-Guest-Checkout #ab-guest-create-account",
                 events: ["click"],
                 callback: handleAddressCreateAccountFormShowHide,
             },
@@ -1720,7 +1750,12 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     if (!item.classList.contains(flagClassName)) {
                         console.log("Action Loop running....");
                         item.classList.add(flagClassName);
-                        item.addEventListener(event, callback);
+                        if(item.getAttribute('inputtype') && item.getAttribute('inputtype') === 'tel') {
+                            item.addEventListener(event, callback);
+                        } else {
+                            item.addEventListener(event, debouncedCallback);
+                        }
+
                     }
                 });
             });
