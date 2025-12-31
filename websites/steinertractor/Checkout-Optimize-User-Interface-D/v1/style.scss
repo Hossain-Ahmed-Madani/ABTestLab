@@ -320,6 +320,8 @@
 
             &:focus-within:not([area-invalid]),
             &:active:not([area-invalid]) {
+            // &:focus-within,
+            // &:active {
                 border: 2px solid #333333;
                 box-shadow: none;
                 color: #333333;
@@ -414,6 +416,8 @@
     }
 
     .ab-product-summary {
+        position: sticky;
+        top: 0;
         // max-width: 407px;
         padding-top: 53px;
         padding-bottom: 53px;
@@ -1094,7 +1098,9 @@
     }
 
     .ab-product-summary {
-        padding-bottom: 123px;
+        position: sticky;
+        top: 0;
+        // padding-bottom: 123px;
     }
 
     .checkout-promo {

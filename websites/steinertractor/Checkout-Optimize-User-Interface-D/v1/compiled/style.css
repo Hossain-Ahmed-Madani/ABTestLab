@@ -315,6 +315,8 @@
   background-color: #f3f5f6;
 }
 .AB-Checkout-Step-1-2 .ab-product-summary {
+  position: sticky;
+  top: 0;
   padding-top: 53px;
   padding-bottom: 53px;
   padding-left: 61px;
@@ -853,7 +855,8 @@
   display: none !important;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-product-summary {
-  padding-bottom: 123px;
+  position: sticky;
+  top: 0;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .checkout-promo {
   padding-bottom: 50px;

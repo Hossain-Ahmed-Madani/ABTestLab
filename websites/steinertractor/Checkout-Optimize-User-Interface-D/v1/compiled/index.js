@@ -1059,7 +1059,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
-        // q("body").classList.add("AB-Guest-Checkout");
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
@@ -1118,7 +1117,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const { checkout_billing_address, checkout_same_billing } = DATA["forms"];
 
         // Update
-        // q("body").classList.add("AB-Address-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1217,7 +1215,22 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
 
+
+        // Update Select Inputs (Shipping & Payment Options)
+        updateControlSelectInput("select#shipping", "Blue Ribbon");
+        setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
         // return true;
+    }
+
+    async function updateControlSelectInput(selector, optionText) {
+        await waitForElementAsync(() => q(selector));
+
+        const selectElement = q(selector);
+        const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
+        option.selected = true;
+        selectElement.value = option.value;
+        const event = new Event("change", { bubbles: true });
+        selectElement.dispatchEvent(event);
     }
 
     async function handleAddressDeliveryFormShowHide(e) {
@@ -1241,7 +1254,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function handleAddressCreateAccountFormShowHide(e) {
-
         q(".ab-form#guest-create-account")?.remove();
 
         const { guest_create_account } = DATA.forms;
@@ -1645,12 +1657,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     if (!item.classList.contains(flagClassName)) {
                         console.log("Action Loop running....");
                         item.classList.add(flagClassName);
-                        if(item.getAttribute('inputtype') && item.getAttribute('inputtype') === 'tel') {
+                        if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                             item.addEventListener(event, callback);
                         } else {
                             item.addEventListener(event, debouncedCallback);
                         }
-
                     }
                 });
             });

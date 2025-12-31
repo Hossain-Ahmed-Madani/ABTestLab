@@ -749,20 +749,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         },
     };
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
     async function fetchCartData() {
         const response = await fetch("https://www.steinertractor.com/api/carts/carts_read", {
             method: "GET",
@@ -802,28 +788,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -844,32 +808,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -877,17 +815,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     function isTouchEnabled() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function updateLayoutOnMutation() {
-        //
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q(".my-new-selector");
-        if (!targetNode) return;
-        const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     //  ========= FORM BUILDER =========
@@ -1141,7 +1068,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
-        // q("body").classList.add("AB-Guest-Checkout");
         qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
@@ -1197,10 +1123,9 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function createAndUpdateAddressLayout() {
-        const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
+        const { checkout_billing_address, checkout_same_billing } = DATA["forms"];
 
         // Update
-        // q("body").classList.add("AB-Address-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1299,7 +1224,22 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
 
+
+        // Update Select Inputs (Shipping & Payment Options)
+        updateControlSelectInput("select#shipping", "Blue Ribbon");
+        setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
         // return true;
+    }
+
+    async function updateControlSelectInput(selector, optionText) {
+        await waitForElementAsync(() => q(selector));
+
+        const selectElement = q(selector);
+        const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
+        option.selected = true;
+        selectElement.value = option.value;
+        const event = new Event("change", { bubbles: true });
+        selectElement.dispatchEvent(event);
     }
 
     async function handleAddressDeliveryFormShowHide(e) {
@@ -1323,7 +1263,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function handleAddressCreateAccountFormShowHide(e) {
-
         q(".ab-form#guest-create-account")?.remove();
 
         const { guest_create_account } = DATA.forms;
@@ -1750,12 +1689,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     if (!item.classList.contains(flagClassName)) {
                         console.log("Action Loop running....");
                         item.classList.add(flagClassName);
-                        if(item.getAttribute('inputtype') && item.getAttribute('inputtype') === 'tel') {
+                        if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                             item.addEventListener(event, callback);
                         } else {
                             item.addEventListener(event, debouncedCallback);
                         }
-
                     }
                 });
             });
