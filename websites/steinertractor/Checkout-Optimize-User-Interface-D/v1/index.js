@@ -135,7 +135,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-billing-street-address",
                         type: "text",
-                        label: "Street Address",
+                        label: "Street address",
                         required: true,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coAddress",
@@ -226,7 +226,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-delivery-street-address",
                         type: "text",
-                        label: "Street Address",
+                        label: "Street address",
                         required: true,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coAddress",
@@ -409,7 +409,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-billing-street-address",
                         type: "text",
-                        label: "Street Address",
+                        label: "Street address",
                         required: true,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coAddress",
@@ -510,7 +510,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-shipping-street-address",
                         type: "text",
-                        label: "Street Address",
+                        label: "Street address",
                         required: true,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coAddress",
@@ -1202,7 +1202,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
             const div = document.createElement("div");
             div.className = "ab-shipping-address-wrapper";
-            console.log("address box:", qq(item, ":scope > *"));
             qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => div.appendChild(child));
             item.appendChild(div);
         });
@@ -1232,7 +1231,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     async function updateControlSelectInput(selector, optionText) {
         try {
-            await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 5000);
+            await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 10000);
 
             const selectElement = q(selector);
             const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));

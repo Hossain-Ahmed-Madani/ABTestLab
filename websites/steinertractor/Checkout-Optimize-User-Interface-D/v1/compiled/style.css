@@ -557,6 +557,12 @@
   text-align: right;
 }
 
+.AB-Checkout-Step-1-2.AB-Guest-Checkout #dnn_Row0_Col2_Cell2_Pane {
+  display: none !important;
+}
+.AB-Checkout-Step-1-2.AB-Guest-Checkout footer .footer {
+  padding-top: 0 !important;
+}
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-product-summary__addons-and-coupon {
   display: none;
 }
@@ -799,6 +805,13 @@
   margin-bottom: 34px;
 }
 
+.AB-Checkout-Step-1-2.AB-Address-Checkout footer .footer {
+  padding-top: 0 !important;
+}
+.AB-Checkout-Step-1-2.AB-Address-Checkout #dnn_ContentPane {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
 .AB-Checkout-Step-1-2.AB-Address-Checkout .ab-product-summary__addons-and-coupon {
   display: none;
 }
@@ -846,6 +859,9 @@
   opacity: 0.7;
 }
 
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout footer .footer {
+  padding-top: 0 !important;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page hr,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .text-center.mb-5,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page .col-12 > .row,
@@ -884,7 +900,7 @@
   flex-direction: column;
   height: auto;
 }
-.AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p {
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p, .AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p > strong {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 700;
   font-size: 20px;
@@ -929,7 +945,8 @@
   font-weight: 400;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper > div *:not(.btn) {
-  width: 50%;
+  display: inline-block;
+  width: 75%;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn {
   position: absolute;

@@ -320,8 +320,8 @@
 
             &:focus-within:not([area-invalid]),
             &:active:not([area-invalid]) {
-            // &:focus-within,
-            // &:active {
+                // &:focus-within,
+                // &:active {
                 border: 2px solid #333333;
                 box-shadow: none;
                 color: #333333;
@@ -703,6 +703,14 @@
 
 // ============== GUEST CHECKOUT ==============
 .AB-Checkout-Step-1-2.AB-Guest-Checkout {
+    #dnn_Row0_Col2_Cell2_Pane {
+        display: none !important;
+    }
+
+    footer .footer {
+        padding-top: 0 !important;
+    }
+
     .ab-product-summary__addons-and-coupon {
         display: none;
     }
@@ -1019,6 +1027,15 @@
 
 // ============== ADDRESS CHECKOUT ============
 .AB-Checkout-Step-1-2.AB-Address-Checkout {
+    footer .footer {
+        padding-top: 0 !important;
+    }
+
+    #dnn_ContentPane {
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(221, 221, 221, 1);
+    }
+
     .ab-product-summary__addons-and-coupon {
         display: none;
     }
@@ -1088,6 +1105,10 @@
 
 // ============== SHIPPING & REVIEW CHECKOUT ============
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout {
+    footer .footer {
+        padding-top: 0 !important;
+    }
+
     eve-checkout-page hr,
     eve-checkout-page .col-12 > .text-center.mb-5,
     eve-checkout-page .col-12 > .row,
@@ -1136,7 +1157,8 @@
         flex-direction: column;
         height: auto;
 
-        & > p {
+        & > p,
+        & > p > strong {
             font-family: Arial, Helvetica, sans-serif;
             font-weight: 700;
             font-size: 20px;
@@ -1188,7 +1210,8 @@
             }
 
             *:not(.btn) {
-                width: 50%;
+                display: inline-block;
+                width: 75%;
             }
         }
 
