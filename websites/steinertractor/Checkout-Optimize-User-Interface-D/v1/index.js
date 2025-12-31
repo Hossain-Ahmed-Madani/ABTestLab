@@ -126,7 +126,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-billing-phone-bill",
                         type: "tel",
                         label: "Phone",
-                        required: false,
+                        required: true,
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #phone",
                         value: "",
@@ -217,7 +217,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-delivery-phone-bill",
                         type: "tel",
                         label: "Phone",
-                        required: false,
+                        required: true,
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #phone",
                         value: "",
@@ -400,7 +400,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-billing-phone-bill",
                         type: "tel",
                         label: "Phone",
-                        required: false,
+                        required: true,
                         className: "col-6 ab-pl-0",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coPhone",
                         value: "",
@@ -1224,7 +1224,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
 
-
         // Update Select Inputs (Shipping & Payment Options)
         updateControlSelectInput("select#shipping", "Blue Ribbon");
         setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
@@ -1232,14 +1231,18 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function updateControlSelectInput(selector, optionText) {
-        await waitForElementAsync(() => q(selector));
+        try {
+            await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 5000);
 
-        const selectElement = q(selector);
-        const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
-        option.selected = true;
-        selectElement.value = option.value;
-        const event = new Event("change", { bubbles: true });
-        selectElement.dispatchEvent(event);
+            const selectElement = q(selector);
+            const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
+            option.selected = true;
+            selectElement.value = option.value;
+            const event = new Event("change", { bubbles: true });
+            selectElement.dispatchEvent(event);
+        } catch (error) {
+            return false;
+        }
     }
 
     async function handleAddressDeliveryFormShowHide(e) {
@@ -1413,27 +1416,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         }
     }
 
-    function formatPhoneNumber({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
-        // Remove all non-numeric characters
-        let currValue = value.replace(/\D/g, "");
-
-        // Limit to 10 digits
-        if (currValue.length > 10) {
-            currValue = currValue.slice(0, 10);
-        }
-
-        // Apply formatting
-        if (currValue.length === 0) {
-            currentTarget.value = "";
-        } else if (currValue.length <= 3) {
-            currentTarget.value = value;
-        } else if (currValue.length <= 6) {
-            currentTarget.value = "(" + currValue.slice(0, 3) + ") " + currValue.slice(3);
-        } else {
-            currentTarget.value = "(" + currValue.slice(0, 3) + ") " + currValue.slice(3, 6) + "-" + currValue.slice(6, 10);
-        }
-    }
-
     function handleTextBasedInputs({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
         // Handle tel inputs
 
@@ -1598,7 +1580,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     }
 
                     // Handle Tel Entry
-                    if (dataObj["controlNodes"].some((controlNode) => controlNode.getAttribute("type") === "tel") && dataObj["value"].length >= 10) {
+                    if (currentTarget.getAttribute("inputtype") === "tel" && dataObj["value"].length >= 10) {
                         e.preventDefault();
                     }
 
