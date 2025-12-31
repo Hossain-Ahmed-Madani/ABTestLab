@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -176,7 +176,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-billing-zip-code",
                         type: "text",
-                        label: "Zip code",
+                        label: "ZIP code",
                         required: true,
                         className: "col-4 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coZip",
@@ -267,7 +267,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-delivery-zip-code",
                         type: "text",
-                        label: "Zip code",
+                        label: "ZIP code",
                         required: true,
                         className: "col-4 ab-pl-0",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coZip",
@@ -448,7 +448,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-billing-zip-code",
                         type: "text",
-                        label: "Zip code",
+                        label: "ZIP code",
                         required: true,
                         className: "col-4 ab-pl-0",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coZip",
@@ -549,7 +549,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     {
                         id: "ab-shipping-zip-code",
                         type: "text",
-                        label: "Zip code",
+                        label: "ZIP code",
                         required: true,
                         className: "col-4 ab-pl-0",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coZip",
@@ -927,7 +927,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                 <select
                                                     id="${id}"
                                                     class="ab-input"
-                                                    type="${inputType}"
+                                                    type="select"
+                                                    inputType="select"
                                                     control_node_selector="${control_node_selector}"
                                                     placeholder=""
                                                     ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
@@ -950,7 +951,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                     <input
                                                         id="${id}"
                                                         class="ab-input"
-                                                        type="${inputType}"
+                                                        type="${inputType === "tel" ? "number" : inputType}"
+                                                        inputType="${inputType}"
                                                         placeholder=""
                                                         control_node_selector="${control_node_selector}"
                                                         ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
@@ -1174,6 +1176,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const controlLoginElement = qq(".row.content-body > *:not(.ab-content-wrapper)").find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
         if (controlLoginElement) {
             controlLoginElement.classList.add("ab-login-section");
+            qq(controlLoginElement, "label.dnnFormLabel").forEach((label) => (label.innerText = label.innerText.replace(":", "")));
             q(mainWrapperElement, ".ab-content-forms-wrapper").insertAdjacentElement("afterbegin", controlLoginElement);
         }
 
@@ -1231,14 +1234,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function createAndUpdateShippingLayout() {
-        console.log("Shipping & Review...");
-
-        // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
-
-        // await waitForElementAsync(() => q("body:not(.AB-Shipping-Checkout) eve-shipping-address"));
-
         // Update
-        // q("body").classList.add("AB-Shipping-Checkout");
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1474,7 +1470,31 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         }
     }
 
+    function formatPhoneNumber({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+        // Remove all non-numeric characters
+        let currValue = value.replace(/\D/g, "");
+
+        // Limit to 10 digits
+        if (currValue.length > 10) {
+            currValue = currValue.slice(0, 10);
+        }
+
+        // Apply formatting
+        if (currValue.length === 0) {
+            currentTarget.value = "";
+        } else if (currValue.length <= 3) {
+            currentTarget.value = value;
+        } else if (currValue.length <= 6) {
+            currentTarget.value = "(" + currValue.slice(0, 3) + ") " + currValue.slice(3);
+        } else {
+            currentTarget.value = "(" + currValue.slice(0, 3) + ") " + currValue.slice(3, 6) + "-" + currValue.slice(6, 10);
+        }
+    }
+
     function handleTextBasedInputs({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+        // Handle tel inputs
+
+        // Handle Rest
         const scrollPos = { x: window.scrollX, y: window.scrollY };
         const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
 
@@ -1544,7 +1564,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                 );
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
-                    dependencyNode.value = inputType === "tel" ? controlNode.value.replace(/\D/g, "") : controlNode.value;
+                    dependencyNode.value = controlNodes.some((controlNode) => controlNode.getAttribute("type") === "tel") ? controlNode.value.replace(/\D/g, "") : controlNode.value;
                 } else if (inputType === "checkbox") {
                     //
                 } else if (inputType === "radio") {
@@ -1589,7 +1609,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             // Form Input
             {
                 selector: ".ab-input",
-                events: ["input", "change"],
+                events: ["input", "change", "keypress"],
                 callback: (e) => {
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
@@ -1598,6 +1618,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
                         console.error("Target node not found:", dataObj["controlNodeSelector"]);
                         return;
+                    }
+
+                    // Handle Tel Entry
+                    if (dataObj["controlNodes"].some((controlNode) => controlNode.getAttribute("type") === "tel") && dataObj["value"].length >= 10) {
+                        e.preventDefault();
                     }
 
                     // Handle control input updates
@@ -1695,7 +1720,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     if (!item.classList.contains(flagClassName)) {
                         console.log("Action Loop running....");
                         item.classList.add(flagClassName);
-                        item.addEventListener(event, debouncedCallback);
+                        item.addEventListener(event, callback);
                     }
                 });
             });

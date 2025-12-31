@@ -941,16 +941,19 @@
     }
 
     .ab-guest-checkout-section {
+
         padding: 49px 59px 97px 0;
 
         // > .pl-0.pr-0 {
         //     display: none !important;
         // }
 
-        .pr-0.pl-0.col-md-12.col-sm-6,
         .ab-control-guest-checkout-form {
+            display: none !important;
+        }
+
+        .pr-0.pl-0.col-md-12.col-sm-6 {
             width: 100%;
-            // display: block !important;
             display: none !important;
         }
     }
@@ -1614,7 +1617,6 @@
     .ab-credit-or-debit-forms-section {
         padding: 0 63px 123px 0;
     }
-
 
     // ========== Product Summary Extra ==========
     .ab-product-summary__coupons-form-group,

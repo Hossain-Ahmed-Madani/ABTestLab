@@ -748,8 +748,10 @@
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-guest-checkout-section {
   padding: 49px 59px 97px 0;
 }
-.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-guest-checkout-section .pr-0.pl-0.col-md-12.col-sm-6,
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-guest-checkout-section .ab-control-guest-checkout-form {
+  display: none !important;
+}
+.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-guest-checkout-section .pr-0.pl-0.col-md-12.col-sm-6 {
   width: 100%;
   display: none !important;
 }
