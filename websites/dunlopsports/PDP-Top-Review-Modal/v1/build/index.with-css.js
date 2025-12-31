@@ -17,16 +17,15 @@ body {
 .AB-PDP-TOP-REVIEW__modal {
   opacity: 0;
   display: none;
-  box-shadow: 7px 5px 8px 0px rgba(0, 0, 0, 0.35);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: 1px solid rgb(81, 81, 81);
-  border-radius: 5px;
   background-color: rgb(255, 255, 255);
   max-width: 100%;
   min-height: max-content;
   height: max-content;
   background: #ffffff;
   z-index: 1;
-  padding: 24px 21px 35px 22px;
+  padding: 20px;
   position: fixed;
   bottom: 80px;
   left: 10px;
@@ -43,18 +42,19 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .AB-PDP-TOP-REVIEW__modal__review-stars {
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .AB-PDP-TOP-REVIEW__modal__close-cta {
   margin: 0;
+  margin-left: auto;
   padding: 0;
   cursor: pointer;
   position: relative;
-  width: 23px;
-  height: 23px;
+  width: 16px;
+  height: 16px;
 }
 .AB-PDP-TOP-REVIEW__modal__close-cta:after {
   content: "";
@@ -75,8 +75,7 @@ body {
   top: 50%;
 }
 .AB-PDP-TOP-REVIEW__modal__head__progress {
-  flex-grow: 1;
-  margin-right: 70px;
+  width: 285px;
   height: 5px;
   background-color: rgb(241, 241, 241);
   border-radius: 6px;
@@ -91,27 +90,27 @@ body {
 .AB-PDP-TOP-REVIEW__modal__review-header {
   font-family: Libre Franklin;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 100%;
   letter-spacing: 0px;
   color: rgb(0, 0, 0);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .AB-PDP-TOP-REVIEW__modal__review-description {
   font-family: Libre Franklin;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 22px;
   letter-spacing: 0px;
   color: rgb(37, 37, 37);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .AB-PDP-TOP-REVIEW__modal__review-see-more-cta {
   width: max-content;
   cursor: pointer;
   font-family: Libre Franklin;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0px;
   text-decoration: underline;
@@ -126,8 +125,9 @@ body {
   outline: none;
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
+  margin: 0;
   margin-left: -3px;
-  height: 21px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,8 +140,8 @@ body {
   top: -8px;
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4 {
-  width: 21px;
-  height: 21px;
+  width: 20px;
+  height: 20px;
 }
 .AB-PDP-TOP-REVIEW__modal .pr-snippet-read-and-write {
   display: none !important;
@@ -157,10 +157,10 @@ body {
   .pr-snippet-stars-png
   .pr-snippet-rating-decimal {
   padding: 0;
-  padding-left: 12px;
+  padding-left: 7px;
   font-family: Libre Franklin;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   line-height: 24px;
   letter-spacing: 0px;
   vertical-align: middle;
@@ -169,55 +169,57 @@ body {
 @media screen and (min-width: 768px) {
   .AB-PDP-TOP-REVIEW__modal {
     border: 1px solid rgb(81, 81, 81);
-    box-shadow: 8.31px 5.93px 9.49px 0px rgba(0, 0, 0, 0.35);
-    padding: 28px 27px 39px 26px;
-    width: 600px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    width: 450px;
     right: auto;
     left: 41px;
     bottom: 80px;
   }
   .AB-PDP-TOP-REVIEW__modal__top {
-    margin-bottom: 14px;
+    margin-bottom: 10px;
+  }
+  .AB-PDP-TOP-REVIEW__modal__head__progress {
+    width: 331px;
   }
   .AB-PDP-TOP-REVIEW__modal__review-stars {
-    margin-bottom: 19px;
+    margin-bottom: 10px;
   }
   .AB-PDP-TOP-REVIEW__modal__close-cta {
-    width: 28px;
-    height: 28px;
+    width: 16px;
+    height: 16px;
   }
   .AB-PDP-TOP-REVIEW__modal__review-header {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0px;
-    margin-bottom: 19px;
+    margin-bottom: 10px;
   }
   .AB-PDP-TOP-REVIEW__modal__review-description {
     font-weight: 500;
-    font-size: 20px;
-    line-height: 33.22px;
+    font-size: 14px;
+    line-height: 22px;
     letter-spacing: 0px;
-    margin-bottom: 19px;
+    margin-bottom: 10px;
   }
   .AB-PDP-TOP-REVIEW__modal__review-see-more-cta {
     font-weight: 700;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 100%;
     letter-spacing: 0px;
     text-decoration: underline;
     text-decoration-style: solid;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
-    height: 25px;
     margin: 0;
     margin-left: -5px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
-    top: -7px;
+    top: -8px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4:before {
-    top: -7px;
+    top: -8px;
   }
   .AB-PDP-TOP-REVIEW__modal
     .p-w-r
@@ -225,16 +227,16 @@ body {
     .pr-snippet-stars-png
     .pr-snippet-rating-decimal {
     padding: 0;
-    padding-left: 14px;
+    padding-left: 7px;
     font-weight: 500;
-    font-size: 16px;
-    line-height: 28.48px;
+    font-size: 14px;
+    line-height: 16px;
     letter-spacing: 0px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4 {
-    width: 25px;
-    height: 25px;
-    margin-right: 0px;
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
   }
 }
 
@@ -394,7 +396,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -406,105 +408,90 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
         review_header: "Great wedges!",
         review_description:
           "The wedges perform great. They are easy to hit and have a smooth feel about them. I especially like the 50 degree the best. Every time I purchase a new Cleveland wedge I fall in love with it. Don't hesitate to get one!",
-        reviewer_name: "bjacobs79",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-tour-satin-wedge/MRTZTS.html",
         review_header: "First RTZ",
         review_description:
           "Ordered custom with Nippon shaft to match my ZXi 5's and it feels great ! The wedge is a little softer than my RTX6 wedges but the trajectory and distance is the same. Very happy with my purchase!",
-        reviewer_name: "WEJJS",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html",
-        review_header: "Amazing feel and spin",
+        review_header: "Cleveland Wedges",
         review_description:
-          "I've played a number of wedges and always come back to Vokey or Cleveland. With a recent upgrade of some old wedges and redo in the bag, I was hitting these more consistently with better feel and spin than any others out there at my independent fitting. Love them and can't wait to get out next spring with these.",
-        reviewer_name: "Tyler",
+          "I just changed out all of my wedges and couldn't be happier! Great quality, great feel, superior product",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-tour-rack-(raw)-wedge/MRTZTR.html",
         review_header: "Great wedge!",
         review_description:
           "Excellent all-around playability. Looks great, spin is perfect, and I love the default swing weight. Solid feel, versatile, and the best wedge on the market right now. I also appreciate the tour-issue DG S400 as the default shaft.",
-        reviewer_name: "J",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtx-6-zipcore/rtx-6-zipcore-tour-satin-wedge/MRTX6ZCTS.html",
-        review_header: "Solid wedge with great feel",
+        review_header: "Great wedge",
         review_description:
-          "This wedge feels great right out of the box. Excellent feel, plenty of spin, and consistent performance on chips and pitches. It also feels great with a full swing. Definitely a quality upgrade for the short game.",
-        reviewer_name: "David",
+          "Cleveland wedges are always solid and this one doesn't disappoint. Feels great and controllable.",
       },
       {
         url: "/srixon/clubs/irons/zxi5-irons/zxi5-irons/MZXI5IRN.html",
-        review_header: "Incredible irons for a wide range of handicaps",
+        review_header: "Talk About Incredible Feel!",
         review_description:
-          "The Srixon ZXi5 irons are easily the best set of irons I've owned. They are incredibly consistent, very forgiving for their category, and beautiful to look down on. It's amazing how much technology they've packed into these irons, all while keeping them sleek in appearance. The feel is wonderful, and there is enough feedback to know exactly where you hit the ball on the face to make adjustments. I will be playing these for years to come.",
-        reviewer_name: "NJ",
+          "Absolutely Amazing Feel. Custom ordered a ZXi5 set and couldn't be happier. These irons look beautiful and feel incredible. The loft setup is perfect gapping.",
       },
       {
         url: "/srixon/clubs/irons/zxi7-irons/zxi7-irons/MZXI7IRN.html",
-        review_header: "ZXi7 are great. Definitely recommend them",
+        review_header: "Excellent",
         review_description:
-          "I replaced my 4-year-old ZX7 iron set with the new ZXi7. The new clubs are fantastic. I did not think they could improve on the ZX7, but they found a way to do it. They feel softer than my old set and are definitely straighter and a bit more forgiving. I would say handicaps as high as 15–18 can easily play these fantastic-looking clubs.",
-        reviewer_name: "TM",
+          "There is a reason you see this in so many bags on tour. They do everything well. Excellent build quality. Specs were dead on.",
       },
       {
         url: "/srixon/clubs/irons/zxi4-irons/zxi4-irons/MZXI4IRN.html",
         review_header: "Srixon does it again!",
         review_description:
           "The new generation of ZX4 irons has further helped me improve my game. Ball launch is slightly better than my older ZX4, and I am even more confident hitting the longer irons.",
-        reviewer_name: "Dreaming72",
       },
       {
         url: "/srixon/balls/z-star-series/z-star-diamond/z-star-diamond-golf-balls-24-pack/10376310.html",
-        review_header: "An amazing golf ball",
+        review_header: "Optimal combination of distance and spin",
         review_description:
-          "This ball is fast and it spins! It launches in a great window with all clubs. It also produces low spin with the driver and plenty of spin with irons and wedges. It does everything I want it to do and more. I'll be playing this ball for a while!",
-        reviewer_name: "Burt",
+          "Terrific combination of distance and green side spin for my game.",
       },
       {
         url: "/srixon/balls/z-star-series/z-star-diamond/z-star-diamond-golf-balls-24-pack/MZSTARD24PK.html",
         review_header: "My new summer game ball",
         review_description:
           "They are the best spinning balls I have ever had on the greens off of irons and wedges.",
-        reviewer_name: "JT",
       },
       {
         url: "/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-driver/MX13D.html",
         review_header: "Longer drives, game changer!",
         review_description:
-          "Clearly a game changer. Hitting the ball off the tee with more distance (at least 10–20 yards). Misses still produce a long drive. When I hit it flush, the ball explodes off the face of the club and goes a mile. Very happy with my new XXIO 13 driver. Highly recommend.",
-        reviewer_name: "Len",
+          "Clearly a game changer. Hitting the ball off the tee with more distance (at least 10–20 yards)...When I hit it flush, the ball explodes off the face of the club and goes a mile. Very happy with my new XXIO 13 driver. Highly recommend.",
       },
       {
         url: "/xxio/balls/xxio-rebound-drive-ii/xxio-rebound-drive-ii-golf-balls/10348035.html",
         review_header: "First hole-in-one",
         review_description:
           "Had my first hole-in-one using an XXIO driver and lime-yellow ball. Both work great!",
-        reviewer_name: "Randy",
       },
       {
         url: "/xxio/balls/xxio-rebound-drive-ii/xxio-rebound-drive-ii-ladies-golf-balls/MXRDL2GB.html",
         review_header: "I would buy this product again and again",
         review_description:
           "I really liked this ball. Better than most balls I have tried.",
-        reviewer_name: "LIVY",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz-set-builder/rtz-wedge-set-builder/rtz-wedge-set.html",
         review_header: "Awesome green grabbing spin!",
         review_description:
           "3rd set of the Cleveland wedges, love the feel of the KBS Steel, satin. New grooves are perfect for our hard-to-hold Bermuda grass. Would recommend these to anyone needing help stopping the ball on the green.",
-        reviewer_name: "Pmoney",
       },
       {
         url: "/srixon/clubs/drivers/zxi-driver/zxi-driver/MZXIDRV.html",
         review_header: "Easy to hit and very forgiving",
         review_description:
           "This has been a wonderful addition to the bag. I've found added confidence when teeing up, even in tight fairways. The design and build provide forgiveness throughout my round. I would buy this again.",
-        reviewer_name: "Blake",
       },
     ],
   };
@@ -714,6 +701,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
       // Check after scrolling if we reached the correct position
       setTimeout(() => {
+        console.log("handleScroll, setTimeout...");
         const newRect = reviewsAnchor.getBoundingClientRect();
         const newScroll = window.scrollY || document.documentElement.scrollTop;
         newScroll + newRect.top;
@@ -732,6 +720,12 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
   function createLayout() {
     const { review_header, review_description } = getReviewData();
 
+    const startRatingHTML = q("#pr-review-snippet")
+      ? /* HTML */ `<div class="${page_initials}__modal__review-stars">
+          ${q("#pr-review-snippet").outerHTML}
+        </div>`
+      : "";
+
     q("body").insertAdjacentHTML(
       "afterbegin",
       /* HTML */ `
@@ -745,9 +739,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
             </div>
             <div class="${page_initials}__modal__close-cta"></div>
           </div>
-          ${q("#pr-review-snippet")
-            ? ` <div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet")?.outerHTML}</div>`
-            : ""}
+          ${startRatingHTML}
           <div class="${page_initials}__modal__review-header">
             ${review_header}
           </div>

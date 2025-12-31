@@ -14,7 +14,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -26,105 +26,90 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
         review_header: "Great wedges!",
         review_description:
           "The wedges perform great. They are easy to hit and have a smooth feel about them. I especially like the 50 degree the best. Every time I purchase a new Cleveland wedge I fall in love with it. Don't hesitate to get one!",
-        reviewer_name: "bjacobs79",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-tour-satin-wedge/MRTZTS.html",
         review_header: "First RTZ",
         review_description:
           "Ordered custom with Nippon shaft to match my ZXi 5's and it feels great ! The wedge is a little softer than my RTX6 wedges but the trajectory and distance is the same. Very happy with my purchase!",
-        reviewer_name: "WEJJS",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-black-satin-wedge/MRTZBKS.html",
-        review_header: "Amazing feel and spin",
+        review_header: "Cleveland Wedges",
         review_description:
-          "I've played a number of wedges and always come back to Vokey or Cleveland. With a recent upgrade of some old wedges and redo in the bag, I was hitting these more consistently with better feel and spin than any others out there at my independent fitting. Love them and can't wait to get out next spring with these.",
-        reviewer_name: "Tyler",
+          "I just changed out all of my wedges and couldn't be happier! Great quality, great feel, superior product",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz/rtz-tour-rack-(raw)-wedge/MRTZTR.html",
         review_header: "Great wedge!",
         review_description:
           "Excellent all-around playability. Looks great, spin is perfect, and I love the default swing weight. Solid feel, versatile, and the best wedge on the market right now. I also appreciate the tour-issue DG S400 as the default shaft.",
-        reviewer_name: "J",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtx-6-zipcore/rtx-6-zipcore-tour-satin-wedge/MRTX6ZCTS.html",
-        review_header: "Solid wedge with great feel",
+        review_header: "Great wedge",
         review_description:
-          "This wedge feels great right out of the box. Excellent feel, plenty of spin, and consistent performance on chips and pitches. It also feels great with a full swing. Definitely a quality upgrade for the short game.",
-        reviewer_name: "David",
+          "Cleveland wedges are always solid and this one doesn't disappoint. Feels great and controllable.",
       },
       {
         url: "/srixon/clubs/irons/zxi5-irons/zxi5-irons/MZXI5IRN.html",
-        review_header: "Incredible irons for a wide range of handicaps",
+        review_header: "Talk About Incredible Feel!",
         review_description:
-          "The Srixon ZXi5 irons are easily the best set of irons I've owned. They are incredibly consistent, very forgiving for their category, and beautiful to look down on. It's amazing how much technology they've packed into these irons, all while keeping them sleek in appearance. The feel is wonderful, and there is enough feedback to know exactly where you hit the ball on the face to make adjustments. I will be playing these for years to come.",
-        reviewer_name: "NJ",
+          "Absolutely Amazing Feel. Custom ordered a ZXi5 set and couldn't be happier. These irons look beautiful and feel incredible. The loft setup is perfect gapping.",
       },
       {
         url: "/srixon/clubs/irons/zxi7-irons/zxi7-irons/MZXI7IRN.html",
-        review_header: "ZXi7 are great. Definitely recommend them",
+        review_header: "Excellent",
         review_description:
-          "I replaced my 4-year-old ZX7 iron set with the new ZXi7. The new clubs are fantastic. I did not think they could improve on the ZX7, but they found a way to do it. They feel softer than my old set and are definitely straighter and a bit more forgiving. I would say handicaps as high as 15–18 can easily play these fantastic-looking clubs.",
-        reviewer_name: "TM",
+          "There is a reason you see this in so many bags on tour. They do everything well. Excellent build quality. Specs were dead on.",
       },
       {
         url: "/srixon/clubs/irons/zxi4-irons/zxi4-irons/MZXI4IRN.html",
         review_header: "Srixon does it again!",
         review_description:
           "The new generation of ZX4 irons has further helped me improve my game. Ball launch is slightly better than my older ZX4, and I am even more confident hitting the longer irons.",
-        reviewer_name: "Dreaming72",
       },
       {
         url: "/srixon/balls/z-star-series/z-star-diamond/z-star-diamond-golf-balls-24-pack/10376310.html",
-        review_header: "An amazing golf ball",
+        review_header: "Optimal combination of distance and spin",
         review_description:
-          "This ball is fast and it spins! It launches in a great window with all clubs. It also produces low spin with the driver and plenty of spin with irons and wedges. It does everything I want it to do and more. I'll be playing this ball for a while!",
-        reviewer_name: "Burt",
+          "Terrific combination of distance and green side spin for my game.",
       },
       {
         url: "/srixon/balls/z-star-series/z-star-diamond/z-star-diamond-golf-balls-24-pack/MZSTARD24PK.html",
         review_header: "My new summer game ball",
         review_description:
           "They are the best spinning balls I have ever had on the greens off of irons and wedges.",
-        reviewer_name: "JT",
       },
       {
         url: "/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-driver/MX13D.html",
         review_header: "Longer drives, game changer!",
         review_description:
-          "Clearly a game changer. Hitting the ball off the tee with more distance (at least 10–20 yards). Misses still produce a long drive. When I hit it flush, the ball explodes off the face of the club and goes a mile. Very happy with my new XXIO 13 driver. Highly recommend.",
-        reviewer_name: "Len",
+          "Clearly a game changer. Hitting the ball off the tee with more distance (at least 10–20 yards)...When I hit it flush, the ball explodes off the face of the club and goes a mile. Very happy with my new XXIO 13 driver. Highly recommend.",
       },
       {
         url: "/xxio/balls/xxio-rebound-drive-ii/xxio-rebound-drive-ii-golf-balls/10348035.html",
         review_header: "First hole-in-one",
         review_description:
           "Had my first hole-in-one using an XXIO driver and lime-yellow ball. Both work great!",
-        reviewer_name: "Randy",
       },
       {
         url: "/xxio/balls/xxio-rebound-drive-ii/xxio-rebound-drive-ii-ladies-golf-balls/MXRDL2GB.html",
         review_header: "I would buy this product again and again",
         review_description:
           "I really liked this ball. Better than most balls I have tried.",
-        reviewer_name: "LIVY",
       },
       {
         url: "/cleveland-golf/clubs/wedges/rtz-set-builder/rtz-wedge-set-builder/rtz-wedge-set.html",
         review_header: "Awesome green grabbing spin!",
         review_description:
           "3rd set of the Cleveland wedges, love the feel of the KBS Steel, satin. New grooves are perfect for our hard-to-hold Bermuda grass. Would recommend these to anyone needing help stopping the ball on the green.",
-        reviewer_name: "Pmoney",
       },
       {
         url: "/srixon/clubs/drivers/zxi-driver/zxi-driver/MZXIDRV.html",
         review_header: "Easy to hit and very forgiving",
         review_description:
           "This has been a wonderful addition to the bag. I've found added confidence when teeing up, even in tight fairways. The design and build provide forgiveness throughout my round. I would buy this again.",
-        reviewer_name: "Blake",
       },
     ],
   };
@@ -334,6 +319,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
       // Check after scrolling if we reached the correct position
       setTimeout(() => {
+        console.log("handleScroll, setTimeout...");
         const newRect = reviewsAnchor.getBoundingClientRect();
         const newScroll = window.scrollY || document.documentElement.scrollTop;
         newScroll + newRect.top;
@@ -352,6 +338,12 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
   function createLayout() {
     const { review_header, review_description } = getReviewData();
 
+    const startRatingHTML = q("#pr-review-snippet")
+      ? /* HTML */ `<div class="${page_initials}__modal__review-stars">
+          ${q("#pr-review-snippet").outerHTML}
+        </div>`
+      : "";
+
     q("body").insertAdjacentHTML(
       "afterbegin",
       /* HTML */ `
@@ -365,9 +357,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
             </div>
             <div class="${page_initials}__modal__close-cta"></div>
           </div>
-          ${q("#pr-review-snippet")
-            ? ` <div class="${page_initials}__modal__review-stars">${q("#pr-review-snippet")?.outerHTML}</div>`
-            : ""}
+          ${startRatingHTML}
           <div class="${page_initials}__modal__review-header">
             ${review_header}
           </div>

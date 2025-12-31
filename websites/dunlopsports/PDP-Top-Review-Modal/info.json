@@ -1,13 +1,10 @@
 {
-  "id": "1766493498061_4448_PDP_Top_Review_Modal",
-  "name": "PDP-Top-Review-Modal",
-  "type": "A/B",
-  "website": "dunlopsports",
-  "variations": [
-    "control",
-    "v1"
-  ],
-  "createdAt": "2025-12-23T12:38:18.061Z",
-  "createdAtReadable": "12/23/2025, 6:38:18 PM",
-  "lastUpdated": "2025-12-23T12:38:18.248Z"
+    "id": "1766493498061_4448_PDP_Top_Review_Modal",
+    "name": "PDP-Top-Review-Modal",
+    "type": "A/B",
+    "website": "dunlopsports",
+    "variations": ["control", "v1"],
+    "createdAt": "2025-12-23T12:38:18.061Z",
+    "createdAtReadable": "12/23/2025, 6:38:18 PM",
+    "lastUpdated": "2025-12-23T12:38:18.248Z"
 }
