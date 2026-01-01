@@ -189,7 +189,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: false,
+                        required: true,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) select#ShipMethod",
                         value: "",
@@ -280,7 +280,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: false,
+                        required: true,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) select#ShipMethod",
                         value: "",
@@ -463,7 +463,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: false,
+                        required: true,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#carrier",
                         value: "",
@@ -564,7 +564,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: false,
+                        required: true,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier",
                         value: "",
@@ -1061,14 +1061,19 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             </div>
         `;
 
-        eventHandler();
+        // eventHandler();
     }
 
     async function createAndUpdateGuestCheckoutLayout() {
         const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
-        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("area-empty", ""));
+        // qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => {
+        //     if (!item.value) {
+        //         item.setAttribute("area-empty", "");
+        //     }
+        // });
+
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1257,7 +1262,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             );
             contentWrapper.classList.add("ab-content-wrapper--show-delivery-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
-            eventHandler();
+            // eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-delivery-address");
             setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
@@ -1275,7 +1280,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             await waitForElementAsync(() => !!validateAllControlNodesExist(guest_create_account.inputList));
             contentWrapper.classList.add("ab-content-wrapper--show-guest-create-account");
             shippingAddressForm.insertAdjacentHTML("beforebegin", getFormLayout(guest_create_account));
-            eventHandler();
+            // eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-guest-create-account");
             setTimeout(() => shippingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
@@ -1295,7 +1300,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             );
             contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
-            eventHandler();
+            // eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-shipping-address");
             setTimeout(() => billingAddressForm.scrollIntoView({ behavior: "smooth", block: "center" }), 100);
@@ -1331,7 +1336,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     </div>
                 `
             );
-            eventHandler();
+            // eventHandler();
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
             setTimeout(() => q(".ab-control-forms-section").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
@@ -1675,11 +1680,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                 },
             },
             {
-                selector: ".dnnFormItem input[type='email'], .dnnFormItem input[type='password']",
+                selector: ".dnnFormItem input[type='email'], .dnnFormItem input[type='password'], input#poNumber.form-control",
                 events: ["input", "change"],
                 callback: handleControlInputAreaEmptyAttribute,
             },
-
         ];
 
         ACTION_LIST.forEach(async ({ selector, events, callback }) => {
@@ -1704,6 +1708,22 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                 return;
             }
         });
+    }
+
+    function updateLayoutOnMutation() {
+        qq(".dnnFormItem input[type='email'], .dnnFormItem input[type='password'], input#poNumber.form-control").forEach((item) => {
+            if (item.value === "" && !item.hasAttribute("area-empty")) {
+                item.setAttribute("area-empty", "");
+            }
+        });
+        eventHandler();
+    }
+
+    async function mutationObserverFunction() {
+        await waitForElementAsync(() => q(".ab-content-bottom"));
+        const targetNode = q(".ab-content-bottom");
+        const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     // ===========  MAIN JS ===========
@@ -1764,6 +1784,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         console.table(TEST_CONFIG);
         await mainLayoutFunction();
         eventHandler();
+        mutationObserverFunction();
     }
 
     function checkForItems() {
