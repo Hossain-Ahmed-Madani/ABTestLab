@@ -1384,6 +1384,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             currentTarget?.removeAttribute("area-invalid");
         }
 
+        console.log("handleFormErrorMessage", currentTarget.value);
+
         if (!currentTarget.value) {
             currentTarget?.setAttribute("area-empty", "");
         } else {

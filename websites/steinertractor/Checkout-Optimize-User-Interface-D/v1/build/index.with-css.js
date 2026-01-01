@@ -162,7 +162,7 @@
 .AB-Checkout-Step-1-2
   .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"]))
   .ab-label:has(
-    ~ input:not([type="radio"]):not([type="checkbox"]):not(:placeholder-shown)
+    ~ input:not([type="radio"]):not([type="checkbox"]):not([area-empty])
   ) {
   position: static;
   font-size: 14px;
@@ -399,6 +399,8 @@
   background-color: #f3f5f6;
 }
 .AB-Checkout-Step-1-2 .ab-product-summary {
+  position: sticky;
+  top: 0;
   padding-top: 53px;
   padding-bottom: 53px;
   padding-left: 61px;
@@ -651,6 +653,12 @@
   text-align: right;
 }
 
+.AB-Checkout-Step-1-2.AB-Guest-Checkout #dnn_Row0_Col2_Cell2_Pane {
+  display: none !important;
+}
+.AB-Checkout-Step-1-2.AB-Guest-Checkout footer .footer {
+  padding-top: 0 !important;
+}
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-product-summary__addons-and-coupon {
   display: none;
 }
@@ -813,7 +821,7 @@
   .dnnLabel:has(~ input:active),
 .AB-Checkout-Step-1-2.AB-Guest-Checkout
   .ab-login-section
-  .dnnLabel:has(~ input:not(:placeholder-shown)) {
+  .dnnLabel:has(~ input:not([area-empty])) {
   position: static;
   font-size: 14px;
 }
@@ -827,7 +835,7 @@
   label,
 .AB-Checkout-Step-1-2.AB-Guest-Checkout
   .ab-login-section
-  .dnnLabel:has(~ input:not(:placeholder-shown))
+  .dnnLabel:has(~ input:not([area-empty]))
   label {
   font-size: 14px;
 }
@@ -860,7 +868,7 @@
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:active,
 .AB-Checkout-Step-1-2.AB-Guest-Checkout
   .ab-login-section
-  input:not(:placeholder-shown) {
+  input:not([area-empty]) {
   position: static;
   border: none;
   outline: none;
@@ -902,10 +910,12 @@
 }
 .AB-Checkout-Step-1-2.AB-Guest-Checkout
   .ab-guest-checkout-section
-  .pr-0.pl-0.col-md-12.col-sm-6,
+  .ab-control-guest-checkout-form {
+  display: none !important;
+}
 .AB-Checkout-Step-1-2.AB-Guest-Checkout
   .ab-guest-checkout-section
-  .ab-control-guest-checkout-form {
+  .pr-0.pl-0.col-md-12.col-sm-6 {
   width: 100%;
   display: none !important;
 }
@@ -961,6 +971,13 @@
   margin-bottom: 34px;
 }
 
+.AB-Checkout-Step-1-2.AB-Address-Checkout footer .footer {
+  padding-top: 0 !important;
+}
+.AB-Checkout-Step-1-2.AB-Address-Checkout #dnn_ContentPane {
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgb(221, 221, 221);
+}
 .AB-Checkout-Step-1-2.AB-Address-Checkout
   .ab-product-summary__addons-and-coupon {
   display: none;
@@ -1023,6 +1040,9 @@
   opacity: 0.7;
 }
 
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout footer .footer {
+  padding-top: 0 !important;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-checkout-page hr,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   eve-checkout-page
@@ -1038,7 +1058,8 @@
   display: none !important;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-product-summary {
-  padding-bottom: 123px;
+  position: sticky;
+  top: 0;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .checkout-promo {
   padding-bottom: 50px;
@@ -1064,10 +1085,22 @@
   color: rgb(255, 255, 255);
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text {
+  display: flex;
+  flex-direction: column;
   height: auto;
 }
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p,
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p > strong {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  color: rgb(51, 51, 51);
+  margin-bottom: 15px;
+}
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper {
-  height: 100%;
+  flex-grow: 1;
   gap: 10px;
   padding: 20px;
   border: 1px solid rgb(206, 212, 218);
@@ -1108,7 +1141,8 @@
   .ab-shipping-address-wrapper
   > div
   *:not(.btn) {
-  width: 50%;
+  display: inline-block;
+  width: 75%;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn {
   position: absolute;
@@ -1503,7 +1537,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   eve-payment-options
   .col-lg-2.mb-3:has(> input#poNumber)
-  label:has(~ input:not(:placeholder-shown)),
+  label:has(~ input:not([area-empty])),
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   eve-payment-options
   .col-lg-2.mb-3:has(> input#poNumber)
@@ -1544,7 +1578,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   eve-payment-options
   .col-lg-2.mb-3:has(> input#poNumber)
-  input:not(:placeholder-shown) {
+  input:not([area-empty]) {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
@@ -1757,10 +1791,11 @@ Figma: https://www.figma.com/design/8qOYEM40DrLkcFtP6ZFY3N/Steiner-Tractor?node-
 
 Test container: https://app.convert.com/accounts/100412165/projects/10043124/experiences/1004178648/summary
 Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=1004178648.1004420738&utm_campaign=qa5&returnurl=%2Fcheckout
+Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpreview&convert_e=1004178648&convert_v=1004420738&returnurl=%2Fcheckout
 
 */
 
-(async function AB_CHECKOUT_TEST() {
+(async function () {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
     project: "steinertractor",
@@ -1770,7 +1805,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     test_name: "Checkout - Optimize User Interface [D]",
     page_initials: "AB-Checkout-Step-1-2",
     test_variation: 1,
-    test_version: 0.0005,
+    test_version: 0.0009,
   };
 
   const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1890,7 +1925,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             id: "ab-billing-phone-bill",
             type: "tel",
             label: "Phone",
-            required: false,
+            required: true,
             className: "col-6 ab-pl-0",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(6) #phone",
@@ -1900,7 +1935,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-billing-street-address",
             type: "text",
-            label: "Street Address",
+            label: "Street address",
             required: true,
             className: "col-12",
             control_node_selector:
@@ -1945,7 +1980,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-billing-zip-code",
             type: "text",
-            label: "Zip code",
+            label: "ZIP code",
             required: true,
             className: "col-4 ab-pl-0",
             control_node_selector:
@@ -1989,7 +2024,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             id: "ab-delivery-phone-bill",
             type: "tel",
             label: "Phone",
-            required: false,
+            required: true,
             className: "col-6 ab-pl-0",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(9) #phone",
@@ -1999,7 +2034,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-delivery-street-address",
             type: "text",
-            label: "Street Address",
+            label: "Street address",
             required: true,
             className: "col-12",
             control_node_selector:
@@ -2044,7 +2079,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-delivery-zip-code",
             type: "text",
-            label: "Zip code",
+            label: "ZIP code",
             required: true,
             className: "col-4 ab-pl-0",
             control_node_selector:
@@ -2074,6 +2109,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-guest-password",
             type: "password",
+            required: true,
             label: "Password",
             className: "col-6",
             control_node_selector: "#Password",
@@ -2082,6 +2118,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-guest-retype-password",
             type: "password",
+            required: true,
             label: "Confirm Password",
             className: "col-6 ab-pl-0",
             control_node_selector: "#confirmPassword",
@@ -2182,7 +2219,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
             id: "ab-billing-phone-bill",
             type: "tel",
             label: "Phone",
-            required: false,
+            required: true,
             className: "col-6 ab-pl-0",
             control_node_selector:
               "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coPhone",
@@ -2192,7 +2229,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-billing-street-address",
             type: "text",
-            label: "Street Address",
+            label: "Street address",
             required: true,
             className: "col-12",
             control_node_selector:
@@ -2237,7 +2274,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-billing-zip-code",
             type: "text",
-            label: "Zip code",
+            label: "ZIP code",
             required: true,
             className: "col-4 ab-pl-0",
             control_node_selector:
@@ -2302,7 +2339,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-shipping-street-address",
             type: "text",
-            label: "Street Address",
+            label: "Street address",
             required: true,
             className: "col-12",
             control_node_selector:
@@ -2347,7 +2384,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           {
             id: "ab-shipping-zip-code",
             type: "text",
-            label: "Zip code",
+            label: "ZIP code",
             required: true,
             className: "col-4 ab-pl-0",
             control_node_selector:
@@ -2664,7 +2701,8 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                                 <select
                                                     id="${id}"
                                                     class="ab-input"
-                                                    type="${inputType}"
+                                                    type="select"
+                                                    inputType="select"
                                                     control_node_selector="${control_node_selector}"
                                                     placeholder=""
                                                     ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
@@ -2694,7 +2732,8 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
                                                     <input
                                                         id="${id}"
                                                         class="ab-input"
-                                                        type="${inputType}"
+                                                        type="${inputType === "tel" ? "number" : inputType}"
+                                                        inputType="${inputType}"
                                                         placeholder=""
                                                         control_node_selector="${control_node_selector}"
                                                         ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
@@ -2966,7 +3005,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     } = DATA["forms"];
 
     // Update
-    // q("body").classList.add("AB-Guest-Checkout");
     qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) =>
       item.setAttribute("placeholder", ""),
     );
@@ -3018,6 +3056,9 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     ).find((item) => !!q(item, ".Head")?.innerText.includes("Account Login"));
     if (controlLoginElement) {
       controlLoginElement.classList.add("ab-login-section");
+      qq(controlLoginElement, "label.dnnFormLabel").forEach(
+        (label) => (label.innerText = label.innerText.replace(":", "")),
+      );
       q(mainWrapperElement, ".ab-content-forms-wrapper").insertAdjacentElement(
         "afterbegin",
         controlLoginElement,
@@ -3052,7 +3093,6 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     const { checkout_billing_address, checkout_same_billing } = DATA["forms"];
 
     // Update
-    // q("body").classList.add("AB-Address-Checkout");
     qq("body > form > .container.bg-white, .footer").forEach((item) =>
       item.classList.remove("container"),
     );
@@ -3101,14 +3141,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
   }
 
   async function createAndUpdateShippingLayout() {
-    console.log("Shipping & Review...");
-
-    // const { checkout_billing_address, checkout_shipping_address, checkout_same_billing } = DATA["forms"];
-
-    // await waitForElementAsync(() => q("body:not(.AB-Shipping-Checkout) eve-shipping-address"));
-
     // Update
-    // q("body").classList.add("AB-Shipping-Checkout");
     qq("body > form > .container.bg-white, .footer").forEach((item) =>
       item.classList.remove("container"),
     );
@@ -3159,7 +3192,9 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
 
       const div = document.createElement("div");
       div.className = "ab-shipping-address-wrapper";
-      qq(item, ":scope > *").forEach((child) => div.appendChild(child));
+      qq(item, ":scope > *:not(p:first-of-type)").forEach((child) =>
+        div.appendChild(child),
+      );
       item.appendChild(div);
     });
 
@@ -3195,7 +3230,46 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
       );
     }
 
+    // Update Select Inputs (Shipping & Payment Options)
+    updateControlSelectInput("select#shipping", "Blue Ribbon");
+    setTimeout(
+      () =>
+        updateControlSelectInput(
+          "eve-payment-options .payment-row select",
+          "Credit/Debit Card",
+        ),
+      250,
+    );
     // return true;
+  }
+
+  async function updateControlSelectInput(selector, optionText) {
+    try {
+      await waitForElementAsync(
+        () =>
+          !!(
+            q(selector) &&
+            qq(selector + " > option").find(
+              (option) =>
+                option &&
+                option.innerText &&
+                option.innerText.includes(optionText),
+            )
+          ),
+        10000,
+      );
+
+      const selectElement = q(selector);
+      const option = qq(selectElement, "option").find((option) =>
+        option.innerText.includes(optionText),
+      );
+      option.selected = true;
+      selectElement.value = option.value;
+      const event = new Event("change", { bubbles: true });
+      selectElement.dispatchEvent(event);
+    } catch (error) {
+      return false;
+    }
   }
 
   async function handleAddressDeliveryFormShowHide(e) {
@@ -3261,6 +3335,44 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
       setTimeout(
         () =>
           shippingAddressForm.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          }),
+        100,
+      );
+    }
+  }
+
+  async function handleAddressShippingFormShowHide(e) {
+    q(".ab-form#shipping-address")?.remove();
+
+    const { checkout_shipping_address } = DATA.forms;
+    const contentWrapper = q(".ab-content-wrapper");
+    const billingAddressForm = q(".ab-form#billing-address");
+
+    if (!e.target.checked) {
+      await waitForElementAsync(
+        () =>
+          !!(
+            q(
+              "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier",
+            ) &&
+            validateAllControlNodesExist(checkout_shipping_address.inputList)
+          ),
+      );
+      contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
+      billingAddressForm.insertAdjacentHTML(
+        "afterend",
+        getFormLayout(checkout_shipping_address),
+      );
+      eventHandler();
+    } else {
+      contentWrapper.classList.remove(
+        "ab-content-wrapper--show-shipping-address",
+      );
+      setTimeout(
+        () =>
+          billingAddressForm.scrollIntoView({
             behavior: "smooth",
             block: "center",
           }),
@@ -3454,6 +3566,9 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     dependencySelector,
     dependencyNodes,
   }) {
+    // Handle tel inputs
+
+    // Handle Rest
     const scrollPos = { x: window.scrollX, y: window.scrollY };
     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(
       window.HTMLInputElement.prototype,
@@ -3575,10 +3690,11 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
         );
 
         if (DATA["text_based_input_list"].some((type) => type === inputType)) {
-          dependencyNode.value =
-            inputType === "tel"
-              ? controlNode.value.replace(/\D/g, "")
-              : controlNode.value;
+          dependencyNode.value = controlNodes.some(
+            (controlNode) => controlNode.getAttribute("type") === "tel",
+          )
+            ? controlNode.value.replace(/\D/g, "")
+            : controlNode.value;
         } else if (inputType === "checkbox") {
           //
         } else if (inputType === "radio") {
@@ -3628,7 +3744,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     const ACTION_LIST = [
       // Form Input
       {
-        selector: ".ab-input",
+        selector: ".ab-input:not([inputtype='tel'])",
         events: ["input", "change"],
         callback: (e) => {
           const currentTarget = e.target;
@@ -3659,6 +3775,45 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           } else if (dataObj["inputType"] === "select") {
             handleSelectInput(dataObj);
           }
+
+          // Update dependent fields
+          updateDependencyNodes(dataObj);
+
+          // Handle error message
+          handleFormErrorMessage(dataObj);
+
+          // Update actions items
+          updateFormActionElements();
+        },
+      },
+      {
+        selector: ".ab-input[inputtype='tel']",
+        events: ["input", "change", "keypress"],
+        callback: (e) => {
+          const currentTarget = e.target;
+          const dataObj = getElementData(currentTarget);
+
+          // Check For Control inputs
+          if (
+            dataObj["controlNodes"] &&
+            dataObj["controlNodes"]?.length === 0
+          ) {
+            console.error(
+              "Target node not found:",
+              dataObj["controlNodeSelector"],
+            );
+            return;
+          }
+
+          // Handle Tel Entry
+          if (
+            currentTarget.getAttribute("inputtype") === "tel" &&
+            dataObj["value"].length >= 10
+          ) {
+            e.preventDefault();
+          }
+
+          handleTextBasedInputs(dataObj);
 
           // Update dependent fields
           updateDependencyNodes(dataObj);
@@ -3703,9 +3858,16 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
       },
       {
         selector: ".AB-Guest-Checkout #createAccount",
+        // selector: ".AB-Guest-Checkout #ab-guest-create-account",
         events: ["click"],
         callback: handleAddressCreateAccountFormShowHide,
       },
+      {
+        selector: ".AB-Address-Checkout #ab-checkout-same-as-billing",
+        events: ["click"],
+        callback: handleAddressShippingFormShowHide,
+      },
+
       {
         selector:
           ".AB-Shipping-Checkout  select#shipping, .AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control",
@@ -3744,7 +3906,14 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
           if (!item.classList.contains(flagClassName)) {
             console.log("Action Loop running....");
             item.classList.add(flagClassName);
-            item.addEventListener(event, debouncedCallback);
+            if (
+              item.getAttribute("inputtype") &&
+              item.getAttribute("inputtype") === "tel"
+            ) {
+              item.addEventListener(event, callback);
+            } else {
+              item.addEventListener(event, debouncedCallback);
+            }
           }
         });
       });
@@ -3809,6 +3978,10 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
   }
 
   async function init() {
+    if (window[page_initials]) return;
+
+    window[page_initials] = true;
+
     const { stepClassName, mainLayoutFunction } = getLayoutConfig();
     q("body").classList.add(
       page_initials,
@@ -3825,8 +3998,7 @@ Forced variation v1:  https://www.steinertractor.com/guestcheckout?_conv_eforce=
     const currentPath = window.location.pathname + window.location.hash;
 
     if (!Object.keys(PATHS).some((key) => currentPath === PATHS[key])) {
-      // console.warn("No matching path found for:", currentPath);
-      return;
+      return false;
     }
 
     const { stepClassName, inputList } = getLayoutConfig();

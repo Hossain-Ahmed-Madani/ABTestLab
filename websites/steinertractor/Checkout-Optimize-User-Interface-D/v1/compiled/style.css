@@ -132,7 +132,7 @@
   padding: 0 !important;
   font-size: 16px;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):focus), .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):active), .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):not(:placeholder-shown)) {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):focus), .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):active), .AB-Checkout-Step-1-2 .ab-form-group:has(> input:not([type=radio]):not([type=checkbox])) .ab-label:has(~ input:not([type=radio]):not([type=checkbox]):not([area-empty])) {
   position: static;
   font-size: 14px;
 }
@@ -688,11 +688,11 @@
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel label:after {
   display: none;
 }
-.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active), .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) {
+.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active), .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not([area-empty])) {
   position: static;
   font-size: 14px;
 }
-.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus) label, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active) label, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not(:placeholder-shown)) label {
+.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:focus) label, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:active) label, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section .dnnLabel:has(~ input:not([area-empty])) label {
   font-size: 14px;
 }
 .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input {
@@ -720,7 +720,7 @@
   letter-spacing: 0px;
   color: #000000;
 }
-.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:focus, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:active, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:not(:placeholder-shown) {
+.AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:focus, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:active, .AB-Checkout-Step-1-2.AB-Guest-Checkout .ab-login-section input:not([area-empty]) {
   position: static;
   border: none;
   outline: none;
@@ -1242,7 +1242,7 @@
   padding: 0 !important;
   font-size: 16px;
 }
-.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:not(:placeholder-shown)), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:active) {
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:not([area-empty])), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:focus), .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) label:has(~ input:active) {
   position: static;
   font-size: 14px;
 }
@@ -1261,7 +1261,7 @@
   line-height: 100%;
   color: #333333;
 }
-.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:focus, .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:active, .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:not(:placeholder-shown) {
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:focus, .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:active, .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-payment-options .col-lg-2.mb-3:has(> input#poNumber) input:not([area-empty]) {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;

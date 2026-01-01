@@ -166,7 +166,7 @@
 
         &:has(~ input:not([type="radio"]):not([type="checkbox"]):focus),
         &:has(~ input:not([type="radio"]):not([type="checkbox"]):active),
-        &:has(~ input:not([type="radio"]):not([type="checkbox"]):not(:placeholder-shown)) {
+        &:has(~ input:not([type="radio"]):not([type="checkbox"]):not([area-empty])) {
             position: static;
             font-size: 14px;
         }
@@ -222,7 +222,7 @@
         }
     }
 
-    // .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"]):placeholder-shown[required]) {
+    // .ab-form-group:has(> input:not([type="radio"]):not([type="checkbox"])[area-empty][required]) {
     //     border: 2px solid #dc3545;
 
     //     & + .ab-error-message {
@@ -874,7 +874,7 @@
 
         &:has(~ input:focus),
         &:has(~ input:active),
-        &:has(~ input:not(:placeholder-shown)) {
+        &:has(~ input:not([area-empty])) {
             position: static;
             font-size: 14px;
 
@@ -913,7 +913,7 @@
 
         &:focus,
         &:active,
-        &:not(:placeholder-shown) {
+        &:not([area-empty]) {
             position: static;
             border: none;
             outline: none;
@@ -1583,7 +1583,7 @@
                 padding: 0 !important;
                 font-size: 16px;
 
-                &:has(~ input:not(:placeholder-shown)),
+                &:has(~ input:not([area-empty])),
                 &:has(~ input:focus),
                 &:has(~ input:active) {
                     position: static;
@@ -1609,7 +1609,7 @@
 
                 &:focus,
                 &:active,
-                &:not(:placeholder-shown) {
+                &:not([area-empty]) {
                     border: none !important;
                     outline: none !important;
                     box-shadow: none !important;
