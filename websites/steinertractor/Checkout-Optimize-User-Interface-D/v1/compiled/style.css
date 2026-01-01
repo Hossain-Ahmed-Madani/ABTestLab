@@ -178,11 +178,15 @@
 .AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
   display: block;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])),
-.AB-Checkout-Step-1-2 .ab-form-group:has(> select[required]:not([area-selected])) {
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) {
   border: 2px solid #dc3545;
 }
-.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message,
+.AB-Checkout-Step-1-2 .ab-form-group:has(> input[area-invalid]:not([type=radio]):not([type=checkbox])) + .ab-error-message {
+  display: block;
+}
+.AB-Checkout-Step-1-2 .ab-form-group:has(> select[required]:not([area-selected])) select {
+  border: 2px solid #dc3545;
+}
 .AB-Checkout-Step-1-2 .ab-form-group:has(> select[required]:not([area-selected])) + .ab-error-message {
   display: block;
 }

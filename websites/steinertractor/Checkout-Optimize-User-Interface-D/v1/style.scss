@@ -230,9 +230,18 @@
     //     }
     // }
 
-    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])),
-    .ab-form-group:has(> select[required]:not([area-selected])) {
+    .ab-form-group:has(> input[area-invalid]:not([type="radio"]):not([type="checkbox"])) {
         border: 2px solid #dc3545;
+
+        & + .ab-error-message {
+            display: block;
+        }
+    }
+
+    .ab-form-group:has(> select[required]:not([area-selected])) {
+        select {
+            border: 2px solid #dc3545;
+        }
 
         & + .ab-error-message {
             display: block;
