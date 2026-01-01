@@ -40,7 +40,7 @@ logInfo("fired");
         test_name: "VC115: [COLLECTION] Filter Quantities - (2) SET UP TEST",
         page_initials: "AB-VC115",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -99,13 +99,12 @@ logInfo("fired");
     }
 
     function updateLayout() {
-
         const flagClassName = "ab-quantity-added";
         qq('input[type="checkbox"][data-count]').forEach((input) => {
             if (input.parentNode.classList.contains(flagClassName) || q(input.parentNode, ".ab-label-span")) return;
             const parentNode = input.parentNode;
             parentNode.classList.add(flagClassName);
-            const label =  q(parentNode, "label")
+            const label = q(parentNode, "label");
             const quantity = input.getAttribute("data-count");
             label.insertAdjacentHTML("beforeend", `<span class="ab-label-span">&nbsp;(${quantity})</span>`);
         });
@@ -144,7 +143,7 @@ logInfo("fired");
 
     function checkForItems() {
         return !!(
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".collection-filters-modal__content input[type='checkbox'][data-count]") &&
             q("input[type='checkbox'][data-count]") &&
             q(".collection-filter-sort__filter-list") &&
@@ -156,6 +155,7 @@ logInfo("fired");
     try {
         await waitForElementAsync(checkForItems);
         init();
+        return true;
     } catch (error) {
         return false;
     }

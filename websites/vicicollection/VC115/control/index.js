@@ -126,7 +126,7 @@ logInfo("fired");
 
     function checkForItems() {
         return !!(
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".collection-filters-modal__content input[type='checkbox'][data-count]") &&
             q("input[type='checkbox'][data-count]") &&
             q(".collection-filter-sort__filter-list") &&
