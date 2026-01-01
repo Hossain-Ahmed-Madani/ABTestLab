@@ -1,10 +1,8 @@
-.AB-VC115 div.ab-quantity-added {
+.AB-VC115 .ab-quantity-added {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.AB-VC115 .ab-label {
-  margin: 0;
-  padding-left: 0;
-  order: 1;
+.AB-VC115 .ab-quantity-added .filter-options__list-item-text {
+  line-height: 120%;
 }

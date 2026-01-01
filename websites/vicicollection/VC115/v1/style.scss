@@ -1,27 +1,25 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-VC115 {
-    div.ab-quantity-added {
+    .ab-quantity-added {
         display: flex;
         justify-content: flex-start;
         align-items: center;
-    }
 
-    .ab-label {
-        margin: 0;
-        padding-left: 0;
-        order: 1;
+        .filter-options__list-item-text {
+            line-height: 120%;
+        }
     }
 }

@@ -13,7 +13,6 @@ Then
 
 v1 (excluding all experiences) :  https://marketer.monetate.net/control/preview/12997/S45SU5SOG5CKUC09UC0G8XEO0111AJ58/vc115-collection-filter-quantities
 
-
 control (including all experiences) :  https://marketer.monetate.net/control/preview/12997/3B1PUOYF9Y2A6L41H7IWAN1P97HUY0VF/vc115-collection-filter-quantities
 v1 (including all experiences) :  https://marketer.monetate.net/control/preview/12997/AZNA8QHF6WDHKKOLZK2QUBBDKSW1TNLT/vc115-collection-filter-quantities
 
@@ -35,19 +34,14 @@ logInfo("fired");
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "vicicollection",
-        host: "https://www.vicicollection.com/",
-        test_name: "VC115: [COLLECTION] Filter Quantities - (2) SET UP TEST",
         page_initials: "AB-VC115",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventName);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -96,20 +90,15 @@ logInfo("fired");
     }
 
     function updateLayout() {
-        console.log("updateLayout...");
 
         const flagClassName = "ab-quantity-added";
         qq('input[type="checkbox"][data-count]').forEach((input) => {
-            if (input.parentNode.classList.contains(flagClassName) || q(input.parentNode, ".ab-label")) return;
-
+            if (input.parentNode.classList.contains(flagClassName) || q(input.parentNode, ".ab-label-span")) return;
             const parentNode = input.parentNode;
-
             parentNode.classList.add(flagClassName);
-
+            const label =  q(parentNode, "label");
             const quantity = input.getAttribute("data-count");
-            const className = q(parentNode, "label").getAttribute("class");
-
-            parentNode.insertAdjacentHTML("beforeend", `<label class="ab-label ${className}" for="${input.getAttribute("id")}">&nbsp;(${quantity})</label>`);
+            label.insertAdjacentHTML("beforeend", `<span class="ab-label-span">&nbsp;(${quantity})</span>`);
         });
     }
 
@@ -139,7 +128,6 @@ logInfo("fired");
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         updateLayout();
         mutationObserverFunction();
         clickFunction();
@@ -160,7 +148,6 @@ logInfo("fired");
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
