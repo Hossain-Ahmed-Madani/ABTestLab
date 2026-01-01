@@ -1742,7 +1742,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     };
 
     function getLayoutConfig() {
-        const config = FORM_CONFIG[window.location.pathname + window.location.hash] || {
+        const config = FORM_CONFIG[(window.location.pathname + window.location.hash).toLowerCase()] || {
             stepClassName: "",
             inputList: [],
             layoutFunction: () => console.log("No matching path..."),
@@ -1777,7 +1777,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     function checkForItems() {
-        const currentPath = window.location.pathname + window.location.hash;
+        const currentPath = (window.location.pathname + window.location.hash).toLowerCase();
 
         if (!Object.keys(PATHS).some((key) => currentPath === PATHS[key])) {
             return false;

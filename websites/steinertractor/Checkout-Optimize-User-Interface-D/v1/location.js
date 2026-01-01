@@ -24,7 +24,7 @@
             return true;
         } else {
             waitForElement(
-                () => ["/guestcheckout", "/checkout#/address", "/checkout#/main"].some(path => path === window.location.pathname + window.location.hash),
+                () => ["/guestcheckout", "/checkout#/address", "/checkout#/main"].some(path => path === (window.location.pathname + window.location.hash).toLowerCase()),
                 () => triggerExperiment()
             );
             return false;
