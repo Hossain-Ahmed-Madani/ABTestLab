@@ -1059,7 +1059,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const { guest_personal_information, guest_billing_address, guest_shipping_address } = DATA["forms"];
 
         // Update
-        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("placeholder", ""));
+        qq(".row.content-body  *:not(.ab-content-wrapper) input").forEach((item) => item.setAttribute("area-empty", ""));
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1384,8 +1384,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             currentTarget?.removeAttribute("area-invalid");
         }
 
-        console.log("handleFormErrorMessage", currentTarget.value);
-
         if (!currentTarget.value) {
             currentTarget?.setAttribute("area-empty", "");
         } else {
@@ -1395,6 +1393,21 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         // Exception | Guest Password input
         if (currentTarget.getAttribute("id") === "ab-guest-password" && currentTarget.value.length >= 7) {
             currentTarget?.removeAttribute("area-invalid");
+        }
+    }
+
+    function handleControlInputAreaEmptyAttribute(e) {
+        const currentTarget = e.target;
+        // if (controlNodes?.some((controlNode) => controlNode.classList.contains("is-invalid"))) {
+        //     currentTarget.setAttribute("area-invalid", "");
+        // } else {
+        //     currentTarget?.removeAttribute("area-invalid");
+        // }
+
+        if (!currentTarget.value) {
+            currentTarget?.setAttribute("area-empty", "");
+        } else {
+            currentTarget?.removeAttribute("area-empty");
         }
     }
 
@@ -1650,25 +1663,35 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     updateProductSummaryLayout();
                 },
             },
+            {
+                selector: ".dnnFormItem input[type='email'], .dnnFormItem input[type='password']",
+                events: ["input", "change"],
+                callback: handleControlInputAreaEmptyAttribute,
+            },
+
         ];
 
         ACTION_LIST.forEach(async ({ selector, events, callback }) => {
-            await waitForElementAsync(() => qq(selector), 5000);
-            qq(selector)?.forEach((item) => {
-                const debouncedCallback = debounce(callback, 150);
-                events.forEach((event) => {
-                    const flagClassName = `ab-${event}-event-attached`;
-                    if (!item.classList.contains(flagClassName)) {
-                        console.log("Action Loop running....");
-                        item.classList.add(flagClassName);
-                        if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
-                            item.addEventListener(event, callback);
-                        } else {
-                            item.addEventListener(event, debouncedCallback);
+            try {
+                await waitForElementAsync(() => q(selector), 5000);
+                qq(selector)?.forEach((item) => {
+                    const debouncedCallback = debounce(callback, 150);
+                    events.forEach((event) => {
+                        const flagClassName = `ab-${event}-event-attached`;
+                        if (!item.classList.contains(flagClassName)) {
+                            console.log("Action Loop running....");
+                            item.classList.add(flagClassName);
+                            if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
+                                item.addEventListener(event, callback);
+                            } else {
+                                item.addEventListener(event, debouncedCallback);
+                            }
                         }
-                    }
+                    });
                 });
-            });
+            } catch (error) {
+                return;
+            }
         });
     }
 
