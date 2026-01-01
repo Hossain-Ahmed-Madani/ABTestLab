@@ -13,6 +13,10 @@
 }
 
 .AB-STICKY-ADD-TO-CART {
+    #newsletter-ribbon {
+        transition: all 0.3s;
+    }
+
     #add-to-cart-area input.add-to-cart {
         display: none;
     }
@@ -54,13 +58,27 @@
     }
 
     &--show-sticky {
-
         #___ratingbadge_0 {
             z-index: 0 !important;
         }
 
         .ab-sticky-cart-container {
             bottom: 0;
+        }
+
+        #newsletter-ribbon {
+            position: fixed;
+            bottom: 78.79px;
+        }
+
+        #page-footer-bottom {
+            padding-bottom: 85px;
+        }
+
+        &:has(> #newsletter-ribbon) {
+            #page-footer-bottom {
+                padding-bottom: 125px;
+            }
         }
     }
 }

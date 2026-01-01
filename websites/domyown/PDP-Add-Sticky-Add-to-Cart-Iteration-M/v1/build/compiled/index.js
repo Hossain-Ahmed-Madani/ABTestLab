@@ -1,18 +1,23 @@
 /* 
 Ticket: https://trello.com/c/q8ZdiK0H/4522-pdp-add-sticky-add-to-cart-iteration-m?search_id=8f2d25f5-996e-407f-8b24-04e50f0bf188
-Test container: https://app.vwo.com/#/test/ab/275/edit/urls/?accountId=348406
+Test container: https://app.vwo.com/#/test/ab/279/edit/variations/?accountId=348406
 QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
+
+Preview:
+control: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI3OSI6eyJ2IjoiMSIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tJTI1MkZ0ZXJtaWRvci1zYy1wLTE4NC5odG1sIiwiYXBwIjoiYXBwIiwidHMiOjE3NjY5Mzg1OTQxNDV9fX0=
+
+v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI3OSI6eyJ2IjoiMiIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tJTI1MkZ0ZXJtaWRvci1zYy1wLTE4NC5odG1sIiwiYXBwIjoiYXBwIiwidHMiOjE3NjY5Mzg2MTM5ODB9fX0=
 */
 
 (async () => {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
-    project: "PDP - Add Sticky Add to Cart (Iteration) [M]",
+    project: "domyown",
     site_url: "https://www.domyown.com",
     test_name: "PDP - Add Sticky Add to Cart (Iteration) [M]",
     page_initials: "AB-STICKY-ADD-TO-CART",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -55,6 +60,14 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
 
   function qq(s, o) {
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
+
+  function isTouchEnabled() {
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
   }
 
   function isSafari() {
@@ -124,8 +137,9 @@ QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
       `,
     );
 
+    const eventName = isTouchEnabled() ? "touchend" : "click";
     qq(".ab-add-to-cart, .ab-sticky-add-to-cart").forEach((item) =>
-      item.addEventListener("click", () =>
+      item.addEventListener(eventName, () =>
         q("#add-to-cart-area input.add-to-cart").click(),
       ),
     );

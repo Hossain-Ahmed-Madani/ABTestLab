@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-STICKY-ADD-TO-CART #add-to-cart-area input.add-to-cart {
+      style.innerHTML = `.AB-STICKY-ADD-TO-CART #newsletter-ribbon {
+  transition: all 0.3s;
+}
+.AB-STICKY-ADD-TO-CART #add-to-cart-area input.add-to-cart {
   display: none;
 }
 .AB-STICKY-ADD-TO-CART #add-to-cart-area .ab-add-to-cart:active,
@@ -44,6 +47,17 @@
 .AB-STICKY-ADD-TO-CART--show-sticky .ab-sticky-cart-container {
   bottom: 0;
 }
+.AB-STICKY-ADD-TO-CART--show-sticky #newsletter-ribbon {
+  position: fixed;
+  bottom: 78.79px;
+}
+.AB-STICKY-ADD-TO-CART--show-sticky #page-footer-bottom {
+  padding-bottom: 85px;
+}
+.AB-STICKY-ADD-TO-CART--show-sticky:has(> #newsletter-ribbon)
+  #page-footer-bottom {
+  padding-bottom: 125px;
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -71,7 +85,7 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
     test_name: "PDP - Add Sticky Add to Cart (Iteration) [M]",
     page_initials: "AB-STICKY-ADD-TO-CART",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
