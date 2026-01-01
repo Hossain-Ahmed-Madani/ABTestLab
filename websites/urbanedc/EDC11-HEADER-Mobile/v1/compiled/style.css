@@ -1,0 +1,404 @@
+.AB-EDC11 {
+  /**
+  * ----------------------------------------
+          *			MODAL
+  * ----------------------------------------
+  */
+}
+.AB-EDC11 header {
+  padding-top: 15px !important;
+  padding-bottom: 25px !important;
+}
+.AB-EDC11 header a[href="/"] img {
+  width: auto;
+  height: 35px;
+  object-fit: cover;
+  margin-left: -45px;
+}
+.AB-EDC11 .text-scheme-text.bg-scheme-background.pt-top-section-vertical-spacing.pb-bottom-section-vertical-spacing {
+  padding-top: 75px;
+}
+.AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 {
+  flex-wrap: nowrap;
+  gap: 15px;
+}
+.AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 a[href="/account/login"] + button {
+  white-space: nowrap;
+}
+.AB-EDC11 .row-start-1.lg\:col-span-item.lg\:col-end-\[-1\] > .flex.flex-wrap.justify-end.items-top.gap-5 button, .AB-EDC11__modal__show-cta {
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+}
+.AB-EDC11__modal-layout {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  z-index: 99999;
+  overflow: hidden;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+.AB-EDC11__modal-backdrop {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+.AB-EDC11__modal {
+  opacity: 1;
+  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(232, 232, 232);
+  border-radius: 5px;
+  width: 100%;
+  min-height: max-content;
+  position: relative;
+  z-index: 1;
+  padding: 7px 5px 6px;
+  overflow: hidden;
+}
+.AB-EDC11__modal__container {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.AB-EDC11__modal__top {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 3px;
+  margin: 6px 8px 23px;
+  padding: 3px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 28px;
+  max-height: 28px;
+  overflow: hidden;
+}
+.AB-EDC11__modal__close-cta {
+  margin: 0;
+  margin-left: auto;
+  padding: 5.22px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-EDC11__modal__close-cta svg {
+  width: 11.5px;
+  height: 11.5px;
+}
+.AB-EDC11__modal__search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+.AB-EDC11__modal__search-cta {
+  width: max-content;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.AB-EDC11__modal__search-cta svg {
+  width: 100%;
+  height: 12px;
+  object-fit: contain;
+}
+.AB-EDC11__modal__search-input {
+  width: 100%;
+  padding: 4px 6px !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: none !important;
+  height: 100% !important;
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  /* For Edge */
+}
+.AB-EDC11__modal__search-input:-webkit-autofill, .AB-EDC11__modal__search-input:-webkit-autofill:hover, .AB-EDC11__modal__search-input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important; /* Change #ffffff to your desired background color */
+  -webkit-text-fill-color: rgb(0, 0, 0) !important;
+  background: none !important;
+  box-shadow: none !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+.AB-EDC11__modal__search-input:hover, .AB-EDC11__modal__search-input:focus, .AB-EDC11__modal__search-input:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+.AB-EDC11__modal__search-input::placeholder {
+  color: rgb(51, 51, 51);
+}
+.AB-EDC11__modal__search-input::-ms-input-placeholder {
+  color: rgb(51, 51, 51);
+}
+.AB-EDC11__modal__featured-collections-container {
+  margin: 0 15px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.AB-EDC11__modal__featured-collections-title {
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+}
+.AB-EDC11__modal__featured-collections {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+.AB-EDC11__modal__featured-item {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 13.5px;
+  border-radius: 3px;
+  border: 1px solid rgb(0, 0, 0);
+  outline: none;
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+}
+.AB-EDC11__modal__featured-item:hover, .AB-EDC11__modal__featured-item:active {
+  border: 1px solid rgb(0, 0, 0);
+  outline: none;
+}
+.AB-EDC11__modal__gear-drop-container {
+  margin-bottom: 38px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.AB-EDC11__modal__gear-drop-title {
+  padding: 0 15px;
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  text-transform: uppercase;
+  color: rgb(0, 0, 0);
+}
+.AB-EDC11__modal__gear-drop-items {
+  padding: 0 14px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  overflow: scroll;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.AB-EDC11__modal__gear-drop-items::-webkit-scrollbar {
+  display: none;
+}
+.AB-EDC11__modal__gear-drop-item {
+  width: 200px;
+  min-width: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 9px;
+  padding: 5px 12px 5px 5px;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  outline: none;
+}
+.AB-EDC11__modal__gear-drop-item:hover, .AB-EDC11__modal__gear-drop-item:active {
+  border: 1px solid rgb(0, 0, 0);
+  outline: none;
+}
+.AB-EDC11__modal__gear-drop-item-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-EDC11__modal__gear-drop-item-img img {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+}
+.AB-EDC11__modal__gear-drop-item-title {
+  font-family: "PT Mono";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  text-wrap: pretty;
+  color: rgb(0, 0, 0);
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.AB-EDC11--v2.AB-EDC11 .AB-EDC11__modal {
+  padding: 6px 5px;
+}
+.AB-EDC11--v2.AB-EDC11 .AB-EDC11__modal__top {
+  margin-top: 7px;
+}
+.AB-EDC11--v2.AB-EDC11 .AB-EDC11__modal__featured-collections-container {
+  margin-bottom: 38px;
+}
+.AB-EDC11--v2.AB-EDC11 .AB-EDC11__modal__gear-drop-container {
+  order: 1;
+  margin-bottom: 22px;
+}
+
+.AB-EDC11--modal-show {
+  overflow: hidden;
+}
+.AB-EDC11--modal-show .swell-tab {
+  display: none !important;
+}
+.AB-EDC11--modal-show .AB-EDC11__modal-layout {
+  display: flex;
+}
+.AB-EDC11--modal-show .AB-EDC11__modal-backdrop {
+  display: block;
+}
+.slide-bottom {
+  -webkit-animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-top {
+  -webkit-animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/**
+  * ----------------------------------------
+  * animation slide-bottom
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-bottom {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slide-bottom {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+/**
+  * ----------------------------------------
+  * animation slide-top
+  * ----------------------------------------
+  */
+@-webkit-keyframes slide-top {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+}
+@keyframes slide-top {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-200px);
+    transform: translateY(-200px);
+  }
+}
+/**
+  * ----------------------------------------
+  * animation fade-in
+  * ----------------------------------------
+  */
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
