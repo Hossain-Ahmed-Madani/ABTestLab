@@ -1,0 +1,215 @@
+(function () {
+  var interval = setInterval(function () {
+    if (document.head) {
+      // Check if <head> exists
+      clearInterval(interval); // Stop checking once found
+      var style = document.createElement("style");
+      style.innerHTML = `.AB-VC115 .ab-quantity-added {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-VC115 .ab-quantity-added .filter-options__list-item-text {
+  line-height: 120%;
+}
+`;
+      document.head.appendChild(style);
+      setTimeout(() => {
+        clearInterval(interval); // Clear the interval after 5 seconds
+      }, 5000);
+    }
+  }, 100); // Check every 100ms for <head>
+})();
+/* 
+Ticket link: https://trello.com/c/oQ2yiWSy/4560-%F0%9F%92%9B%F0%9F%8D%BF-vc115-collection-filter-quantities-2-set-up-test
+URL:https://www.vicicollection.com/?preview_theme_id=137131098174&pb=1 , https://www.vicicollection.com/collections/new-arrivals , https://www.vicicollection.com/collections/the-daily-drop#page=1 
+Figma: https://www.figma.com/design/OqFHShfnjCQzW7JHGAf9vT/VC_---COLLECTION--Filter-Quantities?node-id=2002-9&t=zIfUG0iOTtzAFOjq-0
+Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollection.com/experience/2073784#
+
+
+Preview
+
+Enter this to enable theme: https://www.vicicollection.com/?preview_theme_id=137131098174&pb=1
+
+Then
+
+v1 (excluding all experiences) :  https://marketer.monetate.net/control/preview/12997/S45SU5SOG5CKUC09UC0G8XEO0111AJ58/vc115-collection-filter-quantities
+
+control (including all experiences) :  https://marketer.monetate.net/control/preview/12997/3B1PUOYF9Y2A6L41H7IWAN1P97HUY0VF/vc115-collection-filter-quantities
+v1 (including all experiences) :  https://marketer.monetate.net/control/preview/12997/AZNA8QHF6WDHKKOLZK2QUBBDKSW1TNLT/vc115-collection-filter-quantities
+
+*/
+
+const TEST_ID = "VC115";
+const VARIANT_ID = "V1"; /* Control, V1 */
+
+function logInfo(message) {
+  console.log(
+    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    message,
+  );
+}
+
+logInfo("fired");
+
+(async () => {
+  const TEST_CONFIG = {
+    page_initials: "AB-VC115",
+    test_variation: 1 /* 0, 1 */,
+    test_version: 0.0002,
+  };
+
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  function fireGA4Event(eventName, eventLabel = "") {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "GA4event",
+      "ga4-event-name": "cro_event",
+      "ga4-event-p1-name": "event_category",
+      "ga4-event-p1-value": eventName,
+      "ga4-event-p2-name": "event_label",
+      "ga4-event-p2-value": eventLabel,
+    });
+  }
+
+  async function waitForElementAsync(
+    predicate,
+    timeout = 20000,
+    frequency = 150,
+  ) {
+    const startTime = Date.now();
+
+    return new Promise((resolve, reject) => {
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
+
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+
+        if (elapsed >= timeout) {
+          clearInterval(interval);
+          return reject(
+            new Error(
+              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
+            ),
+          );
+        }
+
+        if (typeof predicate === "function" && predicate()) {
+          clearInterval(interval);
+          return resolve(true);
+        }
+      }, frequency);
+    });
+  }
+
+  function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
+
+  function isTouchEnabled() {
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
+
+  function updateLayout() {
+    const flagClassName = "ab-quantity-added";
+    qq('input[type="checkbox"][data-count]').forEach((input) => {
+      if (
+        input.parentNode.classList.contains(flagClassName) ||
+        q(input.parentNode, ".ab-label-span")
+      )
+        return;
+      const parentNode = input.parentNode;
+      parentNode.classList.add(flagClassName);
+      const label = q(parentNode, "label");
+      const quantity = input.getAttribute("data-count");
+      label.insertAdjacentHTML(
+        "beforeend",
+        `<span class="ab-label-span">&nbsp;(${quantity})</span>`,
+      );
+    });
+  }
+
+  function mutationObserverFunction() {
+    const targetNode = q(".collection-filters-modal__content");
+    const observer = new MutationObserver(updateLayout);
+    if (targetNode)
+      observer.observe(targetNode, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        characterData: true,
+      });
+  }
+
+  function clickFunction() {
+    // Users opens a filter dropdown (Desktop Only)
+    if (window.innerWidth >= 991 || !isTouchEnabled()) {
+      qq(
+        ".collection-filters-modal__content, .collection-filter-sort__filter-list",
+      ).forEach((item) =>
+        item.addEventListener("click", (e) => {
+          if (
+            e.target.closest(
+              ".multi-select__button, .vue-accordion__trigger.btn",
+            )
+          ) {
+            fireGA4Event("VC115_FilterView");
+          }
+        }),
+      );
+    }
+
+    // Filter Click (All Device)
+    qq(
+      ".collection-filter-sort__more-filters-cta, .collection-filter-sort__filter-button",
+    ).forEach((item) =>
+      item.addEventListener("click", () => fireGA4Event("VC115_FilterView")),
+    );
+  }
+
+  function init() {
+    q("body").classList.add(
+      page_initials,
+      `${page_initials}--v${test_variation}`,
+      `${page_initials}--version:${test_version}`,
+    );
+    updateLayout();
+    mutationObserverFunction();
+    clickFunction();
+  }
+
+  function checkForItems() {
+    return !!(
+      q(
+        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+      ) &&
+      q(
+        ".collection-filters-modal__content input[type='checkbox'][data-count]",
+      ) &&
+      q("input[type='checkbox'][data-count]") &&
+      q(".collection-filter-sort__filter-list") &&
+      q(".collection-filter-sort__more-filters-cta") &&
+      q(".collection-filter-sort__filter-button")
+    );
+  }
+
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
+})();

@@ -1,0 +1,25 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-VC115 {
+    .ab-quantity-added {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .filter-options__list-item-text {
+            line-height: 120%;
+        }
+    }
+}
