@@ -41,7 +41,7 @@ logInfo("fired");
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -262,10 +262,9 @@ logInfo("fired");
     const clickEventName = isTouchEnabled() ? "touchend" : "click";
 
     function handleSearch(e) {
-
         e.preventDefault();
 
-        const searchInput = q( "input#ab-search[type='search']");
+        const searchInput = q("input#ab-search[type='search']");
         const value = searchInput.value.replace(" ", "+");
 
         window.location.href = `/search?q=${value}`;
@@ -279,6 +278,7 @@ logInfo("fired");
                 e.preventDefault();
                 e.stopPropagation();
                 handleModalView("show");
+                fireGA4Event("EDC11_ClickedSearch");
             },
         },
         {
@@ -305,23 +305,24 @@ logInfo("fired");
             event: clickEventName,
             callback: handleSearch,
         },
-        {
-            selector: `input#ab-search[type="search"]`,
-            event: clickEventName,
-            callback: () => fireGA4Event("EDC11_ClickedSearch"),
-        },
+        // {
+        //     selector: `input#ab-search[type="search"]`,
+        //     event: clickEventName,
+        //     callback: () => fireGA4Event("EDC11_ClickedSearch"),
+        // },
         {
             selector: `form[action="/search"] input[type="search"]`,
             event: clickEventName,
             callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
         {
-            selector: `.${page_initials}__modal__featured-item`,
-            event: clickEventName,
+            selector: `.${page_initials}__modal__gear-drop-item, .${page_initials}__modal__featured-item`,
+            event: 'click',
             callback: (e) => {
+                const currentTarget = e.currentTarget;
                 e.preventDefault();
-                fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
-                setTimeout(() => (window.location.href = e.target.getAttribute("href")), 150);
+                fireGA4Event("EDC11_ClickedCategory", currentTarget.innerText);
+                setTimeout(() => (window.location.href = currentTarget.getAttribute("href")), 150);
             },
         },
     ];
