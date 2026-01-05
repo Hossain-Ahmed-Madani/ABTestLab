@@ -120,6 +120,7 @@ body {
     margin: 0;
     margin-left: -3px;
     height: 20px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -208,7 +209,7 @@ body {
     }
     .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
         margin: 0;
-        margin-left: -5px;
+        margin-left: -2px;
     }
     .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
         top: -6px;

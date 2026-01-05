@@ -126,6 +126,7 @@ body {
   margin: 0;
   margin-left: -3px;
   height: 20px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,7 +219,7 @@ body {
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet {
     margin: 0;
-    margin-left: -5px;
+    margin-left: -2px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
     top: -6px;
@@ -395,10 +396,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
 (function () {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "Dunlopsports",
-    host: "https://us.dunlopsports.com",
-    test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
     test_version: 0.0004,
@@ -503,9 +500,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
   function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
     if (timer <= 0) {
-      console.warn(
-        `Timeout reached while waiting for condition: ${predicate.toString()}`,
-      );
       return;
     } else if (predicate && predicate()) {
       callback();
@@ -706,7 +700,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
       // Check after scrolling if we reached the correct position
       setTimeout(() => {
-        console.log("handleScroll, setTimeout...");
         const newRect = reviewsAnchor.getBoundingClientRect();
         const newScroll = window.scrollY || document.documentElement.scrollTop;
         newScroll + newRect.top;
@@ -775,7 +768,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
     getReviewData();
     createLayout();
     handleModalView("show");

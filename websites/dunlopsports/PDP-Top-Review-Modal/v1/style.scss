@@ -159,6 +159,7 @@ body {
             margin: 0;
             margin-left: -3px;
             height: 20px;
+            font-size: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -265,7 +266,7 @@ body {
             #pr-review-snippet {
                 // height: 25px;
                 margin: 0;
-                margin-left: -5px;
+                margin-left: -2px;
             }
 
             #pr-review-snippet .pr-star-v4::after {
