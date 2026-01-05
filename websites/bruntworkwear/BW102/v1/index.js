@@ -2,14 +2,14 @@
 Test container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear.com/experience/2078585
 
 Preview excluding all experiences:
-control: https://marketer.monetate.net/control/preview/12090/IV3WQDFT8TG69GGDZNGEJIV1KR4SPWYT/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/2XNXPIC3UDWHIQUXKK6ZHAPA15AQHF6Q/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/NEFJYTCDX4F3TZ2QXZQPXQA9S019CIYK/bw102-collections-update-badge-copy
+control: https://marketer.monetate.net/control/preview/12090/U4Y3HYHGD6AVLG5OQ5U2Z8UACV0UCS0M/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/QR4W7983S351ZNL2KUCSONAVCGTRDTFQ/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/E6PDBD0WUTQU178NKSB0GPJ3UVDLO014/bw102-collections-update-badge-copy
 
 Preview including all experiences:
-control: https://marketer.monetate.net/control/preview/12090/6UTII247S9IBAIFDT2KE68IZFJQEMLEI/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/WFESTJ6UTASVLO2R3NXWYBNK3FV6N5ZM/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/Z41RKUTWBS1KYF6N4XIJ2VY721UQTIRQ/bw102-collections-update-badge-copy
+control: https://marketer.monetate.net/control/preview/12090/J4BXUBKMR1P5YR172XOYG37US43BY68K/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/R0WGM636899GXSEUSIK9WPHU9UWRACHY/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/YWXQCWZBB3UEBDBM3MJPIXZQAPMMPV7G/bw102-collections-update-badge-copy
 
 
 https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=false
@@ -164,7 +164,7 @@ logInfo("fired");
 
     function checkForItems() {
         return !!(
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             (q("body.template-collection .collection__content .productCard") || q("body.template-product .product__featureCallout"))
         );
     }

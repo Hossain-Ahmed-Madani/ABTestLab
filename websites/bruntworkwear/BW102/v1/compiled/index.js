@@ -3,13 +3,13 @@ Test container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear
 
 Preview excluding all experiences:
 control: https://marketer.monetate.net/control/preview/12090/IV3WQDFT8TG69GGDZNGEJIV1KR4SPWYT/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/2XNXPIC3UDWHIQUXKK6ZHAPA15AQHF6Q/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/NEFJYTCDX4F3TZ2QXZQPXQA9S019CIYK/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/1H6MD6BI6Q2AML15EA6GMHDV5M5W0OQG/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/BEYENIGER2VOZ702O0KD633OEP5FWB40/bw102-collections-update-badge-copy
 
 Preview including all experiences:
-control: https://marketer.monetate.net/control/preview/12090/6UTII247S9IBAIFDT2KE68IZFJQEMLEI/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/WFESTJ6UTASVLO2R3NXWYBNK3FV6N5ZM/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/Z41RKUTWBS1KYF6N4XIJ2VY721UQTIRQ/bw102-collections-update-badge-copy
+control: https://marketer.monetate.net/control/preview/12090/8FX8YOCMR9OTBNX8IX819CM15V24LJ0Z/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/GGKS5SCWOBHRE4HK2HRN30C4PB7IQZRD/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/2S98S9YA9Q7UCNKORDONTPJZUAXMUEDE/bw102-collections-update-badge-copy
 
 
 https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=false
