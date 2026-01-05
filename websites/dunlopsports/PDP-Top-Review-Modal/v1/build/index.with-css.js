@@ -18,8 +18,6 @@ body {
   opacity: 0;
   display: none;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgb(81, 81, 81);
-  background-color: rgb(255, 255, 255);
   max-width: 100%;
   min-height: max-content;
   height: max-content;
@@ -134,14 +132,21 @@ body {
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
   color: rgb(0, 0, 0);
-  top: -8px;
+  top: -6px;
+  font-size: 20px;
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4:before {
-  top: -8px;
+  top: -6px;
+  font-size: 20px;
 }
 .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4 {
   width: 20px;
   height: 20px;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 .AB-PDP-TOP-REVIEW__modal .pr-snippet-read-and-write {
   display: none !important;
@@ -216,10 +221,10 @@ body {
     margin-left: -5px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4::after {
-    top: -8px;
+    top: -6px;
   }
   .AB-PDP-TOP-REVIEW__modal #pr-review-snippet .pr-star-v4:before {
-    top: -8px;
+    top: -6px;
   }
   .AB-PDP-TOP-REVIEW__modal
     .p-w-r
@@ -396,7 +401,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -781,7 +786,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     const hasMatchingReview = !!getReviewData();
     return !!(
       q(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
       q(".pr-rating-stars") &&
       hasMatchingReview

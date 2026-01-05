@@ -29,8 +29,8 @@ body {
         display: none;
 
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-        border: 1px solid rgba(81, 81, 81, 1);
-        background-color: rgba(255, 255, 255, 1);
+        // border: 1px solid rgba(81, 81, 81, 1);
+        // background-color: rgba(255, 255, 255, 1);
 
         max-width: 100%;
         min-height: max-content;
@@ -166,16 +166,24 @@ body {
 
         #pr-review-snippet .pr-star-v4::after {
             color: rgba(0, 0, 0, 1);
-            top: -8px;
+            top: -6px;
+            font-size: 20px;
         }
 
         #pr-review-snippet .pr-star-v4:before {
-            top: -8px;
+            top: -6px;
+            font-size: 20px;
         }
 
         #pr-review-snippet .pr-star-v4 {
             width: 20px;
             height: 20px;
+            padding: 0;
+            margin: 0;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            // outline: 1px solid red;
         }
 
         .pr-snippet-read-and-write {
@@ -261,11 +269,11 @@ body {
             }
 
             #pr-review-snippet .pr-star-v4::after {
-                top: -8px;
+                top: -6px;
             }
 
             #pr-review-snippet .pr-star-v4:before {
-                top: -8px;
+                top: -6px;
             }
 
             .p-w-r .pr-snippet .pr-snippet-stars-png .pr-snippet-rating-decimal {

@@ -14,7 +14,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     test_name: "PDP - Top Review Modal [DTM]",
     page_initials: "AB-PDP-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -399,7 +399,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
     const hasMatchingReview = !!getReviewData();
     return !!(
       q(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
       q(".pr-rating-stars") &&
       hasMatchingReview

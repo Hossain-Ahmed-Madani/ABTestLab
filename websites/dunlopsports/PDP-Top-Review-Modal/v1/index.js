@@ -14,7 +14,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
         test_name: "PDP - Top Review Modal [DTM]",
         page_initials: "AB-PDP-TOP-REVIEW",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -101,7 +101,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
@@ -300,7 +299,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
             // Check after scrolling if we reached the correct position
             setTimeout(() => {
-                console.log('handleScroll, setTimeout...')
                 const newRect = reviewsAnchor.getBoundingClientRect();
                 const newScroll = window.scrollY || document.documentElement.scrollTop;
                 const expectedPosition = newScroll + newRect.top;
@@ -346,7 +344,6 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         getReviewData();
         createLayout();
         handleModalView("show");
@@ -355,7 +352,7 @@ QA Param : https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz/rtz-black
 
     function checkForItems() {
         const hasMatchingReview = !!getReviewData();
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".pr-rating-stars") && hasMatchingReview);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".pr-rating-stars") && hasMatchingReview);
     }
 
     waitForElement(checkForItems, init);
