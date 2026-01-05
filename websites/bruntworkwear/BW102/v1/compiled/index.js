@@ -34,13 +34,9 @@ logInfo("fired");
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "bruntworkwear",
-        host: "https://bruntworkwear.com",
-        test_name: "BW102: [COLLECTIONS] Update Badge Copy (2) SET UP TEST",
         page_initials: "AB-BW102",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -108,7 +104,7 @@ logInfo("fired");
     };
 
     function mutationObserverFunction() {
-        const targetNode = q(".collection__content");
+        const targetNode = q(".collection__content, .product");
         const debouncedUpdate = debounce(updateLayout, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
@@ -117,8 +113,8 @@ logInfo("fired");
         const txt = BADGE_TEXT[test_variation];
         const flagClassName = "ab-selling-fast-product";
 
-        qq(`.productCard:not(.${flagClassName})`).forEach((item) => {
-            const badge = q(item, ".productCard__badgeText");
+        qq(`.productCard:not(.${flagClassName}), .product__slidesWrapper:not(.${flagClassName})`).forEach((item) => {
+            const badge = q(item, ".productCard__badgeText, .product__featureCallout");
 
             if (badge && badge.innerText.includes("SELLING FAST")) {
                 {
@@ -130,6 +126,8 @@ logInfo("fired");
     }
 
     function clickFunction() {
+        if(!q(".collection__content")) return;
+        
         q(".collection__content").addEventListener("click", (e) => {
             const linkItem = e.target.closest(".ab-selling-fast-product a.productCard__link");
             if (linkItem) {
@@ -145,21 +143,22 @@ logInfo("fired");
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         updateLayout();
         mutationObserverFunction();
         clickFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q(".collection__content .productCard"));
+        return !!(
+            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            (q("body.template-collection .collection__content .productCard") || q("body.template-product .product__featureCallout"))
+        );
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
