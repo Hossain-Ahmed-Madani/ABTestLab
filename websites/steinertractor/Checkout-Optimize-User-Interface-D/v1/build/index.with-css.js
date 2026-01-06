@@ -293,6 +293,7 @@
   width: 100%;
   height: 51px;
   padding: 7px 10px;
+  padding-right: 30px;
   position: relative;
   background-color: transparent;
   font-family: Inter, sans-serif;
@@ -301,6 +302,10 @@
   line-height: 1.4;
   letter-spacing: 0px;
   color: #767676;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
   appearance: none; /* Hide default arrow */
   -webkit-appearance: none; /* For Webkit browsers */
@@ -1113,6 +1118,7 @@
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
+  overflow: hidden;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper > br {
   display: none;
@@ -1147,7 +1153,7 @@
   > div
   *:not(.btn) {
   display: inline-block;
-  width: 75%;
+  width: auto;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn {
   position: absolute;
@@ -1314,6 +1320,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-tooltip-container svg {
   width: 20px;
   height: 20px;
+  overflow: visible;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   .ab-tooltip-container:hover
@@ -1810,7 +1817,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     test_name: "Checkout - Optimize User Interface [D]",
     page_initials: "AB-Checkout-Step-1-2",
     test_variation: 1,
-    test_version: 0.0009,
+    test_version: 0.00013,
   };
 
   const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1952,7 +1959,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             id: "ab-billing-street-address-two",
             type: "text",
             label: "Street address 2",
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(6) #coAddress2",
@@ -1999,7 +2006,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             type: "select" /* Dropdown/Select */,
             label: "All Carriers",
             optionList: [],
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(6) select#ShipMethod",
@@ -2051,7 +2058,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             id: "ab-delivery-street-address-two",
             type: "text",
             label: "Street address 2",
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(9) #coAddress2",
@@ -2098,7 +2105,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             type: "select" /* Dropdown/Select */,
             label: "All Carriers",
             optionList: [],
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "#guestCheckoutWrapper >  form > div:nth-child(9) select#ShipMethod",
@@ -2246,7 +2253,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             id: "ab-billing-street-address-two",
             type: "text",
             label: "Street address 2",
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coAddress2",
@@ -2293,7 +2300,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             type: "select" /* Dropdown/Select */,
             label: "All Carriers",
             optionList: [],
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#carrier",
@@ -2356,7 +2363,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             id: "ab-shipping-street-address-two",
             type: "text",
             label: "Street address 2",
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coAddress2",
@@ -2403,7 +2410,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             type: "select" /* Dropdown/Select */,
             label: "All Carriers",
             optionList: [],
-            required: true,
+            required: false,
             className: "col-12",
             control_node_selector:
               "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier",
@@ -3196,6 +3203,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     // Add heading items
     qq("eve-shipping-address .address-text").forEach((item) => {
+      if (q(item, "strong").innerText.includes("Delivery Address")) {
+        q(item, "strong").innerText = "Shipping Address";
+      }
+
       q(item, "div:not(.btn)").appendChild(q(item, ".btn"));
 
       const div = document.createElement("div");
@@ -4010,7 +4021,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
   function getLayoutConfig() {
     const config = FORM_CONFIG[
-      window.location.pathname + window.location.hash
+      (window.location.pathname + window.location.hash).toLowerCase()
     ] || {
       stepClassName: "",
       inputList: [],
@@ -4051,7 +4062,9 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
   }
 
   function checkForItems() {
-    const currentPath = window.location.pathname + window.location.hash;
+    const currentPath = (
+      window.location.pathname + window.location.hash
+    ).toLowerCase();
 
     if (!Object.keys(PATHS).some((key) => currentPath === PATHS[key])) {
       return false;

@@ -236,6 +236,7 @@
     width: 100%;
     height: 51px;
     padding: 7px 10px;
+    padding-right: 30px;
     position: relative;
     background-color: transparent;
     font-family: Inter, sans-serif;
@@ -244,6 +245,10 @@
     line-height: 1.4;
     letter-spacing: 0px;
     color: #767676;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
     white-space: nowrap;
     appearance: none; /* Hide default arrow */
     -webkit-appearance: none; /* For Webkit browsers */
@@ -937,6 +942,7 @@
     flex-direction: column;
     justify-content: flex-start;
     gap: 0;
+    overflow: hidden;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper > br {
     display: none;
@@ -965,7 +971,7 @@
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper > div *:not(.btn) {
     display: inline-block;
-    width: 75%;
+    width: auto;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn {
     position: absolute;
@@ -1095,6 +1101,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-tooltip-container svg {
     width: 20px;
     height: 20px;
+    overflow: visible;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-tooltip-container:hover .ab-tooltip-message {
     display: block;
