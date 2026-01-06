@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00011,
+        test_version: 0.00013,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -146,7 +146,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-billing-street-address-two",
                         type: "text",
                         label: "Street address 2",
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) #coAddress2",
                         value: "",
@@ -189,7 +189,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(6) select#ShipMethod",
                         value: "",
@@ -237,7 +237,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-delivery-street-address-two",
                         type: "text",
                         label: "Street address 2",
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) #coAddress2",
                         value: "",
@@ -280,7 +280,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "#guestCheckoutWrapper >  form > div:nth-child(9) select#ShipMethod",
                         value: "",
@@ -420,7 +420,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-billing-street-address-two",
                         type: "text",
                         label: "Street address 2",
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form #coAddress2",
                         value: "",
@@ -463,7 +463,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:first-of-type   > eve-address-form select#carrier",
                         value: "",
@@ -521,7 +521,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-shipping-street-address-two",
                         type: "text",
                         label: "Street address 2",
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form #coAddress2",
                         value: "",
@@ -564,7 +564,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         type: "select" /* Dropdown/Select */,
                         label: "All Carriers",
                         optionList: [],
-                        required: true,
+                        required: false,
                         className: "col-12",
                         control_node_selector: "app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier",
                         value: "",
@@ -1194,6 +1194,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         // Add heading items
         qq("eve-shipping-address .address-text").forEach((item) => {
+
+            if(q(item, 'strong').innerText.includes('Delivery Address')) {
+                q(item, 'strong').innerText = 'Shipping Address';
+            }
+
             q(item, "div:not(.btn)").appendChild(q(item, ".btn"));
 
             const div = document.createElement("div");
