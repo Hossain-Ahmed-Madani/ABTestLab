@@ -40,7 +40,7 @@ logInfo("fired");
         test_name: "VC115: [COLLECTION] Filter Quantities - (2) SET UP TEST",
         page_initials: "AB-VC115",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -101,12 +101,22 @@ logInfo("fired");
     function updateLayout() {
         const flagClassName = "ab-quantity-added";
         qq('input[type="checkbox"][data-count]').forEach((input) => {
-            if (input.parentNode.classList.contains(flagClassName) || q(input.parentNode, ".ab-label-span")) return;
-            const parentNode = input.parentNode;
-            parentNode.classList.add(flagClassName);
-            const label = q(parentNode, "label");
-            const quantity = input.getAttribute("data-count");
-            label.insertAdjacentHTML("beforeend", `<span class="ab-label-span">&nbsp;(${quantity})</span>`);
+            const currentQuantity = +input.getAttribute("data-count");
+
+            if (!currentQuantity) return;
+
+            const labelSpan = q(input.parentNode, ".ab-label-span");
+
+            if (!labelSpan) {
+                const parentNode = input.parentNode;
+                parentNode.classList.add(flagClassName);
+                const label = q(parentNode, "label");
+                label.insertAdjacentHTML("beforeend", `<span class="ab-label-span">&nbsp;(${currentQuantity})</span>`);
+            } else {
+                const previousQuantity = +(labelSpan.textContent.replace(/[^0-9]/g, ''));
+                if (previousQuantity === currentQuantity) return;
+                labelSpan.textContent = ` (${currentQuantity})`;
+            }
         });
     }
 
