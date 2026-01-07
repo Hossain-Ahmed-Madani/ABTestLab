@@ -14,13 +14,9 @@
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com",
-        test_name: "H & L - A/B test idea - Added to cart messaging vs. mini cart slide-out.",
         page_initials: "AB-MINI-CART",
         test_variation: 1,
-        test_version: 0.00022,
+        test_version: 0.00023,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -216,7 +212,6 @@
         constructor(container) {
             this.container = container;
             if (!this.container) {
-                // console.error("Carousel container not found");
                 return;
             }
 
@@ -227,7 +222,6 @@
             this.gap = 12; // 12px gap between items
 
             if (!this.cardContainer || !this.prevBtn || !this.nextBtn) {
-                // console.error("Required carousel elements not found");
                 return;
             }
 
@@ -440,7 +434,6 @@
 
             return null;
         } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
             return null;
         }
     }
@@ -504,7 +497,6 @@
             const dom = new DOMParser().parseFromString(html, "text/html");
             return dom;
         } catch (error) {
-            // console.error("Fetch and parse failed:", error);
             return null;
         }
     }
@@ -512,7 +504,6 @@
     async function getPairsWellProductApi(dom) {
         try {
             if (!dom) {
-                // console.warn("No DOM provided to getPairsWellProduct");
                 return {};
             }
 
@@ -1039,7 +1030,12 @@
     }
 
     async function handlePDPAddToCart() {
+        const isTouch = "ontouchstart" in window;
+
+        if(!isTouch || window.innerWidth >= 768) return;
+
         const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
+
         await waitForElementAsync(() => qq(selector).length > 0);
 
         qq(selector).forEach((elem) =>
@@ -1051,7 +1047,6 @@
                 q("button#menu-cart-icon")?.click();
 
                 const device_type = isSafari() ? "SAFARI" : "CHROME";
-                const isTouch = "ontouchstart" in window;
 
                 if (!(device_type === "SAFARI" && isTouch)) return;
 
@@ -1063,8 +1058,6 @@
     function init() {
         const device_type = isSafari() ? "SAFARI" : "CHROME";
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, `${page_initials}--${device_type}`);
-
-        console.table(TEST_CONFIG);
 
         updateRecentlyViewedProductsApi();
         handlePDPAddToCart();
