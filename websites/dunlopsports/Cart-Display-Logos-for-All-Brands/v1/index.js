@@ -18,6 +18,42 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+
+    const DATA = {
+        brands: [
+            {
+                label: "dunlop",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/bdaf2fbedb4545e3971e15d242b346c0.png',
+                link: "https://us.dunlopsports.com/dunlop",
+            },
+            {
+                label: "srixon",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/7c8dd842b0ba48aaaa58b5c687fbed58.png',
+                link: "https://us.dunlopsports.com/srixon",
+            },
+            {
+                label: "cleveland",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/6cf448201947461f874fb83eb5235b93.png',
+                link: "https://us.dunlopsports.com/cleveland-golf",
+            },
+            {
+                label: "xxio",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/ebbbae6400e84d399124fa23027eecc6.png',
+                link: "https://us.dunlopsports.com/xxio",
+            },
+            {
+                label: "never-compromise",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/8289e7d3114149f59d5d3f1ee11ca461.png',
+                link: "https://us.dunlopsports.com/never-compromise",
+            },
+            {
+                label: "asics",
+                imgUrl: 'https://cdn.optimizely.com/img/30347390156/1464cca5ca02401dbe034982aa37a391.png',
+                link: "https://us.dunlopsports.com/asics",
+            },
+        ],
+    };
+
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
             console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
@@ -84,7 +120,7 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function updateLayout(){
+    function updateLayout() {
         console.log("updateLayout...");
     }
 
