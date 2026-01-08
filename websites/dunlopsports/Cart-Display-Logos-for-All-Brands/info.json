@@ -1,0 +1,13 @@
+{
+  "id": "1767866273791_6001_Cart_Display_Logos_for_All_Brands",
+  "name": "Cart-Display-Logos-for-All-Brands",
+  "type": "A/B",
+  "website": "dunlopsports",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-01-08T09:57:53.791Z",
+  "createdAtReadable": "1/8/2026, 3:57:53 PM",
+  "lastUpdated": "2026-01-08T09:57:54.006Z"
+}
