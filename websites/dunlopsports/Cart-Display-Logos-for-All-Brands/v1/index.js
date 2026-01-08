@@ -18,37 +18,36 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-
     const DATA = {
         brands: [
             {
                 label: "dunlop",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/bdaf2fbedb4545e3971e15d242b346c0.png',
-                link: "https://us.dunlopsports.com/dunlop",
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/bdaf2fbedb4545e3971e15d242b346c0.png",
+                link: "https://us.dunlopsports.com/",
             },
             {
                 label: "srixon",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/7c8dd842b0ba48aaaa58b5c687fbed58.png',
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/7c8dd842b0ba48aaaa58b5c687fbed58.png",
                 link: "https://us.dunlopsports.com/srixon",
             },
             {
                 label: "cleveland",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/6cf448201947461f874fb83eb5235b93.png',
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/6cf448201947461f874fb83eb5235b93.png",
                 link: "https://us.dunlopsports.com/cleveland-golf",
             },
             {
                 label: "xxio",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/ebbbae6400e84d399124fa23027eecc6.png',
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/ebbbae6400e84d399124fa23027eecc6.png",
                 link: "https://us.dunlopsports.com/xxio",
             },
             {
                 label: "never-compromise",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/8289e7d3114149f59d5d3f1ee11ca461.png',
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/8289e7d3114149f59d5d3f1ee11ca461.png",
                 link: "https://us.dunlopsports.com/never-compromise",
             },
             {
                 label: "asics",
-                imgUrl: 'https://cdn.optimizely.com/img/30347390156/1464cca5ca02401dbe034982aa37a391.png',
+                imgUrl: "https://cdn.optimizely.com/img/30347390156/1464cca5ca02401dbe034982aa37a391.png",
                 link: "https://us.dunlopsports.com/asics",
             },
         ],
@@ -120,33 +119,105 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function updateLayout() {
-        console.log("updateLayout...");
+    function getBrandsLayout() {
+        return /* HTML */ `
+            <div class="ab-brand-logos-layout">
+                <div class="ab-dunlop-logo-container">
+                    <a href="${DATA.brands[0].link}" class="ab-dunlop-logo">
+                        <img src="${DATA.brands[0].imgUrl}" alt="${DATA.brands[0].label}" class="ab-dunlop-logo-img" />
+                    </a>
+                </div>
+                <div class="ab-brand-logos-separator-line"></div>
+                <div class="ab-brands-container">
+                    ${DATA.brands
+                        .slice(1)
+                        .map(
+                            (brand) => /* HTML */ `
+                                <a href="${brand.link}" class="ab-brand-item">
+                                    <img src="${brand.imgUrl}" alt="${brand.label}" class="ab-brand-logo-img" />
+                                </a>
+                            `
+                        )
+                        .join("")}
+                </div>
+            </div>
+        `;
     }
 
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    function createCartBrandLayout() {
+        const layout = getBrandsLayout();
+
+        waitForElement(
+            () => qq(".sticky-nav, .header .navbar-header.d-md-none").length === 2,
+            () => {
+                q(".sticky-nav").insertAdjacentHTML("afterend", layout);
+                q(".header .navbar-header.d-md-none").insertAdjacentHTML("beforebegin", layout);
+            }
+        );
     }
 
-    function createLayout() {
-        //
+    function createCheckoutBrandLayout() {
+        const layout = getBrandsLayout();
+        waitForElement(
+            () => q(".header__checkout .navbar-header"),
+            () => {
+                q(".header__checkout .navbar-header").insertAdjacentHTML("afterend", layout);
+            }
+        );
     }
 
     function clickFunction() {
-        //
+        waitForElement(
+            () => q(".ab-brand-item"),
+            () => {
+                qq(".ab-brand-item").forEach((item) => {
+                    item.addEventListener("click", (e) => {
+                        if (window.innerWidth < 767.5 || isTouchEnabled()) {
+                            e.preventDefault();
+                            if (e.ctrlKey || e.metaKey) {
+                                window.open("/", "_blank");
+                            } else {
+                                window.location.href = "/";
+                            }
+                        }
+                    });
+                });
+            }
+        );
+    }
+
+    const LAYOUT_CONFIG = {
+        "/cart": {
+            body_class: page_initials + "--CART",
+            layoutFunction: createCartBrandLayout,
+        },
+        "/on/demandware.store/Sites-DunlopSportsUS-Site/en_US/Checkout-Begin": {
+            body_class: page_initials + "--CHECKOUT",
+            layoutFunction: createCheckoutBrandLayout,
+        },
+    };
+
+    function getLayoutConfig() {
+        const path = window.location.pathname;
+
+        if (LAYOUT_CONFIG[path]) {
+            return LAYOUT_CONFIG[path];
+        }
+
+        return null;
     }
 
     function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        const { body_class, layoutFunction } = getLayoutConfig();
+
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, body_class);
         console.table(TEST_CONFIG);
-        createLayout();
+        layoutFunction();
         clickFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && getLayoutConfig());
     }
 
     waitForElement(checkForItems, init);

@@ -1,13 +1,166 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-DISPLAY-LOGOS {
+    svg#dunlop-logo-svg {
+        display: none;
+    }
+
+    .ab-brand-logos-layout {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .ab-dunlop-logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        text-align: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            border: none;
+            outline: none;
+            text-align: none;
+        }
+    }
+
+    .ab-dunlop-logo-img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .ab-brand-logos-separator-line {
+        display: none;
+    }
+
+    .ab-brands-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+        gap: 20px;
+    }
+
+    .ab-brand-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        text-align: none;
+
+        &:hover,
+        &:focus,
+        &:active {
+            border: none;
+            outline: none;
+            text-align: none;
+        }
+    }
+
+    .ab-brand-logo-img {
+        width: 50px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    @media screen and (min-width: 767.5px) {
+        .ab-brand-logos-layout {
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        .ab-dunlop-logo-img {
+            width: 130px;
+        }
+
+        .ab-brand-logos-separator-line {
+            display: block;
+            height: 20px;
+            width: 1.5px;
+            background-color: rgba(0, 0, 0, 1);
+        }
+
+        .ab-brand-logo-img {
+            width: 70px;
+        }
+    }
+}
+
+.AB-DISPLAY-LOGOS--CART {
+    .sticky-nav .ab-brand-logos-layout {
+        display: none;
+    }
+
+    .header .navbar-header.d-md-none + .col-md-2,
+    .header .col-md-3.text-center {
+        display: none !important;
+    }
+
+    @media screen and (min-width: 767.5px) {
+        .sticky-nav .ab-brand-logos-layout {
+            display: flex;
+            flex-grow: 1;
+        }
+
+        .sticky-nav ~ .ab-brand-logos-layout {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .sticky-nav .ab-brand-logos-layout {
+            margin-right: -17%;
+        }
+    }
+}
+
+.AB-DISPLAY-LOGOS--CHECKOUT {
+
+    .header__checkout {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .header__checkout .navbar-header {
+        display: none;
+    }
+
+    .header__checkout .row.align-items-center.justify-content-between {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    @media screen and (min-width: 767.5px) {
+        .header__checkout .row.align-items-center.justify-content-between {
+            flex-direction: row;
+        }
+
+        .ab-brand-logos-layout {
+            justify-content: flex-start;
+        }  
+
+        .header__checkout .container-fluid {
+            max-width: 100%;
+        }
+    }
 }

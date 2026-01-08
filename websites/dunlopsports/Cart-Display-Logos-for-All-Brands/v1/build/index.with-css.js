@@ -1,0 +1,360 @@
+(function () {
+  var interval = setInterval(function () {
+    if (document.head) {
+      // Check if <head> exists
+      clearInterval(interval); // Stop checking once found
+      var style = document.createElement("style");
+      style.innerHTML = `.AB-DISPLAY-LOGOS svg#dunlop-logo-svg {
+  display: none;
+}
+.AB-DISPLAY-LOGOS .ab-brand-logos-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.AB-DISPLAY-LOGOS .ab-dunlop-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  text-align: none;
+}
+.AB-DISPLAY-LOGOS .ab-dunlop-logo:hover,
+.AB-DISPLAY-LOGOS .ab-dunlop-logo:focus,
+.AB-DISPLAY-LOGOS .ab-dunlop-logo:active {
+  border: none;
+  outline: none;
+  text-align: none;
+}
+.AB-DISPLAY-LOGOS .ab-dunlop-logo-img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+}
+.AB-DISPLAY-LOGOS .ab-brand-logos-separator-line {
+  display: none;
+}
+.AB-DISPLAY-LOGOS .ab-brands-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+.AB-DISPLAY-LOGOS .ab-brand-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  text-align: none;
+}
+.AB-DISPLAY-LOGOS .ab-brand-item:hover,
+.AB-DISPLAY-LOGOS .ab-brand-item:focus,
+.AB-DISPLAY-LOGOS .ab-brand-item:active {
+  border: none;
+  outline: none;
+  text-align: none;
+}
+.AB-DISPLAY-LOGOS .ab-brand-logo-img {
+  width: 50px;
+  height: auto;
+  object-fit: contain;
+}
+@media screen and (min-width: 767.5px) {
+  .AB-DISPLAY-LOGOS .ab-brand-logos-layout {
+    flex-direction: row;
+    gap: 20px;
+  }
+  .AB-DISPLAY-LOGOS .ab-dunlop-logo-img {
+    width: 130px;
+  }
+  .AB-DISPLAY-LOGOS .ab-brand-logos-separator-line {
+    display: block;
+    height: 20px;
+    width: 1.5px;
+    background-color: rgb(0, 0, 0);
+  }
+  .AB-DISPLAY-LOGOS .ab-brand-logo-img {
+    width: 70px;
+  }
+}
+
+.AB-DISPLAY-LOGOS--CART .sticky-nav .ab-brand-logos-layout {
+  display: none;
+}
+.AB-DISPLAY-LOGOS--CART .header .navbar-header.d-md-none + .col-md-2,
+.AB-DISPLAY-LOGOS--CART .header .col-md-3.text-center {
+  display: none !important;
+}
+@media screen and (min-width: 767.5px) {
+  .AB-DISPLAY-LOGOS--CART .sticky-nav .ab-brand-logos-layout {
+    display: flex;
+    flex-grow: 1;
+  }
+  .AB-DISPLAY-LOGOS--CART .sticky-nav ~ .ab-brand-logos-layout {
+    display: none;
+  }
+}
+@media screen and (min-width: 991px) {
+  .AB-DISPLAY-LOGOS--CART .sticky-nav .ab-brand-logos-layout {
+    margin-right: -17%;
+  }
+}
+
+.AB-DISPLAY-LOGOS--CHECKOUT .header__checkout {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.AB-DISPLAY-LOGOS--CHECKOUT .header__checkout .navbar-header {
+  display: none;
+}
+.AB-DISPLAY-LOGOS--CHECKOUT
+  .header__checkout
+  .row.align-items-center.justify-content-between {
+  flex-direction: column;
+  gap: 20px;
+}
+@media screen and (min-width: 767.5px) {
+  .AB-DISPLAY-LOGOS--CHECKOUT
+    .header__checkout
+    .row.align-items-center.justify-content-between {
+    flex-direction: row;
+  }
+  .AB-DISPLAY-LOGOS--CHECKOUT .ab-brand-logos-layout {
+    justify-content: flex-start;
+  }
+  .AB-DISPLAY-LOGOS--CHECKOUT .header__checkout .container-fluid {
+    max-width: 100%;
+  }
+}
+`;
+      document.head.appendChild(style);
+      setTimeout(() => {
+        clearInterval(interval); // Clear the interval after 5 seconds
+      }, 5000);
+    }
+  }, 100); // Check every 100ms for <head>
+})();
+/* 
+    Ticket: https://trello.com/c/vAbXT6E6/4473-cart-display-logos-for-all-brands-dtm
+    Test container: https://app.optimizely.com/v2/projects/30347390156/experiments/4653129170419712/variations
+    Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=54-3&t=IPFQ1NtXJ3dwcTvX-1
+
+*/
+
+(function () {
+  const TEST_CONFIG = {
+    client: "ROI Revolution",
+    project: "dunlopsports",
+    site_url: "https://us.dunlopsports.com/",
+    test_name: "Cart - Display Logos for All Brands [DTM]",
+    page_initials: "AB-DISPLAY-LOGOS",
+    test_variation: 1,
+    test_version: 0.0001,
+  };
+
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  const DATA = {
+    brands: [
+      {
+        label: "dunlop",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/bdaf2fbedb4545e3971e15d242b346c0.png",
+        link: "https://us.dunlopsports.com/",
+      },
+      {
+        label: "srixon",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/7c8dd842b0ba48aaaa58b5c687fbed58.png",
+        link: "https://us.dunlopsports.com/srixon",
+      },
+      {
+        label: "cleveland",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/6cf448201947461f874fb83eb5235b93.png",
+        link: "https://us.dunlopsports.com/cleveland-golf",
+      },
+      {
+        label: "xxio",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/ebbbae6400e84d399124fa23027eecc6.png",
+        link: "https://us.dunlopsports.com/xxio",
+      },
+      {
+        label: "never-compromise",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/8289e7d3114149f59d5d3f1ee11ca461.png",
+        link: "https://us.dunlopsports.com/never-compromise",
+      },
+      {
+        label: "asics",
+        imgUrl:
+          "https://cdn.optimizely.com/img/30347390156/1464cca5ca02401dbe034982aa37a391.png",
+        link: "https://us.dunlopsports.com/asics",
+      },
+    ],
+  };
+
+  function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
+    if (timer <= 0) {
+      console.warn(
+        `Timeout reached while waiting for condition: ${predicate.toString()}`,
+      );
+      return;
+    } else if (predicate && predicate()) {
+      callback();
+    } else {
+      setTimeout(
+        () => waitForElement(predicate, callback, timer - frequency, frequency),
+        frequency,
+      );
+    }
+  }
+
+  function q(s, o) {
+    return document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
+
+  function isTouchEnabled() {
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
+
+  function getBrandsLayout() {
+    return /* HTML */ `
+      <div class="ab-brand-logos-layout">
+        <div class="ab-dunlop-logo-container">
+          <a href="${DATA.brands[0].link}" class="ab-dunlop-logo">
+            <img
+              src="${DATA.brands[0].imgUrl}"
+              alt="${DATA.brands[0].label}"
+              class="ab-dunlop-logo-img"
+            />
+          </a>
+        </div>
+        <div class="ab-brand-logos-separator-line"></div>
+        <div class="ab-brands-container">
+          ${DATA.brands
+            .slice(1)
+            .map(
+              (brand) => /* HTML */ `
+                <a href="${brand.link}" class="ab-brand-item">
+                  <img
+                    src="${brand.imgUrl}"
+                    alt="${brand.label}"
+                    class="ab-brand-logo-img"
+                  />
+                </a>
+              `,
+            )
+            .join("")}
+        </div>
+      </div>
+    `;
+  }
+
+  function createCartBrandLayout() {
+    const layout = getBrandsLayout();
+
+    waitForElement(
+      () => qq(".sticky-nav, .header .navbar-header.d-md-none").length === 2,
+      () => {
+        q(".sticky-nav").insertAdjacentHTML("afterend", layout);
+        q(".header .navbar-header.d-md-none").insertAdjacentHTML(
+          "beforebegin",
+          layout,
+        );
+      },
+    );
+  }
+
+  function createCheckoutBrandLayout() {
+    const layout = getBrandsLayout();
+    waitForElement(
+      () => q(".header__checkout .navbar-header"),
+      () => {
+        q(".header__checkout .navbar-header").insertAdjacentHTML(
+          "afterend",
+          layout,
+        );
+      },
+    );
+  }
+
+  function clickFunction() {
+    waitForElement(
+      () => q(".ab-brand-item"),
+      () => {
+        qq(".ab-brand-item").forEach((item) => {
+          item.addEventListener("click", (e) => {
+            if (window.innerWidth < 767.5 || isTouchEnabled()) {
+              e.preventDefault();
+              if (e.ctrlKey || e.metaKey) {
+                window.open("/", "_blank");
+              } else {
+                window.location.href = "/";
+              }
+            }
+          });
+        });
+      },
+    );
+  }
+
+  const LAYOUT_CONFIG = {
+    "/cart": {
+      body_class: page_initials + "--CART",
+      layoutFunction: createCartBrandLayout,
+    },
+    "/on/demandware.store/Sites-DunlopSportsUS-Site/en_US/Checkout-Begin": {
+      body_class: page_initials + "--CHECKOUT",
+      layoutFunction: createCheckoutBrandLayout,
+    },
+  };
+
+  function getLayoutConfig() {
+    const path = window.location.pathname;
+
+    if (LAYOUT_CONFIG[path]) {
+      return LAYOUT_CONFIG[path];
+    }
+
+    return null;
+  }
+
+  function init() {
+    const { body_class, layoutFunction } = getLayoutConfig();
+
+    q("body").classList.add(
+      page_initials,
+      `${page_initials}--v${test_variation}`,
+      `${page_initials}--version:${test_version}`,
+      body_class,
+    );
+    console.table(TEST_CONFIG);
+    layoutFunction();
+    clickFunction();
+  }
+
+  function checkForItems() {
+    return !!(
+      q(
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+      ) && getLayoutConfig()
+    );
+  }
+
+  waitForElement(checkForItems, init);
+})();
