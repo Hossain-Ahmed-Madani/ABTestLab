@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00013,
+        test_version: 0.00014,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -88,7 +88,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-ext",
                         type: "tel",
                         label: "Ext",
-                        required: true,
+                        required: false,
                         className: "col-6 ab-pl-0",
                         control_node_selector: "#ext",
                         value: "",
@@ -614,12 +614,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         id: "ab-credit-debit",
                         type: "text",
                         label: "Credit/Debit Card Number",
-
                         required: true,
                         className: "col-12",
                         control_node_selector: "#creditCardNumber",
                         value: "",
-                        errorMessage: "",
+                        errorMessage: "Credit Card Number is Invalid",
                     },
                     {
                         id: "ab-month",
@@ -1404,6 +1403,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         if (currentTarget.getAttribute("id") === "ab-guest-password" && currentTarget.value.length >= 7) {
             currentTarget?.removeAttribute("area-invalid");
         }
+
+         // Exception | Credit Card input
+        if(currentTarget.getAttribute("id") === "ab-credit-debit" && q('.form-group:has(> label[for="cardName"]) .text-danger:not(.asterix)')) { 
+            currentTarget?.setAttribute("area-invalid", "");
+        }
     }
 
     function handleControlInputAreaEmptyAttribute(e) {
@@ -1446,6 +1450,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             }
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
+
+            console.log("controlNode:...", controlNode, controlNode.value);
         });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
@@ -1531,13 +1537,20 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             const selector = item.getAttribute("control_node_selector");
             const controlNode = q(selector);
 
-            setTimeout(() => {
+            let intervalCount = 0;
+            const maxIntervalCount = 6; // stop after 10 intervals (5 seconds if interval is 500ms)
+            const intervalId = setInterval(() => {
                 const isDisabled = controlNode.disabled;
 
                 if (isDisabled) {
                     item.setAttribute("disabled", "");
                 } else {
                     item.removeAttribute("disabled", "");
+                }
+
+                intervalCount++;
+                if (intervalCount >= maxIntervalCount) {
+                    clearInterval(intervalId);
                 }
             }, 500);
         });
@@ -1549,7 +1562,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             // Form Input
             {
                 selector: ".ab-input:not([inputtype='tel'])",
-                events: ["input", "change"],
+                events: ["input", "change", "keypress"],
                 callback: (e) => {
                     const currentTarget = e.target;
                     const dataObj = getElementData(currentTarget);
@@ -1692,7 +1705,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             item.classList.add(flagClassName);
                             if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                                 item.addEventListener(event, callback);
-                            } else {
+                            } 
+                            // if (item.getAttribute("type") && DATA["text_based_input_list"].some((type) => type === item.getAttribute("type"))) {
+                            //     item.addEventListener(event, callback);
+                            // }
+                            else {
                                 item.addEventListener(event, debouncedCallback);
                             }
                         }
@@ -1705,6 +1722,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     function updateLayoutOnMutation() {
+        console.log("Mutation Observer running....");
         qq(".dnnFormItem input[type='email'], .dnnFormItem input[type='password'], input#poNumber.form-control").forEach((item) => {
             if (item.value === "" && !item.hasAttribute("area-empty")) {
                 item.setAttribute("area-empty", "");
