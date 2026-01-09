@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00014,
+        test_version: 0.00015,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1233,25 +1233,25 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         }
 
         // Update Select Inputs (Shipping & Payment Options)
-        updateControlSelectInput("select#shipping", "Blue Ribbon");
-        setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
+        // updateControlSelectInput("select#shipping", "Blue Ribbon");
+        // setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
         // return true;
     }
 
-    async function updateControlSelectInput(selector, optionText) {
-        try {
-            await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 10000);
+    // async function updateControlSelectInput(selector, optionText) {
+    //     try {
+    //         await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 10000);
 
-            const selectElement = q(selector);
-            const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
-            option.selected = true;
-            selectElement.value = option.value;
-            const event = new Event("change", { bubbles: true });
-            selectElement.dispatchEvent(event);
-        } catch (error) {
-            return false;
-        }
-    }
+    //         const selectElement = q(selector);
+    //         const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
+    //         option.selected = true;
+    //         selectElement.value = option.value;
+    //         const event = new Event("change", { bubbles: true });
+    //         selectElement.dispatchEvent(event);
+    //     } catch (error) {
+    //         return false;
+    //     }
+    // }
 
     async function handleAddressDeliveryFormShowHide(e) {
         q(".ab-form#delivery-address")?.remove();
