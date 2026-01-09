@@ -1315,7 +1315,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
         const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
-        optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
+        const optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
 
         q(".ab-form#payment-options-credit-or-debit")?.remove();
 
