@@ -3,18 +3,13 @@
     Test container: https://app.optimizely.com/v2/projects/30347390156/experiments/4653129170419712/variations
     Figma: https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=54-3&t=IPFQ1NtXJ3dwcTvX-1
     Preview: https://us.dunlopsports.com/cart?qa5=true
-
 */
 
 (function () {
     const TEST_CONFIG = {
-        client: "ROI Revolution",
-        project: "dunlopsports",
-        site_url: "https://us.dunlopsports.com/",
-        test_name: "Cart - Display Logos for All Brands [DTM]",
         page_initials: "AB-DISPLAY-LOGOS",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -56,7 +51,6 @@
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
             return;
         } else if (predicate && predicate()) {
             callback();
@@ -71,10 +65,6 @@
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
     function getBrandsLayout() {
@@ -130,7 +120,7 @@
             () => {
                 qq(".ab-brand-item").forEach((item) => {
                     item.addEventListener("click", (e) => {
-                        if (window.innerWidth < 767.5 || isTouchEnabled()) {
+                        if (window.innerWidth < 767.5) {
                             e.preventDefault();
                             if (e.ctrlKey || e.metaKey) {
                                 window.open("/", "_blank");
@@ -167,9 +157,7 @@
 
     function init() {
         const { body_class, layoutFunction } = getLayoutConfig();
-
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, body_class);
-        console.table(TEST_CONFIG);
         layoutFunction();
         clickFunction();
     }
