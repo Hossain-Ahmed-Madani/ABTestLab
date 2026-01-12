@@ -1,0 +1,6 @@
+.AB-TEST .AB-TEST__urgency-message {
+  font-size: var(--font-size-body-100);
+  margin: 6px 0 0;
+  font-weight: 600;
+  line-height: 1.2;
+}
