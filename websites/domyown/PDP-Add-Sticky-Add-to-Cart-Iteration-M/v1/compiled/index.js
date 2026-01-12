@@ -20,7 +20,7 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
         test_name: "PDP - Add Sticky Add to Cart (Iteration) [M]",
         page_initials: "AB-STICKY-ADD-TO-CART",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -166,7 +166,6 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
         init();
         return true;
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
