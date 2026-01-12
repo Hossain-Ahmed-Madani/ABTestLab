@@ -232,7 +232,7 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
   function checkForItems() {
     return !!(
       q(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) && q("#add-to-cart-area input.add-to-cart")
     );
   }

@@ -1,7 +1,10 @@
 /* 
 Ticket: https://trello.com/c/q8ZdiK0H/4522-pdp-add-sticky-add-to-cart-iteration-m?search_id=8f2d25f5-996e-407f-8b24-04e50f0bf188
 Test container: https://app.vwo.com/#/test/ab/279/edit/variations/?accountId=348406
-QA URl: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
+QA URl: 
+Basic: https://www.domyown.com/termidor-sc-p-184.html?to_mobile=true
+Multiple Options: https://www.domyown.com/navigator-sc-termiticide-p-19237.html?sub_id=19238 
+Single Options: https://www.domyown.com/termidor-sc-p-184.html
 
 Preview:
 control: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI3OSI6eyJ2IjoiMSIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tJTI1MkZ0ZXJtaWRvci1zYy1wLTE4NC5odG1sIiwiYXBwIjoiYXBwIiwidHMiOjE3NjY5Mzg1OTQxNDV9fX0=
@@ -17,7 +20,7 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
         test_name: "PDP - Add Sticky Add to Cart (Iteration) [M]",
         page_initials: "AB-STICKY-ADD-TO-CART",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -102,23 +105,44 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
         }
     }
 
+    function handleAddToCart() {
+        q("#add-to-cart-area input.add-to-cart").click();
+    }
+
+    function scrollToBuyBox() {
+        const rect =  q("#products-grid").getBoundingClientRect();
+        // Calculate scroll position so target is 100px below the top of window
+        const scrollTop = window.pageYOffset + rect.top - 100;
+        window.scrollTo({ top: scrollTop, behavior: "smooth" });
+    }
+
     function createLayout() {
+        // Duplicate Add To Cart Button for goals
         q("#add-to-cart-area input.add-to-cart").insertAdjacentHTML(
             "afterend",
             `<button type="button" class="button-primary ab-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>`
         );
 
+        // Sticky Add To Cart Button
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
                 <div class="ab-sticky-cart-container">
-                    <button type="button" class="button-primary ab-sticky-add-to-cart text-lg w-full md:w-4/5 text-center">Add to Cart</button>
+                    <button type="button" class="button-primary ab-sticky-add-to-cart text-lg w-full md:w-4/5 text-center">${qq("#products-grid > .product-option-card").length > 1 ? "Select Size" : "Add to Cart"}</button>
                 </div>
             `
         );
 
-        const eventName = isTouchEnabled() ? 'touchend' : 'click';
-        qq(".ab-add-to-cart, .ab-sticky-add-to-cart").forEach((item) => item.addEventListener(eventName, () => q("#add-to-cart-area input.add-to-cart").click()));
+        // Event Listeners
+        const eventName = isTouchEnabled() ? "touchend" : "click";
+        q(".ab-add-to-cart").addEventListener(eventName, handleAddToCart);
+        q(".ab-sticky-add-to-cart").addEventListener(eventName, e => {
+            if(qq("#products-grid > .product-option-card").length > 1 ) {
+                scrollToBuyBox();
+            } else {
+                handleAddToCart();
+            }
+        });
     }
 
     function init() {
@@ -134,7 +158,7 @@ v1: https://www.domyown.com/termidor-sc-p-184.html?_vis_preview_data=eyJhIjoiMTc
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q("#add-to-cart-area input.add-to-cart"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("#add-to-cart-area input.add-to-cart") && q("#products-grid > .product-option-card"));
     }
 
     try {
