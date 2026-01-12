@@ -1,0 +1,7 @@
+.SH-PLP-URGENCY .ab-urgency-msg {
+  margin-top: 5px;
+  font-size: var(--font-size-body-100);
+  line-height: 1.2;
+  font-weight: 600;
+  color: #b91c1c;
+}

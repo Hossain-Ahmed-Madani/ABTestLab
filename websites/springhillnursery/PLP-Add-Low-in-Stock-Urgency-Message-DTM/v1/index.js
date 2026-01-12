@@ -1,10 +1,11 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "Client Name",
-        project: "Project Name",
-        site_url: "https://www.example.com",
-        test_name: "Ticket Name",
-        page_initials: "AB-TEST",
+        client: "EchoLogyx",
+        project: "Spring Hill Nursery",
+        site_url: "https://springhillnursery.com",
+        test_name: "PLP - Add Low in Stock Urgency Message [DTM]",
+        page_initials: "SH-PLP-URGENCY",
+        // 1 => Hurry! Selling Fast (manually toggled), 2 =>  Low in Stock
         test_variation: 1,
         test_version: 0.0001,
     };
@@ -102,32 +103,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -137,30 +112,60 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
+    function randomIntInclusive(min, max) {
+        const mn = Math.ceil(min);
+        const mx = Math.floor(max);
+        return Math.floor(Math.random() * (mx - mn + 1)) + mn;
+    }
+
+    function shuffleInPlace(arr) {
+        for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+    }
+
+    const TXT = {
+        1: "Hurry! Selling Fast",
+        2: "Low in Stock",
+    }
+
     function updateLayout() {
-        //
+        console.log("updateLayout...");
+
+        const cards = qq( ".product-item[data-id]:not(.ab-urgency-msg-injected):not(:has( .soldoutstrip))");
+        if (!cards.length) return;
+
+        // Pick some random cards to inject
+        const pickCount = Math.min(cards.length, randomIntInclusive(6, 10));
+        const picked = shuffleInPlace([...cards]).slice(0, pickCount);
+        picked.forEach(card => {
+            card.classList.add("ab-urgency-msg-injected");
+            q(card, ".product-item__text_group_primary").insertAdjacentHTML("beforeend",  /* HTML */ `<div class="ab-urgency-msg">${ TXT[test_variation]}</div>`);
+        });
     }
 
     function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
+        const targetNode = q("#root");
         const debouncedUpdate = debounce(updateLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+        const observer = new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: false });
+        return observer;
     }
-
-
-    function createLayout() {
-        //
-    }
-
-
+    
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createLayout()
+        updateLayout();
+        mutationObserverFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q("#root") &&
+            q(".collection__products-container")
+        );
     }
 
     try {

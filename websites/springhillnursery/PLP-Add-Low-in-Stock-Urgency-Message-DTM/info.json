@@ -1,0 +1,13 @@
+{
+  "id": "1768208822221_1445_PLP_Add_Low_in_Stock_Urgency_Message_DTM",
+  "name": "PLP-Add-Low-in-Stock-Urgency-Message-DTM",
+  "type": "A/B",
+  "website": "springhillnursery",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-01-12T09:07:02.221Z",
+  "createdAtReadable": "1/12/2026, 3:07:02 PM",
+  "lastUpdated": "2026-01-12T09:07:02.731Z"
+}
