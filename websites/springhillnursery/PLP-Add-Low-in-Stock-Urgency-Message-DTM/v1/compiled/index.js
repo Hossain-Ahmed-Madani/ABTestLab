@@ -1,11 +1,22 @@
+/* 
+Test doc: https://trello.com/c/R1C2oyZu/4600-plp-add-low-in-stock-urgency-message-dtm
+Figma: https://www.figma.com/design/9JhvESiGmUH7UEXd0rEUDe/Gardens-Alive-?node-id=2429-37&t=tEDyQ6JOHJGqd8Zy-1
+Test container: https://app.convert.com/accounts/100412411/projects/100416781/experiences/1004182892/summary
+
+Forced variation: 
+
+v1: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=1004182892.1004430151&utm_campaign=qa5
+
+v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=1004182892.1004430875&utm_campaign=qa5
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "EchoLogyx",
-        project: "Spring Hill Nursery",
+        project: "springhillnursery",
         site_url: "https://springhillnursery.com",
         test_name: "PLP - Add Low in Stock Urgency Message [DTM]",
-        page_initials: "SH-PLP-URGENCY",
-        // 1 => Hurry! Selling Fast (manually toggled), 2 =>  Low in Stock
+        page_initials: "AB-PLP-URGENCY",
         test_variation: 1,
         test_version: 0.0001,
     };
@@ -56,11 +67,10 @@
         };
     }
 
-    function randomIntInclusive(min, max) {
-        const mn = Math.ceil(min);
-        const mx = Math.floor(max);
-        return Math.floor(Math.random() * (mx - mn + 1)) + mn;
-    }
+    const TXT = {
+        1: "Hurry! Selling Fast",
+        2: "Low in Stock",
+    };
 
     function shuffleInPlace(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
@@ -70,23 +80,46 @@
         return arr;
     }
 
-    const TXT = {
-        1: "Hurry! Selling Fast",
-        2: "Low in Stock",
-    };
+    function pickAndShuffleCards(cards) {
+        // 1. If there is only one card, return it
+        if (cards.length === 1) {
+            return cards;
+        }
+        
+        // 2. For multiple cards: pick 30% of the cards array
+        const pickCount = Math.max(1, Math.min(cards.length, Math.round(cards.length * 0.3)));
+        
+        // 3. Ensure one of the 1st, 2nd, or 3rd card is always included
+        // Randomly select which one of the first 3 cards to guarantee
+        const guaranteedIndex = Math.min(Math.floor(Math.random() * 3), cards.length - 1);
+        const guaranteedCard = cards[guaranteedIndex];
+        
+        // Get remaining cards (excluding the guaranteed one)
+        const remainingCards = cards.filter((_, idx) => idx !== guaranteedIndex);
+        
+        // Shuffle the remaining cards
+        const shuffledRemaining = shuffleInPlace([...remainingCards]);
+        
+        // Pick the required number of cards (including the guaranteed one)
+        const selectedCards = [guaranteedCard, ...shuffledRemaining.slice(0, pickCount - 1)];
+
+        console.log("selectedCards...",cards.length, selectedCards.length);
+        
+        // Shuffle the final selection randomly
+        return shuffleInPlace(selectedCards);
+    }
 
     function updateLayout() {
         console.log("updateLayout...");
 
         const cards = qq( ".product-item[data-id]:not(.ab-urgency-msg-injected):not(:has( .soldoutstrip))");
-        if (!cards.length) return;
+        if (cards.length === 0) return;
 
-        // Pick some random cards to inject
-        const pickCount = Math.min(cards.length, randomIntInclusive(6, 10));
-        const picked = shuffleInPlace([...cards]).slice(0, pickCount);
+
+        const picked = pickAndShuffleCards(cards);
         picked.forEach(card => {
             card.classList.add("ab-urgency-msg-injected");
-            q(card, ".product-item__text_group_primary").insertAdjacentHTML("beforeend",  /* HTML */ `<div class="ab-urgency-msg">${ TXT[test_variation]}</div>`);
+            q(card, ".product-item__text_group_primary").insertAdjacentHTML("beforeend",  /* HTML */ `<div class="ab-urgency-msg">${TXT[test_variation]}</div>`);
         });
     }
 
