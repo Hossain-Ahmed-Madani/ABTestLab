@@ -41,8 +41,8 @@ logInfo("fired");
     test_name:
       "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
     page_initials: "AB-EDC11",
-    test_variation: 1 /* 1, 2 */,
-    test_version: 0.0001,
+    test_variation: 2 /* 1, 2 */,
+    test_version: 0.0004,
   };
 
   const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -91,7 +91,7 @@ logInfo("fired");
         link: "https://urbanedc.com/collections/in-stock-games",
       },
       {
-        title: "Mutitool",
+        title: "Multitool",
         link: "https://urbanedc.com/collections/in-stock-keychains-multitools",
       },
       {
@@ -115,6 +115,139 @@ logInfo("fired");
       "ga4-event-p1-value": eventName,
       "ga4-event-p2-name": "event_label",
       "ga4-event-p2-value": eventLabel,
+    });
+  }
+
+  async function initGearDropDrag() {
+    await waitForElementAsync(
+      () => q(`.${page_initials}__modal__gear-drop-items--carousel`),
+      5000,
+      200,
+    );
+    const carousel = q(`.${page_initials}__modal__gear-drop-items--carousel`);
+
+    if (!carousel) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let lastX;
+    let velocity = 0;
+    let momentumID;
+
+    // Expose isDragging to window for external access
+    window.AB_EDC11_isDragging = false;
+
+    const stopDragging = () => {
+      if (!isDown) return;
+      isDown = false;
+      carousel.classList.remove("active");
+
+      // Apply momentum/easing effect
+      beginMomentumTracking();
+
+      // Reset dragging flag after a short delay to prevent immediate clicks
+      setTimeout(() => {
+        window.AB_EDC11_isDragging = false;
+      }, 100);
+    };
+
+    const beginMomentumTracking = () => {
+      cancelMomentumTracking();
+      momentumID = requestAnimationFrame(momentumLoop);
+    };
+
+    const cancelMomentumTracking = () => {
+      if (momentumID) {
+        cancelAnimationFrame(momentumID);
+        momentumID = null;
+      }
+    };
+
+    const momentumLoop = () => {
+      // Apply velocity with friction
+      carousel.scrollLeft += velocity;
+      velocity *= 0.92; // Friction coefficient (lower = more friction)
+
+      // Stop when velocity is negligible
+      if (Math.abs(velocity) > 0.5) {
+        momentumID = requestAnimationFrame(momentumLoop);
+      }
+    };
+
+    carousel.addEventListener("mousedown", (e) => {
+      isDown = true;
+      carousel.classList.add("active");
+      startX = e.pageX - carousel.offsetLeft;
+      lastX = startX;
+      scrollLeft = carousel.scrollLeft;
+      velocity = 0; // Reset velocity
+      cancelMomentumTracking(); // Cancel any ongoing momentum
+    });
+
+    // Stop dragging when mouse leaves the carousel
+    carousel.addEventListener("mouseleave", stopDragging);
+
+    // Stop dragging when mouse is released anywhere on the document
+    document.addEventListener("mouseup", stopDragging);
+
+    carousel.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 2; // Multiply by 2 for faster scrolling
+
+      // Set dragging to true if user has moved more than 5px
+      if (Math.abs(walk) > 5) {
+        window.AB_EDC11_isDragging = true;
+      }
+
+      carousel.scrollLeft = scrollLeft - walk;
+
+      // Calculate velocity for momentum
+      velocity = (lastX - x) * 2;
+      lastX = x;
+    });
+
+    // Touch support for mobile devices
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+    let lastTouchX = 0;
+    let touchVelocity = 0;
+
+    carousel.addEventListener("touchstart", (e) => {
+      touchStartX = e.touches[0].pageX - carousel.offsetLeft;
+      lastTouchX = touchStartX;
+      touchScrollLeft = carousel.scrollLeft;
+      touchVelocity = 0;
+      cancelMomentumTracking();
+    });
+
+    carousel.addEventListener("touchmove", (e) => {
+      const x = e.touches[0].pageX - carousel.offsetLeft;
+      const walk = (x - touchStartX) * 2;
+
+      // Set dragging to true if user has moved more than 5px
+      if (Math.abs(walk) > 5) {
+        window.AB_EDC11_isDragging = true;
+      }
+
+      carousel.scrollLeft = touchScrollLeft - walk;
+
+      // Calculate velocity for momentum
+      touchVelocity = (lastTouchX - x) * 2;
+      lastTouchX = x;
+    });
+
+    carousel.addEventListener("touchend", () => {
+      velocity = touchVelocity;
+      beginMomentumTracking();
+
+      // Reset dragging flag after a short delay
+      setTimeout(() => {
+        window.AB_EDC11_isDragging = false;
+      }, 100);
     });
   }
 
@@ -210,7 +343,8 @@ logInfo("fired");
   function preventScroll(e) {
     if (
       (e.target === document.body || document.body.contains(e.target)) &&
-      !e.target.closest(".AB-EDC11__modal__gear-drop-items")
+      !e.target.closest(".AB-EDC11__modal__gear-drop-items") &&
+      !e.target.closest(`.${page_initials}__modal__predictive-search-results`)
     ) {
       e.preventDefault();
     }
@@ -255,10 +389,15 @@ logInfo("fired");
           <div class="${page_initials}__modal">
             <div class="${page_initials}__modal__container">
               <div class="${page_initials}__modal__top">
-                <div class="${page_initials}__modal__search">
+                <form
+                  action="/search"
+                  method="get"
+                  role="search"
+                  class="${page_initials}__modal__search"
+                >
                   <button
                     class="${page_initials}__modal__search-cta"
-                    type="button"
+                    type="submit"
                   >
                     ${ASSETS.search_svg}
                   </button>
@@ -269,7 +408,7 @@ logInfo("fired");
                     placeholder="Search"
                     autocomplete="off"
                   />
-                </div>
+                </form>
                 <button
                   class="${page_initials}__modal__close-cta"
                   type="button"
@@ -320,6 +459,61 @@ logInfo("fired");
                     .join("")}
                 </div>
               </div>
+              <div
+                class="${page_initials}__modal__predictive-search-results"
+              ></div>
+            </div>
+          </div>
+        </div>
+      `,
+    );
+
+    // Search Offcanvas
+    q("div[x-ref='resultsSlot']").insertAdjacentHTML(
+      "beforebegin",
+      /* HTML */ `
+        <div class="${page_initials}__modal__container">
+          <div class="${page_initials}__modal__gear-drop-container">
+            <div class="${page_initials}__modal__gear-drop-title">
+              This Week's Gear Drop
+            </div>
+            <div class="${page_initials}__modal__gear-drop-items--carousel">
+              <div
+                class="${page_initials}__modal__gear-drop-items--carousel-inner"
+              >
+                ${gear_drop_data
+                  .map(
+                    ({ title, link, imgUrl }) => /* HTML */ `
+                      <div
+                        href="${host + link}"
+                        class="${page_initials}__modal__gear-drop-item"
+                      >
+                        <span
+                          class="${page_initials}__modal__gear-drop-item-img"
+                          ><img src="${imgUrl}" alt="${title}"
+                        /></span>
+                        <span
+                          class="${page_initials}__modal__gear-drop-item-title"
+                          >${title}</span
+                        >
+                      </div>
+                    `,
+                  )
+                  .join("")}
+              </div>
+            </div>
+          </div>
+          <div class="${page_initials}__modal__featured-collections-container">
+            <div class="${page_initials}__modal__featured-collections-title">
+              Featured Collections
+            </div>
+            <div class="${page_initials}__modal__featured-collections">
+              ${DATA.featured_collections
+                .map(
+                  ({ title, link }) =>
+                    `<a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>`,
+                )
+                .join("")}
             </div>
           </div>
         </div>
@@ -330,16 +524,12 @@ logInfo("fired");
   const clickEventName = isTouchEnabled() ? "touchend" : "click";
 
   function handleSearch(e) {
-    const currentTarget = e.currentTarget;
-
     e.preventDefault();
-    fireGA4Event("EDC11_ClickedSearch");
 
-    const parentNode = currentTarget.parentNode;
-    const searchInput = q(parentNode, "input[type='search']");
+    const searchInput = q("input#ab-search[type='search']");
     const value = searchInput.value.replace(" ", "+");
 
-    setTimeout(() => (window.location.href = `/search?q=${value}`), 150);
+    window.location.href = `/search?q=${value}`;
   }
 
   const INITIAL_ACTION_LIST = [
@@ -350,6 +540,7 @@ logInfo("fired");
         e.preventDefault();
         e.stopPropagation();
         handleModalView("show");
+        fireGA4Event("EDC11_ClickedSearch");
       },
     },
     {
@@ -359,7 +550,7 @@ logInfo("fired");
     },
     {
       selector: `.${page_initials}__modal-backdrop`,
-      event: clickEventName,
+      event: "click",
       callback: (e) => {
         if (!e.target.closest(`.${page_initials}__modal`)) {
           handleModalView("hide");
@@ -367,38 +558,222 @@ logInfo("fired");
       },
     },
     {
+      selector: `form.${page_initials}__modal__search`,
+      event: "submit",
+      callback: handleSearch,
+    },
+    {
       selector: `.${page_initials}__modal__search-cta`,
       event: clickEventName,
       callback: handleSearch,
     },
     {
-      selector: `form[action="/search"] button[aria-label="Search"]`,
-      event: clickEventName,
-      callback: handleSearch,
+      selector: `input#ab-search[type="search"]`,
+      event: "input",
+      callback: async (e) => {
+        const value = e.target.value;
+
+        if (value) {
+          q(`.${page_initials}__modal__container`).classList.add(
+            "show-predictive-search-results",
+          );
+        } else {
+          q(`.${page_initials}__modal__container`).classList.remove(
+            "show-predictive-search-results",
+          );
+        }
+
+        console.log("value", value);
+
+        const target = q(
+          '.predictive-search-form  input[type="search"][name="q"]',
+        );
+        target.value = value;
+        target.dispatchEvent(new Event("input", { bubbles: true }));
+
+        let count = 0;
+        await waitForElementAsync(
+          () =>
+            q(
+              `.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`,
+            ) &&
+            q(
+              `.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`,
+            ) &&
+            ++count >= 5,
+          5000,
+          200,
+        );
+
+        if (
+          q(
+            `.${page_initials}__modal__predictive-search-results #predictive-search-results-group-products`,
+          )
+        ) {
+          q(
+            `.${page_initials}__modal__predictive-search-results #predictive-search-results-group-products`,
+          ).checked = true;
+        }
+
+        q(
+          `.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`,
+        ).removeAttribute("hidden");
+        q(
+          `.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`,
+        ).setAttribute("hidden", "");
+      },
     },
     {
-      selector: `.${page_initials}__modal__featured-item`,
+      selector: `.predictive-search-form  input[type="search"][name="q"]`,
+      event: "input",
+      callback: async (e) => {
+        const value = e.target.value;
+
+        if (value) {
+          q(`.predictive-search-form`).classList.add(
+            "show-predictive-search-results",
+          );
+        } else {
+          q(`.predictive-search-form`).classList.remove(
+            "show-predictive-search-results",
+          );
+        }
+      },
+    },
+    {
+      selector: `.${page_initials}__modal__predictive-search-results`,
       event: clickEventName,
       callback: (e) => {
+        if (
+          e.target.closest(
+            'label[for="predictive-search-results-group-products"]',
+          )
+        ) {
+          q(
+            `.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`,
+          ).removeAttribute("hidden");
+          q(
+            `.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`,
+          ).setAttribute("hidden", "");
+        }
+        if (
+          e.target.closest(
+            'label[for="predictive-search-results-group-collections"]',
+          )
+        ) {
+          q(
+            `.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`,
+          ).removeAttribute("hidden", "");
+          q(
+            `.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`,
+          ).setAttribute("hidden", "");
+        }
+      },
+    },
+    {
+      selector: `.predictive-search-form`,
+      event: clickEventName,
+      callback: (e) => {
+        if (
+          e.target.closest(
+            'label[for="predictive-search-results-group-products"]',
+          )
+        ) {
+          q(
+            `.predictive-search-form #predictive-search-results-group-products`,
+          ).checked = true;
+          q(
+            `.predictive-search-form div[x-ref="productsResults"]`,
+          ).removeAttribute("hidden");
+          q(
+            `.predictive-search-form div[x-ref="collectionsResults"]`,
+          ).setAttribute("hidden", "");
+        }
+        if (
+          e.target.closest(
+            'label[for="predictive-search-results-group-collections"]',
+          )
+        ) {
+          q(
+            `.predictive-search-form #predictive-search-results-group-collections`,
+          ).checked = true;
+          q(
+            `.predictive-search-form div[x-ref="collectionsResults"]`,
+          ).removeAttribute("hidden", "");
+          q(
+            `.predictive-search-form div[x-ref="productsResults"]`,
+          ).setAttribute("hidden", "");
+        }
+      },
+    },
+    {
+      selector: `form[action="/search"] input[type="search"]`,
+      event: clickEventName,
+      callback: () => fireGA4Event("EDC11_ClickedSearch"),
+    },
+    {
+      selector: `button[type="button"].uppercase.js-enabled.block.lg\\:hidden`,
+      event: clickEventName,
+      callback: () => fireGA4Event("EDC11_ClickedSearch"),
+    },
+    {
+      selector: `a.${page_initials}__modal__gear-drop-item, .${page_initials}__modal__featured-item`,
+      event: "click",
+      callback: (e) => {
+        const currentTarget = e.currentTarget;
         e.preventDefault();
-        fireGA4Event("EDC11_ClickedCategory", e.target.innerText);
+        fireGA4Event("EDC11_ClickedCategory", currentTarget.innerText);
         setTimeout(
-          () => (window.location.href = e.target.getAttribute("href")),
+          () => (window.location.href = currentTarget.getAttribute("href")),
           150,
         );
+      },
+    },
+    {
+      selector: `div.${page_initials}__modal__gear-drop-item`,
+      event: "click",
+      callback: (e) => {
+        const currentTarget = e.currentTarget;
+        const href = currentTarget.getAttribute("href");
+        if (window.AB_EDC11_isDragging) {
+          return;
+        }
+        fireGA4Event("EDC11_ClickedCategory", currentTarget.innerText);
+        setTimeout(() => (window.location.href = href), 150);
       },
     },
   ];
 
   function eventHandler(action_list) {
     action_list.forEach(async ({ selector, event, callback }) => {
-      const flagClassName = `ab-${event})-attached`;
+      const flagClassName = `ab-${event}-event-attached`;
       await waitForElementAsync(() => qq(selector).length > 0, 5000, 200);
       qq(selector).forEach((item) => {
         if (item.classList.contains(flagClassName)) return;
         item.classList.add(flagClassName);
         item.addEventListener(event, callback);
       });
+    });
+  }
+
+  async function mutationObserverFunction() {
+    await waitForElementAsync(
+      () => q(`.${page_initials}__modal__predictive-search-results`),
+      5000,
+      200,
+    );
+    const targetNode = q(".predictive-search-form");
+    const debouncedUpdate = debounce(() => {
+      if (q(".predictive-search-form  div[x-ref='resultsSlot']")) {
+        q(`.${page_initials}__modal__predictive-search-results`).innerHTML = q(
+          ".predictive-search-form  div[x-ref='resultsSlot']",
+        ).outerHTML;
+      }
+    }, 250);
+    return new MutationObserver(debouncedUpdate).observe(targetNode, {
+      childList: true,
+      subtree: true,
+      attributes: true,
     });
   }
 
@@ -411,6 +786,8 @@ logInfo("fired");
     console.table(TEST_CONFIG);
     createLayout();
     eventHandler(INITIAL_ACTION_LIST);
+    initGearDropDrag();
+    mutationObserverFunction();
   }
 
   function checkForItems() {
@@ -419,7 +796,9 @@ logInfo("fired");
         `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
       ) &&
       q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
-      q('#DrawerMenu form[action="/search"] button[aria-label="Search"]')
+      q("#DrawerMenu form[action='/search'] button[aria-label='Search']") &&
+      q(".predictive-search-form") &&
+      q("div[x-ref='resultsSlot']")
     );
   }
 

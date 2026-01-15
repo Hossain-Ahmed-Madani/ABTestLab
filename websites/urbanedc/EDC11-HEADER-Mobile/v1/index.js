@@ -41,7 +41,7 @@ logInfo("fired");
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -319,7 +319,11 @@ logInfo("fired");
     }
 
     function preventScroll(e) {
-        if ((e.target === document.body || document.body.contains(e.target)) && !e.target.closest(".AB-EDC11__modal__gear-drop-items")) {
+        if (
+            (e.target === document.body || document.body.contains(e.target)) &&
+            !e.target.closest(".AB-EDC11__modal__gear-drop-items") &&
+            !e.target.closest(`.${page_initials}__modal__predictive-search-results`)
+        ) {
             e.preventDefault();
         }
     }
@@ -388,6 +392,7 @@ logInfo("fired");
                                     ${DATA.featured_collections.map(({ title, link }) => `<a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>`).join("")}
                                 </div>
                             </div>
+                            <div class="${page_initials}__modal__predictive-search-results"></div>
                         </div>
                     </div>
                 </div>
@@ -473,13 +478,92 @@ logInfo("fired");
             event: clickEventName,
             callback: handleSearch,
         },
-        // {
-        //     selector: `input#ab-search[type="search"]`,
-        //     event: clickEventName,
-        //     callback: () => fireGA4Event("EDC11_ClickedSearch"),
-        // },
+        {
+            selector: `input#ab-search[type="search"]`,
+            event: "input",
+            callback: async (e) => {
+                const value = e.target.value;
+
+                if (value) {
+                    q(`.${page_initials}__modal__container`).classList.add("show-predictive-search-results");
+                } else {
+                    q(`.${page_initials}__modal__container`).classList.remove("show-predictive-search-results");
+                }
+
+                console.log("value", value);
+
+                const target = q('.predictive-search-form  input[type="search"][name="q"]');
+                target.value = value;
+                target.dispatchEvent(new Event("input", { bubbles: true }));
+
+                let count = 0;
+                await waitForElementAsync(
+                    () =>
+                        q(`.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`) &&
+                        q(`.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`) &&
+                        ++count >= 5,
+                    5000,
+                    200
+                );
+
+                if (q(`.${page_initials}__modal__predictive-search-results #predictive-search-results-group-products`)) {
+                    q(`.${page_initials}__modal__predictive-search-results #predictive-search-results-group-products`).checked = true;
+                }
+
+                q(`.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`).removeAttribute("hidden");
+                q(`.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`).setAttribute("hidden", "");
+            },
+        },
+        {
+            selector: `.predictive-search-form  input[type="search"][name="q"]`,
+            event: "input",
+            callback: async (e) => {
+                const value = e.target.value;
+
+                if (value) {
+                    q(`.predictive-search-form`).classList.add("show-predictive-search-results");
+                } else {
+                    q(`.predictive-search-form`).classList.remove("show-predictive-search-results");
+                }
+            },
+        },
+        {
+            selector: `.${page_initials}__modal__predictive-search-results`,
+            event: clickEventName,
+            callback: (e) => {
+                if (e.target.closest('label[for="predictive-search-results-group-products"]')) {
+                    q(`.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`).removeAttribute("hidden");
+                    q(`.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`).setAttribute("hidden", "");
+                }
+                if (e.target.closest('label[for="predictive-search-results-group-collections"]')) {
+                    q(`.${page_initials}__modal__predictive-search-results div[x-ref="collectionsResults"]`).removeAttribute("hidden", "");
+                    q(`.${page_initials}__modal__predictive-search-results div[x-ref="productsResults"]`).setAttribute("hidden", "");
+                }
+            },
+        },
+        {
+            selector: `.predictive-search-form`,
+            event: clickEventName,
+            callback: (e) => {
+                if (e.target.closest('label[for="predictive-search-results-group-products"]')) {
+                    q(`.predictive-search-form #predictive-search-results-group-products`).checked = true;
+                    q(`.predictive-search-form div[x-ref="productsResults"]`).removeAttribute("hidden");
+                    q(`.predictive-search-form div[x-ref="collectionsResults"]`).setAttribute("hidden", "");
+                }
+                if (e.target.closest('label[for="predictive-search-results-group-collections"]')) {
+                    q(`.predictive-search-form #predictive-search-results-group-collections`).checked = true;
+                    q(`.predictive-search-form div[x-ref="collectionsResults"]`).removeAttribute("hidden", "");
+                    q(`.predictive-search-form div[x-ref="productsResults"]`).setAttribute("hidden", "");
+                }
+            },
+        },
         {
             selector: `form[action="/search"] input[type="search"]`,
+            event: clickEventName,
+            callback: () => fireGA4Event("EDC11_ClickedSearch"),
+        },
+        {
+            selector: `button[type="button"].uppercase.js-enabled.block.lg\\:hidden`,
             event: clickEventName,
             callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
@@ -520,19 +604,32 @@ logInfo("fired");
         });
     }
 
+    async function mutationObserverFunction() {
+        await waitForElementAsync(() => q(`.${page_initials}__modal__predictive-search-results`), 5000, 200);
+        const targetNode = q(".predictive-search-form");
+        const debouncedUpdate = debounce(() => {
+            if (q(".predictive-search-form  div[x-ref='resultsSlot']")) {
+                q(`.${page_initials}__modal__predictive-search-results`).innerHTML = q(".predictive-search-form  div[x-ref='resultsSlot']").outerHTML;
+            }
+        }, 250);
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         createLayout();
         eventHandler(INITIAL_ACTION_LIST);
         initGearDropDrag();
+        mutationObserverFunction();
     }
 
     function checkForItems() {
         return !!(
-            q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
             q("#DrawerMenu form[action='/search'] button[aria-label='Search']") &&
+            q(".predictive-search-form") &&
             q("div[x-ref='resultsSlot']")
         );
     }
