@@ -280,6 +280,39 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.AB-EDC11 .predictive-search-form .AB-EDC11__modal__container {
+  border: none;
+  border-radius: 0;
+}
+.AB-EDC11 .predictive-search-form .AB-EDC11__modal__gear-drop-items--carousel {
+  width: 100%; /* Or a specific width/height */
+  overflow-x: auto; /* Use 'auto' or 'scroll' for the desired direction */
+  cursor: grab; /* Cursor when not dragging */
+  /* Prevent text selection */
+  user-select: none;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.AB-EDC11 .predictive-search-form .AB-EDC11__modal__gear-drop-items--carousel::-webkit-scrollbar {
+  display: none;
+}
+.AB-EDC11 .predictive-search-form .AB-EDC11__modal__gear-drop-items--carousel.active {
+  cursor: grabbing; /* Cursor when dragging */
+}
+.AB-EDC11 .predictive-search-form .AB-EDC11__modal__gear-drop-items--carousel-inner {
+  width: max-content;
+  padding: 0 14px;
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+.AB-EDC11 .predictive-search-form:has(div[x-ref=results]:not([hidden])) .AB-EDC11__modal__container {
+  display: none;
+}
 
 .AB-EDC11--v2.AB-EDC11 .AB-EDC11__modal {
   padding: 6px 5px;

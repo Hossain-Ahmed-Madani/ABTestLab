@@ -41,7 +41,7 @@ logInfo("fired");
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -102,6 +102,135 @@ logInfo("fired");
             "ga4-event-p1-value": eventName,
             "ga4-event-p2-name": "event_label",
             "ga4-event-p2-value": eventLabel,
+        });
+    }
+
+    async function initGearDropDrag() {
+        await waitForElementAsync(() => q(`.${page_initials}__modal__gear-drop-items--carousel`), 5000, 200);
+        const carousel = q(`.${page_initials}__modal__gear-drop-items--carousel`);
+
+        if (!carousel) return;
+
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let lastX;
+        let velocity = 0;
+        let momentumID;
+
+        // Expose isDragging to window for external access
+        window.AB_EDC11_isDragging = false;
+
+        const stopDragging = () => {
+            if (!isDown) return;
+            isDown = false;
+            carousel.classList.remove("active");
+
+            // Apply momentum/easing effect
+            beginMomentumTracking();
+
+            // Reset dragging flag after a short delay to prevent immediate clicks
+            setTimeout(() => {
+                window.AB_EDC11_isDragging = false;
+            }, 100);
+        };
+
+        const beginMomentumTracking = () => {
+            cancelMomentumTracking();
+            momentumID = requestAnimationFrame(momentumLoop);
+        };
+
+        const cancelMomentumTracking = () => {
+            if (momentumID) {
+                cancelAnimationFrame(momentumID);
+                momentumID = null;
+            }
+        };
+
+        const momentumLoop = () => {
+            // Apply velocity with friction
+            carousel.scrollLeft += velocity;
+            velocity *= 0.92; // Friction coefficient (lower = more friction)
+
+            // Stop when velocity is negligible
+            if (Math.abs(velocity) > 0.5) {
+                momentumID = requestAnimationFrame(momentumLoop);
+            }
+        };
+
+        carousel.addEventListener("mousedown", (e) => {
+            isDown = true;
+            carousel.classList.add("active");
+            startX = e.pageX - carousel.offsetLeft;
+            lastX = startX;
+            scrollLeft = carousel.scrollLeft;
+            velocity = 0; // Reset velocity
+            cancelMomentumTracking(); // Cancel any ongoing momentum
+        });
+
+        // Stop dragging when mouse leaves the carousel
+        carousel.addEventListener("mouseleave", stopDragging);
+
+        // Stop dragging when mouse is released anywhere on the document
+        document.addEventListener("mouseup", stopDragging);
+
+        carousel.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2; // Multiply by 2 for faster scrolling
+
+            // Set dragging to true if user has moved more than 5px
+            if (Math.abs(walk) > 5) {
+                window.AB_EDC11_isDragging = true;
+            }
+
+            carousel.scrollLeft = scrollLeft - walk;
+
+            // Calculate velocity for momentum
+            velocity = (lastX - x) * 2;
+            lastX = x;
+        });
+
+        // Touch support for mobile devices
+        let touchStartX = 0;
+        let touchScrollLeft = 0;
+        let lastTouchX = 0;
+        let touchVelocity = 0;
+
+        carousel.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].pageX - carousel.offsetLeft;
+            lastTouchX = touchStartX;
+            touchScrollLeft = carousel.scrollLeft;
+            touchVelocity = 0;
+            cancelMomentumTracking();
+        });
+
+        carousel.addEventListener("touchmove", (e) => {
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - touchStartX) * 2;
+
+            // Set dragging to true if user has moved more than 5px
+            if (Math.abs(walk) > 5) {
+                window.AB_EDC11_isDragging = true;
+            }
+
+            carousel.scrollLeft = touchScrollLeft - walk;
+
+            // Calculate velocity for momentum
+            touchVelocity = (lastTouchX - x) * 2;
+            lastTouchX = x;
+        });
+
+        carousel.addEventListener("touchend", () => {
+            velocity = touchVelocity;
+            beginMomentumTracking();
+
+            // Reset dragging flag after a short delay
+            setTimeout(() => {
+                window.AB_EDC11_isDragging = false;
+            }, 100);
         });
     }
 
@@ -252,6 +381,38 @@ logInfo("fired");
                 </div>
             `
         );
+
+        // Search Offcanvas
+        q("div[x-ref='resultsSlot']").insertAdjacentHTML(
+            "beforebegin",
+            /* HTML */ `
+                <div class="${page_initials}__modal__container">
+                    <div class="${page_initials}__modal__gear-drop-container">
+                        <div class="${page_initials}__modal__gear-drop-title">This Week's Gear Drop</div>
+                        <div class="${page_initials}__modal__gear-drop-items--carousel">
+                            <div class="${page_initials}__modal__gear-drop-items--carousel-inner">
+                                ${gear_drop_data
+                                    .map(
+                                        ({ title, link, imgUrl }) => /* HTML */ `
+                                            <div href="${host + link}" class="${page_initials}__modal__gear-drop-item">
+                                                <span class="${page_initials}__modal__gear-drop-item-img"><img src="${imgUrl}" alt="${title}" /></span>
+                                                <span class="${page_initials}__modal__gear-drop-item-title">${title}</span>
+                                            </div>
+                                        `
+                                    )
+                                    .join("")}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="${page_initials}__modal__featured-collections-container">
+                        <div class="${page_initials}__modal__featured-collections-title">Featured Collections</div>
+                        <div class="${page_initials}__modal__featured-collections">
+                            ${DATA.featured_collections.map(({ title, link }) => `<a href="${link}" class="${page_initials}__modal__featured-item"> ${title} </a>`).join("")}
+                        </div>
+                    </div>
+                </div>
+            `
+        );
     }
 
     const clickEventName = isTouchEnabled() ? "touchend" : "click";
@@ -311,13 +472,26 @@ logInfo("fired");
             callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
         {
-            selector: `.${page_initials}__modal__gear-drop-item, .${page_initials}__modal__featured-item`,
-            event: 'click',
+            selector: `a.${page_initials}__modal__gear-drop-item, .${page_initials}__modal__featured-item`,
+            event: "click",
             callback: (e) => {
                 const currentTarget = e.currentTarget;
                 e.preventDefault();
                 fireGA4Event("EDC11_ClickedCategory", currentTarget.innerText);
                 setTimeout(() => (window.location.href = currentTarget.getAttribute("href")), 150);
+            },
+        },
+        {
+            selector: `div.${page_initials}__modal__gear-drop-item`,
+            event: "click",
+            callback: (e) => {
+                const currentTarget = e.currentTarget;
+                const href = currentTarget.getAttribute("href");
+                if (window.AB_EDC11_isDragging) {
+                    return;
+                }
+                fireGA4Event("EDC11_ClickedCategory", currentTarget.innerText);
+                setTimeout(() => (window.location.href = href), 150);
             },
         },
     ];
@@ -339,13 +513,15 @@ logInfo("fired");
         console.table(TEST_CONFIG);
         createLayout();
         eventHandler(INITIAL_ACTION_LIST);
+        initGearDropDrag();
     }
 
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
             q(".row-start-1.lg\\:col-span-item.lg\\:col-end-\\[-1\\]") &&
-            q('#DrawerMenu form[action="/search"] button[aria-label="Search"]')
+            q("#DrawerMenu form[action='/search'] button[aria-label='Search']") &&
+            q("div[x-ref='resultsSlot']")
         );
     }
 
