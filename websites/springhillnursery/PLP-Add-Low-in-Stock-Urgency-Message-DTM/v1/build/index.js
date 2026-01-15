@@ -2,6 +2,12 @@
 Test doc: https://trello.com/c/R1C2oyZu/4600-plp-add-low-in-stock-urgency-message-dtm
 Figma: https://www.figma.com/design/9JhvESiGmUH7UEXd0rEUDe/Gardens-Alive-?node-id=2429-37&t=tEDyQ6JOHJGqd8Zy-1
 Test container: https://app.convert.com/accounts/100412411/projects/100416781/experiences/1004182892/summary
+
+Forced variation: 
+
+v1: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=1004182892.1004430151&utm_campaign=qa5
+
+v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=1004182892.1004430875&utm_campaign=qa5
 */
 
 (async () => {
@@ -11,8 +17,8 @@ Test container: https://app.convert.com/accounts/100412411/projects/100416781/ex
     site_url: "https://springhillnursery.com",
     test_name: "PLP - Add Low in Stock Urgency Message [DTM]",
     page_initials: "AB-PLP-URGENCY",
-    test_variation: 1,
-    test_version: 0.0001,
+    test_variation: 1 /* 1, 2 */,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -70,9 +76,61 @@ Test container: https://app.convert.com/accounts/100412411/projects/100416781/ex
   }
 
   const TXT = {
-    1: "Hurry! Selling Fast",
+    1: "Hurry! Selling Fast!",
     2: "Low in Stock",
   };
+
+  const STORAGE_KEY = "ab-urgency-shuffled-data";
+
+  // Get current page number from URL
+  function getCurrentPage() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("page") || "1";
+  }
+
+  // Get session storage data
+  function getStorageData() {
+    try {
+      const data = sessionStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : {};
+    } catch (error) {
+      // Do nothing
+      return {};
+    }
+  }
+
+  // Set session storage data
+  function setStorageData(data) {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      // Do nothing
+      return;
+    }
+  }
+
+  // Get stored card IDs for current path and page
+  function getStoredCardIds() {
+    const pathname = window.location.pathname;
+    const page = getCurrentPage();
+    const data = getStorageData();
+
+    return data[pathname]?.[page] || null;
+  }
+
+  // Save card IDs for current path and page
+  function saveCardIds(cardIds) {
+    const pathname = window.location.pathname;
+    const page = getCurrentPage();
+    const data = getStorageData();
+
+    if (!data[pathname]) {
+      data[pathname] = {};
+    }
+
+    data[pathname][page] = cardIds;
+    setStorageData(data);
+  }
 
   function shuffleInPlace(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
@@ -114,8 +172,6 @@ Test container: https://app.convert.com/accounts/100412411/projects/100416781/ex
       ...shuffledRemaining.slice(0, pickCount - 1),
     ];
 
-    console.log("selectedCards...", cards.length, selectedCards.length);
-
     // Shuffle the final selection randomly
     return shuffleInPlace(selectedCards);
   }
@@ -128,7 +184,24 @@ Test container: https://app.convert.com/accounts/100412411/projects/100416781/ex
     );
     if (cards.length === 0) return;
 
-    const picked = pickAndShuffleCards(cards);
+    const storedCardIds = getStoredCardIds();
+    let picked;
+
+    if (storedCardIds) {
+      picked = storedCardIds
+        .map((id) => cards.find((card) => card.getAttribute("data-id") === id))
+        .filter((card) => card !== undefined); // Filter out cards that don't exist on current page
+    } else {
+      picked = pickAndShuffleCards(cards);
+      const pickedIds = picked.map((card) => card.getAttribute("data-id"));
+      saveCardIds(pickedIds);
+    }
+
+    console.log("Log 1", "Total Cards", cards.length);
+    console.log("Log 2", "Total Selected Cards", picked.length);
+    console.log("Log 3", "Selected/Stored Cards", getStoredCardIds());
+
+    // Inject urgency messages into picked cards
     picked.forEach((card) => {
       card.classList.add("ab-urgency-msg-injected");
       q(card, ".product-item__text_group_primary").insertAdjacentHTML(
@@ -166,7 +239,8 @@ Test container: https://app.convert.com/accounts/100412411/projects/100416781/ex
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
       q("#root") &&
-      q(".collection__products-container")
+      q(".collection__products-container") &&
+      document.readyState === "complete"
     );
   }
 
