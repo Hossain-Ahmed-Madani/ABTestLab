@@ -18,7 +18,7 @@ v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=10041828
         test_name: "PLP - Add Low in Stock Urgency Message [DTM]",
         page_initials: "AB-PLP-URGENCY",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -185,9 +185,9 @@ v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=10041828
             saveCardIds(pickedIds);
         }
 
-        console.log("Log 1", 'Total Cards', cards.length);
-        console.log("Log 2", 'Total Selected Cards', picked.length);
-        console.log("Log 3", 'Selected/Stored Cards', getStoredCardIds());
+        console.log("LOG 1", 'Total Cards', cards.length);
+        console.log("LOG 2", 'Total Picked & Stored Cards', 'picked: ', picked.length, 'stored: ', getStoredCardIds()?.length);
+        console.log("LOG 3", 'Total Stored Cards', getStoredCardIds());
         
         // Inject urgency messages into picked cards
         picked.forEach((card) => {
@@ -198,12 +198,16 @@ v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=10041828
 
     function mutationObserverFunction() {
         const targetNode = q("#root");
-        const debouncedUpdate = debounce(updateLayout, 250);
+        const debouncedUpdate = debounce(updateLayout, 150);
         const observer = new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: false });
         return observer;
     }
 
     function init() {
+
+        if(window[page_initials] === true) return
+
+        window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         updateLayout();
