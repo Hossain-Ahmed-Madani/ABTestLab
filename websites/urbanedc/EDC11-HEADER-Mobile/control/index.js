@@ -105,13 +105,13 @@ logInfo("fired");
         console.table(TEST_CONFIG);
 
         const eventName = isTouchEnabled() ? "touchend" : "click";
-        qq('form[action="/search"] input[type="search"]').forEach((item) => {
+        qq('form[action="/search"] input[type="search"], button[type="button"].uppercase.js-enabled.block.lg\\:hidden').forEach((item) => {
             item.addEventListener(eventName, () => fireGA4Event("EDC11_ClickedSearch"));
         });
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) && q('#DrawerMenu form[action="/search"] button[aria-label="Search"]'));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('#DrawerMenu form[action="/search"] button[aria-label="Search"]'));
     }
 
     try {
