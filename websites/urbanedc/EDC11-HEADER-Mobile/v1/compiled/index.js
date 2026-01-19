@@ -35,13 +35,10 @@ logInfo("fired");
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "urbanedc",
         host: "https://urbanedc.com",
-        test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -93,7 +90,6 @@ logInfo("fired");
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("GA4 Event Fired:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -245,7 +241,6 @@ logInfo("fired");
 
             return dom;
         } catch (error) {
-            // console.error("Fetch and parse failed:", error);
             return null;
         }
     }
@@ -478,8 +473,6 @@ logInfo("fired");
                     q(`.${page_initials}__modal__container`).classList.remove("show-predictive-search-results");
                 }
 
-                console.log("value", value);
-
                 const target = q('.predictive-search-form  input[type="search"][name="q"]');
                 target.value = value;
                 target.dispatchEvent(new Event("input", { bubbles: true }));
@@ -546,12 +539,12 @@ logInfo("fired");
             },
         },
         {
-            selector: `form[action="/search"] input[type="search"]`,
+            selector: `form[action="/search"]:not(.predictive-search-form):not(.${page_initials}__modal__search) input[type="search"]`,
             event: clickEventName,
             callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
         {
-            selector: `button[type="button"].uppercase.js-enabled.block.lg\\:hidden`,
+            selector: `button[type="button"].uppercase.js-enabled.block.lg\\:hidden ~ div.hidden.lg\\:block`,
             event: clickEventName,
             callback: () => fireGA4Event("EDC11_ClickedSearch"),
         },
@@ -605,7 +598,6 @@ logInfo("fired");
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         createLayout();
         eventHandler(INITIAL_ACTION_LIST);
         initGearDropDrag();
@@ -626,7 +618,6 @@ logInfo("fired");
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

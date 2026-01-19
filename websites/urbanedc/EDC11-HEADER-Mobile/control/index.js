@@ -41,13 +41,12 @@ logInfo("fired");
         test_name: "EDC11: [HEADER - Mobile] Add Search Into Header with Panel - (2) SET UP TEST",
         page_initials: "AB-EDC11",
         test_variation: 0 /* 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("GA4 Event Fired:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -102,23 +101,21 @@ logInfo("fired");
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         const eventName = isTouchEnabled() ? "touchend" : "click";
-        qq('form[action="/search"] input[type="search"], button[type="button"].uppercase.js-enabled.block.lg\\:hidden').forEach((item) => {
+        qq('form[action="/search"]:not(.predictive-search-form) input[type="search"], button[type="button"].uppercase.js-enabled.block.lg\\:hidden ~ div.hidden.lg\\:block').forEach((item) => {
             item.addEventListener(eventName, () => fireGA4Event("EDC11_ClickedSearch"));
         });
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('#DrawerMenu form[action="/search"] button[aria-label="Search"]'));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('#DrawerMenu form[action="/search"] button[aria-label="Search"]') && q(`button[type="button"].uppercase.js-enabled.block.lg\\:hidden ~ div.hidden.lg\\:block`));
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
