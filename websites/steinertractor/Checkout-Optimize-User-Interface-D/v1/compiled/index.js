@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00015,
+        test_version: 0.00017,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -763,7 +763,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         return await response.json();
     }
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+    async function waitForElementAsync(predicate, timeout = 10000, frequency = 150) {
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
@@ -1157,6 +1157,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     async function createAndUpdateShippingLayout() {
         // Update
+        console.log("createAndUpdateShippingLayout...", qq("body > form > .container.bg-white, .footer").length);
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1193,9 +1194,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         // Add heading items
         qq("eve-shipping-address .address-text").forEach((item) => {
-
-            if(q(item, 'strong').innerText.includes('Delivery Address')) {
-                q(item, 'strong').innerText = 'Shipping Address';
+            if (q(item, "strong").innerText.includes("Delivery Address")) {
+                q(item, "strong").innerText = "Shipping Address";
             }
 
             q(item, "div:not(.btn)").appendChild(q(item, ".btn"));
@@ -1222,27 +1222,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             q(mainWrapperElement, ".ab-product-summary__addons").appendChild(q("div:has(> input#newsletter)"));
             q(mainWrapperElement, ".ab-product-summary__coupons").appendChild(q("cart-coupon"));
         }
-
-        // Update Select Inputs (Shipping & Payment Options)
-        // updateControlSelectInput("select#shipping", "Blue Ribbon");
-        // setTimeout(() => updateControlSelectInput("eve-payment-options .payment-row select", "Credit/Debit Card"), 250);
-        // return true;
     }
-
-    // async function updateControlSelectInput(selector, optionText) {
-    //     try {
-    //         await waitForElementAsync(() => !!(q(selector) && qq(selector + " > option").find((option) => option && option.innerText && option.innerText.includes(optionText))), 10000);
-
-    //         const selectElement = q(selector);
-    //         const option = qq(selectElement, "option").find((option) => option.innerText.includes(optionText));
-    //         option.selected = true;
-    //         selectElement.value = option.value;
-    //         const event = new Event("change", { bubbles: true });
-    //         selectElement.dispatchEvent(event);
-    //     } catch (error) {
-    //         return false;
-    //     }
-    // }
 
     async function handleAddressDeliveryFormShowHide(e) {
         q(".ab-form#delivery-address")?.remove();
@@ -1306,7 +1286,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
         const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
-        optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
+        const optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
 
         q(".ab-form#payment-options-credit-or-debit")?.remove();
 
@@ -1404,8 +1384,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             currentTarget?.removeAttribute("area-invalid");
         }
 
-         // Exception | Credit Card input
-        if(currentTarget.getAttribute("id") === "ab-credit-debit" && q('.form-group:has(> label[for="cardName"]) .text-danger:not(.asterix)')) { 
+        // Exception | Credit Card input
+        if (currentTarget.getAttribute("id") === "ab-credit-debit" && q('.form-group:has(> label[for="cardName"]) .text-danger:not(.asterix)')) {
             currentTarget?.setAttribute("area-invalid", "");
         }
     }
@@ -1705,7 +1685,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             item.classList.add(flagClassName);
                             if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                                 item.addEventListener(event, callback);
-                            } 
+                            }
                             // if (item.getAttribute("type") && DATA["text_based_input_list"].some((type) => type === item.getAttribute("type"))) {
                             //     item.addEventListener(event, callback);
                             // }
@@ -1736,6 +1716,31 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const targetNode = q(".ab-content-bottom");
         const debouncedUpdate = debounce(updateLayoutOnMutation, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    }
+
+    const applyChangesOnLocationChange = debounce(function () {
+        console.log("Location changed, applying changes...");
+        window.location.reload();
+    }, 250);
+
+    function urlObserver() {
+        // Optional: Track pushState/replaceState changes too
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            console.log("==== < Navigation occurred (back/forward button) ====");
+            applyChangesOnLocationChange();
+        });
+
+        window.addEventListener("pushstate", function () {
+            console.log("=== > History state was changed programmatically ===");
+            applyChangesOnLocationChange();
+        });
     }
 
     // ===========  MAIN JS ===========
@@ -1797,6 +1802,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         await mainLayoutFunction();
         eventHandler();
         mutationObserverFunction();
+        urlObserver();
     }
 
     function checkForItems() {
@@ -1810,9 +1816,14 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         const hasRequiredContents =
             !!((currentPath === PATHS.guest_checkout || currentPath === PATHS.address_checkout) && validateAllControlNodesExist(inputList)) ||
-            (currentPath === PATHS.shipping_checkout && q("select#shipping") && q("eve-payment-options"));
+            (currentPath === PATHS.shipping_checkout &&
+                q("select#shipping") &&
+                q("eve-payment-options") &&
+                qq("body > form > .container.bg-white, .footer").length >= 3 &&
+                q("#newsletter"));
 
         return !!(
+            document.readyState === "complete" &&
             stepClassName &&
             hasRequiredContents &&
             q(`body:not(.${page_initials})`) &&
@@ -1823,12 +1834,15 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-        return true;
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    // try {
+    //     await waitForElementAsync(checkForItems);
+    //     init();
+    //     return true;
+    // } catch (error) {
+    //     console.warn(error);
+    //     return false;
+    // }
+
+    // Need to add page reload, when url changes by adding url observer
+    waitForElementAsync(checkForItems).then(init);
 })();
