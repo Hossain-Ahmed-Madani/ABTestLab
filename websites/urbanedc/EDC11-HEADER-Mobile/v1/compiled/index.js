@@ -38,7 +38,7 @@ logInfo("fired");
         host: "https://urbanedc.com",
         page_initials: "AB-EDC11",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -228,6 +228,149 @@ logInfo("fired");
                 window.AB_EDC11_isDragging = false;
             }, 100);
         });
+
+        // Prev/Next button functionality
+        const prevButton = q(`.${page_initials}__modal__gear-drop-items--carousel-inner-nav-prev`);
+        const nextButton = q(`.${page_initials}__modal__gear-drop-items--carousel-inner-nav-next`);
+
+        if (prevButton && nextButton) {
+            // Calculate scroll distance (scroll by the width of visible area)
+            const getScrollDistance = () => {
+                const carouselInner = q(`.${page_initials}__modal__gear-drop-items--carousel-inner`);
+                if (!carouselInner) return carousel.offsetWidth * 0.8;
+                
+                const items = carouselInner.querySelectorAll(`.${page_initials}__modal__gear-drop-item`);
+                if (items.length > 0) {
+                    // Scroll by one item width + gap
+                    return items[0].offsetWidth + 16; // 16px for gap
+                }
+                return carousel.offsetWidth * 0.8;
+            };
+
+            // Update button states based on scroll position
+            const updateButtonStates = () => {
+                const scrollLeft = carousel.scrollLeft;
+                const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                
+                // Only update if carousel has scrollable content
+                if (maxScrollLeft > 5) {
+                    // Disable prev button if at the start (with 1px tolerance)
+                    if (scrollLeft <= 1) {
+                        prevButton.disabled = true;
+                        prevButton.style.opacity = '0.5';
+                        prevButton.style.cursor = 'not-allowed';
+                    } else {
+                        prevButton.disabled = false;
+                        prevButton.style.opacity = '1';
+                        prevButton.style.cursor = 'pointer';
+                    }
+                    
+                    // Disable next button if at the end (with 1px tolerance)
+                    if (scrollLeft >= maxScrollLeft - 1) {
+                        nextButton.disabled = true;
+                        nextButton.style.opacity = '0.5';
+                        nextButton.style.cursor = 'not-allowed';
+                    } else {
+                        nextButton.disabled = false;
+                        nextButton.style.opacity = '1';
+                        nextButton.style.cursor = 'pointer';
+                    }
+                } else {
+                    // If no scrollable content, hide or disable both buttons
+                    prevButton.disabled = true;
+                    prevButton.style.opacity = '0.5';
+                    prevButton.style.cursor = 'not-allowed';
+                    
+                    nextButton.disabled = true;
+                    nextButton.style.opacity = '0.5';
+                    nextButton.style.cursor = 'not-allowed';
+                }
+            };
+
+            // Smooth scroll function
+            const smoothScroll = (distance) => {
+                cancelMomentumTracking();
+                carousel.scrollBy({
+                    left: distance,
+                    behavior: 'smooth'
+                });
+                
+                // Update button states after scroll completes
+                setTimeout(updateButtonStates, 500);
+            };
+
+            // Previous button click handler
+            prevButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!prevButton.disabled) {
+                    smoothScroll(-getScrollDistance());
+                }
+            });
+
+            // Next button click handler
+            nextButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!nextButton.disabled) {
+                    smoothScroll(getScrollDistance());
+                }
+            });
+
+            // Touch support for buttons
+            prevButton.addEventListener("touchend", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!prevButton.disabled) {
+                    smoothScroll(-getScrollDistance());
+                }
+            });
+
+            nextButton.addEventListener("touchend", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (!nextButton.disabled) {
+                    smoothScroll(getScrollDistance());
+                }
+            });
+
+            // Listen to scroll events to update button states
+            carousel.addEventListener("scroll", updateButtonStates);
+
+            // Initialize button states after images load
+            const initButtonStates = () => {
+                // Wait for images to load
+                const images = carousel.querySelectorAll('img');
+                let loadedImages = 0;
+                
+                if (images.length === 0) {
+                    // No images, update immediately
+                    updateButtonStates();
+                    return;
+                }
+                
+                const checkAllLoaded = () => {
+                    loadedImages++;
+                    if (loadedImages === images.length) {
+                        updateButtonStates();
+                    }
+                };
+                
+                images.forEach(img => {
+                    if (img.complete) {
+                        checkAllLoaded();
+                    } else {
+                        img.addEventListener('load', checkAllLoaded);
+                        img.addEventListener('error', checkAllLoaded); // Handle failed images
+                    }
+                });
+                
+                // Fallback: Update after timeout regardless of image load status
+                setTimeout(updateButtonStates, 1000);
+            };
+            
+            initButtonStates();
+        }
     }
 
     async function fetchAndParseURLApi(url) {
@@ -401,6 +544,10 @@ logInfo("fired");
                                         `
                                     )
                                     .join("")}
+                            </div>
+                            <div class="${page_initials}__modal__gear-drop-items--carousel-inner-nav" style="position: absolute; right: 0; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                                <button type="button" class="${page_initials}__modal__gear-drop-items--carousel-inner-nav-prev"><-</button>
+                                <button type="button" class="${page_initials}__modal__gear-drop-items--carousel-inner-nav-next">-></button>
                             </div>
                         </div>
                     </div>
