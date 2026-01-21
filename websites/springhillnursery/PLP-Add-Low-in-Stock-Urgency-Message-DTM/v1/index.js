@@ -18,7 +18,7 @@ v2: https://springhillnursery.com/collections/flower_bulbs?_conv_eforce=10041828
         test_name: "PLP - Add Low in Stock Urgency Message [DTM]",
         page_initials: "AB-PLP-URGENCY",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
