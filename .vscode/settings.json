@@ -3,5 +3,19 @@
         "imidiately",
         "kleur",
         "upgradation"
-    ]
+    ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    // "[scss]": {
+    //     "editor.defaultFormatter": "vscode.css-language-features"
+    // },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
 }

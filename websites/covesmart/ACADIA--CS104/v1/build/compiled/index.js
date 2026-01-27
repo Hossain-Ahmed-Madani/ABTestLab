@@ -3,7 +3,7 @@
 URL: https://www.covesmart.com/quiz-results/
 Figma: https://www.figma.com/design/6kGIV8C7MvldVxOx8N3EHb/CS104---QUIZ-RESULTS--Card-Clean-Up?node-id=2001-3683&p=f&t=bHhinD1kOtBsyoSs-0
 Test container: https://app.convert.com/accounts/10049195/projects/100410617/experiences/1004177293/summary
-Forced variation: https://www.covesmart.com/quiz-results/?utm_campaign=acadia
+Forced variation: https://www.covesmart.com/quiz-results/?_conv_eforce=1004177293.1004417797?utm_campaign=acadia
 Preview: https://www.covesmart.com/quiz-results/?convert_action=convert_vpreview&convert_e=1004177293&convert_v=1004417797
 */
 
@@ -29,7 +29,7 @@ logInfo("fired");
     test_name: "CS104: [QUIZ RESULTS] Card Clean Up - (2) SET UP TEST",
     page_initials: "AB-CS104",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -132,10 +132,8 @@ logInfo("fired");
   }
 
   function checkForItems() {
-    return !!(
-      q(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
-      ) && true
+    return !!q(
+      `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
     );
   }
 

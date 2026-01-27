@@ -799,8 +799,8 @@
         div.innerHTML = /* HTML */ `
             <div class="ab-related-products__card-container">
                 ${carousel_data
-                    .map(
-                        ({ id, name, url, sku, image, price }) => /* HTML */ `
+                .map(
+                    ({ id, name, url, sku, image, price }) => /* HTML */ `
                             <div class="ab-related-product ab-related-product__card">
                                 <a href="${url}" class="ab-related-product__img">
                                     <img src="${image}" alt="${name}" />
@@ -809,8 +809,8 @@
                                 <div class="ab-related-product__price">${price}</div>
                             </div>
                         `
-                    )
-                    .join("")}
+                )
+                .join("")}
             </div>
 
             <button class="ab-carousel-btn ab-carousel-btn--prev disabled" aria-label="Previous products">${ASSETS.slider_prev_svg}</button>
@@ -851,8 +851,8 @@
             </p>
             <div class="ab-related-products-skeleton-loader">
                 ${Array.from({ length: 3 })
-                    .map(
-                        () => /* HTML */ `
+                .map(
+                    () => /* HTML */ `
                             <div class="ab-related-products-skeleton-loader__card">
                                 <div class="ab-related-products-skeleton-loader__img"></div>
                                 <div class="ab-related-products-skeleton-loader__title ab-related-products-skeleton-loader__title--first"></div>
@@ -860,8 +860,8 @@
                                 <div class="ab-related-products-skeleton-loader__price"></div>
                             </div>
                         `
-                    )
-                    .join("")}
+                )
+                .join("")}
             </div>
         `;
 
@@ -1070,7 +1070,7 @@
     async function handlePDPAddToCart() {
         const isTouch = "ontouchstart" in window;
 
-        if(!isTouch || window.innerWidth >= 768) return;
+        if (!isTouch || window.innerWidth >= 768) return;
 
         const selector = "button[type='submit'][form='product_addtocart_form'], button#custom_strap_atc";
 

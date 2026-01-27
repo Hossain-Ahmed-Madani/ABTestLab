@@ -75,13 +75,12 @@ Array.from($0.classList).join('.')
             padding: 0px;
             padding-left: 2px;
             display: inline-block;
-            
-            
+
             svg {
                 // border: 1px solid red;
                 margin-bottom: -1px;
-                width: 12px;
-                height: 12px;
+                // width: 12px;
+                // height: 12px;
             }
         }
     }
@@ -89,8 +88,8 @@ Array.from($0.classList).join('.')
     .flex.h-auto.w-auto.items-center.justify-center.mt-\[6px\] {
         margin-bottom: 10px;
         margin-top: 3px;
-        width: 9px;
-        height: 9px;
+        // width: 9px;
+        // height: 9px;
     }
 
     .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5 {
@@ -252,6 +251,10 @@ Array.from($0.classList).join('.')
 
     .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white {
         gap: 20px;
+
+        .flex.h-full.w-full.items-center.justify-center.p-0 {
+            height: max-content;
+        }
     }
 
     .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {
@@ -300,12 +303,13 @@ Array.from($0.classList).join('.')
             color: rgba(0, 35, 52, 1);
             padding-bottom: 0;
             margin-bottom: 13px;
+            width: max-content;
 
-            button {
-                svg {
-                    margin-bottom: 0;
-                }
-            }
+            // button {
+            //     svg {
+            //         margin-bottom: 0;
+            //     }
+            // }
         }
 
         .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
@@ -447,7 +451,12 @@ Array.from($0.classList).join('.')
         }
 
         .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white {
+            justify-content: flex-start;
             gap: 17px;
+
+            .flex.h-full.w-full.items-center.justify-center.p-0 {
+                min-height: 160px;
+            }
         }
 
         .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {

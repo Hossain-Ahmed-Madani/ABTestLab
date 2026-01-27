@@ -94,14 +94,10 @@ Array.from($0.classList).join('.')
   button
   svg {
   margin-bottom: -1px;
-  width: 12px;
-  height: 12px;
 }
 .AB-CS104 .flex.h-auto.w-auto.items-center.justify-center.mt-\[6px\] {
   margin-bottom: 10px;
   margin-top: 3px;
-  width: 9px;
-  height: 9px;
 }
 .AB-CS104
   .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5 {
@@ -278,6 +274,11 @@ Array.from($0.classList).join('.')
   gap: 20px;
 }
 .AB-CS104
+  .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white
+  .flex.h-full.w-full.items-center.justify-center.p-0 {
+  height: max-content;
+}
+.AB-CS104
   .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -325,16 +326,7 @@ Array.from($0.classList).join('.')
     color: rgb(0, 35, 52);
     padding-bottom: 0;
     margin-bottom: 13px;
-  }
-  .AB-CS104
-    .m-0.flex.text-\[12px\].font-bold.leading-4.text-cove-navy-blue.sm\:text-sm.sm\:font-bold
-    button
-    svg,
-  .AB-CS104
-    .text-cove-dark-grey.mb-cove-5.m-0.flex.text-\[12px\].font-bold.leading-4.sm\:text-sm.sm\:font-bold
-    button
-    svg {
-    margin-bottom: 0;
+    width: max-content;
   }
   .AB-CS104
     .mt-cove-10.flex.w-full.flex-col.items-center.justify-center.gap-cove-2.xs\:flex-row.xs\:gap-cove-5,
@@ -479,7 +471,13 @@ Array.from($0.classList).join('.')
   }
   .AB-CS104
     .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white {
+    justify-content: flex-start;
     gap: 17px;
+  }
+  .AB-CS104
+    .border-cove-dove.p-cove-5.sm\:p-cove-10.gap-cove-15.relative.flex.h-full.w-full.flex-col.items-center.justify-between.rounded.border.bg-white
+    .flex.h-full.w-full.items-center.justify-center.p-0 {
+    min-height: 160px;
   }
   .AB-CS104
     .mb-cove-10.mt-cove-15.h-cove-35.relative.flex.w-full.items-center.justify-center {
@@ -500,7 +498,7 @@ Array.from($0.classList).join('.')
 URL: https://www.covesmart.com/quiz-results/
 Figma: https://www.figma.com/design/6kGIV8C7MvldVxOx8N3EHb/CS104---QUIZ-RESULTS--Card-Clean-Up?node-id=2001-3683&p=f&t=bHhinD1kOtBsyoSs-0
 Test container: https://app.convert.com/accounts/10049195/projects/100410617/experiences/1004177293/summary
-Forced variation: https://www.covesmart.com/quiz-results/?utm_campaign=acadia
+Forced variation: https://www.covesmart.com/quiz-results/?_conv_eforce=1004177293.1004417797?utm_campaign=acadia
 Preview: https://www.covesmart.com/quiz-results/?convert_action=convert_vpreview&convert_e=1004177293&convert_v=1004417797
 */
 
@@ -526,7 +524,7 @@ logInfo("fired");
     test_name: "CS104: [QUIZ RESULTS] Card Clean Up - (2) SET UP TEST",
     page_initials: "AB-CS104",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -629,10 +627,8 @@ logInfo("fired");
   }
 
   function checkForItems() {
-    return !!(
-      q(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
-      ) && true
+    return !!q(
+      `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
     );
   }
 
