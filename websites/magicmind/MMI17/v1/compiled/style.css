@@ -1,0 +1,112 @@
+.AB-MMI17 .main-product-v2__open-modal-btn {
+  display: none;
+}
+.AB-MMI17 .main-product-v2__description {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+.AB-MMI17 .main-product-v2__description p {
+  text-align: left;
+  font-family: Circular, "sans-serif";
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 17px;
+}
+.AB-MMI17 .ab-nutrition-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.AB-MMI17 .ab-nutrition-facts-cta {
+  font-family: Circular, "sans-serif";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.AB-MMI17 .ab-befits-bullets {
+  width: max-content;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 21px;
+}
+.AB-MMI17 .ab-befits-bullet-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  box-sizing: border-box;
+}
+.AB-MMI17 .ab-befits-bullet-item-icon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-MMI17 .ab-befits-bullet-item-icon svg {
+  width: 12px;
+  min-width: 12px;
+  height: 12px;
+  min-height: 12px;
+}
+.AB-MMI17 .ab-befits-bullet-item-text {
+  font-family: Circular, "sans-serif";
+  font-weight: 450;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  white-space: nowrap;
+}
+@media screen and (min-width: 991px) {
+  .AB-MMI17 .ab-nutrition-facts {
+    gap: 40px;
+  }
+  .AB-MMI17 .main-product-v2__description {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .AB-MMI17 .main-product-v2__description p {
+    font-weight: 450;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0px;
+    margin-bottom: 21px;
+  }
+  .AB-MMI17 .ab-nutrition-facts-cta {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+  .AB-MMI17 .ab-befits-bullets {
+    margin-bottom: 10px;
+    gap: 20px 25px;
+  }
+  .AB-MMI17 .ab-befits-bullet-item {
+    gap: 10px;
+  }
+  .AB-MMI17 .ab-befits-bullet-item-icon svg {
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+    min-height: 18px;
+  }
+  .AB-MMI17 .ab-befits-bullet-item-text {
+    font-weight: 450;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0px;
+  }
+}
+
+.AB-MMI17.AB-MMI17--v1 .ab-befits-bullets {
+  display: none;
+}
