@@ -1,167 +1,171 @@
 .AB-MMI22 .hm-v3-banner__btn {
-  display: none;
+    display: none;
 }
 .AB-MMI22 .ab-hero-micro-commitment {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 29px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 29px;
 }
 .AB-MMI22 .ab-hero-micro-commitment__title {
-  color: #000;
-  text-align: center;
-  font-family: CircularStd-Book, "sans-serif";
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 150% */
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 15px;
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta {
-  border-radius: 5px;
-  border: 1px solid rgba(3, 161, 136, 0.15);
-  background: #fff;
-  box-shadow: 0 10px 55px 0 rgba(0, 0, 0, 0.1);
-  white-space: nowrap;
-  min-width: 275px;
-  width: 100%;
-  height: 60px;
-  padding: 20px 20px;
-  outline: none;
-  text-decoration: none;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 5px;
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta:hover, .AB-MMI22 .ab-hero-micro-commitment__cta:focus {
-  text-decoration: none;
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta:hover:before, .AB-MMI22 .ab-hero-micro-commitment__cta:focus:before {
-  background: rgb(3, 161, 136);
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta:before {
-  content: "";
-  width: 15px;
-  min-width: 15px;
-  height: 15px;
-  min-height: 15px;
-  border-radius: 50%;
-  border: 2px solid rgb(3, 161, 136);
-  background: #fff;
-  transition: all 0.2s;
-  margin-right: 5px;
-  margin-top: -1.5px;
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta-title {
-  color: #000;
-  font-family: CircularStd-Book, "sans-serif";
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  align-self: center;
-}
-.AB-MMI22 .ab-hero-micro-commitment__cta-prefix {
-  color: rgb(0, 0, 0);
-  font-family: Circular Std, sans-serif;
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 300;
-  line-height: 100%;
-  letter-spacing: 0px;
-  align-self: center;
-}
-.AB-MMI22 .hm-v3-banner {
-  min-height: 740px;
-}
-.AB-MMI22 .hm-v3-banner__wrapper {
-  padding: 40px 20px;
-  gap: 0;
-}
-.AB-MMI22 .hm-v3-banner__title {
-  font-weight: 500;
-  font-size: 42px;
-  line-height: 48px;
-  letter-spacing: -3px;
-  text-align: center;
-  color: rgb(0, 0, 0);
-  margin-bottom: 35px !important;
-}
-.AB-MMI22 .hm-v3-banner__text {
-  font-weight: 450;
-  font-size: 14px;
-  line-height: 24px;
-  letter-spacing: 0px;
-  text-align: center;
-  color: rgb(0, 0, 0);
-  margin: 0;
-  text-wrap: pretty;
-  margin-bottom: 38px;
-}
-.AB-MMI22 .hm-v3-banner__text br {
-  display: none;
-}
-@media screen and (min-width: 990px) {
-  .AB-MMI22 .hm-v3-banner {
-    min-height: 850px;
-  }
-  .AB-MMI22 .hm-v3-banner__wrapper {
-    padding: 50px 0;
-  }
-  .AB-MMI22 .hm-v3-banner__title {
-    font-weight: 500;
-    font-size: 70px;
-    line-height: 70px;
-    letter-spacing: -3px;
-    text-align: center;
-    margin-bottom: 40px !important;
-  }
-  .AB-MMI22 .hm-v3-banner__text {
-    font-weight: 450;
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 0px;
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .AB-MMI22 .hm-v3-banner__text br {
-    display: block;
-  }
-}
-@media screen and (min-width: 991px) {
-  .AB-MMI22 .ab-hero-micro-commitment {
-    gap: 41px;
-  }
-  .AB-MMI22 .ab-hero-micro-commitment__title {
     color: #000;
     text-align: center;
+    font-family: CircularStd-Book, "sans-serif";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta {
+    border-radius: 5px;
+    border: 1px solid rgba(3, 161, 136, 0.15);
+    background: #fff;
+    box-shadow: 0 10px 55px 0 rgba(0, 0, 0, 0.1);
+    white-space: nowrap;
+    min-width: 275px;
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta:hover,
+.AB-MMI22 .ab-hero-micro-commitment__cta:focus {
+    text-decoration: none;
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta:hover:before,
+.AB-MMI22 .ab-hero-micro-commitment__cta:focus:before {
+    background: rgb(3, 161, 136);
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta:before {
+    content: "";
+    width: 15px;
+    min-width: 15px;
+    height: 15px;
+    min-height: 15px;
+    border-radius: 50%;
+    border: 2px solid rgb(3, 161, 136);
+    background: #fff;
+    transition: all 0.2s;
+    margin-right: 5px;
+    margin-top: -1.5px;
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta-title {
+    color: #000;
+    font-family: CircularStd-Book, "sans-serif";
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    line-height: 30px; /* 150% */
-  }
-  .AB-MMI22 .ab-hero-micro-commitment__cta-container {
-    flex-direction: row;
-    gap: 20px;
-  }
-  .AB-MMI22 .ab-hero-micro-commitment__cta {
-    min-width: 220px;
-  }
-  .AB-MMI22 .ab-hero-micro-commitment__cta:before {
-    margin-right: 0;
-  }
+    line-height: normal;
+    align-self: center;
+}
+.AB-MMI22 .ab-hero-micro-commitment__cta-prefix {
+    color: rgb(0, 0, 0);
+    font-family:
+        Circular Std,
+        sans-serif;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 100%;
+    letter-spacing: 0px;
+    align-self: center;
+}
+.AB-MMI22 .hm-v3-banner {
+    min-height: 740px;
+}
+.AB-MMI22 .hm-v3-banner__wrapper {
+    padding: 40px 20px;
+    gap: 0;
+}
+.AB-MMI22 .hm-v3-banner__title {
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 48px;
+    letter-spacing: -3px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin-bottom: 35px !important;
+}
+.AB-MMI22 .hm-v3-banner__text {
+    font-weight: 450;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    margin: 0;
+    text-wrap: pretty;
+    margin-bottom: 38px;
+}
+.AB-MMI22 .hm-v3-banner__text br {
+    display: none;
+}
+@media screen and (min-width: 990px) {
+    .AB-MMI22 .hm-v3-banner {
+        min-height: 850px;
+    }
+    .AB-MMI22 .hm-v3-banner__wrapper {
+        padding: 50px 0;
+    }
+    .AB-MMI22 .hm-v3-banner__title {
+        font-weight: 500;
+        font-size: 70px;
+        line-height: 70px;
+        letter-spacing: -3px;
+        text-align: center;
+        margin-bottom: 40px !important;
+    }
+    .AB-MMI22 .hm-v3-banner__text {
+        font-weight: 450;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .AB-MMI22 .hm-v3-banner__text br {
+        display: block;
+    }
+}
+@media screen and (min-width: 991px) {
+    .AB-MMI22 .ab-hero-micro-commitment {
+        gap: 41px;
+    }
+    .AB-MMI22 .ab-hero-micro-commitment__title {
+        color: #000;
+        text-align: center;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px; /* 150% */
+    }
+    .AB-MMI22 .ab-hero-micro-commitment__cta-container {
+        flex-direction: row;
+        gap: 20px;
+    }
+    .AB-MMI22 .ab-hero-micro-commitment__cta {
+        min-width: 220px;
+    }
+    .AB-MMI22 .ab-hero-micro-commitment__cta:before {
+        margin-right: 0;
+    }
 }
 
 @media screen and (min-width: 991px) {
-  .AB-MMI22.AB-MMI22--v3 .ab-hero-micro-commitment__cta {
-    min-width: 275px;
-  }
+    .AB-MMI22.AB-MMI22--v3 .ab-hero-micro-commitment__cta {
+        min-width: 275px;
+    }
 }
