@@ -1,0 +1,46 @@
+.AB-VC120 .collection-filters-modal__inner-content-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.AB-VC120 header.collection-filters-modal__header {
+  min-height: 3.75rem;
+  order: -7;
+}
+.AB-VC120 .collection-filters-modal__refinements-wrapper {
+  order: -6;
+}
+.AB-VC120 .ab-filter-flag .collection-filters__accordion-title {
+  color: rgb(173, 32, 32) !important;
+}
+
+.AB-VC120--v1 ul.vue-accordion.Size {
+  order: -5;
+}
+.AB-VC120--v1 ul.vue-accordion.Style {
+  order: -4;
+}
+.AB-VC120--v1 ul.vue-accordion.Color {
+  order: -3;
+}
+.AB-VC120--v1 ul.vue-accordion.By_Price {
+  order: -2;
+}
+.AB-VC120--v1 ul.vue-accordion.Category {
+  order: -1;
+}
+
+.AB-VC120--v2 ul.vue-accordion.Style {
+  order: -5;
+}
+.AB-VC120--v2 ul.vue-accordion.Color {
+  order: -4;
+}
+.AB-VC120--v2 ul.vue-accordion.Size {
+  order: -3;
+}
+.AB-VC120--v2 ul.vue-accordion.Category {
+  order: -2;
+}
+.AB-VC120--v2 ul.vue-accordion.By_Price {
+  order: -1;
+}
