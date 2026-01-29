@@ -1,3 +1,19 @@
+/* 
+Test container: https://marketer.monetate.net/control/a-d6198f6f/p/magicmind.com/experience/2085733
+
+Preview:
+Control: https://marketer.monetate.net/control/preview/13487/NBSVKLW9FT7ETVWGEPOHI1Q7HH436J1R/17-product-move-ingredients-into-description
+V1: https://marketer.monetate.net/control/preview/13487/EQRAK69VTLBK2I2QBNCUKAEAA9AQXL8D/17-product-move-ingredients-into-description
+V2: https://marketer.monetate.net/control/preview/13487/YAUBVO1VQH12LXW1O75L7J2UX6XWVBAX/17-product-move-ingredients-into-description
+
+Preview including all experiences:
+Control: https://marketer.monetate.net/control/preview/13487/JI7ULSK7PTADWMU5E3PYWJESXUBK3DP0/17-product-move-ingredients-into-description
+V1: https://marketer.monetate.net/control/preview/13487/VYBEAFPHA4FL1SIP4QUAICRW83ZBVXUF/17-product-move-ingredients-into-description
+V2: https://marketer.monetate.net/control/preview/13487/3XGR36HZQ0D7YVM4TM96NS3G9B99TB15/17-product-move-ingredients-into-description
+
+
+*/
+
 const TEST_ID = "MMI17";
 const VARIANT_ID = "V1"; /* Control, V1, V2*/
 
@@ -19,7 +35,7 @@ logInfo("fired");
         site_url: "https://magicmind.com",
         test_name: "MMI17: [PRODUCT] Move Ingredients into Description (2) SET UP TEST",
         page_initials: "AB-MMI17",
-        test_variation: 2 /* 0, 1, 2 */,
+        test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.0001,
     };
 
