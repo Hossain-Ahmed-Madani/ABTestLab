@@ -13,15 +13,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
 (async function () {
     const TEST_CONFIG = {
-        client: "ROI Revolutions",
-        project: "steinertractor",
         host: "https://www.steinertractor.com",
-        path: window.location.pathname,
-        hash: window.location.hash,
-        test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00017,
+        test_version: 0.00021,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -854,8 +849,11 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                     ${value ? `value="${value}"` : ""}
                                                     ${required ? `required` : ""}
                                                     ${pattern ? `pattern="${pattern}"` : ""}
+                                                    ${q(control_node_selector + "> option:first-child").value !== "" ? "area-selected" : ""}
                                                 >
-                                                    <option value="${q(control_node_selector + "> option:first-child").value || ""}" selected>${label}</option>
+                                                    <option value="${q(control_node_selector + "> option:first-child").value || ""}" selected>
+                                                        ${q(control_node_selector + "> option:first-child").textContent}
+                                                    </option>
                                                     ${
                                                         control_node_selector && q(control_node_selector)
                                                             ? `
@@ -886,7 +884,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                             <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
                                         </div>
                                     `;
-                                }
+                                },
                             )
                             .join("")}
 
@@ -904,7 +902,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                 ${label}
                                             </button>
                                         </div>
-                                    `
+                                    `,
                                 )
                                 .join("")}
                         </div>`
@@ -940,7 +938,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                     <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
                                 </div>
                             </div>
-                        `
+                        `,
                     ).join("")}
                 </div>
                 <div class="ab-product-summary__border"></div>
@@ -1020,7 +1018,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
                         </div>
                     </div>
-                `
+                `,
             ).join("")}
         `;
 
@@ -1087,7 +1085,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `
+            `,
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1140,7 +1138,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `
+            `,
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1157,7 +1155,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     async function createAndUpdateShippingLayout() {
         // Update
-        console.log("createAndUpdateShippingLayout...", qq("body > form > .container.bg-white, .footer").length);
         qq("body > form > .container.bg-white, .footer").forEach((item) => item.classList.remove("container"));
 
         // Create
@@ -1187,7 +1184,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `
+            `,
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1233,7 +1230,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         if (!e.target.checked) {
             await waitForElementAsync(
-                () => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList))
+                () => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList)),
             );
             contentWrapper.classList.add("ab-content-wrapper--show-delivery-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
@@ -1271,7 +1268,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         if (!e.target.checked) {
             await waitForElementAsync(
-                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList))
+                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList)),
             );
             contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
@@ -1309,9 +1306,14 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             the front.
                         </div>
                     </div>
-                `
+                `,
             );
-            // eventHandler();
+            
+            setTimeout(() => {
+                const dataObj = getElementData(q('select#ab-country'));
+                handleSelectInput(dataObj);
+            }, 150);
+
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
             setTimeout(() => q(".ab-control-forms-section").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
@@ -1329,8 +1331,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
             if (dataObj["inputType"] === "select") {
                 setTimeout(() => {
-                    const controlOptions = qq(dataObj["controlNodeSelector"] + " > option:not(:first-child)");
-                    currentTarget.innerHTML = `${q(currentTarget, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                    // const controlOptions = qq(dataObj["controlNodeSelector"] + " > option:not(:first-child)");
+                    const controlOptions = qq(dataObj["controlNodeSelector"] + " > option");
+                    // currentTarget.innerHTML = `${q(currentTarget, "option:first-child").outerHTML} ${controlOptions.map((option) => option.outerHTML).join("")} `;
+                    currentTarget.innerHTML = `${controlOptions.map((option) => option.outerHTML).join("")} `;
                     const selectedOption = controlOptions.find((option) => option.selected);
                     currentTarget.value = selectedOption.value;
 
@@ -1430,8 +1434,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             }
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
-
-            console.log("controlNode:...", controlNode, controlNode.value);
         });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
@@ -1486,7 +1488,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             controlNode?.options.length > 1 &&
                             controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase() &&
                             ++count > 3),
-                    5000
+                    5000,
                 );
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
@@ -1506,7 +1508,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
                 handleFormErrorMessage(dependencyDataObj);
             } catch (error) {
-                console.error(error);
                 return false;
             }
         });
@@ -1549,7 +1550,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
                     // Check For Control inputs
                     if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
-                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
                         return;
                     }
 
@@ -1581,7 +1581,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
                     // Check For Control inputs
                     if (dataObj["controlNodes"] && dataObj["controlNodes"]?.length === 0) {
-                        console.error("Target node not found:", dataObj["controlNodeSelector"]);
                         return;
                     }
 
@@ -1681,7 +1680,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     events.forEach((event) => {
                         const flagClassName = `ab-${event}-event-attached`;
                         if (!item.classList.contains(flagClassName)) {
-                            console.log("Action Loop running....");
                             item.classList.add(flagClassName);
                             if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                                 item.addEventListener(event, callback);
@@ -1702,7 +1700,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     function updateLayoutOnMutation() {
-        console.log("Mutation Observer running....");
         qq(".dnnFormItem input[type='email'], .dnnFormItem input[type='password'], input#poNumber.form-control").forEach((item) => {
             if (item.value === "" && !item.hasAttribute("area-empty")) {
                 item.setAttribute("area-empty", "");
@@ -1719,7 +1716,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     const applyChangesOnLocationChange = debounce(function () {
-        console.log("Location changed, applying changes...");
         window.location.reload();
     }, 250);
 
@@ -1733,12 +1729,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             applyChangesOnLocationChange();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             applyChangesOnLocationChange();
         });
     }
@@ -1773,7 +1767,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const config = FORM_CONFIG[(window.location.pathname + window.location.hash).toLowerCase()] || {
             stepClassName: "",
             inputList: [],
-            layoutFunction: () => console.log("No matching path..."),
+            layoutFunction: () => {},
         };
         return {
             stepClassName: config.stepClassName,
@@ -1798,7 +1792,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         const { stepClassName, mainLayoutFunction } = getLayoutConfig();
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, stepClassName);
-        console.table(TEST_CONFIG);
         await mainLayoutFunction();
         eventHandler();
         mutationObserverFunction();
@@ -1834,15 +1827,5 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         );
     }
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    //     return true;
-    // } catch (error) {
-    //     console.warn(error);
-    //     return false;
-    // }
-
-    // Need to add page reload, when url changes by adding url observer
     waitForElementAsync(checkForItems).then(init);
 })();
