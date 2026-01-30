@@ -33,14 +33,13 @@ logInfo("fired");
 (async () => {
     const TEST_CONFIG = {
         page_initials: "AB-GP90",
-        test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_variation: 2 /* 0, 1, 2 */,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event:", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -110,35 +109,42 @@ logInfo("fired");
         poster_redirect_link: "https://guideposts.org/shop/category/best-sellers/",
     };
 
+    const layout = /* HTMl */ `
+            <li
+                class="ast-grid-common-col ast-full-width ast-article-post astra-woo-hover-zoom desktop-align-left tablet-align-left mobile-align-left ast-width-md-12 ast-archive-post ast-separate-posts product type-product post-2002623 status-publish last instock product_cat-mysteries-of-cobble-hill-farm product_cat-new-releases product_cat-fiction-books has-post-thumbnail sale taxable shipping-taxable product-type-grouped"
+            >
+                <div class="ab-bestseller-ad widget_text widget category-ads-shortcode">
+                    <div class="textwidget custom-html-widget">
+                        <a href="${ASSETS["poster_redirect_link"]}" aria-label="inline-banner-gp">
+                            <div class="wcpb-product-badges-loop-container" style="position: relative; max-width: 261.656px; margin: 0px auto;">
+                                <img loading="lazy" src="${ASSETS["poster_img_src"]}" alt="" width="336" height="452" style="display: block;" />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        `;
+
     function updateLayoutV1() {
         if (q(".ab-bestseller-ad")) return;
 
-        const targetNode = q(".products:not(.owl-carousel) .widget_text.widget.category-ads-shortcode");
-        targetNode.classList.add(".ab-bestseller-ad");
-        q(targetNode, "a").setAttribute("href", ASSETS["poster_redirect_link"]);
-        q(targetNode, "img").setAttribute("src", ASSETS["poster_img_src"]);
+        let targetNode = q(".products:not(.owl-carousel) .widget_text.widget.category-ads-shortcode");
+        if (targetNode) {
+            targetNode.classList.add(".ab-bestseller-ad");
+            q(targetNode, "a").setAttribute("href", ASSETS["poster_redirect_link"]);
+            q(targetNode, "img").setAttribute("src", ASSETS["poster_img_src"]);
+            return;
+        }
+
+        targetNode = q(".products:not(.owl-carousel) > li:last-child");
+        targetNode.insertAdjacentHTML("afterend", layout);
     }
 
     function updateLayoutV2() {
         if (q(".ab-bestseller-ad")) return;
 
-        q(".products:not(.owl-carousel) > li:nth-child(10)").insertAdjacentHTML(
-            "afterend",
-            /* HTML */ `
-                <li
-                    class="ast-grid-common-col ast-full-width ast-article-post astra-woo-hover-zoom desktop-align-left tablet-align-left mobile-align-left ast-width-md-12 ast-archive-post ast-separate-posts product type-product post-2002623 status-publish last instock product_cat-mysteries-of-cobble-hill-farm product_cat-new-releases product_cat-fiction-books has-post-thumbnail sale taxable shipping-taxable product-type-grouped"
-                >
-                    <div class="ab-bestseller-ad widget_text widget category-ads-shortcode">
-                        <div class="textwidget custom-html-widget">
-                            <a href="${ASSETS["poster_redirect_link"]}" aria-label="inline-banner-gp"
-                                ><div class="wcpb-product-badges-loop-container" style="position: relative; max-width: 261.656px; margin: 0px auto;">
-                                    <img loading="lazy" src="${ASSETS["poster_img_src"]}" alt="" width="336" height="452" style="display: block;" /></div
-                            ></a>
-                        </div>
-                    </div>
-                </li>
-            `,
-        );
+        let targetNode = q(".products:not(.owl-carousel) > li:nth-child(10)") || q(".products:not(.owl-carousel) > li:last-child");
+        targetNode.insertAdjacentHTML("afterend", layout);
     }
 
     function clickFunction() {
@@ -154,13 +160,13 @@ logInfo("fired");
                     fireGA4Event("GP90_AdClick", "Shop Our Best Sellers");
                 }
 
-            setTimeout(() => {
-                if (e.ctrlKey || e.metaKey) {
-                    window.open(href, "_blank");
-                } else {
-                    window.location.href = href;
-                }
-            }, 150);
+                setTimeout(() => {
+                    if (e.ctrlKey || e.metaKey) {
+                        window.open(href, "_blank");
+                    } else {
+                        window.location.href = href;
+                    }
+                }, 150);
             }
         });
     }
