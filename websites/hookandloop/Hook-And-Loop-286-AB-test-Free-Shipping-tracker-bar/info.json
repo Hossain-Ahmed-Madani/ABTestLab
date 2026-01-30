@@ -1,0 +1,13 @@
+{
+  "id": "1769781403721_3058_Hook_And_Loop_286_AB_test_Free_Shipping_tracker_bar",
+  "name": "Hook-And-Loop-286-AB-test-Free-Shipping-tracker-bar",
+  "type": "A/B",
+  "website": "hookandloop",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-01-30T13:56:43.721Z",
+  "createdAtReadable": "1/30/2026, 7:56:43 PM",
+  "lastUpdated": "2026-01-30T13:56:44.226Z"
+}
