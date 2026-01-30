@@ -27,45 +27,43 @@
         order: -6;
     }
 
-    .ab-filter-flag .collection-filters__accordion-title {
-        color: rgb(173, 32, 32) !important;
-    }
+    // [ab-filter-type] .collection-filters__accordion-title {
+    //     color: rgb(182, 16, 16) !important;
+    // }
 }
 
 .AB-VC120--v1 {
-    ul.vue-accordion.Size {
+    ul.vue-accordion[ab-filter-type="Size"] {
         order: -5;
     }
-    ul.vue-accordion.Style {
+    ul.vue-accordion[ab-filter-type="Style"] {
         order: -4;
     }
-    ul.vue-accordion.Color {
+    ul.vue-accordion[ab-filter-type="Color"] {
         order: -3;
     }
-    ul.vue-accordion.By_Price {
+    ul.vue-accordion[ab-filter-type="By Price"] {
         order: -2;
     }
-    ul.vue-accordion.Category {
+    ul.vue-accordion[ab-filter-type="Category"] {
         order: -1;
     }
 }
 
 .AB-VC120--v2 {
-    ul.vue-accordion.Style {
+    ul.vue-accordion[ab-filter-type="Style"] {
         order: -5;
     }
-    ul.vue-accordion.Color {
+    ul.vue-accordion[ab-filter-type="Color"] {
         order: -4;
     }
-    ul.vue-accordion.Size {
+    ul.vue-accordion[ab-filter-type="Size"] {
         order: -3;
     }
-    ul.vue-accordion.Category {
+    ul.vue-accordion[ab-filter-type="Category"] {
         order: -2;
     }
-    ul.vue-accordion.By_Price {
+    ul.vue-accordion[ab-filter-type="By Price"] {
         order: -1;
     }
 }
-
-
