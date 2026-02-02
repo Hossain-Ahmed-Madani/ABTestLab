@@ -1,9 +1,12 @@
+/* 
+Ticket: https://trello.com/c/3icFrs7c/4644-hook-loop-286-a-b-test-free-shipping-tracker-bar-on-website-pages-as-well-as-mini-cart
+Test container:  https://app.varify.io/dashboard?search=Hook+%26+Loop+286+-+A%2FB+test+-+Free+Shipping+tracker+bar+on+website+pages+as+well+as+mini-cart
+Preview : https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
-        client: "Hook & Loop",
-        project: "Hook & Loop",
-        site_url: "https://www.hookandloop.com/",
-        test_name: "Hook & Loop 286 - A/B test - Free Shipping tracker bar on website pages as well as mini-cart.",
         page_initials: "AB-FREE-SHIPPING-TRACKER-BAR",
         test_variation: 1,
         test_version: 0.0001,
@@ -54,7 +57,7 @@
     function createLayout() {
         // ab-show-free-shipping, hidden
         const layout = /* HTML */ `
-            <div class="ab-subtotal-progress-wrapper container">
+            <div class="ab-subtotal-progress-wrapper container hidden">
                 <div class="ab-subtotal-progress-container">
                     <!-- Unlock Shipping Message -->
                     <div class="ab-subtotal-progress-heading ab-unlock-shipping">
@@ -112,7 +115,7 @@
 
                     <!-- Progress Bar -->
                     <div class="ab-subtotal-progress-bar">
-                        <div class="ab-subtotal-progress-bar__progress" style="width: 6.25%"></div>
+                        <div class="ab-subtotal-progress-bar__progress" style="width: 0%"></div>
                     </div>
 
                     <!-- Price Display -->
@@ -125,12 +128,18 @@
             </div>
         `;
 
-        const targetNode = q(".breadcrumbs");
-        targetNode.insertAdjacentHTML("beforebegin", layout);
+        const promotionBanner = q("#promotion-banner");
+        const breadCrumbs = q(".breadcrumbs");
+
+        if (promotionBanner) {
+            promotionBanner.insertAdjacentHTML("afterend", layout);
+        } else if (breadCrumbs) {
+            breadCrumbs.insertAdjacentHTML("beforebegin", layout);
+        }
     }
 
     function updateLayout() {
-        console.log("update layout....");
+        console.log("update layout on mutation....");
 
         const subtotalProgressContainer = q("#cart-drawer .subtotal-progress-container");
         const targetNode = q(".ab-subtotal-progress-wrapper");
@@ -154,31 +163,28 @@
         q(targetNode, ".ab-added-subtotal .ab-price").innerText = subTotal;
         q(targetNode, ".ab-subtotal-progress-bar__progress").style.width = `${percentage <= 100 ? percentage : 100}%`;
 
-        console.log("subtotal", subTotal, "percentage", (+subTotal.replace(/[^\d.]/g, "") * 100) / 200);
     }
 
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateLayout, 250);
+        const debouncedUpdate = debounce(updateLayout, 100);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         createLayout();
         mutationObserverFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".breadcrumbs") && q("#cart-drawer"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && (q("#promotion-banner") || q(".breadcrumbs")) && q("#cart-drawer"));
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
