@@ -7,10 +7,6 @@
       style.innerHTML = `.AB-MMI17 .main-product-v2__open-modal-btn {
   display: none;
 }
-.AB-MMI17 .main-product-v2__description {
-  padding-left: 18px;
-  padding-right: 18px;
-}
 .AB-MMI17 .main-product-v2__description p {
   text-align: left;
   font-family: Circular, "sans-serif";
@@ -19,7 +15,10 @@
   line-height: 20px;
   letter-spacing: 0px;
   color: rgb(0, 0, 0);
-  margin-bottom: 17px;
+  margin-bottom: 11px;
+}
+.AB-MMI17 .main-product-v2__description p br {
+  display: none;
 }
 .AB-MMI17 .ab-nutrition-facts {
   display: flex;
@@ -30,7 +29,7 @@
   font-family: Circular, "sans-serif";
   font-weight: 500;
   font-size: 14px;
-  line-height: 32px;
+  line-height: 100%;
   letter-spacing: 0px;
   text-align: left;
   text-decoration: underline;
@@ -71,6 +70,9 @@
   color: rgb(0, 0, 0);
   white-space: nowrap;
 }
+.AB-MMI17 .main-product-v2__thumbnails-outher {
+  margin-top: 11px;
+}
 @media screen and (min-width: 991px) {
   .AB-MMI17 .ab-nutrition-facts {
     gap: 40px;
@@ -84,12 +86,12 @@
     font-size: 18px;
     line-height: 26px;
     letter-spacing: 0px;
-    margin-bottom: 21px;
+    margin-bottom: 15px;
   }
   .AB-MMI17 .ab-nutrition-facts-cta {
     font-weight: 500;
     font-size: 16px;
-    line-height: 32px;
+    line-height: 100%;
     letter-spacing: 0px;
   }
   .AB-MMI17 .ab-befits-bullets {
@@ -124,21 +126,37 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
-const TEST_ID = "MMI17";
-const VARIANT_ID = "V1"; /* Control, V1, V2*/
+/* 
+Test container: https://marketer.monetate.net/control/a-d6198f6f/p/magicmind.com/experience/2085733
 
-function logInfo(message) {
-  console.log(
-    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
-    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-    message,
-  );
-}
+Preview:
+Control: https://marketer.monetate.net/control/preview/13487/NBSVKLW9FT7ETVWGEPOHI1Q7HH436J1R/17-product-move-ingredients-into-description
+V1: https://marketer.monetate.net/control/preview/13487/EQRAK69VTLBK2I2QBNCUKAEAA9AQXL8D/17-product-move-ingredients-into-description
+V2: https://marketer.monetate.net/control/preview/13487/YAUBVO1VQH12LXW1O75L7J2UX6XWVBAX/17-product-move-ingredients-into-description
 
-logInfo("fired");
+Preview including all experiences:
+Control: https://marketer.monetate.net/control/preview/13487/JI7ULSK7PTADWMU5E3PYWJESXUBK3DP0/17-product-move-ingredients-into-description
+V1: https://marketer.monetate.net/control/preview/13487/VYBEAFPHA4FL1SIP4QUAICRW83ZBVXUF/17-product-move-ingredients-into-description
+V2: https://marketer.monetate.net/control/preview/13487/3XGR36HZQ0D7YVM4TM96NS3G9B99TB15/17-product-move-ingredients-into-description
+
+
+*/
 
 (async () => {
+  const TEST_ID = "MMI17";
+  const VARIANT_ID = "V1"; /* Control, V1, V2*/
+
+  function logInfo(message) {
+    console.log(
+      `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      message,
+    );
+  }
+
+  logInfo("fired");
+
   const TEST_CONFIG = {
     client: "Acadia",
     project: "magicmind",
@@ -146,8 +164,8 @@ logInfo("fired");
     test_name:
       "MMI17: [PRODUCT] Move Ingredients into Description (2) SET UP TEST",
     page_initials: "AB-MMI17",
-    test_variation: 2 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_variation: 1 /* 0, 1, 2 */,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -174,7 +192,7 @@ logInfo("fired");
 
   async function waitForElementAsync(
     predicate,
-    timeout = 20000,
+    timeout = 10000,
     frequency = 150,
   ) {
     const startTime = Date.now();

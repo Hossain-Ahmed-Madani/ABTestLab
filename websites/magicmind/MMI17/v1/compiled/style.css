@@ -1,10 +1,6 @@
 .AB-MMI17 .main-product-v2__open-modal-btn {
   display: none;
 }
-.AB-MMI17 .main-product-v2__description {
-  padding-left: 18px;
-  padding-right: 18px;
-}
 .AB-MMI17 .main-product-v2__description p {
   text-align: left;
   font-family: Circular, "sans-serif";
@@ -13,7 +9,10 @@
   line-height: 20px;
   letter-spacing: 0px;
   color: rgb(0, 0, 0);
-  margin-bottom: 17px;
+  margin-bottom: 11px;
+}
+.AB-MMI17 .main-product-v2__description p br {
+  display: none;
 }
 .AB-MMI17 .ab-nutrition-facts {
   display: flex;
@@ -24,7 +23,7 @@
   font-family: Circular, "sans-serif";
   font-weight: 500;
   font-size: 14px;
-  line-height: 32px;
+  line-height: 100%;
   letter-spacing: 0px;
   text-align: left;
   text-decoration: underline;
@@ -65,6 +64,9 @@
   color: rgb(0, 0, 0);
   white-space: nowrap;
 }
+.AB-MMI17 .main-product-v2__thumbnails-outher {
+  margin-top: 11px;
+}
 @media screen and (min-width: 991px) {
   .AB-MMI17 .ab-nutrition-facts {
     gap: 40px;
@@ -78,12 +80,12 @@
     font-size: 18px;
     line-height: 26px;
     letter-spacing: 0px;
-    margin-bottom: 21px;
+    margin-bottom: 15px;
   }
   .AB-MMI17 .ab-nutrition-facts-cta {
     font-weight: 500;
     font-size: 16px;
-    line-height: 32px;
+    line-height: 100%;
     letter-spacing: 0px;
   }
   .AB-MMI17 .ab-befits-bullets {

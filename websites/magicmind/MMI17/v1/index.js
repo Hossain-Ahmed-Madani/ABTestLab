@@ -14,21 +14,21 @@ V2: https://marketer.monetate.net/control/preview/13487/3XGR36HZQ0D7YVM4TM96NS3G
 
 */
 
-const TEST_ID = "MMI17";
-const VARIANT_ID = "V1"; /* Control, V1, V2*/
-
-function logInfo(message) {
-    console.log(
-        `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
-        "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-        "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-        message,
-    );
-}
-
-logInfo("fired");
-
 (async () => {
+    const TEST_ID = "MMI17";
+    const VARIANT_ID = "V1"; /* Control, V1, V2*/
+
+    function logInfo(message) {
+        console.log(
+            `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+            "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            message
+        );
+    }
+
+    logInfo("fired");
+
     const TEST_CONFIG = {
         client: "Acadia",
         project: "magicmind",
@@ -36,7 +36,7 @@ logInfo("fired");
         test_name: "MMI17: [PRODUCT] Move Ingredients into Description (2) SET UP TEST",
         page_initials: "AB-MMI17",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -49,7 +49,6 @@ logInfo("fired");
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -61,7 +60,7 @@ logInfo("fired");
         });
     }
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+    async function waitForElementAsync(predicate, timeout = 10000, frequency = 150) {
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
@@ -95,7 +94,6 @@ logInfo("fired");
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         let data;
         const currentPath = window.location.pathname;
@@ -111,7 +109,7 @@ logInfo("fired");
         }
 
         q(".main-product-v2__description p").insertAdjacentHTML(
-            "afterend", /* HTML */
+            "afterend" /* HTML */,
             `<div class="ab-nutrition-facts">
                 <div class="ab-nutrition-facts-cta">See Nutrition Facts</div>
                 <div class="ab-befits-bullets">
@@ -130,12 +128,13 @@ logInfo("fired");
                                     </div>
                                     <div class="ab-befits-bullet-item-text">${txt}</div>
                                 </div>
-                            `,
+                            `
                         )
                         .join("")}
                 </div>
             </div>
-        `);
+        `
+        );
 
         q(".ab-nutrition-facts-cta").addEventListener("click", (e) => {
             fireGA4Event("MMI17_IngredientsClick");
@@ -151,7 +150,6 @@ logInfo("fired");
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
