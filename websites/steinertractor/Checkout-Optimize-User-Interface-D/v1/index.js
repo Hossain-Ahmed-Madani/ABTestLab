@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00021,
+        test_version: 0.00022,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -898,7 +898,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                             <span class="ab-error-message">${errorMessage ? errorMessage : `${label} is required`} </span>
                                         </div>
                                     `;
-                                },
+                                }
                             )
                             .join("")}
 
@@ -916,7 +916,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                 ${label}
                                             </button>
                                         </div>
-                                    `,
+                                    `
                                 )
                                 .join("")}
                         </div>`
@@ -929,7 +929,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     //  ========= PRODUCT SUMMARY =========
     async function getProductSummaryLayout() {
-        const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
+        const { CartLine, FreightTotal, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
 
         const layout = /* HTML */ `
             <div class="ab-product-summary">
@@ -952,7 +952,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                     <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
                                 </div>
                             </div>
-                        `,
+                        `
                     ).join("")}
                 </div>
                 <div class="ab-product-summary__border"></div>
@@ -986,7 +986,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                     </div>
                     <div class="ab-product-summary__row row">
                         <div class="ab-product-summary__col col-6">Delivery</div>
-                        <div class="ab-product-summary__col col-6">$0.00</div>
+                        <div class="ab-product-summary__col col-6">$${FreightTotal ? FreightTotal : "0.00"}</div>
                     </div>
                     <div class="ab-product-summary__row row">
                         <div class="ab-product-summary__col col-6">Sub Total</div>
@@ -1012,7 +1012,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     }
 
     async function updateProductSummaryLayout() {
-        const { CartLine, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
+        const { CartLine, FreightTotal, UnitTotals, SubTotal, PromotionTotal, TaxTotal, Total } = await fetchCartData();
 
         q(".ab-product-summary__added-products").innerHTML = /* HTML */ `
             ${CartLine.map(
@@ -1032,7 +1032,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             <p class="ab-product-summary__product-price">$${UnitOfMeasure[0].Price}</p>
                         </div>
                     </div>
-                `,
+                `
             ).join("")}
         `;
 
@@ -1043,7 +1043,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             </div>
             <div class="ab-product-summary__row row">
                 <div class="ab-product-summary__col col-6">Delivery</div>
-                <div class="ab-product-summary__col col-6">$0.00</div>
+                <div class="ab-product-summary__col col-6">$${FreightTotal ? FreightTotal : "0.00"}</div>
             </div>
             <div class="ab-product-summary__row row">
                 <div class="ab-product-summary__col col-6">Sub Total</div>
@@ -1099,7 +1099,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `,
+            `
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1152,7 +1152,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `,
+            `
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1198,7 +1198,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         </div>
                     </div>
                 </div>
-            `,
+            `
         );
 
         const mainWrapperElement = q(".ab-content-wrapper");
@@ -1244,7 +1244,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         if (!e.target.checked) {
             await waitForElementAsync(
-                () => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList)),
+                () => !!(q("#guestCheckoutWrapper >  form > div:nth-child(9) select[name='CountryId']") && validateAllControlNodesExist(guest_delivery_address.inputList))
             );
             contentWrapper.classList.add("ab-content-wrapper--show-delivery-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(guest_delivery_address));
@@ -1282,7 +1282,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         if (!e.target.checked) {
             await waitForElementAsync(
-                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList)),
+                () => !!(q("app-progress-stepper ~ .row.mt-5:last-of-type > eve-address-form select#carrier") && validateAllControlNodesExist(checkout_shipping_address.inputList))
             );
             contentWrapper.classList.add("ab-content-wrapper--show-shipping-address");
             billingAddressForm.insertAdjacentHTML("afterend", getFormLayout(checkout_shipping_address));
@@ -1320,18 +1320,19 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             the front.
                         </div>
                     </div>
-                `,
+                `
             );
-            
-            setTimeout(() => {
-                const dataObj = getElementData(q('select#ab-country'));
-                handleSelectInput(dataObj)
-            }, 150)
 
+            setTimeout(() => {
+                const dataObj = getElementData(q("select#ab-country"));
+                handleSelectInput(dataObj);
+            }, 150);
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
             setTimeout(() => q(".ab-control-forms-section").scrollIntoView({ behavior: "smooth", block: "center" }), 100);
         }
+
+        setTimeout(updateProductSummaryLayout, 1500);
     }
 
     async function handleSameAsBillingCheckboxClick(e) {
@@ -1410,11 +1411,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     function handleControlInputAreaEmptyAttribute(e) {
         const currentTarget = e.target;
-        // if (controlNodes?.some((controlNode) => controlNode.classList.contains("is-invalid"))) {
-        //     currentTarget.setAttribute("area-invalid", "");
-        // } else {
-        //     currentTarget?.removeAttribute("area-invalid");
-        // }
 
         if (!currentTarget.value) {
             currentTarget?.setAttribute("area-empty", "");
@@ -1502,7 +1498,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             controlNode?.options.length > 1 &&
                             controlNode?.options?.[1]?.innerText.trim().toLowerCase() !== dependencyNode?.options?.[1]?.innerText.trim().toLowerCase() &&
                             ++count > 3),
-                    5000,
+                    5000
                 );
 
                 if (DATA["text_based_input_list"].some((type) => type === inputType)) {
@@ -1700,9 +1696,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                             if (item.getAttribute("inputtype") && item.getAttribute("inputtype") === "tel") {
                                 item.addEventListener(event, callback);
                             }
-                            // if (item.getAttribute("type") && DATA["text_based_input_list"].some((type) => type === item.getAttribute("type"))) {
-                            //     item.addEventListener(event, callback);
-                            // }
                             else {
                                 item.addEventListener(event, debouncedCallback);
                             }
