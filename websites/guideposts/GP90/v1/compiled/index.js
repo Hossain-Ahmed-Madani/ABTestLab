@@ -33,8 +33,8 @@ logInfo("fired");
 (async () => {
     const TEST_CONFIG = {
         page_initials: "AB-GP90",
-        test_variation: 2 /* 0, 1, 2 */,
-        test_version: 0.0002,
+        test_variation: 1 /* 0, 1, 2 */,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -179,7 +179,7 @@ logInfo("fired");
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".products:not(.owl-carousel) .widget_text.widget.category-ads-shortcode"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".products:not(.owl-carousel)") /* q(".products:not(.owl-carousel)  .widget_text.widget.category-ads-shortcode") */);
     }
 
     try {
