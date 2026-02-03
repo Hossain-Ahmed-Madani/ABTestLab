@@ -1,0 +1,13 @@
+{
+  "id": "1770100255469_3504_Test008_SGD_course_detail_page_visualize_the_course_implementation_process",
+  "name": "Test008-SGD-course-detail-page-visualize-the-course-implementation-process",
+  "type": "A/B",
+  "website": "sgd",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-02-03T06:30:55.469Z",
+  "createdAtReadable": "2/3/2026, 12:30:55 PM",
+  "lastUpdated": "2026-02-03T06:30:55.739Z"
+}
