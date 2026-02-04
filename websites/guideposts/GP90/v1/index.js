@@ -37,8 +37,8 @@ logInfo("fired");
         site_url: "https://guideposts.org/",
         test_name: "GP90: [Collection] Best Sellers In Line Ad (2) SET UP TEST",
         page_initials: "AB-GP90",
-        test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0003,
+        test_variation: 2 /* 0, 1, 2 */,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

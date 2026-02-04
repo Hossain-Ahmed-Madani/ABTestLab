@@ -33,8 +33,8 @@ logInfo("fired");
 (async () => {
     const TEST_CONFIG = {
         page_initials: "AB-GP90",
-        test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0003,
+        test_variation: 2 /* 0, 1, 2 */,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
