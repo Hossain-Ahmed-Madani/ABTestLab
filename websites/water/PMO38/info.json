@@ -1,0 +1,10 @@
+{
+    "id": "1770211710842_6151_PMO38",
+    "name": "PMO38",
+    "type": "A/B",
+    "website": "water",
+    "variations": ["control", "v1"],
+    "createdAt": "2026-02-04T13:28:30.843Z",
+    "createdAtReadable": "2/4/2026, 7:28:30 PM",
+    "lastUpdated": "2026-02-04T13:28:31.046Z"
+}
