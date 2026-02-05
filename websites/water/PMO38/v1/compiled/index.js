@@ -15,7 +15,6 @@ V1:
 
 */
 
-
 (async () => {
     const TEST_ID = "PMO38";
     const VARIANT_ID = "V1"; /* control, V1 */
@@ -257,14 +256,14 @@ V1:
         qq(".ab-summary-dropdown__head").forEach((item) => {
             const dropdown = item.parentNode;
             item.addEventListener("click", () => {
-                fireGA4Event("PMO38_SummaryAccordion", q(item, '.text-left').textContent);
+                fireGA4Event("PMO38_SummaryAccordion", q(item, ".text-left").textContent);
                 const isOpen = dropdown.getAttribute("aria-expanded") === "true";
                 dropdown.setAttribute("aria-expanded", !isOpen);
             });
         });
 
-        q('.summary-checkout-button').addEventListener('click', e => {
-            fireGA4Event("PMO38_CheckoutCTAClick", 'Proceed to Checkout');
+        q(".summary-checkout-button").addEventListener("click", (e) => {
+            fireGA4Event("PMO38_CheckoutCTAClick", "Proceed to Checkout");
         });
     }
 
@@ -272,6 +271,7 @@ V1:
         if (window.location.pathname === "/cart/") {
             init_PMO38();
         } else {
+            window[page_initials] = false;
             document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             q(".ab-summary-wrapper")?.remove();
             observer?.disconnect();
@@ -301,12 +301,20 @@ V1:
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && document.readyState === "complete" && q(".wrapper-section.flex.flex-col.gap-2\\.5") && q('.summary-checkout-button'));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            document.readyState === "complete" &&
+            q(".wrapper-section.flex.flex-col.gap-2\\.5") &&
+            q(".summary-checkout-button")
+        );
     }
 
     async function init_PMO38() {
+        if (window[page_initials] === true) return;
+
         try {
             await waitForElementAsync(checkForItems);
+            window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             createLayout();
             clickFunction();
