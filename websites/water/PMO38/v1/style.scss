@@ -27,6 +27,43 @@
         display: none;
     }
 
+    h2.summit-Title-root {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: rgba(0, 5, 62, 1);
+        margin-bottom: 6px;
+    }
+
+    .summary-coupon .summit-Button-root .summit-Text-root {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: rgba(0, 5, 62, 1);
+    }
+
+    .summary-coupon {
+        margin-bottom: -4px;
+    }
+
+    .summary-list {
+        margin-bottom: -9px;
+    }
+
+    .summary-actions .mt-6 {
+        margin-top: 20px;
+    }
+
     .ab-summary-wrapper {
         border: 1px solid rgba(229, 230, 236, 1);
         border-radius: 10px;
@@ -44,26 +81,31 @@
     }
 
     .ab-summary-dropdown {
+        user-select: none;
         border-bottom: 1px solid rgba(229, 230, 236, 1);
         background: rgba(240, 241, 244, 1);
-        
-        &[area-expanded="true"] {
+
+        &[aria-expanded="true"] {
             .ab-summary-dropdown__arrow svg {
                 transform: rotate(180deg);
             }
+
+            .ab-summary-dropdown__body {
+                //
+            }
         }
-        
-        &[area-expanded="false"] {
+
+        &[aria-expanded="false"] {
             .ab-summary-dropdown__body {
                 display: none;
             }
         }
-        
+
         &__head {
             padding: 15px 15px 17px;
             cursor: pointer;
         }
-        
+
         &__arrow {
             margin-left: 10px;
             svg {
@@ -74,12 +116,13 @@
                 min-height: 6px;
             }
         }
-        
+
         &__body {
             padding: 3px 15px 14px;
             gap: 20px;
             overflow: hidden;
             will-change: height;
+            transition: all 0.3s;
         }
     }
 
@@ -131,7 +174,43 @@
         color: rgba(0, 5, 62, 1);
     }
 
+    .summary-actions + .text-sm {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-align: center;
+        color: rgba(0, 5, 62, 1);
+
+        a {
+            font-weight: 700;
+            color: rgba(0, 103, 195, 1);
+        }
+    }
+
     @media screen and (min-width: 768px) {
+        h2.summit-Title-root {
+            font-size: 20px;
+            line-height: 100%;
+            margin-bottom: 16px;
+        }
+
+        .summary-coupon .summit-Button-root .summit-Text-root {
+            font-size: 14px;
+            line-height: 100%;
+        }
+
+        .summary-coupon {
+            //
+        }
+
+        .summary-list {
+            margin-bottom: -13px;
+        }
+
         .ab-summary-dropdown {
             &__head {
                 padding: 18px 15px 21px;

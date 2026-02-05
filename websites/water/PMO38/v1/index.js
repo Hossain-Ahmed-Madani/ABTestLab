@@ -1,3 +1,21 @@
+/* 
+
+URL: https://www.water.com/cart/
+Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-Up-Order-Summary?node-id=9-82&t=Az29v74pNVnOwjFj-0
+Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
+
+Preview:
+Control:
+V1: 
+
+
+Preview including all experiences:
+Control:
+V1: 
+
+*/
+
+
 (async () => {
     const TEST_ID = "PMO38";
     const VARIANT_ID = "V1"; /* control, V1 */
@@ -34,13 +52,15 @@
         </svg> `,
         down_arrow_svg: /* HTML */ `<svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
-                d="M0.140238 4.91288C-0.0599864 5.17474 -0.0458649 5.56075 0.182964 5.80484C0.411794 6.04892 0.77368 6.06399 1.01917 5.85041L1.06678 5.80484L5 1.60938L8.93322 5.80484L8.98083 5.85041C9.22632 6.06399 9.58821 6.04892 9.81704 5.80484C10.0459 5.56075 10.06 5.17474 9.85976 4.91288L9.81704 4.8621L5.44191 0.195269C5.19782 -0.0650892 4.80218 -0.0650892 4.55809 0.195269L0.182964 4.8621L0.140238 4.91288Z"
+                d="M0.140238 1.08712C-0.0599864 0.825263 -0.0458649 0.439249 0.182964 0.195163C0.411794 -0.0489224 0.77368 -0.0639854 1.01917 0.149589L1.06678 0.195163L5 4.39062L8.93322 0.195163L8.98083 0.149588C9.22632 -0.0639858 9.58821 -0.0489228 9.81704 0.195163C10.0459 0.439249 10.06 0.825262 9.85976 1.08712L9.81704 1.1379L5.44191 5.80473C5.19782 6.06509 4.80218 6.06509 4.55809 5.80473L0.182964 1.1379L0.140238 1.08712Z"
                 fill="#0067C3"
             />
         </svg> `,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event", eventName, eventLabel);
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -96,12 +116,59 @@
         };
     }
 
+    function parseCurrency(val) {
+        if (!val) return 0;
+        const num = parseFloat(String(val).replace(/[^0-9.\-]/g, ""));
+        return isNaN(num) ? 0 : num;
+    }
+
+    function getSum(...args) {
+        const sum = args.reduce((sum, arg) => sum + parseCurrency(arg), 0);
+        return sum.toFixed(2);
+    }
+
+    function getOrderSummaryData() {
+        const dataObj = {
+            "One-time Purchase": "$00.00",
+            "One-Time Products": "$00.00",
+            "One-Time Refundable Deposit Fee": "$00.00",
+            "Recurring Charges": "$00.00",
+            "Recurring Products": "$00.00",
+            Delivery: "$00.00",
+            Discount: "$00.00",
+            "Estimated Credit Card Fee": "$00.00",
+            Taxes: "$00.00",
+            "Estimated Total": "$00.00",
+        };
+
+        qq(".wrapper-section.flex.flex-col.gap-2\\.5 .segment").forEach((item) => {
+            const label = q(item, ".summit-Text-root:not(.text-nowrap)")?.textContent?.trim() ?? "";
+            const value = q(item, ".summit-Text-root.text-nowrap")?.textContent?.trim() ?? "";
+            dataObj[label] = value;
+        });
+
+        dataObj["Estimated Total"] = q(".wrapper-section.flex.flex-col.gap-2\\.5 .flex.flex-col.items-end .summit-Text-root.font-semibold")?.textContent?.trim() ?? "";
+        dataObj["One-time Purchase"] = `$${getSum(dataObj["One-Time Products"], dataObj["One-Time Refundable Deposit Fee"])}`;
+        dataObj["Recurring Charges"] = `$${getSum(dataObj["Recurring Products"], dataObj["Delivery"])}`;
+
+        return dataObj;
+    }
+
     function updateLayout() {
-        console.log("updateLayout...");
+        if (!q(".ab-summary-wrapper")) return;
+
+        const dataObj = getOrderSummaryData();
+
+        Object.keys(dataObj).forEach((key) => {
+            const selector = `div[ab-col-label='${key}']`;
+            q(selector).innerText = dataObj[key];
+        });
     }
 
     function createLayout() {
         if (q(".ab-summary-wrapper")) return;
+
+        const dataObj = getOrderSummaryData();
 
         q(".wrapper-section.flex.flex-col.gap-2\\.5").insertAdjacentHTML(
             "afterend",
@@ -112,38 +179,61 @@
                             <div class="ab-summary-dropdown__head">
                                 <div class="ab-summary-row flex justify-between">
                                     <div class="ab-txt-lg text-left text-nowrap">One-time Purchase</div>
-                                    <div class="ab-txt-lg text-right uppercase ml-auto">$34.99</div>
+                                    <div class="ab-txt-lg text-right uppercase ml-auto" ab-col-label="One-time Purchase">${dataObj["One-time Purchase"]}</div>
                                     <div class="ab-summary-dropdown__arrow flex justify-end items-center">${ASSETS["down_arrow_svg"]}</div>
                                 </div>
                             </div>
                             <div class="ab-summary-dropdown__body flex flex-col">
                                 <div class="ab-summary-row flex justify-between">
                                     <div class="ab-txt-regular text-left text-nowrap">One-Time Products</div>
-                                    <div class="ab-txt-regular text-right uppercase">$14.99</div>
+                                    <div class="ab-txt-regular text-right uppercase" ab-col-label="One-Time Products">${dataObj["One-Time Products"]}</div>
                                 </div>
                                 <div class="ab-summary-row flex justify-between">
                                     <div class="ab-txt-regular text-left text-nowrap flex items-center">
                                         <span>One-Time Refundable Deposit Fee</span>
                                         <span class="ab-summary-more-info flex justify-center items-center">${ASSETS["more_info_svg"]}</span>
                                     </div>
-                                    <div class="ab-txt-regular text-right uppercase">$20.00</div>
+                                    <div class="ab-txt-regular text-right uppercase" ab-col-label="One-Time Refundable Deposit Fee">${dataObj["One-Time Refundable Deposit Fee"]}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ab-summary-dropdown flex flex-col" aria-expanded="false">
+                            <div class="ab-summary-dropdown__head">
+                                <div class="ab-summary-row flex justify-between">
+                                    <div class="ab-txt-lg text-left text-nowrap">Recurring Charges</div>
+                                    <div class="ab-txt-lg text-right uppercase ml-auto" ab-col-label="Recurring Charges">${dataObj["Recurring Charges"]}</div>
+                                    <div class="ab-summary-dropdown__arrow flex justify-end items-center">${ASSETS["down_arrow_svg"]}</div>
+                                </div>
+                            </div>
+                            <div class="ab-summary-dropdown__body flex flex-col">
+                                <div class="ab-summary-row flex justify-between">
+                                    <div class="ab-txt-regular text-left text-nowrap">Recurring Products</div>
+                                    <div class="ab-txt-regular text-right uppercase" ab-col-label="Recurring Products">${dataObj["Recurring Products"]}</div>
+                                </div>
+                                <div class="ab-summary-row flex justify-between">
+                                    <div class="ab-txt-regular text-left text-nowrap flex items-center">Delivery</div>
+                                    <div class="ab-txt-regular text-right uppercase" ab-col-label="Delivery">${dataObj["Delivery"]}</div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="ab-wrapper-section__total flex flex-col justify-between">
                             <div class="ab-summary-row flex justify-between">
+                                <div class="ab-txt-regular text-left text-nowrap">Discount</div>
+                                <div class="ab-txt-regular text-right uppercase" ab-col-label="Discount">${dataObj["Discount"]}</div>
+                            </div>
+                            <div class="ab-summary-row flex justify-between">
                                 <div class="ab-txt-regular text-left text-nowrap">Estimated Credit Card Fee</div>
-                                <div class="ab-txt-regular text-right uppercase">TBD</div>
+                                <div class="ab-txt-regular text-right uppercase" ab-col-label="Estimated Credit Card Fee">${dataObj["Estimated Credit Card Fee"]}</div>
                             </div>
                             <div class="ab-summary-row flex justify-between">
                                 <div class="ab-summary-label ab-txt-regular text-left text-nowrap">Taxes</div>
-                                <div class="ab-summary-value ab-txt-regular text-right text-nowrap uppercase">TBD</div>
+                                <div class="ab-summary-value ab-txt-regular text-right text-nowrap uppercase" ab-col-label="Taxes">${dataObj["Taxes"]}</div>
                             </div>
                             <div class="ab-summary-row ab-summary-row--total flex justify-between">
                                 <div class="ab-summary-label ab-txt-lg text-left text-nowrap">Estimated Total</div>
                                 <div class="ab-summary-value flex flex-col items-end">
-                                    <div class="ab-txt-lg text-right text-nowrap uppercase">$82.42</div>
+                                    <div class="ab-txt-lg text-right text-nowrap uppercase" ab-col-label="Estimated Total">${dataObj["Estimated Total"]}</div>
                                     <div class="ab-txt-sm text-right text-nowrap">Billed on the first invoice</div>
                                 </div>
                             </div>
@@ -154,154 +244,82 @@
         );
     }
 
+    let observer;
+
     function mutationObserverFunction() {
-        const targetNode = q(".my-selector");
+        const targetNode = q(".wrapper-section.flex.flex-col.gap-2\\.5:not(.ab-mutation-added)");
+        if (!targetNode) return;
+
+        targetNode.classList.add("ab-mutation-added");
         const debouncedUpdate = debounce(updateLayout, 150);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: true });
+        const observer = new MutationObserver(debouncedUpdate);
+        observer.observe(targetNode, { childList: true, subtree: true, attributes: true, characterData: true });
+        return observer;
     }
 
     function clickFunction() {
-        const prefersReducedMotion = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-
-        qq(".ab-summary-dropdown__head").forEach((head) => {
-            const dropdown = head.parentNode;
-            const dropdownBody = q(dropdown, ".ab-summary-dropdown__body");
-            if (!dropdownBody) return;
-
-            // Initialize transition properties (smoother: height + fade + slight slide)
-            dropdownBody.style.overflow = "hidden";
-            dropdownBody.style.willChange = "height, opacity, transform";
-            dropdownBody.style.transition = prefersReducedMotion
-                ? "none"
-                : "height 320ms cubic-bezier(0.4, 0, 0.2, 1), opacity 200ms ease-in-out, transform 200ms ease-in-out";
-
-            const removeExistingTransitionHandler = () => {
-                if (dropdownBody._abTransitionHandler) {
-                    dropdownBody.removeEventListener("transitionend", dropdownBody._abTransitionHandler);
-                    dropdownBody._abTransitionHandler = null;
-                }
-            };
-
-            const setClosedStyles = () => {
-                dropdownBody.style.display = "none";
-                dropdownBody.style.height = "0px";
-                dropdownBody.style.opacity = "0";
-                dropdownBody.style.transform = "translateY(-4px)";
-                dropdownBody.style.overflow = "hidden";
-            };
-
-            const setOpenStyles = () => {
-                dropdownBody.style.display = "flex";
-                dropdownBody.style.height = "";
-                dropdownBody.style.opacity = "1";
-                dropdownBody.style.transform = "translateY(0)";
-                dropdownBody.style.overflow = "visible";
-            };
-
-            // Ensure body matches current expanded state on init
-            const isOpenOnInit = dropdown.getAttribute("aria-expanded") === "true";
-            if (isOpenOnInit) setOpenStyles();
-            else setClosedStyles();
-
-            const openDropdown = () => {
-                dropdown.setAttribute("aria-expanded", "true");
-
-                if (prefersReducedMotion) {
-                    setOpenStyles();
-                    return;
-                }
-
-                removeExistingTransitionHandler();
-                dropdownBody.style.display = "flex";
-                dropdownBody.style.overflow = "hidden";
-                dropdownBody.style.height = "0px";
-                dropdownBody.style.opacity = "0";
-                dropdownBody.style.transform = "translateY(-4px)";
-
-                // Force layout so the browser acknowledges the "from" state
-                dropdownBody.offsetHeight;
-
-                const targetHeight = dropdownBody.scrollHeight;
-                requestAnimationFrame(() => {
-                    dropdownBody.style.height = `${targetHeight}px`;
-                    dropdownBody.style.opacity = "1";
-                    dropdownBody.style.transform = "translateY(0)";
-                });
-
-                dropdownBody._abTransitionHandler = (evt) => {
-                    if (evt.target !== dropdownBody) return;
-                    if (evt.propertyName !== "height") return;
-                    dropdownBody.style.height = "";
-                    dropdownBody.style.overflow = "visible";
-                    dropdownBody.classList.remove("animating");
-                    removeExistingTransitionHandler();
-                };
-                dropdownBody.addEventListener("transitionend", dropdownBody._abTransitionHandler);
-            };
-
-            const closeDropdown = () => {
-                dropdown.setAttribute("aria-expanded", "false");
-
-                if (prefersReducedMotion) {
-                    setClosedStyles();
-                    return;
-                }
-
-                removeExistingTransitionHandler();
-                dropdownBody.style.overflow = "hidden";
-
-                const startHeight = dropdownBody.getBoundingClientRect().height;
-                dropdownBody.style.height = `${startHeight}px`;
-                dropdownBody.style.opacity = "1";
-                dropdownBody.style.transform = "translateY(0)";
-
-                // Force layout so the browser acknowledges the "from" state
-                dropdownBody.offsetHeight;
-
-                requestAnimationFrame(() => {
-                    dropdownBody.style.height = "0px";
-                    dropdownBody.style.opacity = "0";
-                    dropdownBody.style.transform = "translateY(-4px)";
-                });
-
-                dropdownBody._abTransitionHandler = (evt) => {
-                    if (evt.target !== dropdownBody) return;
-                    if (evt.propertyName !== "height") return;
-                    setClosedStyles();
-                    dropdownBody.classList.remove("animating");
-                    removeExistingTransitionHandler();
-                };
-                dropdownBody.addEventListener("transitionend", dropdownBody._abTransitionHandler);
-            };
-
-            head.addEventListener("click", () => {
+        qq(".ab-summary-dropdown__head").forEach((item) => {
+            const dropdown = item.parentNode;
+            item.addEventListener("click", () => {
+                fireGA4Event("PMO38_SummaryAccordion", q(item, '.text-left').textContent);
                 const isOpen = dropdown.getAttribute("aria-expanded") === "true";
-
-                // Prevent rapid clicking during animation
-                if (dropdownBody.classList.contains("animating")) return;
-                dropdownBody.classList.add("animating");
-
-                if (!isOpen) openDropdown();
-                else closeDropdown();
+                dropdown.setAttribute("aria-expanded", !isOpen);
             });
+        });
+
+        q('.summary-checkout-button').addEventListener('click', e => {
+            fireGA4Event("PMO38_CheckoutCTAClick", 'Proceed to Checkout');
+        })
+    }
+
+    function handleLocationChanges() {
+        if (window.location.pathname === "/cart/") {
+            init_PMO38();
+        } else {
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            q(".ab-summary-wrapper")?.remove();
+            observer?.disconnect();
+            observer = null;
+        }
+    }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            console.log("==== < Navigation occurred (back/forward button) ====");
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            console.log("=== > History state was changed programmatically ===");
+            debouncedChanges();
         });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        createLayout();
-        // mutationObserverFunction();
-        clickFunction();
-    }
-
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && document.readyState === "complete" && q(".wrapper-section.flex.flex-col.gap-2\\.5"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && document.readyState === "complete" && q(".wrapper-section.flex.flex-col.gap-2\\.5") && q('.summary-checkout-button'));
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
+    async function init_PMO38() {
+        try {
+            await waitForElementAsync(checkForItems);
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            createLayout();
+            clickFunction();
+            observer = mutationObserverFunction();
+        } catch (error) {
+            return false;
+        }
     }
+
+    init_PMO38();
+    urlObserver();
 })();

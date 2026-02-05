@@ -10,6 +10,34 @@
 .AB-PMO38 .wrapper-section.flex.flex-col.gap-2\.5 {
   display: none;
 }
+.AB-PMO38 h2.summit-Title-root {
+  font-family: Nunito Sans, Nunito Sans Fallback;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  color: rgb(0, 5, 62);
+  margin-bottom: 6px;
+}
+.AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+  font-family: Nunito Sans, Nunito Sans Fallback;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  color: rgb(0, 5, 62);
+}
+.AB-PMO38 .summary-coupon {
+  margin-bottom: -4px;
+}
+.AB-PMO38 .summary-list {
+  margin-bottom: -9px;
+}
+.AB-PMO38 .summary-actions .mt-6 {
+  margin-top: 20px;
+}
 .AB-PMO38 .ab-summary-wrapper {
   border: 1px solid rgb(229, 230, 236);
   border-radius: 10px;
@@ -24,13 +52,14 @@
   gap: 12px;
 }
 .AB-PMO38 .ab-summary-dropdown {
+  user-select: none;
   border-bottom: 1px solid rgb(229, 230, 236);
   background: rgb(240, 241, 244);
 }
-.AB-PMO38 .ab-summary-dropdown[area-expanded=true] .ab-summary-dropdown__arrow svg {
+.AB-PMO38 .ab-summary-dropdown[aria-expanded=true] .ab-summary-dropdown__arrow svg {
   transform: rotate(180deg);
 }
-.AB-PMO38 .ab-summary-dropdown[area-expanded=false] .ab-summary-dropdown__body {
+.AB-PMO38 .ab-summary-dropdown[aria-expanded=false] .ab-summary-dropdown__body {
   display: none;
 }
 .AB-PMO38 .ab-summary-dropdown__head {
@@ -52,6 +81,7 @@
   gap: 20px;
   overflow: hidden;
   will-change: height;
+  transition: all 0.3s;
 }
 .AB-PMO38 .ab-summary-more-info {
   margin-left: 7px;
@@ -89,7 +119,32 @@
   letter-spacing: 0px;
   color: rgb(0, 5, 62);
 }
+.AB-PMO38 .summary-actions + .text-sm {
+  font-family: Nunito Sans, Nunito Sans Fallback;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(0, 5, 62);
+}
+.AB-PMO38 .summary-actions + .text-sm a {
+  font-weight: 700;
+  color: rgb(0, 103, 195);
+}
 @media screen and (min-width: 768px) {
+  .AB-PMO38 h2.summit-Title-root {
+    font-size: 20px;
+    line-height: 100%;
+    margin-bottom: 16px;
+  }
+  .AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+    font-size: 14px;
+    line-height: 100%;
+  }
+  .AB-PMO38 .summary-list {
+    margin-bottom: -13px;
+  }
   .AB-PMO38 .ab-summary-dropdown__head {
     padding: 18px 15px 21px;
   }

@@ -1,0 +1,182 @@
+
+.AB-PMO38 .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
+.AB-PMO38 .wrapper-section.flex.flex-col.gap-2\.5 {
+    display: none;
+}
+.AB-PMO38 h2.summit-Title-root {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    color: rgb(0, 5, 62);
+    margin-bottom: 6px;
+}
+.AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    color: rgb(0, 5, 62);
+}
+.AB-PMO38 .summary-coupon {
+    margin-bottom: -4px;
+}
+.AB-PMO38 .summary-list {
+    margin-bottom: -9px;
+}
+.AB-PMO38 .summary-actions .mt-6 {
+    margin-top: 20px;
+}
+.AB-PMO38 .ab-summary-wrapper {
+    border: 1px solid rgb(229, 230, 236);
+    border-radius: 10px;
+    background: rgb(255, 255, 255);
+    overflow: hidden;
+}
+.AB-PMO38 .ab-wrapper-section__total {
+    padding: 17px 15px 18px;
+    gap: 12px;
+}
+.AB-PMO38 .ab-summary-row--total .ab-summary-value {
+    gap: 12px;
+}
+.AB-PMO38 .ab-summary-dropdown {
+    user-select: none;
+    border-bottom: 1px solid rgb(229, 230, 236);
+    background: rgb(240, 241, 244);
+}
+.AB-PMO38 .ab-summary-dropdown[aria-expanded="true"] .ab-summary-dropdown__arrow svg {
+    transform: rotate(180deg);
+}
+.AB-PMO38 .ab-summary-dropdown[aria-expanded="false"] .ab-summary-dropdown__body {
+    display: none;
+}
+.AB-PMO38 .ab-summary-dropdown__head {
+    padding: 15px 15px 17px;
+    cursor: pointer;
+}
+.AB-PMO38 .ab-summary-dropdown__arrow {
+    margin-left: 10px;
+}
+.AB-PMO38 .ab-summary-dropdown__arrow svg {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 10px;
+    min-width: 10px;
+    height: 6px;
+    min-height: 6px;
+}
+.AB-PMO38 .ab-summary-dropdown__body {
+    padding: 3px 15px 14px;
+    gap: 20px;
+    overflow: hidden;
+    will-change: height;
+    transition: all 0.3s;
+}
+.AB-PMO38 .ab-summary-more-info {
+    margin-left: 7px;
+    cursor: pointer;
+}
+.AB-PMO38 .ab-summary-more-info svg {
+    margin-top: -1px;
+    width: 12px;
+    min-width: 12px;
+    height: 12px;
+    min-height: 12px;
+}
+.AB-PMO38 .ab-txt-sm {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: right;
+    color: rgb(98, 98, 98);
+}
+.AB-PMO38 .ab-txt-regular {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: rgb(0, 5, 62);
+}
+.AB-PMO38 .ab-txt-lg {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    color: rgb(0, 5, 62);
+}
+.AB-PMO38 .summary-actions + .text-sm {
+    font-family:
+        Nunito Sans,
+        Nunito Sans Fallback;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgb(0, 5, 62);
+}
+.AB-PMO38 .summary-actions + .text-sm a {
+    font-weight: 700;
+    color: rgb(0, 103, 195);
+}
+@media screen and (min-width: 768px) {
+    .AB-PMO38 h2.summit-Title-root {
+        font-size: 20px;
+        line-height: 100%;
+        margin-bottom: 16px;
+    }
+    .AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+        font-size: 14px;
+        line-height: 100%;
+    }
+    .AB-PMO38 .summary-list {
+        margin-bottom: -13px;
+    }
+    .AB-PMO38 .ab-summary-dropdown__head {
+        padding: 18px 15px 21px;
+    }
+    .AB-PMO38 .ab-summary-dropdown__body {
+        padding: 3px 15px 21px;
+    }
+    .AB-PMO38 .ab-summary-more-info {
+        cursor: pointer;
+        margin-left: 4px;
+    }
+    .AB-PMO38 .ab-summary-more-info svg {
+        margin-top: -1.2px;
+    }
+    .AB-PMO38 .ab-txt-regular {
+        font-weight: 500;
+        font-size: 14px;
+    }
+    .AB-PMO38 .ab-txt-lg {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 100%;
+        letter-spacing: 0px;
+    }
+    .AB-PMO38 .ab-wrapper-section__total {
+        gap: 15px;
+    }
+    .AB-PMO38 .ab-summary-row--total .ab-summary-value {
+        gap: 15px;
+    }
+}
