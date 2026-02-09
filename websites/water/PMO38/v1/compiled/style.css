@@ -6,10 +6,6 @@
 
 
 */
-.AB-PMO38 .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
-.AB-PMO38 .wrapper-section.flex.flex-col.gap-2\.5 {
-  display: none;
-}
 .AB-PMO38 h2.summit-Title-root {
   font-family: Nunito Sans, Nunito Sans Fallback;
   font-weight: 600;

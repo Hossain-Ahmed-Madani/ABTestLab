@@ -1,6 +1,6 @@
 /* 
 
-URL: https://www.water.com/cart/
+URL: https://order.water.com/checkout/cart/
 Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-Up-Order-Summary?node-id=9-82&t=Az29v74pNVnOwjFj-0
 Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
 
@@ -31,6 +31,10 @@ V1:
     logInfo("fired");
 
     const TEST_CONFIG = {
+        cdivent: "Acadia",
+        project: "Water",
+        site_url: "https://order.water.com",
+        test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
         page_initials: "AB-PMO38",
         test_variation: 1 /* 0, 1 */,
         test_version: 0.0001,
@@ -262,13 +266,13 @@ V1:
             });
         });
 
-        q(".summary-checkout-button").addEventListener("click", (e) => {
+        q(".wrapper-actions .btn.shadow-btn").addEventListener("click", (e) => {
             fireGA4Event("PMO38_CheckoutCTAClick", "Proceed to Checkout");
         });
     }
 
     function handleLocationChanges() {
-        if (window.location.pathname === "/cart/") {
+        if (window.location.pathname === "/checkout/cart/") {
             init_PMO38();
         } else {
             window[page_initials] = false;
@@ -305,17 +309,20 @@ V1:
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             document.readyState === "complete" &&
             q(".wrapper-section.flex.flex-col.gap-2\\.5") &&
-            q(".summary-checkout-button")
+            q(".wrapper-actions .btn.shadow-btn")
         );
     }
 
     async function init_PMO38() {
+    	
         if (window[page_initials] === true) return;
 
+    	
         try {
             await waitForElementAsync(checkForItems);
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            console.log(TEST_CONFIG);
             createLayout();
             clickFunction();
             observer = mutationObserverFunction();

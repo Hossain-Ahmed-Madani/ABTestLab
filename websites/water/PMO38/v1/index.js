@@ -1,6 +1,6 @@
 /* 
 
-URL: https://www.water.com/cart/
+URL: https://order.water.com/checkout/cart/
 Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-Up-Order-Summary?node-id=9-82&t=Az29v74pNVnOwjFj-0
 Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
 
@@ -33,7 +33,7 @@ V1:
     const TEST_CONFIG = {
         cdivent: "Acadia",
         project: "Water",
-        site_url: "https://www.water.com",
+        site_url: "https://order.water.com",
         test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
         page_initials: "AB-PMO38",
         test_variation: 1 /* 0, 1 */,
@@ -272,7 +272,7 @@ V1:
     }
 
     function handleLocationChanges() {
-        if (window.location.pathname === "/cart/") {
+        if (window.location.pathname === "/checkout/cart/") {
             init_PMO38();
         } else {
             window[page_initials] = false;

@@ -16,7 +16,7 @@
     const TEST_CONFIG = {
         cdivent: "Acadia",
         project: "Water",
-        site_url: "https://www.water.com",
+        site_url: "https://order.water.com/",
         test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
         page_initials: "AB-PMO38",
         test_variation: 0 /* 0, 1 */,
@@ -84,7 +84,7 @@
     }
 
     function handleLocationChanges() {
-        if (window.location.pathname === "/cart/") {
+        if (window.location.pathname === "/checkout/cart/") {
             init_PMO38();
         } else {
             document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
