@@ -12,7 +12,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 Todos:
 
 1. Fix images
-2. Handle SPA Functionality
+2. Handle SPA Functionality | Use functionality from water.com
 3. Add GA4 events
 
 */
