@@ -1,22 +1,32 @@
 /* 
+Target URL's:
 https://www.texastaxprotest.com/blog/
 https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
+https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
 
+Figma: https://www.figma.com/design/42DzjhpNUj4W7pNQzKxJ4m/TTP27---BLOGS--Redesign-In-Line-Ads?node-id=2001-309&t=gm3GJl2zJdkfCqXS-0
+
+Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2088293#c2622626:what
+
+
+Todos:
+
+1. Fix images
+2. Handle SPA Functionality
+3. Add GA4 events
 
 */
 
-
 (async () => {
-
-    const TEST_ID = "BW102";
-    const VARIANT_ID = "V1"; /* Control, V1, V2, V3, V4, V5 */
+    const TEST_ID = "TTP27";
+    const VARIANT_ID = "V1"; /* Control, V1 */
 
     function logInfo(message) {
         console.log(
             `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
             "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
             "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-            message
+            message,
         );
     }
 
@@ -28,8 +38,8 @@ https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
         host: "https://www.texastaxprotest.com",
         test_name: " TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
         page_initials: "AB-TTP27",
-        test_variation: 1 /* 0, 1, 2, 3, 4, 5 */,
-        test_version: 0.0004,
+        test_variation: 1 /* 0, 1 */,
+        test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -47,6 +57,38 @@ https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
             "ga4-event-p2-value": eventLabel,
         });
     }
+
+    const ASSETS = {
+        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6005534.png",
+        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6005535.png",
+        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6005538.png",
+        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6005540.png",
+        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6005542.png",
+        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6005545.png",
+    };
+
+    const DATA = {
+        layout_info: [
+            {
+                title: "Property Taxes Too High",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Win-fair-tax-assessments-for-Texas-property-owners-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_too_high_mobile,
+                img_desktop_src: ASSETS.property_tax_too_high_desktop,
+            },
+            {
+                title: "Property Taxes Made Easy",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Tax-Protests-Made-Easy-with-Texas-Tax-Protest-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_made_easy_mobile,
+                img_desktop_src: ASSETS.property_tax_made_easy_desktop,
+            },
+            {
+                title: "Property Taxes Got You Down",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/09/Texas-Tax-Protest-Can-Advocate-For-Your-Property0A-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_got_you_down_mobile,
+                img_desktop_src: ASSETS.property_tax_got_you_down_desktop,
+            },
+        ],
+    };
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -101,7 +143,6 @@ https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-
     function mutationObserverFunction() {
         const targetNode = q("#ResultsList");
         const debouncedUpdate = debounce(updateLayout, 150);
@@ -109,11 +150,53 @@ https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
     }
 
     function updateLayout() {
-        console.log("======== update layout ======")
+        DATA["layout_info"].forEach(({ title, selector, img_mobile_src, img_desktop_src }) => {
+
+            const targetNode = q(selector);
+
+            if (!targetNode) return;
+
+            console.log(targetNode);
+
+            targetNode.classList.add("ab-hidden");
+
+            const layout = /* HTML */ `
+                <figure class="ab-figure-content wp-block-image size-large ab-mobile">
+                    <a href="https://www.texastaxprotest.com/blog-contact-us/" target="_blank" rel=" noreferrer noopener">
+                        <img
+                            loading="lazy"
+                            decoding="async"
+                            width="1024"
+                            height="576"
+                            src="${img_mobile_src}"
+                            alt="${title}"
+                            class="wp-image-712"
+                            sizes="auto, (max-width: 1024px) 100vw, 1024px"
+                        />
+                    </a>
+                </figure>
+                <figure class="ab-figure-content wp-block-image size-large ab-desktop">
+                    <a href="https://www.texastaxprotest.com/blog-contact-us/" target="_blank" rel=" noreferrer noopener">
+                        <img
+                            loading="lazy"
+                            decoding="async"
+                            width="1024"
+                            height="576"
+                            src="${img_desktop_src}"
+                            alt="${title}"
+                            class="wp-image-712"
+                            sizes="auto, (max-width: 1024px) 100vw, 1024px"
+                        />
+                    </a>
+                </figure>
+            `;
+
+            targetNode.insertAdjacentHTML("afterend", layout);
+        });
     }
 
     function clickFunction() {
-        console.log("========= click function ========")
+        console.log("========= click function ========");
     }
 
     function init() {
@@ -126,7 +209,8 @@ https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            true
+            DATA.layout_info.some((item) => q(item.selector)) &&
+            document.readyState === "complete"
         );
     }
 

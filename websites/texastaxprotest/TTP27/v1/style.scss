@@ -1,27 +1,58 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-TTP27 {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    .ab-hidden {
+        display: none;
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    .ab-mobile {
+        display: block;
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    .ab-desktop {
+        display: none;
+    }
+
+    .ab-mobile a {
+        display: flex;
+        width: max-content;
+        margin: auto;
+    }
+
+    .ab-mobile img {
+        width: auto;
+        margin: auto;
+        height: 510px;
+        aspect-ratio: unset;
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-mobile {
+            display: none;
+        }
+
+        .ab-desktop {
+            display: block;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
