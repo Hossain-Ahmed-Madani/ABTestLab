@@ -1,17 +1,24 @@
 /* 
-Test container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear.com/experience/2078585
+Test container: https://marketer.monetate.net/control/a-a3b0f153/p/bruntworkwear.com/experience/2089387#c2624065:what
 
 Preview excluding all experiences:
-control: https://marketer.monetate.net/control/preview/12090/U4Y3HYHGD6AVLG5OQ5U2Z8UACV0UCS0M/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/QR4W7983S351ZNL2KUCSONAVCGTRDTFQ/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/E6PDBD0WUTQU178NKSB0GPJ3UVDLO014/bw102-collections-update-badge-copy
+control: https://marketer.monetate.net/control/preview/12090/FM0QZV6T5O02FWOGF28RF790H0GXNRI3/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/4BELR4GY76TZJXBJ06JBA4ISG3G31OPG/bw102-collections-update-badge-copy
+v2:  https://marketer.monetate.net/control/preview/12090/CR662HUEOLG4X63W353JD5Y8MM9ILAW2/bw102-collections-update-badge-copy
+v3: https://marketer.monetate.net/control/preview/12090/Y8HUY2ADN65J7MW1Z47D6D72ZMJD9ZIQ/bw102-collections-update-badge-copy
+v4: https://marketer.monetate.net/control/preview/12090/JJIEH88J6XXUADQOGET62I11GHVVSBIG/bw102-collections-update-badge-copy
+v5: https://marketer.monetate.net/control/preview/12090/OUMA68LXE78Q83AFCHWN1ZRFH1MMU6RM/bw102-collections-update-badge-copy
 
 Preview including all experiences:
-control: https://marketer.monetate.net/control/preview/12090/J4BXUBKMR1P5YR172XOYG37US43BY68K/bw102-collections-update-badge-copy
-v1: https://marketer.monetate.net/control/preview/12090/R0WGM636899GXSEUSIK9WPHU9UWRACHY/bw102-collections-update-badge-copy
-v2: https://marketer.monetate.net/control/preview/12090/YWXQCWZBB3UEBDBM3MJPIXZQAPMMPV7G/bw102-collections-update-badge-copy
+control: https://marketer.monetate.net/control/preview/12090/M5Y0R670ITXN57GHP4F76UF8SYKMJ55L/bw102-collections-update-badge-copy
+v1: https://marketer.monetate.net/control/preview/12090/298YBI91ULGWYZG57E0O45F3CWLP0RF2/bw102-collections-update-badge-copy
+v2: https://marketer.monetate.net/control/preview/12090/SQNGR2ISGXJ758EYN3IFGHNWUYHGAQPE/bw102-collections-update-badge-copy
+v3: https://marketer.monetate.net/control/preview/12090/0ZA1CE8GMG9QX4BWLEFW9508LN3YGWUH/bw102-collections-update-badge-copy
+v4: https://marketer.monetate.net/control/preview/12090/B8KEZEQBW9CVZ558M6CBAUMEWCYKU6JH/bw102-collections-update-badge-copy
+v5: https://marketer.monetate.net/control/preview/12090/38BMYKTBP45QJIYX46P9E3HWGVO98XNQ/bw102-collections-update-badge-copy
 
 
+https://bruntworkwear.com/collections/all
 https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=false
 
 
@@ -21,7 +28,7 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
 (async () => {
 
     const TEST_ID = "BW102";
-    const VARIANT_ID = "V1"; /* Control, V1, V2 */
+    const VARIANT_ID = "V1"; /* Control, V1, V2, V3, V4, V5 */
 
     function logInfo(message) {
         console.log(
@@ -36,8 +43,8 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
 
     const TEST_CONFIG = {
         page_initials: "AB-BW102",
-        test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0003,
+        test_variation: 1 /* 0, 1, 2, 3, 4, 5 */,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -100,8 +107,17 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
 
     const BADGE_TEXT = {
         0: "SELLING FAST" /* Control Text */,
-        1: "POPULAR RIGHT NOW",
-        2: "CUSTOMER FAVORITE",
+
+        // OLD TEXT
+        // 1: "POPULAR RIGHT NOW",
+        // 2: "CUSTOMER FAVORITE",
+
+        // NEW TEXT
+        1: "MOVING FAST",
+        2: "HIGH DEMAND",
+        3: "POPULAR PICK",
+        4: "TOP PICK",
+        5: "HEAVY HITTER",
     };
 
     function mutationObserverFunction() {
@@ -115,14 +131,17 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
         const flagClassName = "ab-selling-fast-product";
 
         qq(`#ResultsList .productCard:not(.${flagClassName})`).forEach((item) => {
-            const badge = q(item, ".media__badge-text");
 
-            if (badge && badge.textContent.trim().includes("SELLING FAST")) {
-                {
-                    badge.innerText = txt;
-                }
-                item.classList.add(flagClassName);
+            const badges = qq(item, ".media__badge-text").filter(item => item.textContent.trim().includes('SELLING FAST'));
+
+            if (badges.length === 0) return;
+
+            {
+                badges.forEach(badge => (badge.innerText = txt));
             }
+
+            item.classList.add(flagClassName);
+
         });
     }
 
