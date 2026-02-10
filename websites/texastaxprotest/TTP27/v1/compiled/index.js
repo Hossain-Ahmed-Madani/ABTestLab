@@ -12,7 +12,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 Todos:
 
 1. Fix images
-2. Handle SPA Functionality
+2. Handle SPA Functionality | Use functionality from water.com
 3. Add GA4 events
 
 */
@@ -33,12 +33,30 @@ Todos:
     logInfo("fired");
 
     const TEST_CONFIG = {
+        client: "Acadia",
+        project: "texastaxprotest",
+        host: "https://www.texastaxprotest.com",
+        test_name: " TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
         page_initials: "AB-TTP27",
         test_variation: 1 /* 0, 1 */,
         test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event:", eventName, eventLabel);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
 
     const ASSETS = {
         property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6005534.png",
@@ -97,12 +115,29 @@ Todos:
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
+
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    let foundNodes;
 
     function updateLayout() {
         DATA["layout_info"].forEach(({ title, selector, img_mobile_src, img_desktop_src }) => {
-
             const targetNode = q(selector);
 
             if (!targetNode) return;
@@ -147,14 +182,92 @@ Todos:
     }
 
     function clickFunction() {
-        console.log("========= click function ========");
+
+        // Variation
+        qq(`.${page_initials} figure.ab-figure-content a`).forEach((item) => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const currentTarget = e.currentTarget;
+                const href = currentTarget.getAttribute("href");
+                const label = q(currentTarget, "img").getAttribute("alt") ?? "";
+                fireGA4Event("TTP27_inlineAdClicks", label);
+                window.open(href, "_blank", "noopener,noreferrer");
+            });
+        });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        updateLayout();
-        // mutationObserverFunction();
-        clickFunction();
+    function isElementVisibleInViewport(el) {
+        let top = el.getBoundingClientRect().top;
+        let right = el.getBoundingClientRect().right;
+        let bottom = el.getBoundingClientRect().bottom;
+        let left = el.getBoundingClientRect().left;
+        let innerWidth = window.innerWidth;
+        let innerHeight = window.innerHeight;
+
+        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+    }
+
+    const debouncedGa4Event = debounce(() => {
+        fireGA4Event("TTP27_ViewInLineAd");
+    }, 250);
+
+    function removeScrollHandler() {
+        console.log("scroll event removed");
+        window.removeEventListener("scroll", handleScroll);
+        foundNodes = null;
+    }
+
+    function handleScroll(e) {
+        const isVisible = foundNodes.some((item) => isElementVisibleInViewport(item));
+        if (isVisible) {
+            debouncedGa4Event();
+            removeScrollHandler();
+        }
+    }
+
+    function scrollFunction() {
+        // Control
+        // foundNodes = DATA["layout_info"].filter(({ selector }) => q(selector)).map(({ selector }) => q(selector));
+
+        // Variation
+        foundNodes = qq(".ab-figure-content img");
+
+        if (foundNodes && foundNodes.length === 0) return;
+        window.addEventListener("scroll", handleScroll);
+    }
+
+    function handleLocationChanges() {
+        const pathname = window.location.pathname;
+        const blogDetailPathRegex = /^\/blog\/[^/]+\/?$/;
+
+        if (blogDetailPathRegex.test(pathname)) {
+            init_TTP27();
+        } else {
+            window[page_initials] = false;
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            removeScrollHandler();
+        }
+    }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            console.log("==== < Navigation occurred (back/forward button) ====");
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            console.log("=== > History state was changed programmatically ===");
+            debouncedChanges();
+        });
     }
 
     function checkForItems() {
@@ -165,10 +278,25 @@ Todos:
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
+    async function init_TTP27() {
+        if (window[page_initials] === true) return;
+
+        try {
+            await waitForElementAsync(checkForItems);
+
+            window[page_initials] = true;
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+            console.log(TEST_CONFIG);
+
+            updateLayout();
+            clickFunction();
+            scrollFunction();
+        } catch (error) {
+            return false;
+        }
     }
+
+    init_TTP27();
+    urlObserver();
 })();

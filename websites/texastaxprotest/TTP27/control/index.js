@@ -1,40 +1,94 @@
+/* 
+Target URL's:
+https://www.texastaxprotest.com/blog/
+https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
+https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
+
+Figma: https://www.figma.com/design/42DzjhpNUj4W7pNQzKxJ4m/TTP27---BLOGS--Redesign-In-Line-Ads?node-id=2001-309&t=gm3GJl2zJdkfCqXS-0
+
+Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2088293#c2622626:what
+
+
+Todos:
+
+1. Fix images
+2. Handle SPA Functionality | Use functionality from water.com
+3. Add GA4 events
+
+*/
+
 (async () => {
+    const TEST_ID = "TTP27";
+    const VARIANT_ID = "Control"; /* Control, V1 */
+
+    function logInfo(message) {
+        console.log(
+            `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+            "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            message,
+        );
+    }
+
+    logInfo("fired");
+
     const TEST_CONFIG = {
-        client: "Client Name",
-        project: "Project Name",
-        site_url: "https://www.example.com",
-        test_name: "Ticket Name",
-        page_initials: "AB-TEST",
-        test_variation: 1,
+        client: "Acadia",
+        project: "texastaxprotest",
+        host: "https://www.texastaxprotest.com",
+        test_name: "TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
+        page_initials: "AB-TTP27",
+        test_variation: 0 /* 0, 1 */,
         test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event:", eventName, eventLabel);
 
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
     }
 
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
+    const ASSETS = {
+        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6005534.png",
+        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6005535.png",
+        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6005538.png",
+        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6005540.png",
+        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6005542.png",
+        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6005545.png",
+    };
+
+    const DATA = {
+        layout_info: [
+            {
+                title: "Property Taxes Too High",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Win-fair-tax-assessments-for-Texas-property-owners-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_too_high_mobile,
+                img_desktop_src: ASSETS.property_tax_too_high_desktop,
+            },
+            {
+                title: "Property Taxes Made Easy",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Tax-Protests-Made-Easy-with-Texas-Tax-Protest-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_made_easy_mobile,
+                img_desktop_src: ASSETS.property_tax_made_easy_desktop,
+            },
+            {
+                title: "Property Taxes Got You Down",
+                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/09/Texas-Tax-Protest-Can-Advocate-For-Your-Property0A-1024x576.png'])",
+                img_mobile_src: ASSETS.property_tax_got_you_down_mobile,
+                img_desktop_src: ASSETS.property_tax_got_you_down_desktop,
+            },
+        ],
+    };
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -60,28 +114,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -102,32 +134,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -137,26 +143,121 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    let foundNodes;
+
+    function clickFunction() {
+        foundNodes.forEach((item) => {
+            const linkItem = q(item, "a");
+
+            linkItem.addEventListener("click", (e) => {
+                e.preventDefault();
+                const currentTarget = e.currentTarget;
+                const href = currentTarget.getAttribute("href");
+                const label = q(currentTarget, "img").getAttribute("alt") ?? "";
+                fireGA4Event("TTP27_inlineAdClicks", label);
+                window.open(href, "_blank", "noopener,noreferrer");
+            });
+        });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
+    function isElementVisibleInViewport(el) {
+        let top = el.getBoundingClientRect().top;
+        let right = el.getBoundingClientRect().right;
+        let bottom = el.getBoundingClientRect().bottom;
+        let left = el.getBoundingClientRect().left;
+        let innerWidth = window.innerWidth;
+        let innerHeight = window.innerHeight;
+
+        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+    }
+
+    const debouncedGa4Event = debounce(() => {
+        fireGA4Event("TTP27_ViewInLineAd");
+    }, 250);
+
+    function removeScrollHandler() {
+        console.log("scroll event removed");
+        window.removeEventListener("scroll", handleScroll);
+        foundNodes = null;
+    }
+
+    function handleScroll(e) {
+        const isVisible = foundNodes.some((item) => isElementVisibleInViewport(item));
+        if (isVisible) {
+            debouncedGa4Event();
+            removeScrollHandler();
+        }
+    }
+
+    function scrollFunction() {
+        if (foundNodes && foundNodes.length === 0) return;
+        window.addEventListener("scroll", handleScroll);
+    }
+
+    function handleLocationChanges() {
+        const pathname = window.location.pathname;
+        const blogDetailPathRegex = /^\/blog\/[^/]+\/?$/;
+
+        if (blogDetailPathRegex.test(pathname)) {
+            init_TTP27();
+        } else {
+            window[page_initials] = false;
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            removeScrollHandler();
+        }
+    }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            console.log("==== < Navigation occurred (back/forward button) ====");
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            console.log("=== > History state was changed programmatically ===");
+            debouncedChanges();
+        });
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            DATA.layout_info.some((item) => q(item.selector)) &&
+            document.readyState === "complete"
+        );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
+    async function init_TTP27() {
+        if (window[page_initials] === true) return;
+
+        try {
+            await waitForElementAsync(checkForItems);
+
+            window[page_initials] = true;
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+            console.log(TEST_CONFIG);
+
+            foundNodes = DATA["layout_info"].filter(({ selector }) => q(selector)).map(({ selector }) => q(selector));
+
+            if (foundNodes && foundNodes.length === 0) return;
+
+            clickFunction();
+            scrollFunction();
+        } catch (error) {
+            return false;
+        }
     }
+
+    init_TTP27();
+    urlObserver();
 })();

@@ -25,6 +25,14 @@
         display: none;
     }
 
+    .ab-desktop img{
+        height: 400px;
+        padding: 0;
+        aspect-ratio: unset !important;
+        // object-fit: cover;
+        border-radius: 15px;
+    }
+
     .ab-mobile a {
         display: flex;
         width: max-content;
@@ -35,7 +43,9 @@
         width: auto;
         margin: auto;
         height: 510px;
-        aspect-ratio: unset;
+        min-height: 510px;
+        aspect-ratio: unset !important;
+        object-fit: cover;
     }
 
     @media screen and (min-width: 768px) {

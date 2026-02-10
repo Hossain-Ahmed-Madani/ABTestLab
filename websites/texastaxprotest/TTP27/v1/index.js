@@ -45,7 +45,7 @@ Todos:
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
+        console.log("fireGA4Event:", eventName, eventLabel);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -143,15 +143,10 @@ Todos:
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function mutationObserverFunction() {
-        const targetNode = q("#ResultsList");
-        const debouncedUpdate = debounce(updateLayout, 150);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
+    let foundNodes;
 
     function updateLayout() {
         DATA["layout_info"].forEach(({ title, selector, img_mobile_src, img_desktop_src }) => {
-
             const targetNode = q(selector);
 
             if (!targetNode) return;
@@ -196,14 +191,92 @@ Todos:
     }
 
     function clickFunction() {
-        console.log("========= click function ========");
+
+        // Variation
+        qq(`.${page_initials} figure.ab-figure-content a`).forEach((item) => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                const currentTarget = e.currentTarget;
+                const href = currentTarget.getAttribute("href");
+                const label = q(currentTarget, "img").getAttribute("alt") ?? "";
+                fireGA4Event("TTP27_inlineAdClicks", label);
+                window.open(href, "_blank", "noopener,noreferrer");
+            });
+        });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        updateLayout();
-        // mutationObserverFunction();
-        clickFunction();
+    function isElementVisibleInViewport(el) {
+        let top = el.getBoundingClientRect().top;
+        let right = el.getBoundingClientRect().right;
+        let bottom = el.getBoundingClientRect().bottom;
+        let left = el.getBoundingClientRect().left;
+        let innerWidth = window.innerWidth;
+        let innerHeight = window.innerHeight;
+
+        return ((top > 0 && top < innerHeight) || (bottom > 0 && bottom < innerHeight)) && ((left > 0 && left < innerWidth) || (right > 0 && right < innerWidth));
+    }
+
+    const debouncedGa4Event = debounce(() => {
+        fireGA4Event("TTP27_ViewInLineAd");
+    }, 250);
+
+    function removeScrollHandler() {
+        console.log("scroll event removed");
+        window.removeEventListener("scroll", handleScroll);
+        foundNodes = null;
+    }
+
+    function handleScroll(e) {
+        const isVisible = foundNodes.some((item) => isElementVisibleInViewport(item));
+        if (isVisible) {
+            debouncedGa4Event();
+            removeScrollHandler();
+        }
+    }
+
+    function scrollFunction() {
+        // Control
+        // foundNodes = DATA["layout_info"].filter(({ selector }) => q(selector)).map(({ selector }) => q(selector));
+
+        // Variation
+        foundNodes = qq(".ab-figure-content img");
+
+        if (foundNodes && foundNodes.length === 0) return;
+        window.addEventListener("scroll", handleScroll);
+    }
+
+    function handleLocationChanges() {
+        const pathname = window.location.pathname;
+        const blogDetailPathRegex = /^\/blog\/[^/]+\/?$/;
+
+        if (blogDetailPathRegex.test(pathname)) {
+            init_TTP27();
+        } else {
+            window[page_initials] = false;
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            removeScrollHandler();
+        }
+    }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            console.log("==== < Navigation occurred (back/forward button) ====");
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            console.log("=== > History state was changed programmatically ===");
+            debouncedChanges();
+        });
     }
 
     function checkForItems() {
@@ -214,10 +287,25 @@ Todos:
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
+    async function init_TTP27() {
+        if (window[page_initials] === true) return;
+
+        try {
+            await waitForElementAsync(checkForItems);
+
+            window[page_initials] = true;
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+            console.log(TEST_CONFIG);
+
+            updateLayout();
+            clickFunction();
+            scrollFunction();
+        } catch (error) {
+            return false;
+        }
     }
+
+    init_TTP27();
+    urlObserver();
 })();
