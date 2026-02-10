@@ -7,13 +7,17 @@ https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
 Figma: https://www.figma.com/design/42DzjhpNUj4W7pNQzKxJ4m/TTP27---BLOGS--Redesign-In-Line-Ads?node-id=2001-309&t=gm3GJl2zJdkfCqXS-0
 
 Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2088293#c2622626:what
+Url Matching Regex: ^https?:\/\/(?:www\.)?texastaxprotest\.com\/blog\/[^\/?#]+\/?(?:[?#].*)?$
 
 
-Todos:
+Preview:
+control: https://marketer.monetate.net/control/preview/12476/8XJWG0ICTUP1403FBUY3EJKDCT8DDQHG/27-blogs-redesign-in-line-ads
+v1: https://marketer.monetate.net/control/preview/12476/J8LNV8DPFFC4WDJLO94FBPLTTUOPZDCO/27-blogs-redesign-in-line-ads
 
-1. Fix images
-2. Handle SPA Functionality | Use functionality from water.com
-3. Add GA4 events
+Preview including all experiences:
+control: https://marketer.monetate.net/control/preview/12476/39UK6PB0RUMHN1YAQRQP5AZSJ5W2PGSI/27-blogs-redesign-in-line-ads
+v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKPCOX9NQLQ/27-blogs-redesign-in-line-ads
+
 
 */
 
