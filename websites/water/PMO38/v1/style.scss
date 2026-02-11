@@ -22,12 +22,16 @@
 */
 
 .AB-PMO38 {
-    .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
-    .wrapper-section.flex.flex-col.gap-2\.5 {
+    // .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
+    // .wrapper-section.flex.flex-col.gap-2\.5 {
+    //     display: none;
+    // }
+
+    .wrapper-summary-totals__inner .wrapper-section {
         display: none;
     }
 
-    h2.summit-Title-root {
+    .wrapper-outer .wrapper-head .wrapper-heading {
         font-family:
             Nunito Sans,
             Nunito Sans Fallback;
@@ -40,7 +44,12 @@
         margin-bottom: 6px;
     }
 
-    .summary-coupon .summit-Button-root .summit-Text-root {
+    
+    .wrapper-coupon-code {
+        min-height: 15px;
+    }
+
+    .wrapper-coupon-code__inner .text-base {
         font-family:
             Nunito Sans,
             Nunito Sans Fallback;
@@ -52,16 +61,16 @@
         color: rgba(0, 5, 62, 1);
     }
 
-    .summary-coupon {
+    .wrapper-coupon-code__inner {
         margin-bottom: -4px;
     }
 
-    .summary-list {
+    .ab-summary-wrapper {
         margin-bottom: -9px;
     }
 
-    .summary-actions .mt-6 {
-        margin-top: 20px;
+    .usp-section {
+        margin-top: 6px;
     }
 
     .ab-summary-wrapper {
@@ -73,6 +82,10 @@
 
     .ab-wrapper-section__total {
         padding: 17px 15px 18px;
+        gap: 12px;
+    }
+
+    .ab-summary-row-others {
         gap: 12px;
     }
 
@@ -174,7 +187,7 @@
         color: rgba(0, 5, 62, 1);
     }
 
-    .summary-actions + .text-sm {
+    .wrapper-faq {
         font-family:
             Nunito Sans,
             Nunito Sans Fallback;
@@ -192,22 +205,22 @@
     }
 
     @media screen and (min-width: 768px) {
-        h2.summit-Title-root {
+        .wrapper-outer .wrapper-head .wrapper-heading {
             font-size: 20px;
             line-height: 100%;
             margin-bottom: 16px;
         }
 
-        .summary-coupon .summit-Button-root .summit-Text-root {
+        .wrapper-coupon-code__inner .text-base {
             font-size: 14px;
             line-height: 100%;
         }
 
-        .summary-coupon {
+        .wrapper-coupon-code__inner {
             //
         }
 
-        .summary-list {
+        .ab-summary-wrapper {
             margin-bottom: -13px;
         }
 
@@ -252,6 +265,10 @@
         }
 
         .ab-wrapper-section__total {
+            gap: 15px;
+        }
+
+        .ab-summary-row-others {
             gap: 15px;
         }
 

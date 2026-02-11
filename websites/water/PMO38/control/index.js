@@ -7,14 +7,14 @@
             `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
             "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
             "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-            message
+            message,
         );
     }
 
     logInfo("fired");
 
     const TEST_CONFIG = {
-        cdivent: "Acadia",
+        client: "Acadia",
         project: "Water",
         site_url: "https://order.water.com/",
         test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
@@ -87,10 +87,9 @@
         if (window.location.pathname === "/checkout/cart/") {
             init_PMO38();
         } else {
+            window[page_initials] = false;
             document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             q(".ab-summary-wrapper")?.remove();
-            observer?.disconnect();
-            observer = null;
         }
     }
 
@@ -105,12 +104,10 @@
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             debouncedChanges();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             debouncedChanges();
         });
     }
@@ -120,17 +117,26 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             document.readyState === "complete" &&
             q(".wrapper-section.flex.flex-col.gap-2\\.5") &&
-            q(".summary-checkout-button")
+            q("button.btn.btn-primary.btn-size-default.btm-size-full.shadow-btn")
         );
     }
 
     async function init_PMO38() {
+
+        if (window[page_initials] === true) return;
+
         try {
             await waitForElementAsync(checkForItems);
+
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-            q(".summary-checkout-button").addEventListener("click", (e) => {
+            window[page_initials] = true;
+
+            console.log(TEST_CONFIG);
+
+            q("button.btn.btn-primary.btn-size-default.btm-size-full.shadow-btn").addEventListener("click", (e) => {
                 fireGA4Event("PMO38_CheckoutCTAClick", "Proceed to Checkout");
             });
+
         } catch (error) {
             return false;
         }

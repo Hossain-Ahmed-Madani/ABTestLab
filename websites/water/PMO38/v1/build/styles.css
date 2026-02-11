@@ -1,9 +1,15 @@
+/* 
+    text-left 
+    text-right 
+    uppercase
+    text-nowrap
 
-.AB-PMO38 .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
-.AB-PMO38 .wrapper-section.flex.flex-col.gap-2\.5 {
+
+*/
+.AB-PMO38 .wrapper-summary-totals__inner .wrapper-section {
     display: none;
 }
-.AB-PMO38 h2.summit-Title-root {
+.AB-PMO38 .wrapper-outer .wrapper-head .wrapper-heading {
     font-family:
         Nunito Sans,
         Nunito Sans Fallback;
@@ -15,7 +21,10 @@
     color: rgb(0, 5, 62);
     margin-bottom: 6px;
 }
-.AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+.AB-PMO38 .wrapper-coupon-code {
+    min-height: 15px;
+}
+.AB-PMO38 .wrapper-coupon-code__inner .text-base {
     font-family:
         Nunito Sans,
         Nunito Sans Fallback;
@@ -26,14 +35,14 @@
     text-transform: capitalize;
     color: rgb(0, 5, 62);
 }
-.AB-PMO38 .summary-coupon {
+.AB-PMO38 .wrapper-coupon-code__inner {
     margin-bottom: -4px;
 }
-.AB-PMO38 .summary-list {
+.AB-PMO38 .ab-summary-wrapper {
     margin-bottom: -9px;
 }
-.AB-PMO38 .summary-actions .mt-6 {
-    margin-top: 20px;
+.AB-PMO38 .usp-section {
+    margin-top: 6px;
 }
 .AB-PMO38 .ab-summary-wrapper {
     border: 1px solid rgb(229, 230, 236);
@@ -43,6 +52,9 @@
 }
 .AB-PMO38 .ab-wrapper-section__total {
     padding: 17px 15px 18px;
+    gap: 12px;
+}
+.AB-PMO38 .ab-summary-row-others {
     gap: 12px;
 }
 .AB-PMO38 .ab-summary-row--total .ab-summary-value {
@@ -122,7 +134,7 @@
     letter-spacing: 0px;
     color: rgb(0, 5, 62);
 }
-.AB-PMO38 .summary-actions + .text-sm {
+.AB-PMO38 .wrapper-faq {
     font-family:
         Nunito Sans,
         Nunito Sans Fallback;
@@ -133,21 +145,21 @@
     text-align: center;
     color: rgb(0, 5, 62);
 }
-.AB-PMO38 .summary-actions + .text-sm a {
+.AB-PMO38 .wrapper-faq a {
     font-weight: 700;
     color: rgb(0, 103, 195);
 }
 @media screen and (min-width: 768px) {
-    .AB-PMO38 h2.summit-Title-root {
+    .AB-PMO38 .wrapper-outer .wrapper-head .wrapper-heading {
         font-size: 20px;
         line-height: 100%;
         margin-bottom: 16px;
     }
-    .AB-PMO38 .summary-coupon .summit-Button-root .summit-Text-root {
+    .AB-PMO38 .wrapper-coupon-code__inner .text-base {
         font-size: 14px;
         line-height: 100%;
     }
-    .AB-PMO38 .summary-list {
+    .AB-PMO38 .ab-summary-wrapper {
         margin-bottom: -13px;
     }
     .AB-PMO38 .ab-summary-dropdown__head {
@@ -174,6 +186,9 @@
         letter-spacing: 0px;
     }
     .AB-PMO38 .ab-wrapper-section__total {
+        gap: 15px;
+    }
+    .AB-PMO38 .ab-summary-row-others {
         gap: 15px;
     }
     .AB-PMO38 .ab-summary-row--total .ab-summary-value {

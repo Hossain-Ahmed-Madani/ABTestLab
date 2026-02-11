@@ -1,6 +1,6 @@
 /* 
 
-URL: https://www.water.com/cart/
+URL: https://order.water.com/checkout/cart/
 Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-Up-Order-Summary?node-id=9-82&t=Az29v74pNVnOwjFj-0
 Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
 
@@ -31,6 +31,10 @@ V1:
   logInfo("fired");
 
   const TEST_CONFIG = {
+    client: "Acadia",
+    project: "Water",
+    site_url: "https://order.water.com",
+    test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
     page_initials: "AB-PMO38",
     test_variation: 1 /* 0, 1 */,
     test_version: 0.0001,
@@ -144,37 +148,72 @@ V1:
 
   function getOrderSummaryData() {
     const dataObj = {
-      "One-time Purchase": "$00.00",
-      "One-Time Products": "$00.00",
-      "One-Time Refundable Deposit Fee": "$00.00",
-      "Recurring Charges": "$00.00",
-      "Recurring Products": "$00.00",
-      Delivery: "$00.00",
-      Discount: "$00.00",
-      "Estimated Credit Card Fee": "$00.00",
-      Taxes: "$00.00",
-      "Estimated Total": "$00.00",
+      "one-time-purchase-total": "$0.00",
+      "one-time-purchase": {
+        "one-time products": "$0.00",
+        "one-time refundable deposit fee": "$0.00",
+      },
+      "recurring-charges-total": "$0.00",
+      "recurring charges": {
+        "recurring products": "$0.00",
+        delivery: "$0.00",
+      },
+      others: {},
+      "estimated credit card fee": "$0.00",
+      taxes: "$0.00",
+      "estimated total": "$0.00",
     };
 
-    qq(".wrapper-section.flex.flex-col.gap-2\\.5 .segment").forEach((item) => {
-      const label =
-        q(item, ".summit-Text-root:not(.text-nowrap)")?.textContent?.trim() ??
-        "";
-      const value =
-        q(item, ".summit-Text-root.text-nowrap")?.textContent?.trim() ?? "";
-      dataObj[label] = value;
-    });
+    qq(".wrapper-section.flex.flex-col.gap-2\\.5 .wrapper-totals-item").forEach(
+      (item) => {
+        const label =
+          q(item, "span[x-text='segment.label']")
+            ?.textContent?.toLowerCase()
+            .trim() ?? "";
+        const value = q(item, "span.text-nowrap")?.textContent?.trim() ?? "";
 
-    dataObj["Estimated Total"] =
+        if (!label) return;
+
+        if (label.includes("one-time")) {
+          dataObj["one-time-purchase"][label] = value;
+        } else if (label.includes("recurring") || label.includes("delivery")) {
+          dataObj["recurring charges"][label] = value;
+        } else if (
+          label.includes("estimated credit card fee") ||
+          label.includes("taxes")
+        ) {
+          dataObj[label] = value;
+        } else {
+          dataObj["others"][label] = value;
+        }
+      },
+    );
+
+    dataObj["one-time-purchase-total"] =
+      `$${getSum(...Object.values(dataObj["one-time-purchase"]))}`;
+    dataObj["recurring-charges-total"] =
+      `$${getSum(...Object.values(dataObj["recurring charges"]))}`;
+    dataObj["estimated total"] =
       q(
-        ".wrapper-section.flex.flex-col.gap-2\\.5 .flex.flex-col.items-end .summit-Text-root.font-semibold",
+        ".wrapper-section.flex.flex-col.gap-2\\.5 .wrapper-section__total  .flex.items-end.flex-col .font-semibold span",
       )?.textContent?.trim() ?? "";
-    dataObj["One-time Purchase"] =
-      `$${getSum(dataObj["One-Time Products"], dataObj["One-Time Refundable Deposit Fee"])}`;
-    dataObj["Recurring Charges"] =
-      `$${getSum(dataObj["Recurring Products"], dataObj["Delivery"])}`;
 
     return dataObj;
+  }
+
+  function updateRow(key, value) {
+    const selector = `div[ab-col-label="${key}"]`;
+    const targetNode = q(selector);
+    if (!targetNode) return;
+    const parentNode = targetNode.parentNode;
+    targetNode.innerText = value;
+
+    if (parentNode.hasAttribute("others") && parseCurrency(value) === 0) {
+      parentNode.classList.add("hidden");
+      return;
+    }
+
+    parentNode.classList.remove("hidden");
   }
 
   function updateLayout() {
@@ -183,8 +222,18 @@ V1:
     const dataObj = getOrderSummaryData();
 
     Object.keys(dataObj).forEach((key) => {
-      const selector = `div[ab-col-label='${key}']`;
-      q(selector).innerText = dataObj[key];
+      const value = dataObj[key];
+
+      if (typeof value !== "object" || value === null) {
+        updateRow(key, value);
+        return;
+      }
+
+      if (typeof value === "object") {
+        Object.keys(value).forEach((nestedKey) => {
+          updateRow(nestedKey, value[nestedKey]);
+        });
+      }
     });
   }
 
@@ -209,9 +258,9 @@ V1:
                   </div>
                   <div
                     class="ab-txt-lg text-right uppercase ml-auto"
-                    ab-col-label="One-time Purchase"
+                    ab-col-label="one-time-purchase-total"
                   >
-                    ${dataObj["One-time Purchase"]}
+                    ${dataObj["one-time-purchase-total"]}
                   </div>
                   <div
                     class="ab-summary-dropdown__arrow flex justify-end items-center"
@@ -227,9 +276,9 @@ V1:
                   </div>
                   <div
                     class="ab-txt-regular text-right uppercase"
-                    ab-col-label="One-Time Products"
+                    ab-col-label="one-time products"
                   >
-                    ${dataObj["One-Time Products"]}
+                    ${dataObj["one-time-purchase"]["one-time products"]}
                   </div>
                 </div>
                 <div class="ab-summary-row flex justify-between">
@@ -244,9 +293,11 @@ V1:
                   </div>
                   <div
                     class="ab-txt-regular text-right uppercase"
-                    ab-col-label="One-Time Refundable Deposit Fee"
+                    ab-col-label="one-time refundable deposit fee"
                   >
-                    ${dataObj["One-Time Refundable Deposit Fee"]}
+                    ${dataObj["one-time-purchase"][
+                      "one-time refundable deposit fee"
+                    ]}
                   </div>
                 </div>
               </div>
@@ -262,9 +313,9 @@ V1:
                   </div>
                   <div
                     class="ab-txt-lg text-right uppercase ml-auto"
-                    ab-col-label="Recurring Charges"
+                    ab-col-label="recurring-charges-total"
                   >
-                    ${dataObj["Recurring Charges"]}
+                    ${dataObj["recurring-charges-total"]}
                   </div>
                   <div
                     class="ab-summary-dropdown__arrow flex justify-end items-center"
@@ -280,9 +331,9 @@ V1:
                   </div>
                   <div
                     class="ab-txt-regular text-right uppercase"
-                    ab-col-label="Recurring Products"
+                    ab-col-label="recurring products"
                   >
-                    ${dataObj["Recurring Products"]}
+                    ${dataObj["recurring charges"]["recurring products"]}
                   </div>
                 </div>
                 <div class="ab-summary-row flex justify-between">
@@ -293,9 +344,9 @@ V1:
                   </div>
                   <div
                     class="ab-txt-regular text-right uppercase"
-                    ab-col-label="Delivery"
+                    ab-col-label="delivery"
                   >
-                    ${dataObj["Delivery"]}
+                    ${dataObj["recurring charges"]["delivery"]}
                   </div>
                 </div>
               </div>
@@ -304,24 +355,49 @@ V1:
             <div
               class="ab-wrapper-section__total flex flex-col justify-between"
             >
-              <div class="ab-summary-row flex justify-between">
-                <div class="ab-txt-regular text-left text-nowrap">Discount</div>
-                <div
-                  class="ab-txt-regular text-right uppercase"
-                  ab-col-label="Discount"
-                >
-                  ${dataObj["Discount"]}
-                </div>
-              </div>
+              ${dataObj["others"] && Object.keys(dataObj["others"]).length > 0
+                ? /* HTML */ `
+                    <div
+                      class="ab-summary-row-others flex flex-col justify-between"
+                    >
+                      ${Object.keys(dataObj["others"])
+                        .map(
+                          (key) => /* HTML */ `
+                            <div
+                              class="ab-summary-row flex justify-between ${parseCurrency(
+                                dataObj["others"][key],
+                              ) === 0
+                                ? "hidden"
+                                : ""}"
+                              others
+                            >
+                              <div
+                                class="ab-txt-regular text-left text-nowrap capitalize"
+                              >
+                                ${key}
+                              </div>
+                              <div
+                                class="ab-txt-regular text-right uppercase"
+                                ab-col-label="${key}"
+                              >
+                                ${dataObj["others"][key]}
+                              </div>
+                            </div>
+                          `,
+                        )
+                        .join("")}
+                    </div>
+                  `
+                : ""}
               <div class="ab-summary-row flex justify-between">
                 <div class="ab-txt-regular text-left text-nowrap">
                   Estimated Credit Card Fee
                 </div>
                 <div
                   class="ab-txt-regular text-right uppercase"
-                  ab-col-label="Estimated Credit Card Fee"
+                  ab-col-label="estimated credit card fee"
                 >
-                  ${dataObj["Estimated Credit Card Fee"]}
+                  ${dataObj["estimated credit card fee"]}
                 </div>
               </div>
               <div class="ab-summary-row flex justify-between">
@@ -332,9 +408,9 @@ V1:
                 </div>
                 <div
                   class="ab-summary-value ab-txt-regular text-right text-nowrap uppercase"
-                  ab-col-label="Taxes"
+                  ab-col-label="taxes"
                 >
-                  ${dataObj["Taxes"]}
+                  ${dataObj["taxes"]}
                 </div>
               </div>
               <div
@@ -346,9 +422,9 @@ V1:
                 <div class="ab-summary-value flex flex-col items-end">
                   <div
                     class="ab-txt-lg text-right text-nowrap uppercase"
-                    ab-col-label="Estimated Total"
+                    ab-col-label="estimated total"
                   >
-                    ${dataObj["Estimated Total"]}
+                    ${dataObj["estimated total"]}
                   </div>
                   <div class="ab-txt-sm text-right text-nowrap">
                     Billed on the first invoice
@@ -395,15 +471,24 @@ V1:
       });
     });
 
-    q(".summary-checkout-button").addEventListener("click", (e) => {
+    q(
+      "button.btn.btn-primary.btn-size-default.btm-size-full.shadow-btn",
+    ).addEventListener("click", (e) => {
       fireGA4Event("PMO38_CheckoutCTAClick", "Proceed to Checkout");
     });
+
+    q(".ab-summary-more-info").addEventListener("click", (e) =>
+      q(
+        ".wrapper-summary-totals__inner .cursor-pointer.modal-v2__trigger__ready",
+      )?.click(),
+    );
   }
 
   function handleLocationChanges() {
-    if (window.location.pathname === "/cart/") {
+    if (window.location.pathname === "/checkout/cart/") {
       init_PMO38();
     } else {
+      window[page_initials] = false;
       document.body.classList.remove(
         page_initials,
         `${page_initials}--v${test_variation}`,
@@ -443,18 +528,25 @@ V1:
       ) &&
       document.readyState === "complete" &&
       q(".wrapper-section.flex.flex-col.gap-2\\.5") &&
-      q(".summary-checkout-button")
+      q("button.btn.btn-primary.btn-size-default.btm-size-full.shadow-btn")
     );
   }
 
   async function init_PMO38() {
+    if (window[page_initials] === true) return;
+
     try {
       await waitForElementAsync(checkForItems);
+
+      window[page_initials] = true;
       q("body").classList.add(
         page_initials,
         `${page_initials}--v${test_variation}`,
         `${page_initials}--version:${test_version}`,
       );
+
+      console.log(TEST_CONFIG);
+
       createLayout();
       clickFunction();
       observer = mutationObserverFunction();
