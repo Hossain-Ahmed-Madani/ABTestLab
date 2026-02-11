@@ -44,7 +44,7 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
     const TEST_CONFIG = {
         page_initials: "AB-BW102",
         test_variation: 1 /* 0, 1, 2, 3, 4, 5 */,
-        test_version: 0.0004,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -122,6 +122,8 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
 
     function mutationObserverFunction() {
         const targetNode = q("#ResultsList");
+        if (!targetNode) return;
+
         const debouncedUpdate = debounce(updateLayout, 150);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
@@ -130,7 +132,7 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
         const txt = BADGE_TEXT[test_variation];
         const flagClassName = "ab-selling-fast-product";
 
-        qq(`#ResultsList .productCard:not(.${flagClassName})`).forEach((item) => {
+        qq(`.productCard:not(.${flagClassName})`).forEach((item) => {
 
             const badges = qq(item, ".media__badge-text").filter(item => item.textContent.trim().includes('SELLING FAST'));
 
@@ -146,33 +148,36 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
     }
 
     function clickFunction() {
-        if (!q("#ResultsList")) return;
+        if (qq("#ResultsList, .tabbed-collections__panel, .product-grouping").length === 0) return;
 
-        q("#ResultsList").addEventListener("click", (e) => {
-            const linkItem = e.target.closest(".ab-selling-fast-product a.productCard__link");
-            if (linkItem) {
-                e.preventDefault();
-                const productItem = e.target.closest(".productCard");
-                const href = linkItem.getAttribute("href");
-                const title = q(productItem, ".productCard__title").textContent.trim();
-                fireGA4Event("BW102_ClickBadge", title);
+        qq("#ResultsList, .tabbed-collections__panel, .product-grouping").forEach(item => {
+            item.addEventListener("click", (e) => {
+                const linkItem = e.target.closest(".ab-selling-fast-product a.productCard__link");
+                if (linkItem) {
+                    e.preventDefault();
+                    const productItem = e.target.closest(".productCard");
+                    const href = linkItem.getAttribute("href");
+                    const title = q(productItem, ".productCard__title").textContent.trim();
+                    fireGA4Event("BW102_ClickBadge", title);
 
-                setTimeout(() => {
-                    if (e.ctrlKey || e.metaKey) {
-                        window.open(href, "_blank");
-                    }
-                    else {
-                        (window.location.href = href);
-                    }
-                }, 150);
+            
+                    setTimeout(() => {
+                        if (e.ctrlKey || e.metaKey) {
+                            window.open(href, "_blank");
+                        }
+                        else {
+                            (window.location.href = href);
+                        }
+                    }, 150);
 
-
-            }
+                }
+            });
         });
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
         updateLayout();
         mutationObserverFunction();
         clickFunction();
@@ -181,7 +186,8 @@ https://bruntworkwear.com/collections/womens-work-boots?sort=MANUAL&reverse=fals
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            q("#ResultsList .productCard")
+            q('#ResultsList .productCard') ||
+            (q('.tabbed-collections__panel .productCard') && q('.product-grouping .productCard'))
         );
     }
 
