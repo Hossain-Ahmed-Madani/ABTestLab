@@ -1,0 +1,13 @@
+{
+  "id": "1770877870269_3273_TTP19",
+  "name": "TTP19",
+  "type": "A/B",
+  "website": "texastaxprotest",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-02-12T06:31:10.269Z",
+  "createdAtReadable": "2/12/2026, 12:31:10 PM",
+  "lastUpdated": "2026-02-12T06:31:10.588Z"
+}

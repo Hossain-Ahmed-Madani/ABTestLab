@@ -1,0 +1,238 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-TTP19 {
+    header a[href="/"] img {
+        height: 48px;
+        min-height: 48px;
+        width: auto;
+    }
+
+
+    header {
+        padding : 10px 20px 12px !important;
+        height: max-content;
+    }
+
+    header > div {
+        padding: 0 !important;
+        top: 78px !important;
+    }
+
+    header > div > div {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+
+    // Sign In Button
+
+    header a.mantine-focus-auto[href="https://client.texastaxprotest.com/login"]
+    {
+        display: none;
+    }
+
+    .ab-cta-container {
+        gap: 12px;
+
+        &--mobile {
+            display: flex;
+            //
+        }
+
+        &--desktop {
+            display: none;
+        }
+    }
+
+    .ab-sign-in-cta {
+        background-color: transparent;
+        border: 1px solid rgba(255, 255, 255, 1);
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        outline: none;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            text-decoration: none;
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 12px;
+                min-width: 12px;
+                height: 12px;
+                min-height: 12px;
+            }
+        }
+
+        &__text {
+            display: none;
+            font-family: Lato, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+
+            line-height: 100%;
+            letter-spacing: 0.02em;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
+    .ab-contact-cta {
+        background-color: rgba(252, 106, 0, 1);
+        border: 1px solid rgba(252, 106, 0, 1);
+        width: 129px;
+        height: 30px;
+        border-radius: 500px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        outline: none;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            outline: none;
+            text-decoration: none;
+        }
+
+        &__icon {
+            font-weight: 700;
+            font-size: 14px;
+
+            line-height: 100%;
+            letter-spacing: 0.02em;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 1);
+        }
+
+        &__text {
+            font-family: Lato, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+
+            line-height: 100%;
+            letter-spacing: 0.02em;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+
+        header {
+            padding : 11px 0 !important;
+        }
+
+        header > div { 
+            top: 97px !important;
+        }
+    
+
+        header a[href="/"] img {
+            height: 68px;
+            min-height: 68px;
+        }
+
+        .ab-cta-container {
+            gap: 25px;
+
+            &--mobile {
+                display: none;
+                //
+            }
+
+            &--desktop {
+                margin-left: 27px;
+                display: flex;
+            }
+        }
+
+        .ab-sign-in-cta {
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 1);
+            width: 130px;
+            height: 35px;
+            border-radius: 500px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+
+            &__icon {
+                justify-content: center;
+                align-items: center;
+
+                svg {
+                    width: 14px;
+                    min-width: 14px;
+                    height: 14px;
+                    min-height: 14px;
+                }
+            }
+
+            &__text {
+                display: block;
+            }
+        }
+
+        .ab-contact-cta {
+            background-color: rgba(252, 106, 0, 1);
+            border: 1px solid rgba(252, 106, 0, 1);
+            width: 130px;
+            height: 35px;
+            border-radius: 500px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+
+            outline: none;
+            text-decoration: none;
+
+            &__text {
+                margin-bottom: -1px;
+            }
+        }
+    }
+}
+
+.AB-TTP19--v1 {
+    header a.mantine-focus-auto[href="/#contact"] {
+        display: none;
+    }
+}
+
+.AB-TTP19--v2 {
+    //
+}
