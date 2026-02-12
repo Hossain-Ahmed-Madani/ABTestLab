@@ -84,4 +84,4 @@
         .catch((error) => {
             return false;
         });
-})();
+})()
