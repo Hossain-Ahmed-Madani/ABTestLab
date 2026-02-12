@@ -14,7 +14,15 @@
   display: none;
 }
 .AB-TTP27 .ab-desktop img {
-  height: 400px;
+  min-width: 100%;
+  min-height: 350px;
+  padding: 0;
+  aspect-ratio: unset !important;
+  border-radius: 15px;
+}
+.AB-TTP27 .ab-desktop img[alt="Property Taxes Too High"] {
+  min-width: 100%;
+  min-height: 400px;
   padding: 0;
   aspect-ratio: unset !important;
   border-radius: 15px;
@@ -27,10 +35,10 @@
 .AB-TTP27 .ab-mobile img {
   width: auto;
   margin: auto;
-  height: 510px;
-  min-height: 510px;
+  height: 473px;
+  min-height: 473px;
   aspect-ratio: unset !important;
-  object-fit: cover;
+  object-fit: contain;
 }
 @media screen and (min-width: 768px) {
   .AB-TTP27 .ab-mobile {
@@ -59,11 +67,15 @@ Figma: https://www.figma.com/design/42DzjhpNUj4W7pNQzKxJ4m/TTP27---BLOGS--Redesi
 Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2088293#c2622626:what
 Url Matching Regex: ^https?:\/\/(?:www\.)?texastaxprotest\.com\/blog\/[^\/?#]+\/?(?:[?#].*)?$
 
-Todos:
 
-1. Fix images
-2. Handle SPA Functionality | Use functionality from water.com
-3. Add GA4 events
+Preview:
+control: https://marketer.monetate.net/control/preview/12476/8XJWG0ICTUP1403FBUY3EJKDCT8DDQHG/27-blogs-redesign-in-line-ads
+v1: https://marketer.monetate.net/control/preview/12476/J8LNV8DPFFC4WDJLO94FBPLTTUOPZDCO/27-blogs-redesign-in-line-ads
+
+Preview including all experiences:
+control: https://marketer.monetate.net/control/preview/12476/39UK6PB0RUMHN1YAQRQP5AZSJ5W2PGSI/27-blogs-redesign-in-line-ads
+v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKPCOX9NQLQ/27-blogs-redesign-in-line-ads
+
 
 */
 
@@ -89,7 +101,7 @@ Todos:
     test_name: " TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
     page_initials: "AB-TTP27",
     test_variation: 1 /* 0, 1 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -110,17 +122,17 @@ Todos:
 
   const ASSETS = {
     property_tax_too_high_mobile:
-      "https://sb.monetate.net/img/1/1582/6005534.png",
+      "https://sb.monetate.net/img/1/1582/6010989.png",
     property_tax_too_high_desktop:
-      "https://sb.monetate.net/img/1/1582/6005535.png",
+      "https://sb.monetate.net/img/1/1582/6010990.png",
     property_tax_made_easy_mobile:
-      "https://sb.monetate.net/img/1/1582/6005538.png",
+      "https://sb.monetate.net/img/1/1582/6010987.png",
     property_tax_made_easy_desktop:
-      "https://sb.monetate.net/img/1/1582/6005540.png",
+      "https://sb.monetate.net/img/1/1582/6010988.png",
     property_tax_got_you_down_mobile:
-      "https://sb.monetate.net/img/1/1582/6005542.png",
+      "https://sb.monetate.net/img/1/1582/6010985.png",
     property_tax_got_you_down_desktop:
-      "https://sb.monetate.net/img/1/1582/6005545.png",
+      "https://sb.monetate.net/img/1/1582/6010986.png",
   };
 
   const DATA = {
@@ -210,8 +222,6 @@ Todos:
 
         if (!targetNode) return;
 
-        console.log(targetNode);
-
         targetNode.classList.add("ab-hidden");
 
         const layout = /* HTML */ `
@@ -294,7 +304,6 @@ Todos:
   }, 250);
 
   function removeScrollHandler() {
-    console.log("scroll event removed");
     window.removeEventListener("scroll", handleScroll);
     foundNodes = null;
   }

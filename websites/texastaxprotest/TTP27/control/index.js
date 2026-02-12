@@ -59,14 +59,13 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
             "ga4-event-p2-value": eventLabel,
         });
     }
-
     const ASSETS = {
-        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6005534.png",
-        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6005535.png",
-        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6005538.png",
-        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6005540.png",
-        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6005542.png",
-        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6005545.png",
+        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6010989.png",
+        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6010990.png",
+        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6010987.png",
+        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6010988.png",
+        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6010985.png",
+        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6010986.png",
     };
 
     const DATA = {

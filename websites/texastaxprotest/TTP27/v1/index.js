@@ -43,7 +43,7 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
         test_name: " TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
         page_initials: "AB-TTP27",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -63,12 +63,12 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
     }
 
     const ASSETS = {
-        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6005534.png",
-        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6005535.png",
-        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6005538.png",
-        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6005540.png",
-        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6005542.png",
-        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6005545.png",
+        property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6010989.png",
+        property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6010990.png",
+        property_tax_made_easy_mobile: "https://sb.monetate.net/img/1/1582/6010987.png",
+        property_tax_made_easy_desktop: "https://sb.monetate.net/img/1/1582/6010988.png",
+        property_tax_got_you_down_mobile: "https://sb.monetate.net/img/1/1582/6010985.png",
+        property_tax_got_you_down_desktop: "https://sb.monetate.net/img/1/1582/6010986.png",
     };
 
     const DATA = {
@@ -155,8 +155,6 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
 
             if (!targetNode) return;
 
-            console.log(targetNode);
-
             targetNode.classList.add("ab-hidden");
 
             const layout = /* HTML */ `
@@ -225,7 +223,6 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
     }, 250);
 
     function removeScrollHandler() {
-        console.log("scroll event removed");
         window.removeEventListener("scroll", handleScroll);
         foundNodes = null;
     }

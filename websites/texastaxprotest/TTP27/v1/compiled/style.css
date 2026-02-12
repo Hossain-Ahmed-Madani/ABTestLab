@@ -8,7 +8,15 @@
   display: none;
 }
 .AB-TTP27 .ab-desktop img {
-  height: 400px;
+  min-width: 100%;
+  min-height: 350px;
+  padding: 0;
+  aspect-ratio: unset !important;
+  border-radius: 15px;
+}
+.AB-TTP27 .ab-desktop img[alt="Property Taxes Too High"] {
+  min-width: 100%;
+  min-height: 400px;
   padding: 0;
   aspect-ratio: unset !important;
   border-radius: 15px;
@@ -21,10 +29,10 @@
 .AB-TTP27 .ab-mobile img {
   width: auto;
   margin: auto;
-  height: 510px;
-  min-height: 510px;
+  height: 473px;
+  min-height: 473px;
   aspect-ratio: unset !important;
-  object-fit: cover;
+  object-fit: contain;
 }
 @media screen and (min-width: 768px) {
   .AB-TTP27 .ab-mobile {
