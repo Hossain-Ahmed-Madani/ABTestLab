@@ -1,0 +1,24 @@
+.AB-OPT-CART-ITERATION .quick-cart__item-image {
+  width: 120px;
+}
+.AB-OPT-CART-ITERATION .ab-total-saved {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.AB-OPT-CART-ITERATION .ab-total-saved__label {
+  font-family: "Libre Baskerville";
+  font-size: 14.5px;
+  font-weight: 400;
+  color: #ca5e5c;
+  display: block;
+  margin: 0;
+  font-weight: bold;
+  unicode-bidi: isolate;
+}
+.AB-OPT-CART-ITERATION .ab-total-saved__value {
+  font-family: "Libre Baskerville", serif;
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #ca5e5c;
+}
