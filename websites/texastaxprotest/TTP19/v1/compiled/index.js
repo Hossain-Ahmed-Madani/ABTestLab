@@ -1,8 +1,6 @@
 /* 
 Target URL's:
-https://www.texastaxprotest.com/blog/
-https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
-https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
+https://www.texastaxprotest.com
 
 Figma: https://www.figma.com/design/Jb671zJS1JeGCuC0EiFyuh/TTP19---Header--Add-Sticky-CTA-to-Nav-Header?node-id=2001-905&t=BQzGzcgL7HY0pFpJ-0
 
@@ -37,13 +35,9 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "texastaxprotest",
-        host: "https://www.texastaxprotest.com",
-        test_name: "TTP19: [Header] Add Sticky CTA to Nav Header - (2) SET UP TEST",
         page_initials: "AB-TTP19",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -69,8 +63,6 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event:", eventName, eventLabel);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -191,12 +183,10 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             debouncedChanges();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             debouncedChanges();
         });
     }
@@ -218,8 +208,6 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
 
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-
-            console.log(TEST_CONFIG);
 
             updateLayout();
             clickFunction();

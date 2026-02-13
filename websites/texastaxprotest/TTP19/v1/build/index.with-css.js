@@ -25,6 +25,11 @@
 {
   display: none;
 }
+.AB-TTP19 header ~ nav {
+  top: 80px !important;
+  bottom: 0 !important;
+  height: auto !important;
+}
 .AB-TTP19 .ab-cta-container {
   gap: 12px;
 }
@@ -108,6 +113,14 @@
   text-transform: capitalize;
   color: rgb(255, 255, 255);
 }
+@media screen and (max-width: 360px) {
+  .AB-TTP19 header {
+    padding: 10px 10px 12px !important;
+  }
+  .AB-TTP19 header > div > div {
+    gap: 5px !important;
+  }
+}
 @media screen and (min-width: 768px) {
   .AB-TTP19 header {
     padding: 11px 0 !important;
@@ -170,6 +183,21 @@
     margin-bottom: -1px;
   }
 }
+@media screen and (min-width: 991px) {
+  .AB-TTP19 header a.mantine-focus-auto {
+    font-family: Lato, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24.8px;
+    letter-spacing: 0px;
+  }
+}
+@media screen and (min-width: 767.5px) and (max-width: 1366px) {
+  .AB-TTP19 header > div {
+    width: auto !important;
+    padding: 0 20px !important;
+  }
+}
 
 .AB-TTP19--v1 header a.mantine-focus-auto[href="/#contact"] {
   display: none;
@@ -184,9 +212,7 @@
 })();
 /* 
 Target URL's:
-https://www.texastaxprotest.com/blog/
-https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
-https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
+https://www.texastaxprotest.com
 
 Figma: https://www.figma.com/design/Jb671zJS1JeGCuC0EiFyuh/TTP19---Header--Add-Sticky-CTA-to-Nav-Header?node-id=2001-905&t=BQzGzcgL7HY0pFpJ-0
 
@@ -227,7 +253,7 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
     test_name: "TTP19: [Header] Add Sticky CTA to Nav Header - (2) SET UP TEST",
     page_initials: "AB-TTP19",
     test_variation: 1 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

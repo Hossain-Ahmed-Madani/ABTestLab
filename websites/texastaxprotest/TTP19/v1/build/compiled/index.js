@@ -1,8 +1,6 @@
 /* 
 Target URL's:
-https://www.texastaxprotest.com/blog/
-https://www.texastaxprotest.com/blog/texas-tax-relief-amendment/
-https://www.texastaxprotest.com/blog/texas-property-tax-cuts-2025/
+https://www.texastaxprotest.com
 
 Figma: https://www.figma.com/design/Jb671zJS1JeGCuC0EiFyuh/TTP19---Header--Add-Sticky-CTA-to-Nav-Header?node-id=2001-905&t=BQzGzcgL7HY0pFpJ-0
 
@@ -43,7 +41,7 @@ v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99K
     test_name: "TTP19: [Header] Add Sticky CTA to Nav Header - (2) SET UP TEST",
     page_initials: "AB-TTP19",
     test_variation: 1 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

@@ -19,9 +19,8 @@
         width: auto;
     }
 
-
     header {
-        padding : 10px 20px 12px !important;
+        padding: 10px 20px 12px !important;
         height: max-content;
     }
 
@@ -35,12 +34,15 @@
         padding-right: 0 !important;
     }
 
-
-    // Sign In Button
-
     header a.mantine-focus-auto[href="https://client.texastaxprotest.com/login"]
     {
         display: none;
+    }
+
+    header ~ nav {
+        top: 80px !important;
+        bottom: 0 !important;
+        height: auto !important;
     }
 
     .ab-cta-container {
@@ -56,6 +58,7 @@
         }
     }
 
+    // Sign In Button
     .ab-sign-in-cta {
         background-color: transparent;
         border: 1px solid rgba(255, 255, 255, 1);
@@ -146,16 +149,24 @@
         }
     }
 
-    @media screen and (min-width: 768px) {
-
+    @media screen and (max-width: 360px) {
         header {
-            padding : 11px 0 !important;
+            padding: 10px 10px 12px !important;
         }
 
-        header > div { 
+        header > div > div {
+            gap: 5px !important;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        header {
+            padding: 11px 0 !important;
+        }
+
+        header > div {
             top: 97px !important;
         }
-    
 
         header a[href="/"] img {
             height: 68px;
@@ -223,6 +234,23 @@
             &__text {
                 margin-bottom: -1px;
             }
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        header a.mantine-focus-auto {
+            font-family: Lato, sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24.8px;
+            letter-spacing: 0px;
+        }
+    }
+
+    @media screen and (min-width: 767.5px) and (max-width: 1366px) {
+        header > div {
+            width: auto !important;
+            padding: 0 20px !important;
         }
     }
 }
