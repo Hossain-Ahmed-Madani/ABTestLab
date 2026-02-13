@@ -16,7 +16,6 @@ control:
 v1: https://marketer.monetate.net/control/preview/12476/9VWFL0JC5QVN06Q3MMPGKRXCTAMMF0L4/19-header-add-sticky-cta-to-nav-header
 v2: https://marketer.monetate.net/control/preview/12476/U7UQ3TYDM70J1GY5QANZF99KAOILTRQ7/19-header-add-sticky-cta-to-nav-header
 
-
 */
 
 (async () => {
