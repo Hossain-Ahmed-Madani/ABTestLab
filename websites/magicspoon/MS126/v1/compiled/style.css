@@ -1,0 +1,36 @@
+.AB-MS126 .bundle-sec > ul > li:has(a[href="/collections/shop-all"]) {
+  display: none !important;
+}
+
+.AB-MS126--v1 #mobile-slides-content > div.bundle-sec > ul > li:has(a[href="https://magicspoon.com/products/variety-6-6-bags-of-granola"]) {
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+}
+
+.AB-MS126--v2 header .button-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.AB-MS126--v2 header .button-sec .btn-toggle {
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  font-family: "Mabry Pro";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+  text-transform: uppercase;
+}
+.AB-MS126--v2 header .button-sec .btn-toggle__icon {
+  margin-top: -4px;
+}
+.AB-MS126--v2 header .button-sec a[href="/products/custom-mixed-bundle-6-box"] {
+  display: none !important;
+}
