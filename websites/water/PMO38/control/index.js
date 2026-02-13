@@ -26,7 +26,6 @@
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -130,8 +129,6 @@
 
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             window[page_initials] = true;
-
-            console.log(TEST_CONFIG);
 
             q("button.btn.btn-primary.btn-size-default.btm-size-full.shadow-btn").addEventListener("click", (e) => {
                 fireGA4Event("PMO38_CheckoutCTAClick", "Proceed to Checkout");

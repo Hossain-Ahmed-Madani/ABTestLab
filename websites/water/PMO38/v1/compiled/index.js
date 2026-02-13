@@ -217,7 +217,7 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
                         <div class="ab-summary-dropdown flex flex-col" aria-expanded="false">
                             <div class="ab-summary-dropdown__head">
                                 <div class="ab-summary-row flex justify-between">
-                                    <div class="ab-txt-lg text-left text-nowrap">One-time Purchase</div>
+                                    <div class="ab-txt-lg text-left text-nowrap">One-Time Purchase</div>
                                     <div class="ab-txt-lg text-right uppercase ml-auto" ab-col-label="one-time-purchase-total">${dataObj["one-time-purchase-total"]}</div>
                                     <div class="ab-summary-dropdown__arrow flex justify-end items-center">${ASSETS["down_arrow_svg"]}</div>
                                 </div>

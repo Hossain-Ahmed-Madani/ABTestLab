@@ -37,7 +37,7 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
         test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
         page_initials: "AB-PMO38",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -58,7 +58,6 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -217,7 +216,7 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
                         <div class="ab-summary-dropdown flex flex-col" aria-expanded="false">
                             <div class="ab-summary-dropdown__head">
                                 <div class="ab-summary-row flex justify-between">
-                                    <div class="ab-txt-lg text-left text-nowrap">One-time Purchase</div>
+                                    <div class="ab-txt-lg text-left text-nowrap">One-Time Purchase</div>
                                     <div class="ab-txt-lg text-right uppercase ml-auto" ab-col-label="one-time-purchase-total">${dataObj["one-time-purchase-total"]}</div>
                                     <div class="ab-summary-dropdown__arrow flex justify-end items-center">${ASSETS["down_arrow_svg"]}</div>
                                 </div>
@@ -375,8 +374,6 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
 
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-
-            console.log(TEST_CONFIG);
 
             createLayout();
             clickFunction();
