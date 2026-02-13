@@ -41,14 +41,12 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
         test_name: "TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
         page_initials: "AB-TTP27",
         test_variation: 0 /* 0, 1 */,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event:", eventName, eventLabel);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -59,6 +57,7 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
             "ga4-event-p2-value": eventLabel,
         });
     }
+
     const ASSETS = {
         property_tax_too_high_mobile: "https://sb.monetate.net/img/1/1582/6010989.png",
         property_tax_too_high_desktop: "https://sb.monetate.net/img/1/1582/6010990.png",
@@ -72,13 +71,21 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
         layout_info: [
             {
                 title: "Property Taxes Too High",
-                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Win-fair-tax-assessments-for-Texas-property-owners-1024x576.png'])",
+                selector: `
+                figure:has([src='https://content.texastaxprotest.com/media/uploads/2025/10/Property-taxes-too-high-Win-fair-tax-assessments-with-Texas-Tax-Protest-5-1024x576.png']),
+                figure:has([src='https://content.texastaxprotest.com/media/uploads/2025/10/Property-taxes-too-high-Win-fair-tax-assessments-with-Texas-Tax-Protest-6-1024x576.png']),
+                figure:has([src='https://content.texastaxprotest.com/media/uploads/2025/10/Property-taxes-too-high-Win-fair-tax-assessments-with-Texas-Tax-Protest-7-1024x576.png']),
+                figure:has([src='https://content.texastaxprotest.com/media/uploads/2025/12/Win-fair-tax-assessments-for-Texas-property-owners-1024x576.png'])`,
                 img_mobile_src: ASSETS.property_tax_too_high_mobile,
                 img_desktop_src: ASSETS.property_tax_too_high_desktop,
             },
             {
                 title: "Property Taxes Made Easy",
-                selector: "figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Tax-Protests-Made-Easy-with-Texas-Tax-Protest-1024x576.png'])",
+                selector: `
+                    figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/12/Tax-Protests-Made-Easy-with-Texas-Tax-Protest-1024x576.png']),
+                    figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/10/Ready-to-take-on-the-property-tax-challenge-Avoid-the-frustrating-forms-with-Texas-Tax-Protest-1024x576.png']),
+                    figure:has(img[src='https://content.texastaxprotest.com/media/uploads/2025/10/Avoid-frustrating-forms-and-waiting-and-let-us-help-make-tax-protesting-easier-1-1024x576.png'])
+                    `,
                 img_mobile_src: ASSETS.property_tax_made_easy_mobile,
                 img_desktop_src: ASSETS.property_tax_made_easy_desktop,
             },
@@ -177,7 +184,6 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
     }, 250);
 
     function removeScrollHandler() {
-        console.log("scroll event removed");
         window.removeEventListener("scroll", handleScroll);
         foundNodes = null;
     }
@@ -199,11 +205,12 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
         const pathname = window.location.pathname;
         const blogDetailPathRegex = /^\/blog\/[^/]+\/?$/;
 
+        window[page_initials] = false;
+        document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
         if (blogDetailPathRegex.test(pathname)) {
             init_TTP27();
         } else {
-            window[page_initials] = false;
-            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             removeScrollHandler();
         }
     }
@@ -219,12 +226,10 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             debouncedChanges();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             debouncedChanges();
         });
     }
@@ -245,8 +250,6 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
 
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-
-            console.log(TEST_CONFIG);
 
             foundNodes = DATA["layout_info"].filter(({ selector }) => q(selector)).map(({ selector }) => q(selector));
 
