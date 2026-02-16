@@ -41,7 +41,7 @@ v1: https://marketer.monetate.net/control/preview/12476/55P0XAK8BGTJ583GGZNJMEKP
         test_name: "TTP27: [BLOGS] Redesign In-Line Ads - (2) SET UP TEST",
         page_initials: "AB-TTP27",
         test_variation: 0 /* 0, 1 */,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
