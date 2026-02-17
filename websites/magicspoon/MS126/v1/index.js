@@ -35,15 +35,13 @@ V2: https://magicspoon.com/?_conv_eforce=1004186158.1004437601&utm_campaign=qa5
         site_url: "https://www.example.com",
         test_name: "MS126: [NAV-Mobile] Move Main Nav Element into CTAs (2) SET UP TEST",
         page_initials: "AB-MS126",
-        test_variation: 2,
-        test_version: 0.0001,
+        test_variation: 1,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -87,10 +85,7 @@ V2: https://magicspoon.com/?_conv_eforce=1004186158.1004437601&utm_campaign=qa5
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-
     function createLayoutV1() {
-        console.log("createLayoutV1");
-
         const buildYourOwnBundleNode = q(' header .button-sec a[href="/products/custom-mixed-bundle-6-box"] ');
         buildYourOwnBundleNode.insertAdjacentHTML("afterend", /* HTML */ `<a href="/collections/shop-all" class="btn-toggle ab-toggle-outlined">Shop All PRODUCTS →</a>`);
     }
@@ -114,10 +109,10 @@ V2: https://magicspoon.com/?_conv_eforce=1004186158.1004437601&utm_campaign=qa5
     }
 
     function clickFunction() {
-        document.querySelector(".mobile-menu > button")?.addEventListener("click", () => {
-            if (!document.querySelector("html").classList.contains("mobile_slide")) return;
-            fireGA4Event("MS126_NavView", "Nav View");
-        });
+        // document.querySelector(".mobile-menu > button")?.addEventListener("click", () => {
+        //     if (!document.querySelector("html").classList.contains("mobile_slide")) return;
+        //     fireGA4Event("MS126_NavView", "Nav View");
+        // });
 
         document.querySelector("#mobile-slides-content .bundle-sec").addEventListener("click", (e) => {
             fireGA4Event("MS126_NavEngagement", e.target.textContent.trim());
@@ -134,7 +129,6 @@ V2: https://magicspoon.com/?_conv_eforce=1004186158.1004437601&utm_campaign=qa5
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
     }
