@@ -5,13 +5,13 @@ Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-U
 Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
 
 Preview:
-Control: https://marketer.monetate.net/control/preview/12416/BWOH2TRBHGKNG1KRP6VKOA7OL4MN1X7T/pmo38-cart-clean-up-order-summary
-V1:  https://marketer.monetate.net/control/preview/12416/JHVT2XOPCYQ1FZD4SIE3S1P4B2SOFBIL/pmo38-cart-clean-up-order-summary
+Control: https://marketer.monetate.net/control/preview/12416/QE5FCGZNSP91ZIJ1B0Q02NQZ0T9YNJA1/pmo38-cart-clean-up-order-summary
+V1:  https://marketer.monetate.net/control/preview/12416/SC28DGTGB99025N1DJDGHS2QN1NH373G/pmo38-cart-clean-up-order-summary
 
 
 Preview including all experiences:
-Control: https://marketer.monetate.net/control/preview/12416/7PC0TFU4WQCHJEZDNDWWSMTPM64DHQQO/pmo38-cart-clean-up-order-summary
-V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ8GC01JCY/pmo38-cart-clean-up-order-summary
+Control: https://marketer.monetate.net/control/preview/12416/S35U2NUWSOTW9HT05ZC9VNL01U8D6YR9/pmo38-cart-clean-up-order-summary
+V1: https://marketer.monetate.net/control/preview/12416/0I0MN2D8GUVMNQCGY3UNKTLMTIPLB9QF/pmo38-cart-clean-up-order-summary
 
 */
 

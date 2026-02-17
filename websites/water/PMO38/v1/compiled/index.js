@@ -5,13 +5,13 @@ Figma: https://www.figma.com/design/BhhbSpGPx3ABY1J6OUa8Nd/PMO38---CART--Clean-U
 Test container: https://marketer.monetate.net/control/a-899aac64/p/water.com/experience/2084113#
 
 Preview:
-Control: https://marketer.monetate.net/control/preview/12416/BWOH2TRBHGKNG1KRP6VKOA7OL4MN1X7T/pmo38-cart-clean-up-order-summary
-V1:  https://marketer.monetate.net/control/preview/12416/JHVT2XOPCYQ1FZD4SIE3S1P4B2SOFBIL/pmo38-cart-clean-up-order-summary
+Control: https://marketer.monetate.net/control/preview/12416/QE5FCGZNSP91ZIJ1B0Q02NQZ0T9YNJA1/pmo38-cart-clean-up-order-summary
+V1:  https://marketer.monetate.net/control/preview/12416/SC28DGTGB99025N1DJDGHS2QN1NH373G/pmo38-cart-clean-up-order-summary
 
 
 Preview including all experiences:
-Control: https://marketer.monetate.net/control/preview/12416/7PC0TFU4WQCHJEZDNDWWSMTPM64DHQQO/pmo38-cart-clean-up-order-summary
-V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ8GC01JCY/pmo38-cart-clean-up-order-summary
+Control: https://marketer.monetate.net/control/preview/12416/S35U2NUWSOTW9HT05ZC9VNL01U8D6YR9/pmo38-cart-clean-up-order-summary
+V1: https://marketer.monetate.net/control/preview/12416/0I0MN2D8GUVMNQCGY3UNKTLMTIPLB9QF/pmo38-cart-clean-up-order-summary
 
 */
 
@@ -31,13 +31,9 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "Water",
-        site_url: "https://order.water.com",
-        test_name: "PMO38: [CART] Clean Up Order Summary-(2) SET UP TEST",
         page_initials: "AB-PMO38",
         test_variation: 1 /* 0, 1 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -58,7 +54,6 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -375,8 +370,6 @@ V1: https://marketer.monetate.net/control/preview/12416/4U2LY75MCPFIYNHX7K59DJYJ
 
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-
-            console.log(TEST_CONFIG);
 
             createLayout();
             clickFunction();
