@@ -1,0 +1,8 @@
+.AB-PP27US .ab-swiper .swiper-slide {
+  width: 163px !important;
+}
+.AB-PP27US .ab-swiper img {
+  width: 163px;
+  height: 222px;
+  object-fit: cover; /* or contain, depending on your need */
+}
