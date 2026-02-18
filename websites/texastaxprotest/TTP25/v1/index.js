@@ -32,6 +32,26 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const ASSETS = {
+        close_cta_svg: /* HTML */ `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0.907335 14C0.675145 14 0.442789 13.9111 0.266072 13.7343C-0.0886906 13.3797 -0.0886906 12.8063 0.266072 12.4517L12.4514 0.265953C12.806 -0.0886509 13.3793 -0.0886509 13.7339 0.265953C14.0887 0.620557 14.0887 1.1939 13.7339 1.54851L1.5486 13.7343C1.37072 13.912 1.13953 14 0.907335 14Z"
+                fill="white"
+            />
+            <path
+                d="M13.0927 14C12.8605 14 12.6283 13.9111 12.4514 13.7343L0.266072 1.54851C-0.0886906 1.1939 -0.0886906 0.620557 0.266072 0.265953C0.620668 -0.0886509 1.19384 -0.0886509 1.5486 0.265953L13.7339 12.4517C14.0887 12.8063 14.0887 13.3797 13.7339 13.7343C13.557 13.912 13.3249 14 13.0927 14Z"
+                fill="white"
+            />
+        </svg> `,
+        play_svg: /* HTML */ `
+        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12 5.31586C13.3333 6.06437 13.3333 7.93564 12 8.68414L3 13.7366C1.66667 14.4851 -6.72981e-08 13.5494 0 12.0524L4.54262e-07 1.94758C5.2156e-07 0.450566 1.66667 -0.485068 3 0.263439L12 5.31586Z"
+                fill="white"
+            />
+        </svg> `,
+    };
+
     function fireGA4Event(eventName, eventLabel = "") {
         console.log("fireGA4Event", eventName, eventLabel);
 
@@ -163,7 +183,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             /* HTML */ ` <div class="${page_initials}__modal-layout">
                 <div class="${page_initials}__modal-backdrop"></div>
                 <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal-close-cta" style="cursor: pointer;">X</div>
+                    <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
                     <div class="${page_initials}__modal__content">Video Content here</div>
                 </div>
             </div>`,

@@ -153,35 +153,60 @@ body.AB-TTP25--modal-show {
 
     &__modal {
         opacity: 1;
-        box-shadow: 0px 4px 23.9px 0px #00000029;
-
         width: 100%;
-        min-height: max-content;
-        max-height: auto;
+        height: auto;
         background: #ffffff;
         position: relative;
         z-index: 1;
+
+        width: 343px;
+        height: 212px;
+        border-radius: 22.8px;
+        background-color: rgba(0, 0, 0, 1);
+    }
+
+    &__modal-close-cta {
+        cursor: pointer;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 14px;
+        height: 14px;
+        top: -25px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
     }
 }
 
 // RESPONSIVE
-@media screen and (min-width: 650px) {
-    .AB-TTP25__modal {
-        width: 643px;
-        padding: 48px 32px 32px 32px;
-        min-height: 298px;
-    }
+@media screen and (min-width: 768px) {
+    .AB-TTP25 {
+        &__modal {
+            width: 640px;
+            height: 360px;
+            border-radius: 24px;
+        }
+        &__modal {
+        }
 
-    .AB-TTP25__modal-layout {
-        // ADD CSS HERE
-    }
+        &__modal-layout {
+            // ADD CSS HERE
+        }
 
-    .AB-TTP25__modal-backdrop {
-        // ADD CSS HERE
-    }
+        &__modal-backdrop {
+            // ADD CSS HERE
+        }
 
-    .AB-TTP25__modal {
-        //
+        &__modal-close-cta {
+            width: 20px;
+            height: 20px;
+            top: -30px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+        }
     }
 }
 
@@ -255,4 +280,3 @@ body.AB-TTP25--modal-show {
         transform: translateY(-200px);
     }
 }
-

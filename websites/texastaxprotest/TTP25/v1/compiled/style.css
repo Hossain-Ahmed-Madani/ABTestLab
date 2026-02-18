@@ -117,20 +117,43 @@ body.AB-TTP25--modal-show .AB-TTP25__modal {
 }
 .AB-TTP25__modal {
   opacity: 1;
-  box-shadow: 0px 4px 23.9px 0px rgba(0, 0, 0, 0.1607843137);
   width: 100%;
-  min-height: max-content;
-  max-height: auto;
+  height: auto;
   background: #ffffff;
   position: relative;
   z-index: 1;
+  width: 343px;
+  height: 212px;
+  border-radius: 22.8px;
+  background-color: rgb(0, 0, 0);
+}
+.AB-TTP25__modal-close-cta {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  top: -25px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 768px) {
   .AB-TTP25__modal {
-    width: 643px;
-    padding: 48px 32px 32px 32px;
-    min-height: 298px;
+    width: 640px;
+    height: 360px;
+    border-radius: 24px;
+  }
+  .AB-TTP25__modal-close-cta {
+    width: 20px;
+    height: 20px;
+    top: -30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
 }
 .AB-TTP25__slide-bottom {

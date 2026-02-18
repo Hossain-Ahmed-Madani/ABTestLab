@@ -32,6 +32,18 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const ASSETS = {
+        close_cta_svg: /* HTML */ `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0.907335 14C0.675145 14 0.442789 13.9111 0.266072 13.7343C-0.0886906 13.3797 -0.0886906 12.8063 0.266072 12.4517L12.4514 0.265953C12.806 -0.0886509 13.3793 -0.0886509 13.7339 0.265953C14.0887 0.620557 14.0887 1.1939 13.7339 1.54851L1.5486 13.7343C1.37072 13.912 1.13953 14 0.907335 14Z"
+                fill="white"
+            />
+            <path
+                d="M13.0927 14C12.8605 14 12.6283 13.9111 12.4514 13.7343L0.266072 1.54851C-0.0886906 1.1939 -0.0886906 0.620557 0.266072 0.265953C0.620668 -0.0886509 1.19384 -0.0886509 1.5486 0.265953L13.7339 12.4517C14.0887 12.8063 14.0887 13.3797 13.7339 13.7343C13.557 13.912 13.3249 14 13.0927 14Z"
+                fill="white"
+            />
+        </svg> `};
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -84,7 +96,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             /* HTML */ ` <div class="${page_initials}__modal-layout">
                 <div class="${page_initials}__modal-backdrop"></div>
                 <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal-close-cta" style="cursor: pointer;">X</div>
+                    <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
                     <div class="${page_initials}__modal__content">Video Content here</div>
                 </div>
             </div>`,
