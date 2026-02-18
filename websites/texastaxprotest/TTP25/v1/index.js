@@ -44,12 +44,13 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             />
         </svg> `,
         play_svg: /* HTML */ `
-        <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-                d="M12 5.31586C13.3333 6.06437 13.3333 7.93564 12 8.68414L3 13.7366C1.66667 14.4851 -6.72981e-08 13.5494 0 12.0524L4.54262e-07 1.94758C5.2156e-07 0.450566 1.66667 -0.485068 3 0.263439L12 5.31586Z"
-                fill="white"
-            />
-        </svg> `,
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12 5.31586C13.3333 6.06437 13.3333 7.93564 12 8.68414L3 13.7366C1.66667 14.4851 -6.72981e-08 13.5494 0 12.0524L4.54262e-07 1.94758C5.2156e-07 0.450566 1.66667 -0.485068 3 0.263439L12 5.31586Z"
+                    fill="white"
+                />
+            </svg>
+        `,
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
@@ -98,69 +99,30 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function investigation() {
-        const html = `
-        <script class="w-json-ld" type="application/ld+json" id="w-json-ldwistia_40">
-            {
-                "@context": "http://schema.org/",
-                "@id": "https://fast.wistia.net/embed/iframe/p9lruxird8",
-                "@type": "VideoObject",
-                "duration": "PT1M55S",
-                "name": "CM_TexasTax_MAIN",
-                "thumbnailUrl": "https://embed-ssl.wistia.com/deliveries/1bb4759b294f04e7d7b264504cc5de48.jpg?image_crop_resized=640x360",
-                "embedUrl": "https://fast.wistia.net/embed/iframe/p9lruxird8",
-                "uploadDate": "2024-04-03T23:07:50.000Z",
-                "description": "a TTP Site Videos video",
-                "contentUrl": "https://embed-ssl.wistia.com/deliveries/542de4f89401f23f0bd26756b2f135a7e73508ed.m3u8",
-                "transcript": "[WOMAN CRIES]\n\n- Property taxes suck harder than 100 pounds skeeter. Thanks to Texas Tax Protest, you can take back the power to control your property taxes.\n\n- Oh yeah, this is way better. Can Texas Tax Protest really lower my property taxes?\n\n- You bet your boots. [SWOOSH]\n\nYou love your house as a home and as an investment. But then, the government comes in like a bull in a China shop and--\n\n[SLEDGEHAMMER SMASH]\n\nso long investment dollars and how to do outrageous property taxes. But Texas Tax Protest helps protect what's yours and keeps your money, right where it belongs.\n\n- Great! I'd hate to fight it on my own.\n\n[FINGER CLICKS]\n\n- There's no need to spend hours filling out forms, researching property values, or sitting and waiting in a county tax office. Let Texas Tax Protest empower you [FINGER CLICKS]\n\nby doing the heavy lifting.\n\n[SWOOSH]\n\n- But how they really do it?\n\n- Well--\n\n- No don't snap! Dang it!\n\nNARRATOR: Texas Tax Protest proprietary software analyzes millions of data records to prepare the strongest case to negotiate a fair value for you. You enroll in their program one time and Texas Tax Protest represents you each tax year.\n\n- Oh, nice.\n\nNARRATOR: Plus, they have excellent customer service.\n\n- So you can talk to a fellow Texan any time you call.\n\n- Yeehaw.\n\n- Only pay your fair share and spend your money how you want. Buy an extravagant sculpture of the state of Texas. Hire an opera singer to serenade you.\n\n- (SINGING) Property taxes is suck!\n\n- Or heal your childhood trauma by buying that designer pony your daddy never bought you.\n\n- [SQUEAL]\n\nGoing to name her Dr. Catherine after my therapist. [WOMAN CRIES]\n\n- Take back the power to control your property taxes with Texas Tax Protest.\n\nNARRATOR: Go to Texastaxprotest.com and join thousands of money saving Texans today.\n\n[FINGER CLICKS]\n\nCLICKS]",
-                "potentialAction": {
-                    "@type": "SeekToAction",
-                    "target": "https://www.texastaxprotest.com/?wtime={seek_to_second_number}",
-                    "startOffset-input": "required name=seek_to_second_number"
-                }
-            }
-        </script>
-    
-        <div
-            class="my-new-content"
-            style="position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgb(8 8 8 / 90%); z-index: 9999; display: flex; justify-content: center; align-items: center"
-        >
-            <div class="wistia-video" style="width: 640px; height: 360px">
-                <
-                <!-- <div id="wistia-player-igkoj" class="wistia_embed wistia_async_p9lruxird8 wistia_embed_initialized" style="width: 100%; height: 100%"></div> -->
-                <div id="wistia-player-ttp25" class="wistia_embed wistia_async_p9lruxird8 wistia_embed_initialized" style="width: 100%; height: 100%"></div>
-            </div>
-        </div>
-    `;
+    const VIDEO_ID = "wistia-player-ttp25";
+    let VIDEO_INSTANCE = null;
 
-        document.body.insertAdjacentHTML("afterbegin", html);
+    function resetWistiaVideo() {
+        if(!VIDEO_INSTANCE) return;
+        const hashedId = VIDEO_INSTANCE.hashedId();
+        VIDEO_INSTANCE.replaceWith(hashedId, { transition: "none" });
+    }
 
-        setTimeout(() => {
-            //
-            const videoId = "wistia-player-ttp25"; // Unique element id for your overlay video
-            window._wq = window._wq || [];
-            _wq.push({
-                id: videoId,
-                onReady: function (video) {
-                    console.log("Video is ready:", video);
-                    // Pause the video
-                    // video.pause();
-                    // video.time(0);
-                    // To play the video
-                    // video.play();
-                    video.bind("end", function () {
-                        // Video has ended
-                        console.log("=== Video ended! ====");
-                        video.time(0);
-                        // You can trigger your logic here
+    async function initWistiaVideo() {
+        if(!q(`#${VIDEO_ID}`)) return;
 
-                        console.log("=== Video ended! ====");
-                        const hashedId = video.hashedId();
-                        video.replaceWith(hashedId, { transition: "none" });
-                    });
-                },
-            });
-        }, 1000);
+        window._wq = window._wq || [];
+        _wq.push({
+            id: VIDEO_ID,
+            onReady: function (video) {
+                VIDEO_INSTANCE = video;
+                VIDEO_INSTANCE.bind("end", function () {
+                    VIDEO_INSTANCE.pause();
+                    VIDEO_INSTANCE.time(0);
+                    resetWistiaVideo();
+                });
+            },
+        });
     }
 
     function createLayout() {
@@ -180,13 +142,66 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 
         q("body").insertAdjacentHTML(
             "afterbegin",
-            /* HTML */ ` <div class="${page_initials}__modal-layout">
-                <div class="${page_initials}__modal-backdrop"></div>
-                <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
-                    <div class="${page_initials}__modal__content">Video Content here</div>
-                </div>
-            </div>`,
+            /* HTML */ ` <script class="w-json-ld" type="application/ld+json" id="w-json-ldwistia_40">
+                    {
+                        "@context": "http://schema.org/",
+                        "@id": "https://fast.wistia.net/embed/iframe/p9lruxird8",
+                        "@type": "VideoObject",
+                        "duration": "PT1M55S",
+                        "name": "CM_TexasTax_MAIN",
+                        "thumbnailUrl": "https://embed-ssl.wistia.com/deliveries/1bb4759b294f04e7d7b264504cc5de48.jpg?image_crop_resized=640x360",
+                        "embedUrl": "https://fast.wistia.net/embed/iframe/p9lruxird8",
+                        "uploadDate": "2024-04-03T23:07:50.000Z",
+                        "description": "a TTP Site Videos video",
+                        "contentUrl": "https://embed-ssl.wistia.com/deliveries/542de4f89401f23f0bd26756b2f135a7e73508ed.m3u8",
+                        "transcript": "[WOMAN CRIES]
+
+                        - Property taxes suck harder than 100 pounds skeeter. Thanks to Texas Tax Protest, you can take back the power to control your property taxes.
+                        - Oh yeah, this is way better. Can Texas Tax Protest really lower my property taxes?
+                        - You bet your boots. [SWOOSH]
+                        You love your house as a home and as an investment. But then, the government comes in like a bull in a China shop and--
+                        [SLEDGEHAMMER SMASH]
+                        so long investment dollars and how to do outrageous property taxes. But Texas Tax Protest helps protect what's yours and keeps your money, right where it belongs.
+                        - Great! I'd hate to fight it on my own.
+                        [FINGER CLICKS]
+                        - There's no need to spend hours filling out forms, researching property values, or sitting and waiting in a county tax office. Let Texas Tax Protest empower you [FINGER CLICKS]
+                        by doing the heavy lifting.
+                        [SWOOSH]
+                        - But how they really do it?
+                        - Well--
+                        - No don't snap! Dang it!
+                        NARRATOR: Texas Tax Protest proprietary software analyzes millions of data records to prepare the strongest case to negotiate a fair value for you. You enroll in their program one time and Texas Tax Protest represents you each tax year.
+                        - Oh, nice.
+                        NARRATOR: Plus, they have excellent customer service.
+                        - So you can talk to a fellow Texan any time you call.
+                        - Yeehaw.
+                        - Only pay your fair share and spend your money how you want. Buy an extravagant sculpture of the state of Texas. Hire an opera singer to serenade you.
+                        - (SINGING) Property taxes is suck!
+                        - Or heal your childhood trauma by buying that designer pony your daddy never bought you.
+                        - [SQUEAL]
+                        Going to name her Dr. Catherine after my therapist. [WOMAN CRIES]
+                        - Take back the power to control your property taxes with Texas Tax Protest.
+                        NARRATOR: Go to Texastaxprotest.com and join thousands of money saving Texans today.
+                        [FINGER CLICKS]
+                        CLICKS]",
+                        "potentialAction": {
+                            "@type": "SeekToAction",
+                            "target": "https://www.texastaxprotest.com/?wtime={seek_to_second_number}",
+                            "startOffset-input": "required name=seek_to_second_number"
+                        }
+                    }
+                </script>
+                <div class="${page_initials}__modal-layout">
+                    <div class="${page_initials}__modal-backdrop"></div>
+                    <div class="${page_initials}__modal">
+                        <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
+                        <div class="${page_initials}__modal__content">
+                            <div class="ab-wistia-video">
+                                <div id="wistia-player-ttp25" class="wistia_embed wistia_async_p9lruxird8 wistia_embed_initialized ab-wistia-player-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
         );
     }
 
@@ -214,24 +229,25 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         }
 
         if (action === "hide") {
+            resetWistiaVideo();
             animate(modal, `${page_initials}__slide-top`, 200);
-            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            setTimeout(() => {
+                body.classList.remove(modalShowClass);
+            }, 200);
             document.removeEventListener("touchmove", preventScroll);
         }
     }
 
     function clickFunction() {
-        document.body.addEventListener("click", (e) => {
-            // ====== MODAL ======
-
-            // OPEN MODAL
-            if (e.target.closest(`.${page_initials}__modal-open-cta`)) {
-                handleModalView("show");
-            }
-
-            if (e.target.closest(`.${page_initials}__modal-close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
-                handleModalView("hide");
-            }
+        q(`.${page_initials}__modal-open-cta`).addEventListener("click", () => {
+            handleModalView("show");
+        });
+        q(`.${page_initials}__modal-close-cta`).addEventListener("click", () => {
+            handleModalView("hide");
+        });
+        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+            if(e.target.closest(`.${page_initials}__modal`)) return;
+            handleModalView("hide");
         });
 
         // CLOSE POPUP -> ON ESC CLICK
@@ -248,6 +264,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
+        initWistiaVideo();
     }
 
     function checkForItems() {
@@ -260,12 +277,11 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         );
     }
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false;
+    }
 
-    waitForElementAsync(checkForItems).then(init);
 })();

@@ -76,6 +76,32 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    const VIDEO_ID = "wistia-player-ttp25";
+    let VIDEO_INSTANCE = null;
+
+    function resetWistiaVideo() {
+        if(!VIDEO_INSTANCE) return;
+        const hashedId = VIDEO_INSTANCE.hashedId();
+        VIDEO_INSTANCE.replaceWith(hashedId, { transition: "none" });
+    }
+
+    async function initWistiaVideo() {
+        if(!q(`#${VIDEO_ID}`)) return;
+
+        window._wq = window._wq || [];
+        _wq.push({
+            id: VIDEO_ID,
+            onReady: function (video) {
+                VIDEO_INSTANCE = video;
+                VIDEO_INSTANCE.bind("end", function () {
+                    VIDEO_INSTANCE.pause();
+                    VIDEO_INSTANCE.time(0);
+                    resetWistiaVideo();
+                });
+            },
+        });
+    }
+
     function createLayout() {
         const contactPrevSibling = q('.mantine-Button-root[href="#contact"]').previousSibling;
         contactPrevSibling.insertAdjacentHTML(
@@ -93,13 +119,66 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
 
         q("body").insertAdjacentHTML(
             "afterbegin",
-            /* HTML */ ` <div class="${page_initials}__modal-layout">
-                <div class="${page_initials}__modal-backdrop"></div>
-                <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
-                    <div class="${page_initials}__modal__content">Video Content here</div>
-                </div>
-            </div>`,
+            /* HTML */ ` <script class="w-json-ld" type="application/ld+json" id="w-json-ldwistia_40">
+                    {
+                        "@context": "http://schema.org/",
+                        "@id": "https://fast.wistia.net/embed/iframe/p9lruxird8",
+                        "@type": "VideoObject",
+                        "duration": "PT1M55S",
+                        "name": "CM_TexasTax_MAIN",
+                        "thumbnailUrl": "https://embed-ssl.wistia.com/deliveries/1bb4759b294f04e7d7b264504cc5de48.jpg?image_crop_resized=640x360",
+                        "embedUrl": "https://fast.wistia.net/embed/iframe/p9lruxird8",
+                        "uploadDate": "2024-04-03T23:07:50.000Z",
+                        "description": "a TTP Site Videos video",
+                        "contentUrl": "https://embed-ssl.wistia.com/deliveries/542de4f89401f23f0bd26756b2f135a7e73508ed.m3u8",
+                        "transcript": "[WOMAN CRIES]
+
+                        - Property taxes suck harder than 100 pounds skeeter. Thanks to Texas Tax Protest, you can take back the power to control your property taxes.
+                        - Oh yeah, this is way better. Can Texas Tax Protest really lower my property taxes?
+                        - You bet your boots. [SWOOSH]
+                        You love your house as a home and as an investment. But then, the government comes in like a bull in a China shop and--
+                        [SLEDGEHAMMER SMASH]
+                        so long investment dollars and how to do outrageous property taxes. But Texas Tax Protest helps protect what's yours and keeps your money, right where it belongs.
+                        - Great! I'd hate to fight it on my own.
+                        [FINGER CLICKS]
+                        - There's no need to spend hours filling out forms, researching property values, or sitting and waiting in a county tax office. Let Texas Tax Protest empower you [FINGER CLICKS]
+                        by doing the heavy lifting.
+                        [SWOOSH]
+                        - But how they really do it?
+                        - Well--
+                        - No don't snap! Dang it!
+                        NARRATOR: Texas Tax Protest proprietary software analyzes millions of data records to prepare the strongest case to negotiate a fair value for you. You enroll in their program one time and Texas Tax Protest represents you each tax year.
+                        - Oh, nice.
+                        NARRATOR: Plus, they have excellent customer service.
+                        - So you can talk to a fellow Texan any time you call.
+                        - Yeehaw.
+                        - Only pay your fair share and spend your money how you want. Buy an extravagant sculpture of the state of Texas. Hire an opera singer to serenade you.
+                        - (SINGING) Property taxes is suck!
+                        - Or heal your childhood trauma by buying that designer pony your daddy never bought you.
+                        - [SQUEAL]
+                        Going to name her Dr. Catherine after my therapist. [WOMAN CRIES]
+                        - Take back the power to control your property taxes with Texas Tax Protest.
+                        NARRATOR: Go to Texastaxprotest.com and join thousands of money saving Texans today.
+                        [FINGER CLICKS]
+                        CLICKS]",
+                        "potentialAction": {
+                            "@type": "SeekToAction",
+                            "target": "https://www.texastaxprotest.com/?wtime={seek_to_second_number}",
+                            "startOffset-input": "required name=seek_to_second_number"
+                        }
+                    }
+                </script>
+                <div class="${page_initials}__modal-layout">
+                    <div class="${page_initials}__modal-backdrop"></div>
+                    <div class="${page_initials}__modal">
+                        <div class="${page_initials}__modal-close-cta">${ASSETS.close_cta_svg}</div>
+                        <div class="${page_initials}__modal__content">
+                            <div class="ab-wistia-video">
+                                <div id="wistia-player-ttp25" class="wistia_embed wistia_async_p9lruxird8 wistia_embed_initialized ab-wistia-player-container"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`,
         );
     }
 
@@ -127,24 +206,25 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         }
 
         if (action === "hide") {
+            resetWistiaVideo();
             animate(modal, `${page_initials}__slide-top`, 200);
-            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            setTimeout(() => {
+                body.classList.remove(modalShowClass);
+            }, 200);
             document.removeEventListener("touchmove", preventScroll);
         }
     }
 
     function clickFunction() {
-        document.body.addEventListener("click", (e) => {
-            // ====== MODAL ======
-
-            // OPEN MODAL
-            if (e.target.closest(`.${page_initials}__modal-open-cta`)) {
-                handleModalView("show");
-            }
-
-            if (e.target.closest(`.${page_initials}__modal-close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
-                handleModalView("hide");
-            }
+        q(`.${page_initials}__modal-open-cta`).addEventListener("click", () => {
+            handleModalView("show");
+        });
+        q(`.${page_initials}__modal-close-cta`).addEventListener("click", () => {
+            handleModalView("hide");
+        });
+        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+            if(e.target.closest(`.${page_initials}__modal`)) return;
+            handleModalView("hide");
         });
 
         // CLOSE POPUP -> ON ESC CLICK
@@ -161,6 +241,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
+        initWistiaVideo();
     }
 
     function checkForItems() {
@@ -173,12 +254,11 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         );
     }
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false;
+    }
 
-    waitForElementAsync(checkForItems).then(init);
 })();
