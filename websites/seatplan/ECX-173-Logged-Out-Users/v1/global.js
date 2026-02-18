@@ -35,38 +35,6 @@
         });
     }
 
-    function getSessionStorageValue(key) {
-        try {
-            if (!key || typeof key !== "string") return null;
-            const value = sessionStorage.getItem(key);
-            return value !== null ? value : null;
-        } catch (e) {
-            // console.error("Error getting sessionStorage value:", e);
-            return null;
-        }
-    }
-
-    function setSessionStorageValue(key, value) {
-        try {
-            if (!key || typeof key !== "string") return false;
-            sessionStorage.setItem(key, value);
-            return true;
-        } catch (e) {
-            // console.error("Error setting sessionStorage value:", e);
-            return false;
-        }
-    }
-
-    function removeSessionStorageValue(key) {
-        try {
-            if (!key || typeof key !== "string") return false;
-            sessionStorage.removeItem(key);
-            return true;
-        } catch (e) {
-            // console.error("Error removing sessionStorage value:", e);
-            return false;
-        }
-    }
 
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
@@ -74,18 +42,6 @@
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
-    }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
     }
 
     function triggerGoal(goalName, goalId) {
@@ -107,22 +63,6 @@
     async function initUserCompletesLogin() {
         await waitForElementAsync(() => q(".status-loggedin"));
         triggerGoal("A user completes log in | JS", "111112");
-        setSessionStorageValue("AB_LOGGED_IN", "true");
-    }
-
-    async function initLoggedInUserBeginsCheckout() {
-        const selector = "#cart-summary .button-secure, .c-basket  .button-secure, .basket-overlay__container .basket-overlay__btn";
-        await waitForElementAsync(() => qq(selector).length > 0);
-
-        qq(selector).forEach((button) => {
-            button.addEventListener("click", (e) => {
-                setTimeout(() => {
-                    if (getSessionStorageValue("AB_LOGGED_IN") === "true" && !button.classList.contains("sp-button--disabled")) {
-                        triggerGoal("A logged in user begins checkout | JS", "111113");
-                    }
-                }, 1000);
-            });
-        });
     }
 
     function init() {
@@ -131,7 +71,6 @@
 
         initLoggedOutClicksAccountIcon();
         initUserCompletesLogin();
-        initLoggedInUserBeginsCheckout();
     }
 
     function checkForItems() {
