@@ -12,10 +12,6 @@
     }
 }
 
-.AB-TTP25 {
-    //
-}
-
 /**
  * ----------------------------------------
 		 *			MODAL
@@ -38,7 +34,45 @@ body.AB-TTP25--modal-show {
     }
 }
 
+.AB-TTP25--v2 {
+    .bg-light-blue-building-blur div:has(> h2) ,
+    .bg-light-blue-building-blur div[style="text-align:center"] ,
+    .bg-light-blue-building-blur .mantine-Center-root {
+        display: none;
+    }
+}
+
+
 .AB-TTP25 {
+    .mantine-Button-root[href="#contact"] {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        border: 1.5px solid rgba(252, 106, 1, 1) !important;
+        width: 270px !important;
+        height: 36px !important;
+        border-radius: 32px !important;
+
+        .mantine-Button-label {
+            font-family: Lato, Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 100%;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
+    &__modal-cta-container {
+        margin-top: 13px;
+        width: max-content;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+
     &__modal-layout {
         display: none;
 
@@ -81,6 +115,40 @@ body.AB-TTP25--modal-show {
         background-color: rgba(0, 0, 0, 1);
     }
 
+    &__modal-open-cta {
+        width: 270px;
+        height: 36px;
+        border: 1.5px solid rgba(255, 255, 255, 1);
+        border-radius: 500px;
+        cursor: pointer;
+
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            svg {
+                width: 13px;
+                height: 14px;
+            }
+        }
+
+        &__text {
+            font-family: Lato, Arial, Helvetica, sans-serif;
+            font-weight: 700;
+            font-style: Bold;
+            font-size: 14px;
+            line-height: 100%;
+            text-transform: capitalize;
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
     &__modal-close-cta {
         cursor: pointer;
         position: absolute;
@@ -119,8 +187,6 @@ body.AB-TTP25--modal-show {
             height: 360px;
             border-radius: 24px;
         }
-        &__modal {
-        }
 
         &__modal-layout {
             // ADD CSS HERE
@@ -137,6 +203,40 @@ body.AB-TTP25--modal-show {
             left: 0;
             right: 0;
             margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (min-width: 991px) {
+    .AB-TTP25 {
+        &__modal-cta-container {
+            margin-top: 24px;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        &__modal-open-cta {
+            width: 200px;
+            height: 50px;
+            border: 1.5px solid rgba(255, 255, 255, 1);
+
+            &__text {
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 100%;
+            }
+        }
+
+        .mantine-Button-root[href="#contact"] {
+            border: 1.5px solid rgba(252, 106, 1, 1) !important;
+            width: 200px !important;
+            height: 50px !important;
+
+            .mantine-Button-label {
+                font-weight: 700;
+                font-size: 18px;
+                line-height: 100%;
+            }
         }
     }
 }

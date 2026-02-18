@@ -16,6 +16,38 @@ body.AB-TTP25--modal-show .AB-TTP25__modal {
   display: flex;
 }
 
+.AB-TTP25--v2 .bg-light-blue-building-blur div:has(> h2),
+.AB-TTP25--v2 .bg-light-blue-building-blur div[style="text-align:center"],
+.AB-TTP25--v2 .bg-light-blue-building-blur .mantine-Center-root {
+  display: none;
+}
+
+.AB-TTP25 .mantine-Button-root[href="#contact"] {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  border: 1.5px solid rgb(252, 106, 1) !important;
+  width: 270px !important;
+  height: 36px !important;
+  border-radius: 32px !important;
+}
+.AB-TTP25 .mantine-Button-root[href="#contact"] .mantine-Button-label {
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 100%;
+  text-transform: capitalize;
+  color: rgb(255, 255, 255);
+}
+.AB-TTP25__modal-cta-container {
+  margin-top: 13px;
+  width: max-content;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
 .AB-TTP25__modal-layout {
   display: none;
   position: fixed;
@@ -49,6 +81,36 @@ body.AB-TTP25--modal-show .AB-TTP25__modal {
   height: 212px;
   border-radius: 22.8px;
   background-color: rgb(0, 0, 0);
+}
+.AB-TTP25__modal-open-cta {
+  width: 270px;
+  height: 36px;
+  border: 1.5px solid rgb(255, 255, 255);
+  border-radius: 500px;
+  cursor: pointer;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.AB-TTP25__modal-open-cta__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TTP25__modal-open-cta__icon svg {
+  width: 13px;
+  height: 14px;
+}
+.AB-TTP25__modal-open-cta__text {
+  font-family: Lato, Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 14px;
+  line-height: 100%;
+  text-transform: capitalize;
+  color: rgb(255, 255, 255);
 }
 .AB-TTP25__modal-close-cta {
   cursor: pointer;
@@ -90,6 +152,33 @@ body.AB-TTP25--modal-show .AB-TTP25__modal {
     left: 0;
     right: 0;
     margin: 0 auto;
+  }
+}
+@media screen and (min-width: 991px) {
+  .AB-TTP25__modal-cta-container {
+    margin-top: 24px;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .AB-TTP25__modal-open-cta {
+    width: 200px;
+    height: 50px;
+    border: 1.5px solid rgb(255, 255, 255);
+  }
+  .AB-TTP25__modal-open-cta__text {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
+  }
+  .AB-TTP25 .mantine-Button-root[href="#contact"] {
+    border: 1.5px solid rgb(252, 106, 1) !important;
+    width: 200px !important;
+    height: 50px !important;
+  }
+  .AB-TTP25 .mantine-Button-root[href="#contact"] .mantine-Button-label {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 100%;
   }
 }
 .AB-TTP25__slide-bottom {
