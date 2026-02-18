@@ -1,17 +1,258 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-TTP25 {
+    /* Video modal */
+    .ab-video-modal-wrapper {
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+            opacity 0.25s ease,
+            visibility 0.25s ease;
+
+        &.ab-video-modal-wrapper--open {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+
+            .ab-video-modal {
+                transform: translateY(0);
+            }
+        }
+
+        &.ab-video-modal-wrapper--closing .ab-video-modal {
+            transform: translateY(-150%);
+        }
+    }
+
+    .ab-video-modal-backdrop {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+    }
+
+    .ab-video-modal {
+        position: relative;
+        z-index: 1;
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        padding: 1.5rem;
+        transform: translateY(-150%);
+        transition: transform 0.25s ease-in-out;
+    }
+
+    .ab-video-modal-close-cta {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #333;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background 0.1s;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.08);
+        }
+    }
+
+    .ab-video-modal-content {
+        padding-top: 1rem;
+    }
     //
 }
+
+/**
+ * ----------------------------------------
+		 *			MODAL
+ * ----------------------------------------
+ */
+
+body.AB-TTP25--modal-show {
+    overflow: hidden;
+
+    .AB-TTP25__modal-layout {
+        display: flex;
+    }
+
+    .AB-TTP25__modal-backdrop {
+        display: block;
+    }
+
+    .AB-TTP25__modal {
+        display: flex;
+    }
+}
+
+.AB-TTP25 {
+    &__modal-layout {
+        display: none;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: transparent;
+        z-index: 10000;
+        overflow: hidden;
+
+        display: none;
+        // display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+    }
+
+    &__modal-backdrop {
+        display: none;
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    &__modal {
+        opacity: 1;
+        box-shadow: 0px 4px 23.9px 0px #00000029;
+
+        width: 100%;
+        min-height: max-content;
+        max-height: auto;
+        background: #ffffff;
+        position: relative;
+        z-index: 1;
+    }
+}
+
+// RESPONSIVE
+@media screen and (min-width: 650px) {
+    .AB-TTP25__modal {
+        width: 643px;
+        padding: 48px 32px 32px 32px;
+        min-height: 298px;
+    }
+
+    .AB-TTP25__modal-layout {
+        // ADD CSS HERE
+    }
+
+    .AB-TTP25__modal-backdrop {
+        // ADD CSS HERE
+    }
+
+    .AB-TTP25__modal {
+        //
+    }
+}
+
+// ANIMATION
+.AB-TTP25__slide-bottom {
+    -webkit-animation: AB-TTP25__slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: AB-TTP25__slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.AB-TTP25__slide-top {
+    -webkit-animation: AB-TTP25__slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation: AB-TTP25__slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/**
+   * ----------------------------------------
+   * animation AB-TTP25__slide-bottom
+   * ----------------------------------------
+   */
+@-webkit-keyframes AB-TTP25__slide-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+@keyframes AB-TTP25__slide-bottom {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+/**
+   * ----------------------------------------
+   * animation AB-TTP25__slide-top
+   * ----------------------------------------
+   */
+@-webkit-keyframes AB-TTP25__slide-top {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+}
+@keyframes AB-TTP25__slide-top {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+}
+
