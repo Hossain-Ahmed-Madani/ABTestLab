@@ -3,6 +3,19 @@
 Figma: https://www.figma.com/design/EegmeIrFHMK3rVEhYTOlxT/TTP25---HOME--Add-Video?node-id=2001-2192&p=f&t=G8nZFwZy9SAvbBgU-0
 Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2088292#c2622624:what
 
+Preview:
+ControL: https://marketer.monetate.net/control/preview/12476/36P33TSCD0U92XPELZI42RAS56M4G9PT/25-home-add-video
+V1:  https://marketer.monetate.net/control/preview/12476/KBMENOLKYJA4GLHFIIKWJIPZAB6WD7N3/25-home-add-video
+V2:  https://marketer.monetate.net/control/preview/12476/TIEB1H9B87K1S97U2GE9PPKYGXCPBNUY/25-home-add-video
+
+
+
+Preview including all experiences::
+ControL: https://marketer.monetate.net/control/preview/12476/UU1IWOS9J9E3KSEHTON1AE00WH9FTHNS/25-home-add-video
+V1:  https://marketer.monetate.net/control/preview/12476/US6EGVP34QU2DL0NT4XOWSZ35M3BP8Q3/25-home-add-video
+V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1OMBT3BP7/25-home-add-video
+
+
 */
 
 (async () => {
@@ -248,7 +261,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             fireGA4Event("TTP25_VideoCTAClick");
             handleModalView("show");
         });
-        
+
         q(`.${page_initials}__modal-close-cta`).addEventListener("click", () => {
             handleModalView("hide");
         });
