@@ -54,7 +54,7 @@
         await waitForElementAsync(() => q("#loggedout-control"));
 
         q("#loggedout-control").addEventListener("click", (e) => {
-            triggerGoal("Logged out user clicks on Account icon | JS", "111111");
+            triggerGoal("Logged out user clicks on Account icon | JS", "1004114281");
         });
 
         return true;
@@ -62,7 +62,7 @@
 
     async function initUserCompletesLogin() {
         await waitForElementAsync(() => q(".status-loggedin"));
-        triggerGoal("A user completes log in | JS", "111112");
+        triggerGoal("A user completes log in | JS", "1004114282");
     }
 
     function init() {

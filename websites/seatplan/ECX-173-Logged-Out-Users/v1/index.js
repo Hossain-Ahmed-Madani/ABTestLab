@@ -1,3 +1,12 @@
+
+/* 
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004187832/summary
+control:  https://seatplan.com/?_conv_eforce=1004187832.1004441781&utm_campaign=qa5
+v1: https://seatplan.com/?_conv_eforce=1004187832.1004441782&utm_campaign=qa5
+
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "SeatPlan",

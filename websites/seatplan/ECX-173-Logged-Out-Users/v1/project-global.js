@@ -61,11 +61,11 @@ function triggerLoggedInUserBeginsCheckout() {
     waitForElementV2(
         () =>
             getSessionStorageValue(LOG_IN_KEY) === "true" &&
-            q(".c-loading-with-message-modal-template__loading-message")?.textContent?.toLowerCase()?.includes("proceeding to checkout"),
+        q(".c-loading-with-message-modal-template__loading-message")?.textContent?.toLowerCase()?.includes("proceeding to checkout"),
         () => {
+            // GOAL NAME:  A logged in user begins checkout | JS
             window._conv_q = window._conv_q || [];
-            _conv_q.push(["triggerConversion", "111113"]);
-            console.log("===========");
+            _conv_q.push(["triggerConversion", "1004114283"]);
         },
         25000,
         15
