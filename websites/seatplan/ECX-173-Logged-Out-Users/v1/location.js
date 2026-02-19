@@ -1,5 +1,4 @@
 (function () {
-
     const TEST_KEY = "ECX-173-1004187832";
 
     function waitForElement(predicate, callback, timer = 10000, frequency = 150) {
@@ -13,10 +12,42 @@
             }, frequency);
         }
     }
+
+    function getSessionStorageValue(key) {
+        try {
+            if (!key || typeof key !== "string") return null;
+            const value = sessionStorage.getItem(key);
+            return value !== null ? value : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function setSessionStorageValue(key, value) {
+        try {
+            if (!key || typeof key !== "string") return false;
+            sessionStorage.setItem(key, value);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function removeSessionStorageValue(key) {
+        try {
+            if (!key || typeof key !== "string") return false;
+            sessionStorage.removeItem(key);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
     function triggerExperiment() {
-        window[TEST_KEY] = true;
+        setSessionStorageValue(TEST_KEY, true);
         window._conv_q = window._conv_q || [];
         window._conv_q.push(["executeExperiment", "1004187832"]);
+        return true;
     }
 
     function q(s, o) {
@@ -24,7 +55,7 @@
     }
 
     try {
-        const IS_BUCKETED = window?.[TEST_KEY] === true;
+        const IS_BUCKETED = getSessionStorageValue(TEST_KEY) === "true";
 
         if (IS_BUCKETED) {
             return true;
@@ -36,6 +67,7 @@
             return false;
         }
     } catch (error) {
+        convert_recheck_experiment();
         return false;
     }
 })()
