@@ -55,15 +55,19 @@
         window.history.replaceState({}, "", newUrl);
     }
 
-    // appendParamsWithoutReload({
-    //     bookSeatId: window.location.hash?.replace("s", "") ?? "",
-    // });
-
-    // currentURL.includes("/tickets/") && (currentURL.includes("am") || currentURL.includes("pm"))
-
-    async function closeRealSeatViewModal() {
+    async function updateRealSeatViewModal() {
         await waitForElementAsync(() => q(".sp-overlay[data-cy='sp-modal-overlay']"));
         q(".sp-overlay[data-cy='sp-modal-overlay'] .sp-modal-navigation__close").click();
+    }
+
+    async function updateErrorModal() {
+        await waitForElementAsync(() => q(".c-modal-base__content-wrapper"));
+        const targetNode = q(".c-modal-base__content-wrapper");
+        if (q(targetNode, ".c-error-modal-template__error-message-text")?.textContent?.trim().includes("Sorry, your selected seat")) {
+            q(targetNode, "a.c-generic-button").click();
+        } else {
+            q("body").classList.add(`${page_initials}--show-error-modal`);
+        }
     }
 
     function init() {
@@ -72,20 +76,22 @@
 
         const currentURL = window.location.href;
 
-        if (!(currentURL.includes("/tickets/") && (currentURL.includes("am") || currentURL.includes("pm")))) return;
-
         if (currentURL.includes("#s")) {
             appendParamsWithoutReload({
-                bookSeatId: window.location.hash?.replace("s", "") ?? "",
+                bookSeatId: window.location.hash?.replace("s", ""),
             });
         }
 
-        closeRealSeatViewModal();
-
+        updateErrorModal();
+        updateRealSeatViewModal();
     }
 
     function checkForItems() {
-        return !!q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`);
+        return !!(
+            q(`body.body-booking-path--ticketing:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            window.location.href.includes("/tickets/") &&
+            (window.location.href.includes("am") || window.location.href.includes("pm"))
+        );
     }
 
     try {

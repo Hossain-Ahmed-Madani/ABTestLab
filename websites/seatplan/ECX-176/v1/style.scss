@@ -13,9 +13,15 @@
 }
 
 .AB-ECX-176 {
-    &.body-booking-path--ticketing {
-        div.sp-overlay[data-cy="sp-modal-overlay"] {
+    &:not(.AB-ECX-176--show-error-modal) {
+        div.c-modal-base__opaque,
+        div.c-modal-base__content-wrapper {
             display: none !important;
         }
     }
+
+    div.sp-overlay[data-cy="sp-modal-overlay"] {
+        display: none !important;
+    }
+    
 }
