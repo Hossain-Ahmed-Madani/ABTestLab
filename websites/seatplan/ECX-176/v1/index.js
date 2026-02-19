@@ -1,3 +1,19 @@
+/* 
+
+Related test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004184049/summary
+Forced Variation of related test :
+https://seatplan.com/london/lion-king-tickets/?_conv_eforce=1004184049.1004432804
+
+
+
+Ticket: https://trello.com/c/CBB5IemQ/4759-ecx-176-vsp-append-bookseatid-to-tsm-url-for-blurry-users?filter=label%3ATeam+Titans
+
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004188045/summary
+v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004188045.1004442313&utm_campaign=qa5
+
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "SeatPlan",
