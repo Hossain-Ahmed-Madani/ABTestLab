@@ -338,7 +338,7 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         window.addEventListener("popstate", function () {
             debouncedChanges();
         });
-
+        
         window.addEventListener("pushstate", function () {
             debouncedChanges();
         });
