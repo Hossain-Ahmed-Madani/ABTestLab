@@ -1,0 +1,13 @@
+{
+  "id": "1771500818705_8466_ECX_176",
+  "name": "ECX-176",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-02-19T11:33:38.705Z",
+  "createdAtReadable": "2/19/2026, 5:33:38 PM",
+  "lastUpdated": "2026-02-19T11:33:39.002Z"
+}
