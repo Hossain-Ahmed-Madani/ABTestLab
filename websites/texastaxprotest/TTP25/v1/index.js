@@ -40,7 +40,7 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         test_name: "TTP25: [HOME] Add Video - (2) SET UP TEST",
         page_initials: "AB-TTP25",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -114,6 +114,18 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     const VIDEO_ID = "wistia-player-ttp25";
     let VIDEO_INSTANCE = null;
 
@@ -160,7 +172,7 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
 
         q("body").insertAdjacentHTML(
             "afterbegin",
-            /* HTML */ ` <script class="w-json-ld" type="application/ld+json" id="w-json-ldwistia_40">
+            /* HTML */ ` <script class="w-json-ld ab-wistia-script" type="application/ld+json" id="w-json-ldwistia_40">
                     {
                         "@context": "http://schema.org/",
                         "@id": "https://fast.wistia.net/embed/iframe/p9lruxird8",
@@ -292,14 +304,6 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-        createLayout();
-        initWistiaVideo();
-        clickFunction();
-    }
-
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
@@ -310,10 +314,55 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
+    function handleLocationChanges() {
+        const pathName = window.location.pathname;
+
+        if (pathName === "/") {
+            init_TTP25();
+        } else {
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            window[page_initials] = false;
+            qq("script.ab-wistia-script , .AB-TTP25__modal-layout")?.forEach((item) => item.remove());
+        }
     }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        window.addEventListener("popstate", function () {
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            debouncedChanges();
+        });
+    }
+
+    async function init_TTP25() {
+        if (window[page_initials] === true) return;
+
+        try {
+            await waitForElementAsync(checkForItems);
+
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            window[page_initials] = true;
+
+            console.table(TEST_CONFIG);
+
+            createLayout();
+            initWistiaVideo();
+            clickFunction();
+        } catch (error) {
+            return false;
+        }
+    }
+
+    init_TTP25();
+    urlObserver();
 })();

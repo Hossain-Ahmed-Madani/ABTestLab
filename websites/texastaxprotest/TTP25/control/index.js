@@ -27,7 +27,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         test_name: "TTP25: [HOME] Add Video - (2) SET UP TEST",
         page_initials: "AB-TTP25",
         test_variation: 0,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -78,15 +78,16 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
-        q(".wistia-video").addEventListener("click", (e) => {
-            if (e.target.closest(".w-big-play-button.w-css-reset-button-important.w-vulcan-v2-button svg")) {
-                fireGA4Event("TTP25_VideoPlayClick");
-            }
-        });
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     function checkForItems() {
@@ -99,10 +100,55 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
+    function handleLocationChanges() {
+        const pathName = window.location.pathname;
+
+        if (pathName === "/") {
+            init_TTP25();
+        } else {
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            window[page_initials] = false;
+        }
     }
+
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
+
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        window.addEventListener("popstate", function () {
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            debouncedChanges();
+        });
+    }
+
+    async function init_TTP25() {
+        if (window[page_initials] === true) return;
+        try {
+            await waitForElementAsync(checkForItems);
+
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+            console.table(TEST_CONFIG);
+
+            q(".wistia-video").addEventListener("click", (e) => {
+                if (e.target.closest(".w-big-play-button.w-css-reset-button-important.w-vulcan-v2-button svg")) {
+                    fireGA4Event("TTP25_VideoPlayClick");
+                }
+            });
+
+        } catch (error) {
+            return false;
+        }
+    }
+
+
+    init_TTP25();
+    urlObserver();
 })();
