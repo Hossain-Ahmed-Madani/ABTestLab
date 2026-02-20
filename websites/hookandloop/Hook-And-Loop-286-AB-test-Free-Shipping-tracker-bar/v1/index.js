@@ -2,7 +2,6 @@
 Ticket: https://trello.com/c/3icFrs7c/4644-hook-loop-286-a-b-test-free-shipping-tracker-bar-on-website-pages-as-well-as-mini-cart
 Test container:  https://app.varify.io/dashboard?search=Hook+%26+Loop+286+-+A%2FB+test+-+Free+Shipping+tracker+bar+on+website+pages+as+well+as+mini-cart
 Preview : https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
-
 */
 
 (async () => {
@@ -156,8 +155,6 @@ Preview : https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
     }
 
     function updateLayout() {
-        console.log("update layout on mutation....");
-
         const subtotalProgressContainer = q("#cart-drawer .subtotal-progress-container");
         const targetNode = q(".ab-subtotal-progress-wrapper");
 
