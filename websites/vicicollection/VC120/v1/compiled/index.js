@@ -33,7 +33,7 @@ V2: https://marketer.monetate.net/control/preview/12997/WPZ4B8B08GCYHEVNMNU23POK
     const TEST_CONFIG = {
         page_initials: "AB-VC120",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -104,6 +104,8 @@ V2: https://marketer.monetate.net/control/preview/12997/WPZ4B8B08GCYHEVNMNU23POK
 
     function updateLayout() {
 
+        const firstTitle = orderArr[0];
+
         qq(`ul.vue-accordion`).forEach((item) => {
             const titleElement = q(item, ".collection-filters__accordion-title");
             const textContent = titleElement.textContent
@@ -127,11 +129,14 @@ V2: https://marketer.monetate.net/control/preview/12997/WPZ4B8B08GCYHEVNMNU23POK
 
             item.setAttribute("ab-filter-type", textContent);
 
-            if (textContent !== "Size") return;
-
-            if (q(item, ".vue-accordion__content:not([style])") && qq(item, 'input[type="checkbox"][aria-selected="true"]').length === 0) {
+            if (textContent === "Size" && q(item, ".vue-accordion__content:not([style])") && qq(item, 'input[type="checkbox"][aria-selected="true"]').length === 0) {
                 q(item, ".vue-accordion__trigger.btn").click();
             }
+
+            if (textContent === firstTitle) {
+                q(item, ".vue-accordion__trigger.btn").click();
+            }
+
         });
     }
 
