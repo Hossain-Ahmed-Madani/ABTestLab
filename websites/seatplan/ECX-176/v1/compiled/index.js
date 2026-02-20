@@ -22,7 +22,7 @@ v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
         test_name: "[ECX - 176] VSP - Append ?bookSeatId= to TSM URL for Blurry Users",
         page_initials: "AB-ECX-176",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -68,17 +68,25 @@ v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
     }
 
     async function updateRealSeatViewModal() {
-        await waitForElementAsync(() => q(".sp-overlay[data-cy='sp-modal-overlay']"));
-        q(".sp-overlay[data-cy='sp-modal-overlay'] .sp-modal-navigation__close").click();
+        try {
+            await waitForElementAsync(() => q(".sp-overlay[data-cy='sp-modal-overlay']"));
+            q(".sp-overlay[data-cy='sp-modal-overlay'] .sp-modal-navigation__close").click();
+        } catch (error) {
+            return false;
+        }
     }
 
     async function updateErrorModal() {
-        await waitForElementAsync(() => q(".c-modal-base__content-wrapper"));
-        const targetNode = q(".c-modal-base__content-wrapper");
-        if (q(targetNode, ".c-error-modal-template__error-message-text")?.textContent?.trim().includes("Sorry, your selected seat")) {
-            q(targetNode, "a.c-generic-button").click();
-        } else {
-            q("body").classList.add(`${page_initials}--show-error-modal`);
+        try {
+            await waitForElementAsync(() => q(".c-modal-base__content-wrapper"));
+            const targetNode = q(".c-modal-base__content-wrapper");
+            if (q(targetNode, ".c-error-modal-template__error-message-text")?.textContent?.trim().includes("Sorry, your selected seat")) {
+                q(targetNode, "a.c-generic-button").click();
+            } else {
+                q("body").classList.add(`${page_initials}--show-error-modal`);
+            }
+        } catch (error) {
+            return false;
         }
     }
 
@@ -90,7 +98,7 @@ v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
 
         if (currentURL.includes("#s")) {
             appendParamsWithoutReload({
-                bookSeatId: window.location.hash?.replace("s", ""),
+                bookSeatId: window.location.hash?.replace("#s", ""),
             });
         }
 
