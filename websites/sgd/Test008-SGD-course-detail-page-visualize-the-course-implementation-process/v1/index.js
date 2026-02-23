@@ -219,12 +219,11 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".container-md:has(> .quick-info.row)"));
     }
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false;
+    }
 
-    waitForElementAsync(checkForItems).then(init).catch(console.error);
 })();
