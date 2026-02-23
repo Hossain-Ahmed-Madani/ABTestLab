@@ -59,6 +59,12 @@ v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function triggerGoal(goalName, goalId) {
+        console.log(`Triggering goal: ${goalName} with ID: ${goalId}`);
+        window._conv_q = window._conv_q || [];
+        _conv_q.push(["triggerConversion", goalId]);
+    }
+
     function appendParamsWithoutReload(param, value) {
         const url = window.location.href;
         const [base, hash] = url.split("#");
@@ -85,8 +91,10 @@ v1: https://seatplan.com/london/abba-arena-venue/seating-plan/?_conv_eforce=1004
             await waitForElementAsync(() => q(".c-modal-base__content-wrapper"));
             const targetNode = q(".c-modal-base__content-wrapper");
             if (q(targetNode, ".c-error-modal-template__error-message-text")?.textContent?.trim().includes("Sorry, your selected seat")) {
+                triggerGoal("ECX-176 Viewed ‘Not Add to Basket’ Modal | JS", "1004114526");
                 q(targetNode, "a.c-generic-button").click();
             } else {
+                triggerGoal("ECX-176 Viewed ‘Add to Basket’ Modal | JS", "1004114525");
                 q("body").classList.add(`${page_initials}--show-error-modal`);
             }
         } catch (error) {
