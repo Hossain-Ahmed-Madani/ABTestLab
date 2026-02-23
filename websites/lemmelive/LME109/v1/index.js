@@ -39,7 +39,7 @@ V1:
         test_name: "LME109: [LANDING PAGE - GLP] Add Nutrition Label & Benefits (2) SET UP TEST",
         page_initials: "AB-LME109",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0001,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -105,11 +105,11 @@ V1:
     }
 
     function createLayout() {
-
         q("#buybox_section .ratings > img")?.setAttribute("src", ASSETS.review_star_url);
         q("#buybox_section > div > div:first-child > img.mobImg")?.setAttribute("src", ASSETS.banner_mobile_url);
         q("#buybox_section > div > div:first-child > img.desImg")?.setAttribute("src", ASSETS.banner_desktop_url);
 
+        // Tab Content
         q(".lme-100").insertAdjacentHTML(
             "beforebegin",
             /* HTML */ `
@@ -466,6 +466,79 @@ V1:
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `,
+        );
+
+        // Modal Content
+        q("body").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="site-overlay" data-site-overlay></div>
+                <div
+                    class="modal modal--supplement-modal drawer-view js-focus-hidden"
+                    data-modal="supplement-modal"
+                    role="dialog"
+                    aria-labelledby="modal-title-supplement-modal"
+                    aria-describedby="modal-content-supplement-modal"
+                    tabindex="-1"
+                    data-tab-index="-1"
+                >
+                    <button class="modal__close" data-close-modal="" aria-label="Close Popup">
+                        <svg class="icon-close" role="img" aria-label="Close Icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4139 4.00015L3.99966 17.4144L2.58545 16.0002L15.9997 2.58594L17.4139 4.00015Z" fill="black"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M3.99966 2.58594L17.4139 16.0002L15.9997 17.4144L2.58545 4.00015L3.99966 2.58594Z" fill="black"></path>
+                        </svg>
+                    </button>
+                    <div id="modal-content-supplement-modal" class="modal__content" tabindex="0">
+                        <p id="modal-title-supplement-modal" class="visually-hidden"></p>
+                        <div class="container">
+                            <div class="product-supplement">
+                                <div class="product-supplement__heading">
+                                    <h2 class="text-bold ui-uppercase">Supplement Facts</h2>
+                                </div>
+                                <div class="product-supplement__content">
+                                    <p class="product-supplement__instruction">Suggested Use: Adults, take 2 capsules daily with food. Do not exceed recommended dose.</p>
+                                    <div class="product-supplement__serving">
+                                        <p class="p--large text-bold">Supplement Facts</p>
+                                        <p class="p--small">Serving Size: 2 Capsules</p>
+                                        <p class="p--small">Servings Per Container: 30</p>
+                                    </div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Amount Per Serving</th>
+                                                <th>% Daily Value*</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Calories</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Eriomin<sup>®</sup> Lemon Fruit Extract 200&nbsp;mg <span>(Citrus limon) (std. to 70% eriocitrin)</span></td>
+                                                <td>**</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Supresa<sup>®</sup> Saffron Extract 176.5&nbsp;mg <span>(Crocus sativus) (stigma) (std. to 0.3% safranal)</span></td>
+                                                <td>**</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Morosil<sup>TM</sup> Red Orange Fruit Extract 400&nbsp;mg <span>(Citrus sinesis (L.) Osbeck) (std. to 0.8% anthocyanins)</span></td>
+                                                <td>**</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <p class="p--small product-supplement__disclaimer">†Percent Daily Values are based on a 2,000 calorie diet<br />**Daily Value not established</p>
+                                    <p class="product-supplement__ingredients">
+                                        <strong>Other Ingredients</strong>
+                                        Organic Rice Hulls, Hypromellose Capsule
+                                    </p>
                                 </div>
                             </div>
                         </div>
