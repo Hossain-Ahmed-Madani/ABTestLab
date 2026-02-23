@@ -45,7 +45,6 @@
     }
 
     function triggerGoal(goalName, goalId) {
-        console.log(`Triggering goal: ${goalName} with ID: ${goalId}`);
         window._conv_q = window._conv_q || [];
         _conv_q.push(["triggerConversion", goalId]);
     }
@@ -67,8 +66,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
         initLoggedOutClicksAccountIcon();
         initUserCompletesLogin();
     }
