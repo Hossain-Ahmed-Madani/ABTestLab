@@ -1,15 +1,17 @@
 /* 
 
-Figma: https://www.figma.com/design/sErLd4tN9GUMtVpz3lg5ts/MS126---NAV-Mobile--Move-Main-Nav-Element-into-CTAs?node-id=2004-2
-
+Figma:https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
 Test container: https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004186158/summary
 
+Target URL: https://lemmelive.com/pages/lemme-glp-1-daily
 
 Preview url:
+Control:
+V1:
 
-Control: https://magicspoon.com/?_conv_eforce=1004186158.1004437599&utm_campaign=qa5 
-V1: https://magicspoon.com/?_conv_eforce=1004186158.1004437600&utm_campaign=qa5 
-V2: https://magicspoon.com/?_conv_eforce=1004186158.1004437601&utm_campaign=qa5 
+Preview url (Including All Experiences):
+Control:
+V1:
 
 
 */
