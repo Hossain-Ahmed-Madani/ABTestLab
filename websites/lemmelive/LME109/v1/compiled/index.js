@@ -56,6 +56,20 @@ V1:
         banner_desktop_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/desktop_699ca145aad7f.png",
     };
 
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event", eventName, eventLabel);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -536,38 +550,44 @@ V1:
         );
     }
 
-
     function setActiveTab(currentTab) {
-        qq('.mod_product_details_tabs_IFRVdq_tabs__tab').forEach(el => {
+        qq(".mod_product_details_tabs_IFRVdq_tabs__tab").forEach((el) => {
             el.classList.remove("active");
             el.setAttribute("aria-selected", "false");
         });
 
-        currentTab.classList.add('active');
+        currentTab.classList.add("active");
         currentTab.setAttribute("aria-selected", "true");
     }
 
     function clickFunction() {
         q('button[data-tab="supplement"]').addEventListener("click", (e) => {
-
             const supplementTab = e.currentTarget;
             setActiveTab(supplementTab);
 
-
-            q('body').classList.add("modal-active", "scroll-lock", "browser-inactive");
-            q('.modal--supplement-modal').classList.remove("hidden");
+            q("body").classList.add("modal-active", "scroll-lock", "browser-inactive");
+            q(".modal--supplement-modal").classList.remove("hidden");
         });
 
-        qq('.site-overlay, button.modal__close').forEach(element => {
-            
+        qq(".site-overlay, button.modal__close").forEach((element) => {
             element.addEventListener("click", (e) => {
-                console.log("clicked");
 
                 const detailsTab = q('button[data-tab="details"]');
                 setActiveTab(detailsTab);
 
-                q('body').classList.remove("modal-active", "scroll-lock", "browser-inactive");
-                q('.modal--supplement-modal').classList.add("hidden");
+                q("body").classList.remove("modal-active", "scroll-lock", "browser-inactive");
+                q(".modal--supplement-modal").classList.add("hidden");
+            });
+        });
+
+        q('.lme-100 .sub-ben__toggle').addEventListener("click", (e) => {
+            fireGA4Event("LME109_BenefitsClick");
+        });
+
+        qq('.mod_product_details_tabs_IFRVdq_tabs__tab').forEach(tab => {
+            tab.addEventListener("click", (e) => {
+                const currentTab = e.currentTarget;
+                fireGA4Event("LME109_TabClick", currentTab.textContent.trim());
             });
         });
     }

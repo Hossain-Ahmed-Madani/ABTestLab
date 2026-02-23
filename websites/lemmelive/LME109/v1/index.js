@@ -57,6 +57,8 @@ V1:
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event", eventName, eventLabel);
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -108,6 +110,10 @@ V1:
         q("#buybox_section .ratings > img")?.setAttribute("src", ASSETS.review_star_url);
         q("#buybox_section > div > div:first-child > img.mobImg")?.setAttribute("src", ASSETS.banner_mobile_url);
         q("#buybox_section > div > div:first-child > img.desImg")?.setAttribute("src", ASSETS.banner_desktop_url);
+
+        if (test_variation === 2) {
+            q(".lme-100 .sub-ben")?.classList.add("is-collapsed");
+        }
 
         // Tab Content
         q(".lme-100").insertAdjacentHTML(
@@ -548,38 +554,44 @@ V1:
         );
     }
 
-
     function setActiveTab(currentTab) {
-        qq('.mod_product_details_tabs_IFRVdq_tabs__tab').forEach(el => {
+        qq(".mod_product_details_tabs_IFRVdq_tabs__tab").forEach((el) => {
             el.classList.remove("active");
             el.setAttribute("aria-selected", "false");
         });
 
-        currentTab.classList.add('active');
+        currentTab.classList.add("active");
         currentTab.setAttribute("aria-selected", "true");
     }
 
     function clickFunction() {
         q('button[data-tab="supplement"]').addEventListener("click", (e) => {
-
             const supplementTab = e.currentTarget;
-            setActiveTab(supplementTab)
+            setActiveTab(supplementTab);
 
-
-            q('body').classList.add("modal-active", "scroll-lock", "browser-inactive");
-            q('.modal--supplement-modal').classList.remove("hidden");
+            q("body").classList.add("modal-active", "scroll-lock", "browser-inactive");
+            q(".modal--supplement-modal").classList.remove("hidden");
         });
 
-        qq('.site-overlay, button.modal__close').forEach(element => {
-            
+        qq(".site-overlay, button.modal__close").forEach((element) => {
             element.addEventListener("click", (e) => {
-                console.log("clicked");
 
                 const detailsTab = q('button[data-tab="details"]');
-                setActiveTab(detailsTab)
+                setActiveTab(detailsTab);
 
-                q('body').classList.remove("modal-active", "scroll-lock", "browser-inactive");
-                q('.modal--supplement-modal').classList.add("hidden");
+                q("body").classList.remove("modal-active", "scroll-lock", "browser-inactive");
+                q(".modal--supplement-modal").classList.add("hidden");
+            });
+        });
+
+        q('.lme-100 .sub-ben__toggle').addEventListener("click", (e) => {
+            fireGA4Event("LME109_BenefitsClick");
+        });
+
+        qq('.mod_product_details_tabs_IFRVdq_tabs__tab').forEach(tab => {
+            tab.addEventListener("click", (e) => {
+                const currentTab = e.currentTarget;
+                fireGA4Event("LME109_TabClick", currentTab.textContent.trim());
             });
         });
     }
