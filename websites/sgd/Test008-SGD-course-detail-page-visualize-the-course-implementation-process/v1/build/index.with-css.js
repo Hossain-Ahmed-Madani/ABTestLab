@@ -23,6 +23,7 @@
   padding: 12px 20px;
   margin-bottom: 24px;
   box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+  background-color: rgb(249, 249, 249);
 }
 .AB-TEST008 .slick-list {
   padding-top: 0;
@@ -84,8 +85,13 @@
 }
 .AB-TEST008 .ab-content-heading {
   text-align: left;
-  text-wrap: pretty;
   margin-bottom: 2px;
+}
+.AB-TEST008 .ab-content-heading--sm {
+  display: block;
+}
+.AB-TEST008 .ab-content-heading--lg {
+  display: none;
 }
 .AB-TEST008 .ab-content-description {
   font-family: "Onest Regular";
@@ -154,6 +160,8 @@
   line-height: 21px;
   letter-spacing: 0px;
   text-align: center;
+  white-space: nowrap;
+  min-width: 340px;
 }
 .AB-TEST008 .ab-button-container .track-fb-init-free-month {
   background-color: rgb(102, 204, 0);
@@ -172,6 +180,8 @@
   letter-spacing: 0px;
   text-align: center;
   vertical-align: middle;
+  white-space: nowrap;
+  min-width: 340px;
 }
 @media screen and (min-width: 991px) {
   .AB-TEST008 .container-md:has(.quick-info.row) {
@@ -184,7 +194,8 @@
     margin-bottom: 0;
     box-shadow: none;
     gap: 68px;
-    padding: 12px 20px 20px;
+    padding: 12px 20px 0;
+    margin-bottom: 33px;
   }
   .AB-TEST008 .ab-content-col {
     width: 33.33%;
@@ -230,6 +241,12 @@
   }
   .AB-TEST008 .ab-content-heading {
     margin-bottom: 5px;
+  }
+  .AB-TEST008 .ab-content-heading--sm {
+    display: none;
+  }
+  .AB-TEST008 .ab-content-heading--lg {
+    display: block;
   }
   .AB-TEST008 .ab-content-description {
     font-weight: 400;
@@ -286,6 +303,14 @@
     margin-bottom: 39px !important;
   }
 }
+@media screen and (min-width: 1400px) {
+  .AB-TEST008 .ab-content {
+    min-height: 179px;
+  }
+  .AB-TEST008 .ab-content-col .ab-content:last-child {
+    min-height: 173px;
+  }
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -306,7 +331,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
   const TEST_CONFIG = {
     page_initials: "AB-TEST008",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -326,7 +351,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "1",
       icon: ASSETS["file_img"],
-      heading: "Kostenloses Infopaket zum Kurs erhalten",
+      heading_sm: "Kostenloses Infopaket zum Kurs erhalten",
+      heading_lg: "Kostenloses Infopaket zum Kurs erhalten",
       description:
         "Alle Details auf einen Blick - unverbindlich & transparent. Preise, Kursinhalte, erste Lernmaterialien und flexible Finanzierungsmöglichkeiten entdecken.",
       cta: "oder direkt starten:",
@@ -334,7 +360,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "2",
       icon: ASSETS["booking_img"],
-      heading: "Wunschkurs buchen und risikofrei testen",
+      heading_sm: "Wunschkurs buchen und risikofrei testen",
+      heading_lg: "Wunschkurs buchen und risikofrei testen",
       description:
         "Einsteigen, ausprobieren, entscheiden Lernen Sie im eigenen Tempo, tauschen Sie sich im SGD-Onlinecampus aus und erleben Sie den Kurs unverbindlich.",
       cta: "",
@@ -342,7 +369,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "3",
       icon: ASSETS["online_learning_img"],
-      heading: "Flexibel lernen - Wissen gezielt aufbauen",
+      heading_sm: "Flexibel lernen - Wissen gezielt aufbauen",
+      heading_lg: "Flexibel lernen - Wissen gezielt aufbauen",
       description:
         "Weiterbildung, die sich Ihrem Alltag anpasst. Lernen Sie orts- und zeitunabhängig und erweitern Sie Schritt für Schritt Ihre beruflichen Kompetenzen.",
       cta: "",
@@ -350,7 +378,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "4",
       icon: ASSETS["quality_assurance_img"],
-      heading: "Aufgaben bearbeiten und professionelles Feedback erhalten",
+      heading_sm: "Aufgaben bearbeiten und professionelles Feedback erhalten",
+      heading_lg: "Aufgaben bearbeiten & professionelles Feedback erhalten",
       description:
         "Lernen mit Struktur und persönlicher Begleitung. Bearbeiten Sie Einsendeaufgaben und erhalten Sie qualifiziertes Feedback Ihrer Tutor:innen - für messbaren Lernfortschritt.",
       cta: "",
@@ -358,7 +387,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "5",
       icon: ASSETS["winner_img"],
-      heading: "Anerkanntes Abschlusszeugnis und Zertifikat erhalten",
+      heading_sm: "Anerkanntes Abschlusszeugnis und Zertifikat erhalten",
+      heading_lg: "Anerkanntes Abschlusszeugnis & Zertifikat erhalten",
       description:
         "Ihr offizieller Kompetenznachweis Nach erfolgreichem Abschluss erhalten Sie Ihr SGD-Zertifikat und Abschlusszeugnis.",
       cta: "",
@@ -366,7 +396,8 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     {
       order: "6",
       icon: ASSETS["promotion_img"],
-      heading: "Mit neuem Wissen sichtbar Karriere machen",
+      heading_sm: "Mit neuem Wissen sichtbar Karriere machen",
+      heading_lg: "Mit neuem Wissen sichtbar Karriere machen",
       description:
         "Positionieren Sie sich deutlich als ambitionierte Fachkraft, die sich gezielt weiterbildet und neue Herausforderungen annimmt. ",
       cta: "",
@@ -375,7 +406,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
 
   async function waitForElementAsync(
     predicate,
-    timeout = 20000,
+    timeout = 10000,
     frequency = 150,
   ) {
     const startTime = Date.now();
@@ -421,14 +452,26 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
             <div class="ab-content-col ab-content-col--arrow">
               ${DATA.slice(0, 2)
                 .map(
-                  ({ order, icon, heading, description, cta }) => /* HTML */ `
+                  ({
+                    order,
+                    icon,
+                    heading_sm,
+                    heading_lg,
+                    description,
+                    cta,
+                  }) => /* HTML */ `
                     <div class="ab-content">
                       <div class="ab-content-icon">
-                        <img src="${icon}" alt="${heading}" />
+                        <img src="${icon}" alt="${heading_sm}" />
                       </div>
                       <div class="ab-content-serial">${order}.</div>
                       <div class="ab-content-text-items">
-                        <div class="ab-content-heading">${heading}</div>
+                        <div class="ab-content-heading ab-content-heading--sm">
+                          ${heading_sm}
+                        </div>
+                        <div class="ab-content-heading ab-content-heading--lg">
+                          ${heading_lg}
+                        </div>
                         <div class="ab-content-description">${description}</div>
                         ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                       </div>
@@ -440,14 +483,26 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
             <div class="ab-content-col">
               ${DATA.slice(2, 4)
                 .map(
-                  ({ order, icon, heading, description, cta }) => /* HTML */ `
+                  ({
+                    order,
+                    icon,
+                    heading_sm,
+                    heading_lg,
+                    description,
+                    cta,
+                  }) => /* HTML */ `
                     <div class="ab-content">
                       <div class="ab-content-icon">
-                        <img src="${icon}" alt="${heading}" />
+                        <img src="${icon}" alt="${heading_sm}" />
                       </div>
                       <div class="ab-content-serial">${order}.</div>
                       <div class="ab-content-text-items">
-                        <div class="ab-content-heading">${heading}</div>
+                        <div class="ab-content-heading ab-content-heading--sm">
+                          ${heading_sm}
+                        </div>
+                        <div class="ab-content-heading ab-content-heading--lg">
+                          ${heading_lg}
+                        </div>
                         <div class="ab-content-description">${description}</div>
                         ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                       </div>
@@ -459,14 +514,26 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
             <div class="ab-content-col">
               ${DATA.slice(4)
                 .map(
-                  ({ order, icon, heading, description, cta }) => /* HTML */ `
+                  ({
+                    order,
+                    icon,
+                    heading_sm,
+                    heading_lg,
+                    description,
+                    cta,
+                  }) => /* HTML */ `
                     <div class="ab-content">
                       <div class="ab-content-icon">
-                        <img src="${icon}" alt="${heading}" />
+                        <img src="${icon}" alt="${heading_sm}" />
                       </div>
                       <div class="ab-content-serial">${order}.</div>
                       <div class="ab-content-text-items">
-                        <div class="ab-content-heading">${heading}</div>
+                        <div class="ab-content-heading ab-content-heading--sm">
+                          ${heading_sm}
+                        </div>
+                        <div class="ab-content-heading ab-content-heading--lg">
+                          ${heading_lg}
+                        </div>
                         <div class="ab-content-description">${description}</div>
                         ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                       </div>
@@ -532,10 +599,12 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     );
   }
 
-  try {
-    await waitForElementAsync(checkForItems);
-    init();
-  } catch (error) {
-    return false;
-  }
+  // try {
+  //     await waitForElementAsync(checkForItems);
+  //     init();
+  // } catch (error) {
+  //     return false;
+  // }
+
+  waitForElementAsync(checkForItems).then(init).catch(console.error);
 })();
