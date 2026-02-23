@@ -204,6 +204,12 @@
 
         white-space: nowrap;
         min-width: 340px;
+
+        &:hover {
+            color: #fff;
+            background-color: rgb(31.45, 114.75, 38.25);
+            border-color: rgb(29.6, 108, 36);
+        }
     }
 
     .ab-button-container .track-fb-init-free-month {
@@ -228,6 +234,12 @@
 
         white-space: nowrap;
         min-width: 340px;
+
+        &:hover {
+            color: #fff;
+            background-color: rgb(124.95, 211.65, 38.25);
+            border-color: rgb(117.3, 209.1, 25.5);
+        }
     }
 
     @media screen and (min-width: 991px) {
@@ -378,7 +390,7 @@
             min-height: 179px;
         }
 
-        .ab-content-col   .ab-content:last-child {
+        .ab-content-col .ab-content:last-child {
             min-height: 173px;
         }
     }

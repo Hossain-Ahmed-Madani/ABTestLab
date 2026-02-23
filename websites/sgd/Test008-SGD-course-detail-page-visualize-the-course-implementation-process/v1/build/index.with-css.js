@@ -163,6 +163,11 @@
   white-space: nowrap;
   min-width: 340px;
 }
+.AB-TEST008 .ab-button-container .link-modal-info-package:hover {
+  color: #fff;
+  background-color: rgb(31.45, 114.75, 38.25);
+  border-color: rgb(29.6, 108, 36);
+}
 .AB-TEST008 .ab-button-container .track-fb-init-free-month {
   background-color: rgb(102, 204, 0);
   color: rgb(255, 255, 255);
@@ -182,6 +187,11 @@
   vertical-align: middle;
   white-space: nowrap;
   min-width: 340px;
+}
+.AB-TEST008 .ab-button-container .track-fb-init-free-month:hover {
+  color: #fff;
+  background-color: rgb(124.95, 211.65, 38.25);
+  border-color: rgb(117.3, 209.1, 25.5);
 }
 @media screen and (min-width: 991px) {
   .AB-TEST008 .container-md:has(.quick-info.row) {
@@ -331,7 +341,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
   const TEST_CONFIG = {
     page_initials: "AB-TEST008",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -406,7 +416,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
 
   async function waitForElementAsync(
     predicate,
-    timeout = 10000,
+    timeout = 20000,
     frequency = 150,
   ) {
     const startTime = Date.now();
@@ -544,7 +554,9 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
             </div>
           </div>
           <div class="ab-button-container header-buttons">
-            <button class="btn btn-sm btn-info link-modal-info-package">
+            <button
+              class="btn btn-sm btn-info link-modal-info-package ab-link-modal-info-package"
+            >
               Gratis Infopaket für diesen Kurs anfordern
             </button>
             <div class="ab-button-divider">oder</div>
@@ -562,22 +574,35 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
   }
 
   async function initSlickSlider() {
-    await waitForElementAsync(
-      () =>
-        q(".ab-content-row") &&
-        window?.$?.fn?.slick &&
-        typeof window.$.fn.slick === "function" &&
-        window.innerWidth < 991,
-    );
+    try {
+      await waitForElementAsync(
+        () =>
+          q(".ab-content-row") &&
+          window?.$?.fn?.slick &&
+          typeof window.$.fn.slick === "function" &&
+          window.innerWidth < 991,
+      );
 
-    window.$(".ab-content-row").slick({
-      dots: false,
-      infinite: false,
-      autoplay: false,
-      arrows: true,
-      lazyLoad: "ondemand",
-      slidesToShow: 1,
-      slidesToScroll: 1,
+      window.$(".ab-content-row").slick({
+        dots: false,
+        infinite: false,
+        autoplay: false,
+        arrows: true,
+        lazyLoad: "ondemand",
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      });
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function clickFunction() {
+    document.querySelectorAll(".cta.cta-buttons.cta-name-order.mt-5");
+    q(".ab-link-modal-info-package").addEventListener("click", (e) => {
+      q(
+        ".cta.cta-buttons.cta-name-order.mt-5:not(.ab-link-modal-info-package)",
+      ).click();
     });
   }
 
@@ -589,6 +614,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     );
     updateLayout();
     initSlickSlider();
+    clickFunction();
   }
 
   function checkForItems() {
@@ -599,12 +625,10 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     );
   }
 
-  // try {
-  //     await waitForElementAsync(checkForItems);
-  //     init();
-  // } catch (error) {
-  //     return false;
-  // }
-
-  waitForElementAsync(checkForItems).then(init).catch(console.error);
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
 })();

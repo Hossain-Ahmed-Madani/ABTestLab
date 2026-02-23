@@ -157,6 +157,11 @@
   white-space: nowrap;
   min-width: 340px;
 }
+.AB-TEST008 .ab-button-container .link-modal-info-package:hover {
+  color: #fff;
+  background-color: rgb(31.45, 114.75, 38.25);
+  border-color: rgb(29.6, 108, 36);
+}
 .AB-TEST008 .ab-button-container .track-fb-init-free-month {
   background-color: rgb(102, 204, 0);
   color: rgb(255, 255, 255);
@@ -176,6 +181,11 @@
   vertical-align: middle;
   white-space: nowrap;
   min-width: 340px;
+}
+.AB-TEST008 .ab-button-container .track-fb-init-free-month:hover {
+  color: #fff;
+  background-color: rgb(124.95, 211.65, 38.25);
+  border-color: rgb(117.3, 209.1, 25.5);
 }
 @media screen and (min-width: 991px) {
   .AB-TEST008 .container-md:has(.quick-info.row) {

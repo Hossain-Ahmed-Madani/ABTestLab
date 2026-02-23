@@ -10,18 +10,18 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     const TEST_CONFIG = {
         page_initials: "AB-TEST008",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const ASSETS = {
-        file_img: 'https://www.sgd.de/fileadmin/images/testing/file.png',
-        booking_img: 'https://www.sgd.de/fileadmin/images/testing/booking.png',
-        promotion_img: 'https://www.sgd.de/fileadmin/images/testing/promotion.png',
-        quality_assurance_img: 'https://www.sgd.de/fileadmin/images/testing/quality-assurance.png',
-        online_learning_img: 'https://www.sgd.de/fileadmin/images/testing/online-learning.png',
-        winner_img: 'https://www.sgd.de/fileadmin/images/testing/winner.png',
+        file_img: "https://www.sgd.de/fileadmin/images/testing/file.png",
+        booking_img: "https://www.sgd.de/fileadmin/images/testing/booking.png",
+        promotion_img: "https://www.sgd.de/fileadmin/images/testing/promotion.png",
+        quality_assurance_img: "https://www.sgd.de/fileadmin/images/testing/quality-assurance.png",
+        online_learning_img: "https://www.sgd.de/fileadmin/images/testing/online-learning.png",
+        winner_img: "https://www.sgd.de/fileadmin/images/testing/winner.png",
     };
 
     const DATA = [
@@ -76,7 +76,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
         },
     ];
 
-    async function waitForElementAsync(predicate, timeout = 10000, frequency = 150) {
+    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
@@ -125,7 +125,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
                                                 ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                                             </div>
                                         </div>
-                                    `
+                                    `,
                                 )
                                 .join("")}
                         </div>
@@ -133,7 +133,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
                             ${DATA.slice(2, 4)
                                 .map(
                                     ({ order, icon, heading_sm, heading_lg, description, cta }) => /* HTML */ `
-                                        <div class="ab-content">    
+                                        <div class="ab-content">
                                             <div class="ab-content-icon"><img src="${icon}" alt="${heading_sm}" /></div>
                                             <div class="ab-content-serial">${order}.</div>
                                             <div class="ab-content-text-items">
@@ -143,7 +143,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
                                                 ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                                             </div>
                                         </div>
-                                    `
+                                    `,
                                 )
                                 .join("")}
                         </div>
@@ -161,34 +161,45 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
                                                 ${cta ? `<div class="ab-content-cta">${cta}</div>` : ""}
                                             </div>
                                         </div>
-                                    `
+                                    `,
                                 )
                                 .join("")}
                         </div>
                     </div>
                     <div class="ab-button-container header-buttons">
-                        <button class="btn btn-sm btn-info link-modal-info-package">Gratis Infopaket für diesen Kurs anfordern</button>
+                        <button class="btn btn-sm btn-info link-modal-info-package ab-link-modal-info-package">Gratis Infopaket für diesen Kurs anfordern</button>
                         <div class="ab-button-divider">oder</div>
                         <a href="/kursanmeldung.html" class="btn btn-sm btn-prio-1 btn-reg-header track-fb-init-free-month" data-form-submit="#course_registration">
                             <span>Für diesen Kurs anmelden</span>
                         </a>
                     </div>
                 </div>
-            `
+            `,
         );
     }
 
     async function initSlickSlider() {
-        await waitForElementAsync(() => q(".ab-content-row") && window?.$?.fn?.slick && typeof window.$.fn.slick === "function" && window.innerWidth < 991);
+        try {
+            await waitForElementAsync(() => q(".ab-content-row") && window?.$?.fn?.slick && typeof window.$.fn.slick === "function" && window.innerWidth < 991);
 
-        window.$(".ab-content-row").slick({
-            dots: false,
-            infinite: false,
-            autoplay: false,
-            arrows: true,
-            lazyLoad: "ondemand",
-            slidesToShow: 1,
-            slidesToScroll: 1,
+            window.$(".ab-content-row").slick({
+                dots: false,
+                infinite: false,
+                autoplay: false,
+                arrows: true,
+                lazyLoad: "ondemand",
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            });
+        } catch (error) {
+            return false;
+        }
+    }
+
+    function clickFunction() {
+        document.querySelectorAll(".cta.cta-buttons.cta-name-order.mt-5");
+        q(".ab-link-modal-info-package").addEventListener("click", (e) => {
+            q(".cta.cta-buttons.cta-name-order.mt-5:not(.ab-link-modal-info-package)").click();
         });
     }
 
@@ -196,6 +207,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         updateLayout();
         initSlickSlider();
+        clickFunction();
     }
 
     function checkForItems() {
@@ -208,5 +220,4 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     } catch (error) {
         return false;
     }
-
 })();
