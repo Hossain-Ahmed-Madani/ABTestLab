@@ -480,7 +480,7 @@ V1:
             /* HTML */ `
                 <div class="site-overlay" data-site-overlay></div>
                 <div
-                    class="modal modal--supplement-modal drawer-view js-focus-hidden"
+                    class="modal modal--supplement-modal drawer-view js-focus-hidden hidden"
                     data-modal="supplement-modal"
                     role="dialog"
                     aria-labelledby="modal-title-supplement-modal"
@@ -546,6 +546,42 @@ V1:
                 </div>
             `,
         );
+    }
+
+
+    function setActiveTab(currentTab) {
+        qq('.mod_product_details_tabs_IFRVdq_tabs__tab').forEach(el => {
+            el.classList.remove("active");
+            el.setAttribute("aria-selected", "false");
+        });
+
+        currentTab.classList.add('active');
+        currentTab.setAttribute("aria-selected", "true");
+    }
+
+    function clickFunction() {
+        q('button[data-tab="supplement"]').addEventListener("click", (e) => {
+
+            const supplementTab = e.currentTarget;
+            setActiveTab(supplementTab)
+
+
+            q('body').classList.add("modal-active", "scroll-lock", "browser-inactive");
+            q('.modal--supplement-modal').classList.remove("hidden");
+        });
+
+        qq('.site-overlay, button.modal__close').forEach(element => {
+            
+            element.addEventListener("click", (e) => {
+                console.log("clicked");
+
+                const detailsTab = q('button[data-tab="details"]');
+                setActiveTab(detailsTab)
+
+                q('body').classList.remove("modal-active", "scroll-lock", "browser-inactive");
+                q('.modal--supplement-modal').classList.add("hidden");
+            });
+        });
     }
 
     function init() {

@@ -1,6 +1,6 @@
 .AB-LME109 {
   /* ============================================================================
-    Modal
+  ==== Modal ====
   ============================================================================== */
 }
 .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs {
@@ -240,6 +240,23 @@
     background-color: #dfc8e7;
     padding: 2rem 0;
   }
+}
+.AB-LME109 body.modal-active .site-overlay {
+  visibility: visible;
+  z-index: 1000;
+  opacity: 100%;
+}
+.AB-LME109 .site-overlay {
+  visibility: hidden;
+  position: fixed;
+  z-index: 990;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transition: opacity 0.3s cubic-bezier(0.46, 0.01, 0.32, 1), visibility 0.3s cubic-bezier(0.46, 0.01, 0.32, 1);
+  opacity: 0%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 .AB-LME109 .modal {
   visibility: visible;
@@ -522,21 +539,25 @@
 .AB-LME109 .product-supplement__content tr {
   border-bottom: 2px solid #000;
 }
-.AB-LME109 .product-supplement__content th, .AB-LME109 .product-supplement__content td {
+.AB-LME109 .product-supplement__content th,
+.AB-LME109 .product-supplement__content td {
   background: 0 0;
   border: none;
   padding: 8px 0;
 }
-.AB-LME109 .product-supplement__content th:last-of-type, .AB-LME109 .product-supplement__content td:last-of-type {
+.AB-LME109 .product-supplement__content th:last-of-type,
+.AB-LME109 .product-supplement__content td:last-of-type {
   text-align: right;
   white-space: nowrap;
 }
-.AB-LME109 .product-supplement__content th, .AB-LME109 .product-supplement__content td {
+.AB-LME109 .product-supplement__content th,
+.AB-LME109 .product-supplement__content td {
   background: 0 0;
   border: none;
   padding: 8px 0;
 }
-.AB-LME109 .product-supplement__disclaimer, .AB-LME109 .product-supplement__ingredients {
+.AB-LME109 .product-supplement__disclaimer,
+.AB-LME109 .product-supplement__ingredients {
   margin-bottom: 24px;
 }
 @media screen and (min-width: 1025px) {
@@ -544,6 +565,9 @@
     font-size: 3.6rem;
     font-weight: 500;
     line-height: 3.6rem;
+  }
+  .AB-LME109 .product-supplement__content {
+    padding-bottom: 48px;
   }
 }
 .AB-LME109 #buybox_section > div > div:nth-of-type(2) > p {
