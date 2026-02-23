@@ -1,7 +1,7 @@
 /* 
 
 Figma:https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
-Test container: https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004186158/summary
+Test container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2089466
 
 Target URL: https://lemmelive.com/pages/lemme-glp-1-daily
 PDP: https://lemmelive.com/products/lemme-glp-1
@@ -51,9 +51,9 @@ V1:
                 fill="black"
             ></path>
         </svg>`,
-        review_star_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-1_699c9eea23c11.png",
-        banner_mobile_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/mobile_699ca133b599c.png",
-        banner_desktop_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/desktop_699ca145aad7f.png",
+        review_star_url: "https://sb.monetate.net/img/1/1597/6022393.png",
+        banner_mobile_url: "https://sb.monetate.net/img/1/1597/6022392.png",
+        banner_desktop_url: "https://sb.monetate.net/img/1/1597/6022394.png",
     };
 
     function fireGA4Event(eventName, eventLabel = "") {

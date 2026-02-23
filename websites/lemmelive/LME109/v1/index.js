@@ -1,19 +1,20 @@
 /* 
 
 Figma:https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
-Test container: https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004186158/summary
+Test container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2089466
 
 Target URL: https://lemmelive.com/pages/lemme-glp-1-daily
 PDP: https://lemmelive.com/products/lemme-glp-1
 
 Preview url:
-Control:
-V1:
+Control: https://marketer.monetate.net/control/preview/12706/UXA1DT54BNKWMPSAA6H2JNIWXQMIRYDW/109-landing-page-glp-add-nutrition-label-benefits
+V1: https://marketer.monetate.net/control/preview/12706/K4XESS130A7Y4VLQPUVC4ZQK9RRHJ8AI/109-landing-page-glp-add-nutrition-label-benefits
+V2: https://marketer.monetate.net/control/preview/12706/9TEY84AQJDTBM8I43O0R01KW8CZC4470/109-landing-page-glp-add-nutrition-label-benefits
 
 Preview url (Including All Experiences):
-Control:
-V1:
-
+Control: https://marketer.monetate.net/control/preview/12706/NF58TFVDWHI9ACTWT42ASMXOH5HEVEJ3/109-landing-page-glp-add-nutrition-label-benefits
+V1: https://marketer.monetate.net/control/preview/12706/EXGOZOSD8CHBEC7A26WRZYD0G0BXWU6V/109-landing-page-glp-add-nutrition-label-benefits
+V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1FYK9KJ6Y/109-landing-page-glp-add-nutrition-label-benefits
 
 */
 
@@ -51,9 +52,9 @@ V1:
                 fill="black"
             ></path>
         </svg>`,
-        review_star_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-1_699c9eea23c11.png",
-        banner_mobile_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/mobile_699ca133b599c.png",
-        banner_desktop_url: "https://cdn-3.convertexperiments.com/uf/10042082/10042535/desktop_699ca145aad7f.png",
+        review_star_url: "https://sb.monetate.net/img/1/1597/6022393.png",
+        banner_mobile_url: "https://sb.monetate.net/img/1/1597/6022392.png",
+        banner_desktop_url: "https://sb.monetate.net/img/1/1597/6022394.png",
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
