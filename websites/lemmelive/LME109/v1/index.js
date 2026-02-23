@@ -102,10 +102,6 @@ V1:
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function clickFunction() {
-        //
-    }
-
     function createLayout() {
         q("#buybox_section .ratings > img")?.setAttribute("src", ASSETS.review_star_url);
         q("#buybox_section > div > div:first-child > img.mobImg")?.setAttribute("src", ASSETS.banner_mobile_url);
