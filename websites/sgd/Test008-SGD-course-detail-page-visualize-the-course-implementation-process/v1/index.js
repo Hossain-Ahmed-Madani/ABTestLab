@@ -14,7 +14,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
         test_name: "Test008 [SGD] - course detail page - visualize the course implementation process",
         page_initials: "AB-TEST008",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -216,7 +216,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     function clickFunction() {
         document.querySelectorAll(".cta.cta-buttons.cta-name-order.mt-5");
         q(".ab-link-modal-info-package").addEventListener("click", (e) => {
-            q(".cta.cta-buttons.cta-name-order.mt-5:not(.ab-link-modal-info-package)").click();
+            qq(".btn.btn-primary.link-modal-info-package:not(.ab-link-modal-info-package)").forEach(item => item.click());
         });
     }
 
