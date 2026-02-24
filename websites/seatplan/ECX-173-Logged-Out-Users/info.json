@@ -1,0 +1,13 @@
+{
+  "id": "1771408155098_5901_ECX_173_Logged_Out_Users",
+  "name": "ECX-173-Logged-Out-Users",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-02-18T09:49:15.098Z",
+  "createdAtReadable": "2/18/2026, 3:49:15 PM",
+  "lastUpdated": "2026-02-18T09:49:15.302Z"
+}

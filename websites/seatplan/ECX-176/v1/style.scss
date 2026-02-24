@@ -1,0 +1,27 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-ECX-176 {
+    &:not(.AB-ECX-176--show-error-modal) {
+        div.c-modal-base__opaque,
+        div.c-modal-base__content-wrapper {
+            display: none !important;
+        }
+    }
+
+    div.sp-overlay[data-cy="sp-modal-overlay"] {
+        display: none !important;
+    }
+    
+}

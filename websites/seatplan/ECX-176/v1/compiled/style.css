@@ -1,0 +1,7 @@
+.AB-ECX-176:not(.AB-ECX-176--show-error-modal) div.c-modal-base__opaque,
+.AB-ECX-176:not(.AB-ECX-176--show-error-modal) div.c-modal-base__content-wrapper {
+  display: none !important;
+}
+.AB-ECX-176 div.sp-overlay[data-cy=sp-modal-overlay] {
+  display: none !important;
+}
