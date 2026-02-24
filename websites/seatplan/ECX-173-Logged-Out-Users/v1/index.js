@@ -54,7 +54,6 @@ v1: https://seatplan.com/?_conv_eforce=1004187832.1004441782&utm_campaign=qa5
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         q("#loggedout-control").insertAdjacentHTML("beforeend", `
             <span class="icon-user-warning sp-icon sp-icon-counter-1 sp-icon--filled avatar-error-icon ab-error-icon-animation"></span>
@@ -69,7 +68,6 @@ v1: https://seatplan.com/?_conv_eforce=1004187832.1004441782&utm_campaign=qa5
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
