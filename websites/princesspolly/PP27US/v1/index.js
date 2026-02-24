@@ -27,6 +27,20 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event", eventName, eventLabel);
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
+
     async function fetchAndParseURLApi(url) {
         try {
             const response = await fetch(url);
@@ -38,17 +52,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         } catch (error) {
             // console.error("Fetch and parse failed:", error);
             return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
         }
     }
 
@@ -76,28 +79,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -118,32 +99,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -159,84 +114,95 @@ check the pdp pages as the code mostly works on it, and you can also find design
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    async function createLayout() {
-        const dom = await fetchAndParseURLApi("https://us.princesspolly.com/products/gigi-skort-black-lower-impact?variant=41406057676884");
-        // const dom = await fetchAndParseURLApi("https://us.princesspolly.com/products/marano-bag-brown");
-        const thumbnails = qq(dom, ".product__thumb img");
-        const afterPay = q(dom, ".product__payment-terms");
-        const layout = q(dom, ".product__info");
-
-        console.log(dom, layout, afterPay);
-
-        q("body").insertAdjacentHTML(
-            "afterbegin",
-            /* HTML */ ` <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(51, 49, 49, 0.5); z-index: 1000;">
-                <div style="width:100%;height:max-content; background-color: #fff; margin: auto;">
-                    <div style=" width: 100%;" class="ab-swiper swiper">
-                        <div class="swiper-wrapper">${thumbnails.map((thumbnail) => `<div class="swiper-slide">${thumbnail.outerHTML}</div>`).join("")}</div>
-                    </div>
-
-                    <div style="display:block; border:1px solid red;  height: 100px;" class="ab-afterpay">
-                        <div class="product__payment-terms">
-                            <div class="afterpay" data-currency="USD">
-                                <afterpay-placement
-                                    id="afterpay-placement-pdp"
-                                    data-locale="en_US"
-                                    data-currency="USD"
-                                    data-amount="49"
-                                    data-currency-conversion="49.00"
-                                    data-amount-attribute="amount"
-                                    data-currency-attribute="currency"
-                                    data-logo-type="lockup"
-                                    data-size="sm"
-                                    data-show-interest-free="false"
-                                ></afterpay-placement>
-                            </div>
+    function createModalLayout() {
+        const layout = /* HTML */ `
+            <div class="${page_initials}__modal-layout">
+                <div class="${page_initials}__modal-backdrop"></div>
+                <div class="${page_initials}__modal">
+                    <div class="${page_initials}__modal__head">
+                        <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
+                        <div class="${page_initials}__modal__head__close-cta">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
+                                <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
                         </div>
                     </div>
-                    <div>${layout.outerHTML}</div>
+                    <div class="${page_initials}__modal__body">
+                        <div class="${page_initials}__modal__body__text-content">Content Here</div>
+                    </div>
                 </div>
-            </div>`,
+            </div>
+        `;
 
-            waitForElement(
-                () => typeof window.Swiper === "function" && window.Swiper && document.readyState === "complete",
-                () => {
-                    console.log("========= Swiper ========== ", window.Swiper);
+        q("body").insertAdjacentHTML("afterbegin", layout);
+    }
 
-                    // INSERT_YOUR_CODE
-                    // Initialize Swiper for .ab-swiper elements using window.Swiper
+    function animate(targetElement, className, interval) {
+        if (!targetElement) return;
+        if (className.includes(".")) className.replace(".", "");
+        targetElement.classList.add(className);
+        setTimeout(() => targetElement.classList.remove(className), interval);
+    }
 
-                    const swiperEl = document.querySelectorAll(".ab-swiper");
-                    swiperEl.forEach((el) => {
-                        // eslint-disable-next-line no-new
-                        new window.Swiper(el, {
-                            // slidesPerView: "auto", // use slide width from CSS (163px)
-                            slidesPerView: "auto", // use slide width from CSS (163px)
-                            spaceBetween: 5, // 5px gap between slides
-                            loop: false, // or true if you want looping
-                            navigation: {
-                                nextEl: ".swiper-button-next",
-                                prevEl: ".swiper-button-prev",
-                            },
-                            watchSlidesProgress: true,
-                            // items: 1.5,
-                        });
-                    });
+    function preventScroll(e) {
+        e.preventDefault();
+    }
 
-                    console.log("========= Afterpay ========== ", window.Afterpay);
-                    if (typeof window.Afterpay !== "undefined" && window.Afterpay.update) {
-                        window.Afterpay.update();
-                    }
-                },
-                10000,
-            ),
-        );
+    function handleModalView(action = "show") {
+        const modalShowClass = `${page_initials}--modal-show`;
+        const body = document.body;
+
+        const modal = q(`.${page_initials}__modal`);
+
+        if(!modal) return;
+
+        if (action === "show" && !body.classList.contains(modalShowClass)) {
+            animate(modal, "slide-bottom", 200);
+            modal.classList.add("slide-bottom");
+            body.classList.add(modalShowClass);
+            document.addEventListener("touchmove", preventScroll, { passive: false });
+        }
+
+        if (action === "hide") {
+            animate(modal, "slide-top", 200);
+            setTimeout(() => body.classList.remove(modalShowClass), 200);
+            document.removeEventListener("touchmove", preventScroll);
+        }
+    }
+
+    function clickFunction() {
+        document.body.addEventListener("click", (e) => {
+            // ====== MODAL ======
+
+            // OPEN MODAL
+            if (e.target.closest(".plp-card-modal-trigger__item")) {
+                handleModalView("show");
+            }
+
+            // CLOSE MODAL
+            if (
+                e.target.closest(`.${page_initials}__modal__head__close-cta`) ||
+                (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))
+            ) {
+                handleModalView("hide");
+            }
+        });
+
+        // CLOSE POPUP -> ON ESC CLICK
+        document.addEventListener("keydown", function (evt) {
+            evt = evt || window.event; // Fallback for older browsers (optional)
+            if (evt.key === "Escape" || evt.key === "Esc") {
+                handleModalView("hide");
+            }
+        });
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createLayout();
+        createModalLayout();
+        clickFunction();
+        handleModalView("show");
     }
 
     function checkForItems() {
