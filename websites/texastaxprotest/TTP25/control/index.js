@@ -27,7 +27,7 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
         test_name: "TTP25: [HOME] Add Video - (2) SET UP TEST",
         page_initials: "AB-TTP25",
         test_variation: 0,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -137,10 +137,9 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             console.table(TEST_CONFIG);
 
+            fireGA4Event("TTP25_ViewHomepage")
             q(".wistia-video").addEventListener("click", (e) => {
-                if (e.target.closest(".w-big-play-button.w-css-reset-button-important.w-vulcan-v2-button svg")) {
-                    fireGA4Event("TTP25_VideoPlayClick");
-                }
+                fireGA4Event("TTP25_BTFVideoPlayClick");
             });
 
         } catch (error) {

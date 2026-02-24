@@ -40,7 +40,7 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
         test_name: "TTP25: [HOME] Add Video - (2) SET UP TEST",
         page_initials: "AB-TTP25",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -283,16 +283,8 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
             handleModalView("hide");
         });
 
-        q(".ab-wistia-video").addEventListener("click", (e) => {
-            if (e.target.closest(".w-big-play-button.w-css-reset-button-important.w-vulcan-v2-button svg")) {
-                fireGA4Event("TTP25_VideoPlayClick");
-            }
-        });
-
-        q(".wistia-video ").addEventListener("click", (e) => {
-            if (e.target.closest(".w-big-play-button.w-css-reset-button-important.w-vulcan-v2-button svg")) {
-                fireGA4Event("TTP25_VideoPlayClick");
-            }
+        q(".wistia-video").addEventListener("click", (e) => {
+            fireGA4Event("TTP25_BTFVideoPlayClick");
         });
 
         // CLOSE POPUP -> ON ESC CLICK
@@ -355,6 +347,7 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
 
             console.table(TEST_CONFIG);
 
+            fireGA4Event("TTP25_ViewHomepage");
             createLayout();
             initWistiaVideo();
             clickFunction();
