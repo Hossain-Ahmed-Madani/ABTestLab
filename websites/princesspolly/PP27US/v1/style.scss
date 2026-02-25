@@ -22,25 +22,64 @@
 // --font-primary: "forma_djr_bannerregular", var(--font-body);
 
 .AB-PP27US {
-
     .ab-carousel-container {
         margin-bottom: 14px;
         margin-left: -13px;
         margin-right: -13px;
-    }
 
-    .ab-swiper:not(.swiper-initialized) {
-        display: none;
-    }
+        .ab-swiper.swiper-initialized ~ .ab-carousel-skeleton-loader {
+            display: none;
+        }
 
-    .ab-swiper .ab-swiper-slide {
-        width: 163px !important;
-    }
+        .ab-carousel-skeleton-loader {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 14px;
+            overflow: hidden;
 
-    .ab-swiper-slide img {
-        width: 163px;
-        height: 222px;
-        object-fit: cover; /* or contain, depending on your need */
+            &__item {
+                width: 163px;
+                min-width: 163px;
+                height: 222px;
+                background-color: rgba(229, 229, 229, 1);
+                animation: pulse 1.2s infinite linear;
+            }
+        }
+
+        .ab-swiper:not(.swiper-initialized) {
+            display: none;
+        }
+
+        .ab-swiper .ab-swiper-slide {
+            width: 163px !important;
+        }
+
+        .ab-swiper-slide img {
+            width: 163px;
+            height: 222px;
+            object-fit: cover; /* or contain, depending on your need */
+        }
+
+        .ab-swiper .swiper-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .ab-swiper .swiper-pagination-bullet {
+            width: 6px !important;
+            height: 6px !important;
+            border: 1px solid rgba(255, 255, 255, 1) !important;
+            background-color: transparent !important;
+            margin: 0 !important;
+        }
+
+        .ab-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+            border: 1px solid rgba(255, 255, 255, 1) !important;
+            background-color: rgba(255, 255, 255, 1) !important;
+        }
     }
 
     .ab-product-title {
@@ -71,6 +110,38 @@
 
     .ab-color-swatch-container {
         margin-bottom: 14px;
+
+        h2.product__active-color {
+            font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 19px;
+            letter-spacing: 0.8px;
+            vertical-align: middle;
+            color: rgba(0, 0, 0, 1);
+            margin-bottom: 11px;
+        }
+
+        .product__swatches {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .swatch {
+            width: 22px;
+            height: 22px;
+            margin: 0;
+
+            &:before {
+                top: -3px;
+                bottom: -3px;
+                left: -3px;
+                right: -3px;
+            }
+        }
     }
 
     .ab-product-size-selector-container {
@@ -136,6 +207,34 @@
         text-decoration-skip-ink: auto;
         width: max-content;
         margin: auto;
+    }
+}
+
+.AB-PP27US--v1 {
+    .ab-carousel-container {
+        display: none;
+    }
+
+    .AB-PP27US {
+        &__modal {
+            min-height: 422px;
+
+            &__head {
+                margin-bottom: 29px;
+            }
+        }
+    }
+}
+
+.AB-PP27US--v2 {
+    .AB-PP27US {
+        &__modal {
+            min-height: 658px;
+
+            &__head {
+                margin-bottom: 32px;
+            }
+        }
     }
 }
 
@@ -221,30 +320,6 @@ body.AB-PP27US--modal-show {
     }
 }
 
-.AB-PP27US--v1 {
-    .AB-PP27US {
-        &__modal {
-            min-height: 422px;
-
-            &__head {
-                margin-bottom: 29px;
-            }
-        }
-    }
-}
-
-.AB-PP27US--v2 {
-    .AB-PP27US {
-        &__modal {
-            min-height: 658px;
-
-            &__head {
-                margin-bottom: 32px;
-            }
-        }
-    }
-}
-
 // ANIMATION
 .slide-in {
     -webkit-animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -313,5 +388,35 @@ body.AB-PP27US--modal-show {
         opacity: 0;
         -webkit-transform: translateY(600px);
         transform: translateY(600px);
+    }
+}
+
+/**
+   * ----------------------------------------
+   * animation pulse
+   * ----------------------------------------
+   */
+
+@-webkit-keyframes pulse {
+    0% {
+        background-color: rgba(229, 229, 229, 1);
+    }
+    50% {
+        background-color: rgba(240, 240, 240, 1);
+    }
+    100% {
+        background-color: rgba(229, 229, 229, 1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(229, 229, 229, 1);
+    }
+    50% {
+        background-color: rgba(240, 240, 240, 1);
+    }
+    100% {
+        background-color: rgba(229, 229, 229, 1);
     }
 }

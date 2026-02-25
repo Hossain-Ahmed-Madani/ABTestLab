@@ -3,16 +3,51 @@
   margin-left: -13px;
   margin-right: -13px;
 }
-.AB-PP27US .ab-swiper:not(.swiper-initialized) {
+.AB-PP27US .ab-carousel-container .ab-swiper.swiper-initialized ~ .ab-carousel-skeleton-loader {
   display: none;
 }
-.AB-PP27US .ab-swiper .ab-swiper-slide {
+.AB-PP27US .ab-carousel-container .ab-carousel-skeleton-loader {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+.AB-PP27US .ab-carousel-container .ab-carousel-skeleton-loader__item {
+  width: 163px;
+  min-width: 163px;
+  height: 222px;
+  background-color: rgb(229, 229, 229);
+  animation: pulse 1.2s infinite linear;
+}
+.AB-PP27US .ab-carousel-container .ab-swiper:not(.swiper-initialized) {
+  display: none;
+}
+.AB-PP27US .ab-carousel-container .ab-swiper .ab-swiper-slide {
   width: 163px !important;
 }
-.AB-PP27US .ab-swiper-slide img {
+.AB-PP27US .ab-carousel-container .ab-swiper-slide img {
   width: 163px;
   height: 222px;
   object-fit: cover; /* or contain, depending on your need */
+}
+.AB-PP27US .ab-carousel-container .ab-swiper .swiper-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.AB-PP27US .ab-carousel-container .ab-swiper .swiper-pagination-bullet {
+  width: 6px !important;
+  height: 6px !important;
+  border: 1px solid rgb(255, 255, 255) !important;
+  background-color: transparent !important;
+  margin: 0 !important;
+}
+.AB-PP27US .ab-carousel-container .ab-swiper .swiper-pagination-bullet.swiper-pagination-bullet-active {
+  border: 1px solid rgb(255, 255, 255) !important;
+  background-color: rgb(255, 255, 255) !important;
 }
 .AB-PP27US .ab-product-title {
   font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
@@ -39,6 +74,34 @@
 }
 .AB-PP27US .ab-color-swatch-container {
   margin-bottom: 14px;
+}
+.AB-PP27US .ab-color-swatch-container h2.product__active-color {
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.8px;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  margin-bottom: 11px;
+}
+.AB-PP27US .ab-color-swatch-container .product__swatches {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.AB-PP27US .ab-color-swatch-container .swatch {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+}
+.AB-PP27US .ab-color-swatch-container .swatch:before {
+  top: -3px;
+  bottom: -3px;
+  left: -3px;
+  right: -3px;
 }
 .AB-PP27US .ab-product-size-selector-container {
   margin-bottom: 15px;
@@ -93,6 +156,23 @@
   text-decoration-skip-ink: auto;
   width: max-content;
   margin: auto;
+}
+
+.AB-PP27US--v1 .ab-carousel-container {
+  display: none;
+}
+.AB-PP27US--v1 .AB-PP27US__modal {
+  min-height: 422px;
+}
+.AB-PP27US--v1 .AB-PP27US__modal__head {
+  margin-bottom: 29px;
+}
+
+.AB-PP27US--v2 .AB-PP27US__modal {
+  min-height: 658px;
+}
+.AB-PP27US--v2 .AB-PP27US__modal__head {
+  margin-bottom: 32px;
 }
 
 /**
@@ -154,20 +234,6 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   border-radius: 3px;
   background: rgb(229, 229, 229);
 }
-.AB-PP27US--v1 .AB-PP27US__modal {
-  min-height: 422px;
-}
-.AB-PP27US--v1 .AB-PP27US__modal__head {
-  margin-bottom: 29px;
-}
-
-.AB-PP27US--v2 .AB-PP27US__modal {
-  min-height: 658px;
-}
-.AB-PP27US--v2 .AB-PP27US__modal__head {
-  margin-bottom: 32px;
-}
-
 .slide-in {
   -webkit-animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
@@ -234,5 +300,32 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
     opacity: 0;
     -webkit-transform: translateY(600px);
     transform: translateY(600px);
+  }
+}
+/**
+   * ----------------------------------------
+   * animation pulse
+   * ----------------------------------------
+   */
+@-webkit-keyframes pulse {
+  0% {
+    background-color: rgb(229, 229, 229);
+  }
+  50% {
+    background-color: rgb(240, 240, 240);
+  }
+  100% {
+    background-color: rgb(229, 229, 229);
+  }
+}
+@keyframes pulse {
+  0% {
+    background-color: rgb(229, 229, 229);
+  }
+  50% {
+    background-color: rgb(240, 240, 240);
+  }
+  100% {
+    background-color: rgb(229, 229, 229);
   }
 }

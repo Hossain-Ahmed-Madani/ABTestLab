@@ -65,13 +65,13 @@ check the pdp pages as the code mostly works on it, and you can also find design
         "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
         "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
         "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
+        // "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
     ];
 
     const modalContent = /* HTML */ `
@@ -90,11 +90,158 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
+            <div class="ab-carousel-skeleton-loader">
+                <div class="ab-carousel-skeleton-loader__item"></div>
+                <div class="ab-carousel-skeleton-loader__item"></div>
+                <div class="ab-carousel-skeleton-loader__item"></div>
+            </div>
         </div>
         <div class="ab-product-title">Yumiko Romper Black</div>
         <div class="ab-product-price">USD $39.00</div>
-        <div class="ab-afterpay-container">After pay</div>
-        <div class="ab-color-swatch-container">Color Swatch Selector</div>
+        <div class="ab-afterpay-container">4 x $16.25 with Afterpay</div>
+        <div class="ab-color-swatch-container">
+            <h2 class="product__active-color">
+                <span class="product__label product__active-color-label">Color:</span>
+                <span class="product__value product__active-color-value">Slate Grey</span>
+            </h2>
+            <div class="product__swatches" data-colors="">
+                <a
+                    href="/products/yumiko-romper-black"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #000000;"
+                    aria-label="Yumiko Romper Black"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-cream-1"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #ffffff;"
+                    aria-label="Yumiko Romper Brown Stripe"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-black-sparkle"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #000000;"
+                    aria-label="Yumiko Romper Black Sparkle"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-brown-pinstripe"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #2c1e09;"
+                    aria-label="Yumiko Romper Brown Pinstripe"
+                >
+                </a
+                ><a
+                    href="/products/endless-nights-playsuit-pink-check"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #ea9999;"
+                    aria-label="Yumiko Romper Pink Check"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-yellow"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #fffdea;"
+                    aria-label="Yumiko Romper Yellow"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-white"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #ffffff;"
+                    aria-label="Yumiko Romper White"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-green-stripe"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #bab39c;"
+                    aria-label="Yumiko Romper Green Stripe"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-brown-polka"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #613d05;"
+                    aria-label="Yumiko Romper Brown Polka Dot"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-blue"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #b4e3f6;"
+                    aria-label="Yumiko Romper Blue"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-blue-sparkle"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #cafbf3;"
+                    aria-label="Yumiko Romper Blue Sparkle"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-cherry-sparkle"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #740a0a;"
+                    aria-label="Yumiko Romper Cherry Sparkle"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-champagne-sparkle"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #fef7ef;"
+                    aria-label="Yumiko Romper Champagne Sparkle"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-cream"
+                    class="swatch"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #eee6d9;"
+                    aria-label="Yumiko Romper Cream"
+                >
+                </a
+                ><a
+                    href="/products/yumiko-romper-slate-grey"
+                    class="swatch swatch--active"
+                    data-product-variant-id=""
+                    data-product-variant-color="#5b5b5b"
+                    style="background-color: #5b5b5b;"
+                    aria-label="Yumiko Romper Slate Grey"
+                >
+                </a>
+            </div>
+        </div>
         <div class="ab-product-size-selector-container">Size Selector</div>
         <button class="ab-add-to-cart-cta" disabled>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
@@ -104,20 +251,17 @@ check the pdp pages as the code mostly works on it, and you can also find design
     `;
 
     async function initSwiper() {
-        await waitForElementAsync(() => typeof window.Swiper === "function" && window.Swiper);
-        const swiperEl = document.querySelectorAll(".ab-swiper");
-        swiperEl.forEach((el) => {
-            // eslint-disable-next-line no-new
-            new window.Swiper(el, {
-                slidesPerView: "auto", // use slide width from CSS (163px)
-                spaceBetween: 5, // 5px gap between slides
-                loop: false, // or true if you want looping
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                watchSlidesProgress: true,
-            });
+        await waitForElementAsync(() => typeof window.Swiper === "function" && window.Swiper && q(".ab-swiper"));
+        const el = q(".ab-swiper");
+        new window.Swiper(el, {
+            slidesPerView: "auto", // use slide width from CSS (163px)
+            spaceBetween: 5, // 5px gap between slides
+            loop: false, // or true if you want looping
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            watchSlidesProgress: true,
         });
     }
 
