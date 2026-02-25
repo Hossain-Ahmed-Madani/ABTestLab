@@ -106,6 +106,45 @@
 .AB-PP27US .ab-product-size-selector-container {
   margin-bottom: 15px;
 }
+.AB-PP27US .ab-product-size-selector-container .product__label.product__label--size {
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.8px;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  margin-bottom: 13px;
+}
+.AB-PP27US .ab-product-size-selector-container .product__select-sizes-list {
+  flex-grow: 1;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.AB-PP27US .ab-product-size-selector-container .product__select-sizes-item.active .product__select-sizes-button {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+.AB-PP27US .ab-product-size-selector-container .product__select-sizes-button {
+  width: 100%;
+  height: 30px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 100%;
+  letter-spacing: 0.8px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
 .AB-PP27US .ab-add-to-cart-cta {
   width: 100%;
   height: 44px;
@@ -129,12 +168,12 @@
 .AB-PP27US .ab-add-to-cart-cta__text {
   font-family: "forma_djr_bannerbold", monospace, Helvetica, Arial, sans-serif;
   font-weight: 700;
-  font-size: 16px !important;
+  font-size: 16px;
   line-height: 100%;
   letter-spacing: 0.8px;
   text-align: center;
   vertical-align: middle;
-  color: rgb(255, 255, 255) !important;
+  color: rgb(255, 255, 255);
   text-transform: uppercase;
 }
 .AB-PP27US .ab-add-to-cart-cta__text--select-size {

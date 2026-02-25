@@ -166,14 +166,14 @@ check the pdp pages as the code mostly works on it, and you can also find design
             <div class="product__swatches" data-colors="">
                 <a
                     href="/products/yumiko-romper-black"
-                    class="swatch"
+                    class="swatch swatch--active"
                     data-product-variant-id=""
                     data-product-variant-color="#5b5b5b"
                     style="background-color: #000000;"
                     aria-label="Yumiko Romper Black"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-cream-1"
                     class="swatch"
                     data-product-variant-id=""
@@ -181,8 +181,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #ffffff;"
                     aria-label="Yumiko Romper Brown Stripe"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-black-sparkle"
                     class="swatch"
                     data-product-variant-id=""
@@ -190,8 +190,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #000000;"
                     aria-label="Yumiko Romper Black Sparkle"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-brown-pinstripe"
                     class="swatch"
                     data-product-variant-id=""
@@ -199,8 +199,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #2c1e09;"
                     aria-label="Yumiko Romper Brown Pinstripe"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/endless-nights-playsuit-pink-check"
                     class="swatch"
                     data-product-variant-id=""
@@ -208,8 +208,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #ea9999;"
                     aria-label="Yumiko Romper Pink Check"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-yellow"
                     class="swatch"
                     data-product-variant-id=""
@@ -217,8 +217,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #fffdea;"
                     aria-label="Yumiko Romper Yellow"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-white"
                     class="swatch"
                     data-product-variant-id=""
@@ -226,8 +226,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #ffffff;"
                     aria-label="Yumiko Romper White"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-green-stripe"
                     class="swatch"
                     data-product-variant-id=""
@@ -235,8 +235,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #bab39c;"
                     aria-label="Yumiko Romper Green Stripe"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-brown-polka"
                     class="swatch"
                     data-product-variant-id=""
@@ -244,8 +244,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #613d05;"
                     aria-label="Yumiko Romper Brown Polka Dot"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-blue"
                     class="swatch"
                     data-product-variant-id=""
@@ -253,8 +253,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #b4e3f6;"
                     aria-label="Yumiko Romper Blue"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-blue-sparkle"
                     class="swatch"
                     data-product-variant-id=""
@@ -262,46 +262,92 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     style="background-color: #cafbf3;"
                     aria-label="Yumiko Romper Blue Sparkle"
                 >
-                </a
-                ><a
+                </a>
+                <a
                     href="/products/yumiko-romper-cherry-sparkle"
                     class="swatch"
                     data-product-variant-id=""
                     data-product-variant-color="#5b5b5b"
                     style="background-color: #740a0a;"
                     aria-label="Yumiko Romper Cherry Sparkle"
-                >
-                </a
-                ><a
-                    href="/products/yumiko-romper-champagne-sparkle"
-                    class="swatch"
-                    data-product-variant-id=""
-                    data-product-variant-color="#5b5b5b"
-                    style="background-color: #fef7ef;"
-                    aria-label="Yumiko Romper Champagne Sparkle"
-                >
-                </a
-                ><a
-                    href="/products/yumiko-romper-cream"
-                    class="swatch"
-                    data-product-variant-id=""
-                    data-product-variant-color="#5b5b5b"
-                    style="background-color: #eee6d9;"
-                    aria-label="Yumiko Romper Cream"
-                >
-                </a
-                ><a
-                    href="/products/yumiko-romper-slate-grey"
-                    class="swatch swatch--active"
-                    data-product-variant-id=""
-                    data-product-variant-color="#5b5b5b"
-                    style="background-color: #5b5b5b;"
-                    aria-label="Yumiko Romper Slate Grey"
-                >
-                </a>
+                ></a>
             </div>
         </div>
-        <div class="ab-product-size-selector-container">Size Selector</div>
+        <div class="ab-product-size-selector-container">
+            <h2 class="product__label product__label--size">
+                <span class="product__active-size-label">Size:</span>
+                <span class="product__size-value" data-product-size-value="">US 0</span><span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
+            </h2>
+            <div class="product__select-sizes" data-product-sizes="">
+                <ul class="product__select-sizes-list">
+                    <li class="product__select-sizes-item active">
+                        <button
+                            type="button"
+                            class="product__select-sizes-button"
+                            data-size-label="US 0"
+                            data-size-variant-id="40812272975956"
+                            data-size-value="US 0"
+                            data-product-handle="yumiko-romper-slate-grey"
+                            data-inventory-label=""
+                        >
+                            US 0
+                        </button>
+                    </li>
+                    <li class="product__select-sizes-item">
+                        <button
+                            type="button"
+                            class="product__select-sizes-button"
+                            data-size-label="US 2"
+                            data-size-variant-id="40812273008724"
+                            data-size-value="US 2"
+                            data-product-handle="yumiko-romper-slate-grey"
+                            data-inventory-label=""
+                        >
+                            US 2
+                        </button>
+                    </li>
+                    <li class="product__select-sizes-item">
+                        <button
+                            type="button"
+                            class="product__select-sizes-button"
+                            data-size-label="US 8"
+                            data-size-variant-id="40812273107028"
+                            data-size-value="US 8"
+                            data-product-handle="yumiko-romper-slate-grey"
+                            data-inventory-label=""
+                        >
+                            US 8
+                        </button>
+                    </li>
+                    <li class="product__select-sizes-item">
+                        <button
+                            type="button"
+                            class="product__select-sizes-button"
+                            data-size-label="US 10"
+                            data-size-variant-id="40812273139796"
+                            data-size-value="US 10"
+                            data-product-handle="yumiko-romper-slate-grey"
+                            data-inventory-label=""
+                        >
+                            US 10
+                        </button>
+                    </li>
+                    <li class="product__select-sizes-item">
+                        <button
+                            type="button"
+                            class="product__select-sizes-button"
+                            data-size-label="US 12"
+                            data-size-variant-id="40812273172564"
+                            data-size-value="US 12"
+                            data-product-handle="yumiko-romper-slate-grey"
+                            data-inventory-label=""
+                        >
+                            US 12
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <button class="ab-add-to-cart-cta" disabled>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag">ADD TO BAG</span>
@@ -414,10 +460,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
         createModalLayout();
         clickFunction();
         initSwiper();
+
+        handleModalView("show");
     }
 
     function checkForItems() {
-        return !!q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`);
+        return !!q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && window.location.href.includes('/collections/');
     }
 
     try {
