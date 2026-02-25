@@ -19,9 +19,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
         client: "Acadia",
         project: "Princess Polly",
         site_url: "https://us.princesspolly.com",
-        test_name: "Ticket Name",
+        test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 1,
+        test_variation: 2,
         test_version: 0.0001,
     };
 
@@ -55,21 +55,82 @@ check the pdp pages as the code mostly works on it, and you can also find design
         return document.querySelector(s);
     }
 
+    const thumbnails = [
+        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
+        "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
+    ];
+
+    const modalContent = /* HTML */ `
+        <div class="ab-carousel-container">
+            <div class="ab-swiper swiper">
+                <div class="swiper-wrapper">
+                    ${thumbnails
+                        .map(
+                            (thumbnail) => /* HTML */ `
+                                <div class="ab-swiper-slide swiper-slide">
+                                    <img src="${thumbnail}" alt="" />
+                                </div>
+                            `,
+                        )
+                        .join("")}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="ab-product-title">Yumiko Romper Black</div>
+        <div class="ab-product-price">USD $39.00</div>
+        <div class="ab-afterpay-container">After pay</div>
+        <div class="ab-color-swatch-container">Color Swatch Selector</div>
+        <div class="ab-product-size-selector-container">Size Selector</div>
+        <button class="ab-add-to-cart-cta" disabled>
+            <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
+            <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag">ADD TO BAG</span>
+        </button>
+        <a href="#" class="ab-view-full-details">View Full Details</a>
+    `;
+
+    async function initSwiper() {
+        await waitForElementAsync(() => typeof window.Swiper === "function" && window.Swiper);
+        const swiperEl = document.querySelectorAll(".ab-swiper");
+        swiperEl.forEach((el) => {
+            // eslint-disable-next-line no-new
+            new window.Swiper(el, {
+                slidesPerView: "auto", // use slide width from CSS (163px)
+                spaceBetween: 5, // 5px gap between slides
+                loop: false, // or true if you want looping
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                watchSlidesProgress: true,
+            });
+        });
+    }
+
     function createModalLayout() {
         const layout = /* HTML */ `
             <div class="${page_initials}__modal-layout">
                 <div class="${page_initials}__modal-backdrop"></div>
                 <div class="${page_initials}__modal">
                     <div class="${page_initials}__modal__head">
-                        <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
-                        <div class="${page_initials}__modal__head__close-cta">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                                <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                        </div>
+                        <div class="${page_initials}__modal__close-cta"></div>
                     </div>
                     <div class="${page_initials}__modal__body">
-                        <div class="${page_initials}__modal__body__text-content">Content Here</div>
+                        <div class="${page_initials}__modal__body__text-content">${modalContent}</div>
                     </div>
                 </div>
             </div>
@@ -95,17 +156,17 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
         const modal = q(`.${page_initials}__modal`);
 
-        if(!modal) return;
+        if (!modal) return;
 
         if (action === "show" && !body.classList.contains(modalShowClass)) {
-            animate(modal, "slide-bottom", 200);
-            modal.classList.add("slide-bottom");
+            animate(modal, "slide-in", 200);
+            modal.classList.add("slide-in");
             body.classList.add(modalShowClass);
             document.addEventListener("touchmove", preventScroll, { passive: false });
         }
 
         if (action === "hide") {
-            animate(modal, "slide-top", 200);
+            animate(modal, "slide-out", 200);
             setTimeout(() => body.classList.remove(modalShowClass), 200);
             document.removeEventListener("touchmove", preventScroll);
         }
@@ -116,15 +177,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
             // ====== MODAL ======
 
             // OPEN MODAL
-            if (e.target.closest(".plp-card-modal-trigger__item")) {
+            if (e.target.closest(".product-tile__quick")) {
                 handleModalView("show");
             }
 
             // CLOSE MODAL
-            if (
-                e.target.closest(`.${page_initials}__modal__head__close-cta`) ||
-                (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))
-            ) {
+            if (e.target.closest(`.${page_initials}__modal__close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
                 handleModalView("hide");
             }
         });
@@ -143,11 +201,11 @@ check the pdp pages as the code mostly works on it, and you can also find design
         console.table(TEST_CONFIG);
         createModalLayout();
         clickFunction();
-        handleModalView("show");
+        initSwiper();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`);
     }
 
     try {

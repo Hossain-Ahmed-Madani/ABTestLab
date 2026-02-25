@@ -1,10 +1,98 @@
-.AB-PP27US .ab-swiper .swiper-slide {
+.AB-PP27US .ab-carousel-container {
+  margin-bottom: 14px;
+  margin-left: -13px;
+  margin-right: -13px;
+}
+.AB-PP27US .ab-swiper:not(.swiper-initialized) {
+  display: none;
+}
+.AB-PP27US .ab-swiper .ab-swiper-slide {
   width: 163px !important;
 }
-.AB-PP27US .ab-swiper img {
+.AB-PP27US .ab-swiper-slide img {
   width: 163px;
   height: 222px;
   object-fit: cover; /* or contain, depending on your need */
+}
+.AB-PP27US .ab-product-title {
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0.8px;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+}
+.AB-PP27US .ab-product-price {
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 0.8px;
+  vertical-align: middle;
+  color: rgb(0, 0, 0);
+  margin-bottom: 14px;
+}
+.AB-PP27US .ab-afterpay-container {
+  margin-bottom: 14px;
+}
+.AB-PP27US .ab-color-swatch-container {
+  margin-bottom: 14px;
+}
+.AB-PP27US .ab-product-size-selector-container {
+  margin-bottom: 15px;
+}
+.AB-PP27US .ab-add-to-cart-cta {
+  width: 100%;
+  height: 44px;
+  background-color: rgb(0, 0, 0);
+  margin-bottom: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-PP27US .ab-add-to-cart-cta:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+.AB-PP27US .ab-add-to-cart-cta:disabled .ab-add-to-cart-cta__text--select-size {
+  display: block;
+}
+.AB-PP27US .ab-add-to-cart-cta:disabled .ab-add-to-cart-cta__text--add-to-bag {
+  display: none;
+}
+.AB-PP27US .ab-add-to-cart-cta__text {
+  font-family: "forma_djr_bannerbold", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-size: 16px !important;
+  line-height: 100%;
+  letter-spacing: 0.8px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(255, 255, 255) !important;
+  text-transform: uppercase;
+}
+.AB-PP27US .ab-add-to-cart-cta__text--select-size {
+  display: none;
+}
+.AB-PP27US .ab-add-to-cart-cta__text--add-to-bag {
+  display: block;
+}
+.AB-PP27US a.ab-view-full-details {
+  display: block;
+  font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 0.8px;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: auto;
+  width: max-content;
+  margin: auto;
 }
 
 /**
@@ -33,8 +121,7 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   overflow: hidden;
   display: none;
   justify-content: center;
-  align-items: center;
-  padding: 0 10px;
+  align-items: flex-end;
 }
 .AB-PP27US__modal-backdrop {
   display: none;
@@ -43,107 +130,64 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(0, 0, 0, 0.8);
 }
 .AB-PP27US__modal {
   opacity: 1;
-  box-shadow: 0px 4px 23.9px 0px rgba(0, 0, 0, 0.1607843137);
   width: 100%;
-  min-height: max-content;
-  max-height: auto;
-  background: #ffffff;
+  min-height: 422px;
+  background: rgb(255, 255, 255);
   position: relative;
   z-index: 1;
-  padding: 15px 15px 15px 15px;
+  padding: 16px 13px 20px;
+  border-radius: 13px 13px 0 0;
 }
 .AB-PP27US__modal__head {
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
-  font-family: Roboto, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 132%;
-  text-align: left;
-  color: #547351;
 }
-.AB-PP27US__modal__head__close-cta {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 15px;
-  right: 18px;
-  cursor: pointer;
+.AB-PP27US__modal__close-cta {
+  display: block;
+  width: 56px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgb(229, 229, 229);
 }
-.AB-PP27US__modal__head__close-cta svg {
-  width: 18px;
-  height: 18px;
+.AB-PP27US--v1 .AB-PP27US__modal {
+  min-height: 422px;
 }
-.AB-PP27US__modal__body {
-  width: 100%;
-  font-family: Roboto, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 150%; /* 24px */
-  text-align: left;
-  text-wrap: pretty;
-}
-.AB-PP27US__modal__body .table.table-bordered {
-  width: 100%;
-  margin-bottom: 0;
-}
-.AB-PP27US__modal__body .table.table-bordered tr td {
-  background: none;
+.AB-PP27US--v1 .AB-PP27US__modal__head {
+  margin-bottom: 29px;
 }
 
-@media screen and (min-width: 650px) {
-  .AB-PP27US__modal {
-    width: 643px;
-    padding: 48px 32px 32px 32px;
-    min-height: 298px;
-  }
-  .AB-PP27US__modal__head {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 42.24px;
-    margin-bottom: 32px;
-  }
-  .AB-PP27US__modal__head__close-cta {
-    top: 32px;
-    right: 32px;
-  }
-  .AB-PP27US__modal__head__close-cta svg {
-    width: 24px;
-    height: 24px;
-  }
-  .AB-PP27US__modal__body {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-  }
+.AB-PP27US--v2 .AB-PP27US__modal {
+  min-height: 658px;
 }
-.slide-bottom {
-  -webkit-animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-bottom 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+.AB-PP27US--v2 .AB-PP27US__modal__head {
+  margin-bottom: 32px;
 }
 
-.slide-top {
-  -webkit-animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+.slide-in {
+  -webkit-animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.slide-out {
+  -webkit-animation: slide-out 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-out 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 /**
    * ----------------------------------------
-   * animation slide-bottom
+   * animation slide-in
    * ----------------------------------------
    */
-@-webkit-keyframes slide-bottom {
+@-webkit-keyframes slide-in {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-200px);
-    transform: translateY(-200px);
+    -webkit-transform: translateY(600px);
+    transform: translateY(600px);
   }
   100% {
     opacity: 1;
@@ -151,11 +195,11 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
     transform: translateY(0);
   }
 }
-@keyframes slide-bottom {
+@keyframes slide-in {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-200px);
-    transform: translateY(-200px);
+    -webkit-transform: translateY(600px);
+    transform: translateY(600px);
   }
   100% {
     opacity: 1;
@@ -165,10 +209,10 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
 }
 /**
    * ----------------------------------------
-   * animation slide-top
+   * animation slide-out
    * ----------------------------------------
    */
-@-webkit-keyframes slide-top {
+@-webkit-keyframes slide-out {
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -176,11 +220,11 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   }
   100% {
     opacity: 0;
-    -webkit-transform: translateY(-200px);
-    transform: translateY(-200px);
+    -webkit-transform: translateY(600px);
+    transform: translateY(600px);
   }
 }
-@keyframes slide-top {
+@keyframes slide-out {
   0% {
     opacity: 1;
     -webkit-transform: translateY(0);
@@ -188,34 +232,7 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   }
   100% {
     opacity: 0;
-    -webkit-transform: translateY(-200px);
-    transform: translateY(-200px);
-  }
-}
-/**
-   * ----------------------------------------
-   * animation fade-in
-   * ----------------------------------------
-   */
-@-webkit-keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
+    -webkit-transform: translateY(600px);
+    transform: translateY(600px);
   }
 }
