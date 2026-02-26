@@ -323,13 +323,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 }
 
                 let styles = `
-                    img,
-                    video {
-                        filter: blur(10px);
-                        /* For older browser compatibility */
-                        -webkit-filter: blur(10px);
-                    }
-
+                
                     // FOR TEST
                     .product-tile-size {
                         opacity: 1 !important;
@@ -378,8 +372,21 @@ check the pdp pages as the code mostly works on it, and you can also find design
                         flex-flow: row wrap !important;
                         -webkit-box-pack: center !important;
                         -ms-flex-pack: center !important;
-                        justify-content: center !important;
+                        justify-content: flex-start !important;
                     }
+
+                    .afterpay-logo-link .afterpay-logo.brand-afterpay.logo-cashappafterpay,
+                    .afterpay-logo-link .afterpay-logo  svg {
+                        max-width: 61px !important;
+                        width: 61px !important;
+                        max-height: 15px !important;
+                        height: 15px !important;
+                    }
+
+                    .afterpay-logo-link #logo-link svg {
+                        display: none !important;
+                    }
+
                     .afterpay-paragraph {
                         -webkit-box-align: center !important;
                         -ms-flex-align: center !important;
@@ -434,6 +441,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     }
                     .payment-terms__price {
                         text-transform: none;
+                        font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
+                        font-weight: 500;
+                        font-size: 13px;
+                        line-height: 16px;
+                        letter-spacing: 0.8px;
+                        vertical-align: middle;
+                        color: rgba(0, 0, 0, 1);
+
+
                     }
                     .afterpay-main-text,
                     .payment-amount,

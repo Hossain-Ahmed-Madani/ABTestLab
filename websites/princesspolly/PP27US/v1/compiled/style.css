@@ -69,12 +69,22 @@
   color: rgb(0, 0, 0);
   margin-bottom: 14px;
 }
-.AB-PP27US .afterpay-main-text {
-  display: none !important;
+.AB-PP27US .ab-product-price-container:has(span.product__price-savings-percent:not(:empty)) span[data-shop-currency], .AB-PP27US .ab-product-price-container:has(span.product__price-savings-percent:not(:empty)) span[data-product-price] {
+  color: #e80404;
+}
+.AB-PP27US .ab-product-price-container span:has(s:not(:empty)) {
+  margin: 0 5px;
+}
+.AB-PP27US .ab-product-price-container .product__price-savings-percent {
+  font-size: 13px;
+  line-height: 1;
 }
 .AB-PP27US .ab-afterpay-container {
   display: flex;
   margin-bottom: 14px;
+}
+.AB-PP27US .ab-afterpay-container #afterpay-placement-pdp {
+  margin: 0;
 }
 .AB-PP27US .ab-color-swatch-container {
   margin-bottom: 14px;

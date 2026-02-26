@@ -102,16 +102,30 @@
         vertical-align: middle;
         color: rgba(0, 0, 0, 1);
         margin-bottom: 14px;
+
+        &:has(span.product__price-savings-percent:not(:empty)) {
+            span[data-shop-currency], span[data-product-price] {
+                color: #e80404;
+            }
+        }
+
+        span:has(s:not(:empty)) {
+            margin: 0 5px;
+        }
+
+        .product__price-savings-percent {
+            font-size: 13px;
+            line-height: 1;
+        }
     }
 
-    .afterpay-main-text {
-        display: none !important;
-    }
-    
     .ab-afterpay-container {
         display: flex;
         margin-bottom: 14px;
 
+        #afterpay-placement-pdp {
+            margin: 0;
+        }
     }
 
     .ab-color-swatch-container {
