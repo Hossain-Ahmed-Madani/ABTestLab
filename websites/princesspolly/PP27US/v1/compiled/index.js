@@ -178,15 +178,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
                         mainCopy.removeChild(previousCopy);
                     }
 
-                    const totalPriceText = q('.ab-product-price-container .product__sale-price-row span[data-product-price]').textContent.trim();
-            
+                    const totalPriceText = q(".ab-product-price-container .product__sale-price-row span[data-product-price]").textContent.trim();
+
                     // Extract currency sign (first non-digit, non-dot, non-comma character)
                     const currencyMatch = totalPriceText.match(/[^0-9.,\s]+/);
-                    const currency = currencyMatch ? currencyMatch[0] : '';
-                    
+                    const currency = currencyMatch ? currencyMatch[0] : "";
+
                     // Extract numeric price, parse, and format to two decimals
                     const priceMatch = totalPriceText.match(/[\d,.]+/);
-                    const totalPrice = priceMatch ? Number(priceMatch[0].replace(/,/g, '')).toFixed(2) : '';
+                    const totalPrice = priceMatch ? Number(priceMatch[0].replace(/,/g, "")).toFixed(2) : "";
                     const payments = 4;
                     const payment = (totalPrice / payments).toFixed(2);
                     const money = `${currency}${payment}`;
@@ -531,6 +531,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
     }
 
     function clickFunction() {
+        // Modal Base Events
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
             handleModalView("hide");
         });
@@ -541,26 +542,26 @@ check the pdp pages as the code mostly works on it, and you can also find design
         });
 
         // Product Card Quick Add Click
-        q(".product-tiles").addEventListener("click", (e) => {
-            if (e.target.closest(".product-tile__quick")) {
-                const quickAddButton = e.target.closest(".product-tile__quick");
-                const swatchItem = q(quickAddButton.parentNode, ".swatch--active");
-                const url = getUrlFromColorSwatch(swatchItem);
-                if (!url) return;
-                // Clear Content For Loader
-                qq(
-                    ".ab-product-title, .ab-product-price-container, .ab-afterpay-container, .ab-color-swatch-container .product__swatches, .ab-color-swatch-container .product__value.product__active-color-value",
-                ).forEach((item) => (item.innerHTML = ""));
-                // Update & Show
-                updateModalLayout(url);
-                handleModalView("show");
-            }
+        qq(".product-tiles, .nosto-carousel-tabs__wrap").forEach((item) => {
+            item.addEventListener("click", (e) => {
+                if (e.target.closest(".product-tile__quick, .quick-shop-carousel-quickadd")) {
+                    const quickAddButton = e.target.closest(".product-tile__quick, .quick-shop-carousel-quickadd");
+                    const swatchItem = q(quickAddButton.parentNode, ".swatch--active") || q(quickAddButton.parentNode.parentNode, ".swatch--active");
+                    const url = getUrlFromColorSwatch(swatchItem);
+                    if (!url) return;
+                    // Clear Content For Loader
+                    qq(
+                        ".ab-product-title, .ab-product-price-container, .ab-afterpay-container, .ab-color-swatch-container .product__swatches, .ab-color-swatch-container .product__value.product__active-color-value",
+                    ).forEach((item) => (item.innerHTML = ""));
+                    // Update & Show
+                    updateModalLayout(url);
+                    handleModalView("show");
+                }
+            });
         });
 
         // Modal Content Click
         q(`.${page_initials}__modal__body__content`).addEventListener("click", (e) => {
-            console.log("click detected on modal body....");
-
             // Swatch Items CLick
             const swatchItem = e.target.closest(".ab-color-swatch-container .swatch");
             if (swatchItem) {
@@ -580,8 +581,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 q(".ab-product-title").innerText = swatchAriaLabel;
                 q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchAriaLabel.split(" ").pop();
 
-                // Click Control Swathes & Api Update 
-                qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach(item => item.click());
+                // Click Control Swathes & Api Update
+                qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach((item) => item.click());
                 updateModalLayout(url);
             }
 
