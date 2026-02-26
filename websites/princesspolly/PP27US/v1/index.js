@@ -218,9 +218,19 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     if (previousCopy) {
                         mainCopy.removeChild(previousCopy);
                     }
+
+                    const totalPriceText = q('.ab-product-price-container .product__sale-price-row span[data-product-price]').textContent.trim();
+            
+                    // Extract currency sign (first non-digit, non-dot, non-comma character)
+                    const currencyMatch = totalPriceText.match(/[^0-9.,\s]+/);
+                    const currency = currencyMatch ? currencyMatch[0] : '';
+                    
+                    // Extract numeric price, parse, and format to two decimals
+                    const priceMatch = totalPriceText.match(/[\d,.]+/);
+                    const totalPrice = priceMatch ? Number(priceMatch[0].replace(/,/g, '')).toFixed(2) : '';
                     const payments = 4;
-                    const payment = Math.ceil(64 / payments);
-                    const money = `$${payment}`;
+                    const payment = (totalPrice / payments).toFixed(2);
+                    const money = `${currency}${payment}`;
 
                     const paymentCopy = document.createElement("span");
                     paymentCopy.classList.add("payment-terms__price");
