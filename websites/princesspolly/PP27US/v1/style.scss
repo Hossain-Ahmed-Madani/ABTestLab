@@ -44,7 +44,7 @@
                 min-width: 163px;
                 height: 222px;
                 background-color: rgba(229, 229, 229, 1);
-                animation: pulse 1.2s infinite linear;
+                animation: pulse 0.5s infinite linear;
             }
         }
 
@@ -93,7 +93,7 @@
         margin-bottom: 10px;
     }
 
-    .ab-product-price {
+    .ab-product-price-container {
         font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
         font-weight: 500;
         font-size: 16px;
@@ -104,8 +104,14 @@
         margin-bottom: 14px;
     }
 
+    .afterpay-main-text {
+        display: none !important;
+    }
+    
     .ab-afterpay-container {
+        display: flex;
         margin-bottom: 14px;
+
     }
 
     .ab-color-swatch-container {
@@ -166,8 +172,8 @@
             gap: 5px;
         }
 
-        .product__select-sizes-item {
-            // flex: 0 0 calc(25% - 6px);
+        .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+            display: none;
         }
 
         .product__select-sizes-item.active .product__select-sizes-button {
