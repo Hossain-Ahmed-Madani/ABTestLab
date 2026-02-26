@@ -114,18 +114,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    const thumbnails = [
-        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
-    ];
-
     const initialInnerLayout = /* HTML */ `
         <div class="ab-carousel-container">
             <div class="ab-swiper swiper"></div>
@@ -152,6 +140,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 <span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
             </h2>
             <div class="product__select-sizes" data-product-sizes=""></div>
+            <div class="ab-product-sizes-skeleton-loader">
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+            </div>
         </div>
         <button class="ab-add-to-cart-cta" disabled>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
@@ -491,16 +488,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
         }
     }
 
-    function clearContentsForLoadingState() {
-        qq(`.ab-product-title,
-            .ab-product-price-container,
-            .ab-afterpay-container,
-            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
-    }
-
     async function updateModalLayout(url) {
         destroySwiper();
-        clearContentsForLoadingState();
+        // Clear Size Section Items For Loader
+        qq(`
+            .ab-product-size-selector-container .product__size-value,
+            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
 
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
@@ -585,6 +578,11 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 const swatchItem = q(quickAddButton.parentNode, ".swatch--active");
                 const url = getUrlFromColorSwatch(swatchItem);
                 if (!url) return;
+                // Clear Content For Loader
+                qq(
+                    ".ab-product-title, .ab-product-price-container, .ab-afterpay-container, .ab-color-swatch-container .product__swatches, .ab-color-swatch-container .product__value.product__active-color-value",
+                ).forEach((item) => (item.innerHTML = ""));
+                // Update & Show
                 updateModalLayout(url);
                 handleModalView("show");
             }
@@ -613,8 +611,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 q(".ab-product-title").innerText = swatchAriaLabel;
                 q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchAriaLabel.split(" ").pop();
 
-                // Api Update
-                q(`.product-tile__swatches .swatch[href*='${url}']`).click();
+                // Click Control Swathes & Api Update 
+                qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach(item => item.click())
                 updateModalLayout(url);
             }
 
@@ -634,7 +632,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 console.log("variantId", variantId);
                 q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`).click();
                 handleModalView("hide");
-                console.log("selected variant: ", q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`));
             }
         });
 

@@ -3,8 +3,7 @@
 .AB-PP27US .ab-afterpay-container:empty,
 .AB-PP27US .ab-color-swatch-container:has(.product__swatches:empty)::after,
 .AB-PP27US .ab-color-swatch-container:has(.product__swatches:empty)::before,
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty)::after,
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty)::before {
+.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader__item {
   background-color: rgb(229, 229, 229);
   animation: pulse 0.5s infinite linear;
   border-radius: 2px;
@@ -39,22 +38,8 @@
   width: 28px;
   border-radius: 50%;
 }
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty) {
-  display: flex;
-  flex-wrap: wrap;
-}
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty) .product__label.product__label--size {
-  order: -1;
-  width: 100%;
-}
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty)::before {
-  margin-right: 5px;
-}
-.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty)::after, .AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty)::before {
-  content: "";
-  display: block;
-  height: 30px;
-  width: 83px;
+.AB-PP27US .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader {
+  display: grid;
 }
 .AB-PP27US .ab-carousel-container {
   margin-bottom: 14px;
@@ -178,6 +163,14 @@
 }
 .AB-PP27US .ab-product-size-selector-container {
   margin-bottom: 15px;
+}
+.AB-PP27US .ab-product-size-selector-container .ab-product-sizes-skeleton-loader {
+  display: none;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.AB-PP27US .ab-product-size-selector-container .ab-product-sizes-skeleton-loader__item {
+  height: 30px;
 }
 .AB-PP27US .ab-product-size-selector-container .product__label.product__label--size {
   font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;

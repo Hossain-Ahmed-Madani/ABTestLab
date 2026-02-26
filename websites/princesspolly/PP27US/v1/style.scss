@@ -24,12 +24,10 @@
 .AB-PP27US {
     .ab-product-title:empty,
     .ab-product-price-container:empty,
-    .ab-afterpay-container:empty ,
+    .ab-afterpay-container:empty,
     .ab-color-swatch-container:has(.product__swatches:empty)::after,
     .ab-color-swatch-container:has(.product__swatches:empty)::before,
-    .ab-product-size-selector-container:has(.product__select-sizes:empty)::after,
-    .ab-product-size-selector-container:has(.product__select-sizes:empty)::before
-    {
+    .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader__item {
         background-color: rgba(229, 229, 229, 1);
         animation: pulse 0.5s infinite linear;
         border-radius: 2px;
@@ -72,29 +70,10 @@
             border-radius: 50%;
         }
     }
-    
-    .ab-product-size-selector-container:has(.product__select-sizes:empty) {
-        display: flex;
-        flex-wrap: wrap;
 
-        .product__label.product__label--size {
-            order: -1;
-            width: 100%;
-        }
-
-        &::before {
-            margin-right: 5px;
-        }
-
-        &::after,
-        &::before {
-            content: "";
-            display: block;
-            height: 30px;
-            width: 83px;
-        }
+    .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader {
+        display: grid;
     }
-
 
     // Main Designs
     .ab-carousel-container {
@@ -245,6 +224,18 @@
     .ab-product-size-selector-container {
         margin-bottom: 15px;
 
+        // Skeleton Loader
+        .ab-product-sizes-skeleton-loader {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+
+            &__item {
+                height: 30px;
+            }
+        }
+
+        // Main
         .product__label.product__label--size {
             font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
             font-weight: 500;

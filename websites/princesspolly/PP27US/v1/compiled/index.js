@@ -99,6 +99,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 <span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
             </h2>
             <div class="product__select-sizes" data-product-sizes=""></div>
+            <div class="ab-product-sizes-skeleton-loader">
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+                <div class="ab-product-sizes-skeleton-loader__item"></div>
+            </div>
         </div>
         <button class="ab-add-to-cart-cta" disabled>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
@@ -438,16 +447,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
         }
     }
 
-    function clearContentsForLoadingState() {
-        qq(`.ab-product-title,
-            .ab-product-price-container,
-            .ab-afterpay-container,
-            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
-    }
-
     async function updateModalLayout(url) {
         destroySwiper();
-        clearContentsForLoadingState();
+        // Clear Size Section Items For Loader
+        qq(`
+            .ab-product-size-selector-container .product__size-value,
+            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
 
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
@@ -532,6 +537,11 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 const swatchItem = q(quickAddButton.parentNode, ".swatch--active");
                 const url = getUrlFromColorSwatch(swatchItem);
                 if (!url) return;
+                // Clear Content For Loader
+                qq(
+                    ".ab-product-title, .ab-product-price-container, .ab-afterpay-container, .ab-color-swatch-container .product__swatches, .ab-color-swatch-container .product__value.product__active-color-value",
+                ).forEach((item) => (item.innerHTML = ""));
+                // Update & Show
                 updateModalLayout(url);
                 handleModalView("show");
             }
@@ -560,8 +570,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 q(".ab-product-title").innerText = swatchAriaLabel;
                 q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchAriaLabel.split(" ").pop();
 
-                // Api Update
-                q(`.product-tile__swatches .swatch[href*='${url}']`).click();
+                // Click Control Swathes & Api Update 
+                qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach(item => item.click());
                 updateModalLayout(url);
             }
 
@@ -581,7 +591,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 console.log("variantId", variantId);
                 q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`).click();
                 handleModalView("hide");
-                console.log("selected variant: ", q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`));
             }
         });
 
