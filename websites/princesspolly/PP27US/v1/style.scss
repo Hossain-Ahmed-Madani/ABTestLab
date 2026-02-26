@@ -22,11 +22,87 @@
 // --font-primary: "forma_djr_bannerregular", var(--font-body);
 
 .AB-PP27US {
+    .ab-product-title:empty,
+    .ab-product-price-container:empty,
+    .ab-afterpay-container:empty ,
+    .ab-color-swatch-container:has(.product__swatches:empty)::after,
+    .ab-color-swatch-container:has(.product__swatches:empty)::before,
+    .ab-product-size-selector-container:has(.product__select-sizes:empty)::after,
+    .ab-product-size-selector-container:has(.product__select-sizes:empty)::before
+    {
+        background-color: rgba(229, 229, 229, 1);
+        animation: pulse 0.5s infinite linear;
+        border-radius: 2px;
+    }
+
+    .ab-product-title:empty {
+        height: 20px;
+        width: 60%;
+    }
+
+    .ab-product-price-container:empty {
+        height: 21px;
+        width: 30%;
+    }
+
+    .ab-afterpay-container:empty {
+        height: 20px;
+        width: 50%;
+    }
+
+    .ab-color-swatch-container:has(.product__swatches:empty) {
+        display: flex;
+        flex-wrap: wrap;
+
+        .product__active-color {
+            order: -1;
+            width: 100%;
+        }
+
+        &::before {
+            margin-right: 15px;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            display: block;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+        }
+    }
+    
+    .ab-product-size-selector-container:has(.product__select-sizes:empty) {
+        display: flex;
+        flex-wrap: wrap;
+
+        .product__label.product__label--size {
+            order: -1;
+            width: 100%;
+        }
+
+        &::before {
+            margin-right: 5px;
+        }
+
+        &::after,
+        &::before {
+            content: "";
+            display: block;
+            height: 30px;
+            width: 83px;
+        }
+    }
+
+
+    // Main Designs
     .ab-carousel-container {
         margin-bottom: 14px;
         margin-left: -13px;
         margin-right: -13px;
 
+        // Carousel Skeleton Loader
         .ab-swiper.swiper-initialized ~ .ab-carousel-skeleton-loader {
             display: none;
         }
@@ -52,6 +128,7 @@
             display: none;
         }
 
+        //  Swiper Design
         .ab-swiper .ab-swiper-slide {
             width: 163px !important;
         }
@@ -104,7 +181,8 @@
         margin-bottom: 14px;
 
         &:has(span.product__price-savings-percent:not(:empty)) {
-            span[data-shop-currency], span[data-product-price] {
+            span[data-shop-currency],
+            span[data-product-price] {
                 color: #e80404;
             }
         }

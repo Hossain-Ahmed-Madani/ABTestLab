@@ -73,131 +73,32 @@ check the pdp pages as the code mostly works on it, and you can also find design
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    const thumbnails = [
-        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
-        "https://us.princesspolly.com/cdn/shop/files/0-modelinfo-alexa-us2_5fe10b12-4ca3-4ed0-bb04-2e4e5bdba303.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/1-modelinfo-alexa-us2_3d87cd7c-82c7-479c-8cc7-77d576b6379d.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/2-modelinfo-alexa-us2_e6c3cebd-5a05-42fc-81c0-789ff8ce2069.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/3-modelinfo-alexa-us2_6819f923-b09c-4d2f-9ba3-834d2e191ce2.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/4-modelinfo-alexa-us2_eb13542a-3c33-4563-bdfe-4c79397e14c0.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/5-modelinfo-alexa-us2_4ea80cae-fdb2-4d42-87f4-e167b748dce0.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/6-modelinfo-alexa-us2_014dd5dd-18c6-4769-885d-56c00fc0e689.jpg?v=1720144796&width=244",
-        // "https://us.princesspolly.com/cdn/shop/files/7-modelinfo-alexa-us2_8966a00a-a328-4b7d-afc5-78f804b994b1.jpg?v=1720144792&width=244",
-    ];
-
-    const modalContent = /* HTML */ `
+    const initialInnerLayout = /* HTML */ `
         <div class="ab-carousel-container">
-            <div class="ab-swiper swiper">
-                <div class="ab-swiper-wrapper swiper-wrapper">
-                    ${thumbnails
-                        .map(
-                            (thumbnail) => /* HTML */ `
-                                <div class="ab-swiper-slide swiper-slide">
-                                    <img src="${thumbnail}" alt="" />
-                                </div>
-                            `,
-                        )
-                        .join("")}
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
+            <div class="ab-swiper swiper"></div>
             <div class="ab-carousel-skeleton-loader">
                 <div class="ab-carousel-skeleton-loader__item"></div>
                 <div class="ab-carousel-skeleton-loader__item"></div>
                 <div class="ab-carousel-skeleton-loader__item"></div>
             </div>
         </div>
-        <div class="ab-product-title">Yumiko Romper Black</div>
-        <div class="ab-product-price-container">
-            <div class="product__sale-price-row">
-                <span data-shop-currency="">USD</span>
-                <span data-product-price="" data-currency-conversion="3500">$35.00</span>
-                <span><s data-compare-price="">$65.00</s> </span>
-                <span class="product__price-savings-percent">46% off</span>
-            </div>
-        </div>
-        <div class="ab-afterpay-container">
-            <afterpay-placement
-                id="afterpay-placement-pdp"
-                data-locale="en_US"
-                data-currency="USD"
-                data-amount="65"
-                data-currency-conversion="65.00"
-                data-amount-attribute="amount"
-                data-currency-attribute="currency"
-                data-logo-type="lockup"
-                data-size="sm"
-                data-show-interest-free="false"
-            ></afterpay-placement>
-        </div>
+        <div class="ab-product-title"></div>
+        <div class="ab-product-price-container"></div>
+        <div class="ab-afterpay-container"></div>
         <div class="ab-color-swatch-container">
             <h2 class="product__active-color">
                 <span class="product__label product__active-color-label">Color:</span>
-                <span class="product__value product__active-color-value">Slate Grey</span>
+                <span class="product__value product__active-color-value"></span>
             </h2>
-            <div class="product__swatches" data-colors="">
-                <a
-                    href="/products/yumiko-romper-black"
-                    class="swatch swatch--active"
-                    data-product-variant-id=""
-                    data-product-variant-color="#5b5b5b"
-                    style="background-color: #000000;"
-                    aria-label="Yumiko Romper Black"
-                >
-                </a>
-                <a
-                    href="/products/yumiko-romper-cream-1"
-                    class="swatch"
-                    data-product-variant-id=""
-                    data-product-variant-color="#5b5b5b"
-                    style="background-color: #ffffff;"
-                    aria-label="Yumiko Romper Brown Stripe"
-                >
-                </a>
-            </div>
+            <div class="product__swatches" data-colors=""></div>
         </div>
         <div class="ab-product-size-selector-container">
             <h2 class="product__label product__label--size">
                 <span class="product__active-size-label">Size:</span>
-                <span class="product__size-value" data-product-size-value="">US 0</span><span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
+                <span class="product__size-value" data-product-size-value=""></span>
+                <span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
             </h2>
-            <div class="product__select-sizes" data-product-sizes="">
-                <ul class="product__select-sizes-list">
-                    <li class="product__select-sizes-item active">
-                        <button
-                            type="button"
-                            class="product__select-sizes-button"
-                            data-size-label="US 0"
-                            data-size-variant-id="40812272975956"
-                            data-size-value="US 0"
-                            data-product-handle="yumiko-romper-slate-grey"
-                            data-inventory-label=""
-                        >
-                            US 0
-                        </button>
-                    </li>
-                    <li class="product__select-sizes-item">
-                        <button
-                            type="button"
-                            class="product__select-sizes-button"
-                            data-size-label="US 2"
-                            data-size-variant-id="40812273008724"
-                            data-size-value="US 2"
-                            data-product-handle="yumiko-romper-slate-grey"
-                            data-inventory-label=""
-                        >
-                            US 2
-                        </button>
-                    </li>
-                </ul>
-            </div>
+            <div class="product__select-sizes" data-product-sizes=""></div>
         </div>
         <button class="ab-add-to-cart-cta" disabled>
             <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
@@ -215,7 +116,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
                         <div class="${page_initials}__modal__close-cta"></div>
                     </div>
                     <div class="${page_initials}__modal__body">
-                        <div class="${page_initials}__modal__body__content">${modalContent}</div>
+                        <div class="${page_initials}__modal__body__content">${initialInnerLayout}</div>
                     </div>
                 </div>
             </div>
@@ -537,19 +438,26 @@ check the pdp pages as the code mostly works on it, and you can also find design
         }
     }
 
+    function clearContentsForLoadingState() {
+        qq(`.ab-product-title,
+            .ab-product-price-container,
+            .ab-afterpay-container,
+            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
+    }
+
     async function updateModalLayout(url) {
         destroySwiper();
+        clearContentsForLoadingState();
+
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
 
         q(".ab-product-title").innerHTML = q(dom, ".product__title").innerHTML;
         q(".ab-product-price-container").innerHTML = q(dom, ".product__sale-price-row").outerHTML;
-        q(".ab-color-swatch-container").innerHTML = qq(dom, ".product__active-color, .product__swatches .product__swatches")
+        q(".ab-color-swatch-container").innerHTML = qq(dom, ".product__active-color, .product__swatches:has(> .swatch)")
             .map((el) => el.outerHTML)
             .join("");
-        q(".ab-product-size-selector-container").innerHTML = qq(dom, "h2.product__label.product__label--size, .product__select-sizes")
-            .map((el) => el.outerHTML)
-            .join("");
+        q(".ab-product-size-selector-container .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
         q(".ab-add-to-cart-cta").setAttribute("disabled", "");
         q("a.ab-view-full-details").setAttribute("href", url);
 
@@ -639,13 +547,21 @@ check the pdp pages as the code mostly works on it, and you can also find design
                 e.preventDefault();
                 if (swatchItem.classList.contains("swatch--active")) return;
 
+                const swatchAriaLabel = swatchItem.getAttribute("aria-label");
+                const url = getUrlFromColorSwatch(swatchItem);
+
                 qq(".ab-color-swatch-container .swatch").forEach((item) => item.classList.remove("swatch--active"));
                 swatchItem.classList.add("swatch--active");
-                q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchItem.getAttribute("aria-label").split(" ").pop();
+
+                // Static Update
+                q(".ab-product-size-selector-container .product__size-value").innerHTML = "";
                 qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
                 q(".ab-add-to-cart-cta").setAttribute("disabled", "");
+                q(".ab-product-title").innerText = swatchAriaLabel;
+                q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchAriaLabel.split(" ").pop();
 
-                const url = getUrlFromColorSwatch(swatchItem);
+                // Api Update
+                q(`.product-tile__swatches .swatch[href*='${url}']`).click();
                 updateModalLayout(url);
             }
 
@@ -660,7 +576,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
             const addToCartCta = e.target.closest("button.ab-add-to-cart-cta:not(:disabled)");
             if (addToCartCta) {
-                console.log("Add to cart");
+                const selectedSize = q(".ab-product-size-selector-container .product__select-sizes-item.active button");
+                const variantId = selectedSize.getAttribute("data-size-variant-id");
+                console.log("variantId", variantId);
+                q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`).click();
+                handleModalView("hide");
+                console.log("selected variant: ", q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`));
             }
         });
 
@@ -678,10 +599,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         console.table(TEST_CONFIG);
         createModalLayout();
         clickFunction();
-
-        // initSwiper();
-        // handleModalView("show");
-        // applyAfterPayStyles();
     }
 
     function checkForItems() {
