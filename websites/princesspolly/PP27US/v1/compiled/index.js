@@ -215,7 +215,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
                         <div class="${page_initials}__modal__close-cta"></div>
                     </div>
                     <div class="${page_initials}__modal__body">
-                        <div class="${page_initials}__modal__body__text-content">${modalContent}</div>
+                        <div class="${page_initials}__modal__body__content">${modalContent}</div>
                     </div>
                 </div>
             </div>
@@ -249,7 +249,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
     }
 
     function applyAfterPayStyles() {
-        const afterpay = document.querySelector("#afterpay-placement-pdp");
+        const afterpay = q("#afterpay-placement-pdp");
         if (afterpay !== null) {
             const root = afterpay.shadowRoot;
             if (root !== null) {
@@ -258,9 +258,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
                     logo.setAttribute("width", 80);
                     logo.setAttribute("height", 14);
                 }
-                const mainCopy = root.querySelector(".afterpay-paragraph");
-                const promo = document.querySelector("[data-promo-id]");
-                const promoActive = root.querySelector(".afterpay-promo");
+                const mainCopy = q(root, ".afterpay-paragraph");
+                const promo = q("[data-promo-id]");
+                const promoActive = q(root, ".afterpay-promo");
                 if (mainCopy) {
                     /* Remove markup from this running before */
                     const previousCopy = mainCopy.querySelector(".payment-terms__price");
@@ -541,7 +541,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         destroySwiper();
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
-        console.log("RESPONSE:", q(dom, "form[action='/cart/add']"));
 
         q(".ab-product-title").innerHTML = q(dom, ".product__title").innerHTML;
         q(".ab-product-price-container").innerHTML = q(dom, ".product__sale-price-row").outerHTML;
@@ -551,10 +550,10 @@ check the pdp pages as the code mostly works on it, and you can also find design
         q(".ab-product-size-selector-container").innerHTML = qq(dom, "h2.product__label.product__label--size, .product__select-sizes")
             .map((el) => el.outerHTML)
             .join("");
+        q(".ab-add-to-cart-cta").setAttribute("disabled", "");
         q("a.ab-view-full-details").setAttribute("href", url);
 
         // AfterPay
-        console.log("Test", q(dom, "#afterpay-placement-pdp"));
         q(".ab-afterpay-container").innerHTML = q(dom, "#afterpay-placement-pdp").outerHTML;
         applyAfterPayStyles();
 
@@ -603,6 +602,11 @@ check the pdp pages as the code mostly works on it, and you can also find design
         }
     }
 
+    function getUrlFromColorSwatch(item) {
+        if (!item) return;
+        return item.getAttribute("href") ?? "";
+    }
+
     function clickFunction() {
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
             handleModalView("hide");
@@ -613,13 +617,50 @@ check the pdp pages as the code mostly works on it, and you can also find design
             handleModalView("hide");
         });
 
+        // Product Card Quick Add Click
         q(".product-tiles").addEventListener("click", (e) => {
             if (e.target.closest(".product-tile__quick")) {
                 const quickAddButton = e.target.closest(".product-tile__quick");
-                const url = q(quickAddButton.parentNode, ".swatch--active").getAttribute("href") ?? "";
+                const swatchItem = q(quickAddButton.parentNode, ".swatch--active");
+                const url = getUrlFromColorSwatch(swatchItem);
                 if (!url) return;
                 updateModalLayout(url);
                 handleModalView("show");
+            }
+        });
+
+        // Modal Content Click
+        q(`.${page_initials}__modal__body__content`).addEventListener("click", (e) => {
+            console.log("click detected on modal body....");
+
+            // Swatch Items CLick
+            const swatchItem = e.target.closest(".ab-color-swatch-container .swatch");
+            if (swatchItem) {
+                e.preventDefault();
+                if (swatchItem.classList.contains("swatch--active")) return;
+
+                qq(".ab-color-swatch-container .swatch").forEach((item) => item.classList.remove("swatch--active"));
+                swatchItem.classList.add("swatch--active");
+                q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchItem.getAttribute("aria-label").split(" ").pop();
+                qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
+                q(".ab-add-to-cart-cta").setAttribute("disabled", "");
+
+                const url = getUrlFromColorSwatch(swatchItem);
+                updateModalLayout(url);
+            }
+
+            // Product Size Click
+            const productSizeItem = e.target.closest(".ab-product-size-selector-container .product__select-sizes-item:not(.active)");
+            if (productSizeItem) {
+                q(".ab-product-size-selector-container .product__size-value").innerText = productSizeItem.textContent.trim();
+                qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
+                productSizeItem.classList.add("active");
+                q(".ab-add-to-cart-cta").removeAttribute("disabled");
+            }
+
+            const addToCartCta = e.target.closest("button.ab-add-to-cart-cta:not(:disabled)");
+            if (addToCartCta) {
+                console.log("Add to cart");
             }
         });
 
@@ -637,10 +678,10 @@ check the pdp pages as the code mostly works on it, and you can also find design
         console.table(TEST_CONFIG);
         createModalLayout();
         clickFunction();
-        initSwiper();
 
-        handleModalView("show");
-        applyAfterPayStyles();
+        // initSwiper();
+        // handleModalView("show");
+        // applyAfterPayStyles();
     }
 
     function checkForItems() {
