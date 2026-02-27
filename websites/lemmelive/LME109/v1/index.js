@@ -2,7 +2,7 @@
 
 Const Prev Test: https://marketer.monetate.net/control/preview/12706/018WRTSZ25O4DXFUBYLSA6EHVFDZPIGN/100-landing-page-glp-optimize-buy-box
 
-Figma:https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
+Figma: https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
 Test container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2089466
 
 Target URL: https://lemmelive.com/pages/lemme-glp-1-daily
@@ -42,7 +42,7 @@ V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1
         test_name: "LME109: [LANDING PAGE - GLP] Add Nutrition Label & Benefits (2) SET UP TEST",
         page_initials: "AB-LME109",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -60,8 +60,7 @@ V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
-
+    
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -597,7 +596,6 @@ V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.log(TEST_CONFIG);
         createLayout();
         clickFunction();
     }

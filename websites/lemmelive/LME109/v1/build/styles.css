@@ -49,8 +49,16 @@
 }
 .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__description p {
   margin: 0;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+  font-family:
+    Mier A,
+    helvetica,
+    arial,
+    sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
 }
 .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__benefits {
   margin-top: 1rem;
@@ -247,6 +255,12 @@
   }
   .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__faq__modal__content {
     padding: 1.5rem;
+  }
+  .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__description p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0px;
   }
 }
 @media print, screen and (width <= 40em) {
@@ -590,6 +604,12 @@
 .AB-LME109 .product-supplement__ingredients {
   margin-bottom: 24px;
 }
+.AB-LME109 .product-supplement__content th span,
+.AB-LME109 .product-supplement__content td span {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  display: block;
+}
 @media screen and (min-width: 1025px) {
   .AB-LME109 .product-supplement__instruction {
     font-size: 3.6rem;
@@ -746,5 +766,16 @@
     line-height: 100%;
     letter-spacing: 0px;
     text-transform: capitalize;
+  }
+}
+@media screen and (min-width: 624px) and (max-width: 991px) {
+  .AB-LME109 #buybox_section > div > div > h2 {
+    font-family: Recoleta, helvetica, arial, sans-serif;
+    font-size: 7.9vw;
+    line-height: 7.9vw;
+    font-weight: 400;
+    margin: 0 0 15px;
+    padding: 0;
+    text-align: center;
   }
 }

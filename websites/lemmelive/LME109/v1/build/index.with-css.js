@@ -55,8 +55,16 @@
 }
 .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__description p {
   margin: 0;
-  font-size: 1.6rem;
-  line-height: 2.4rem;
+  font-family:
+    Mier A,
+    helvetica,
+    arial,
+    sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
 }
 .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__benefits {
   margin-top: 1rem;
@@ -253,6 +261,12 @@
   }
   .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__faq__modal__content {
     padding: 1.5rem;
+  }
+  .AB-LME109 .mod_product_details_tabs_IFRVdq_tabs__description p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: 0px;
   }
 }
 @media print, screen and (width <= 40em) {
@@ -596,6 +610,12 @@
 .AB-LME109 .product-supplement__ingredients {
   margin-bottom: 24px;
 }
+.AB-LME109 .product-supplement__content th span,
+.AB-LME109 .product-supplement__content td span {
+  font-size: 1.4rem;
+  line-height: 1.6rem;
+  display: block;
+}
 @media screen and (min-width: 1025px) {
   .AB-LME109 .product-supplement__instruction {
     font-size: 3.6rem;
@@ -754,6 +774,17 @@
     text-transform: capitalize;
   }
 }
+@media screen and (min-width: 624px) and (max-width: 991px) {
+  .AB-LME109 #buybox_section > div > div > h2 {
+    font-family: Recoleta, helvetica, arial, sans-serif;
+    font-size: 7.9vw;
+    line-height: 7.9vw;
+    font-weight: 400;
+    margin: 0 0 15px;
+    padding: 0;
+    text-align: center;
+  }
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -764,20 +795,23 @@
 })();
 /* 
 
-Figma:https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
-Test container: https://app.convert.com/accounts/10042082/projects/10042535/experiences/1004186158/summary
+Const Prev Test: https://marketer.monetate.net/control/preview/12706/018WRTSZ25O4DXFUBYLSA6EHVFDZPIGN/100-landing-page-glp-optimize-buy-box
+
+Figma: https://www.figma.com/design/62c1u91EMDKKGfeEAKvF8A/LME109---LANDING-PAGE---GLP--Add-Nutrition-Label---Benefits?node-id=2001-2
+Test container: https://marketer.monetate.net/control/a-2087c1e5/p/lemmelive.com/experience/2089466
 
 Target URL: https://lemmelive.com/pages/lemme-glp-1-daily
 PDP: https://lemmelive.com/products/lemme-glp-1
 
 Preview url:
-Control:
-V1:
+Control: https://marketer.monetate.net/control/preview/12706/UXA1DT54BNKWMPSAA6H2JNIWXQMIRYDW/109-landing-page-glp-add-nutrition-label-benefits
+V1: https://marketer.monetate.net/control/preview/12706/K4XESS130A7Y4VLQPUVC4ZQK9RRHJ8AI/109-landing-page-glp-add-nutrition-label-benefits
+V2: https://marketer.monetate.net/control/preview/12706/9TEY84AQJDTBM8I43O0R01KW8CZC4470/109-landing-page-glp-add-nutrition-label-benefits
 
 Preview url (Including All Experiences):
-Control:
-V1:
-
+Control: https://marketer.monetate.net/control/preview/12706/NF58TFVDWHI9ACTWT42ASMXOH5HEVEJ3/109-landing-page-glp-add-nutrition-label-benefits
+V1: https://marketer.monetate.net/control/preview/12706/EXGOZOSD8CHBEC7A26WRZYD0G0BXWU6V/109-landing-page-glp-add-nutrition-label-benefits
+V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1FYK9KJ6Y/109-landing-page-glp-add-nutrition-label-benefits
 
 */
 
@@ -797,11 +831,6 @@ V1:
   logInfo("fired");
 
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "Magic Spoon",
-    site_url: "https://lemmelive.com",
-    test_name:
-      "LME109: [LANDING PAGE - GLP] Add Nutrition Label & Benefits (2) SET UP TEST",
     page_initials: "AB-LME109",
     test_variation: 1,
     test_version: 0.0001,
@@ -824,17 +853,12 @@ V1:
         fill="black"
       ></path>
     </svg>`,
-    review_star_url:
-      "https://cdn-3.convertexperiments.com/uf/10042082/10042535/group-1_699c9eea23c11.png",
-    banner_mobile_url:
-      "https://cdn-3.convertexperiments.com/uf/10042082/10042535/mobile_699ca133b599c.png",
-    banner_desktop_url:
-      "https://cdn-3.convertexperiments.com/uf/10042082/10042535/desktop_699ca145aad7f.png",
+    review_star_url: "https://sb.monetate.net/img/1/1597/6022393.png",
+    banner_mobile_url: "https://sb.monetate.net/img/1/1597/6022392.png",
+    banner_desktop_url: "https://sb.monetate.net/img/1/1597/6022394.png",
   };
 
   function fireGA4Event(eventName, eventLabel = "") {
-    console.log("fireGA4Event", eventName, eventLabel);
-
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
       event: "GA4event",
@@ -1519,7 +1543,6 @@ V1:
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.log(TEST_CONFIG);
     createLayout();
     clickFunction();
   }
