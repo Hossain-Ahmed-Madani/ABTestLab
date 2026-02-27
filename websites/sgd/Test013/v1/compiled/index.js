@@ -1,3 +1,22 @@
+/* 
+Test doc: https://docs.google.com/document/d/1aRY66TBUeXHBDx5imd0b7Z3HhILM3nqkuWvxBML48HY/edit?tab=t.0
+Figma: https://www.figma.com/design/RWs9kC2tKwUdp3OEJcadw9/Test013---Landingpages-Kurse---Optimierung-auf-Anmeldungen-upper-funnel?node-id=50-1031&t=reOCha0nPcNYTOyf-1
+
+Target Pages:
+https://www.sgd.de/lp/abitur.html
+https://www.sgd.de/lp/gepr-fachwirtin-im-gesundheits-und-sozialwesen-ihk.html
+https://www.sgd.de/lp/gepr-wirtschaftsfachwirtin-ihk.html
+https://www.sgd.de/lp/realschulabschluss.html
+https://www.sgd.de/lp/ernaehrungsberaterin.html
+https://www.sgd.de/lp/tierpsychologie-tierhaltung-tierbetreuung-tierverhaltenstherapie.html
+https://www.sgd.de/lp/psychotherapie-hp.html
+https://www.sgd.de/lp/gepr-fitnesscoach-sgd.html
+https://www.sgd.de/lp/gepr-buchhalterin-sgd.html
+https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
+
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "Netzproduzenten",
