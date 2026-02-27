@@ -34,10 +34,6 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "Texas Tax Protest",
-        site_url: "https://www.texastaxprotest.com",
-        test_name: "TTP25: [HOME] Add Video - (2) SET UP TEST",
         page_initials: "AB-TTP25",
         test_variation: 1,
         test_version: 0.0003,
@@ -69,8 +65,6 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
     };
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
-
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -344,8 +338,6 @@ V2: https://marketer.monetate.net/control/preview/12476/18JCO1AWYT3KZE27SG0LPGF1
 
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             window[page_initials] = true;
-
-            console.table(TEST_CONFIG);
 
             fireGA4Event("TTP25_ViewHomepage");
             createLayout();

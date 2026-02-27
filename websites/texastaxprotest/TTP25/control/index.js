@@ -33,7 +33,6 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
 
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
@@ -135,7 +134,6 @@ Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprote
             await waitForElementAsync(checkForItems);
 
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-            console.table(TEST_CONFIG);
 
             fireGA4Event("TTP25_ViewHomepage")
             q(".wistia-video").addEventListener("click", (e) => {
