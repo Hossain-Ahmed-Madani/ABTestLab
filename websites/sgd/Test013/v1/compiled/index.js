@@ -141,6 +141,10 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         return document.querySelector(s);
     }
 
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
@@ -168,8 +172,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
         const currentPath = window.location.pathname;
         const infoList = DATA.course_info[currentPath.replace(".html", "")];
-
-        console.log("InfoList:", q("div.my-3:has(> .badge.badge-.badge-type-action)"), infoList, currentPath.replace(".html", ""));
 
         if (infoList) {
             q("div.my-3:has(> .badge.badge-.badge-type-action)").insertAdjacentHTML(
@@ -200,6 +202,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             );
         }
 
+        // Image Desktop
         q("#course_registration > div.row.mb-2").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
@@ -210,13 +213,22 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 </div>
             `,
         );
+
+        const targetNode = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");        
+        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
+        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container) + .container-md:has(>hr)"));
+        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
+        qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach(item => item.classList.add("ab-hidden"));
+        
     }
 
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".header-wrapper.container-md") &&
-            q("div.my-3:has(> .badge.badge-.badge-type-action)")
+            q("div.my-3:has(> .badge.badge-.badge-type-action)") &&
+            q(".container-md:has(> .frame-type-easy_image_slider)") &&
+            qq(".container-md:has(>.grid-container), .container-md:has(>.grid-container) + .container-md:has(>hr), .container-md:has(>.frame-type-contact_support)").length === 3
         );
     }
 

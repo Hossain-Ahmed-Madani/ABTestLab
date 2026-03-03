@@ -1,3 +1,4 @@
+.AB-TEST013 .ab-hidden,
 .AB-TEST013 .header-phone.d-none.d-lg-flex,
 .AB-TEST013 .page-header .header-elements .header-wrapper .header-button-wrapper,
 .AB-TEST013 .page-header .header-elements .header-banner,
@@ -5,7 +6,11 @@
 .AB-TEST013 .page-header .header-elements .header-buttons,
 .AB-TEST013 .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0,
 .AB-TEST013 div.my-3:has(> .badge.badge-.badge-type-action) ~ span:has(ul),
-.AB-TEST013 .header-navigation-wrapper {
+.AB-TEST013 .header-navigation-wrapper,
+.AB-TEST013 .container-md:has(> div.h2),
+.AB-TEST013 .container-md ~ .frame-type-teaser_course_registration,
+.AB-TEST013 .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
+.AB-TEST013 .container-md:has(> #course_accordion) {
   display: none !important;
 }
 .AB-TEST013 .header-wrapper.container-md {
@@ -18,6 +23,7 @@
 }
 .AB-TEST013 .page-content {
   padding-top: 0;
+  padding-bottom: 0;
 }
 .AB-TEST013 main.page-content {
   margin-top: 0px !important;
@@ -147,6 +153,12 @@
   }
   .AB-TEST013 .page-header.pinned .header-elements {
     box-shadow: none;
+  }
+  .AB-TEST013 .container-md:has(> .grid-container) {
+    margin-bottom: 72px;
+  }
+  .AB-TEST013 .container-md:has(> .grid-container) + .container-md:has(> hr) {
+    display: none;
   }
 }
 @media screen and (min-width: 768px) {

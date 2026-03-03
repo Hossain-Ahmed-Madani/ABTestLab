@@ -13,16 +13,19 @@
 }
 
 .AB-TEST013 {
+    .ab-hidden,
     .header-phone.d-none.d-lg-flex,
     .page-header .header-elements .header-wrapper .header-button-wrapper,
     .page-header .header-elements .header-banner,
     .page-header .header-elements .header-wrapper .header-grid-right,
     .page-header .header-elements .header-buttons,
-    // div.my-3:has(> .badge.badge-.badge-type-action),
-    // .header-wrapper.container-md,
     .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0,
     div.my-3:has(> .badge.badge-.badge-type-action) ~ span:has(ul),
-    .header-navigation-wrapper {
+    .header-navigation-wrapper,
+    .container-md:has(> div.h2),
+    .container-md ~ .frame-type-teaser_course_registration,
+    .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
+    .container-md:has(> #course_accordion) {
         display: none !important;
     }
 
@@ -38,6 +41,7 @@
 
     .page-content {
         padding-top: 0;
+        padding-bottom: 0;
     }
 
     main.page-content {
@@ -177,10 +181,6 @@
         color: rgba(255, 255, 255, 1);
     }
 
-    #course_registration > div.row.mb-2 {
-        //
-    }
-
     .ab-course-info-box-btn-desktop-mobile {
         margin-bottom: 25px;
     }
@@ -197,6 +197,14 @@
 
         .page-header.pinned .header-elements {
             box-shadow: none;
+        }
+
+        .container-md:has(> .grid-container) {
+            margin-bottom: 72px;
+        }
+
+        .container-md:has(> .grid-container) + .container-md:has(> hr) {
+            display: none;
         }
     }
 
