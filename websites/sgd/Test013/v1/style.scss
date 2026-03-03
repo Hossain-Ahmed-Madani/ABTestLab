@@ -25,7 +25,9 @@
     .container-md:has(> div.h2),
     .container-md ~ .frame-type-teaser_course_registration,
     .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
-    .container-md:has(> #course_accordion) {
+    .container-md:has(> #course_accordion) ,
+    .container-md.mb-2.tab-393-none,
+    .container-md:has(> .tab-393-none) {
         display: none !important;
     }
 
@@ -338,7 +340,7 @@
             }
 
             .ab-faq-accordion-item__body {
-                max-height: 750px;
+                max-height: 1600px;
             }
 
             .ab-faq-accordion-item__collapsed-text {
@@ -355,7 +357,6 @@
             gap: 12px;
             justify-content: flex-start;
             align-items: center;
-            cursor: pointer;
 
             text-align: left;
             font-family: "Onest Bold";
@@ -369,10 +370,11 @@
         &__body {
             max-height: 0;
             overflow: hidden;
-            transition: all 0.3s;
+            transition: all 0.5s;
         }
 
-        &__body__content {
+        &__body__content,
+        strong {
             padding: 15px 0 25px;
 
             text-align: left;
@@ -382,6 +384,8 @@
             line-height: 20px;
             letter-spacing: 0px;
             color: #1a2b49;
+
+           
         }
 
         &__cta {
@@ -416,6 +420,12 @@
             top: 0;
             left: 0;
         }
+
+        p {
+            margin-bottom: 0 !important;
+            text-wrap: pretty;
+            text-align: left;
+        }
     }
 
     @media screen and (min-width: 991px) {
@@ -446,7 +456,8 @@
                 transition: all 0.3s;
             }
 
-            &__body__content {
+            &__body__content,
+            strong {
                 padding: 6px 0 29px;
                 font-weight: 400;
                 font-size: 20px;

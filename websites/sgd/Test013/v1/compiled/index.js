@@ -138,35 +138,59 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    const accordionData = [
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/ZwGvyiBDKEqbakt7ApOPavMcVxXPmB5NQSH2gJ81.png",
-            title: "Was passiert nach der Bestellung?",
-            description: `Ist Ihre Bestellung bei uns eingegangen, erhalten Sie von uns eine Auftragsbestätigung per E-Mail zugesendet und wir beginnen mit der Bearbeitung. Sie werden stets auf dem aktuellen Stand gehalten - über jeden Produktionsprozess erhalten Sie automatisch eine E-Mail vom Auftragseingang über die Produktion und bis zur Fertigstellung Ihrer Ware. Sobald Ihr Auftrag abschließend bearbeitet und kommissioniert wurde, teilen wir Ihnen per E-Mail einen Liefertermin mit. Über den Status Ihres Auftrags können Sie sich jederzeit in unserem <a href="https://www.zaun-idee.de/sendungsnummer">Sendungstool</a> informieren.`,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/OMZ0jFCYjx2ZmQmcqieAPJvXghwb8UlGFizq1teE.png",
-            title: "Wie läuft der Versand ab?",
-            description: `Paketdienstleister: Ihre Sendung wird dem Dienstleister übergeben und Ihnen an Ihrer Adresse zugestellt. Sie erhalten via E-Mail eine Sendungsnummer und sind somit jederzeit über den Stand Ihrer Bestellung informiert. Spedition: Wir sorgen dafür, dass alle bestellten Artikel unbeschädigt und sicher bei Ihnen angeliefert werden. Deshalb erfolgt der Versand ausschließlich durch Transportunternehmen, die unser gesamtes Produktportfolio kennen. Weitere Informationen haben wir <a href="https://www.zaun-idee.de/lieferung">hier</a> für Sie zusammengestellt.`,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/xjyeXdF2vIQQwgdRijmHXn66pPM5272uDBUGL5v6.png",
-            title: "Wie läuft die Montage ab?",
-            description: `Am Tag der Montage wird im ersten Schritt der gesamte Ablauf zusammen mit Ihnen besprochen, der Montageort abgegangen und die örtlichen Gegebenheiten werden geklärt und besprochen. Danach beginnen unsere Monteure mit den Vorbereitungen und anschließend mit der Montage. Weiterführende Informationen rund um die Montage der verschiedenen Zaunsysteme können Sie auf unserer <a href="https://www.zaun-idee.de/montage">Montageseite</a> nachlesen.`,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/jzH089DBid8YmWDhQflthxFleVqXUdSG6UcPaSUp.png",
-            title: "Sie benötigen eine Beratung?",
-            description: `Sie sind sich unsicher, welcher Zaun der richtige für Ihr Grundstück ist oder wie viele Zaunpfosten Sie für Ihr Projekt benötigen? Kein Problem - bei allen Fragen rund um unsere Produkte können Sie sich gern jederzeit an unseren Kundenservice wenden. Wir beraten Sie kostenfrei und unverbindlich. Rufen Sie uns an oder senden Sie uns eine E-Mail. Alternativ können Sie uns Ihre Anliegen und Fragen bequem über unser <a href="https://www.zaun-idee.de/kontakt">Kontaktformular</a> mitteilen. Wir melden uns dann zeitnah bei Ihnen.`,
-        },
-    ];
+    function getAccordionNoTabLayout() {
+        const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
+
+            console.log("item:", item);
+            console.log("q(item, h2):", q(item, "h2"));
+            console.log("q(item, span > p):", qq(item, "span > p"));
+
+            return {
+                title: q(item, "h2").textContent,
+                description: qq(item, "span > p")
+                    .map((p) => p.outerHTML)
+                    .join(""),
+            }
+        });
+
+        console.log("data:", data);
+
+
+
+
+        return /* HTML */ ` 
+        <div class="ab-course-accordion container-md mb-2">
+            <div class="ab-faq-accordion-section">
+                ${data
+                    .map(
+                        (item, index) => /* HTML */ `
+                            <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
+                                <div class="ab-faq-accordion-item__head">
+                                    <div class="ab-faq-accordion-item__head__title">${item.title}</div>
+                                </div>
+                                <div class="ab-faq-accordion-item__body">
+                                    <div class="ab-faq-accordion-item__body__content">${item.description}</div>
+                                </div>
+                                <div class="ab-faq-accordion-item__cta">
+                                    <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
+                                    <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                </div>
+                            </div>
+                            ${index !== data.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
+                        `,
+                    )
+                    .join("")}
+            </div>
+        </div>
+    `;
+    }
 
     function createLayout() {
         // Header
@@ -244,30 +268,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         // Accorction Content
         q(".container-md.tab-393-none + div.frame-space-after-medium")?.insertAdjacentHTML(
             "afterend",
-            /* HTML */ ` 
-            <div class="ab-course-accordion container-md mb-2">
-                <div class="ab-faq-accordion-section">
-                    ${accordionData
-                        .map(
-                            (item, index) => /* HTML */ `
-                                <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
-                                    <div class="ab-faq-accordion-item__head">
-                                        <div class="ab-faq-accordion-item__head__title">${item.title}</div>
-                                    </div>
-                                    <div class="ab-faq-accordion-item__body">
-                                        <div class="ab-faq-accordion-item__body__content">${item.description}</div>
-                                    </div>
-                                    <div class="ab-faq-accordion-item__cta">
-                                        <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
-                                        <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
-                                    </div>
-                                </div>
-                                ${index !== accordionData.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
-                            `,
-                        )
-                        .join("")}
-                </div>
-            </div>`
+            getAccordionNoTabLayout(),
         );
     }
 
@@ -278,26 +279,20 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         clickFunction();
     }
 
-    function toggleAccordion(clickedElement) {
-        const currentAccordionElement = clickedElement;
-        const clickedItemIsOpen = currentAccordionElement.classList.contains("ab-faq-accordion-item--open");
-
-        // const accordionELements = document.querySelectorAll(".ab-faq-accordion-item");
-        // accordionELements.forEach((elem) => {
-        //     elem.classList.remove("ab-faq-accordion-item--open");
-        // });
-
-        if (clickedItemIsOpen) {
-            currentAccordionElement.classList.remove("ab-faq-accordion-item--open");
+    function toggleAccordion(clickedItem) {
+        const clickedAccordion = clickedItem.parentNode;
+        const isOpen = clickedAccordion.classList.contains("ab-faq-accordion-item--open");
+        if (isOpen) {
+            clickedAccordion.classList.remove("ab-faq-accordion-item--open");
         } else {
-            currentAccordionElement.classList.add("ab-faq-accordion-item--open");
+            clickedAccordion.classList.add("ab-faq-accordion-item--open");
         }
     }
 
     function clickFunction() {
-        qq(".ab-faq-accordion-item__cta").forEach((item) => {
+        qq(".ab-faq-accordion-item__cta")?.forEach((item) => {
             item.addEventListener("click", (e) => {
-                toggleAccordion(item.parentNode);
+                toggleAccordion(item);
             });
         });
     }
@@ -310,15 +305,18 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             q(".container-md:has(> .frame-type-easy_image_slider)") &&
             q(".container-md:has(>.grid-container)") &&
             q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
-            q(".container-md:has(>.frame-type-contact_support)")
+            q(".container-md:has(>.frame-type-contact_support)") &&
+            q("div.tab-393-none:not(.accordion):has(h2)")
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    // try {
+    //     await waitForElementAsync(checkForItems);
+    //     init();
+    // } catch (error) {
+    //     console.warn(error);
+    //     return false;
+    // }
+
+    waitForElementAsync(checkForItems).then(init);
 })();
