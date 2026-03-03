@@ -315,3 +315,104 @@
         }
     }
 }
+
+// MAIN CSS -> Accordion Section
+.AB-TEST013 {
+    .ab-faq-accordion-section {
+        hr {
+            margin-top: 26px;
+            margin-bottom: 26px;
+        }
+    }
+
+    .ab-faq-accordion-item {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 8px 25px 18px;
+        transition: all 0.3s ease-in-out;
+        background-color: #f7f7f7;
+
+        &--open {
+            .ab-faq-accordion-item__head__toggle-icon {
+                transform: rotate(180deg);
+            }
+
+            .ab-faq-accordion-item__body {
+                max-height: 750px;
+            }
+
+            .ab-faq-accordion-item__collapsed-text {
+                opacity: 0;
+            }
+
+            .ab-faq-accordion-item__expanded-text {
+                opacity: 1;
+            }
+        }
+
+        &__head {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+            align-items: center;
+            cursor: pointer;
+
+            font-family: "Onest Bold";
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            color: #1a2b49;
+        }
+
+        &__body {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: #1a2b49;
+        }
+
+        &__body__content {
+            padding: 15px 0;
+        }
+
+        &__cta {
+
+            margin-top: 4px;
+
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: rgba(26, 43, 73, 0.8);
+            cursor: pointer;
+            height: 20px;
+            position: relative;
+        }
+
+        &__collapsed-text {
+            overflow: hidden;
+            opacity: 1;
+            transition: all 0.1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        &__expanded-text {
+            position: absolute;
+            opacity: 0;
+            transition: all 0.1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+}

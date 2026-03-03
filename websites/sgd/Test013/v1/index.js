@@ -212,10 +212,30 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
+    const accordionData = [
+        {
+            imgUrl: "https://assets.ablyft.com/22263542/ZwGvyiBDKEqbakt7ApOPavMcVxXPmB5NQSH2gJ81.png",
+            title: "Was passiert nach der Bestellung?",
+            description: `Ist Ihre Bestellung bei uns eingegangen, erhalten Sie von uns eine Auftragsbestätigung per E-Mail zugesendet und wir beginnen mit der Bearbeitung. Sie werden stets auf dem aktuellen Stand gehalten - über jeden Produktionsprozess erhalten Sie automatisch eine E-Mail vom Auftragseingang über die Produktion und bis zur Fertigstellung Ihrer Ware. Sobald Ihr Auftrag abschließend bearbeitet und kommissioniert wurde, teilen wir Ihnen per E-Mail einen Liefertermin mit. Über den Status Ihres Auftrags können Sie sich jederzeit in unserem <a href="https://www.zaun-idee.de/sendungsnummer">Sendungstool</a> informieren.`,
+        },
+        {
+            imgUrl: "https://assets.ablyft.com/22263542/OMZ0jFCYjx2ZmQmcqieAPJvXghwb8UlGFizq1teE.png",
+            title: "Wie läuft der Versand ab?",
+            description: `Paketdienstleister: Ihre Sendung wird dem Dienstleister übergeben und Ihnen an Ihrer Adresse zugestellt. Sie erhalten via E-Mail eine Sendungsnummer und sind somit jederzeit über den Stand Ihrer Bestellung informiert. Spedition: Wir sorgen dafür, dass alle bestellten Artikel unbeschädigt und sicher bei Ihnen angeliefert werden. Deshalb erfolgt der Versand ausschließlich durch Transportunternehmen, die unser gesamtes Produktportfolio kennen. Weitere Informationen haben wir <a href="https://www.zaun-idee.de/lieferung">hier</a> für Sie zusammengestellt.`,
+        },
+        {
+            imgUrl: "https://assets.ablyft.com/22263542/xjyeXdF2vIQQwgdRijmHXn66pPM5272uDBUGL5v6.png",
+            title: "Wie läuft die Montage ab?",
+            description: `Am Tag der Montage wird im ersten Schritt der gesamte Ablauf zusammen mit Ihnen besprochen, der Montageort abgegangen und die örtlichen Gegebenheiten werden geklärt und besprochen. Danach beginnen unsere Monteure mit den Vorbereitungen und anschließend mit der Montage. Weiterführende Informationen rund um die Montage der verschiedenen Zaunsysteme können Sie auf unserer <a href="https://www.zaun-idee.de/montage">Montageseite</a> nachlesen.`,
+        },
+        {
+            imgUrl: "https://assets.ablyft.com/22263542/jzH089DBid8YmWDhQflthxFleVqXUdSG6UcPaSUp.png",
+            title: "Sie benötigen eine Beratung?",
+            description: `Sie sind sich unsicher, welcher Zaun der richtige für Ihr Grundstück ist oder wie viele Zaunpfosten Sie für Ihr Projekt benötigen? Kein Problem - bei allen Fragen rund um unsere Produkte können Sie sich gern jederzeit an unseren Kundenservice wenden. Wir beraten Sie kostenfrei und unverbindlich. Rufen Sie uns an oder senden Sie uns eine E-Mail. Alternativ können Sie uns Ihre Anliegen und Fragen bequem über unser <a href="https://www.zaun-idee.de/kontakt">Kontaktformular</a> mitteilen. Wir melden uns dann zeitnah bei Ihnen.`,
+        },
+    ];
 
+    function createLayout() {
         // Header
         q(".header-wrapper.container-md").insertAdjacentHTML(
             "afterend",
@@ -236,7 +256,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         );
 
         // Course Info Box
-
         const currentPath = window.location.pathname;
         const infoList = DATA.course_info[currentPath.replace(".html", "")];
 
@@ -281,12 +300,73 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             `,
         );
 
-        const targetNode = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");        
+        // Reposition Elements
+        const targetNode = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");
         targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
         targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container) + .container-md:has(>hr)"));
         targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
-        qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach(item => item.classList.add("ab-hidden"));
-        
+        qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach((item) => item.classList.add("ab-hidden"));
+
+        // container-md mb-2 tab-393-none, container-md mb-2 tab-393-none + container-md frame-space-after-medium ||  #courseTabContent
+        // Accorction Content
+        q(".container-md.tab-393-none + div.frame-space-after-medium")?.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ ` 
+            <div class="ab-course-accordion container-md mb-2">
+                <div class="ab-faq-accordion-section">
+                    ${accordionData
+                        .map(
+                            (item, index) => /* HTML */ `
+                                <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
+                                    <div class="ab-faq-accordion-item__head">
+                                        <div class="ab-faq-accordion-item__head__title">${item.title}</div>
+                                    </div>
+                                    <div class="ab-faq-accordion-item__body">
+                                        <div class="ab-faq-accordion-item__body__content">${item.description}</div>
+                                    </div>
+                                    <div class="ab-faq-accordion-item__cta">
+                                        <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
+                                        <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                    </div>
+                                </div>
+                                ${index !== accordionData.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
+                            `,
+                        )
+                        .join("")}
+                </div>
+            </div>`
+        );
+    }
+
+    function init() {
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        console.table(TEST_CONFIG);
+        createLayout();
+        clickFunction();
+    }
+
+    function toggleAccordion(clickedElement) {
+        const currentAccordionElement = clickedElement;
+        const clickedItemIsOpen = currentAccordionElement.classList.contains("ab-faq-accordion-item--open");
+
+        // const accordionELements = document.querySelectorAll(".ab-faq-accordion-item");
+        // accordionELements.forEach((elem) => {
+        //     elem.classList.remove("ab-faq-accordion-item--open");
+        // });
+
+        if (clickedItemIsOpen) {
+            currentAccordionElement.classList.remove("ab-faq-accordion-item--open");
+        } else {
+            currentAccordionElement.classList.add("ab-faq-accordion-item--open");
+        }
+    }
+
+    function clickFunction() {
+        qq(".ab-faq-accordion-item__cta").forEach((item) => {
+            item.addEventListener("click", (e) => {
+                toggleAccordion(item.parentNode);
+            });
+        });
     }
 
     function checkForItems() {
@@ -295,7 +375,9 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             q(".header-wrapper.container-md") &&
             q("div.my-3:has(> .badge.badge-.badge-type-action)") &&
             q(".container-md:has(> .frame-type-easy_image_slider)") &&
-            qq(".container-md:has(>.grid-container), .container-md:has(>.grid-container) + .container-md:has(>hr), .container-md:has(>.frame-type-contact_support)").length === 3
+            q(".container-md:has(>.grid-container)") &&
+            q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
+            q(".container-md:has(>.frame-type-contact_support)")
         );
     }
 
