@@ -38,7 +38,7 @@ V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1
     const TEST_CONFIG = {
         page_initials: "AB-LME109",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

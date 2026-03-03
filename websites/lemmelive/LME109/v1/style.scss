@@ -635,6 +635,13 @@
         display: block;
     }
 
+    @media screen and (min-width: 1024px) {
+
+        #buybox_section > div > div:last-child {
+            padding-top: 0;
+        }
+    }
+
     @media screen and (min-width: 1025px) {
         .product-supplement__instruction {
             font-size: 3.6rem;
@@ -825,5 +832,13 @@
             text-align: center;
         }
     }
+
+    @media screen and (min-width: 1024px) {
+
+        #buybox_section .ratings {
+            margin-top: 0;
+        }
+    }
+
 
 }

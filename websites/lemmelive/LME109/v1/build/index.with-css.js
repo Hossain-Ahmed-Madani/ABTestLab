@@ -616,6 +616,11 @@
   line-height: 1.6rem;
   display: block;
 }
+@media screen and (min-width: 1024px) {
+  .AB-LME109 #buybox_section > div > div:last-child {
+    padding-top: 0;
+  }
+}
 @media screen and (min-width: 1025px) {
   .AB-LME109 .product-supplement__instruction {
     font-size: 3.6rem;
@@ -785,6 +790,11 @@
     text-align: center;
   }
 }
+@media screen and (min-width: 1024px) {
+  .AB-LME109 #buybox_section .ratings {
+    margin-top: 0;
+  }
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -833,7 +843,7 @@ V2: https://marketer.monetate.net/control/preview/12706/3K6DIZ5UHXVAFDVK2UDSLEN1
   const TEST_CONFIG = {
     page_initials: "AB-LME109",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
