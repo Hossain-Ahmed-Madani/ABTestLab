@@ -263,6 +263,10 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         <img src="https://www.sgd.de/fileadmin/images/siegel/Statista_FurtherEducation_DE2024.png" alt="Top Weiterbildungsanbieter 2024" />
                         <img src="https://www.sgd.de/fileadmin/images/siegel/fernstudium-direkt-2024.png" alt="Fernstudium Direkt Siegel 2024" />
                     </div>
+
+                    ${q(".container-md.frame-space-before-medium.frame-space-after-medium:has(a.btn.btn-prio-1)")
+                        ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" data-jump-to="#js-card-download">Preise &amp; Probeinhalte anfordern</a></div>`
+                        : ""}
                 `,
             );
         }

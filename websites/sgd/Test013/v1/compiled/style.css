@@ -40,6 +40,10 @@
   color: rgb(26, 43, 73);
   margin-bottom: 13px;
 }
+.AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+  margin-top: 0 !important;
+  margin-bottom: 21px !important;
+}
 .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
   font-family: "Onest Regular";
   font-weight: 400;
@@ -58,7 +62,7 @@
   display: flex;
   flex-direction: column;
   gap: 13px;
-  margin-bottom: 15px;
+  margin-bottom: 23px;
 }
 .AB-TEST013 .ab-course-info-item {
   display: flex;
@@ -108,6 +112,9 @@
   width: auto;
   height: 92px;
 }
+.AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+  display: none;
+}
 .AB-TEST013 .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
   background-color: rgb(38, 139, 46);
   border: 1px solid rgb(102, 204, 0);
@@ -126,6 +133,9 @@
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
   color: rgb(255, 255, 255);
+}
+.AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
+  margin-bottom: 25px;
 }
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
@@ -153,13 +163,18 @@
     padding-bottom: 35px;
   }
   .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium {
+    display: block;
     margin-top: 30px;
+    margin-bottom: 0;
   }
   .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 {
     font-weight: 700;
     font-size: 32px;
     line-height: 44px;
-    margin-bottom: 22px;
+    margin-bottom: 22px !important;
+  }
+  .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+    margin-bottom: 26px !important;
   }
   .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
     font-size: 14.4px;
@@ -208,5 +223,15 @@
   }
   .AB-TEST013 .wf-course-badges-desktop {
     display: flex;
+    margin-top: 43px;
+    margin-bottom: 60px;
+  }
+  .AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
+    display: none !important;
+  }
+  .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 }
