@@ -155,8 +155,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
             return {
                 title: q(item, "h2").textContent,
-                description: qq(item, "span > p")
-                    .map((p) => p.outerHTML)
+                description: qq(item, "span p")
+                    .map((p) => `<p>${p.textContent.trim()}</p>`)
                     .join(""),
             };
         });
@@ -164,7 +164,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         targetNode.insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                <div class="ab-course-accordion container-md mb-2">
+                <div class="ab-course-accordion container-md">
                     <div class="ab-faq-accordion-section">
                         ${data
                             .map(
@@ -230,7 +230,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         targetNode1.insertAdjacentHTML(
             "beforebegin",
             /* HTML */ `
-                <div class="ab-course-accordion">
+                <div class="ab-course-accordion mb-5">
                     <div class="ab-faq-accordion-section">
                         ${data2
                             .map(
@@ -259,7 +259,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         targetNode2.insertAdjacentHTML(
             "beforebegin",
             /* HTML */ `
-                <div class="ab-course-accordion">
+                <div class="ab-course-accordion mb-5">
                     <div class="ab-faq-accordion-section">
                         ${data1
                             .map(

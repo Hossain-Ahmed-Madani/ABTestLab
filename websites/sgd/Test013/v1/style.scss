@@ -28,7 +28,7 @@
     .container-md:has(> #course_accordion),
     .container-md.mb-2.tab-393-none,
     .container-md:has(> .tab-393-none),
-    .quick-info:not(:has(.mb-2:empty)) h2, 
+    .quick-info:not(:has(.mb-2:empty)) h2,
     .quick-info:not(:has(.mb-2:empty)) p,
     .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none) {
         display: none !important;
@@ -190,6 +190,15 @@
         margin-bottom: 25px;
     }
 
+    #js-card-download .container-md:has(> hr) {
+        display: none;
+    }
+
+    .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) hr {
+        margin-top: 41px;
+        margin-bottom: 32px;
+    }
+
     @media screen and (max-width: 768px) {
         .page-header.pinned .header-elements {
             position: static;
@@ -210,6 +219,19 @@
 
         .container-md:has(> .grid-container) + .container-md:has(> hr) {
             display: none;
+        }
+
+        .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) {
+            display: none;
+        }
+
+        #js-card-download .container-md:has(> hr) {
+            display: block;
+        }
+
+        #js-card-download .container-md hr {
+            margin-top: 25px;
+            margin-bottom: 22px;
         }
     }
 
@@ -233,6 +255,10 @@
             display: block;
             margin-top: 30px;
             margin-bottom: 0;
+        }
+
+        .container-md.frame-space-after-medium + .ab-course-accordion {
+            margin-bottom: 44px;
         }
 
         .col-12.col-md-6 h1.h2.mb-3 {
@@ -391,13 +417,13 @@
         strong {
             font-family: "Onest Bold";
             font-weight: bolder;
-            color: #1A2B49;
+            color: #1a2b49;
         }
-        
+
         a {
             font-family: "Onest Bold";
             font-weight: bolder;
-            color: #1A2B49;
+            color: #1a2b49;
             text-align: underline;
         }
 
@@ -435,9 +461,21 @@
         }
 
         p {
+            margin-top: 0 !important;
             margin-bottom: 0 !important;
             text-wrap: pretty;
             text-align: left;
+            display: block !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .read-more-toggle {
+            display: none !important;
+        }
+
+        .read-more-wrapper {
+            display: block !important;
         }
     }
 
@@ -449,9 +487,14 @@
             }
         }
 
-        .ab-faq-accordion-item {
+        #courseTabContent    .ab-faq-accordion-item  {
             margin-left: 0;
             margin-right: 0;
+        }
+
+        .ab-faq-accordion-item {
+            // margin-left: 0;
+            // margin-right: 0;
             padding: 10px 14px 14px;
             transition: all 0.3s ease-in-out;
             background-color: #f7f7f7;

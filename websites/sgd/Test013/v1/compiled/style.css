@@ -148,6 +148,13 @@
 .AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
   margin-bottom: 25px;
 }
+.AB-TEST013 #js-card-download .container-md:has(> hr) {
+  display: none;
+}
+.AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) hr {
+  margin-top: 41px;
+  margin-bottom: 32px;
+}
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
     position: static;
@@ -164,6 +171,16 @@
   }
   .AB-TEST013 .container-md:has(> .grid-container) + .container-md:has(> hr) {
     display: none;
+  }
+  .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) {
+    display: none;
+  }
+  .AB-TEST013 #js-card-download .container-md:has(> hr) {
+    display: block;
+  }
+  .AB-TEST013 #js-card-download .container-md hr {
+    margin-top: 25px;
+    margin-bottom: 22px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -183,6 +200,9 @@
     display: block;
     margin-top: 30px;
     margin-bottom: 0;
+  }
+  .AB-TEST013 .container-md.frame-space-after-medium + .ab-course-accordion {
+    margin-bottom: 44px;
   }
   .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 {
     font-weight: 700;
@@ -307,12 +327,12 @@
 .AB-TEST013 .ab-faq-accordion-item strong {
   font-family: "Onest Bold";
   font-weight: bolder;
-  color: #1A2B49;
+  color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item a {
   font-family: "Onest Bold";
   font-weight: bolder;
-  color: #1A2B49;
+  color: #1a2b49;
   text-align: underline;
 }
 .AB-TEST013 .ab-faq-accordion-item__cta {
@@ -345,18 +365,30 @@
   left: 0;
 }
 .AB-TEST013 .ab-faq-accordion-item p {
+  margin-top: 0 !important;
   margin-bottom: 0 !important;
   text-wrap: pretty;
   text-align: left;
+  display: block !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+.AB-TEST013 .ab-faq-accordion-item .read-more-toggle {
+  display: none !important;
+}
+.AB-TEST013 .ab-faq-accordion-item .read-more-wrapper {
+  display: block !important;
 }
 @media screen and (min-width: 991px) {
   .AB-TEST013 .ab-faq-accordion-section hr {
     margin-top: 41px;
     margin-bottom: 36px;
   }
-  .AB-TEST013 .ab-faq-accordion-item {
+  .AB-TEST013 #courseTabContent .ab-faq-accordion-item {
     margin-left: 0;
     margin-right: 0;
+  }
+  .AB-TEST013 .ab-faq-accordion-item {
     padding: 10px 14px 14px;
     transition: all 0.3s ease-in-out;
     background-color: #f7f7f7;
