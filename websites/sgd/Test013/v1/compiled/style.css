@@ -12,7 +12,10 @@
 .AB-TEST013 .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
 .AB-TEST013 .container-md:has(> #course_accordion),
 .AB-TEST013 .container-md.mb-2.tab-393-none,
-.AB-TEST013 .container-md:has(> .tab-393-none) {
+.AB-TEST013 .container-md:has(> .tab-393-none),
+.AB-TEST013 .quick-info:not(:has(.mb-2:empty)) h2,
+.AB-TEST013 .quick-info:not(:has(.mb-2:empty)) p,
+.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none) {
   display: none !important;
 }
 .AB-TEST013 .header-wrapper.container-md {
@@ -291,8 +294,7 @@
   overflow: hidden;
   transition: all 0.5s;
 }
-.AB-TEST013 .ab-faq-accordion-item__body__content,
-.AB-TEST013 .ab-faq-accordion-item strong {
+.AB-TEST013 .ab-faq-accordion-item__body__content {
   padding: 15px 0 25px;
   text-align: left;
   font-family: "Onest Regular";
@@ -301,6 +303,17 @@
   line-height: 20px;
   letter-spacing: 0px;
   color: #1a2b49;
+}
+.AB-TEST013 .ab-faq-accordion-item strong {
+  font-family: "Onest Bold";
+  font-weight: bolder;
+  color: #1A2B49;
+}
+.AB-TEST013 .ab-faq-accordion-item a {
+  font-family: "Onest Bold";
+  font-weight: bolder;
+  color: #1A2B49;
+  text-align: underline;
 }
 .AB-TEST013 .ab-faq-accordion-item__cta {
   margin-top: 4px;

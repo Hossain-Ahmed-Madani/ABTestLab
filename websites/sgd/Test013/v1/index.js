@@ -2,6 +2,8 @@
 Test doc: https://docs.google.com/document/d/1aRY66TBUeXHBDx5imd0b7Z3HhILM3nqkuWvxBML48HY/edit?tab=t.0
 Figma: https://www.figma.com/design/RWs9kC2tKwUdp3OEJcadw9/Test013---Landingpages-Kurse---Optimierung-auf-Anmeldungen-upper-funnel?node-id=50-1031&t=reOCha0nPcNYTOyf-1
 
+Important: https://www.sgd.de/lp/realschulabschluss.html
+
 Target Pages:
 https://www.sgd.de/lp/abitur.html
 https://www.sgd.de/lp/gepr-fachwirtin-im-gesundheits-und-sozialwesen-ihk.html
@@ -113,20 +115,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         },
     };
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -171,32 +159,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -212,51 +174,143 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function getAccordionNoTabLayout() {
+    function createAccordionNoTabLayout() {
+        const targetNode = q(".container-md.tab-393-none + div.frame-space-after-medium");
+
+        if (!targetNode) return;
+
         const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
-
-            console.log("item:", item);
-            console.log("q(item, h2):", q(item, "h2"));
-            console.log("q(item, span > p):", qq(item, "span > p"));
-
             return {
                 title: q(item, "h2").textContent,
                 description: qq(item, "span > p")
                     .map((p) => p.outerHTML)
                     .join(""),
-            }
+            };
         });
 
-        console.log("data:", data);
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-course-accordion container-md mb-2">
+                    <div class="ab-faq-accordion-section">
+                        ${data
+                            .map(
+                                (item, index) => /* HTML */ `
+                                    <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
+                                        <div class="ab-faq-accordion-item__head">
+                                            <div class="ab-faq-accordion-item__head__title">${item.title}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__body">
+                                            <div class="ab-faq-accordion-item__body__content">${item.description}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__cta">
+                                            <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                        </div>
+                                    </div>
+                                    ${index !== data.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
+                                `,
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `,
+        );
+    }
 
+    function createAccordionWithTabLayout() {
+        const targetNode = q("#courseTabContent .quick-info");
 
+        if (!targetNode) return;
 
+        const [targetNode1, targetNode2] = qq(".quick-info:not(:has(.mb-2:empty))");
 
-        return /* HTML */ ` 
-        <div class="ab-course-accordion container-md mb-2">
-            <div class="ab-faq-accordion-section">
-                ${data
-                    .map(
-                        (item, index) => /* HTML */ `
-                            <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
-                                <div class="ab-faq-accordion-item__head">
-                                    <div class="ab-faq-accordion-item__head__title">${item.title}</div>
-                                </div>
-                                <div class="ab-faq-accordion-item__body">
-                                    <div class="ab-faq-accordion-item__body__content">${item.description}</div>
-                                </div>
-                                <div class="ab-faq-accordion-item__cta">
-                                    <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
-                                    <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
-                                </div>
-                            </div>
-                            ${index !== data.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
-                        `,
-                    )
-                    .join("")}
-            </div>
-        </div>
-    `;
+        const data1 = [
+            {
+                title: "Abitur nachholen mit Realschulabschluss",
+                description: `
+                <p>Wenn Sie bereits den Realschulabschluss erfolgreich absolviert haben, erfüllen Sie alle Voraussetzungen, um direkt in den Fernkurs für das Abitur einzusteigen. Die Dauer des Kurses beträgt hier bei einem Pensum von 12–16 Wochenstunden etwa 32 Monate.</p>
+                <p>Da es sich um einen Fernlehrgang handelt, haben Sie die Möglichkeit, den Zeitraum bis zur Abiturprüfung zu verkürzen oder zu verlängern.</p>
+                `,
+            },
+            {
+                title: "Fächerkombinationen, um das Abitur nachzuholen",
+                description:
+                    "<p>Die Abitur-Prüfungsordnung für die staatliche Externenprüfung in Hessen sieht acht Prüfungsfächer vor. Dabei können Sie je nach Ihren Interessen bzw. Vorkenntnissen eigene Schwerpunkte bei der Fächerwahl setzen. Aus langjähriger Erfahrung wissen wir, dass vier Fächerkombinationen besonders erfolgversprechend sind. Wählen Sie eine dieser Kursvarianten – je nachdem, welche Fremdsprachen Sie bevorzugen und ob Sie weniger oder mehr naturwissenschaftliche Fächer belegen möchten.</p>",
+            },
+        ];
+
+        const data2 = [
+            {
+                title: "Abitur nachholen mit Fachhochschulreife oder Fachoberschulreife",
+                description: `
+                <p>Auch wenn Sie bereits die fachgebundene Hochschulreife oder die Fachoberschulreife haben, kann es Gründe geben, dass Sie die Allgemeine Hochschulreife brauchen. Denn gerade bei Studienfächern, die ausschließlich an Universitäten studiert werden, wie Medizin oder Psychologie, ist die Allgemeine Hochschulreife notwendig. Wenden Sie sich gerne an unsere sgd Bildungsberatung, um zu besprechen, welche Möglichkeiten Sie haben, das Abitur mit Fachoberschulreife nachzuholen und eventuell den Fernlehrgang zu verkürzen.</p>
+                `,
+            },
+            {
+                title: "Die Allgemeine Hochschulreife nachholen und durch Vorkenntnisse verkürzen",
+                description:
+                    '<p>Haben Sie bereits einen dieser Abschlüsse erreicht, bieten wir Ihnen die Möglichkeit, den Aufbaulehrgang zu verkürzen. Das Gleiche gilt, wenn Sie bereits die gymnasiale Oberstufe besucht, das Abitur jedoch nicht beendet haben.&nbsp;Lassen Sie sich von unseren Experten persönlich beraten!<br>Ihre individuelle SGD-Bildungsberatung erreichen Sie unter: <strong>06151 3842 259</strong><br>Um ein Angebot für einen individuellen Lehrgangseinstieg zu erhalten, senden Sie bitte Ihre letzten Zeugnisse in Kopie mit Angabe der Fächer und Noten direkt an: <a href="mailto:abitur@sgd.de"><strong>abitur@sgd.de</strong></a></p>',
+            },
+        ];
+
+        targetNode1.insertAdjacentHTML(
+            "beforebegin",
+            /* HTML */ `
+                <div class="ab-course-accordion">
+                    <div class="ab-faq-accordion-section">
+                        ${data2
+                            .map(
+                                (item, index) => /* HTML */ `
+                                    <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
+                                        <div class="ab-faq-accordion-item__head">
+                                            <div class="ab-faq-accordion-item__head__title">${item.title}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__body">
+                                            <div class="ab-faq-accordion-item__body__content">${item.description}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__cta">
+                                            <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                        </div>
+                                    </div>
+                                    ${index !== data1.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
+                                `,
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `,
+        );
+
+        targetNode2.insertAdjacentHTML(
+            "beforebegin",
+            /* HTML */ `
+                <div class="ab-course-accordion">
+                    <div class="ab-faq-accordion-section">
+                        ${data1
+                            .map(
+                                (item, index) => /* HTML */ `
+                                    <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
+                                        <div class="ab-faq-accordion-item__head">
+                                            <div class="ab-faq-accordion-item__head__title">${item.title}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__body">
+                                            <div class="ab-faq-accordion-item__body__content">${item.description}</div>
+                                        </div>
+                                        <div class="ab-faq-accordion-item__cta">
+                                            <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                        </div>
+                                    </div>
+                                    ${index !== data2.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
+                                `,
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `,
+        );
     }
 
     function createLayout() {
@@ -331,12 +385,9 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
         qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach((item) => item.classList.add("ab-hidden"));
 
-        // container-md mb-2 tab-393-none, container-md mb-2 tab-393-none + container-md frame-space-after-medium ||  #courseTabContent
         // Accorction Content
-        q(".container-md.tab-393-none + div.frame-space-after-medium")?.insertAdjacentHTML(
-            "afterend",
-            getAccordionNoTabLayout(),
-        );
+        createAccordionNoTabLayout();
+        createAccordionWithTabLayout();
     }
 
     function init() {
@@ -373,7 +424,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             q(".container-md:has(>.grid-container)") &&
             q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
             q(".container-md:has(>.frame-type-contact_support)") &&
-            q("div.tab-393-none:not(.accordion):has(h2)")
+            ((q(".container-md.tab-393-none + div.frame-space-after-medium") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
         );
     }
 
