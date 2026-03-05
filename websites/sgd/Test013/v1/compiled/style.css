@@ -15,7 +15,8 @@
 .AB-TEST013 .container-md:has(> .tab-393-none),
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) h2,
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) p,
-.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none) {
+.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
+.AB-TEST013 #downloadForm .list-type-none.list-style-check {
   display: none !important;
 }
 .AB-TEST013 .header-wrapper.container-md {
@@ -155,6 +156,21 @@
   margin-top: 41px;
   margin-bottom: 32px;
 }
+.AB-TEST013 .registration {
+  background-color: #97fffc;
+}
+.AB-TEST013 #downloadForm {
+  background-color: #ffffff;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  border-radius: 8px;
+}
+.AB-TEST013 .ab-form-content-right {
+  display: none;
+}
+.AB-TEST013 .registration-inner-container {
+  background-color: transparent;
+  padding: 7px 21px 22px !important;
+}
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
     position: static;
@@ -271,6 +287,25 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+  .AB-TEST013 .registration-right {
+    display: none;
+  }
+  .AB-TEST013 #downloadForm {
+    display: flex;
+  }
+  .AB-TEST013 .registration-inner-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 21px 31px !important;
+  }
+  .AB-TEST013 .ab-form-content-right {
+    display: flex;
+    flex-direction: column;
+    padding: 42px 50px 21px 0 !important;
+    width: 528px;
+    min-width: 528px;
+    align-items: end;
+  }
 }
 
 .AB-TEST013 .ab-faq-accordion-section hr {
@@ -325,13 +360,11 @@
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item strong {
-  font-family: "Onest Bold";
-  font-weight: bolder;
+  font-family: "Onest Medium";
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item a {
-  font-family: "Onest Bold";
-  font-weight: bolder;
+  font-family: "Onest Medium";
   color: #1a2b49;
   text-align: underline;
 }

@@ -286,7 +286,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         );
     }
 
-    function createLayout() {
+    function updateMainLayout() {
         // Header
         q(".header-wrapper.container-md").insertAdjacentHTML(
             "afterend",
@@ -352,10 +352,10 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         );
 
         // Reposition Elements
-        const targetNode = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");
-        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
-        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container) + .container-md:has(>hr)"));
-        targetNode.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
+        const frameSlider = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");
+        frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
+        frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container) + .container-md:has(>hr)"));
+        frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
         qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach((item) => item.classList.add("ab-hidden"));
 
         // Accorction Content
@@ -363,10 +363,39 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         createAccordionWithTabLayout();
     }
 
+    function updateFormLayout() {
+        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm"))).then(() => {
+            // Form Section
+
+            const registrationLeft = q(".registration-left");
+            registrationLeft.classList.remove("col-lg-8");
+
+            q(registrationLeft, "h2.mb-2").innerText = "Erfahren Sie alles über diesen Kurs";
+            
+            q(registrationLeft, "h2.mb-2").insertAdjacentHTML(
+                "afterend",
+                /* HTML */ `
+                    <p class="ab-description">
+                        Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte
+                        Studienprogramm senden wir Ihnen einmalig und kostenlos per Post. <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
+                    </p>
+                `,
+            );
+
+            qq(registrationLeft, "p:not(.mt-2):not(.ab-description)").forEach((item) => item.classList.add("ab-hidden"));
+            q(registrationLeft, "#downloadForm").insertAdjacentHTML("beforeend", /* HTML */ ` <div class="ab-form-content-right">Hello</div> `);
+        });
+        // .catch((error) => {
+        //     console.warn(error);
+        //     return false;
+        // });
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createLayout();
+        updateMainLayout();
+        updateFormLayout();
         clickFunction();
     }
 
@@ -410,4 +439,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     // }
 
     waitForElementAsync(checkForItems).then(init);
+    // .catch((error) => {
+    //     console.warn(error);
+    //     return false;
+    // });
 })();
