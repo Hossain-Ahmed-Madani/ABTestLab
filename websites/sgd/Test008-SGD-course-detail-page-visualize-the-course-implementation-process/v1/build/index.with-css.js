@@ -151,7 +151,7 @@
   background-color: rgb(38, 139, 46);
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 29px;
+  min-height: 29px;
   border-radius: 30px;
   border: 1px solid rgb(38, 139, 46);
   font-family: "Onest Regular";
@@ -160,7 +160,6 @@
   line-height: 21px;
   letter-spacing: 0px;
   text-align: center;
-  white-space: nowrap;
   min-width: 340px;
 }
 .AB-TEST008 .ab-button-container .link-modal-info-package:hover {
@@ -172,7 +171,7 @@
   background-color: rgb(102, 204, 0);
   color: rgb(255, 255, 255);
   width: 100%;
-  height: 29px;
+  min-height: 29px;
   border-radius: 30px;
   border: 1px solid rgb(102, 204, 0);
   display: flex;
@@ -185,8 +184,7 @@
   letter-spacing: 0px;
   text-align: center;
   vertical-align: middle;
-  white-space: nowrap;
-  min-width: 340px;
+  min-width: 345px;
 }
 .AB-TEST008 .ab-button-container .track-fb-init-free-month:hover {
   color: #fff;
@@ -341,7 +339,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
   const TEST_CONFIG = {
     page_initials: "AB-TEST008",
     test_variation: 1,
-    test_version: 0.0005,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -448,6 +446,10 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
 
   function q(s, o) {
     return document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
   function updateLayout() {
@@ -600,9 +602,9 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
   function clickFunction() {
     document.querySelectorAll(".cta.cta-buttons.cta-name-order.mt-5");
     q(".ab-link-modal-info-package").addEventListener("click", (e) => {
-      q(
-        ".cta.cta-buttons.cta-name-order.mt-5:not(.ab-link-modal-info-package)",
-      ).click();
+      qq(
+        ".btn.btn-primary.link-modal-info-package:not(.ab-link-modal-info-package)",
+      ).forEach((item) => item.click());
     });
   }
 
