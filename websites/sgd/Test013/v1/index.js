@@ -391,7 +391,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function updateFormLayout() {
-        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm"))).then(() => {
+        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm")), 30000).then(() => {
             // Form Section
 
             const registrationLeft = q(".registration-left");

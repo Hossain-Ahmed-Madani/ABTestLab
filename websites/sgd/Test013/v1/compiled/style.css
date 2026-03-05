@@ -223,6 +223,64 @@
   color: #ffffff;
   background-color: #25872d;
 }
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) {
+  height: 49px;
+  padding: 14px 7px 11px 11px;
+  border: 1px solid rgb(217, 217, 217);
+  border-radius: 5px;
+  margin: 15px 5px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid {
+  background-image: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label {
+  top: 12px;
+  transform: translateY(0);
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active {
+  top: 0px;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  transition: all 0.1s ease-in-out;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input {
+  margin: 0;
+  padding: 0;
+  border: none !important;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  background-color: #fff;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:hover, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:focus, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #1a2b49;
+  background-color: #fff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) select ~ label {
+  display: none !important;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid {
+  display: none !important;
+}
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
     position: static;
