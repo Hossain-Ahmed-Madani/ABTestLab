@@ -36,6 +36,10 @@
         display: none !important;
     }
 
+    .ab-ml-auto {
+        margin-left: auto !important;
+    }
+
     .header-wrapper.container-md {
         display: none !important;
     }
@@ -251,6 +255,10 @@
         margin-bottom: 14px;
     }
 
+    .registration-left .form .form-group-customer-type {
+        margin-bottom: 0 !important;
+        width: 100%;
+    }
     .registration-left .form .form-group-customer-type .form-check {
         margin-right: 25px;
     }
@@ -280,6 +288,20 @@
     }
 
     // Form
+
+    .ab-row:has(> .form-group),
+    .ab-row:has(> .form-field-street),
+    .ab-row:has(> .form-field-postal-code) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .registration-left .form-group.form-input-group {
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+
     .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
     .registration-left .form-field-street,
     .registration-left .form-field-house-number,
@@ -290,7 +312,8 @@
         padding: 14px 7px 11px 11px;
         border: 1px solid rgba(217, 217, 217, 1);
         border-radius: 5px;
-        margin: 15px 0;
+        margin: 0;
+        position: relative;
     }
 
     .registration-left .select-list-search {
@@ -307,12 +330,12 @@
         background-color: transparent;
     }
 
-    .registration-left .form-group .form-field-street,
-    .registration-left .form-group .form-field-house-number,
-    .registration-left .form-group .form-field-postal-code,
-    .registration-left .form-group .form-field-city {
-        margin: 0 0;
-    }
+    // .registration-left .form-group .form-field-street,
+    // .registration-left .form-group .form-field-house-number,
+    // .registration-left .form-group .form-field-postal-code,
+    // .registration-left .form-group .form-field-city {
+    //     margin: 0 0;
+    // }
 
     .registration-left .form-group:not(.form-input-group) .is-valid,
     .registration-left .form-field-street .is-valid,
@@ -395,7 +418,7 @@
         }
     }
 
-    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit)  input {
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
         background-color: transparent;
 
         &:-webkit-autofill,

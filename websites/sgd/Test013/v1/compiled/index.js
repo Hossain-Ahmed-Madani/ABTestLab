@@ -364,7 +364,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function updateFormLayout() {
-        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm")), 30000).then(() => {
+        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm")), 100000).then(() => {
             // Form Section
 
             const registrationLeft = q(".registration-left");
@@ -421,6 +421,37 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     </div>
                 `,
             );
+
+            // Update Form Items
+
+            // Form Item
+            // const formSelectSalutation = q(registrationLeft, ".form-select-salutation");
+            // formSelectSalutation.className = 'col-12 col-lg-5 form-group form-input form-select-salutation'
+            // const formSelectSalutationRow = document.createElement("div");
+            // formSelectSalutationRow.classList.add("row");
+            // formSelectSalutation.insertAdjacentElement("afterend", formSelectSalutationRow);
+            // formSelectSalutationRow.appendChild(formSelectSalutation);
+
+            // // Form Item
+            // q(registrationLeft, ".form-field-first-name").className = 'col-12 col-lg-5 form-group form-input form-field-first-name'
+            // q(registrationLeft, ".form-field-last-name").className = 'col-12 col-lg-5 form-group form-input form-field-last-name ab-ml-auto'
+
+            qq(registrationLeft, ".registration-inner-container .row").forEach((item) => {
+                item.classList.remove("row");
+                item.classList.add("ab-row");
+            });
+
+            qq(registrationLeft, ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city").forEach((item) => {
+                Array.from(item.classList).forEach((className) => {
+                    if (className.includes("col")) {
+                        item.classList.remove(className);
+                    }
+                });
+            });
+
+            const formLastName = q(registrationLeft, ".form-field-last-name");
+            const formEmail = q(registrationLeft, ".form-field-email");
+            formLastName.insertAdjacentElement("afterend", formEmail);
         });
         // .catch((error) => {
         //     console.warn(error);
@@ -431,8 +462,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        updateMainLayout();
         updateFormLayout();
+        updateMainLayout();
         clickFunction();
     }
 
@@ -463,6 +494,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             q(".container-md:has(>.grid-container)") &&
             q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
             q(".container-md:has(>.frame-type-contact_support)") &&
+            // q(".registration-left") && q("#downloadForm") && /* Remove Later !important */
             ((q(".container-md.tab-393-none + div.frame-space-after-medium") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
         );
     }

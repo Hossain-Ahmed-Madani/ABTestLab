@@ -19,6 +19,9 @@
 .AB-TEST013 #downloadForm .list-type-none.list-style-check {
   display: none !important;
 }
+.AB-TEST013 .ab-ml-auto {
+  margin-left: auto !important;
+}
 .AB-TEST013 .header-wrapper.container-md {
   display: none !important;
 }
@@ -199,6 +202,10 @@
   color: #1a2b49;
   margin-bottom: 14px;
 }
+.AB-TEST013 .registration-left .form .form-group-customer-type {
+  margin-bottom: 0 !important;
+  width: 100%;
+}
 .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
   margin-right: 25px;
 }
@@ -223,6 +230,17 @@
   color: #ffffff;
   background-color: #25872d;
 }
+.AB-TEST013 .ab-row:has(> .form-group),
+.AB-TEST013 .ab-row:has(> .form-field-street),
+.AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.AB-TEST013 .registration-left .form-group.form-input-group {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
 .AB-TEST013 .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
 .AB-TEST013 .registration-left .form-field-street,
 .AB-TEST013 .registration-left .form-field-house-number,
@@ -233,7 +251,8 @@
   padding: 14px 7px 11px 11px;
   border: 1px solid rgb(217, 217, 217);
   border-radius: 5px;
-  margin: 15px 0;
+  margin: 0;
+  position: relative;
 }
 .AB-TEST013 .registration-left .select-list-search {
   margin-bottom: 5px;
@@ -246,12 +265,6 @@
   padding: 0;
   height: 35px;
   background-color: transparent;
-}
-.AB-TEST013 .registration-left .form-group .form-field-street,
-.AB-TEST013 .registration-left .form-group .form-field-house-number,
-.AB-TEST013 .registration-left .form-group .form-field-postal-code,
-.AB-TEST013 .registration-left .form-group .form-field-city {
-  margin: 0 0;
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid,
 .AB-TEST013 .registration-left .form-field-street .is-valid,
