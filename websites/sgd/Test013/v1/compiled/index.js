@@ -371,19 +371,56 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             registrationLeft.classList.remove("col-lg-8");
 
             q(registrationLeft, "h2.mb-2").innerText = "Erfahren Sie alles über diesen Kurs";
-            
+
             q(registrationLeft, "h2.mb-2").insertAdjacentHTML(
                 "afterend",
                 /* HTML */ `
                     <p class="ab-description">
-                        Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte
-                        Studienprogramm senden wir Ihnen einmalig und kostenlos per Post. <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
+                        Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr
+                        <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
+                        <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
                     </p>
                 `,
             );
 
             qq(registrationLeft, "p:not(.mt-2):not(.ab-description)").forEach((item) => item.classList.add("ab-hidden"));
-            q(registrationLeft, "#downloadForm").insertAdjacentHTML("beforeend", /* HTML */ ` <div class="ab-form-content-right">Hello</div> `);
+
+            q(registrationLeft, "#downloadForm").insertAdjacentHTML(
+                "beforeend",
+                /* HTML */ `
+                    <div class="ab-form-content-right">
+                        <div class="ab-advantage-desktop">
+                            <div class="ab-advantage-title">Sie erhalten sofort:</div>
+                            <div class="ab-advantage-list">
+                                ${[
+                                    "Informationen zu den Studiengebühren",
+                                    "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                                    "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                                    "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                                    "Informationen zu den Seminaren/Webinaren",
+                                ]
+                                    .map(
+                                        (item) => /* HTML */ `
+                                            <div class="ab-advantage-list-item">
+                                                <span class="ab-advantage-list-item__svg">${ASSETS.course_info_svg}</span>
+                                                <span class="ab-advantage-list-item__title">${item}</span>
+                                            </div>
+                                        `,
+                                    )
+                                    .join("")}
+                            </div>
+                        </div>
+                        <div class="ab-form-step-two-message-desktop">
+                            <p class="ab-form-step-two-message-text-strong">Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten.</p>
+                            <p class="ab-form-step-two-message-text-strong">Noch ein weiterer Vorteil:</p>
+                            <p class="ab-form-step-two-message-text-regular">
+                                Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung. Wir hinterlegen Ihre Adresse sicher, damit der Versand von Studienmaterialien später
+                                reibungslos und schnell für Sie abläuft.
+                            </p>
+                        </div>
+                    </div>
+                `,
+            );
         });
         // .catch((error) => {
         //     console.warn(error);

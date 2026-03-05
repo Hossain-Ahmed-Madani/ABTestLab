@@ -220,6 +220,65 @@
         padding: 7px 21px 22px !important;
     }
 
+    .registration-left h2.mb-2 {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: #1a2b49;
+    }
+
+    .registration-left p.mt-2 {
+        font-family: "Onest Regular";
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+    }
+
+    .registration-left .ab-description {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        margin-bottom: 14px;
+    }
+
+    .registration-left .form .form-group-customer-type .form-check {
+        margin-right: 25px;
+    }
+
+    .registration-left .form .form-group-customer-type label.btn {
+        width: 105px;
+        height: 34px;
+        background-color: #ffffff;
+        border: 1px solid #25872d;
+        border-radius: 5px;
+
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: #5c5f63;
+    }
+
+    .registration-left .form .form-group-customer-type label.btn.active {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        color: #ffffff;
+        background-color: #25872d;
+    }
+
     @media screen and (max-width: 768px) {
         .page-header.pinned .header-elements {
             position: static;
@@ -387,6 +446,108 @@
             width: 528px;
             min-width: 528px;
             align-items: end;
+        }
+
+        .registration-left h2.mb-2 {
+            font-size: 32px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            margin-bottom: 25px !important;
+        }
+
+
+        .registration-left .ab-description {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            margin-bottom: 17px;
+        }
+
+        .registration-left .form .form-group-customer-type .form-check {
+            margin-right: 27px;
+        }
+
+        .ab-advantage-desktop {
+            border: 2px solid #1a2b49;
+            width: 355px;
+            padding: 21px 34px 39px;
+            border-radius: 10px;
+            margin-bottom: 41px;
+        }
+
+        .ab-advantage-desktop .ab-advantage-title {
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #1a2b49;
+            margin-bottom: 8px;
+        }
+
+        .ab-advantage-desktop .ab-advantage-list {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .ab-advantage-desktop .ab-advantage-list-item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 11px;
+
+            &__svg {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 20px;
+                height: 20px;
+            }
+
+            &__title {
+                font-family: "Onest Bold";
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: #1a2b49;
+            }
+        }
+
+        .ab-form-step-two-message-desktop {
+            width: 353px;
+            background-color: rgba(178, 229, 128, 0.3);
+            padding: 10px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .ab-form-step-two-message-desktop .ab-form-step-two-message-text-strong {
+            font-family: Inter;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 150%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+            margin-bottom: 0;
+        }
+
+        .ab-form-step-two-message-desktop .ab-form-step-two-message-text-regular {
+            font-family: Inter;
+            font-weight: 300;
+            font-size: 12px;
+            line-height: 150%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+            margin-bottom: 0;
         }
     }
 }
