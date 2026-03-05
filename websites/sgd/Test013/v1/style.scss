@@ -292,9 +292,10 @@
     .ab-row:has(> .form-group),
     .ab-row:has(> .form-field-street),
     .ab-row:has(> .form-field-postal-code) {
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
-        gap: 16px;
+        gap: 16px 14px;
     }
 
     .registration-left .form-group.form-input-group {
@@ -389,6 +390,7 @@
     }
 
     .registration-left .form-group:not(.form-input-group) input,
+    .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only,
     .registration-left .form-field-street input,
     .registration-left .form-field-house-number input,
     .registration-left .form-field-postal-code input,
@@ -447,6 +449,82 @@
 
     .registration-left .form .form-group.form-input .select-list {
         left: 0;
+    }
+
+    // Form Layout
+    .registration-left .form-select-salutation,
+    .registration-left .form-field-first-name,
+    .registration-left .form-field-last-name,
+    .registration-left .form-field-email,
+    .registration-left .form-field-land,
+    .registration-left .form-field-phone {
+        width: 100%;
+    }
+
+    .registration-left .form-field-street {
+        width: calc(100% - 62px - 14px);
+    }
+
+    .registration-left .form-field-house-number {
+        width: 62px;
+    }
+
+    .registration-left .form-field-group-city {
+        width: 100%;
+    }
+
+    .registration-left .form-field-postal-code {
+        width: 120px;
+    }
+
+    .registration-left .form-field-city {
+        width: calc(100% - (120px + 14px));
+    }
+
+    @media screen and (min-width: 1400px) {
+        .ab-row:has(> .form-group),
+        .ab-row:has(> .form-field-street),
+        .ab-row:has(> .form-field-postal-code) {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 56px;
+        }
+
+        .ab-row:has(> .form-field-postal-code) {
+            // border: 1px solid red;
+            width: 306px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .registration-left .form-field-group-city {
+            width: 306px;
+        }
+
+        .registration-left .form-select-salutation,
+        .registration-left .form-field-first-name,
+        .registration-left .form-field-last-name,
+        .registration-left .form-field-street,
+        .registration-left .form-field-land,
+        .registration-left .form-field-phone {
+            width: 306px;
+        }
+
+        .registration-left .form-select-salutation.form-group:not(.form-input-group):not(.form-button-submit) {
+            margin-right: calc(100% - 306px - 56px);
+        }
+        .registration-left .form-field-email {
+            width: 668px;
+        }
+
+        .registration-left .form-field-postal-code {
+            width: 120px;
+        }
+        .registration-left .form-field-city {
+            width: 169px;
+        }
     }
 
     @media screen and (max-width: 768px) {

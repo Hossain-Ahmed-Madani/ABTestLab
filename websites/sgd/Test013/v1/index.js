@@ -479,6 +479,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             const formLastName = q(registrationLeft, ".form-field-last-name");
             const formEmail = q(registrationLeft, ".form-field-email");
             formLastName.insertAdjacentElement("afterend", formEmail);
+
+            // Inject div, .row, for line break
         });
         // .catch((error) => {
         //     console.warn(error);

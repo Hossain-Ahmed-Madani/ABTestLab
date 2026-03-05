@@ -233,9 +233,10 @@
 .AB-TEST013 .ab-row:has(> .form-group),
 .AB-TEST013 .ab-row:has(> .form-field-street),
 .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 16px 14px;
 }
 .AB-TEST013 .registration-left .form-group.form-input-group {
   margin-top: 0;
@@ -313,6 +314,7 @@
   top: -10px;
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) input,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type=text]:read-only,
 .AB-TEST013 .registration-left .form-field-street input,
 .AB-TEST013 .registration-left .form-field-house-number input,
 .AB-TEST013 .registration-left .form-field-postal-code input,
@@ -330,6 +332,10 @@
   background-color: rgb(247, 247, 247);
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:hover, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:focus, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type=text]:read-only:-webkit-autofill,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type=text]:read-only:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type=text]:read-only:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type=text]:read-only:-webkit-autofill:active,
 .AB-TEST013 .registration-left .form-field-street input:-webkit-autofill,
 .AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:hover,
 .AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:focus,
@@ -371,6 +377,68 @@
 }
 .AB-TEST013 .registration-left .form .form-group.form-input .select-list {
   left: 0;
+}
+.AB-TEST013 .registration-left .form-select-salutation,
+.AB-TEST013 .registration-left .form-field-first-name,
+.AB-TEST013 .registration-left .form-field-last-name,
+.AB-TEST013 .registration-left .form-field-email,
+.AB-TEST013 .registration-left .form-field-land,
+.AB-TEST013 .registration-left .form-field-phone {
+  width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-street {
+  width: calc(100% - 62px - 14px);
+}
+.AB-TEST013 .registration-left .form-field-house-number {
+  width: 62px;
+}
+.AB-TEST013 .registration-left .form-field-group-city {
+  width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-postal-code {
+  width: 120px;
+}
+.AB-TEST013 .registration-left .form-field-city {
+  width: calc(100% - 134px);
+}
+@media screen and (min-width: 1400px) {
+  .AB-TEST013 .ab-row:has(> .form-group),
+  .AB-TEST013 .ab-row:has(> .form-field-street),
+  .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 56px;
+  }
+  .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+    width: 306px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .AB-TEST013 .registration-left .form-field-group-city {
+    width: 306px;
+  }
+  .AB-TEST013 .registration-left .form-select-salutation,
+  .AB-TEST013 .registration-left .form-field-first-name,
+  .AB-TEST013 .registration-left .form-field-last-name,
+  .AB-TEST013 .registration-left .form-field-street,
+  .AB-TEST013 .registration-left .form-field-land,
+  .AB-TEST013 .registration-left .form-field-phone {
+    width: 306px;
+  }
+  .AB-TEST013 .registration-left .form-select-salutation.form-group:not(.form-input-group):not(.form-button-submit) {
+    margin-right: calc(100% - 306px - 56px);
+  }
+  .AB-TEST013 .registration-left .form-field-email {
+    width: 668px;
+  }
+  .AB-TEST013 .registration-left .form-field-postal-code {
+    width: 120px;
+  }
+  .AB-TEST013 .registration-left .form-field-city {
+    width: 169px;
+  }
 }
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
