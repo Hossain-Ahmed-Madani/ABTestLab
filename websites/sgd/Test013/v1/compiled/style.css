@@ -223,18 +223,49 @@
   color: #ffffff;
   background-color: #25872d;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) {
+.AB-TEST013 .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
+.AB-TEST013 .registration-left .form-field-street,
+.AB-TEST013 .registration-left .form-field-house-number,
+.AB-TEST013 .registration-left .form-field-postal-code,
+.AB-TEST013 .registration-left .form-field-city {
   height: 49px;
+  background-color: rgb(247, 247, 247);
   padding: 14px 7px 11px 11px;
   border: 1px solid rgb(217, 217, 217);
   border-radius: 5px;
-  margin: 15px 5px;
+  margin: 15px 0;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid {
+.AB-TEST013 .registration-left .select-list-search {
+  margin-bottom: 5px;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #66cc00;
+  border-radius: 0;
+  padding: 0;
+  height: 35px;
+  background-color: transparent;
+}
+.AB-TEST013 .registration-left .form-group .form-field-street,
+.AB-TEST013 .registration-left .form-group .form-field-house-number,
+.AB-TEST013 .registration-left .form-group .form-field-postal-code,
+.AB-TEST013 .registration-left .form-group .form-field-city {
+  margin: 0 0;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid,
+.AB-TEST013 .registration-left .form-field-street .is-valid,
+.AB-TEST013 .registration-left .form-field-house-number .is-valid,
+.AB-TEST013 .registration-left .form-field-postal-code .is-valid,
+.AB-TEST013 .registration-left .form-field-city .is-valid {
   background-image: none;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) label {
-  top: 12px;
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label,
+.AB-TEST013 .registration-left .form-field-street label,
+.AB-TEST013 .registration-left .form-field-house-number label,
+.AB-TEST013 .registration-left .form-field-postal-code label,
+.AB-TEST013 .registration-left .form-field-city label {
+  top: 13px;
   transform: translateY(0);
   font-family: "Onest Regular";
   font-weight: 400;
@@ -244,7 +275,11 @@
   vertical-align: middle;
   color: #1a2b49;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active {
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active,
+.AB-TEST013 .registration-left .form-field-street label.active,
+.AB-TEST013 .registration-left .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-field-city label.active {
   top: 0px;
   font-family: "Onest Regular";
   font-weight: 400;
@@ -255,7 +290,20 @@
   color: #1a2b49;
   transition: all 0.1s ease-in-out;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) input {
+.AB-TEST013 .registration-left .form-field-street label.active,
+.AB-TEST013 .registration-left .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-field-city label.active {
+  top: 20px;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) label.active {
+  top: -10px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input,
+.AB-TEST013 .registration-left .form-field-street input,
+.AB-TEST013 .registration-left .form-field-house-number input,
+.AB-TEST013 .registration-left .form-field-postal-code input,
+.AB-TEST013 .registration-left .form-field-city input {
   margin: 0;
   padding: 0;
   border: none !important;
@@ -266,20 +314,50 @@
   letter-spacing: 0px;
   vertical-align: middle;
   color: #1a2b49;
-  background-color: #fff;
+  background-color: rgb(247, 247, 247);
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:hover, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:focus, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:active {
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:hover, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:focus, .AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #1a2b49;
-  background-color: #fff;
+  background-color: rgb(247, 247, 247);
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: none;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) select ~ label {
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
+  background-color: transparent;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill, .AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:hover, .AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:focus, .AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #1a2b49;
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid,
+.AB-TEST013 .registration-left .form-field-street em.is-invalid,
+.AB-TEST013 .registration-left .form-field-house-number em.is-invalid,
+.AB-TEST013 .registration-left .form-field-postal-code em.is-invalid,
+.AB-TEST013 .registration-left .form-field-city em.is-invalid {
   display: none !important;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid {
-  display: none !important;
+.AB-TEST013 .registration-left .form .form-group.form-input .select-list {
+  left: 0;
 }
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {

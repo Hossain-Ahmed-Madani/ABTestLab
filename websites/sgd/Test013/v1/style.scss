@@ -280,19 +280,54 @@
     }
 
     // Form
-    .registration-left .form-group:not(.form-input-group) {
+    .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
+    .registration-left .form-field-street,
+    .registration-left .form-field-house-number,
+    .registration-left .form-field-postal-code,
+    .registration-left .form-field-city {
         height: 49px;
+        background-color: rgba(247, 247, 247, 1);
         padding: 14px 7px 11px 11px;
         border: 1px solid rgba(217, 217, 217, 1);
         border-radius: 5px;
-        margin: 15px 5px;
+        margin: 15px 0;
     }
-    .registration-left .form-group:not(.form-input-group) .is-valid {
+
+    .registration-left .select-list-search {
+        margin-bottom: 5px;
+    }
+
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) {
+        margin: 0;
+        border: none;
+        border-bottom: 1px solid #66cc00;
+        border-radius: 0;
+        padding: 0;
+        height: 35px;
+        background-color: transparent;
+    }
+
+    .registration-left .form-group .form-field-street,
+    .registration-left .form-group .form-field-house-number,
+    .registration-left .form-group .form-field-postal-code,
+    .registration-left .form-group .form-field-city {
+        margin: 0 0;
+    }
+
+    .registration-left .form-group:not(.form-input-group) .is-valid,
+    .registration-left .form-field-street .is-valid,
+    .registration-left .form-field-house-number .is-valid,
+    .registration-left .form-field-postal-code .is-valid,
+    .registration-left .form-field-city .is-valid {
         background-image: none;
     }
 
-    .registration-left .form-group:not(.form-input-group) label {
-        top: 12px;
+    .registration-left .form-group:not(.form-input-group) label,
+    .registration-left .form-field-street label,
+    .registration-left .form-field-house-number label,
+    .registration-left .form-field-postal-code label,
+    .registration-left .form-field-city label {
+        top: 13px;
         transform: translateY(0);
         font-family: "Onest Regular";
         font-weight: 400;
@@ -303,7 +338,11 @@
         color: #1a2b49;
     }
 
-    .registration-left .form-group:not(.form-input-group) label.active {
+    .registration-left .form-group:not(.form-input-group) label.active,
+    .registration-left .form-field-street label.active,
+    .registration-left .form-field-house-number label.active,
+    .registration-left .form-field-postal-code label.active,
+    .registration-left .form-field-city label.active {
         top: 0px;
         font-family: "Onest Regular";
         font-weight: 400;
@@ -315,7 +354,22 @@
         transition: all 0.1s ease-in-out;
     }
 
-    .registration-left .form-group:not(.form-input-group) input {
+    .registration-left .form-field-street label.active,
+    .registration-left .form-field-house-number label.active,
+    .registration-left .form-field-postal-code label.active,
+    .registration-left .form-field-city label.active {
+        top: 20px;
+    }
+
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) label.active {
+        top: -10px;
+    }
+
+    .registration-left .form-group:not(.form-input-group) input,
+    .registration-left .form-field-street input,
+    .registration-left .form-field-house-number input,
+    .registration-left .form-field-postal-code input,
+    .registration-left .form-field-city input {
         margin: 0;
         padding: 0;
         border: none !important;
@@ -327,7 +381,7 @@
         letter-spacing: 0px;
         vertical-align: middle;
         color: #1a2b49;
-        background-color: #fff;
+        background-color: rgba(247, 247, 247, 1);
 
         &:-webkit-autofill,
         &:-webkit-autofill:hover,
@@ -335,18 +389,41 @@
         &:-webkit-autofill:active {
             -webkit-background-clip: text;
             -webkit-text-fill-color: #1a2b49;
-            background-color: #fff;
+            background-color: rgba(247, 247, 247, 1);
             transition: background-color 5000s ease-in-out 0s;
             box-shadow: none;
         }
     }
 
-    .registration-left .form-group:not(.form-input-group) select ~ label {
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit)  input {
+        background-color: transparent;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #1a2b49;
+            background-color: transparent;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: none;
+        }
+    }
+
+    // .registration-left .form-group:not(.form-input-group) select ~ label {
+    //     display: none !important;
+    // }
+
+    .registration-left .form-group:not(.form-input-group) em.is-invalid,
+    .registration-left .form-field-street em.is-invalid,
+    .registration-left .form-field-house-number em.is-invalid,
+    .registration-left .form-field-postal-code em.is-invalid,
+    .registration-left .form-field-city em.is-invalid {
         display: none !important;
     }
 
-    .registration-left .form-group:not(.form-input-group) em.is-invalid {
-        display: none !important;
+    .registration-left .form .form-group.form-input .select-list {
+        left: 0;
     }
 
     @media screen and (max-width: 768px) {
