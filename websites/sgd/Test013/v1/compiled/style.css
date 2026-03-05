@@ -16,7 +16,8 @@
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) h2,
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) p,
 .AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
-.AB-TEST013 #downloadForm .list-type-none.list-style-check {
+.AB-TEST013 #downloadForm .list-type-none.list-style-check,
+.AB-TEST013 .registration-left .form-button-submit {
   display: none !important;
 }
 .AB-TEST013 .ab-ml-auto {
@@ -183,7 +184,64 @@
   vertical-align: middle;
   color: #1a2b49;
 }
+.AB-TEST013 .ab-form-submit-action-container {
+  width: 100%;
+  margin-top: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.AB-TEST013 .ab-form-action-cta {
+  width: 100%;
+  height: 36px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  background-color: rgba(102, 204, 0, 0.5019607843);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.AB-TEST013 .ab-form-action-cta__text {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: #212529;
+}
+.AB-TEST013 .ab-form-action-cta__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TEST013 .ab-form-action-cta__icon svg {
+  width: 25px;
+  height: auto;
+}
+.AB-TEST013 .ab-form-submit-cta {
+  background-color: rgba(102, 204, 0, 0.5019607843);
+  display: none;
+}
+.AB-TEST013 .ab-form-submit-cta .ab-form-action-cta__text {
+  font-family: "Onest Bold";
+  font-weight: 700;
+}
+.AB-TEST013 .ab-action-note-text {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(37, 135, 45);
+}
 .AB-TEST013 .registration-left p.mt-2 {
+  display: none;
+  max-width: 677px;
   font-family: "Onest Regular";
   font-weight: 300;
   font-size: 12px;
@@ -191,6 +249,10 @@
   letter-spacing: 0px;
   vertical-align: middle;
   color: #1a2b49;
+  text-align: left;
+  text-wrap: pretty;
+  margin-top: 8px !important;
+  margin-bottom: 0;
 }
 .AB-TEST013 .registration-left .ab-description {
   font-family: "Onest Regular";
@@ -205,9 +267,113 @@
 .AB-TEST013 .registration-left .form .form-group-customer-type {
   margin-bottom: 0 !important;
   width: 100%;
+  margin-bottom: 6px !important;
 }
 .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
   margin-right: 25px;
+}
+.AB-TEST013 .ab-form-progress-container {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 0.3px solid rgb(190, 190, 190);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-TEST013 .ab-form-progress {
+  width: 50%;
+  position: relative;
+  background-color: rgb(178, 229, 128);
+  border-radius: 6px;
+  will-change: width;
+  transition: width 0.3s ease-in-out;
+}
+.AB-TEST013 .ab-progress-text {
+  font-family: Inter;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(98, 98, 98);
+}
+.AB-TEST013 .ab-step-two-text {
+  display: none;
+}
+.AB-TEST013 .ab-advantage-mobile {
+  width: 100%;
+  margin-bottom: 26px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-title {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+  margin-bottom: 21px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 11px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg svg {
+  width: 20px;
+  height: 20px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__title {
+  font-family: "Onest Bold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+}
+.AB-TEST013 .ab-form-step-two-message-mobile {
+  width: 100%;
+  background-color: rgba(178, 229, 128, 0.3);
+  padding: 2px 5px 2px 9px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-strong {
+  font-family: Inter;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0;
+  text-align: left;
+}
+.AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-regular {
+  font-family: Inter;
+  font-weight: 300;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0;
 }
 .AB-TEST013 .registration-left .form .form-group-customer-type label.btn {
   width: 105px;
@@ -229,6 +395,12 @@
   font-weight: 700;
   color: #ffffff;
   background-color: #25872d;
+}
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-street,
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-city,
+.AB-TEST013 .form .form-group.form-input.form-field-land,
+.AB-TEST013 .form .form-group.form-input.form-field-phone {
+  display: none;
 }
 .AB-TEST013 .ab-row:has(> .form-group),
 .AB-TEST013 .ab-row:has(> .form-field-street),
@@ -275,10 +447,10 @@
   background-image: none;
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) label,
-.AB-TEST013 .registration-left .form-field-street label,
-.AB-TEST013 .registration-left .form-field-house-number label,
-.AB-TEST013 .registration-left .form-field-postal-code label,
-.AB-TEST013 .registration-left .form-field-city label {
+.AB-TEST013 .registration-left .form-group.form-input .form-field-street label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-house-number label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-postal-code label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-city label {
   top: 13px;
   transform: translateY(0);
   font-family: "Onest Regular";
@@ -288,12 +460,13 @@
   letter-spacing: 0px;
   vertical-align: middle;
   color: #1a2b49;
+  padding: 0;
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active,
-.AB-TEST013 .registration-left .form-field-street label.active,
-.AB-TEST013 .registration-left .form-field-house-number label.active,
-.AB-TEST013 .registration-left .form-field-postal-code label.active,
-.AB-TEST013 .registration-left .form-field-city label.active {
+.AB-TEST013 .registration-left .form-group.form-input .form-field-street label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-city label.active {
   top: 0px;
   font-family: "Onest Regular";
   font-weight: 400;
@@ -303,6 +476,8 @@
   vertical-align: middle;
   color: #1a2b49;
   transition: all 0.1s ease-in-out;
+  padding: 0;
+  transform: translateY(0);
 }
 .AB-TEST013 .registration-left .form-field-street label.active,
 .AB-TEST013 .registration-left .form-field-house-number label.active,
@@ -321,6 +496,8 @@
 .AB-TEST013 .registration-left .form-field-city input {
   margin: 0;
   padding: 0;
+  padding-left: 0;
+  padding-right: 0;
   border: none !important;
   font-family: "Onest Regular";
   font-weight: 400;
@@ -383,7 +560,9 @@
 .AB-TEST013 .registration-left .form-field-last-name,
 .AB-TEST013 .registration-left .form-field-email,
 .AB-TEST013 .registration-left .form-field-land,
-.AB-TEST013 .registration-left .form-field-phone {
+.AB-TEST013 .registration-left .form-field-phone,
+.AB-TEST013 .registration-left .form-field-company-position,
+.AB-TEST013 .registration-left .form-field-company-name {
   width: 100%;
 }
 .AB-TEST013 .registration-left .form-field-street {
@@ -424,7 +603,9 @@
   .AB-TEST013 .registration-left .form-field-last-name,
   .AB-TEST013 .registration-left .form-field-street,
   .AB-TEST013 .registration-left .form-field-land,
-  .AB-TEST013 .registration-left .form-field-phone {
+  .AB-TEST013 .registration-left .form-field-phone,
+  .AB-TEST013 .registration-left .form-field-company-position,
+  .AB-TEST013 .registration-left .form-field-company-name {
     width: 306px;
   }
   .AB-TEST013 .registration-left .form-select-salutation.form-group:not(.form-input-group):not(.form-button-submit) {
@@ -591,7 +772,31 @@
     margin-bottom: 17px;
   }
   .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
-    margin-right: 27px;
+    margin-right: 25px;
+  }
+  .AB-TEST013 .ab-advantage-mobile {
+    display: none;
+  }
+  .AB-TEST013 .ab-form-step-two-message-mobile {
+    display: none;
+  }
+  .AB-TEST013 .ab-form-submit-action-container {
+    width: 100%;
+    margin-top: 27px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .AB-TEST013 .ab-form-action-cta {
+    width: 297px;
+    gap: 20px;
+  }
+  .AB-TEST013 .ab-action-note-text {
+    text-align: left;
+  }
+  .AB-TEST013 .ab-form-progress-container {
+    width: 306px;
+    margin-bottom: 17px;
   }
   .AB-TEST013 .ab-advantage-desktop {
     border: 2px solid #1a2b49;
@@ -625,6 +830,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__svg svg {
     width: 20px;
     height: 20px;
   }
@@ -641,7 +848,7 @@
     width: 353px;
     background-color: rgba(178, 229, 128, 0.3);
     padding: 10px;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 3px;
   }
@@ -662,6 +869,35 @@
     letter-spacing: 0px;
     color: rgb(0, 0, 0);
     margin-bottom: 0;
+  }
+}
+
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-progress {
+  width: 100%;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input-group.form-field-group-street,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input-group.form-field-group-city,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input.form-field-land,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input.form-field-phone,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-two-text,
+.AB-TEST013 .registration-left.ab-show-step-two-items p.mt-2 {
+  display: block;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-one-text,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-show-contact-details-cta {
+  display: none;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-mobile,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-submit-cta {
+  display: flex;
+}
+@media screen and (min-width: 991px) {
+  .AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-mobile {
+    display: none;
+  }
+  .AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-desktop {
+    display: flex;
+    flex-direction: column;
   }
 }
 

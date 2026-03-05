@@ -48,6 +48,22 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 />
             </defs>
         </svg>`,
+        arrow_right_svg: /* HTML */ `
+            <svg width="26" height="8" viewBox="0 0 26 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M25.3536 4.03556C25.5488 3.8403 25.5488 3.52372 25.3536 3.32845L22.1716 0.146473C21.9763 -0.0487893 21.6597 -0.0487893 21.4645 0.146473C21.2692 0.341735 21.2692 0.658318 21.4645 0.85358L24.2929 3.68201L21.4645 6.51043C21.2692 6.7057 21.2692 7.02228 21.4645 7.21754C21.6597 7.4128 21.9763 7.4128 22.1716 7.21754L25.3536 4.03556ZM0 3.68201V4.18201H25V3.68201V3.18201H0V3.68201Z"
+                    fill="#505051"
+                />
+            </svg>
+        `,
+        arrow_right_bold_svg: /* HTML */ `
+            <svg width="26" height="15" viewBox="0 0 26 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M25.7071 8.07112C26.0976 7.6806 26.0976 7.04743 25.7071 6.65691L19.3431 0.292946C18.9526 -0.0975785 18.3195 -0.0975785 17.9289 0.292946C17.5384 0.68347 17.5384 1.31664 17.9289 1.70716L23.5858 7.36401L17.9289 13.0209C17.5384 13.4114 17.5384 14.0446 17.9289 14.4351C18.3195 14.8256 18.9526 14.8256 19.3431 14.4351L25.7071 8.07112ZM0 7.36401V8.36401H25V7.36401V6.36401H0V7.36401Z"
+                    fill="#505051"
+                />
+            </svg>
+        `,
     };
 
     const DATA = {
@@ -136,6 +152,29 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     return resolve(true);
                 }
             }, frequency);
+        });
+    }
+
+    async function waitForPromiseOnMutation(predicate, maxCount = 1000) {
+        let count = 0;
+
+        return new Promise((resolve, reject) => {
+            if (typeof predicate === "function" && predicate()) {
+                return resolve(true);
+            }
+
+            new MutationObserver((mutationList, observer) => {
+                count++;
+                console.log("mutation", count);
+
+                if (typeof predicate === "function" && predicate()) {
+                    observer.disconnect();
+                    return resolve(true);
+                } else if (count > maxCount) {
+                    observer.disconnect();
+                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
+                }
+            }).observe(document.body, { childList: true, subtree: true });
         });
     }
 
@@ -364,7 +403,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function updateFormLayout() {
-        waitForElementAsync(() => !!(q(".registration-left") && q("#downloadForm")), 100000).then(() => {
+        waitForPromiseOnMutation(() => !!(q(".registration-left") && q("#downloadForm"))).then(() => {
             // Form Section
 
             const registrationLeft = q(".registration-left");
@@ -380,6 +419,33 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
                         <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
                     </p>
+                    <div class="ab-advantage-mobile">
+                        <div class="ab-advantage-title">Sie erhalten sofort:</div>
+                        <div class="ab-advantage-list">
+                            ${[
+                                "Informationen zu den Studiengebühren (jetzt 10% sparen)",
+                                "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                                "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                                "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                                "Informationen zu den Seminaren/Webinaren",
+                            ]
+                                .map(
+                                    (item) => /* HTML */ `
+                                        <div class="ab-advantage-list-item">
+                                            <span class="ab-advantage-list-item__svg">${ASSETS.course_info_svg}</span>
+                                            <span class="ab-advantage-list-item__title">${item}</span>
+                                        </div>
+                                    `,
+                                )
+                                .join("")}
+                        </div>
+                    </div>
+                    <div class="ab-form-progress-container">
+                        <div class="ab-form-progress">
+                            <div class="ab-progress-text ab-step-one-text">Ihre Daten - Schritt 1 von 2</div>
+                            <div class="ab-progress-text ab-step-two-text">Anfrage abschließen - Schritt 2 von 2</div>
+                        </div>
+                    </div>
                 `,
             );
 
@@ -422,38 +488,66 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 `,
             );
 
-            // Update Form Items
+            q(registrationLeft, ".form-field-company-position").insertAdjacentHTML(
+                "beforebegin",
+                /* HTML */ `
+                    <div class="ab-form-step-two-message-mobile">
+                        <p class="ab-form-step-two-message-text-strong">
+                            Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten. Noch ein weiterer Vorteil:
+                        </p>
+                        <p class="ab-form-step-two-message-text-regular">
+                            Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung. Wir hinterlegen Ihre Adresse sicher, damit der Versand von Studienmaterialien später
+                            reibungslos und schnell für Sie abläuft
+                        </p>
+                    </div>
+                `,
+            );
 
-            // Form Item
-            // const formSelectSalutation = q(registrationLeft, ".form-select-salutation");
-            // formSelectSalutation.className = 'col-12 col-lg-5 form-group form-input form-select-salutation'
-            // const formSelectSalutationRow = document.createElement("div");
-            // formSelectSalutationRow.classList.add("row");
-            // formSelectSalutation.insertAdjacentElement("afterend", formSelectSalutationRow);
-            // formSelectSalutationRow.appendChild(formSelectSalutation);
+            q(registrationLeft, ".registration-inner-container > div:has(> .form-group) ").insertAdjacentHTML(
+                "afterend",
+                /* HTML */ `
+                    <div class="ab-form-submit-action-container">
+                        <div class="ab-show-contact-details-cta ab-form-action-cta">
+                            <span class="ab-form-action-cta__text">Zu den Kontaktangaben</span>
+                            <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_svg}</span>
+                        </div>
+                        <div class="ab-form-submit-cta ab-form-action-cta">
+                            <span class="ab-form-action-cta__text">Jetzt Preise einsehen</span>
+                            <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_bold_svg}</span>
+                        </div>
+                        <div class="ab-action-note-text">Keine Kursbuchung. Der Zugang ist kostenlos & unverbindlich.</div>
+                    </div>
+                `,
+            );
 
-            // // Form Item
-            // q(registrationLeft, ".form-field-first-name").className = 'col-12 col-lg-5 form-group form-input form-field-first-name'
-            // q(registrationLeft, ".form-field-last-name").className = 'col-12 col-lg-5 form-group form-input form-field-last-name ab-ml-auto'
-
+            // Update Form Section
             qq(registrationLeft, ".registration-inner-container .row").forEach((item) => {
                 item.classList.remove("row");
                 item.classList.add("ab-row");
             });
 
-            qq(registrationLeft, ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city").forEach((item) => {
-                Array.from(item.classList).forEach((className) => {
-                    if (className.includes("col")) {
-                        item.classList.remove(className);
-                    }
-                });
-            });
+            qq(registrationLeft, ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city").forEach(
+                (item) => {
+                    Array.from(item.classList).forEach((className) => {
+                        if (className.includes("col")) {
+                            item.classList.remove(className);
+                        }
+                    });
+                },
+            );
 
             const formLastName = q(registrationLeft, ".form-field-last-name");
             const formEmail = q(registrationLeft, ".form-field-email");
             formLastName.insertAdjacentElement("afterend", formEmail);
 
-            // Inject div, .row, for line break
+            // Click Action
+            q(".ab-show-contact-details-cta").addEventListener("click", () => {
+                registrationLeft.classList.add("ab-show-step-two-items");
+            });
+
+            q(".ab-form-submit-cta").addEventListener("click", () => {
+                q(registrationLeft, ".form-button-submit button").click();
+            });
         });
         // .catch((error) => {
         //     console.warn(error);
