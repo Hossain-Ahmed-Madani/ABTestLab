@@ -29,8 +29,13 @@
 .AB-TEST013 .container-md:has(> .tab-393-none),
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) h2,
 .AB-TEST013 .quick-info:not(:has(.mb-2:empty)) p,
-.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none) {
+.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
+.AB-TEST013 #downloadForm .list-type-none.list-style-check,
+.AB-TEST013 .registration-left .form-button-submit {
   display: none !important;
+}
+.AB-TEST013 .ab-ml-auto {
+  margin-left: auto !important;
 }
 .AB-TEST013 .header-wrapper.container-md {
   display: none !important;
@@ -176,6 +181,583 @@
   margin-top: 41px;
   margin-bottom: 32px;
 }
+.AB-TEST013 .registration {
+  background-color: #97fffc;
+}
+.AB-TEST013 #downloadForm {
+  background-color: #ffffff;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  border-radius: 8px;
+}
+.AB-TEST013 .ab-form-content-right {
+  display: none;
+}
+.AB-TEST013 .registration-inner-container {
+  background-color: transparent;
+  padding: 7px 21px 22px !important;
+}
+.AB-TEST013 .registration-left h2.mb-2 {
+  font-family: "Onest Bold";
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: 0%;
+  vertical-align: middle;
+  color: #1a2b49;
+}
+.AB-TEST013 .ab-form-submit-action-container {
+  width: 100%;
+  margin-top: 17px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.AB-TEST013 .ab-form-action-cta {
+  width: 100%;
+  height: 36px;
+  border-radius: 30px;
+  box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2509803922);
+  background-color: rgba(102, 204, 0, 0.5019607843);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.AB-TEST013 .ab-form-action-cta__text {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: #212529;
+}
+.AB-TEST013 .ab-form-action-cta__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TEST013 .ab-form-action-cta__icon svg {
+  width: 25px;
+  height: auto;
+}
+.AB-TEST013 .ab-form-submit-cta {
+  background-color: rgba(102, 204, 0, 0.5019607843);
+  display: none;
+}
+.AB-TEST013 .ab-form-submit-cta .ab-form-action-cta__text {
+  font-family: "Onest Bold";
+  font-weight: 700;
+}
+.AB-TEST013 .ab-action-note-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  color: rgb(37, 135, 45);
+}
+.AB-TEST013 .registration-left p.mt-2 {
+  display: none;
+  max-width: 677px;
+  font-family: "Onest Regular";
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  text-align: left;
+  text-wrap: pretty;
+  margin-top: 8px !important;
+  margin-bottom: 0;
+}
+.AB-TEST013 .registration-left .ab-description {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  margin-bottom: 14px;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type {
+  margin-bottom: 0 !important;
+  width: 100%;
+  margin-bottom: 6px !important;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
+  margin-right: 25px;
+}
+.AB-TEST013 .ab-form-progress-container {
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  border: 0.3px solid rgb(190, 190, 190);
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-TEST013 .ab-form-progress {
+  width: 50%;
+  position: relative;
+  background-color: rgb(178, 229, 128);
+  border-radius: 6px;
+  will-change: width;
+  transition: width 0.3s ease-in-out;
+}
+.AB-TEST013 .ab-progress-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(98, 98, 98);
+}
+.AB-TEST013 .ab-step-two-text {
+  display: none;
+}
+.AB-TEST013 .ab-advantage-mobile {
+  width: 100%;
+  margin-bottom: 26px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-title {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+  margin-bottom: 21px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 11px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg svg {
+  width: 20px;
+  height: 20px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__title {
+  font-family: "Onest Bold";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+}
+.AB-TEST013 .ab-form-step-two-message-mobile {
+  width: 100%;
+  background-color: rgba(178, 229, 128, 0.3);
+  padding: 2px 5px 2px 9px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+}
+.AB-TEST013
+  .ab-form-step-two-message-mobile
+  .ab-form-step-two-message-text-strong {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0;
+  text-align: left;
+}
+.AB-TEST013
+  .ab-form-step-two-message-mobile
+  .ab-form-step-two-message-text-regular {
+  font-family: "Inter", sans-serif;
+  font-weight: 300;
+  font-size: 8px;
+  line-height: 150%;
+  letter-spacing: 0px;
+  color: rgb(0, 0, 0);
+  margin-bottom: 0;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type label.btn {
+  width: 105px;
+  height: 34px;
+  background-color: #ffffff;
+  border: 1px solid #25872d;
+  border-radius: 5px;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: #5c5f63;
+}
+.AB-TEST013
+  .registration-left
+  .form
+  .form-group-customer-type
+  label.btn.active {
+  font-family: "Onest Bold";
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #25872d;
+}
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-street,
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-city,
+.AB-TEST013 .form .form-group.form-input.form-field-land,
+.AB-TEST013 .form .form-group.form-input.form-field-phone {
+  display: none;
+}
+.AB-TEST013 .ab-row:has(> .form-group),
+.AB-TEST013 .ab-row:has(> .form-field-street),
+.AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 14px;
+}
+.AB-TEST013 .registration-left .form-group.form-input-group {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group):not(.form-button-submit),
+.AB-TEST013 .registration-left .form-field-street,
+.AB-TEST013 .registration-left .form-field-house-number,
+.AB-TEST013 .registration-left .form-field-postal-code,
+.AB-TEST013 .registration-left .form-field-city {
+  height: 49px;
+  background-color: rgb(247, 247, 247);
+  padding: 14px 7px 11px 11px;
+  border: 1px solid rgb(217, 217, 217);
+  border-radius: 5px;
+  margin: 0;
+  position: relative;
+}
+.AB-TEST013 .registration-left .select-list-search {
+  margin-bottom: 5px;
+}
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit) {
+  margin: 0;
+  border: none;
+  border-bottom: 1px solid #66cc00;
+  border-radius: 0;
+  padding: 0;
+  height: 35px;
+  background-color: transparent;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid,
+.AB-TEST013 .registration-left .form-field-street .is-valid,
+.AB-TEST013 .registration-left .form-field-house-number .is-valid,
+.AB-TEST013 .registration-left .form-field-postal-code .is-valid,
+.AB-TEST013 .registration-left .form-field-city .is-valid {
+  background-image: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-street label,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-house-number
+  label,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-postal-code
+  label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-city label {
+  top: 13px;
+  transform: translateY(0);
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  padding: 0;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-street
+  label.active,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-house-number
+  label.active,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-postal-code
+  label.active,
+.AB-TEST013
+  .registration-left
+  .form-group.form-input
+  .form-field-city
+  label.active {
+  top: 0px;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  transition: all 0.1s ease-in-out;
+  padding: 0;
+  transform: translateY(0);
+}
+.AB-TEST013 .registration-left .form-field-street label.active,
+.AB-TEST013 .registration-left .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-field-city label.active {
+  top: 20px;
+}
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  label.active {
+  top: -10px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input[type="text"]:read-only,
+.AB-TEST013 .registration-left .form-field-street input,
+.AB-TEST013 .registration-left .form-field-house-number input,
+.AB-TEST013 .registration-left .form-field-postal-code input,
+.AB-TEST013 .registration-left .form-field-city input {
+  margin: 0;
+  padding: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border: none !important;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  background-color: rgb(247, 247, 247);
+}
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input:-webkit-autofill,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input:-webkit-autofill:hover,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input:-webkit-autofill:focus,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input:-webkit-autofill:active,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input[type="text"]:read-only:-webkit-autofill,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input[type="text"]:read-only:-webkit-autofill:hover,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input[type="text"]:read-only:-webkit-autofill:focus,
+.AB-TEST013
+  .registration-left
+  .form-group:not(.form-input-group)
+  input[type="text"]:read-only:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill,
+.AB-TEST013
+  .registration-left
+  .form-field-house-number
+  input:-webkit-autofill:hover,
+.AB-TEST013
+  .registration-left
+  .form-field-house-number
+  input:-webkit-autofill:focus,
+.AB-TEST013
+  .registration-left
+  .form-field-house-number
+  input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill,
+.AB-TEST013
+  .registration-left
+  .form-field-postal-code
+  input:-webkit-autofill:hover,
+.AB-TEST013
+  .registration-left
+  .form-field-postal-code
+  input:-webkit-autofill:focus,
+.AB-TEST013
+  .registration-left
+  .form-field-postal-code
+  input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #1a2b49;
+  background-color: rgb(247, 247, 247);
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  input {
+  background-color: transparent;
+}
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  input:-webkit-autofill,
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  input:-webkit-autofill:hover,
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  input:-webkit-autofill:focus,
+.AB-TEST013
+  .registration-left
+  .select-list-search
+  .form-group:not(.form-input-group):not(.form-button-submit)
+  input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #1a2b49;
+  background-color: transparent;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid,
+.AB-TEST013 .registration-left .form-field-street em.is-invalid,
+.AB-TEST013 .registration-left .form-field-house-number em.is-invalid,
+.AB-TEST013 .registration-left .form-field-postal-code em.is-invalid,
+.AB-TEST013 .registration-left .form-field-city em.is-invalid {
+  display: none !important;
+}
+.AB-TEST013 .registration-left .form .form-group.form-input .select-list {
+  left: 0;
+}
+.AB-TEST013 .registration-left .form-select-salutation,
+.AB-TEST013 .registration-left .form-field-first-name,
+.AB-TEST013 .registration-left .form-field-last-name,
+.AB-TEST013 .registration-left .form-field-email,
+.AB-TEST013 .registration-left .form-field-land,
+.AB-TEST013 .registration-left .form-field-phone,
+.AB-TEST013 .registration-left .form-field-company-position,
+.AB-TEST013 .registration-left .form-field-company-name {
+  width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-street {
+  width: calc(100% - 62px - 14px);
+}
+.AB-TEST013 .registration-left .form-field-house-number {
+  width: 62px;
+}
+.AB-TEST013 .registration-left .form-field-group-city {
+  width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-postal-code {
+  width: 120px;
+}
+.AB-TEST013 .registration-left .form-field-city {
+  width: calc(100% - 134px);
+}
+@media screen and (min-width: 1400px) {
+  .AB-TEST013 .ab-row:has(> .form-group),
+  .AB-TEST013 .ab-row:has(> .form-field-street),
+  .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 56px;
+  }
+  .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+    width: 306px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .AB-TEST013 .registration-left .form-field-group-city {
+    width: 306px;
+  }
+  .AB-TEST013 .registration-left .form-select-salutation,
+  .AB-TEST013 .registration-left .form-field-first-name,
+  .AB-TEST013 .registration-left .form-field-last-name,
+  .AB-TEST013 .registration-left .form-field-street,
+  .AB-TEST013 .registration-left .form-field-land,
+  .AB-TEST013 .registration-left .form-field-phone,
+  .AB-TEST013 .registration-left .form-field-company-position,
+  .AB-TEST013 .registration-left .form-field-company-name {
+    width: 306px;
+  }
+  .AB-TEST013
+    .registration-left
+    .form-select-salutation.form-group:not(.form-input-group):not(
+      .form-button-submit
+    ) {
+    margin-right: calc(100% - 306px - 56px);
+  }
+  .AB-TEST013 .registration-left .form-field-email {
+    width: 668px;
+  }
+  .AB-TEST013 .registration-left .form-field-postal-code {
+    width: 120px;
+  }
+  .AB-TEST013 .registration-left .form-field-city {
+    width: 169px;
+  }
+}
 @media screen and (max-width: 768px) {
   .AB-TEST013 .page-header.pinned .header-elements {
     position: static;
@@ -224,6 +806,7 @@
     margin-top: 30px;
     margin-bottom: 0;
   }
+  .AB-TEST013 .container-md.tab-393-none + .ab-course-accordion,
   .AB-TEST013 .container-md.frame-space-after-medium + .ab-course-accordion {
     margin-bottom: 44px;
   }
@@ -297,6 +880,192 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+  .AB-TEST013 .registration-right {
+    display: none;
+  }
+  .AB-TEST013 #downloadForm {
+    display: flex;
+  }
+  .AB-TEST013 .registration-inner-container {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0 21px 31px !important;
+  }
+  .AB-TEST013 .ab-form-content-right {
+    display: flex;
+    flex-direction: column;
+    padding: 42px 50px 21px 0 !important;
+    width: 528px;
+    min-width: 528px;
+    align-items: end;
+  }
+  .AB-TEST013 .registration-left h2.mb-2 {
+    font-size: 32px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    margin-bottom: 25px !important;
+  }
+  .AB-TEST013 .registration-left .ab-description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    margin-bottom: 17px;
+  }
+  .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
+    margin-right: 25px;
+  }
+  .AB-TEST013 .ab-advantage-mobile {
+    display: none;
+  }
+  .AB-TEST013 .ab-form-step-two-message-mobile {
+    display: none;
+  }
+  .AB-TEST013 .ab-form-submit-action-container {
+    width: 100%;
+    margin-top: 27px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .AB-TEST013 .ab-form-action-cta {
+    width: 297px;
+    gap: 20px;
+  }
+  .AB-TEST013 .ab-action-note-text {
+    text-align: left;
+  }
+  .AB-TEST013 .ab-form-progress-container {
+    width: 306px;
+    margin-bottom: 17px;
+  }
+  .AB-TEST013 .ab-advantage-desktop {
+    border: 2px solid #1a2b49;
+    width: 355px;
+    padding: 21px 34px 39px;
+    border-radius: 10px;
+    margin-bottom: 41px;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-title {
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    margin-bottom: 8px;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 11px;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__svg {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__svg svg {
+    width: 20px;
+    height: 20px;
+  }
+  .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__title {
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+  }
+  .AB-TEST013 .ab-form-step-two-message-desktop {
+    width: 353px;
+    background-color: rgba(178, 229, 128, 0.3);
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .AB-TEST013
+    .ab-form-step-two-message-desktop
+    .ab-form-step-two-message-text-strong {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+  }
+  .AB-TEST013
+    .ab-form-step-two-message-desktop
+    .ab-form-step-two-message-text-regular {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+  }
+}
+
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-progress {
+  width: 100%;
+}
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .form
+  .form-group.form-input-group.form-field-group-street,
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .form
+  .form-group.form-input-group.form-field-group-city,
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .form
+  .form-group.form-input.form-field-land,
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .form
+  .form-group.form-input.form-field-phone,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-two-text,
+.AB-TEST013 .registration-left.ab-show-step-two-items p.mt-2 {
+  display: block;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-one-text,
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .ab-show-contact-details-cta {
+  display: none;
+}
+.AB-TEST013
+  .registration-left.ab-show-step-two-items
+  .ab-form-step-two-message-mobile,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-submit-cta {
+  display: flex;
+}
+@media screen and (min-width: 991px) {
+  .AB-TEST013
+    .registration-left.ab-show-step-two-items
+    .ab-form-step-two-message-mobile {
+    display: none;
+  }
+  .AB-TEST013
+    .registration-left.ab-show-step-two-items
+    .ab-form-step-two-message-desktop {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .AB-TEST013 .ab-faq-accordion-section hr {
@@ -355,13 +1124,11 @@
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item strong {
-  font-family: "Onest Bold";
-  font-weight: bolder;
+  font-family: "Onest Medium";
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item a {
-  font-family: "Onest Bold";
-  font-weight: bolder;
+  font-family: "Onest Medium";
   color: #1a2b49;
   text-align: underline;
 }
@@ -465,6 +1232,10 @@ Figma: https://www.figma.com/design/RWs9kC2tKwUdp3OEJcadw9/Test013---Landingpage
 
 Important: https://www.sgd.de/lp/realschulabschluss.html
 
+Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=33053&variation_id=49499&search=Test013+%5BSGD%5D+-+landing+pages+-+new+structure
+Preview url: 
+https://www.sgd.de/lp/abitur.html?qa5=true
+
 Target Pages:
 https://www.sgd.de/lp/abitur.html
 https://www.sgd.de/lp/gepr-fachwirtin-im-gesundheits-und-sozialwesen-ihk.html
@@ -482,10 +1253,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "SGD",
-    site_url: "https://www.sgd.de/",
-    test_name: "Test013 [SGD] - landing pages - new structure",
     page_initials: "AB-TEST013",
     test_variation: 1,
     test_version: 0.0001,
@@ -521,6 +1288,34 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         />
       </defs>
     </svg>`,
+    arrow_right_svg: /* HTML */ `
+      <svg
+        width="26"
+        height="8"
+        viewBox="0 0 26 8"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M25.3536 4.03556C25.5488 3.8403 25.5488 3.52372 25.3536 3.32845L22.1716 0.146473C21.9763 -0.0487893 21.6597 -0.0487893 21.4645 0.146473C21.2692 0.341735 21.2692 0.658318 21.4645 0.85358L24.2929 3.68201L21.4645 6.51043C21.2692 6.7057 21.2692 7.02228 21.4645 7.21754C21.6597 7.4128 21.9763 7.4128 22.1716 7.21754L25.3536 4.03556ZM0 3.68201V4.18201H25V3.68201V3.18201H0V3.68201Z"
+          fill="#505051"
+        />
+      </svg>
+    `,
+    arrow_right_bold_svg: /* HTML */ `
+      <svg
+        width="26"
+        height="15"
+        viewBox="0 0 26 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M25.7071 8.07112C26.0976 7.6806 26.0976 7.04743 25.7071 6.65691L19.3431 0.292946C18.9526 -0.0975785 18.3195 -0.0975785 17.9289 0.292946C17.5384 0.68347 17.5384 1.31664 17.9289 1.70716L23.5858 7.36401L17.9289 13.0209C17.5384 13.4114 17.5384 14.0446 17.9289 14.4351C18.3195 14.8256 18.9526 14.8256 19.3431 14.4351L25.7071 8.07112ZM0 7.36401V8.36401H25V7.36401V6.36401H0V7.36401Z"
+          fill="#505051"
+        />
+      </svg>
+    `,
   };
 
   const DATA = {
@@ -620,6 +1415,32 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     });
   }
 
+  async function waitForPromiseOnMutation(predicate, maxCount = 1000) {
+    let count = 0;
+
+    return new Promise((resolve, reject) => {
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
+
+      new MutationObserver((mutationList, observer) => {
+        count++;
+
+        if (typeof predicate === "function" && predicate()) {
+          observer.disconnect();
+          return resolve(true);
+        } else if (count > maxCount) {
+          observer.disconnect();
+          return reject(
+            new Error(
+              `Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`,
+            ),
+          );
+        }
+      }).observe(document.body, { childList: true, subtree: true });
+    });
+  }
+
   function q(s, o) {
     return o ? s.querySelector(o) : document.querySelector(s);
   }
@@ -629,9 +1450,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
   }
 
   function createAccordionNoTabLayout() {
-    const targetNode = q(
-      ".container-md.tab-393-none + div.frame-space-after-medium",
-    );
+    const targetNode = q(".container-md.tab-393-none + div");
 
     if (!targetNode) return;
 
@@ -644,8 +1463,12 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
       };
     });
 
+    const position = targetNode.classList.contains("frame-space-after-medium")
+      ? "afterend"
+      : "beforebegin";
+
     targetNode.insertAdjacentHTML(
-      "afterend",
+      position,
       /* HTML */ `
         <div class="ab-course-accordion container-md">
           <div class="ab-faq-accordion-section">
@@ -810,7 +1633,20 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     );
   }
 
-  function createLayout() {
+  function updateMainLayout() {
+    // Add Font Family
+    q("head").insertAdjacentHTML(
+      "beforeend",
+      /* HTML */ `
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet"
+        />
+      `,
+    );
+
     // Header
     q(".header-wrapper.container-md").insertAdjacentHTML(
       "afterend",
@@ -900,18 +1736,18 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     );
 
     // Reposition Elements
-    const targetNode = q(
+    const frameSlider = q(
       ".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)",
     );
-    targetNode.insertAdjacentElement(
+    frameSlider.insertAdjacentElement(
       "afterend",
       q(".container-md:has(>.frame-type-contact_support)"),
     );
-    targetNode.insertAdjacentElement(
+    frameSlider.insertAdjacentElement(
       "afterend",
       q(".container-md:has(>.grid-container) + .container-md:has(>hr)"),
     );
-    targetNode.insertAdjacentElement(
+    frameSlider.insertAdjacentElement(
       "afterend",
       q(".container-md:has(>.grid-container)"),
     );
@@ -924,14 +1760,218 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     createAccordionWithTabLayout();
   }
 
+  function updateFormLayout() {
+    waitForPromiseOnMutation(
+      () => !!(q(".registration-left") && q("#downloadForm")),
+    )
+      .then(() => {
+        // Form Section
+
+        const registrationLeft = q(".registration-left");
+        registrationLeft.classList.remove("col-lg-8");
+
+        q(registrationLeft, "h2.mb-2").innerText =
+          "Erfahren Sie alles über diesen Kurs";
+
+        q(registrationLeft, "h2.mb-2").insertAdjacentHTML(
+          "afterend",
+          /* HTML */ `
+            <p class="ab-description">
+              Füllen Sie das Formular aus, um sofortigen und
+              <strong
+                >dauerhaften Zugriff auf alle Kursdetails und Preise
+              </strong>
+              zu erhalten - aufrufbar über ihr
+              <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte
+              Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
+              <strong
+                >Ihr persönlicher Zugang ist unverbindlich und keine
+                Kursbuchung.</strong
+              >
+            </p>
+            <div class="ab-advantage-mobile">
+              <div class="ab-advantage-title">Sie erhalten sofort:</div>
+              <div class="ab-advantage-list">
+                ${[
+                  "Informationen zu den Studiengebühren (jetzt 10% sparen)",
+                  "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                  "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                  "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                  "Informationen zu den Seminaren/Webinaren",
+                ]
+                  .map(
+                    (item) => /* HTML */ `
+                      <div class="ab-advantage-list-item">
+                        <span class="ab-advantage-list-item__svg"
+                          >${ASSETS.course_info_svg}</span
+                        >
+                        <span class="ab-advantage-list-item__title"
+                          >${item}</span
+                        >
+                      </div>
+                    `,
+                  )
+                  .join("")}
+              </div>
+            </div>
+            <div class="ab-form-progress-container">
+              <div class="ab-form-progress">
+                <div class="ab-progress-text ab-step-one-text">
+                  Ihre Daten - Schritt 1 von 2
+                </div>
+                <div class="ab-progress-text ab-step-two-text">
+                  Anfrage abschließen - Schritt 2 von 2
+                </div>
+              </div>
+            </div>
+          `,
+        );
+
+        qq(registrationLeft, "p:not(.mt-2):not(.ab-description)").forEach(
+          (item) => item.classList.add("ab-hidden"),
+        );
+
+        q(registrationLeft, "#downloadForm").insertAdjacentHTML(
+          "beforeend",
+          /* HTML */ `
+            <div class="ab-form-content-right">
+              <div class="ab-advantage-desktop">
+                <div class="ab-advantage-title">Sie erhalten sofort:</div>
+                <div class="ab-advantage-list">
+                  ${[
+                    "Informationen zu den Studiengebühren",
+                    "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                    "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                    "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                    "Informationen zu den Seminaren/Webinaren",
+                  ]
+                    .map(
+                      (item) => /* HTML */ `
+                        <div class="ab-advantage-list-item">
+                          <span class="ab-advantage-list-item__svg"
+                            >${ASSETS.course_info_svg}</span
+                          >
+                          <span class="ab-advantage-list-item__title"
+                            >${item}</span
+                          >
+                        </div>
+                      `,
+                    )
+                    .join("")}
+                </div>
+              </div>
+              <div class="ab-form-step-two-message-desktop">
+                <p class="ab-form-step-two-message-text-strong">
+                  Sie können zusätzlich ein Gratis-Exemplar des aktuellen
+                  Studienprogramms per Post erhalten.
+                </p>
+                <p class="ab-form-step-two-message-text-strong">
+                  Noch ein weiterer Vorteil:
+                </p>
+                <p class="ab-form-step-two-message-text-regular">
+                  Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung.
+                  Wir hinterlegen Ihre Adresse sicher, damit der Versand von
+                  Studienmaterialien später reibungslos und schnell für Sie
+                  abläuft.
+                </p>
+              </div>
+            </div>
+          `,
+        );
+
+        q(registrationLeft, ".form-field-company-position").insertAdjacentHTML(
+          "beforebegin",
+          /* HTML */ `
+            <div class="ab-form-step-two-message-mobile">
+              <p class="ab-form-step-two-message-text-strong">
+                Sie können zusätzlich ein Gratis-Exemplar des aktuellen
+                Studienprogramms per Post erhalten. Noch ein weiterer Vorteil:
+              </p>
+              <p class="ab-form-step-two-message-text-regular">
+                Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung.
+                Wir hinterlegen Ihre Adresse sicher, damit der Versand von
+                Studienmaterialien später reibungslos und schnell für Sie
+                abläuft
+              </p>
+            </div>
+          `,
+        );
+
+        q(
+          registrationLeft,
+          ".registration-inner-container > div:has(> .form-group) ",
+        ).insertAdjacentHTML(
+          "afterend",
+          /* HTML */ `
+            <div class="ab-form-submit-action-container">
+              <div class="ab-show-contact-details-cta ab-form-action-cta">
+                <span class="ab-form-action-cta__text"
+                  >Zu den Kontaktangaben</span
+                >
+                <span class="ab-form-action-cta__icon"
+                  >${ASSETS.arrow_right_svg}</span
+                >
+              </div>
+              <div class="ab-form-submit-cta ab-form-action-cta">
+                <span class="ab-form-action-cta__text"
+                  >Jetzt Preise einsehen</span
+                >
+                <span class="ab-form-action-cta__icon"
+                  >${ASSETS.arrow_right_bold_svg}</span
+                >
+              </div>
+              <div class="ab-action-note-text">
+                Keine Kursbuchung. Der Zugang ist kostenlos & unverbindlich.
+              </div>
+            </div>
+          `,
+        );
+
+        // Update Form Section
+        qq(registrationLeft, ".registration-inner-container .row").forEach(
+          (item) => {
+            item.classList.remove("row");
+            item.classList.add("ab-row");
+          },
+        );
+
+        qq(
+          registrationLeft,
+          ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city",
+        ).forEach((item) => {
+          Array.from(item.classList).forEach((className) => {
+            if (className.includes("col")) {
+              item.classList.remove(className);
+            }
+          });
+        });
+
+        const formLastName = q(registrationLeft, ".form-field-last-name");
+        const formEmail = q(registrationLeft, ".form-field-email");
+        formLastName.insertAdjacentElement("afterend", formEmail);
+
+        // Click Action
+        q(".ab-show-contact-details-cta").addEventListener("click", () => {
+          registrationLeft.classList.add("ab-show-step-two-items");
+        });
+
+        q(".ab-form-submit-cta").addEventListener("click", () => {
+          q(registrationLeft, ".form-button-submit button").click();
+        });
+      })
+      .catch((error) => {
+        return false;
+      });
+  }
+
   function init() {
     q("body").classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
-    createLayout();
+    updateMainLayout();
+    updateFormLayout();
     clickFunction();
   }
 
@@ -966,19 +2006,16 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
       q(".container-md:has(>.grid-container)") &&
       q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
       q(".container-md:has(>.frame-type-contact_support)") &&
-      ((q(".container-md.tab-393-none + div.frame-space-after-medium") &&
+      // ((q(".container-md.tab-393-none + div.frame-space-after-medium") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
+      ((q(".container-md.tab-393-none") &&
         q("div.tab-393-none:not(.accordion):has(h2)")) ||
         q("#courseTabContent .quick-info"))
     );
   }
 
-  // try {
-  //     await waitForElementAsync(checkForItems);
-  //     init();
-  // } catch (error) {
-  //     console.warn(error);
-  //     return false;
-  // }
-
-  waitForElementAsync(checkForItems).then(init);
+  waitForElementAsync(checkForItems)
+    .then(init)
+    .catch((error) => {
+      return false;
+    });
 })();

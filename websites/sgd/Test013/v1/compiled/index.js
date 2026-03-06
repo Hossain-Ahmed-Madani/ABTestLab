@@ -4,6 +4,10 @@ Figma: https://www.figma.com/design/RWs9kC2tKwUdp3OEJcadw9/Test013---Landingpage
 
 Important: https://www.sgd.de/lp/realschulabschluss.html
 
+Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=33053&variation_id=49499&search=Test013+%5BSGD%5D+-+landing+pages+-+new+structure
+Preview url: 
+https://www.sgd.de/lp/abitur.html?qa5=true
+
 Target Pages:
 https://www.sgd.de/lp/abitur.html
 https://www.sgd.de/lp/gepr-fachwirtin-im-gesundheits-und-sozialwesen-ihk.html
@@ -21,10 +25,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Netzproduzenten",
-        project: "SGD",
-        site_url: "https://www.sgd.de/",
-        test_name: "Test013 [SGD] - landing pages - new structure",
         page_initials: "AB-TEST013",
         test_variation: 1,
         test_version: 0.0001,
@@ -165,7 +165,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
             new MutationObserver((mutationList, observer) => {
                 count++;
-                console.log("mutation", count);
 
                 if (typeof predicate === "function" && predicate()) {
                     observer.disconnect();
@@ -187,7 +186,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function createAccordionNoTabLayout() {
-        const targetNode = q(".container-md.tab-393-none + div.frame-space-after-medium");
+        const targetNode = q(".container-md.tab-393-none + div");
 
         if (!targetNode) return;
 
@@ -200,8 +199,10 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             };
         });
 
+        const position = targetNode.classList.contains("frame-space-after-medium") ? "afterend" : "beforebegin";
+
         targetNode.insertAdjacentHTML(
-            "afterend",
+            position,
             /* HTML */ `
                 <div class="ab-course-accordion container-md">
                     <div class="ab-faq-accordion-section">
@@ -326,6 +327,16 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function updateMainLayout() {
+        // Add Font Family
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
         // Header
         q(".header-wrapper.container-md").insertAdjacentHTML(
             "afterend",
@@ -403,63 +414,28 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function updateFormLayout() {
-        waitForPromiseOnMutation(() => !!(q(".registration-left") && q("#downloadForm"))).then(() => {
-            // Form Section
+        waitForPromiseOnMutation(() => !!(q(".registration-left") && q("#downloadForm")))
+            .then(() => {
+                // Form Section
 
-            const registrationLeft = q(".registration-left");
-            registrationLeft.classList.remove("col-lg-8");
+                const registrationLeft = q(".registration-left");
+                registrationLeft.classList.remove("col-lg-8");
 
-            q(registrationLeft, "h2.mb-2").innerText = "Erfahren Sie alles über diesen Kurs";
+                q(registrationLeft, "h2.mb-2").innerText = "Erfahren Sie alles über diesen Kurs";
 
-            q(registrationLeft, "h2.mb-2").insertAdjacentHTML(
-                "afterend",
-                /* HTML */ `
-                    <p class="ab-description">
-                        Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr
-                        <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
-                        <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
-                    </p>
-                    <div class="ab-advantage-mobile">
-                        <div class="ab-advantage-title">Sie erhalten sofort:</div>
-                        <div class="ab-advantage-list">
-                            ${[
-                                "Informationen zu den Studiengebühren (jetzt 10% sparen)",
-                                "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
-                                "Auszüge aus dem Original-Lernmaterial zum Downloaden",
-                                "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
-                                "Informationen zu den Seminaren/Webinaren",
-                            ]
-                                .map(
-                                    (item) => /* HTML */ `
-                                        <div class="ab-advantage-list-item">
-                                            <span class="ab-advantage-list-item__svg">${ASSETS.course_info_svg}</span>
-                                            <span class="ab-advantage-list-item__title">${item}</span>
-                                        </div>
-                                    `,
-                                )
-                                .join("")}
-                        </div>
-                    </div>
-                    <div class="ab-form-progress-container">
-                        <div class="ab-form-progress">
-                            <div class="ab-progress-text ab-step-one-text">Ihre Daten - Schritt 1 von 2</div>
-                            <div class="ab-progress-text ab-step-two-text">Anfrage abschließen - Schritt 2 von 2</div>
-                        </div>
-                    </div>
-                `,
-            );
-
-            qq(registrationLeft, "p:not(.mt-2):not(.ab-description)").forEach((item) => item.classList.add("ab-hidden"));
-
-            q(registrationLeft, "#downloadForm").insertAdjacentHTML(
-                "beforeend",
-                /* HTML */ `
-                    <div class="ab-form-content-right">
-                        <div class="ab-advantage-desktop">
+                q(registrationLeft, "h2.mb-2").insertAdjacentHTML(
+                    "afterend",
+                    /* HTML */ `
+                        <p class="ab-description">
+                            Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr
+                            <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
+                            <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
+                        </p>
+                        <div class="ab-advantage-mobile">
                             <div class="ab-advantage-title">Sie erhalten sofort:</div>
                             <div class="ab-advantage-list">
                                 ${[
-                                    "Informationen zu den Studiengebühren",
+                                    "Informationen zu den Studiengebühren (jetzt 10% sparen)",
                                     "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
                                     "Auszüge aus dem Original-Lernmaterial zum Downloaden",
                                     "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
@@ -476,90 +452,124 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                     .join("")}
                             </div>
                         </div>
-                        <div class="ab-form-step-two-message-desktop">
-                            <p class="ab-form-step-two-message-text-strong">Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten.</p>
-                            <p class="ab-form-step-two-message-text-strong">Noch ein weiterer Vorteil:</p>
+                        <div class="ab-form-progress-container">
+                            <div class="ab-form-progress">
+                                <div class="ab-progress-text ab-step-one-text">Ihre Daten - Schritt 1 von 2</div>
+                                <div class="ab-progress-text ab-step-two-text">Anfrage abschließen - Schritt 2 von 2</div>
+                            </div>
+                        </div>
+                    `,
+                );
+
+                qq(registrationLeft, "p:not(.mt-2):not(.ab-description)").forEach((item) => item.classList.add("ab-hidden"));
+
+                q(registrationLeft, "#downloadForm").insertAdjacentHTML(
+                    "beforeend",
+                    /* HTML */ `
+                        <div class="ab-form-content-right">
+                            <div class="ab-advantage-desktop">
+                                <div class="ab-advantage-title">Sie erhalten sofort:</div>
+                                <div class="ab-advantage-list">
+                                    ${[
+                                        "Informationen zu den Studiengebühren",
+                                        "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                                        "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                                        "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                                        "Informationen zu den Seminaren/Webinaren",
+                                    ]
+                                        .map(
+                                            (item) => /* HTML */ `
+                                                <div class="ab-advantage-list-item">
+                                                    <span class="ab-advantage-list-item__svg">${ASSETS.course_info_svg}</span>
+                                                    <span class="ab-advantage-list-item__title">${item}</span>
+                                                </div>
+                                            `,
+                                        )
+                                        .join("")}
+                                </div>
+                            </div>
+                            <div class="ab-form-step-two-message-desktop">
+                                <p class="ab-form-step-two-message-text-strong">Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten.</p>
+                                <p class="ab-form-step-two-message-text-strong">Noch ein weiterer Vorteil:</p>
+                                <p class="ab-form-step-two-message-text-regular">
+                                    Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung. Wir hinterlegen Ihre Adresse sicher, damit der Versand von Studienmaterialien später
+                                    reibungslos und schnell für Sie abläuft.
+                                </p>
+                            </div>
+                        </div>
+                    `,
+                );
+
+                q(registrationLeft, ".form-field-company-position").insertAdjacentHTML(
+                    "beforebegin",
+                    /* HTML */ `
+                        <div class="ab-form-step-two-message-mobile">
+                            <p class="ab-form-step-two-message-text-strong">
+                                Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten. Noch ein weiterer Vorteil:
+                            </p>
                             <p class="ab-form-step-two-message-text-regular">
                                 Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung. Wir hinterlegen Ihre Adresse sicher, damit der Versand von Studienmaterialien später
-                                reibungslos und schnell für Sie abläuft.
+                                reibungslos und schnell für Sie abläuft
                             </p>
                         </div>
-                    </div>
-                `,
-            );
+                    `,
+                );
 
-            q(registrationLeft, ".form-field-company-position").insertAdjacentHTML(
-                "beforebegin",
-                /* HTML */ `
-                    <div class="ab-form-step-two-message-mobile">
-                        <p class="ab-form-step-two-message-text-strong">
-                            Sie können zusätzlich ein Gratis-Exemplar des aktuellen Studienprogramms per Post erhalten. Noch ein weiterer Vorteil:
-                        </p>
-                        <p class="ab-form-step-two-message-text-regular">
-                            Sparen Sie sich das Tippen bei Ihrer zukünftigen Kursbuchung. Wir hinterlegen Ihre Adresse sicher, damit der Versand von Studienmaterialien später
-                            reibungslos und schnell für Sie abläuft
-                        </p>
-                    </div>
-                `,
-            );
-
-            q(registrationLeft, ".registration-inner-container > div:has(> .form-group) ").insertAdjacentHTML(
-                "afterend",
-                /* HTML */ `
-                    <div class="ab-form-submit-action-container">
-                        <div class="ab-show-contact-details-cta ab-form-action-cta">
-                            <span class="ab-form-action-cta__text">Zu den Kontaktangaben</span>
-                            <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_svg}</span>
+                q(registrationLeft, ".registration-inner-container > div:has(> .form-group) ").insertAdjacentHTML(
+                    "afterend",
+                    /* HTML */ `
+                        <div class="ab-form-submit-action-container">
+                            <div class="ab-show-contact-details-cta ab-form-action-cta">
+                                <span class="ab-form-action-cta__text">Zu den Kontaktangaben</span>
+                                <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_svg}</span>
+                            </div>
+                            <div class="ab-form-submit-cta ab-form-action-cta">
+                                <span class="ab-form-action-cta__text">Jetzt Preise einsehen</span>
+                                <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_bold_svg}</span>
+                            </div>
+                            <div class="ab-action-note-text">Keine Kursbuchung. Der Zugang ist kostenlos & unverbindlich.</div>
                         </div>
-                        <div class="ab-form-submit-cta ab-form-action-cta">
-                            <span class="ab-form-action-cta__text">Jetzt Preise einsehen</span>
-                            <span class="ab-form-action-cta__icon">${ASSETS.arrow_right_bold_svg}</span>
-                        </div>
-                        <div class="ab-action-note-text">Keine Kursbuchung. Der Zugang ist kostenlos & unverbindlich.</div>
-                    </div>
-                `,
-            );
+                    `,
+                );
 
-            // Update Form Section
-            qq(registrationLeft, ".registration-inner-container .row").forEach((item) => {
-                item.classList.remove("row");
-                item.classList.add("ab-row");
+                // Update Form Section
+                qq(registrationLeft, ".registration-inner-container .row").forEach((item) => {
+                    item.classList.remove("row");
+                    item.classList.add("ab-row");
+                });
+
+                qq(registrationLeft, ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city").forEach(
+                    (item) => {
+                        Array.from(item.classList).forEach((className) => {
+                            if (className.includes("col")) {
+                                item.classList.remove(className);
+                            }
+                        });
+                    },
+                );
+
+                const formLastName = q(registrationLeft, ".form-field-last-name");
+                const formEmail = q(registrationLeft, ".form-field-email");
+                formLastName.insertAdjacentElement("afterend", formEmail);
+
+                // Click Action
+                q(".ab-show-contact-details-cta").addEventListener("click", () => {
+                    registrationLeft.classList.add("ab-show-step-two-items");
+                });
+
+                q(".ab-form-submit-cta").addEventListener("click", () => {
+                    q(registrationLeft, ".form-button-submit button").click();
+                });
+            })
+            .catch((error) => {
+                return false;
             });
-
-            qq(registrationLeft, ".registration-inner-container .form-group, .form-field-street, .form-field-house-number, .form-field-postal-code, .form-field-city").forEach(
-                (item) => {
-                    Array.from(item.classList).forEach((className) => {
-                        if (className.includes("col")) {
-                            item.classList.remove(className);
-                        }
-                    });
-                },
-            );
-
-            const formLastName = q(registrationLeft, ".form-field-last-name");
-            const formEmail = q(registrationLeft, ".form-field-email");
-            formLastName.insertAdjacentElement("afterend", formEmail);
-
-            // Click Action
-            q(".ab-show-contact-details-cta").addEventListener("click", () => {
-                registrationLeft.classList.add("ab-show-step-two-items");
-            });
-
-            q(".ab-form-submit-cta").addEventListener("click", () => {
-                q(registrationLeft, ".form-button-submit button").click();
-            });
-        });
-        // .catch((error) => {
-        //     console.warn(error);
-        //     return false;
-        // });
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-        updateFormLayout();
         updateMainLayout();
+        updateFormLayout();
         clickFunction();
     }
 
@@ -590,22 +600,14 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             q(".container-md:has(>.grid-container)") &&
             q(".container-md:has(>.grid-container) + .container-md:has(>hr)") &&
             q(".container-md:has(>.frame-type-contact_support)") &&
-            // q(".registration-left") && q("#downloadForm") && /* Remove Later !important */
-            ((q(".container-md.tab-393-none + div.frame-space-after-medium") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
+            // ((q(".container-md.tab-393-none + div.frame-space-after-medium") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
+            ((q(".container-md.tab-393-none") && q("div.tab-393-none:not(.accordion):has(h2)")) || q("#courseTabContent .quick-info"))
         );
     }
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     console.warn(error);
-    //     return false;
-    // }
-
-    waitForElementAsync(checkForItems).then(init);
-    // .catch((error) => {
-    //     console.warn(error);
-    //     return false;
-    // });
+    waitForElementAsync(checkForItems)
+        .then(init)
+        .catch((error) => {
+            return false;
+        });
 })();

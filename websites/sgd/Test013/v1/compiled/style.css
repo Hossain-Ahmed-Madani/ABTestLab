@@ -231,7 +231,7 @@
   font-weight: 700;
 }
 .AB-TEST013 .ab-action-note-text {
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 10px;
   line-height: 150%;
@@ -293,7 +293,7 @@
   transition: width 0.3s ease-in-out;
 }
 .AB-TEST013 .ab-progress-text {
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 8px;
   line-height: 150%;
@@ -357,7 +357,7 @@
   gap: 2px;
 }
 .AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-strong {
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-weight: 700;
   font-size: 8px;
   line-height: 150%;
@@ -367,7 +367,7 @@
   text-align: left;
 }
 .AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-regular {
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
   font-weight: 300;
   font-size: 8px;
   line-height: 150%;
@@ -667,6 +667,7 @@
     margin-top: 30px;
     margin-bottom: 0;
   }
+  .AB-TEST013 .container-md.tab-393-none + .ab-course-accordion,
   .AB-TEST013 .container-md.frame-space-after-medium + .ab-course-accordion {
     margin-bottom: 44px;
   }
@@ -853,7 +854,7 @@
     gap: 3px;
   }
   .AB-TEST013 .ab-form-step-two-message-desktop .ab-form-step-two-message-text-strong {
-    font-family: Inter;
+    font-family: "Inter", sans-serif;
     font-weight: 700;
     font-size: 12px;
     line-height: 150%;
@@ -862,7 +863,7 @@
     margin-bottom: 0;
   }
   .AB-TEST013 .ab-form-step-two-message-desktop .ab-form-step-two-message-text-regular {
-    font-family: Inter;
+    font-family: "Inter", sans-serif;
     font-weight: 300;
     font-size: 12px;
     line-height: 150%;
