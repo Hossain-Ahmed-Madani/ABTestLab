@@ -104,8 +104,12 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
         return document.querySelector(s);
     }
 
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     function updateLayout() {
-        q(".container-md:has(> .quick-info.row)").insertAdjacentHTML(
+        q(".container-md:has(.quick-info.row)").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
                 <div class="container-md ab-container">
@@ -199,7 +203,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     function clickFunction() {
         document.querySelectorAll(".cta.cta-buttons.cta-name-order.mt-5");
         q(".ab-link-modal-info-package").addEventListener("click", (e) => {
-            q(".btn.btn-primary.link-modal-info-package:not(.ab-link-modal-info-package)").click();
+            qq(".btn.btn-primary.link-modal-info-package:not(.ab-link-modal-info-package)").forEach(item => item.click());
         });
     }
 
@@ -211,7 +215,7 @@ Preview: https://www.sgd.de/kursseite/gepr-betriebswirtin-sgd.html?qa5=true
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".container-md:has(> .quick-info.row)"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".container-md:has( .quick-info.row)"));
     }
 
     try {
