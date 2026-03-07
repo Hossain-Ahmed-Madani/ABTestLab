@@ -15,6 +15,20 @@ check the pdp pages as the code mostly works on it, and you can also find design
 */
 
 (async () => {
+  const TEST_ID = "PP27US";
+  const VARIANT_ID = "V1"; /* V1, V2 */
+
+  function logInfo(message) {
+    console.log(
+      `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      message,
+    );
+  }
+
+  logInfo("fired");
+
   const TEST_CONFIG = {
     client: "Acadia",
     project: "Princess Polly",
@@ -22,8 +36,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
     test_name:
       "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
     page_initials: "AB-PP27US",
-    test_variation: 2,
-    test_version: 0.0001,
+    test_variation: 1,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -102,6 +116,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
       <div class="product__swatches" data-colors=""></div>
     </div>
     <div class="ab-product-size-selector-container">
+      <!-- on initialize add -> ab-product-size-selector-container--initialized -->
       <h2 class="product__label product__label--size">
         <span class="product__active-size-label">Size:</span>
         <span class="product__size-value" data-product-size-value=""></span>
@@ -488,9 +503,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
   async function updateModalLayout(url) {
     destroySwiper();
     // Clear Size Section Items For Loader
+    q(".ab-product-size-selector-container").classList.remove(
+      "ab-product-size-selector-container--initialized",
+    );
     qq(`
             .ab-product-size-selector-container .product__size-value,
-            .ab-product-size-selector-container .product__select-sizes`).forEach(
+            .ab-product-size-selector-container > .product__select-sizes`).forEach(
       (item) => (item.innerHTML = ""),
     );
 
@@ -508,8 +526,13 @@ check the pdp pages as the code mostly works on it, and you can also find design
     )
       .map((el) => el.outerHTML)
       .join("");
-    q(".ab-product-size-selector-container .product__select-sizes").innerHTML =
-      q(dom, ".product__select-sizes").outerHTML;
+
+    q(".ab-product-size-selector-container").classList.add(
+      "ab-product-size-selector-container--initialized",
+    );
+    q(
+      ".ab-product-size-selector-container > .product__select-sizes",
+    ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
 
@@ -674,7 +697,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
             ".ab-product-size-selector-container .product__select-sizes-item.active button",
           );
           const variantId = selectedSize.getAttribute("data-size-variant-id");
-          console.log("variantId", variantId);
           q(
             `button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`,
           ).click();

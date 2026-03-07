@@ -9,9 +9,7 @@
 .AB-PP27US .ab-afterpay-container:empty,
 .AB-PP27US .ab-color-swatch-container:has(.product__swatches:empty)::after,
 .AB-PP27US .ab-color-swatch-container:has(.product__swatches:empty)::before,
-.AB-PP27US
-  .ab-product-size-selector-container:has(.product__select-sizes:empty)
-  .ab-product-sizes-skeleton-loader__item {
+.AB-PP27US .ab-product-sizes-skeleton-loader__item {
   background-color: rgb(229, 229, 229);
   animation: pulse 0.5s infinite linear;
   border-radius: 2px;
@@ -50,9 +48,21 @@
   border-radius: 50%;
 }
 .AB-PP27US
-  .ab-product-size-selector-container:has(.product__select-sizes:empty)
+  .ab-product-size-selector-container:not(
+    .ab-product-size-selector-container--initialized
+  )
   .ab-product-sizes-skeleton-loader {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.AB-PP27US
+  .ab-product-size-selector-container:not(
+    .ab-product-size-selector-container--initialized
+  )
+  .ab-product-sizes-skeleton-loader__item {
+  display: block;
+  height: 30px;
 }
 .AB-PP27US .ab-carousel-container {
   margin-bottom: 14px;
@@ -198,13 +208,11 @@
   .ab-product-size-selector-container
   .ab-product-sizes-skeleton-loader {
   display: none;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
 }
 .AB-PP27US
   .ab-product-size-selector-container
   .ab-product-sizes-skeleton-loader__item {
-  height: 30px;
+  display: none;
 }
 .AB-PP27US
   .ab-product-size-selector-container
@@ -225,11 +233,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
-}
-.AB-PP27US
-  .ab-product-size-selector-container
-  .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
-  display: none;
 }
 .AB-PP27US
   .ab-product-size-selector-container
@@ -336,7 +339,7 @@ body.AB-PP27US--modal-show {
   overflow: hidden;
 }
 body.AB-PP27US--modal-show .AB-PP27US__modal-layout {
-  display: flex;
+  display: block;
 }
 body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   display: block;
@@ -348,6 +351,7 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   left: 0;
   width: 100%;
   height: 100vh;
+  height: 100dvh;
   background: transparent;
   z-index: 10000;
   overflow: hidden;
@@ -369,7 +373,8 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   width: 100%;
   min-height: 422px;
   background: rgb(255, 255, 255);
-  position: relative;
+  position: absolute;
+  bottom: 0;
   z-index: 1;
   padding: 16px 13px 20px;
   border-radius: 13px 13px 0 0;
@@ -506,6 +511,20 @@ check the pdp pages as the code mostly works on it, and you can also find design
 */
 
 (async () => {
+  const TEST_ID = "PP27US";
+  const VARIANT_ID = "V1"; /* V1, V2 */
+
+  function logInfo(message) {
+    console.log(
+      `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      message,
+    );
+  }
+
+  logInfo("fired");
+
   const TEST_CONFIG = {
     client: "Acadia",
     project: "Princess Polly",
@@ -513,8 +532,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
     test_name:
       "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
     page_initials: "AB-PP27US",
-    test_variation: 2,
-    test_version: 0.0001,
+    test_variation: 1,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -593,6 +612,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
       <div class="product__swatches" data-colors=""></div>
     </div>
     <div class="ab-product-size-selector-container">
+      <!-- on initialize add -> ab-product-size-selector-container--initialized -->
       <h2 class="product__label product__label--size">
         <span class="product__active-size-label">Size:</span>
         <span class="product__size-value" data-product-size-value=""></span>
@@ -979,9 +999,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
   async function updateModalLayout(url) {
     destroySwiper();
     // Clear Size Section Items For Loader
+    q(".ab-product-size-selector-container").classList.remove(
+      "ab-product-size-selector-container--initialized",
+    );
     qq(`
             .ab-product-size-selector-container .product__size-value,
-            .ab-product-size-selector-container .product__select-sizes`).forEach(
+            .ab-product-size-selector-container > .product__select-sizes`).forEach(
       (item) => (item.innerHTML = ""),
     );
 
@@ -999,8 +1022,13 @@ check the pdp pages as the code mostly works on it, and you can also find design
     )
       .map((el) => el.outerHTML)
       .join("");
-    q(".ab-product-size-selector-container .product__select-sizes").innerHTML =
-      q(dom, ".product__select-sizes").outerHTML;
+
+    q(".ab-product-size-selector-container").classList.add(
+      "ab-product-size-selector-container--initialized",
+    );
+    q(
+      ".ab-product-size-selector-container > .product__select-sizes",
+    ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
 
@@ -1165,7 +1193,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
             ".ab-product-size-selector-container .product__select-sizes-item.active button",
           );
           const variantId = selectedSize.getAttribute("data-size-variant-id");
-          console.log("variantId", variantId);
           q(
             `button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`,
           ).click();

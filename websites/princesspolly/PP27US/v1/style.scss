@@ -27,7 +27,7 @@
     .ab-afterpay-container:empty,
     .ab-color-swatch-container:has(.product__swatches:empty)::after,
     .ab-color-swatch-container:has(.product__swatches:empty)::before,
-    .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader__item {
+    .ab-product-sizes-skeleton-loader__item {
         background-color: rgba(229, 229, 229, 1);
         animation: pulse 0.5s infinite linear;
         border-radius: 2px;
@@ -71,8 +71,15 @@
         }
     }
 
-    .ab-product-size-selector-container:has(.product__select-sizes:empty) .ab-product-sizes-skeleton-loader {
+    .ab-product-size-selector-container:not(.ab-product-size-selector-container--initialized) .ab-product-sizes-skeleton-loader {
         display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+
+        &__item {
+            display: block;
+            height: 30px;
+        }
     }
 
     // Main Designs
@@ -227,11 +234,9 @@
         // Skeleton Loader
         .ab-product-sizes-skeleton-loader {
             display: none;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
 
             &__item {
-                height: 30px;
+                display: none;
             }
         }
 
@@ -255,9 +260,11 @@
             gap: 5px;
         }
 
-        .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
-            display: none;
-        }
+
+        // WORK REMAINING || PENDING
+        // .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+        //     display: none;
+        // }
 
         .product__select-sizes-item.active .product__select-sizes-button {
             background-color: rgba(0, 0, 0, 1);
@@ -387,7 +394,7 @@ body.AB-PP27US--modal-show {
 
     .AB-PP27US {
         &__modal-layout {
-            display: flex;
+            display: block;
         }
 
         &__modal-backdrop {
@@ -409,6 +416,7 @@ body.AB-PP27US--modal-show {
         left: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
         background: transparent;
         z-index: 10000;
         overflow: hidden;
@@ -433,7 +441,8 @@ body.AB-PP27US--modal-show {
         width: 100%;
         min-height: 422px;
         background: rgba(255, 255, 255, 1);
-        position: relative;
+        position: absolute;
+        bottom: 0;
         z-index: 1;
         padding: 16px 13px 20px;
         border-radius: 13px 13px 0 0;

@@ -35,8 +35,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
         site_url: "https://us.princesspolly.com",
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 2,
-        test_version: 0.0001,
+        test_variation: 1,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -106,7 +106,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
             </h2>
             <div class="product__swatches" data-colors=""></div>
         </div>
-        <div class="ab-product-size-selector-container">
+        <div class="ab-product-size-selector-container"> <!-- on initialize add -> ab-product-size-selector-container--initialized -->
             <h2 class="product__label product__label--size">
                 <span class="product__active-size-label">Size:</span>
                 <span class="product__size-value" data-product-size-value=""></span>
@@ -474,9 +474,10 @@ check the pdp pages as the code mostly works on it, and you can also find design
     async function updateModalLayout(url) {
         destroySwiper();
         // Clear Size Section Items For Loader
+        q(".ab-product-size-selector-container").classList.remove("ab-product-size-selector-container--initialized");
         qq(`
             .ab-product-size-selector-container .product__size-value,
-            .ab-product-size-selector-container .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
+            .ab-product-size-selector-container > .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
 
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
@@ -486,7 +487,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
         q(".ab-color-swatch-container").innerHTML = qq(dom, ".product__active-color, .product__swatches:has(> .swatch)")
             .map((el) => el.outerHTML)
             .join("");
-        q(".ab-product-size-selector-container .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
+        
+        q(".ab-product-size-selector-container").classList.add("ab-product-size-selector-container--initialized");
+        q(".ab-product-size-selector-container > .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
         q(".ab-add-to-cart-cta").setAttribute("disabled", "");
         q("a.ab-view-full-details").setAttribute("href", url);
 
