@@ -1,3 +1,8 @@
+.AB-PP27US .quick-shop-carousel-size,
+.AB-PP27US .quick-shop-size,
+.AB-PP27US .product-tile-size {
+    display: none;
+}
 .AB-PP27US .ab-product-title:empty,
 .AB-PP27US .ab-product-price-container:empty,
 .AB-PP27US .ab-afterpay-container:empty,

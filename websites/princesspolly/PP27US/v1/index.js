@@ -35,7 +35,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
         site_url: "https://us.princesspolly.com",
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 2,
+        test_variation: 1,
         test_version: 0.0004,
     };
 
@@ -706,11 +706,81 @@ check the pdp pages as the code mostly works on it, and you can also find design
         });
     }
 
+    async function handleMobileSwipe() {
+        await waitForElementAsync(() => q(`.${page_initials}__modal-layout`) && isTouchEnabled());
+
+        const container = q(`.${page_initials}__modal-layout`);
+        container.addEventListener("touchstart", startTouch, false);
+        container.addEventListener("touchmove", moveTouch, false);
+
+        // Swipe Up / Down / Left / Right
+        let initialX = null;
+        let initialY = null;
+
+        function startTouch(e) {
+            initialX = e.touches[0].clientX;
+            initialY = e.touches[0].clientY;
+        }
+
+        function moveTouch(e) {
+            if (initialX === null) {
+                return;
+            }
+
+            if (initialY === null) {
+                return;
+            }
+
+            let currentX = e.touches[0].clientX;
+            let currentY = e.touches[0].clientY;
+
+            let diffX = initialX - currentX;
+            let diffY = initialY - currentY;
+
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // sliding horizontally
+                if (diffX > 0) {
+                    // swiped left
+                    // console.log("swiped left");
+                } else {
+                    // swiped right
+                    // console.log("swiped right");
+                }
+            } else {
+                // sliding vertically
+                if (diffY > 0) {
+                    // swiped up
+                    // console.log("swiped up");
+                } else {
+                    // swiped down
+                    // console.log("swiped down");
+                }
+            }
+
+            // Swipe Down Threshold
+            if (diffY <= -5) {
+                handleModalView("hide");
+            }
+
+            initialX = null;
+            initialY = null;
+
+            e.preventDefault();
+        }
+    }
+
     function init() {
+
+        if (window[page_initials] === true) return;
+
+        window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
         console.table(TEST_CONFIG);
+        
         createModalLayout();
         clickFunction();
+        handleMobileSwipe();
     }
 
     function checkForItems() {
