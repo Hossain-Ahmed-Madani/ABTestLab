@@ -35,8 +35,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
         site_url: "https://us.princesspolly.com",
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 1,
-        test_version: 0.0003,
+        test_variation: 2,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -106,7 +106,8 @@ check the pdp pages as the code mostly works on it, and you can also find design
             </h2>
             <div class="product__swatches" data-colors=""></div>
         </div>
-        <div class="ab-product-size-selector-container"> <!-- on initialize add -> ab-product-size-selector-container--initialized -->
+        <div class="ab-product-size-selector-container">
+            <!-- on initialize add -> ab-product-size-selector-container--initialized -->
             <h2 class="product__label product__label--size">
                 <span class="product__active-size-label">Size:</span>
                 <span class="product__size-value" data-product-size-value=""></span>
@@ -471,13 +472,17 @@ check the pdp pages as the code mostly works on it, and you can also find design
         }
     }
 
-    async function updateModalLayout(url) {
-        destroySwiper();
+    function clearProductSizeContent() {
         // Clear Size Section Items For Loader
         q(".ab-product-size-selector-container").classList.remove("ab-product-size-selector-container--initialized");
         qq(`
             .ab-product-size-selector-container .product__size-value,
             .ab-product-size-selector-container > .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
+    }
+
+    async function updateModalLayout(url) {
+        destroySwiper();
+        clearProductSizeContent();
 
         const dom = await fetchAndParseURLApi(url);
         if (!dom) return;
@@ -487,9 +492,12 @@ check the pdp pages as the code mostly works on it, and you can also find design
         q(".ab-color-swatch-container").innerHTML = qq(dom, ".product__active-color, .product__swatches:has(> .swatch)")
             .map((el) => el.outerHTML)
             .join("");
-        
+
+        // Size Section
         q(".ab-product-size-selector-container").classList.add("ab-product-size-selector-container--initialized");
         q(".ab-product-size-selector-container > .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
+
+        // CTA Section
         q(".ab-add-to-cart-cta").setAttribute("disabled", "");
         q("a.ab-view-full-details").setAttribute("href", url);
 
@@ -547,7 +555,47 @@ check the pdp pages as the code mostly works on it, and you can also find design
         return item.getAttribute("href") ?? "";
     }
 
+    async function handleQuickAddClick(containerSelector, quickAddSelector) {
+        await waitForElementAsync(() => q(containerSelector));
+
+        qq(containerSelector).forEach((item) => {
+            item.addEventListener("click", (e) => {
+                if (e.target.closest(quickAddSelector)) {
+                    e.preventDefault();
+                    const quickAddButton = e.target.closest(quickAddSelector);
+                    const swatchItem = q(quickAddButton.parentNode, ".swatch--active") || q(quickAddButton.parentNode.parentNode, ".swatch--active");
+                    const url = getUrlFromColorSwatch(swatchItem);
+                    if (!url) return;
+
+                    // Clear Content For Loader
+                    qq(`
+                        .ab-product-title, 
+                        .ab-product-price-container, 
+                        .ab-afterpay-container, 
+                        .ab-color-swatch-container .product__swatches, 
+                        .ab-color-swatch-container .product__value.product__active-color-value`).forEach((item) => (item.innerHTML = ""));
+
+                    // Update & Show
+                    updateModalLayout(url);
+                    handleModalView("show");
+                }
+            });
+        });
+    }
+
     function clickFunction() {
+        // Home Quick Add
+        if (window.location.pathname === "/") {
+            handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
+            handleQuickAddClick(".shopify-section--homepage-nosto-tabs", ".quick-shop-quickadd");
+        }
+
+        // Collection Quick Add
+        if (window.location.pathname.includes("/collection")) {
+            handleQuickAddClick(".product-tiles", ".product-tile__quick");
+            handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
+        }
+
         // Modal Base Events
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
             handleModalView("hide");
@@ -556,25 +604,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
             if (e.target.closest(`.${page_initials}__modal`)) return;
             handleModalView("hide");
-        });
-
-        // Product Card Quick Add Click
-        qq(".product-tiles, .nosto-carousel-tabs__wrap").forEach((item) => {
-            item.addEventListener("click", (e) => {
-                if (e.target.closest(".product-tile__quick, .quick-shop-carousel-quickadd")) {
-                    const quickAddButton = e.target.closest(".product-tile__quick, .quick-shop-carousel-quickadd");
-                    const swatchItem = q(quickAddButton.parentNode, ".swatch--active") || q(quickAddButton.parentNode.parentNode, ".swatch--active");
-                    const url = getUrlFromColorSwatch(swatchItem);
-                    if (!url) return;
-                    // Clear Content For Loader
-                    qq(
-                        ".ab-product-title, .ab-product-price-container, .ab-afterpay-container, .ab-color-swatch-container .product__swatches, .ab-color-swatch-container .product__value.product__active-color-value",
-                    ).forEach((item) => (item.innerHTML = ""));
-                    // Update & Show
-                    updateModalLayout(url);
-                    handleModalView("show");
-                }
-            });
         });
 
         // Modal Content Click
@@ -616,7 +645,13 @@ check the pdp pages as the code mostly works on it, and you can also find design
             if (addToCartCta) {
                 const selectedSize = q(".ab-product-size-selector-container .product__select-sizes-item.active button");
                 const variantId = selectedSize.getAttribute("data-size-variant-id");
-                q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`).click();
+
+                const targetButton =
+                    q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`) ||
+                    q(`button.quick-shop-carousel-size__button[data-quick-shop-id="${variantId}"]`) ||
+                    q(`button.quick-shop-size__button[data-quick-shop-id="${variantId}"]`);
+
+                targetButton.click();
                 handleModalView("hide");
             }
         });
@@ -638,7 +673,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-tiles"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && (q(".product-tiles") || q(".nosto-carousel-tabs__wrap")));
     }
 
     try {

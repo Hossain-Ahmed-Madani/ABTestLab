@@ -22,6 +22,12 @@
 // --font-primary: "forma_djr_bannerregular", var(--font-body);
 
 .AB-PP27US {
+    .quick-shop-carousel-size,
+    .quick-shop-size,
+    .product-tile-size {
+        display: none;
+    }
+
     .ab-product-title:empty,
     .ab-product-price-container:empty,
     .ab-afterpay-container:empty,
@@ -259,7 +265,6 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 5px;
         }
-
 
         // WORK REMAINING || PENDING
         // .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
