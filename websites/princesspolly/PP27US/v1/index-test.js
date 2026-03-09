@@ -1,3 +1,19 @@
+/* 
+
+Ticket : https://trello.com/c/vx7mJ8cY/4768-%E2%9D%A4%EF%B8%8F-pp27us-collection-quick-add-modal-with-images-2-set-up-test
+Figma: https://www.figma.com/design/OFbYNoG7ddtMgXfuaunJPh/PP_---COLLECTION--Quick-Add-Modal-with-Images?node-id=4001-29095&t=7hQ02K4unS65XZam-0
+
+
+
+https://us.princesspolly.com
+https://www.princesspolly.com.au
+
+// https://us.princesspolly.com/products/gigi-skort-beige
+check the pdp pages as the code mostly works on it, and you can also find design
+
+
+*/
+
 (async () => {
     const TEST_ID = "PP27US";
     const VARIANT_ID = "V1"; /* V1, V2 */
