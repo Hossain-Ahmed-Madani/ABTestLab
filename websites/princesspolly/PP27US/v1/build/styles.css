@@ -199,6 +199,9 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 5px;
 }
+.AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+    display: none;
+}
 .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item.active .product__select-sizes-button {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);

@@ -266,10 +266,9 @@
             gap: 5px;
         }
 
-        // WORK REMAINING || PENDING
-        // .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
-        //     display: none;
-        // }
+        .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+            display: none;
+        }
 
         .product__select-sizes-item.active .product__select-sizes-button {
             background-color: rgba(0, 0, 0, 1);

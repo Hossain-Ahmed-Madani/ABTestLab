@@ -30,13 +30,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "Princess Polly",
-        site_url: "https://us.princesspolly.com",
-        test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 1,
-        test_version: 0.0004,
+        test_variation: 2,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -358,6 +354,14 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
                 
                 `;
+
+                if(window.location.href.includes("princesspolly.com.au")) {
+                    styles += `
+                        .afterpay-logo.brand-afterpay.lockup-black svg {
+                            margin-top: 1.5px;
+                        }
+                    `;
+                }
 
                 if (promo && promoActive) {
                     styles += `
@@ -711,14 +715,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
     }
 
     function init() {
-
         if (window[page_initials] === true) return;
 
         window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
-        console.table(TEST_CONFIG);
-        
+        if (window.location.href.includes("princesspolly.com.au")) {
+            q("body").classList.add(`${page_initials}--AU`);
+        }
+
         createModalLayout();
         clickFunction();
         handleMobileSwipe();
@@ -732,7 +737,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

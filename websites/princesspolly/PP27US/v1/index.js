@@ -35,25 +35,11 @@ check the pdp pages as the code mostly works on it, and you can also find design
         site_url: "https://us.princesspolly.com",
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 1,
-        test_version: 0.0004,
+        test_variation: 2,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
-
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            event: "GA4event",
-            "ga4-event-name": "cro_event",
-            "ga4-event-p1-name": "event_category",
-            "ga4-event-p1-value": eventName,
-            "ga4-event-p2-name": "event_label",
-            "ga4-event-p2-value": eventLabel,
-        });
-    }
 
     async function fetchAndParseURLApi(url) {
         try {
@@ -120,12 +106,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
     function isTouchEnabled() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     const initialInnerLayout = /* HTML */ `
@@ -395,6 +375,14 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
                 
                 `;
+
+                if(window.location.href.includes("princesspolly.com.au")) {
+                    styles += `
+                        .afterpay-logo.brand-afterpay.lockup-black svg {
+                            margin-top: 1.5px;
+                        }
+                    `;
+                }
 
                 if (promo && promoActive) {
                     styles += `
@@ -770,14 +758,15 @@ check the pdp pages as the code mostly works on it, and you can also find design
     }
 
     function init() {
-
         if (window[page_initials] === true) return;
 
         window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
-        console.table(TEST_CONFIG);
-        
+        if (window.location.href.includes("princesspolly.com.au")) {
+            q("body").classList.add(`${page_initials}--AU`);
+        }
+
         createModalLayout();
         clickFunction();
         handleMobileSwipe();
@@ -791,7 +780,6 @@ check the pdp pages as the code mostly works on it, and you can also find design
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
