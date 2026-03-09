@@ -20,7 +20,7 @@
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -90,12 +90,6 @@
 
     function isTouchEnabled() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     const initialInnerLayout = /* HTML */ `
@@ -365,6 +359,14 @@
 
                 
                 `;
+
+                if (window.location.href.includes("princesspolly.com.au")) {
+                    styles += `
+                        .afterpay-logo.brand-afterpay.lockup-black svg {
+                            margin-top: 1.5px;
+                        }
+                    `;
+                }
 
                 if (promo && promoActive) {
                     styles += `
@@ -775,7 +777,8 @@
         } .AB-PP27US .ab-product-size-selector-container .ab-product-sizes-skeleton-loader__item { display: none; } .AB-PP27US .ab-product-size-selector-container
         .product__label.product__label--size { font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; line-height: 19px;
         letter-spacing: 0.8px; vertical-align: middle; color: rgb(0, 0, 0); margin-bottom: 13px; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-list {
-        flex-grow: 1; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item.active
+        flex-grow: 1; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; } .AB-PP27US .ab-product-size-selector-container
+        .product__select-sizes-item:has(.product__select-sizes-button.disabled) { display: none; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item.active
         .product__select-sizes-button { background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-button {
         width: 100%; height: 30px; background-color: rgb(255, 255, 255); border: 1px solid rgb(0, 0, 0); display: flex; align-items: center; justify-content: center; font-family:
         "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 10px; line-height: 100%; letter-spacing: 0.8px; text-align: center;
@@ -814,9 +817,14 @@
 
     function init() {
         if (window[page_initials] === true) return;
+
+        window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-        window[page_initials] = true;     window[page_initials] = true;
+
+        if (window.location.href.includes("princesspolly.com.au")) {
+            q("body").classList.add(`${page_initials}--AU`);
+        }
+
         injectStyles();
         createModalLayout();
         clickFunction();
@@ -831,7 +839,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

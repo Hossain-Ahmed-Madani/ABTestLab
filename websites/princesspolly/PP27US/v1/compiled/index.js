@@ -31,7 +31,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
 
     const TEST_CONFIG = {
         page_initials: "AB-PP27US",
-        test_variation: 2,
+        test_variation: 1,
         test_version: 0.0005,
     };
 
