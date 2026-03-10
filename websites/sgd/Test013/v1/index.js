@@ -31,7 +31,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         test_name: "Test013 [SGD] - landing pages - new structure",
         page_initials: "AB-TEST013",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -231,7 +231,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                         </div>
                                         <div class="ab-faq-accordion-item__cta">
                                             <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
-                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Einklappen</span>
                                         </div>
                                     </div>
                                     ${index !== data.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
@@ -297,7 +297,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                         </div>
                                         <div class="ab-faq-accordion-item__cta">
                                             <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
-                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Einklappen</span>
                                         </div>
                                     </div>
                                     ${index !== data1.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
@@ -326,7 +326,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                         </div>
                                         <div class="ab-faq-accordion-item__cta">
                                             <span class="ab-faq-accordion-item__collapsed-text">Klicken zum Lesen</span>
-                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Schließen</span>
+                                            <span class="ab-faq-accordion-item__expanded-text">Klicken zum Einklappen</span>
                                         </div>
                                     </div>
                                     ${index !== data2.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
@@ -414,6 +414,9 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             `,
         );
 
+        // View Prices Btn
+        qq(".d-flex.flex-column.align-items-center a.btn.btn-prio-1").forEach((item) => (item.innerText = "Preise & Probeinhalte einsehen"));
+
         // Reposition Elements
         const frameSlider = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");
         frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
@@ -441,7 +444,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     /* HTML */ `
                         <p class="ab-description">
                             Füllen Sie das Formular aus, um sofortigen und <strong>dauerhaften Zugriff auf alle Kursdetails und Preise </strong> zu erhalten - aufrufbar über ihr
-                            <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
+                            <a href="/mein-konto.html">Benutzerkonto.</a> Das gedruckte Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
                             <strong>Ihr persönlicher Zugang ist unverbindlich und keine Kursbuchung.</strong>
                         </p>
                         <div class="ab-advantage-mobile">

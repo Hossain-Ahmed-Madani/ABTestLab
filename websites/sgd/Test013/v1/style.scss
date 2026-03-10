@@ -32,7 +32,7 @@
     .quick-info:not(:has(.mb-2:empty)) p,
     .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
     #downloadForm .list-type-none.list-style-check,
-    .registration-left .form-button-submit  {
+    .registration-left .form-button-submit {
         display: none !important;
     }
 
@@ -86,6 +86,8 @@
     }
 
     .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+        padding-left: 0;
+        padding-right: 16px;
         font-family: "Onest Regular";
         font-weight: 400;
         font-size: 12.6px;
@@ -178,6 +180,7 @@
         justify-content: center;
         align-items: center;
 
+        width: 100%;
         height: 56px;
         font-family: "Onest Bold";
         font-weight: 700;
@@ -190,6 +193,9 @@
         text-decoration-style: solid;
         text-decoration-skip-ink: auto;
         color: rgba(255, 255, 255, 1);
+
+        white-space: nowrap;
+        padding: 0;
     }
 
     .ab-course-info-box-btn-desktop-mobile {
@@ -232,6 +238,7 @@
         letter-spacing: 0%;
         vertical-align: middle;
         color: #1a2b49;
+        margin-top: 15px;
     }
 
     .ab-form-submit-action-container {
@@ -291,7 +298,7 @@
     }
 
     .ab-action-note-text {
-        font-family:  "Inter", sans-serif;;
+        font-family: "Inter", sans-serif;
         font-weight: 500;
         font-size: 10px;
         line-height: 150%;
@@ -362,7 +369,7 @@
     }
 
     .ab-progress-text {
-        font-family:  "Inter", sans-serif;;
+        font-family: "Inter", sans-serif;
         font-weight: 500;
         font-size: 8px;
         line-height: 150%;
@@ -436,7 +443,7 @@
     }
 
     .ab-form-step-two-message-mobile .ab-form-step-two-message-text-strong {
-        font-family:  "Inter", sans-serif;;
+        font-family: "Inter", sans-serif;
         font-weight: 700;
         font-size: 8px;
         line-height: 150%;
@@ -447,7 +454,7 @@
     }
 
     .ab-form-step-two-message-mobile .ab-form-step-two-message-text-regular {
-        font-family:  "Inter", sans-serif;;
+        font-family: "Inter", sans-serif;
         font-weight: 300;
         font-size: 8px;
         line-height: 150%;
@@ -775,6 +782,14 @@
     }
 
     @media screen and (min-width: 991px) {
+        h2.ce-headline-center {
+            text-align: left;
+        }
+
+        .registration-left h2.mb-2 {
+            margin-top: 32px;
+        }
+
         .page-header .header-elements .header-wrapper {
             padding-top: 13px;
             padding-bottom: 35px;
@@ -786,7 +801,7 @@
             margin-bottom: 0;
         }
 
-        .container-md.tab-393-none + .ab-course-accordion ,
+        .container-md.tab-393-none + .ab-course-accordion,
         .container-md.frame-space-after-medium + .ab-course-accordion {
             margin-bottom: 44px;
         }
@@ -803,6 +818,7 @@
         }
 
         .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+            padding-right: 18px;
             font-size: 14.4px;
             line-height: 14.4px;
             letter-spacing: 0px;
@@ -832,7 +848,7 @@
 
             &__text {
                 font-size: 20px;
-                line-height: 20px;
+                line-height: 30px;
                 letter-spacing: 0px;
             }
         }
@@ -913,6 +929,7 @@
             letter-spacing: 0px;
             vertical-align: middle;
             margin-bottom: 17px;
+            max-width: 560px;
         }
 
         .registration-left .form .form-group-customer-type .form-check {
@@ -955,6 +972,7 @@
             padding: 21px 34px 39px;
             border-radius: 10px;
             margin-bottom: 41px;
+            background-color: rgba(246, 246, 246, 1);
         }
 
         .ab-advantage-desktop .ab-advantage-title {
@@ -1012,7 +1030,7 @@
         }
 
         .ab-form-step-two-message-desktop .ab-form-step-two-message-text-strong {
-            font-family:  "Inter", sans-serif;;
+            font-family: "Inter", sans-serif;
             font-weight: 700;
             font-size: 12px;
             line-height: 150%;
@@ -1022,7 +1040,7 @@
         }
 
         .ab-form-step-two-message-desktop .ab-form-step-two-message-text-regular {
-            font-family:  "Inter", sans-serif;;
+            font-family: "Inter", sans-serif;
             font-weight: 300;
             font-size: 12px;
             line-height: 150%;
