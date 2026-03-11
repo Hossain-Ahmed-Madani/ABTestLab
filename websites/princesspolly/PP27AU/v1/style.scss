@@ -24,10 +24,10 @@
 .AB-PP27US {
     .quick-shop-carousel-size,
     .quick-shop-size,
-    .product-tile-size {
+    .product-tile-size,
+    .ab-afterpay-container:has(.ab-afterpay-null) {
         display: none;
     }
-
     .ab-product-title:empty,
     .ab-product-price-container:empty,
     .ab-afterpay-container:empty,

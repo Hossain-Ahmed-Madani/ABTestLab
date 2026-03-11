@@ -14,9 +14,9 @@
   logInfo("fired");
 
   const TEST_CONFIG = {
-    page_initials: "AB-PP27AU",
+    page_initials: "AB-PP27US",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0007,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -539,11 +539,15 @@
     q("a.ab-view-full-details").setAttribute("href", url);
 
     // AfterPay
-    q(".ab-afterpay-container").innerHTML = q(
-      dom,
-      "#afterpay-placement-pdp",
-    ).outerHTML;
-    applyAfterPayStyles();
+    const afterPayElement = q(dom, "#afterpay-placement-pdp");
+    if (afterPayElement) {
+      q(".ab-afterpay-container").innerHTML = afterPayElement.outerHTML;
+      applyAfterPayStyles();
+    } else {
+      q(".ab-afterpay-container").innerHTML = /* HTML */ `<div
+        class="ab-afterpay-null"
+      ></div>`;
+    }
 
     // Carousel
     q(".ab-swiper.swiper").innerHTML = /* HTML */ `
