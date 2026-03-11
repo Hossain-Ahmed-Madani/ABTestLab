@@ -1,5 +1,5 @@
 (async () => {
-    const TEST_ID = "PP27AU";
+    const TEST_ID = "PP27US";
     const VARIANT_ID = "V1"; /* V1, V2 */
 
     function logInfo(message) {
@@ -17,10 +17,10 @@
         client: "Acadia",
         project: "Princess Polly",
         site_url: "https://us.princesspolly.com",
-        test_name: "PP27AU: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
-        page_initials: "AB-PP27AU",
+        test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
+        page_initials: "AB-PP27US",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

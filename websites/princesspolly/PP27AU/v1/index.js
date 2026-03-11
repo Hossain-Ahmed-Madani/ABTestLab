@@ -18,7 +18,7 @@
         project: "Princess Polly",
         site_url: "https://us.princesspolly.com",
         test_name: "PP27AU: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
-        page_initials: "AB-PP27AU",
+        page_initials: "AB-PP27US",
         test_variation: 1,
         test_version: 0.0006,
     };

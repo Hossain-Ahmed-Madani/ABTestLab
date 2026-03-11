@@ -14,7 +14,7 @@
     logInfo("fired");
 
     const TEST_CONFIG = {
-        page_initials: "AB-PP27AU",
+        page_initials: "AB-PP27US",
         test_variation: 1,
         test_version: 0.0006,
     };
