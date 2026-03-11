@@ -402,6 +402,9 @@
   color: #ffffff;
   background-color: #25872d;
 }
+.AB-TEST013 .ab-price-and-sample-btn-container {
+  margin-bottom: 60px;
+}
 .AB-TEST013 .form .form-group.form-input-group.form-field-group-street,
 .AB-TEST013 .form .form-group.form-input-group.form-field-group-city,
 .AB-TEST013 .form .form-group.form-input.form-field-land,
@@ -541,6 +544,11 @@
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: none;
 }
+.AB-TEST013 .registration-left .form-control:invalid,
+.AB-TEST013 .registration-left .form-control.is-invalid {
+  background-position: right 0px center;
+  background-size: 15px;
+}
 .AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
   background-color: transparent;
 }
@@ -664,6 +672,12 @@
   }
 }
 @media screen and (min-width: 991px) {
+  .AB-TEST013 .ab-price-and-sample-btn-container {
+    display: none;
+  }
+  .AB-TEST013 .registration .registration-left {
+    padding: 0;
+  }
   .AB-TEST013 h2.ce-headline-center {
     text-align: left;
   }
@@ -969,7 +983,7 @@
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item strong {
-  font-family: "Onest Medium";
+  font-family: "Onest Semibold";
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item a {

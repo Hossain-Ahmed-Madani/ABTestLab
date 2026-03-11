@@ -75,6 +75,8 @@
   margin-bottom: 21px !important;
 }
 .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+  padding-left: 0;
+  padding-right: 16px;
   font-family: "Onest Regular";
   font-weight: 400;
   font-size: 12.6px;
@@ -155,6 +157,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   height: 56px;
   font-family: "Onest Bold";
   font-weight: 700;
@@ -167,6 +170,8 @@
   text-decoration-style: solid;
   text-decoration-skip-ink: auto;
   color: rgb(255, 255, 255);
+  white-space: nowrap;
+  padding: 0;
 }
 .AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
   margin-bottom: 25px;
@@ -204,6 +209,7 @@
   letter-spacing: 0%;
   vertical-align: middle;
   color: #1a2b49;
+  margin-top: 15px;
 }
 .AB-TEST013 .ab-form-submit-action-container {
   width: 100%;
@@ -425,6 +431,9 @@
   color: #ffffff;
   background-color: #25872d;
 }
+.AB-TEST013 .ab-price-and-sample-btn-container {
+  margin-bottom: 60px;
+}
 .AB-TEST013 .form .form-group.form-input-group.form-field-group-street,
 .AB-TEST013 .form .form-group.form-input-group.form-field-group-city,
 .AB-TEST013 .form .form-group.form-input.form-field-land,
@@ -645,6 +654,11 @@
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: none;
 }
+.AB-TEST013 .registration-left .form-control:invalid,
+.AB-TEST013 .registration-left .form-control.is-invalid {
+  background-position: right 0px center;
+  background-size: 15px;
+}
 .AB-TEST013
   .registration-left
   .select-list-search
@@ -797,6 +811,18 @@
   }
 }
 @media screen and (min-width: 991px) {
+  .AB-TEST013 .ab-price-and-sample-btn-container {
+    display: none;
+  }
+  .AB-TEST013 .registration .registration-left {
+    padding: 0;
+  }
+  .AB-TEST013 h2.ce-headline-center {
+    text-align: left;
+  }
+  .AB-TEST013 .registration-left h2.mb-2 {
+    margin-top: 32px;
+  }
   .AB-TEST013 .page-header .header-elements .header-wrapper {
     padding-top: 13px;
     padding-bottom: 35px;
@@ -820,6 +846,7 @@
     margin-bottom: 26px !important;
   }
   .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+    padding-right: 18px;
     font-size: 14.4px;
     line-height: 14.4px;
     letter-spacing: 0px;
@@ -843,7 +870,7 @@
   }
   .AB-TEST013 .ab-course-info-item__text {
     font-size: 20px;
-    line-height: 20px;
+    line-height: 30px;
     letter-spacing: 0px;
   }
   .AB-TEST013 .wf-course-badges-mobile {
@@ -913,6 +940,7 @@
     letter-spacing: 0px;
     vertical-align: middle;
     margin-bottom: 17px;
+    max-width: 560px;
   }
   .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
     margin-right: 25px;
@@ -947,6 +975,7 @@
     padding: 21px 34px 39px;
     border-radius: 10px;
     margin-bottom: 41px;
+    background-color: rgb(246, 246, 246);
   }
   .AB-TEST013 .ab-advantage-desktop .ab-advantage-title {
     font-family: "Onest Regular";
@@ -1124,7 +1153,7 @@
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item strong {
-  font-family: "Onest Medium";
+  font-family: "Onest Semibold";
   color: #1a2b49;
 }
 .AB-TEST013 .ab-faq-accordion-item a {
@@ -1255,7 +1284,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
   const TEST_CONFIG = {
     page_initials: "AB-TEST013",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1457,8 +1486,12 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
       return {
         title: q(item, "h2").textContent,
-        description: qq(item, "span p")
-          .map((p) => `<p>${p.textContent.trim()}</p>`)
+        description: qq(
+          item,
+          "span:not(.course-combinations.combination-422.d-none) p",
+        )
+          // .map((p) => `<p>${p.textContent.trim()}</p>`)
+          .map((p) => `<p>${p.innerHTML}</p>`)
           .join(""),
       };
     });
@@ -1494,7 +1527,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -1575,7 +1608,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -1617,7 +1650,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -1708,7 +1741,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
           ${q(
             ".container-md.frame-space-before-medium.frame-space-after-medium:has(a.btn.btn-prio-1)",
           )
-            ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" data-jump-to="#js-card-download">Preise &amp; Probeinhalte anfordern</a></div>`
+            ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" >Preise &amp; Probeinhalte anfordern</a></div>`
             : ""}
         `,
       );
@@ -1735,6 +1768,11 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
       `,
     );
 
+    // View Prices Btn
+    qq(".d-flex.flex-column.align-items-center a.btn.btn-prio-1").forEach(
+      (item) => (item.innerText = "Preise & Probeinhalte einsehen"),
+    );
+
     // Reposition Elements
     const frameSlider = q(
       ".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)",
@@ -1742,6 +1780,18 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     frameSlider.insertAdjacentElement(
       "afterend",
       q(".container-md:has(>.frame-type-contact_support)"),
+    );
+    frameSlider.insertAdjacentHTML(
+      "afterend",
+      /* HTML */ `
+        <div class="container-md ab-price-and-sample-btn-container">
+          <div class="d-flex flex-column align-items-center">
+            <a href="#" class="ab-price-and-sample-btn btn btn-prio-1"
+              >Preise & Probeinhalte einsehen</a
+            >
+          </div>
+        </div>
+      `,
     );
     frameSlider.insertAdjacentElement(
       "afterend",
@@ -1758,6 +1808,15 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     // Accorction Content
     createAccordionNoTabLayout();
     createAccordionWithTabLayout();
+
+    qq(
+      "a.ab-course-info-box-btn-desktop-mobile-link, a.ab-price-and-sample-btn",
+    ).forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        q("a[data-jump-to='#js-card-download']").click();
+      });
+    });
   }
 
   function updateFormLayout() {
@@ -1782,7 +1841,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 >dauerhaften Zugriff auf alle Kursdetails und Preise
               </strong>
               zu erhalten - aufrufbar über ihr
-              <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte
+              <a href="/mein-konto.html">Benutzerkonto.</a> Das gedruckte
               Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
               <strong
                 >Ihr persönlicher Zugang ist unverbindlich und keine

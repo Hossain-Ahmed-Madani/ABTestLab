@@ -27,7 +27,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
   const TEST_CONFIG = {
     page_initials: "AB-TEST013",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -229,8 +229,12 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
       return {
         title: q(item, "h2").textContent,
-        description: qq(item, "span p")
-          .map((p) => `<p>${p.textContent.trim()}</p>`)
+        description: qq(
+          item,
+          "span:not(.course-combinations.combination-422.d-none) p",
+        )
+          // .map((p) => `<p>${p.textContent.trim()}</p>`)
+          .map((p) => `<p>${p.innerHTML}</p>`)
           .join(""),
       };
     });
@@ -266,7 +270,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -347,7 +351,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -389,7 +393,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                         >Klicken zum Lesen</span
                       >
                       <span class="ab-faq-accordion-item__expanded-text"
-                        >Klicken zum Schließen</span
+                        >Klicken zum Einklappen</span
                       >
                     </div>
                   </div>
@@ -480,7 +484,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
           ${q(
             ".container-md.frame-space-before-medium.frame-space-after-medium:has(a.btn.btn-prio-1)",
           )
-            ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" data-jump-to="#js-card-download">Preise &amp; Probeinhalte anfordern</a></div>`
+            ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" >Preise &amp; Probeinhalte anfordern</a></div>`
             : ""}
         `,
       );
@@ -507,6 +511,11 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
       `,
     );
 
+    // View Prices Btn
+    qq(".d-flex.flex-column.align-items-center a.btn.btn-prio-1").forEach(
+      (item) => (item.innerText = "Preise & Probeinhalte einsehen"),
+    );
+
     // Reposition Elements
     const frameSlider = q(
       ".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)",
@@ -514,6 +523,18 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     frameSlider.insertAdjacentElement(
       "afterend",
       q(".container-md:has(>.frame-type-contact_support)"),
+    );
+    frameSlider.insertAdjacentHTML(
+      "afterend",
+      /* HTML */ `
+        <div class="container-md ab-price-and-sample-btn-container">
+          <div class="d-flex flex-column align-items-center">
+            <a href="#" class="ab-price-and-sample-btn btn btn-prio-1"
+              >Preise & Probeinhalte einsehen</a
+            >
+          </div>
+        </div>
+      `,
     );
     frameSlider.insertAdjacentElement(
       "afterend",
@@ -530,6 +551,15 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     // Accorction Content
     createAccordionNoTabLayout();
     createAccordionWithTabLayout();
+
+    qq(
+      "a.ab-course-info-box-btn-desktop-mobile-link, a.ab-price-and-sample-btn",
+    ).forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        q("a[data-jump-to='#js-card-download']").click();
+      });
+    });
   }
 
   function updateFormLayout() {
@@ -554,7 +584,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 >dauerhaften Zugriff auf alle Kursdetails und Preise
               </strong>
               zu erhalten - aufrufbar über ihr
-              <a href="/mein-konto.html">Benutzerkonto</a>. Das gedruckte
+              <a href="/mein-konto.html">Benutzerkonto.</a> Das gedruckte
               Studienprogramm senden wir Ihnen einmalig und kostenlos per Post.
               <strong
                 >Ihr persönlicher Zugang ist unverbindlich und keine

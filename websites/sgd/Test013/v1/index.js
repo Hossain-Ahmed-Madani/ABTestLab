@@ -31,7 +31,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         test_name: "Test013 [SGD] - landing pages - new structure",
         page_initials: "AB-TEST013",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -206,8 +206,9 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         const data = qq(".tab-393-none:not(.accordion):has(h2)").map((item) => {
             return {
                 title: q(item, "h2").textContent,
-                description: qq(item, "span p")
-                    .map((p) => `<p>${p.textContent.trim()}</p>`)
+                description: qq(item, "span:not(.course-combinations.combination-422.d-none) p")
+                    // .map((p) => `<p>${p.textContent.trim()}</p>`)
+                    .map((p) => `<p>${p.innerHTML}</p>`)
                     .join(""),
             };
         });
@@ -396,7 +397,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     </div>
 
                     ${q(".container-md.frame-space-before-medium.frame-space-after-medium:has(a.btn.btn-prio-1)")
-                        ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" data-jump-to="#js-card-download">Preise &amp; Probeinhalte anfordern</a></div>`
+                        ? `<div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center"><a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1" >Preise &amp; Probeinhalte anfordern</a></div>`
                         : ""}
                 `,
             );
@@ -420,6 +421,15 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         // Reposition Elements
         const frameSlider = q(".container-md:has(> .frame-type-easy_image_slider) ~ .container-md:has(> hr)");
         frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.frame-type-contact_support)"));
+        frameSlider.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="container-md ab-price-and-sample-btn-container">
+                    <div class="d-flex flex-column align-items-center">
+                        <a href="#" class="ab-price-and-sample-btn btn btn-prio-1">Preise & Probeinhalte einsehen</a></div>
+                </div>
+            `,
+        );
         frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container) + .container-md:has(>hr)"));
         frameSlider.insertAdjacentElement("afterend", q(".container-md:has(>.grid-container)"));
         qq(".container-md:has(>.frame-type-contact_support) ~ .container-md:has(>hr)").forEach((item) => item.classList.add("ab-hidden"));
@@ -427,6 +437,14 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
         // Accorction Content
         createAccordionNoTabLayout();
         createAccordionWithTabLayout();
+
+
+        qq("a.ab-course-info-box-btn-desktop-mobile-link, a.ab-price-and-sample-btn").forEach((item ) => {
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                q("a[data-jump-to='#js-card-download']").click();
+            });
+        } )
     }
 
     function updateFormLayout() {

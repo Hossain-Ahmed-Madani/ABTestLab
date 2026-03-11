@@ -487,6 +487,10 @@
         background-color: #25872d;
     }
 
+    .ab-price-and-sample-btn-container {
+        margin-bottom: 60px;
+    }
+
     // Form Start
 
     .form .form-group.form-input-group.form-field-group-street,
@@ -623,6 +627,13 @@
             transition: background-color 5000s ease-in-out 0s;
             box-shadow: none;
         }
+
+    }
+    
+    .registration-left .form-control:invalid,
+    .registration-left .form-control.is-invalid {
+        background-position: right 0px center;
+        background-size: 15px;
     }
 
     .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
@@ -782,6 +793,15 @@
     }
 
     @media screen and (min-width: 991px) {
+
+        .ab-price-and-sample-btn-container {
+            display: none;
+        }
+
+        .registration .registration-left {
+            padding: 0;
+        }
+
         h2.ce-headline-center {
             text-align: left;
         }
@@ -1158,7 +1178,7 @@
         }
 
         strong {
-            font-family: "Onest Medium";
+            font-family: "Onest Semibold";
             color: #1a2b49;
         }
 
