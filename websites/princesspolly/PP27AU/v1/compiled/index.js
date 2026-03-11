@@ -1,6 +1,6 @@
 (async () => {
     const TEST_ID = "PP27AU";
-    const VARIANT_ID = "V1"; /* V1, V2 */
+    const VARIANT_ID = "V2"; /* V1, V2 */
 
     function logInfo(message) {
         console.log(
@@ -15,7 +15,7 @@
 
     const TEST_CONFIG = {
         page_initials: "AB-PP27AU",
-        test_variation: 1,
+        test_variation: 2,
         test_version: 0.0006,
     };
 
