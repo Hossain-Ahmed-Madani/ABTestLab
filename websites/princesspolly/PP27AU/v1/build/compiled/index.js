@@ -1,206 +1,237 @@
 (async () => {
-    const TEST_ID = "PP27AU";
-    const VARIANT_ID = "V1"; /* V1, V2 */
+  const TEST_ID = "PP27AU";
+  const VARIANT_ID = "V1"; /* V1, V2 */
 
-    function logInfo(message) {
-        console.log(
-            `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
-            "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-            "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
-            message,
-        );
+  function logInfo(message) {
+    console.log(
+      `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      message,
+    );
+  }
+
+  logInfo("fired");
+
+  const TEST_CONFIG = {
+    page_initials: "AB-PP27AU",
+    test_variation: 1,
+    test_version: 0.0006,
+  };
+
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  async function fetchAndParseURLApi(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+      const html = await response.text();
+      const dom = new DOMParser().parseFromString(html, "text/html");
+      return dom;
+    } catch (error) {
+      // console.error("Fetch and parse failed:", error);
+      return null;
     }
+  }
 
-    logInfo("fired");
+  async function waitForElementAsync(
+    predicate,
+    timeout = 20000,
+    frequency = 150,
+  ) {
+    const startTime = Date.now();
 
-    const TEST_CONFIG = {
-        page_initials: "AB-PP27AU",
-        test_variation: 1,
-        test_version: 0.0007,
-    };
+    return new Promise((resolve, reject) => {
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
 
-    const { page_initials, test_variation, test_version } = TEST_CONFIG;
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
+        if (elapsed >= timeout) {
+          clearInterval(interval);
+          return reject(
+            new Error(
+              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
+            ),
+          );
         }
-    }
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
-        const startTime = Date.now();
+        if (typeof predicate === "function" && predicate()) {
+          clearInterval(interval);
+          return resolve(true);
+        }
+      }, frequency);
+    });
+  }
 
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
+  function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
 
-            const interval = setInterval(() => {
-                const elapsed = Date.now() - startTime;
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
 
-                if (elapsed >= timeout) {
-                    clearInterval(interval);
-                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
-                }
+  function isTouchEnabled() {
+    return (
+      "ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      navigator.msMaxTouchPoints > 0
+    );
+  }
 
-                if (typeof predicate === "function" && predicate()) {
-                    clearInterval(interval);
-                    return resolve(true);
-                }
-            }, frequency);
-        });
-    }
+  const initialInnerLayout = /* HTML */ `
+    <div class="ab-carousel-container">
+      <div class="ab-swiper swiper"></div>
+      <div class="ab-carousel-skeleton-loader">
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+      </div>
+    </div>
+    <div class="ab-product-title"></div>
+    <div class="ab-product-price-container"></div>
+    <div class="ab-afterpay-container"></div>
+    <div class="ab-color-swatch-container">
+      <h2 class="product__active-color">
+        <span class="product__label product__active-color-label">Color:</span>
+        <span class="product__value product__active-color-value"></span>
+      </h2>
+      <div class="product__swatches" data-colors=""></div>
+    </div>
+    <div class="ab-product-size-selector-container">
+      <!-- on initialize add -> ab-product-size-selector-container--initialized -->
+      <h2 class="product__label product__label--size">
+        <span class="product__active-size-label">Size:</span>
+        <span class="product__size-value" data-product-size-value=""></span>
+        <span
+          class="product__low-stock"
+          data-product-low-stock=""
+          style="display: none;"
+        ></span>
+      </h2>
+      <div class="product__select-sizes" data-product-sizes=""></div>
+      <div class="ab-product-sizes-skeleton-loader">
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+        <div class="ab-product-sizes-skeleton-loader__item"></div>
+      </div>
+    </div>
+    <button class="ab-add-to-cart-cta" disabled>
+      <span
+        class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size"
+        >SELECT A SIZE</span
+      >
+      <span
+        class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag"
+        >ADD TO BAG</span
+      >
+    </button>
+    <a href="#" class="ab-view-full-details">View Full Details</a>
+  `;
 
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
-    }
-
-    function qq(s, o) {
-        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    const initialInnerLayout = /* HTML */ `
-        <div class="ab-carousel-container">
-            <div class="ab-swiper swiper"></div>
-            <div class="ab-carousel-skeleton-loader">
-                <div class="ab-carousel-skeleton-loader__item"></div>
-                <div class="ab-carousel-skeleton-loader__item"></div>
-                <div class="ab-carousel-skeleton-loader__item"></div>
+  function createModalLayout() {
+    const layout = /* HTML */ `
+      <div class="${page_initials}__modal-layout">
+        <div class="${page_initials}__modal-backdrop"></div>
+        <div class="${page_initials}__modal">
+          <div class="${page_initials}__modal__head">
+            <div class="${page_initials}__modal__close-cta"></div>
+          </div>
+          <div class="${page_initials}__modal__body">
+            <div class="${page_initials}__modal__body__content">
+              ${initialInnerLayout}
             </div>
+          </div>
         </div>
-        <div class="ab-product-title"></div>
-        <div class="ab-product-price-container"></div>
-        <div class="ab-afterpay-container"></div>
-        <div class="ab-color-swatch-container">
-            <h2 class="product__active-color">
-                <span class="product__label product__active-color-label">Color:</span>
-                <span class="product__value product__active-color-value"></span>
-            </h2>
-            <div class="product__swatches" data-colors=""></div>
-        </div>
-        <div class="ab-product-size-selector-container">
-            <!-- on initialize add -> ab-product-size-selector-container--initialized -->
-            <h2 class="product__label product__label--size">
-                <span class="product__active-size-label">Size:</span>
-                <span class="product__size-value" data-product-size-value=""></span>
-                <span class="product__low-stock" data-product-low-stock="" style="display: none;"></span>
-            </h2>
-            <div class="product__select-sizes" data-product-sizes=""></div>
-            <div class="ab-product-sizes-skeleton-loader">
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-                <div class="ab-product-sizes-skeleton-loader__item"></div>
-            </div>
-        </div>
-        <button class="ab-add-to-cart-cta" disabled>
-            <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
-            <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag">ADD TO BAG</span>
-        </button>
-        <a href="#" class="ab-view-full-details">View Full Details</a>
+      </div>
     `;
 
-    function createModalLayout() {
-        const layout = /* HTML */ `
-            <div class="${page_initials}__modal-layout">
-                <div class="${page_initials}__modal-backdrop"></div>
-                <div class="${page_initials}__modal">
-                    <div class="${page_initials}__modal__head">
-                        <div class="${page_initials}__modal__close-cta"></div>
-                    </div>
-                    <div class="${page_initials}__modal__body">
-                        <div class="${page_initials}__modal__body__content">${initialInnerLayout}</div>
-                    </div>
-                </div>
-            </div>
-        `;
+    q("body").insertAdjacentHTML("afterbegin", layout);
+  }
 
-        q("body").insertAdjacentHTML("afterbegin", layout);
+  let swiperInstance = null;
+
+  async function initSwiper() {
+    await waitForElementAsync(
+      () =>
+        typeof window.Swiper === "function" && window.Swiper && q(".ab-swiper"),
+    );
+    const el = q(".ab-swiper");
+    swiperInstance = new window.Swiper(el, {
+      slidesPerView: "auto", // use slide width from CSS (163px)
+      spaceBetween: 5, // 5px gap between slides
+      loop: false, // or true if you want looping
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      watchSlidesProgress: true,
+    });
+  }
+
+  function destroySwiper() {
+    if (swiperInstance) {
+      swiperInstance.destroy();
+      swiperInstance = null;
     }
+  }
 
-    let swiperInstance = null;
-
-    async function initSwiper() {
-        await waitForElementAsync(() => typeof window.Swiper === "function" && window.Swiper && q(".ab-swiper"));
-        const el = q(".ab-swiper");
-        swiperInstance = new window.Swiper(el, {
-            slidesPerView: "auto", // use slide width from CSS (163px)
-            spaceBetween: 5, // 5px gap between slides
-            loop: false, // or true if you want looping
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
-            watchSlidesProgress: true,
-        });
-    }
-
-    function destroySwiper() {
-        if (swiperInstance) {
-            swiperInstance.destroy();
-            swiperInstance = null;
+  function applyAfterPayStyles() {
+    const afterpay = q("#afterpay-placement-pdp");
+    if (afterpay !== null) {
+      const root = afterpay.shadowRoot;
+      if (root !== null) {
+        const logo = root.querySelector("svg");
+        if (logo) {
+          logo.setAttribute("width", 80);
+          logo.setAttribute("height", 14);
         }
-    }
+        const mainCopy = q(root, ".afterpay-paragraph");
+        const promo = q("[data-promo-id]");
+        const promoActive = q(root, ".afterpay-promo");
+        if (mainCopy) {
+          /* Remove markup from this running before */
+          const previousCopy = mainCopy.querySelector(".payment-terms__price");
+          if (previousCopy) {
+            mainCopy.removeChild(previousCopy);
+          }
 
-    function applyAfterPayStyles() {
-        const afterpay = q("#afterpay-placement-pdp");
-        if (afterpay !== null) {
-            const root = afterpay.shadowRoot;
-            if (root !== null) {
-                const logo = root.querySelector("svg");
-                if (logo) {
-                    logo.setAttribute("width", 80);
-                    logo.setAttribute("height", 14);
-                }
-                const mainCopy = q(root, ".afterpay-paragraph");
-                const promo = q("[data-promo-id]");
-                const promoActive = q(root, ".afterpay-promo");
-                if (mainCopy) {
-                    /* Remove markup from this running before */
-                    const previousCopy = mainCopy.querySelector(".payment-terms__price");
-                    if (previousCopy) {
-                        mainCopy.removeChild(previousCopy);
-                    }
+          const totalPriceText = q(
+            ".ab-product-price-container .product__sale-price-row span[data-product-price]",
+          ).textContent.trim();
 
-                    const totalPriceText = q(".ab-product-price-container .product__sale-price-row span[data-product-price]").textContent.trim();
+          // Extract currency sign (first non-digit, non-dot, non-comma character)
+          const currencyMatch = totalPriceText.match(/[^0-9.,\s]+/);
+          const currency = currencyMatch ? currencyMatch[0] : "";
 
-                    // Extract currency sign (first non-digit, non-dot, non-comma character)
-                    const currencyMatch = totalPriceText.match(/[^0-9.,\s]+/);
-                    const currency = currencyMatch ? currencyMatch[0] : "";
+          // Extract numeric price, parse, and format to two decimals
+          const priceMatch = totalPriceText.match(/[\d,.]+/);
+          const totalPrice = priceMatch
+            ? Number(priceMatch[0].replace(/,/g, "")).toFixed(2)
+            : "";
+          const payments = 4;
+          const payment = (totalPrice / payments).toFixed(2);
+          const money = `${currency}${payment}`;
 
-                    // Extract numeric price, parse, and format to two decimals
-                    const priceMatch = totalPriceText.match(/[\d,.]+/);
-                    const totalPrice = priceMatch ? Number(priceMatch[0].replace(/,/g, "")).toFixed(2) : "";
-                    const payments = 4;
-                    const payment = (totalPrice / payments).toFixed(2);
-                    const money = `${currency}${payment}`;
+          const paymentCopy = document.createElement("span");
+          paymentCopy.classList.add("payment-terms__price");
+          if (promo && promoActive) {
+            paymentCopy.innerText = `${payments} X ${money} and`;
+          } else {
+            paymentCopy.innerText = `${payments} X ${money} with`;
+          }
+          mainCopy.insertBefore(paymentCopy, mainCopy.childNodes[0]);
+        }
 
-                    const paymentCopy = document.createElement("span");
-                    paymentCopy.classList.add("payment-terms__price");
-                    if (promo && promoActive) {
-                        paymentCopy.innerText = `${payments} X ${money} and`;
-                    } else {
-                        paymentCopy.innerText = `${payments} X ${money} with`;
-                    }
-                    mainCopy.insertBefore(paymentCopy, mainCopy.childNodes[0]);
-                }
-
-                let styles = `
+        let styles = `
                 
                     // FOR TEST
                     .product-tile-size {
@@ -339,16 +370,16 @@
                 
                 `;
 
-                if (window.location.href.includes("princesspolly.com.au")) {
-                    styles += `
+        if (window.location.href.includes("princesspolly.com.au")) {
+          styles += `
                         .afterpay-logo.brand-afterpay.lockup-black svg {
                             margin-top: 1.5px;
                         }
                     `;
-                }
+        }
 
-                if (promo && promoActive) {
-                    styles += `
+        if (promo && promoActive) {
+          styles += `
                         .afterpay-paragraph {
                             padding-right: 5px;
                         }
@@ -456,276 +487,350 @@
                         }
 
                     `;
-                }
-                const style = document.createElement("style");
-                style.textContent = styles;
-                root.append(style);
-            }
         }
+        const style = document.createElement("style");
+        style.textContent = styles;
+        root.append(style);
+      }
     }
+  }
 
-    function clearProductSizeContent() {
-        // Clear Size Section Items For Loader
-        q(".ab-product-size-selector-container").classList.remove("ab-product-size-selector-container--initialized");
-        qq(`
+  function clearProductSizeContent() {
+    // Clear Size Section Items For Loader
+    q(".ab-product-size-selector-container").classList.remove(
+      "ab-product-size-selector-container--initialized",
+    );
+    qq(`
             .ab-product-size-selector-container .product__size-value,
-            .ab-product-size-selector-container > .product__select-sizes`).forEach((item) => (item.innerHTML = ""));
+            .ab-product-size-selector-container > .product__select-sizes`).forEach(
+      (item) => (item.innerHTML = ""),
+    );
+  }
+
+  async function updateModalLayout(url) {
+    destroySwiper();
+    clearProductSizeContent();
+
+    const dom = await fetchAndParseURLApi(url);
+    if (!dom) return;
+
+    q(".ab-product-title").innerHTML = q(dom, ".product__title").innerHTML;
+    q(".ab-product-price-container").innerHTML = q(
+      dom,
+      ".product__sale-price-row",
+    ).outerHTML;
+    q(".ab-color-swatch-container").innerHTML = qq(
+      dom,
+      ".product__active-color, .product__swatches:has(> .swatch)",
+    )
+      .map((el) => el.outerHTML)
+      .join("");
+
+    // Size Section
+    q(".ab-product-size-selector-container").classList.add(
+      "ab-product-size-selector-container--initialized",
+    );
+    q(
+      ".ab-product-size-selector-container > .product__select-sizes",
+    ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
+
+    // CTA Section
+    q(".ab-add-to-cart-cta").setAttribute("disabled", "");
+    q("a.ab-view-full-details").setAttribute("href", url);
+
+    // AfterPay
+    const afterPayElement = q(dom, "#afterpay-placement-pdp");
+    if (afterPayElement) {
+      q(".ab-afterpay-container").innerHTML = afterPayElement.outerHTML;
+      applyAfterPayStyles();
+    } else {
+      q(".ab-afterpay-container").innerHTML = /* HTML */ `<div
+        class="ab-afterpay-null"
+      ></div>`;
     }
 
-    async function updateModalLayout(url) {
-        destroySwiper();
-        clearProductSizeContent();
+    // Carousel
+    q(".ab-swiper.swiper").innerHTML = /* HTML */ `
+      <div class="ab-swiper-wrapper swiper-wrapper">
+        ${qq(dom, " .product__image.product__thumb-overlay img")
+          .map(
+            (el) =>
+              `<div class="ab-swiper-slide swiper-slide">${el.outerHTML}</div> `,
+          )
+          .join("")}
+      </div>
+      <div class="swiper-pagination"></div>
+    `;
+    initSwiper();
+  }
 
-        const dom = await fetchAndParseURLApi(url);
-        if (!dom) return;
+  function animate(targetElement, className, interval) {
+    if (!targetElement) return;
+    if (className.includes(".")) className.replace(".", "");
+    targetElement.classList.add(className);
+    setTimeout(() => targetElement.classList.remove(className), interval);
+  }
 
-        q(".ab-product-title").innerHTML = q(dom, ".product__title").innerHTML;
-        q(".ab-product-price-container").innerHTML = q(dom, ".product__sale-price-row").outerHTML;
-        q(".ab-color-swatch-container").innerHTML = qq(dom, ".product__active-color, .product__swatches:has(> .swatch)")
-            .map((el) => el.outerHTML)
-            .join("");
+  function preventScroll(e) {
+    e.preventDefault();
+  }
 
-        // Size Section
-        q(".ab-product-size-selector-container").classList.add("ab-product-size-selector-container--initialized");
-        q(".ab-product-size-selector-container > .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
+  function handleModalView(action = "show") {
+    const modalShowClass = `${page_initials}--modal-show`;
+    const body = document.body;
 
-        // CTA Section
-        q(".ab-add-to-cart-cta").setAttribute("disabled", "");
-        q("a.ab-view-full-details").setAttribute("href", url);
+    const modal = q(`.${page_initials}__modal`);
 
-        // AfterPay
-        const afterPayElement = q(dom, "#afterpay-placement-pdp");
-        if (afterPayElement) {
-            q(".ab-afterpay-container").innerHTML = afterPayElement.outerHTML;
-            applyAfterPayStyles();
-        } else {
-            q(".ab-afterpay-container").innerHTML = /* HTML */ `<div class="ab-afterpay-null"></div>`;
-        }
+    if (!modal) return;
 
-        // Carousel
-        q(".ab-swiper.swiper").innerHTML = /* HTML */ `
-            <div class="ab-swiper-wrapper swiper-wrapper">
-                ${qq(dom, " .product__image.product__thumb-overlay img")
-                    .map((el) => `<div class="ab-swiper-slide swiper-slide">${el.outerHTML}</div> `)
-                    .join("")}
-            </div>
-            <div class="swiper-pagination"></div>
-        `;
-        initSwiper();
+    if (action === "show" && !body.classList.contains(modalShowClass)) {
+      animate(modal, "slide-in", 200);
+      modal.classList.add("slide-in");
+      body.classList.add(modalShowClass);
+      document.addEventListener("touchmove", preventScroll, { passive: false });
     }
 
-    function animate(targetElement, className, interval) {
-        if (!targetElement) return;
-        if (className.includes(".")) className.replace(".", "");
-        targetElement.classList.add(className);
-        setTimeout(() => targetElement.classList.remove(className), interval);
+    if (action === "hide") {
+      animate(modal, "slide-out", 200);
+      setTimeout(() => body.classList.remove(modalShowClass), 200);
+      document.removeEventListener("touchmove", preventScroll);
     }
+  }
 
-    function preventScroll(e) {
-        e.preventDefault();
-    }
+  function getUrlFromColorSwatch(item) {
+    if (!item) return;
+    return item.getAttribute("href") ?? "";
+  }
 
-    function handleModalView(action = "show") {
-        const modalShowClass = `${page_initials}--modal-show`;
-        const body = document.body;
+  async function handleQuickAddClick(containerSelector, quickAddSelector) {
+    await waitForElementAsync(() => q(containerSelector));
 
-        const modal = q(`.${page_initials}__modal`);
+    qq(containerSelector).forEach((item) => {
+      item.addEventListener("click", (e) => {
+        if (e.target.closest(quickAddSelector)) {
+          e.preventDefault();
+          const quickAddButton = e.target.closest(quickAddSelector);
+          const swatchItem =
+            q(quickAddButton.parentNode, ".swatch--active") ||
+            q(quickAddButton.parentNode.parentNode, ".swatch--active");
+          const url = getUrlFromColorSwatch(swatchItem);
+          if (!url) return;
 
-        if (!modal) return;
-
-        if (action === "show" && !body.classList.contains(modalShowClass)) {
-            animate(modal, "slide-in", 200);
-            modal.classList.add("slide-in");
-            body.classList.add(modalShowClass);
-            document.addEventListener("touchmove", preventScroll, { passive: false });
-        }
-
-        if (action === "hide") {
-            animate(modal, "slide-out", 200);
-            setTimeout(() => body.classList.remove(modalShowClass), 200);
-            document.removeEventListener("touchmove", preventScroll);
-        }
-    }
-
-    function getUrlFromColorSwatch(item) {
-        if (!item) return;
-        return item.getAttribute("href") ?? "";
-    }
-
-    async function handleQuickAddClick(containerSelector, quickAddSelector) {
-        await waitForElementAsync(() => q(containerSelector));
-
-        qq(containerSelector).forEach((item) => {
-            item.addEventListener("click", (e) => {
-                if (e.target.closest(quickAddSelector)) {
-                    e.preventDefault();
-                    const quickAddButton = e.target.closest(quickAddSelector);
-                    const swatchItem = q(quickAddButton.parentNode, ".swatch--active") || q(quickAddButton.parentNode.parentNode, ".swatch--active");
-                    const url = getUrlFromColorSwatch(swatchItem);
-                    if (!url) return;
-
-                    // Clear Content For Loader
-                    qq(`
+          // Clear Content For Loader
+          qq(`
                         .ab-product-title, 
                         .ab-product-price-container, 
                         .ab-afterpay-container, 
                         .ab-color-swatch-container .product__swatches, 
-                        .ab-color-swatch-container .product__value.product__active-color-value`).forEach((item) => (item.innerHTML = ""));
+                        .ab-color-swatch-container .product__value.product__active-color-value`).forEach(
+            (item) => (item.innerHTML = ""),
+          );
 
-                    // Update & Show
-                    updateModalLayout(url);
-                    handleModalView("show");
-                }
-            });
-        });
+          // Update & Show
+          updateModalLayout(url);
+          handleModalView("show");
+        }
+      });
+    });
+  }
+
+  function clickFunction() {
+    // Home Quick Add
+    if (window.location.pathname === "/") {
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+      handleQuickAddClick(
+        ".shopify-section--homepage-nosto-tabs",
+        ".quick-shop-quickadd",
+      );
     }
 
-    function clickFunction() {
-        // Home Quick Add
-        if (window.location.pathname === "/") {
-            handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
-            handleQuickAddClick(".shopify-section--homepage-nosto-tabs", ".quick-shop-quickadd");
+    // Collection Quick Add
+    if (window.location.pathname.includes("/collection")) {
+      handleQuickAddClick(".product-tiles", ".product-tile__quick");
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+    }
+
+    // Modal Base Events
+    q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
+      handleModalView("hide");
+    });
+
+    q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+      if (e.target.closest(`.${page_initials}__modal`)) return;
+      handleModalView("hide");
+    });
+
+    // Modal Content Click
+    q(`.${page_initials}__modal__body__content`).addEventListener(
+      "click",
+      (e) => {
+        // Swatch Items CLick
+        const swatchItem = e.target.closest(
+          ".ab-color-swatch-container .swatch",
+        );
+        if (swatchItem) {
+          e.preventDefault();
+          if (swatchItem.classList.contains("swatch--active")) return;
+
+          const swatchAriaLabel = swatchItem.getAttribute("aria-label");
+          const url = getUrlFromColorSwatch(swatchItem);
+
+          qq(".ab-color-swatch-container .swatch").forEach((item) =>
+            item.classList.remove("swatch--active"),
+          );
+          swatchItem.classList.add("swatch--active");
+
+          // Static Update
+          q(
+            ".ab-product-size-selector-container .product__size-value",
+          ).innerHTML = "";
+          qq(
+            ".ab-product-size-selector-container .product__select-sizes-item",
+          ).forEach((item) => item.classList.remove("active"));
+          q(".ab-add-to-cart-cta").setAttribute("disabled", "");
+          q(".ab-product-title").innerText = swatchAriaLabel;
+          q(
+            ".ab-color-swatch-container .product__value.product__active-color-value",
+          ).innerText = swatchAriaLabel.split(" ").pop();
+
+          // Click Control Swathes & Api Update
+          qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach(
+            (item) => item.click(),
+          );
+          updateModalLayout(url);
         }
 
-        // Collection Quick Add
-        if (window.location.pathname.includes("/collection")) {
-            handleQuickAddClick(".product-tiles", ".product-tile__quick");
-            handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
+        // Product Size Click
+        const productSizeItem = e.target.closest(
+          ".ab-product-size-selector-container .product__select-sizes-item:not(.active)",
+        );
+        if (productSizeItem) {
+          q(
+            ".ab-product-size-selector-container .product__size-value",
+          ).innerText = productSizeItem.textContent.trim();
+          qq(
+            ".ab-product-size-selector-container .product__select-sizes-item",
+          ).forEach((item) => item.classList.remove("active"));
+          productSizeItem.classList.add("active");
+          q(".ab-add-to-cart-cta").removeAttribute("disabled");
         }
 
-        // Modal Base Events
-        q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
-            handleModalView("hide");
-        });
+        const addToCartCta = e.target.closest(
+          "button.ab-add-to-cart-cta:not(:disabled)",
+        );
+        if (addToCartCta) {
+          const selectedSize = q(
+            ".ab-product-size-selector-container .product__select-sizes-item.active button",
+          );
+          const variantId = selectedSize.getAttribute("data-size-variant-id");
 
-        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
-            if (e.target.closest(`.${page_initials}__modal`)) return;
-            handleModalView("hide");
-        });
+          const targetButton =
+            q(
+              `button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`,
+            ) ||
+            q(
+              `button.quick-shop-carousel-size__button[data-quick-shop-id="${variantId}"]`,
+            ) ||
+            q(
+              `button.quick-shop-size__button[data-quick-shop-id="${variantId}"]`,
+            );
 
-        // Modal Content Click
-        q(`.${page_initials}__modal__body__content`).addEventListener("click", (e) => {
-            // Swatch Items CLick
-            const swatchItem = e.target.closest(".ab-color-swatch-container .swatch");
-            if (swatchItem) {
-                e.preventDefault();
-                if (swatchItem.classList.contains("swatch--active")) return;
-
-                const swatchAriaLabel = swatchItem.getAttribute("aria-label");
-                const url = getUrlFromColorSwatch(swatchItem);
-
-                qq(".ab-color-swatch-container .swatch").forEach((item) => item.classList.remove("swatch--active"));
-                swatchItem.classList.add("swatch--active");
-
-                // Static Update
-                q(".ab-product-size-selector-container .product__size-value").innerHTML = "";
-                qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
-                q(".ab-add-to-cart-cta").setAttribute("disabled", "");
-                q(".ab-product-title").innerText = swatchAriaLabel;
-                q(".ab-color-swatch-container .product__value.product__active-color-value").innerText = swatchAriaLabel.split(" ").pop();
-
-                // Click Control Swathes & Api Update
-                qq(`.product-tile__swatches .swatch[href*='${url}']`).forEach((item) => item.click());
-                updateModalLayout(url);
-            }
-
-            // Product Size Click
-            const productSizeItem = e.target.closest(".ab-product-size-selector-container .product__select-sizes-item:not(.active)");
-            if (productSizeItem) {
-                q(".ab-product-size-selector-container .product__size-value").innerText = productSizeItem.textContent.trim();
-                qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
-                productSizeItem.classList.add("active");
-                q(".ab-add-to-cart-cta").removeAttribute("disabled");
-            }
-
-            const addToCartCta = e.target.closest("button.ab-add-to-cart-cta:not(:disabled)");
-            if (addToCartCta) {
-                const selectedSize = q(".ab-product-size-selector-container .product__select-sizes-item.active button");
-                const variantId = selectedSize.getAttribute("data-size-variant-id");
-
-                const targetButton =
-                    q(`button.product-tile-size__button[data-product-tile-variant-id="${variantId}"]`) ||
-                    q(`button.quick-shop-carousel-size__button[data-quick-shop-id="${variantId}"]`) ||
-                    q(`button.quick-shop-size__button[data-quick-shop-id="${variantId}"]`);
-
-                targetButton.click();
-                handleModalView("hide");
-            }
-        });
-
-        // CLOSE POPUP -> ON ESC CLICK
-        document.addEventListener("keydown", function (evt) {
-            evt = evt || window.event; // Fallback for older browsers (optional)
-            if (evt.key === "Escape" || evt.key === "Esc") {
-                handleModalView("hide");
-            }
-        });
-    }
-
-    async function handleMobileSwipe() {
-        await waitForElementAsync(() => q(`.${page_initials}__modal-layout`) && isTouchEnabled());
-
-        const container = q(`.${page_initials}__modal-layout`);
-        container.addEventListener("touchstart", startTouch, false);
-        container.addEventListener("touchmove", moveTouch, false);
-
-        // Swipe Up / Down / Left / Right
-        let initialX = null;
-        let initialY = null;
-
-        function startTouch(e) {
-            initialX = e.touches[0].clientX;
-            initialY = e.touches[0].clientY;
+          targetButton.click();
+          handleModalView("hide");
         }
+      },
+    );
 
-        function moveTouch(e) {
-            if (initialX === null) {
-                return;
-            }
+    // CLOSE POPUP -> ON ESC CLICK
+    document.addEventListener("keydown", function (evt) {
+      evt = evt || window.event; // Fallback for older browsers (optional)
+      if (evt.key === "Escape" || evt.key === "Esc") {
+        handleModalView("hide");
+      }
+    });
+  }
 
-            if (initialY === null) {
-                return;
-            }
+  async function handleMobileSwipe() {
+    await waitForElementAsync(
+      () => q(`.${page_initials}__modal-layout`) && isTouchEnabled(),
+    );
 
-            e.touches[0].clientX;
-            let currentY = e.touches[0].clientY;
-            let diffY = initialY - currentY;
+    const container = q(`.${page_initials}__modal-layout`);
+    container.addEventListener("touchstart", startTouch, false);
+    container.addEventListener("touchmove", moveTouch, false);
 
-            // Swipe Down Threshold
-            if (diffY <= -5) {
-                handleModalView("hide");
-            }
+    // Swipe Up / Down / Left / Right
+    let initialX = null;
+    let initialY = null;
 
-            initialX = null;
-            initialY = null;
-
-            e.preventDefault();
-        }
+    function startTouch(e) {
+      initialX = e.touches[0].clientX;
+      initialY = e.touches[0].clientY;
     }
 
-    function init() {
-        if (window[page_initials] === true) return;
+    function moveTouch(e) {
+      if (initialX === null) {
+        return;
+      }
 
-        window[page_initials] = true;
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+      if (initialY === null) {
+        return;
+      }
 
-        if (window.location.href.includes("princesspolly.com.au")) {
-            q("body").classList.add(`${page_initials}--AU`);
-        }
+      e.touches[0].clientX;
+      let currentY = e.touches[0].clientY;
+      let diffY = initialY - currentY;
 
-        createModalLayout();
-        clickFunction();
-        handleMobileSwipe();
+      // Swipe Down Threshold
+      if (diffY <= -5) {
+        handleModalView("hide");
+      }
+
+      initialX = null;
+      initialY = null;
+
+      e.preventDefault();
+    }
+  }
+
+  function init() {
+    if (window[page_initials] === true) return;
+
+    window[page_initials] = true;
+    q("body").classList.add(
+      page_initials,
+      `${page_initials}--v${test_variation}`,
+      `${page_initials}--version:${test_version}`,
+    );
+
+    if (window.location.href.includes("princesspolly.com.au")) {
+      q("body").classList.add(`${page_initials}--AU`);
     }
 
-    function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && (q(".product-tiles") || q(".nosto-carousel-tabs__wrap")));
-    }
+    createModalLayout();
+    clickFunction();
+    handleMobileSwipe();
+  }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        return false;
-    }
+  function checkForItems() {
+    return !!(
+      q(
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+      ) &&
+      (q(".product-tiles") || q(".nosto-carousel-tabs__wrap"))
+    );
+  }
+
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
 })();
