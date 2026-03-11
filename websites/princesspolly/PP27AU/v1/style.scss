@@ -21,7 +21,7 @@
 // --font-medium: "forma_djr_bannermedium", var(--font-body);
 // --font-primary: "forma_djr_bannerregular", var(--font-body);
 
-.AB-PP27US {
+.AB-PP27AU {
     .quick-shop-carousel-size,
     .quick-shop-size,
     .product-tile-size,
@@ -359,12 +359,12 @@
     }
 }
 
-.AB-PP27US--v1 {
+.AB-PP27AU--v1 {
     .ab-carousel-container {
         display: none;
     }
 
-    .AB-PP27US {
+    .AB-PP27AU {
         &__modal {
             min-height: 430px;
 
@@ -375,8 +375,8 @@
     }
 }
 
-.AB-PP27US--v2 {
-    .AB-PP27US {
+.AB-PP27AU--v2 {
+    .AB-PP27AU {
         &__modal {
             min-height: 658px;
 
@@ -393,10 +393,10 @@
  * ----------------------------------------
  */
 
-body.AB-PP27US--modal-show {
+body.AB-PP27AU--modal-show {
     overflow: hidden;
 
-    .AB-PP27US {
+    .AB-PP27AU {
         &__modal-layout {
             display: block;
         }
@@ -411,7 +411,7 @@ body.AB-PP27US--modal-show {
     }
 }
 
-.AB-PP27US {
+.AB-PP27AU {
     &__modal-layout {
         display: none;
 
