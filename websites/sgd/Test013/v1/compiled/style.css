@@ -546,8 +546,13 @@
 }
 .AB-TEST013 .registration-left .form-control:invalid,
 .AB-TEST013 .registration-left .form-control.is-invalid {
-  background-position: right 0px center;
   background-size: 15px;
+}
+.AB-TEST013 .registration-left .form-control.is-invalid:not(.select-representation-input) {
+  background-position: right -1px top 2.5px !important;
+}
+.AB-TEST013 .registration-left .form-control.is-invalid.select-representation-input {
+  background-position: right 30px top 2.5px !important;
 }
 .AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
   background-color: transparent;

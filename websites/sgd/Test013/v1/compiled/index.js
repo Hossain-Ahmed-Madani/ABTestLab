@@ -27,7 +27,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     const TEST_CONFIG = {
         page_initials: "AB-TEST013",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -273,7 +273,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             /* HTML */ `
                 <div class="ab-course-accordion mb-5">
                     <div class="ab-faq-accordion-section">
-                        ${data2
+                        ${data1
                             .map(
                                 (item, index) => /* HTML */ `
                                     <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
@@ -302,7 +302,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
             /* HTML */ `
                 <div class="ab-course-accordion mb-5">
                     <div class="ab-faq-accordion-section">
-                        ${data1
+                        ${data2
                             .map(
                                 (item, index) => /* HTML */ `
                                     <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
