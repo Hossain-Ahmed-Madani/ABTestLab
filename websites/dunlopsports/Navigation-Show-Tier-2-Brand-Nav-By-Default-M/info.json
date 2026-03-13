@@ -1,0 +1,13 @@
+{
+  "id": "1773325926567_7212_Navigation_Show_Tier_2_Brand_Nav_By_Default_M",
+  "name": "Navigation-Show-Tier-2-Brand-Nav-By-Default-M",
+  "type": "A/B",
+  "website": "dunlopsports",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-03-12T14:32:06.567Z",
+  "createdAtReadable": "3/12/2026, 8:32:06 PM",
+  "lastUpdated": "2026-03-12T14:32:06.742Z"
+}
