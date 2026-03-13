@@ -68,7 +68,7 @@
             link: "/srixon",
             logo: ASSETS["srixon-logo-svg"],
         },
-        "clevelandgolf": {
+        clevelandgolf: {
             title: "Cleveland Golf",
             link: "/cleveland-golf",
             logo: ASSETS["cleveland-golf-logo-svg"],
@@ -78,7 +78,7 @@
             link: "/xxio",
             logo: ASSETS["xxio-logo-svg"],
         },
-        "nevercompromise": {
+        nevercompromise: {
             title: "Never Compromise",
             link: "/never-compromise",
             logo: ASSETS["never-compromise-logo-svg"],
@@ -132,6 +132,7 @@
         targetNode.classList.add(`ab-container-fluid-control`);
         targetNode.insertAdjacentHTML("afterend", /* HTML */ `<div class="container-fluid ab-container-fluid-duplicated">${targetNode.innerHTML}</div>`);
 
+        // Level 2
         qq(".ab-container-fluid-duplicated .menu-group > ul.nav > li.nav-item > .dropdown-menu").forEach((dropdownMenu) => {
             const parentUl = dropdownMenu.parentElement;
             const linkItem = q(parentUl, ":scope > a.nav-link");
@@ -151,7 +152,7 @@
                                     <span class="menu-heading">${title}</span>
                                 </button>
                             </div>
-                            <div class="close-button pull-right">
+                            <div class="close-button">
                                 <button role="button" class="close" aria-label="Close Menu">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -166,46 +167,105 @@
                 `,
             );
         });
-    }
 
-    function clickFunction() {
-        q(".ab-container-fluid-duplicated").addEventListener("click", (e) => {
-            console.log("===== clicked =====");
-            e.preventDefault();
+        // Level 3
+        qq(".menu-group > ul.nav > li.nav-item > .dropdown-menu > .column.d-flex > ul.row.mr-0.ml-0 > li.dropdown-item > .dropdown-menu").forEach((dropdownItem) => {
+            const parentUl = dropdownItem.parentElement;
+            const linkItem = q(parentUl, ":scope > a.dropdown-link.more-link");
+            linkItem.id;
+            const link = linkItem.href;
+            const title = linkItem.getAttribute("aria-label");
 
-            const closeElement = e.target.closest(".close-menu .close, button.close");
-            if (closeElement) {
-                q(".ab-container-fluid-control .close-menu .close").click();
-            }
-
-            const subMenuLinkL1 = e.target.closest(".menu-group > ul.nav > li.nav-item > a.nav-link");
-            if (subMenuLinkL1) {
-                const ul = subMenuLinkL1.parentElement;
-                const dropdownMenu = q(ul, ":scope > .dropdown-menu");
-                ul.classList.add("show");
-                subMenuLinkL1.setAttribute("aria-expanded", "true");
-                subMenuLinkL1.setAttribute("aria-hidden", "true");
-                dropdownMenu.setAttribute("aria-hidden", "false");
-
-            }
-
-            const dropdownLevel2BackToParentLi = e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > li.nav-menu");
-            if (dropdownLevel2BackToParentLi && q(dropdownLevel2BackToParentLi, ":scope > .close-menu .back.pull-left")) {
-                dropdownLevel2BackToParentLi.parentElement.parentElement.classList.remove("show");
-                dropdownLevel2BackToParentLi.parentElement.previousElementSibling.setAttribute("aria-expanded", "false");
-                dropdownLevel2BackToParentLi.parentElement.previousElementSibling.setAttribute("aria-hidden", "false");
-                dropdownLevel2BackToParentLi.parentElement.setAttribute("aria-hidden", "true");
-            }
-            
-            const dropdownLevel2ShopAllLi = e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > li.dropdown-item.top-category");
-            if (dropdownLevel2ShopAllLi && q(dropdownLevel2ShopAllLi, ":scope > a.nav-link")) {
-                const href = q(dropdownLevel2ShopAllLi, ":scope > a.nav-link").href;
-                window.location.href = href;
-            }
+            dropdownItem.insertAdjacentHTML(
+                "afterbegin",
+                /* HTML */ `
+                    <li class="nav-menu">
+                        <div class="close-menu clearfix d-md-none">
+                            <div class="back pull-left">
+                                <button role="button" aria-label="Back to previous menu">
+                                    <span class="caret-left"></span>
+                                    <span class="menu-heading">${title}</span>
+                                </button>
+                            </div>
+                            <div class="close-button pull-right">
+                                <button role="button" class="close" aria-label="Close Menu">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown-item top-category" role="button" >
+                        <a href="${link}" id="${link}" name="${title}" class="dropdown-link more-link p-0" role="button" aria-haspopup="false" aria-label="${title}" tabindex="0">
+                            <div class="category-name" data-name="Balls">Shop All</div>
+                        </a>
+                    </li>
+                `,
+            );
         });
     }
 
+    function clickFunction() {
+        q(".ab-container-fluid-duplicated")?.addEventListener(
+            "click",
+            (e) => {
+                console.log("===== clicked =====");
+                e.preventDefault();
 
+                const closeElement = e.target.closest(".close-menu .close, button.close, button.close span");
+                if (closeElement) {
+                    console.log("closeElement", closeElement);
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    q(".ab-container-fluid-control .close-menu .close").click();
+                }
+
+                const subMenuLinkL1 = e.target.closest(".menu-group > ul.nav > li.nav-item > a.nav-link");
+                if (subMenuLinkL1) {
+                    const ul = subMenuLinkL1.parentElement;
+                    const dropdownMenu = q(ul, ":scope > .dropdown-menu");
+                    ul.classList.add("show");
+                    subMenuLinkL1.setAttribute("aria-expanded", "true");
+                    subMenuLinkL1.setAttribute("aria-hidden", "true");
+                    dropdownMenu.setAttribute("aria-hidden", "false");
+                }
+
+                const dropdownLevel2BackToParentLi = e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > li.nav-menu");
+                if (
+                    dropdownLevel2BackToParentLi &&
+                    e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > li.nav-menu > .close-menu .back.pull-left") &&
+                    !closeElement
+                ) {
+                    dropdownLevel2BackToParentLi.parentElement.parentElement.classList.remove("show");
+                    dropdownLevel2BackToParentLi.parentElement.previousElementSibling.setAttribute("aria-expanded", "false");
+                    dropdownLevel2BackToParentLi.parentElement.previousElementSibling.setAttribute("aria-hidden", "false");
+                    dropdownLevel2BackToParentLi.parentElement.setAttribute("aria-hidden", "true");
+                }
+
+                const dropdownLevel2ShopAllLi = e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > li.dropdown-item.top-category");
+                if (dropdownLevel2ShopAllLi && q(dropdownLevel2ShopAllLi, ":scope > a.nav-link")) {
+                    const href = q(dropdownLevel2ShopAllLi, ":scope > a.nav-link").href;
+                    window.location.href = href;
+                }
+
+                const subMenuLinkL2 = e.target.closest(".menu-group > ul.nav > li.nav-item > .dropdown-menu > .column > ul[role='menu'] > li.dropdown-item > a.dropdown-link");
+                if (subMenuLinkL2 && !q(subMenuLinkL2.parentElement, ":scope > .dropdown-menu")) {
+                    const href = subMenuLinkL2.href;
+                    window.location.href = href;
+                }
+
+                if (subMenuLinkL2 && q(subMenuLinkL2.parentElement, ":scope > .dropdown-menu")) {
+                    const subMenuParent2 = subMenuLinkL2.parentElement;
+                    subMenuParent2.classList.add("show");
+                    subMenuLinkL2.setAttribute("aria-expanded", "true");
+                    qq(subMenuParent2, ":scope > .dropdown-menu").forEach((dropdownMenu) => {
+                        dropdownMenu.setAttribute("aria-hidden", "false");
+                    });
+                }
+            },
+            false,
+        );
+    }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
