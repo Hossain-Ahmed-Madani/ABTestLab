@@ -1,8 +1,5 @@
 .AB-NAV-TIER-2-BRAND-M nav .main-menu {
-  background-color: #d6d6d6;
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: scroll;
+  font-family: inherit;
 }
 .AB-NAV-TIER-2-BRAND-M nav .main-menu .container-fluid:not(.ab-nav-container) {
   display: none;
@@ -175,6 +172,7 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
 }
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link::before,
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link--has-sub-menu::before {
   content: "";
   position: absolute;
@@ -184,7 +182,9 @@
   border-top: 8px solid rgba(0, 0, 0, 0);
   border-bottom: 8px solid rgba(0, 0, 0, 0);
   border-radius: 5px;
+  color: #444;
 }
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link::after,
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link--has-sub-menu::after {
   content: "";
   position: absolute;
@@ -193,4 +193,15 @@
   border-left: 5px solid #fff;
   border-top: 5px solid rgba(0, 0, 0, 0);
   border-bottom: 5px solid rgba(0, 0, 0, 0);
+  color: #444;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link {
+  padding: 1rem;
+  padding-left: 29px;
+  text-decoration: underline;
+  font-weight: bold;
+  color: #666;
+}
+.AB-NAV-TIER-2-BRAND-M li.ab-nav-menu-item.ab-nav-menu-item--shop-all {
+  margin-top: 9px;
 }

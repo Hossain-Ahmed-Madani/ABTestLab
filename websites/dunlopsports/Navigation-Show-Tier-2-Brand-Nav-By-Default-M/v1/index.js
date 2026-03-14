@@ -513,7 +513,7 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function getNavLayout(menu_items = DATA.menu_items, parent_title = "", level = 1) {
+    function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
         console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
@@ -534,12 +534,17 @@
                     </div>`}
 
                 <ul class="ab-nav-menu-list">
+                    ${parent_link ? `
+                        <li class="ab-nav-menu-item ab-nav-menu-item--shop-all">
+                            <a href="${parent_link}" class="ab-nav-menu-item-link">Shop All</a>
+                        </li>
+                        ` : ""}
                     ${menu_items
                         .map(
                             ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
                             <li class="ab-nav-menu-item">
                                 <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, ++level) : ""}
+                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, ++level) : ""}
                             </li>
                         `,
                         )
@@ -564,7 +569,7 @@
 
     function clickFunction() {
         q(".ab-nav-container").addEventListener("click", (e) => {
-            const closeButton = e.target.closest('.ab-nav-close-cta');
+            const closeButton = e.target.closest(".ab-nav-close-cta");
             if (closeButton) {
                 q(".close-button button.close").click();
             }
@@ -578,7 +583,7 @@
             }
 
             const backToParentCta = e.target.closest("button.ab-nav-menu-back-cta");
-            if(backToParentCta) {
+            if (backToParentCta) {
                 const parentDropdownMenu = backToParentCta.parentElement.parentElement;
                 console.log("parentDropdownMenu", parentDropdownMenu);
                 parentDropdownMenu.classList.remove("ab-nav-menu-container--show");
