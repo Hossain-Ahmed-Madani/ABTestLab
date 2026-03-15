@@ -90,7 +90,7 @@
                 link: "/srixon",
                 logo: ASSETS["srixon-logo-svg"],
             },
-            clevelandgolf: {
+            "cleveland-golf": {
                 title: "Cleveland Golf",
                 link: "/cleveland-golf",
                 logo: ASSETS["cleveland-golf-logo-svg"],
@@ -100,7 +100,7 @@
                 link: "/xxio",
                 logo: ASSETS["xxio-logo-svg"],
             },
-            nevercompromise: {
+            "never-compromise": {
                 title: "Never Compromise",
                 link: "/never-compromise",
                 logo: ASSETS["never-compromise-logo-svg"],
@@ -472,32 +472,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -507,17 +481,32 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+    function getLevel2BrandLayout() {
+        return /* HTML */ `
+            <div class="ab-nav-brand-list-wrapper">
+                <h4 class="ab-nav-brand-list-header">Also Shop</h4>
+                <ul class="ab-nav-brand-list">
+                    ${Object.values(DATA.brand_items)
+                        .map(
+                            ({ title, link }) => /* HTML  */ `
+                            <li class="ab-nav-brand-item">
+                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                            </li>
+                        `,
+                        )
+                        .join("")}
+                </ul>
+            </div>
+        `;
     }
+
+    const level2BrandLayout = getLevel2BrandLayout();
 
     function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
         console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
-            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level}">
+            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level} ${level === 2 && parent_title === "Srixon" ? "ab-nav-menu-container--show" : ""}">
                 ${level === 1
                     ? ` 
                     <div class="ab-nav-menu-top">
@@ -534,27 +523,40 @@
                     </div>`}
 
                 <ul class="ab-nav-menu-list">
-                    ${parent_link ? `
+                    ${parent_link
+                        ? `
                         <li class="ab-nav-menu-item ab-nav-menu-item--shop-all">
                             <a href="${parent_link}" class="ab-nav-menu-item-link">Shop All</a>
                         </li>
-                        ` : ""}
+                        `
+                        : ""}
                     ${menu_items
                         .map(
                             ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
                             <li class="ab-nav-menu-item">
                                 <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, ++level) : ""}
+                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
                             </li>
                         `,
                         )
                         .join("")}
                 </ul>
+
+                ${level === 2 ? level2BrandLayout : ""}
             </div>
         `;
     }
 
     function createLayout() {
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
 
         targetNode.insertAdjacentHTML(

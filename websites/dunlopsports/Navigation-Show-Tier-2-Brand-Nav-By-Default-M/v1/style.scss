@@ -15,6 +15,7 @@
 .AB-NAV-TIER-2-BRAND-M {
     nav .main-menu {
         font-family: inherit;
+        overflow: hidden;
     }
 
     // MAIN
@@ -138,43 +139,15 @@
         line-height: 1;
     }
 
-    ul.ab-nav-menu-list {
-        flex-grow: 1;
-        // height: 100%;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        position: static;
-        background-color: #fff;
-    }
-
-    li.ab-nav-menu-item {
-        margin: 0;
-        position: static;
-    }
-
     .ab-nav-menu-container {
-        height: 100%;
-        // display: none;
         flex-direction: column;
-        gap: 0;
-    }
-
-    .ab-nav-menu-container.ab-nav-menu-container-level-1 {
-        display: flex;
-        left: 0 !important;
-    }
-
-    .ab-nav-menu-container {
-        left: -100%;
-        transition: all 0.3s ease-in-out;
         position: absolute;
         height: 100%;
+        top: 0;
+        left: -100%;
+        transition: all 0.3s ease-in-out;
         z-index: 1;
         background-color: #fff;
-        top: 0;
 
         &--show {
             display: flex;
@@ -183,7 +156,12 @@
     }
 
     .ab-nav-menu-container.ab-nav-menu-container-level-1 {
-        display: block;
+        display: flex;
+        left: 0 !important;
+    }
+
+    .ab-nav-menu-container.ab-nav-menu-container-level-2 {
+        overflow-y: auto;
     }
 
     .ab-nav-menu-container-level-1 > .ab-nav-menu-list {
@@ -197,6 +175,24 @@
     }
     .ab-nav-menu-container-level-3 {
         z-index: 3;
+    }
+
+    ul.ab-nav-menu-list {
+        // flex-grow: 1;
+        // height: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        position: static;
+        background-color: #fff;
+        margin-bottom: 15px;
+    }
+
+    li.ab-nav-menu-item {
+        margin: 0;
+        position: static;
     }
 
     .ab-nav-menu-container-level-1 > .ab-nav-menu-list > .ab-nav-menu-item > .ab-nav-menu-item-link {
@@ -228,7 +224,6 @@
         background-color: rgba(0, 0, 0, 0);
     }
 
-
     .ab-nav-menu-item--shop-all .ab-nav-menu-item-link,
     .ab-nav-menu-item-link--has-sub-menu {
         &::before {
@@ -255,8 +250,7 @@
         }
     }
 
-    .ab-nav-menu-item--shop-all
-    .ab-nav-menu-item-link {
+    .ab-nav-menu-item--shop-all .ab-nav-menu-item-link {
         padding: 1rem;
         padding-left: 29px;
         text-decoration: underline;
@@ -266,5 +260,85 @@
 
     li.ab-nav-menu-item.ab-nav-menu-item--shop-all {
         margin-top: 9px;
+    }
+
+    .ab-nav-brand-list-wrapper {
+        padding-top: 28.5px;
+        background-color: #f0f0f0;
+        flex-grow: 1;
+    }
+
+    .ab-nav-brand-list-header {
+        padding-left: 32px;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-style: Italic;
+        font-size: 15px;
+        line-height: 250%;
+        letter-spacing: 0px;
+        color: #444;
+        text-transform: uppercase;
+        margin-bottom: 7px;
+    }
+
+    ul.ab-nav-brand-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: static;
+        margin-bottom: 15px;
+    }
+
+    li.ab-nav-brand-item {
+        margin: 0;
+        position: static;
+    }
+
+    .ab-nav-brand-item-link {
+        width: 100%;
+        display: flex;
+        margin-left: 0;
+        padding: 0 0.5rem 0 29px;
+        position: relative;
+
+        font-family: "Roboto", sans-serif;
+        font-weight: 600;
+        font-style: SemiBold;
+        font-size: 18px;
+        line-height: 250%;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+        text-decoration: none;
+        
+        &:focus,
+        &:active {
+            text-decoration: none;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 16px;
+            right: 30px;
+            border-left: 8px solid;
+            border-top: 8px solid rgba(0, 0, 0, 0);
+            border-bottom: 8px solid rgba(0, 0, 0, 0);
+            border-radius: 5px;
+            color: #444;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            right: 34px;
+            top: 19px;
+            border-left: 5px solid #fff;
+            border-top: 5px solid rgba(0, 0, 0, 0);
+            border-bottom: 5px solid rgba(0, 0, 0, 0);
+            color: #444;
+        }
     }
 }

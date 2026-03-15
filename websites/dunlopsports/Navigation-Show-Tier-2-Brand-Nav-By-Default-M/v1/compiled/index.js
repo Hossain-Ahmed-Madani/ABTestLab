@@ -12,6 +12,38 @@
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const ASSETS = {
+        "srixon-logo-svg": /* HTML */ `
+            <svg id="srixon-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
+                <title>Srixon</title>
+                <path
+                    d="M221.53,126.66L3.82,0,74.13,57.86c-97.96,3.44-99.69,130.2-.04,137.65L3.82,253.41,221.53,126.66m-205.2-.02c0-35.56,28.83-64.38,64.39-64.38s64.38,28.82,64.38,64.38-28.83,64.37-64.38,64.37S16.33,162.2,16.33,126.64Z"
+                ></path>
+            </svg>
+        `,
+        "cleveland-golf-logo-svg": /* HTML */ `
+            <svg id="cleveland-golf-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
+                <title>Cleveland Golf</title>
+                <path
+                    d="M221.53,126.66L3.82,0,74.13,57.86c-97.96,3.44-99.69,130.2-.04,137.65L3.82,253.41,221.53,126.66m-205.2-.02c0-35.56,28.83-64.38,64.39-64.38s64.38,28.82,64.38,64.38-28.83,64.37-64.38,64.37S16.33,162.2,16.33,126.64Z"
+                ></path>
+            </svg>
+        `,
+        "xxio-logo-svg": /* HTML */ `
+            <svg id="xxio-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
+                <title>XXIO</title>
+                <path
+                    d="M221.53,126.66L3.82,0,74.13,57.86c-97.96,3.44-99.69,130.2-.04,137.65L3.82,253.41,221.53,126.66m-205.2-.02c0-35.56,28.83-64.38,64.39-64.38s64.38,28.82,64.38,64.38-28.83,64.37-64.38,64.37S16.33,162.2,16.33,126.64Z"
+                ></path>
+            </svg>
+        `,
+        "never-compromise-logo-svg": /* HTML */ `
+            <svg id="never-compromise-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
+                <title>Never Compromise</title>
+                <path
+                    d="M221.53,126.66L3.82,0,74.13,57.86c-97.96,3.44-99.69,130.2-.04,137.65L3.82,253.41,221.53,126.66m-205.2-.02c0-35.56,28.83-64.38,64.39-64.38s64.38,28.82,64.38,64.38-28.83,64.37-64.38,64.37S16.33,162.2,16.33,126.64Z"
+                ></path>
+            </svg>
+        `,
         "dunlop-logo-svg": /* HTML */ `
             <svg id="dunlop-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
                 <title>Dunlop</title>
@@ -40,9 +72,50 @@
                     d="M1137.54,189.13c5.95,1.98,47.73,7.44,97.06,4.68,70.94-.44,89.01-64.01,99.29-92.15,6.78-18.52,6.75-37.38-33.93-41.63-38.76-3.21-82.68-1.18-85.79-.94-18.5,1.48-40.85,3.85-61.63,22.26-5.78,5.18-18.4,21.71-33.32,62.28-13.89,37.76,15.58,44.61,18.32,45.51m51.92-49.4c5.65-15.12,19.23-41.88,22.92-46.7,7.37-10.21,17.01-10.78,39.69-9.08,8.63,1.9,19.72,7.32,7.65,32.89-10.59,22.43-17.36,43.46-29.48,47.65-9.24,3.2-18.81,3.71-32.29,2.08-10.55-1.28-15.78-7.31-8.49-26.84Z"
                 ></path>
             </svg>
-        `};
+        `,
+        "asics-logo-svg": /* HTML */ `
+            <svg id="asics-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1560.1 253.41">
+                <title>Asics</title>
+                <path
+                    d="M221.53,126.66L3.82,0,74.13,57.86c-97.96,3.44-99.69,130.2-.04,137.65L3.82,253.41,221.53,126.66m-205.2-.02c0-35.56,28.83-64.38,64.39-64.38s64.38,28.82,64.38,64.38-28.83,64.37-64.38,64.37S16.33,162.2,16.33,126.64Z"
+                ></path>
+            </svg>
+        `,
+    };
 
     const DATA = {
+        brand_items: {
+            srixon: {
+                title: "Srixon",
+                link: "/srixon",
+                logo: ASSETS["srixon-logo-svg"],
+            },
+            "cleveland-golf": {
+                title: "Cleveland Golf",
+                link: "/cleveland-golf",
+                logo: ASSETS["cleveland-golf-logo-svg"],
+            },
+            xxio: {
+                title: "XXIO",
+                link: "/xxio",
+                logo: ASSETS["xxio-logo-svg"],
+            },
+            "never-compromise": {
+                title: "Never Compromise",
+                link: "/never-compromise",
+                logo: ASSETS["never-compromise-logo-svg"],
+            },
+            dunlop: {
+                title: "Dunlop",
+                link: "/dunlop",
+                logo: ASSETS["dunlop-logo-svg"],
+            },
+            asics: {
+                title: "Asics",
+                link: "/asics",
+                logo: ASSETS["asics-logo-svg"],
+            },
+        },
         menu_items: [
             // Level 1 - Srixon
             {
@@ -383,11 +456,32 @@
         return document.querySelector(s);
     }
 
+    function getLevel2BrandLayout() {
+        return /* HTML */ `
+            <div class="ab-nav-brand-list-wrapper">
+                <h4 class="ab-nav-brand-list-header">Also Shop</h4>
+                <ul class="ab-nav-brand-list">
+                    ${Object.values(DATA.brand_items)
+                        .map(
+                            ({ title, link }) => /* HTML  */ `
+                            <li class="ab-nav-brand-item">
+                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                            </li>
+                        `,
+                        )
+                        .join("")}
+                </ul>
+            </div>
+        `;
+    }
+
+    const level2BrandLayout = getLevel2BrandLayout();
+
     function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
         console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
-            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level}">
+            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level} ${level === 2 && parent_title === "Srixon" ? "ab-nav-menu-container--show" : ""}">
                 ${level === 1
                     ? ` 
                     <div class="ab-nav-menu-top">
@@ -404,27 +498,40 @@
                     </div>`}
 
                 <ul class="ab-nav-menu-list">
-                    ${parent_link ? `
+                    ${parent_link
+                        ? `
                         <li class="ab-nav-menu-item ab-nav-menu-item--shop-all">
                             <a href="${parent_link}" class="ab-nav-menu-item-link">Shop All</a>
                         </li>
-                        ` : ""}
+                        `
+                        : ""}
                     ${menu_items
                         .map(
                             ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
                             <li class="ab-nav-menu-item">
                                 <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, ++level) : ""}
+                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
                             </li>
                         `,
                         )
                         .join("")}
                 </ul>
+
+                ${level === 2 ? level2BrandLayout : ""}
             </div>
         `;
     }
 
     function createLayout() {
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
 
         targetNode.insertAdjacentHTML(
