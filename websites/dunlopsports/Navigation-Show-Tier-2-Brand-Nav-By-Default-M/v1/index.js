@@ -641,18 +641,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -706,7 +694,12 @@
         console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
-            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level} ${level === 2 && parent_title === activeBrand.title ? "ab-nav-menu-container--show" : ""}">
+            <div 
+                class="
+                    ab-nav-menu-container 
+                    ab-nav-menu-container-level-${level} 
+                    ${level === 2 && parent_title === activeBrand.title ? "ab-nav-menu-container--show" : ""}"
+            >
                 ${level === 1
                     ? ` 
                     <div class="ab-nav-menu-top">
