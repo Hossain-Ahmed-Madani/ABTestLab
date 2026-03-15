@@ -121,17 +121,19 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-top: -10px;
 
         svg {
             display: block;
             width: 100%;
-            max-height: 30px !important;
-            max-width: 125px !important;
+            width: 57px;
+            // max-height: 30px !important;
+            // max-width: 125px !important;
         }
     }
 
     .ab-nav-close-cta {
-        font-family: Jagger;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         font-size: 2rem;
         color: #000;
         text-shadow: 0 1px 0 #fff;
@@ -312,7 +314,7 @@
         letter-spacing: 0px;
         text-transform: uppercase;
         text-decoration: none;
-        
+
         &:focus,
         &:active {
             text-decoration: none;
