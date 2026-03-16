@@ -5,8 +5,8 @@
 // 4. Paste the code snippet below into the JavaScript editor.
 // 5. Important: You will still need to add your "Mobile Users" audience to the experiment's Audience Targeting section. This activation condition will then only run for users who are already part of the "Mobile Users" audience.
 
-(function () {
-    const EXPERIMENT_ID = "YOUR_EXPERIMENT_ID"; // Replace with experiment's ID
+function customTargetting() {
+    const EXPERIMENT_ID = "6603162392461312"; // Replace with experiment's ID
 
     function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
         if (timer <= 0) {
@@ -65,6 +65,6 @@
             const targetNode = q("nav .main-menu");
             const debouncedUpdate = debounce(triggerExperiment, 250);
             return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: false, subtree: false, attributes: true });
-        },
+        }
     );
-})();
+}

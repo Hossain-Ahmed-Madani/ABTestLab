@@ -1,3 +1,9 @@
+/* 
+Test container: https://app.optimizely.com/signin?continue_to=https%3A//app.optimizely.com/v2/projects/30347390156/experiments/6754851980312576/variations%3F
+Preview: https://us.dunlopsports.com/?qa5=true
+
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -642,15 +648,11 @@
             <div class="ab-nav-brand-list-wrapper">
                 <h4 class="ab-nav-brand-list-header">Also Shop</h4>
                 <ul class="ab-nav-brand-list">
-                    ${Object.values(DATA.brand_items)
-                        .map(
-                            ({ title, link }) => /* HTML  */ `
-                            <li class="ab-nav-brand-item">
-                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
-                            </li>
-                        `,
-                        )
-                        .join("")}
+                    ${window.Object.values(DATA.brand_items).map(({ title, link }) => /* HTML  */ `
+                        <li class="ab-nav-brand-item">
+                            <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                        </li>
+                    `).join("")}
                 </ul>
             </div>
         `;
@@ -678,10 +680,14 @@
     }
 
     function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
-        console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
-            <div class="ab-nav-menu-container ab-nav-menu-container-level-${level} ${level === 2 && parent_title === activeBrand.title ? "ab-nav-menu-container--show" : ""}">
+            <div 
+                class="
+                    ab-nav-menu-container 
+                    ab-nav-menu-container-level-${level} 
+                    ${level === 2 && parent_title === activeBrand.title ? "ab-nav-menu-container--show" : ""}"
+            >
                 ${level === 1
                     ? ` 
                     <div class="ab-nav-menu-top">
@@ -705,16 +711,12 @@
                         </li>
                         `
                         : ""}
-                    ${menu_items
-                        .map(
-                            ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
-                            <li class="ab-nav-menu-item">
-                                <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
-                            </li>
-                        `,
-                        )
-                        .join("")}
+                    ${menu_items.map(({ title, link, sub_menu_items = [] }) => /* HTML  */ `
+                        <li class="ab-nav-menu-item">
+                            <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
+                            ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
+                        </li>
+                    `).join("")}
                 </ul>
 
                 ${level === 2 ? level2BrandLayout : ""}
@@ -729,7 +731,7 @@
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `,
+            `
         );
 
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
@@ -740,7 +742,7 @@
                 <div class="ab-nav-container">
                     <div class="ab-nav-menu-wrapper">${getNavLayout()}</div>
                 </div>
-            `,
+            `
         );
     }
 
@@ -755,14 +757,12 @@
             if (subMenuLinkExpandable) {
                 e.preventDefault();
                 const siblingDropdownMenu = subMenuLinkExpandable.nextElementSibling;
-                console.log("siblingDropdownMenu", siblingDropdownMenu);
                 siblingDropdownMenu.classList.add("ab-nav-menu-container--show");
             }
 
             const backToParentCta = e.target.closest("button.ab-nav-menu-back-cta");
             if (backToParentCta) {
                 const parentDropdownMenu = backToParentCta.parentElement.parentElement;
-                console.log("parentDropdownMenu", parentDropdownMenu);
                 parentDropdownMenu.classList.remove("ab-nav-menu-container--show");
             }
         });
