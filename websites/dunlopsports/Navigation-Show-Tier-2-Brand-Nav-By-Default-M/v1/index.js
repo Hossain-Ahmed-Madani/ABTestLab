@@ -1,3 +1,9 @@
+/* 
+Test container: https://app.optimizely.com/signin?continue_to=https%3A//app.optimizely.com/v2/projects/30347390156/experiments/6754851980312576/variations%3F
+Preview: 
+
+*/
+
 (() => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -691,7 +697,6 @@
     }
 
     function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
-        console.log("getNavLayout: recursive call", menu_items, parent_title, level);
 
         return /* HTML */ `
             <div 
@@ -773,14 +778,12 @@
             if (subMenuLinkExpandable) {
                 e.preventDefault();
                 const siblingDropdownMenu = subMenuLinkExpandable.nextElementSibling;
-                console.log("siblingDropdownMenu", siblingDropdownMenu);
                 siblingDropdownMenu.classList.add("ab-nav-menu-container--show");
             }
 
             const backToParentCta = e.target.closest("button.ab-nav-menu-back-cta");
             if (backToParentCta) {
                 const parentDropdownMenu = backToParentCta.parentElement.parentElement;
-                console.log("parentDropdownMenu", parentDropdownMenu);
                 parentDropdownMenu.classList.remove("ab-nav-menu-container--show");
             }
         });
