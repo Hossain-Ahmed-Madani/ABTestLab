@@ -510,6 +510,16 @@
         q(".ab-product-size-selector-container").classList.add("ab-product-size-selector-container--initialized");
         q(".ab-product-size-selector-container > .product__select-sizes").innerHTML = q(dom, ".product__select-sizes").outerHTML;
 
+        // Modify Size Items
+        const sizeItems = qq(".ab-product-size-selector-container .product__select-sizes-item");
+        if (sizeItems.length > 0) {
+            sizeItems.forEach((item) => item.classList.remove("active"));
+        }
+
+        if (sizeItems.length === 1 && q(sizeItems[0], ".product__select-sizes-button.disabled")) {
+            q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add("ab-disabled");
+        }
+
         // CTA Section
         q(".ab-add-to-cart-cta").setAttribute("disabled", "");
         q("a.ab-view-full-details").setAttribute("href", url);
@@ -614,6 +624,12 @@
             handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
         }
 
+        // PDP Quick Add
+        if (window.location.pathname.includes("/products")) {
+            handleQuickAddClick(".shopify-section--product-quickshop", ".quick-shop-carousel-quickadd");
+            handleQuickAddClick(".nosto-carousel-tabs__wrap", ".quick-shop-carousel-quickadd");
+        }
+
         // Modal Base Events
         q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
             handleModalView("hide");
@@ -652,7 +668,7 @@
 
             // Product Size Click
             const productSizeItem = e.target.closest(".ab-product-size-selector-container .product__select-sizes-item:not(.active)");
-            if (productSizeItem) {
+            if (productSizeItem && !q(productSizeItem, ".disabled")) {
                 q(".ab-product-size-selector-container .product__size-value").innerText = productSizeItem.textContent.trim();
                 qq(".ab-product-size-selector-container .product__select-sizes-item").forEach((item) => item.classList.remove("active"));
                 productSizeItem.classList.add("active");
@@ -762,7 +778,10 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && (q(".product-tiles") || q(".nosto-carousel-tabs__wrap")));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && 
+            (q(".product-tiles") || q(".nosto-carousel-tabs__wrap") || q(".shopify-section--product-quickshop"))
+        );
     }
 
     try {
