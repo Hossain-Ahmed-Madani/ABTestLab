@@ -12,7 +12,7 @@ Preview: https://us.dunlopsports.com/?qa5=true
         test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
         page_initials: "AB-NAV-TIER-2-BRAND-M",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -347,6 +347,7 @@ Preview: https://us.dunlopsports.com/?qa5=true
                         link: "/srixon/limited-edition",
                         sub_menu_items: [
                             { title: "Blackout Collection", link: "/srixon/limited-edition/blackout-collection" },
+                            { title: "Tour Ink Collection", link: "/srixon/limited-edition/tour-ink-collection" },
                             { title: "Hawaii Floral Collection", link: "/srixon/limited-edition/hawaii-floral-collection" },
                             { title: "Summer Major Collection", link: "/srixon/limited-edition/summer-major-collection" },
                             { title: "All-American", link: "/srixon/limited-edition/all-american" },
@@ -666,7 +667,7 @@ Preview: https://us.dunlopsports.com/?qa5=true
 
         if (pathname.includes("/srixon")) {
             activeBrand = DATA.brand_items["srixon"];
-        } else if (pathname.includes("/cleveland-golf")) {
+        } else if (pathname.includes("/cleveland-golf") || pathname.includes("/clevelandgolf") ) {
             activeBrand = DATA.brand_items["cleveland-golf"];
         } else if (pathname.includes("/xxio")) {
             activeBrand = DATA.brand_items["xxio"];
