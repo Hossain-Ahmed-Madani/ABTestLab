@@ -2,6 +2,10 @@
 Test container: https://app.optimizely.com/signin?continue_to=https%3A//app.optimizely.com/v2/projects/30347390156/experiments/6754851980312576/variations%3F
 Preview: https://us.dunlopsports.com/?qa5=true
 
+control: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=6355650406514688&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6119538807275520&optimizely_snippet=s3-30347390156&optimizely_preview_mode_CAMPAIGN=6119538807275520&optimizely_embed_editor=false&qa5=true
+
+v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=5626530114568192&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6119538807275520&optimizely_snippet=s3-30347390156&optimizely_preview_mode_CAMPAIGN=6119538807275520&optimizely_embed_editor=false&qa5=true
+
 */
 
 (() => {
