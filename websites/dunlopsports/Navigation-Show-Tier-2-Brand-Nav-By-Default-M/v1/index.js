@@ -16,7 +16,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
         page_initials: "AB-NAV-TIER-2-BRAND-M",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -365,7 +365,10 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                     { title: "ZXi4 Irons", link: "https://us.dunlopsports.com/srixon/clubs/irons/zxi4-irons/zxi4-irons/MZXI4IRN.html" },
                                     { title: "ZXiR Irons", link: "https://us.dunlopsports.com/srixon/clubs/irons/zxir-irons/zxir-irons/MZXIRIRN.html" },
                                     { title: "ZXiR HL Irons", link: "https://us.dunlopsports.com/srixon/clubs/irons/zxir-hl-irons/zxir-hl-irons/MZXIRHLIRN.html" },
-                                    { title: "Women's ZXiR HL Irons", link: "https://us.dunlopsports.com/srixon/clubs/irons/womens-zxir-hl-irons/womens-zxir-hl-irons/MWZXIRHLIRN.html" },
+                                    {
+                                        title: "Women's ZXiR HL Irons",
+                                        link: "https://us.dunlopsports.com/srixon/clubs/irons/womens-zxir-hl-irons/womens-zxir-hl-irons/MWZXIRHLIRN.html",
+                                    },
                                     { title: "ZXiU Utility Irons", link: "https://us.dunlopsports.com/srixon/clubs/irons/zxiu-utility-irons/zxiu-utility-irons/MZXIUTY.html" },
                                     { title: "Z-Forged II Irons", link: "/srixon/clubs/irons/z-forged-ii-irons" },
                                 ],
@@ -378,7 +381,10 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                     { title: "ZXi Driver", link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-driver/zxi-driver/MZXIDRV.html" },
                                     { title: "ZXi LS Driver", link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-ls-driver/zxi-ls-driver/MZXILSDRV.html" },
                                     { title: "ZXi MAX Driver", link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-max-driver/zxi-max-driver/MZXIMAXDRV.html" },
-                                    { title: "Women's ZXi MAX Driver", link: "https://us.dunlopsports.com/srixon/clubs/drivers/womens-zxi-max-driver/womens-zxi-max-driver/MWZXIMAXDRV.html" },
+                                    {
+                                        title: "Women's ZXi MAX Driver",
+                                        link: "https://us.dunlopsports.com/srixon/clubs/drivers/womens-zxi-max-driver/womens-zxi-max-driver/MWZXIMAXDRV.html",
+                                    },
                                 ],
                             },
                             {
@@ -386,7 +392,10 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                 link: "/srixon/clubs/fairway-woods",
                                 sub_menu_items: [
                                     { title: "ZXi Fairway", link: "https://us.dunlopsports.com/srixon/clubs/fairway-woods/zxi-fairway/zxi-fairway-woods/MZXIFWY.html" },
-                                    { title: "Women's ZXi Fairway", link: "https://us.dunlopsports.com/srixon/clubs/fairway-woods/womens-zxi-fairway/womens-zxi-fairway-woods/MWZXIFWY.html" },
+                                    {
+                                        title: "Women's ZXi Fairway",
+                                        link: "https://us.dunlopsports.com/srixon/clubs/fairway-woods/womens-zxi-fairway/womens-zxi-fairway-woods/MWZXIFWY.html",
+                                    },
                                 ],
                             },
                             {
@@ -480,9 +489,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Events",
                                 link: "/srixon/fitting/events",
-                                sub_menu_items: [
-                                    { title: "Event Days", link: "/srixon/fitting/events/event-days" },
-                                ],
+                                sub_menu_items: [{ title: "Event Days", link: "/srixon/fitting/events/event-days" }],
                             },
                         ],
                     },
@@ -514,12 +521,18 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                 sub_menu_items: [
                                     { title: "My Custom Wedge", link: "/cleveland-golf/clubs/wedges/my-custom-wedge" },
                                     { title: "Wedge Selector", link: "/cleveland-golf/clubs/wedges/wedge-selector" },
-                                    { title: "RTZ Set Builder", link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz-set-builder/rtz-wedge-set-builder/rtz-wedge-set.html" },
+                                    {
+                                        title: "RTZ Set Builder",
+                                        link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz-set-builder/rtz-wedge-set-builder/rtz-wedge-set.html",
+                                    },
                                     { title: "RTZ", link: "/cleveland-golf/clubs/wedges/rtz" },
                                     { title: "RTX 6 ZipCore", link: "/cleveland-golf/clubs/wedges/rtx-6-zipcore" },
                                     { title: "CBX Full-Face 2", link: "/cleveland-golf/clubs/wedges/cbx-full-face-2" },
                                     { title: "CBZ", link: "/cleveland-golf/clubs/wedges/cbz" },
-                                    { title: "Smart Sole Full-Face", link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/smart-sole-full-face/smart-sole-full-face-wedge/MSMARTSOLEFF.html" },
+                                    {
+                                        title: "Smart Sole Full-Face",
+                                        link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/smart-sole-full-face/smart-sole-full-face-wedge/MSMARTSOLEFF.html",
+                                    },
                                     { title: "Women's Wedges", link: "/cleveland-golf/clubs/wedges/womens-wedges" },
                                 ],
                             },
@@ -553,9 +566,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Apparel",
                                 link: "/cleveland-golf/gear/apparel",
-                                sub_menu_items: [
-                                    { title: "Headwear", link: "/cleveland-golf/gear/apparel/headwear" },
-                                ],
+                                sub_menu_items: [{ title: "Headwear", link: "/cleveland-golf/gear/apparel/headwear" }],
                             },
                             {
                                 title: "Accessories",
@@ -570,9 +581,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Limited Edition",
                                 link: "/cleveland-golf/gear/limited-edition",
-                                sub_menu_items: [
-                                    { title: "Hats", link: "/cleveland-golf/gear/limited-edition/hats" },
-                                ],
+                                sub_menu_items: [{ title: "Hats", link: "/cleveland-golf/gear/limited-edition/hats" }],
                             },
                         ],
                     },
@@ -591,9 +600,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Events",
                                 link: "/cleveland-golf/fitting/events",
-                                sub_menu_items: [
-                                    { title: "Event Days", link: "/cleveland-golf/fitting/events/event-days" },
-                                ],
+                                sub_menu_items: [{ title: "Event Days", link: "/cleveland-golf/fitting/events/event-days" }],
                             },
                         ],
                     },
@@ -622,9 +629,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Putters",
                                 link: "/cleveland-golf/sale/putters",
-                                sub_menu_items: [
-                                    { title: "Frontline Elite Putters", link: "/cleveland-golf/sale/putters/frontline-elite-putters" },
-                                ],
+                                sub_menu_items: [{ title: "Frontline Elite Putters", link: "/cleveland-golf/sale/putters/frontline-elite-putters" }],
                             },
                         ],
                     },
@@ -757,7 +762,14 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         title: "Fitting",
                         link: "/never-compromise/fitting",
                         sub_menu_items: [
-                            { title: "Fitting", link: "/never-compromise/fitting/fitting" },
+                            {
+                                title: "Fitting",
+                                link: "/never-compromise/fitting/fitting",
+                                sub_menu_items: [
+                                    { title: "Online Fitting", link: "/never-compromise/fitting/fitting/online-fitting" },
+                                    { title: "In-Store Fitting", link: "/never-compromise/fitting/fitting/in-store-fitting" },
+                                ],
+                            },
                             { title: "Events", link: "/never-compromise/fitting/events" },
                         ],
                     },
@@ -890,9 +902,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             {
                                 title: "Junior Rackets",
                                 link: "/dunlop/squash/junior-rackets",
-                                sub_menu_items: [
-                                    { title: "Mini Squash", link: "/dunlop/squash/junior-rackets/mini-squash" },
-                                ],
+                                sub_menu_items: [{ title: "Mini Squash", link: "/dunlop/squash/junior-rackets/mini-squash" }],
                             },
                         ],
                     },
@@ -1058,50 +1068,53 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             <div class="ab-nav-brand-list-wrapper">
                 <h4 class="ab-nav-brand-list-header">Also Shop</h4>
                 <ul class="ab-nav-brand-list">
-                    ${window.Object.values(DATA.brand_items).map(({ title, link }) => /* HTML  */ `
+                    ${window.Object.values(DATA.brand_items)
+                        .map(
+                            ({ title, link }) => /* HTML  */ `
                         <li class="ab-nav-brand-item">
                             <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
                         </li>
-                    `).join("")}
+                    `,
+                        )
+                        .join("")}
                 </ul>
             </div>
         `;
     }
 
     const level2BrandLayout = getLevel2BrandLayout();
-    let activeBrand = DATA.brand_items["dunlop"];
+    let defaultBrand = DATA.brand_items["dunlop"];
 
-    function setActiveBrand() {
+    function setDefaultBrand() {
         const pathname = window.location.pathname;
 
         if (pathname.includes("/srixon")) {
-            activeBrand = DATA.brand_items["srixon"];
-        } else if (pathname.includes("/cleveland-golf") || pathname.includes("/clevelandgolf") ) {
-            activeBrand = DATA.brand_items["cleveland-golf"];
+            defaultBrand = DATA.brand_items["srixon"];
+        } else if (pathname.includes("/cleveland-golf") || pathname.includes("/clevelandgolf")) {
+            defaultBrand = DATA.brand_items["cleveland-golf"];
         } else if (pathname.includes("/xxio")) {
-            activeBrand = DATA.brand_items["xxio"];
+            defaultBrand = DATA.brand_items["xxio"];
         } else if (pathname.includes("/never-compromise")) {
-            activeBrand = DATA.brand_items["never-compromise"];
+            defaultBrand = DATA.brand_items["never-compromise"];
         } else if (pathname.includes("/dunlop")) {
-            activeBrand = DATA.brand_items["dunlop"];
+            defaultBrand = DATA.brand_items["dunlop"];
         } else if (pathname.includes("/asics")) {
-            activeBrand = DATA.brand_items["asics"];
+            defaultBrand = DATA.brand_items["asics"];
         }
     }
 
     function getNavLayout(menu_items = DATA.menu_items, parent_title = "", parent_link = "", level = 1) {
-
         return /* HTML */ `
-            <div 
+            <div
                 class="
                     ab-nav-menu-container 
                     ab-nav-menu-container-level-${level} 
-                    ${level === 2 && parent_title === activeBrand.title ? "ab-nav-menu-container--show" : ""}"
+                    ${level === 2 && parent_title === defaultBrand.title ? "ab-nav-menu-container--show" : ""}"
             >
                 ${level === 1
                     ? ` 
                     <div class="ab-nav-menu-top">
-                        <div class="ab-nav-top-logo">${activeBrand.logo}</div>
+                        <div class="ab-nav-top-logo">${defaultBrand.logo}</div>
                         <div class="ab-nav-close-cta">×</div>
                     </div>`
                     : ` 
@@ -1121,12 +1134,16 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         </li>
                         `
                         : ""}
-                    ${menu_items.map(({ title, link, sub_menu_items = [] }) => /* HTML  */ `
+                    ${menu_items
+                        .map(
+                            ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
                         <li class="ab-nav-menu-item">
                             <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
                             ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
                         </li>
-                    `).join("")}
+                    `,
+                        )
+                        .join("")}
                 </ul>
 
                 ${level === 2 ? level2BrandLayout : ""}
@@ -1141,7 +1158,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `
+            `,
         );
 
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
@@ -1152,8 +1169,25 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <div class="ab-nav-container">
                     <div class="ab-nav-menu-wrapper">${getNavLayout()}</div>
                 </div>
-            `
+            `,
         );
+    }
+
+    function handleTier2Reset() {
+        const isTier1Visible = !q(".ab-nav-menu-container--show");
+
+        const isTier2Visible = !!(
+            q(".ab-nav-menu-container--show") &&
+            q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show") &&
+            !q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show  .ab-nav-menu-container--show")
+        );
+
+        const expandedTier2Title = q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text")?.textContent || "";
+
+        if (isTier1Visible || (isTier2Visible && expandedTier2Title.trim() !== defaultBrand.title)) {
+            q(".ab-nav-menu-container--show")?.classList.remove("ab-nav-menu-container--show");
+            q(`a.ab-nav-menu-item-link[href="${defaultBrand.link}"] ~ .ab-nav-menu-container-level-2`).classList.add("ab-nav-menu-container--show");
+        }
     }
 
     function clickFunction() {
@@ -1161,6 +1195,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             const closeButton = e.target.closest(".ab-nav-close-cta");
             if (closeButton) {
                 q(".close-button button.close").click();
+                handleTier2Reset();
             }
 
             const subMenuLinkExpandable = e.target.closest(".ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu");
@@ -1181,7 +1216,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        setActiveBrand();
+        setDefaultBrand();
         createLayout();
         clickFunction();
     }

@@ -1,3 +1,6 @@
+.AB-NAV-TIER-2-BRAND-M:has(nav .main-menu.in) {
+  overflow-y: hidden;
+}
 .AB-NAV-TIER-2-BRAND-M nav .main-menu {
   font-family: inherit;
   overflow: hidden;
@@ -114,7 +117,7 @@
   display: flex;
   left: 0 !important;
 }
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container.ab-nav-menu-container-level-2 {
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container.ab-nav-menu-container-level-2:not(:has(.ab-nav-menu-container--show)) {
   overflow-y: auto;
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-1 > .ab-nav-menu-list {
@@ -127,6 +130,15 @@
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-3 {
   z-index: 3;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-4 {
+  z-index: 4;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-5 {
+  z-index: 5;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-6 {
+  z-index: 6;
 }
 .AB-NAV-TIER-2-BRAND-M ul.ab-nav-menu-list {
   list-style: none;
@@ -169,6 +181,9 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
 }
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover, .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus, .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
+  text-decoration: underline;
+}
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link::before,
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link--has-sub-menu::before {
   content: "";
@@ -204,6 +219,7 @@
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-brand-list-wrapper {
   padding-top: 28.5px;
+  padding-bottom: 28.5px;
   background-color: #f0f0f0;
   flex-grow: 1;
 }
@@ -241,8 +257,7 @@
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  font-style: SemiBold;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 250%;
   letter-spacing: 0px;
   text-transform: uppercase;
