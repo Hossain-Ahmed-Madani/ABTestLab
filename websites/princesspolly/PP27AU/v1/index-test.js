@@ -835,7 +835,7 @@
         -webkit-transform: translateY(0); transform: translateY(0); } 100% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } } /** *
         ---------------------------------------- * animation pulse * ---------------------------------------- */ @-webkit-keyframes pulse { 0% { background-color: rgb(229, 229, 229); }
         50% { background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } } @keyframes pulse { 0% { background-color: rgb(229, 229, 229); } 50% {
-        background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } }`;
+        background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } } `;
         const style = document.createElement("style");
         style.id = `${page_initials}-styles`;
         style.textContent = cssText;
