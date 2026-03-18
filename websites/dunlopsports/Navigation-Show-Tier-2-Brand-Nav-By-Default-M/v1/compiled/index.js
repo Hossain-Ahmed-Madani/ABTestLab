@@ -16,7 +16,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
         page_initials: "AB-NAV-TIER-2-BRAND-M",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1050,20 +1050,36 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         return document.querySelector(s);
     }
 
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+
+    function isSafari() {
+        const userAgent = navigator.userAgent;
+        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+    }
+
     function getLevel2BrandLayout() {
         return /* HTML */ `
             <div class="ab-nav-brand-list-wrapper">
                 <h4 class="ab-nav-brand-list-header">Also Shop</h4>
                 <ul class="ab-nav-brand-list">
-                    ${window.Object.values(DATA.brand_items)
-                        .map(
-                            ({ title, link }) => /* HTML  */ `
-                        <li class="ab-nav-brand-item">
-                            <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
-                        </li>
-                    `,
-                        )
-                        .join("")}
+                    ${window.Object.values(DATA.brand_items).map(
+                        ({ title, link }) => /* HTML  */ `
+                            <li class="ab-nav-brand-item">
+                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                            </li>
+                    `).join("")}
                 </ul>
             </div>
         `;
@@ -1121,16 +1137,13 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         </li>
                         `
                         : ""}
-                    ${menu_items
-                        .map(
-                            ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
-                        <li class="ab-nav-menu-item">
-                            <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                            ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
-                        </li>
-                    `,
-                        )
-                        .join("")}
+                    ${menu_items.map(
+                        ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
+                            <li class="ab-nav-menu-item">
+                                <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
+                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
+                            </li>
+                    `).join("")}
                 </ul>
 
                 ${level === 2 ? level2BrandLayout : ""}
@@ -1145,7 +1158,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `,
+            `
         );
 
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
@@ -1156,7 +1169,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <div class="ab-nav-container">
                     <div class="ab-nav-menu-wrapper">${getNavLayout()}</div>
                 </div>
-            `,
+            `
         );
     }
 
@@ -1202,12 +1215,49 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         });
     }
 
+    // Prevent Scroll
+    function preventScroll(e) {
+        if (e.target.closest("nav .main-menu.in")) return;
+        e.preventDefault();
+    }
+
+    function enableScroll() {
+        // Enable Scrolling
+        document.removeEventListener("wheel", preventScroll);
+        document.removeEventListener("touchmove", preventScroll);
+    }
+
+    function disableScroll() {
+        // Disable Scrolling
+        document.addEventListener("wheel", preventScroll, { passive: false });
+        document.addEventListener("touchmove", preventScroll, { passive: false });
+    }
+
+    function addOrRemoveScrollHander() {
+        if (q("nav .main-menu.in")) {
+            disableScroll();
+        } else {
+            enableScroll();
+        }
+    }
+
+    function mutationObserverFunction() {
+        const targetNode = q("nav .main-menu");
+        const debouncedUpdate = debounce(addOrRemoveScrollHander, 250);
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: false, subtree: false, attributes: true });
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         setDefaultBrand();
         createLayout();
         clickFunction();
+
+        if(!isSafari()) return;
+
+        addOrRemoveScrollHander();
+        mutationObserverFunction();
     }
 
     function checkForItems() {
