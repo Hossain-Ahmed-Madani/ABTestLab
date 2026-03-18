@@ -16,7 +16,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-PP27US",
         test_variation: 2,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

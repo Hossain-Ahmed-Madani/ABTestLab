@@ -6,7 +6,8 @@
       var style = document.createElement("style");
       style.innerHTML = `.AB-PP27US .quick-shop-carousel-size,
 .AB-PP27US .quick-shop-size,
-.AB-PP27US .product-tile-size {
+.AB-PP27US .product-tile-size,
+.AB-PP27US .ab-afterpay-container:has(.ab-afterpay-null) {
   display: none;
 }
 .AB-PP27US .ab-product-title:empty,
@@ -205,6 +206,8 @@
   bottom: -3px;
   left: -3px;
   right: -3px;
+  width: auto;
+  height: auto;
 }
 .AB-PP27US .ab-product-size-selector-container {
   margin-bottom: 15px;
@@ -242,6 +245,53 @@
 .AB-PP27US
   .ab-product-size-selector-container
   .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+  display: none;
+}
+.AB-PP27US
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  ) {
+  display: block;
+}
+.AB-PP27US
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button {
+  opacity: 0.5;
+  background-color: #eeeeee;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  position: relative;
+}
+.AB-PP27US
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 1px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  transform: rotate(15deg);
+}
+.AB-PP27US
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button
+  span {
   display: none;
 }
 .AB-PP27US
@@ -504,22 +554,6 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
     }
   }, 100); // Check every 100ms for <head>
 })();
-/* 
-
-Ticket : https://trello.com/c/vx7mJ8cY/4768-%E2%9D%A4%EF%B8%8F-pp27us-collection-quick-add-modal-with-images-2-set-up-test
-Figma: https://www.figma.com/design/OFbYNoG7ddtMgXfuaunJPh/PP_---COLLECTION--Quick-Add-Modal-with-Images?node-id=4001-29095&t=7hQ02K4unS65XZam-0
-
-
-
-https://us.princesspolly.com
-https://www.princesspolly.com.au
-
-// https://us.princesspolly.com/products/gigi-skort-beige
-check the pdp pages as the code mostly works on it, and you can also find design
-
-
-*/
-
 (async () => {
   const TEST_ID = "PP27US";
   const VARIANT_ID = "V1"; /* V1, V2 */
@@ -538,7 +572,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
   const TEST_CONFIG = {
     page_initials: "AB-PP27US",
     test_variation: 2,
-    test_version: 0.0005,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1056,16 +1090,37 @@ check the pdp pages as the code mostly works on it, and you can also find design
       ".ab-product-size-selector-container > .product__select-sizes",
     ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
 
+    // Modify Size Items
+    const sizeItems = qq(
+      ".ab-product-size-selector-container .product__select-sizes-item",
+    );
+    if (sizeItems.length > 0) {
+      sizeItems.forEach((item) => item.classList.remove("active"));
+    }
+
+    if (
+      sizeItems.length === 1 &&
+      q(sizeItems[0], ".product__select-sizes-button.disabled")
+    ) {
+      q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add(
+        "ab-disabled",
+      );
+    }
+
     // CTA Section
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
 
     // AfterPay
-    q(".ab-afterpay-container").innerHTML = q(
-      dom,
-      "#afterpay-placement-pdp",
-    ).outerHTML;
-    applyAfterPayStyles();
+    const afterPayElement = q(dom, "#afterpay-placement-pdp");
+    if (afterPayElement) {
+      q(".ab-afterpay-container").innerHTML = afterPayElement.outerHTML;
+      applyAfterPayStyles();
+    } else {
+      q(".ab-afterpay-container").innerHTML = /* HTML */ `<div
+        class="ab-afterpay-null"
+      ></div>`;
+    }
 
     // Carousel
     q(".ab-swiper.swiper").innerHTML = /* HTML */ `
@@ -1174,6 +1229,18 @@ check the pdp pages as the code mostly works on it, and you can also find design
       );
     }
 
+    // PDP Quick Add
+    if (window.location.pathname.includes("/products")) {
+      handleQuickAddClick(
+        ".shopify-section--product-quickshop",
+        ".quick-shop-carousel-quickadd",
+      );
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+    }
+
     // Modal Base Events
     q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
       handleModalView("hide");
@@ -1228,7 +1295,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
         const productSizeItem = e.target.closest(
           ".ab-product-size-selector-container .product__select-sizes-item:not(.active)",
         );
-        if (productSizeItem) {
+        if (productSizeItem && !q(productSizeItem, ".disabled")) {
           q(
             ".ab-product-size-selector-container .product__size-value",
           ).innerText = productSizeItem.textContent.trim();
@@ -1341,7 +1408,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
-      (q(".product-tiles") || q(".nosto-carousel-tabs__wrap"))
+      (q(".product-tiles") ||
+        q(".nosto-carousel-tabs__wrap") ||
+        q(".shopify-section--product-quickshop"))
     );
   }
 

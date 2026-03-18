@@ -1,19 +1,3 @@
-/* 
-
-Ticket : https://trello.com/c/vx7mJ8cY/4768-%E2%9D%A4%EF%B8%8F-pp27us-collection-quick-add-modal-with-images-2-set-up-test
-Figma: https://www.figma.com/design/OFbYNoG7ddtMgXfuaunJPh/PP_---COLLECTION--Quick-Add-Modal-with-Images?node-id=4001-29095&t=7hQ02K4unS65XZam-0
-
-
-
-https://us.princesspolly.com
-https://www.princesspolly.com.au
-
-// https://us.princesspolly.com/products/gigi-skort-beige
-check the pdp pages as the code mostly works on it, and you can also find design
-
-
-*/
-
 (async () => {
   const TEST_ID = "PP27US";
   const VARIANT_ID = "V1"; /* V1, V2 */
@@ -32,7 +16,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
   const TEST_CONFIG = {
     page_initials: "AB-PP27US",
     test_variation: 2,
-    test_version: 0.0005,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -550,16 +534,37 @@ check the pdp pages as the code mostly works on it, and you can also find design
       ".ab-product-size-selector-container > .product__select-sizes",
     ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
 
+    // Modify Size Items
+    const sizeItems = qq(
+      ".ab-product-size-selector-container .product__select-sizes-item",
+    );
+    if (sizeItems.length > 0) {
+      sizeItems.forEach((item) => item.classList.remove("active"));
+    }
+
+    if (
+      sizeItems.length === 1 &&
+      q(sizeItems[0], ".product__select-sizes-button.disabled")
+    ) {
+      q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add(
+        "ab-disabled",
+      );
+    }
+
     // CTA Section
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
 
     // AfterPay
-    q(".ab-afterpay-container").innerHTML = q(
-      dom,
-      "#afterpay-placement-pdp",
-    ).outerHTML;
-    applyAfterPayStyles();
+    const afterPayElement = q(dom, "#afterpay-placement-pdp");
+    if (afterPayElement) {
+      q(".ab-afterpay-container").innerHTML = afterPayElement.outerHTML;
+      applyAfterPayStyles();
+    } else {
+      q(".ab-afterpay-container").innerHTML = /* HTML */ `<div
+        class="ab-afterpay-null"
+      ></div>`;
+    }
 
     // Carousel
     q(".ab-swiper.swiper").innerHTML = /* HTML */ `
@@ -668,6 +673,18 @@ check the pdp pages as the code mostly works on it, and you can also find design
       );
     }
 
+    // PDP Quick Add
+    if (window.location.pathname.includes("/products")) {
+      handleQuickAddClick(
+        ".shopify-section--product-quickshop",
+        ".quick-shop-carousel-quickadd",
+      );
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+    }
+
     // Modal Base Events
     q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
       handleModalView("hide");
@@ -722,7 +739,7 @@ check the pdp pages as the code mostly works on it, and you can also find design
         const productSizeItem = e.target.closest(
           ".ab-product-size-selector-container .product__select-sizes-item:not(.active)",
         );
-        if (productSizeItem) {
+        if (productSizeItem && !q(productSizeItem, ".disabled")) {
           q(
             ".ab-product-size-selector-container .product__size-value",
           ).innerText = productSizeItem.textContent.trim();
@@ -835,7 +852,9 @@ check the pdp pages as the code mostly works on it, and you can also find design
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
-      (q(".product-tiles") || q(".nosto-carousel-tabs__wrap"))
+      (q(".product-tiles") ||
+        q(".nosto-carousel-tabs__wrap") ||
+        q(".shopify-section--product-quickshop"))
     );
   }
 
