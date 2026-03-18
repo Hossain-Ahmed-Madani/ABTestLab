@@ -19,8 +19,8 @@
         site_url: "https://us.princesspolly.com",
         test_name: "PP27US: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27US",
-        test_variation: 2,
-        test_version: 0.0007,
+        test_variation: 1,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -516,8 +516,8 @@
             sizeItems.forEach((item) => item.classList.remove("active"));
         }
 
-        if (sizeItems.length === 1 && q(sizeItems[0], ".product__select-sizes-button.disabled")) {
-            q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add("ab-disabled");
+        if (sizeItems.length > 0 && qq(".ab-product-size-selector-container .product__select-sizes-button").every((item) => item.classList.contains("disabled"))) {
+            qq(".ab-product-size-selector-container .product__select-sizes-button.disabled").forEach((item) => item.classList.add("ab-disabled"));
         }
 
         // CTA Section
@@ -793,47 +793,48 @@
         margin-bottom: 14px; } .AB-PP27US .ab-color-swatch-container h2.product__active-color { font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
         font-weight: 500; font-size: 14px; line-height: 19px; letter-spacing: 0.8px; vertical-align: middle; color: rgb(0, 0, 0); margin-bottom: 11px; } .AB-PP27US
         .ab-color-swatch-container .product__swatches { display: flex; justify-content: flex-start; align-items: center; flex-wrap: wrap; gap: 15px; } .AB-PP27US
-        .ab-color-swatch-container .swatch { width: 22px; height: 22px; margin: 0; } .AB-PP27US .ab-color-swatch-container .swatch:before { top: -3px; bottom: -3px; left: -3px; right:
-        -3px; width: auto; height: auto; } .AB-PP27US .ab-product-size-selector-container { margin-bottom: 15px; } .AB-PP27US .ab-product-size-selector-container
-        .ab-product-sizes-skeleton-loader { display: none; } .AB-PP27US .ab-product-size-selector-container .ab-product-sizes-skeleton-loader__item { display: none; } .AB-PP27US
-        .ab-product-size-selector-container .product__label.product__label--size { font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500;
-        font-size: 14px; line-height: 19px; letter-spacing: 0.8px; vertical-align: middle; color: rgb(0, 0, 0); margin-bottom: 13px; } .AB-PP27US .ab-product-size-selector-container
-        .product__select-sizes-list { flex-grow: 1; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; } .AB-PP27US .ab-product-size-selector-container
-        .product__select-sizes-item:has(.product__select-sizes-button.disabled) { display: none; } .AB-PP27US .ab-product-size-selector-container
-        .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) { display: block; } .AB-PP27US .ab-product-size-selector-container
-        .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) button { opacity: 0.5; background-color: #eeeeee; border: 1px solid rgba(0, 0, 0, 0.5);
-        pointer-events: none; position: relative; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled)
-        button::after { content: ""; display: block; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); position: absolute; height: 1px; top: 0; left: 0; bottom: 0;
-        margin: auto; transform: rotate(15deg); } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled)
-        button span { display: none; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item.active .product__select-sizes-button { background-color: rgb(0, 0, 0);
-        color: rgb(255, 255, 255); } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-button { width: 100%; height: 30px; background-color: rgb(255, 255, 255);
-        border: 1px solid rgb(0, 0, 0); display: flex; align-items: center; justify-content: center; font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif;
-        font-weight: 500; font-size: 10px; line-height: 100%; letter-spacing: 0.8px; text-align: center; vertical-align: middle; color: rgb(0, 0, 0); cursor: pointer; } .AB-PP27US
-        .ab-add-to-cart-cta { width: 100%; height: 44px; background-color: rgb(0, 0, 0); margin-bottom: 12px; cursor: pointer; display: flex; justify-content: center; align-items:
-        center; } .AB-PP27US .ab-add-to-cart-cta:disabled { pointer-events: none; opacity: 0.5; } .AB-PP27US .ab-add-to-cart-cta:disabled .ab-add-to-cart-cta__text--select-size {
-        display: block; } .AB-PP27US .ab-add-to-cart-cta:disabled .ab-add-to-cart-cta__text--add-to-bag { display: none; } .AB-PP27US .ab-add-to-cart-cta__text { font-family:
-        "forma_djr_bannerbold", monospace, Helvetica, Arial, sans-serif; font-weight: 700; font-size: 16px; line-height: 100%; letter-spacing: 0.8px; text-align: center; vertical-align:
-        middle; color: rgb(255, 255, 255); text-transform: uppercase; } .AB-PP27US .ab-add-to-cart-cta__text--select-size { display: none; } .AB-PP27US
-        .ab-add-to-cart-cta__text--add-to-bag { display: block; } .AB-PP27US a.ab-view-full-details { display: block; font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial,
-        sans-serif; font-weight: 500; font-size: 14px; line-height: 19px; letter-spacing: 0.8px; text-align: center; text-decoration: underline; text-decoration-style: solid;
-        text-decoration-skip-ink: auto; width: max-content; margin: auto; } .AB-PP27US--v1 .ab-carousel-container { display: none; } .AB-PP27US--v1 .AB-PP27US__modal { min-height:
-        430px; } .AB-PP27US--v1 .AB-PP27US__modal__head { margin-bottom: 29px; } .AB-PP27US--v2 .AB-PP27US__modal { min-height: 658px; } .AB-PP27US--v2 .AB-PP27US__modal__head {
-        margin-bottom: 32px; } /** * ---------------------------------------- * MODAL * ---------------------------------------- */ body.AB-PP27US--modal-show { overflow: hidden; }
-        body.AB-PP27US--modal-show .AB-PP27US__modal-layout { display: block; } body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop { display: block; } .AB-PP27US__modal-layout {
-        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh; background: transparent; z-index: 10000; overflow: hidden; display: none;
-        justify-content: center; align-items: flex-end; } .AB-PP27US__modal-backdrop { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,
-        0, 0, 0.8); } .AB-PP27US__modal { opacity: 1; width: 100%; min-height: 422px; background: rgb(255, 255, 255); position: absolute; bottom: 0; z-index: 1; padding: 16px 13px 20px;
-        border-radius: 13px 13px 0 0; } .AB-PP27US__modal__head { display: flex; justify-content: center; align-items: center; } .AB-PP27US__modal__close-cta { display: block; width:
-        56px; height: 6px; border-radius: 3px; background: rgb(229, 229, 229); } .slide-in { -webkit-animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; animation:
-        slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; } .slide-out { -webkit-animation: slide-out 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; animation: slide-out 0.2s
-        cubic-bezier(0.25, 0.46, 0.45, 0.94) both; } /** * ---------------------------------------- * animation slide-in * ---------------------------------------- */ @-webkit-keyframes
-        slide-in { 0% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } 100% { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0);
-        } } @keyframes slide-in { 0% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } 100% { opacity: 1; -webkit-transform: translateY(0); transform:
-        translateY(0); } } /** * ---------------------------------------- * animation slide-out * ---------------------------------------- */ @-webkit-keyframes slide-out { 0% {
-        opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } 100% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } } @keyframes
-        slide-out { 0% { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } 100% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px);
-        } } /** * ---------------------------------------- * animation pulse * ---------------------------------------- */ @-webkit-keyframes pulse { 0% { background-color: rgb(229,
-        229, 229); } 50% { background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } } @keyframes pulse { 0% { background-color: rgb(229, 229, 229); } 50% {
+        .ab-color-swatch-container .swatch { width: 22px; height: 22px; margin: 0; background-size: contain; background-position: center; background-repeat: no-repeat; } .AB-PP27US
+        .ab-color-swatch-container .swatch:before { top: -3px; bottom: -3px; left: -3px; right: -3px; width: auto; height: auto; } .AB-PP27US .ab-product-size-selector-container {
+        margin-bottom: 15px; } .AB-PP27US .ab-product-size-selector-container .ab-product-sizes-skeleton-loader { display: none; } .AB-PP27US .ab-product-size-selector-container
+        .ab-product-sizes-skeleton-loader__item { display: none; } .AB-PP27US .ab-product-size-selector-container .product__label.product__label--size { font-family:
+        "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; line-height: 19px; letter-spacing: 0.8px; vertical-align: middle; color:
+        rgb(0, 0, 0); margin-bottom: 13px; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-list { flex-grow: 1; width: 100%; display: grid;
+        grid-template-columns: repeat(4, 1fr); gap: 5px; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+        display: none; } .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) { display: block; }
+        .AB-PP27US .ab-product-size-selector-container .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) button { opacity: 0.5; background-color:
+        #eeeeee; border: 1px solid rgba(0, 0, 0, 0.5); pointer-events: none; position: relative; } .AB-PP27US .ab-product-size-selector-container
+        .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) button::after { content: ""; display: block; width: 100%; height: 100%; background-color:
+        rgba(0, 0, 0, 0.5); position: absolute; height: 1px; top: 0; left: 0; bottom: 0; margin: auto; transform: rotate(15deg); } .AB-PP27US .ab-product-size-selector-container
+        .product__select-sizes-item:has(.product__select-sizes-button.disabled.ab-disabled) button span { display: none; } .AB-PP27US .ab-product-size-selector-container
+        .product__select-sizes-item.active .product__select-sizes-button { background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); } .AB-PP27US .ab-product-size-selector-container
+        .product__select-sizes-button { width: 100%; height: 30px; background-color: rgb(255, 255, 255); border: 1px solid rgb(0, 0, 0); display: flex; align-items: center;
+        justify-content: center; font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 10px; line-height: 100%; letter-spacing:
+        0.8px; text-align: center; vertical-align: middle; color: rgb(0, 0, 0); cursor: pointer; } .AB-PP27US .ab-add-to-cart-cta { width: 100%; height: 44px; background-color: rgb(0,
+        0, 0); margin-bottom: 12px; cursor: pointer; display: flex; justify-content: center; align-items: center; } .AB-PP27US .ab-add-to-cart-cta:disabled { pointer-events: none;
+        opacity: 0.5; } .AB-PP27US .ab-add-to-cart-cta:disabled .ab-add-to-cart-cta__text--select-size { display: block; } .AB-PP27US .ab-add-to-cart-cta:disabled
+        .ab-add-to-cart-cta__text--add-to-bag { display: none; } .AB-PP27US .ab-add-to-cart-cta__text { font-family: "forma_djr_bannerbold", monospace, Helvetica, Arial, sans-serif;
+        font-weight: 700; font-size: 16px; line-height: 100%; letter-spacing: 0.8px; text-align: center; vertical-align: middle; color: rgb(255, 255, 255); text-transform: uppercase; }
+        .AB-PP27US .ab-add-to-cart-cta__text--select-size { display: none; } .AB-PP27US .ab-add-to-cart-cta__text--add-to-bag { display: block; } .AB-PP27US a.ab-view-full-details {
+        display: block; font-family: "forma_djr_bannermedium", monospace, Helvetica, Arial, sans-serif; font-weight: 500; font-size: 14px; line-height: 19px; letter-spacing: 0.8px;
+        text-align: center; text-decoration: underline; text-decoration-style: solid; text-decoration-skip-ink: auto; width: max-content; margin: auto; } .AB-PP27US--v1
+        .ab-carousel-container { display: none; } .AB-PP27US--v1 .AB-PP27US__modal { min-height: 430px; } .AB-PP27US--v1 .AB-PP27US__modal__head { margin-bottom: 29px; } .AB-PP27US--v2
+        .AB-PP27US__modal { min-height: 658px; } .AB-PP27US--v2 .AB-PP27US__modal__head { margin-bottom: 32px; } /** * ---------------------------------------- * MODAL *
+        ---------------------------------------- */ body.AB-PP27US--modal-show { overflow: hidden; } body.AB-PP27US--modal-show .AB-PP27US__modal-layout { display: block; }
+        body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop { display: block; } .AB-PP27US__modal-layout { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+        height: 100dvh; background: transparent; z-index: 10000; overflow: hidden; display: none; justify-content: center; align-items: flex-end; } .AB-PP27US__modal-backdrop { display:
+        none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); } .AB-PP27US__modal { opacity: 1; width: 100%; min-height: 422px;
+        background: rgb(255, 255, 255); position: absolute; bottom: 0; z-index: 1; padding: 16px 13px 20px; border-radius: 13px 13px 0 0; } .AB-PP27US__modal__head { display: flex;
+        justify-content: center; align-items: center; } .AB-PP27US__modal__close-cta { display: block; width: 56px; height: 6px; border-radius: 3px; background: rgb(229, 229, 229); }
+        .slide-in { -webkit-animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; animation: slide-in 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; } .slide-out {
+        -webkit-animation: slide-out 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; animation: slide-out 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; } /** *
+        ---------------------------------------- * animation slide-in * ---------------------------------------- */ @-webkit-keyframes slide-in { 0% { opacity: 0; -webkit-transform:
+        translateY(600px); transform: translateY(600px); } 100% { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } } @keyframes slide-in { 0% { opacity: 0;
+        -webkit-transform: translateY(600px); transform: translateY(600px); } 100% { opacity: 1; -webkit-transform: translateY(0); transform: translateY(0); } } /** *
+        ---------------------------------------- * animation slide-out * ---------------------------------------- */ @-webkit-keyframes slide-out { 0% { opacity: 1; -webkit-transform:
+        translateY(0); transform: translateY(0); } 100% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } } @keyframes slide-out { 0% { opacity: 1;
+        -webkit-transform: translateY(0); transform: translateY(0); } 100% { opacity: 0; -webkit-transform: translateY(600px); transform: translateY(600px); } } /** *
+        ---------------------------------------- * animation pulse * ---------------------------------------- */ @-webkit-keyframes pulse { 0% { background-color: rgb(229, 229, 229); }
+        50% { background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } } @keyframes pulse { 0% { background-color: rgb(229, 229, 229); } 50% {
         background-color: rgb(240, 240, 240); } 100% { background-color: rgb(229, 229, 229); } } `;
         const style = document.createElement("style");
         style.id = `${page_initials}-styles`;

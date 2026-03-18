@@ -16,7 +16,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-PP27AU",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0009,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -534,6 +534,25 @@
       ".ab-product-size-selector-container > .product__select-sizes",
     ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
 
+    // Modify Size Items
+    const sizeItems = qq(
+      ".ab-product-size-selector-container .product__select-sizes-item",
+    );
+    if (sizeItems.length > 0) {
+      sizeItems.forEach((item) => item.classList.remove("active"));
+    }
+
+    if (
+      sizeItems.length > 0 &&
+      qq(
+        ".ab-product-size-selector-container .product__select-sizes-button",
+      ).every((item) => item.classList.contains("disabled"))
+    ) {
+      qq(
+        ".ab-product-size-selector-container .product__select-sizes-button.disabled",
+      ).forEach((item) => item.classList.add("ab-disabled"));
+    }
+
     // CTA Section
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
@@ -656,6 +675,18 @@
       );
     }
 
+    // PDP Quick Add
+    if (window.location.pathname.includes("/products")) {
+      handleQuickAddClick(
+        ".shopify-section--product-quickshop",
+        ".quick-shop-carousel-quickadd",
+      );
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+    }
+
     // Modal Base Events
     q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
       handleModalView("hide");
@@ -710,7 +741,7 @@
         const productSizeItem = e.target.closest(
           ".ab-product-size-selector-container .product__select-sizes-item:not(.active)",
         );
-        if (productSizeItem) {
+        if (productSizeItem && !q(productSizeItem, ".disabled")) {
           q(
             ".ab-product-size-selector-container .product__size-value",
           ).innerText = productSizeItem.textContent.trim();
@@ -823,7 +854,9 @@
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
-      (q(".product-tiles") || q(".nosto-carousel-tabs__wrap"))
+      (q(".product-tiles") ||
+        q(".nosto-carousel-tabs__wrap") ||
+        q(".shopify-section--product-quickshop"))
     );
   }
 

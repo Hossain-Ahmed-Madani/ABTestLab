@@ -20,7 +20,7 @@
         test_name: "PP27AU: [COLLECTION] Quick Add Modal with Images (2) SET UP TEST",
         page_initials: "AB-PP27AU",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -516,8 +516,8 @@
             sizeItems.forEach((item) => item.classList.remove("active"));
         }
 
-        if (sizeItems.length === 1 && q(sizeItems[0], ".product__select-sizes-button.disabled")) {
-            q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add("ab-disabled");
+        if (sizeItems.length > 0 && qq(".ab-product-size-selector-container .product__select-sizes-button").every((item) => item.classList.contains("disabled"))) {
+            qq(".ab-product-size-selector-container .product__select-sizes-button.disabled").forEach((item) => item.classList.add("ab-disabled"));
         }
 
         // CTA Section

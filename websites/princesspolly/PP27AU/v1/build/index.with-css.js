@@ -200,12 +200,17 @@
   width: 22px;
   height: 22px;
   margin: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .AB-PP27AU .ab-color-swatch-container .swatch:before {
   top: -3px;
   bottom: -3px;
   left: -3px;
   right: -3px;
+  width: auto;
+  height: auto;
 }
 .AB-PP27AU .ab-product-size-selector-container {
   margin-bottom: 15px;
@@ -243,6 +248,53 @@
 .AB-PP27AU
   .ab-product-size-selector-container
   .product__select-sizes-item:has(.product__select-sizes-button.disabled) {
+  display: none;
+}
+.AB-PP27AU
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  ) {
+  display: block;
+}
+.AB-PP27AU
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button {
+  opacity: 0.5;
+  background-color: #eeeeee;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  position: relative;
+}
+.AB-PP27AU
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  height: 1px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  transform: rotate(15deg);
+}
+.AB-PP27AU
+  .ab-product-size-selector-container
+  .product__select-sizes-item:has(
+    .product__select-sizes-button.disabled.ab-disabled
+  )
+  button
+  span {
   display: none;
 }
 .AB-PP27AU
@@ -523,7 +575,7 @@ body.AB-PP27AU--modal-show .AB-PP27AU__modal-backdrop {
   const TEST_CONFIG = {
     page_initials: "AB-PP27AU",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0009,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1041,6 +1093,25 @@ body.AB-PP27AU--modal-show .AB-PP27AU__modal-backdrop {
       ".ab-product-size-selector-container > .product__select-sizes",
     ).innerHTML = q(dom, ".product__select-sizes").outerHTML;
 
+    // Modify Size Items
+    const sizeItems = qq(
+      ".ab-product-size-selector-container .product__select-sizes-item",
+    );
+    if (sizeItems.length > 0) {
+      sizeItems.forEach((item) => item.classList.remove("active"));
+    }
+
+    if (
+      sizeItems.length > 0 &&
+      qq(
+        ".ab-product-size-selector-container .product__select-sizes-button",
+      ).every((item) => item.classList.contains("disabled"))
+    ) {
+      qq(
+        ".ab-product-size-selector-container .product__select-sizes-button.disabled",
+      ).forEach((item) => item.classList.add("ab-disabled"));
+    }
+
     // CTA Section
     q(".ab-add-to-cart-cta").setAttribute("disabled", "");
     q("a.ab-view-full-details").setAttribute("href", url);
@@ -1163,6 +1234,18 @@ body.AB-PP27AU--modal-show .AB-PP27AU__modal-backdrop {
       );
     }
 
+    // PDP Quick Add
+    if (window.location.pathname.includes("/products")) {
+      handleQuickAddClick(
+        ".shopify-section--product-quickshop",
+        ".quick-shop-carousel-quickadd",
+      );
+      handleQuickAddClick(
+        ".nosto-carousel-tabs__wrap",
+        ".quick-shop-carousel-quickadd",
+      );
+    }
+
     // Modal Base Events
     q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
       handleModalView("hide");
@@ -1217,7 +1300,7 @@ body.AB-PP27AU--modal-show .AB-PP27AU__modal-backdrop {
         const productSizeItem = e.target.closest(
           ".ab-product-size-selector-container .product__select-sizes-item:not(.active)",
         );
-        if (productSizeItem) {
+        if (productSizeItem && !q(productSizeItem, ".disabled")) {
           q(
             ".ab-product-size-selector-container .product__size-value",
           ).innerText = productSizeItem.textContent.trim();
@@ -1330,7 +1413,9 @@ body.AB-PP27AU--modal-show .AB-PP27AU__modal-backdrop {
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
-      (q(".product-tiles") || q(".nosto-carousel-tabs__wrap"))
+      (q(".product-tiles") ||
+        q(".nosto-carousel-tabs__wrap") ||
+        q(".shopify-section--product-quickshop"))
     );
   }
 

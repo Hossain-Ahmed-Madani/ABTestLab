@@ -200,6 +200,9 @@
   width: 22px;
   height: 22px;
   margin: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .AB-PP27US .ab-color-swatch-container .swatch:before {
   top: -3px;
@@ -572,7 +575,7 @@ body.AB-PP27US--modal-show .AB-PP27US__modal-backdrop {
   const TEST_CONFIG = {
     page_initials: "AB-PP27US",
     test_variation: 2,
-    test_version: 0.0006,
+    test_version: 0.0007,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

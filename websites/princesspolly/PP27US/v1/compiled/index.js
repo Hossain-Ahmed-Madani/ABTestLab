@@ -16,7 +16,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-PP27US",
         test_variation: 2,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -495,8 +495,8 @@
             sizeItems.forEach((item) => item.classList.remove("active"));
         }
 
-        if(sizeItems.length === 1 && q(sizeItems[0], ".product__select-sizes-button.disabled")) { 
-            q(sizeItems[0], ".product__select-sizes-button.disabled").classList.add('ab-disabled');
+        if (sizeItems.length > 0 && qq(".ab-product-size-selector-container .product__select-sizes-button").every((item) => item.classList.contains("disabled"))) {
+            qq(".ab-product-size-selector-container .product__select-sizes-button.disabled").forEach((item) => item.classList.add("ab-disabled"));
         }
 
         // CTA Section

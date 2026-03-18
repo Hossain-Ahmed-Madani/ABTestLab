@@ -167,6 +167,9 @@
     width: 22px;
     height: 22px;
     margin: 0;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .AB-PP27US .ab-color-swatch-container .swatch:before {
     top: -3px;
