@@ -27,30 +27,13 @@ function customTargetting() {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function triggerExperiment(_, observer) {
-        if (q('nav .main-menu.in[aria-hidden="false"]')) {
-            window[EXPERIMENT_ID] = true;
-            window["optimizely"].push({
-                type: "activate",
-                experimentId: EXPERIMENT_ID, // Replace with experiment's ID
-            });
-            observer.disconnect();
-            return true;
-        }
-
-        return false;
+    function triggerExperiment() {
+        window[EXPERIMENT_ID] = true;
+        window["optimizely"].push({
+            type: "activate",
+            experimentId: EXPERIMENT_ID, // Replace with experiment's ID
+        });
+        return true;
     }
 
     const IS_BUCKETED = window[EXPERIMENT_ID] === true;
@@ -59,12 +42,17 @@ function customTargetting() {
         return true;
     }
 
+    function handleClick(e) {
+        console.log("Init Experiment: Navigation - Show Tier 2 Brand Nav By Default [M]", "Experiment ID:", EXPERIMENT_ID);
+        triggerExperiment();
+        e.currentTarget.removeEventListener("click", handleClick);
+    }
+
     waitForElement(
-        () => q("nav .main-menu"),
+        () => q(".navbar-toggler"),
         () => {
-            const targetNode = q("nav .main-menu");
-            const debouncedUpdate = debounce(triggerExperiment, 250);
-            return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: false, subtree: false, attributes: true });
+            const targetNode = q(".navbar-toggler");
+            targetNode.addEventListener("click", handleClick);
         }
     );
 }

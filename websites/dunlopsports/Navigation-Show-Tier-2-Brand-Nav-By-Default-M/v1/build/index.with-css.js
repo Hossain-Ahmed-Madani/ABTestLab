@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-NAV-TIER-2-BRAND-M nav .main-menu {
+      style.innerHTML = `.AB-NAV-TIER-2-BRAND-M:has(nav .main-menu.in) {
+  overflow-y: hidden;
+}
+.AB-NAV-TIER-2-BRAND-M nav .main-menu {
   font-family: inherit;
   overflow: hidden;
 }
@@ -124,7 +127,10 @@
   display: flex;
   left: 0 !important;
 }
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container.ab-nav-menu-container-level-2 {
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-container.ab-nav-menu-container-level-2:not(
+    :has(.ab-nav-menu-container--show)
+  ) {
   overflow-y: auto;
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-1 > .ab-nav-menu-list {
@@ -137,6 +143,15 @@
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-3 {
   z-index: 3;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-4 {
+  z-index: 4;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-5 {
+  z-index: 5;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-container-level-6 {
+  z-index: 6;
 }
 .AB-NAV-TIER-2-BRAND-M ul.ab-nav-menu-list {
   list-style: none;
@@ -183,6 +198,11 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
 }
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
+  text-decoration: underline;
+}
 .AB-NAV-TIER-2-BRAND-M
   .ab-nav-menu-item--shop-all
   .ab-nav-menu-item-link::before,
@@ -222,6 +242,7 @@
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-brand-list-wrapper {
   padding-top: 28.5px;
+  padding-bottom: 28.5px;
   background-color: #f0f0f0;
   flex-grow: 1;
 }
@@ -259,8 +280,7 @@
   position: relative;
   font-family: "Roboto", sans-serif;
   font-weight: 600;
-  font-style: SemiBold;
-  font-size: 18px;
+  font-size: 15px;
   line-height: 250%;
   letter-spacing: 0px;
   text-transform: uppercase;
@@ -301,7 +321,11 @@
 })();
 /* 
 Test container: https://app.optimizely.com/signin?continue_to=https%3A//app.optimizely.com/v2/projects/30347390156/experiments/6754851980312576/variations%3F
-Preview: 
+Preview: https://us.dunlopsports.com/?qa5=true
+
+control: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=6355650406514688&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6119538807275520&optimizely_snippet=s3-30347390156&optimizely_preview_mode_CAMPAIGN=6119538807275520&optimizely_embed_editor=false&qa5=true
+
+v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972ebd3d2709841466bf12b523eed9c98ed23f30efb599&optimizely_x=5626530114568192&optimizely_x_audiences=5612293145231360&optimizely_preview_layer_ids=6119538807275520&optimizely_snippet=s3-30347390156&optimizely_preview_mode_CAMPAIGN=6119538807275520&optimizely_embed_editor=false&qa5=true
 
 */
 
@@ -313,7 +337,7 @@ Preview:
     test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
     page_initials: "AB-NAV-TIER-2-BRAND-M",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -638,11 +662,67 @@ Preview:
             title: "Balls",
             link: "/srixon/balls",
             sub_menu_items: [
-              { title: "Z-STAR Series", link: "/srixon/balls/z-star-series" },
-              { title: "Q-STAR Series", link: "/srixon/balls/q-star-series" },
+              {
+                title: "Z-STAR Series",
+                link: "/srixon/balls/z-star-series",
+                sub_menu_items: [
+                  {
+                    title: "Z-STAR",
+                    link: "/srixon/balls/z-star-series/z-star",
+                  },
+                  {
+                    title: "Z-STAR DIAMOND",
+                    link: "/srixon/balls/z-star-series/z-star-diamond",
+                  },
+                  {
+                    title: "Z-STAR XV",
+                    link: "/srixon/balls/z-star-series/z-star-xv",
+                  },
+                  {
+                    title: "Z-STAR DIVIDE",
+                    link: "/srixon/balls/z-star-series/z-star-divide",
+                  },
+                  {
+                    title: "Z-STAR XV DIVIDE",
+                    link: "/srixon/balls/z-star-series/z-star-xv-divide",
+                  },
+                ],
+              },
+              {
+                title: "Q-STAR Series",
+                link: "/srixon/balls/q-star-series",
+                sub_menu_items: [
+                  {
+                    title: "Q-STAR TOUR",
+                    link: "/srixon/balls/q-star-series/q-star-tour",
+                  },
+                  {
+                    title: "Q-STAR TOUR DIVIDE",
+                    link: "/srixon/balls/q-star-series/q-star-tour-divide",
+                  },
+                  {
+                    title: "Q-STAR ULTISPEED",
+                    link: "/srixon/balls/q-star-series/q-star-ultispeed",
+                  },
+                ],
+              },
               {
                 title: "SOFT FEEL Series",
                 link: "/srixon/balls/soft-feel-series",
+                sub_menu_items: [
+                  {
+                    title: "SOFT FEEL",
+                    link: "/srixon/balls/soft-feel-series/soft-feel",
+                  },
+                  {
+                    title: "SOFT FEEL BRITE",
+                    link: "/srixon/balls/soft-feel-series/soft-feel-brite",
+                  },
+                  {
+                    title: "SOFT FEEL LADY",
+                    link: "/srixon/balls/soft-feel-series/soft-feel-lady",
+                  },
+                ],
               },
               { title: "Ball Selector", link: "/srixon/balls/ball-selector" },
               {
@@ -655,11 +735,120 @@ Preview:
             title: "Clubs",
             link: "/srixon/clubs",
             sub_menu_items: [
-              { title: "Irons", link: "/srixon/clubs/irons" },
-              { title: "Drivers", link: "/srixon/clubs/drivers" },
-              { title: "Fairway Woods", link: "/srixon/clubs/fairway-woods" },
-              { title: "Hybrids", link: "/srixon/clubs/hybrids" },
-              { title: "Explore", link: "/srixon/clubs/explore" },
+              {
+                title: "Irons",
+                link: "/srixon/clubs/irons",
+                sub_menu_items: [
+                  {
+                    title: "Iron Selector",
+                    link: "/srixon/clubs/irons/iron-selector",
+                  },
+                  {
+                    title: "Iron Combo Set Builder",
+                    link: "/srixon/clubs/irons/iron-combo-set-builder",
+                  },
+                  {
+                    title: "ZXi7 Irons",
+                    link: "/srixon/clubs/irons/zxi7-irons",
+                  },
+                  {
+                    title: "ZXi5 Irons",
+                    link: "/srixon/clubs/irons/zxi5-irons",
+                  },
+                  {
+                    title: "ZXi4 Irons",
+                    link: "https://us.dunlopsports.com/srixon/clubs/irons/zxi4-irons/zxi4-irons/MZXI4IRN.html",
+                  },
+                  {
+                    title: "ZXiR Irons",
+                    link: "https://us.dunlopsports.com/srixon/clubs/irons/zxir-irons/zxir-irons/MZXIRIRN.html",
+                  },
+                  {
+                    title: "ZXiR HL Irons",
+                    link: "https://us.dunlopsports.com/srixon/clubs/irons/zxir-hl-irons/zxir-hl-irons/MZXIRHLIRN.html",
+                  },
+                  {
+                    title: "Women's ZXiR HL Irons",
+                    link: "https://us.dunlopsports.com/srixon/clubs/irons/womens-zxir-hl-irons/womens-zxir-hl-irons/MWZXIRHLIRN.html",
+                  },
+                  {
+                    title: "ZXiU Utility Irons",
+                    link: "https://us.dunlopsports.com/srixon/clubs/irons/zxiu-utility-irons/zxiu-utility-irons/MZXIUTY.html",
+                  },
+                  {
+                    title: "Z-Forged II Irons",
+                    link: "/srixon/clubs/irons/z-forged-ii-irons",
+                  },
+                ],
+              },
+              {
+                title: "Drivers",
+                link: "/srixon/clubs/drivers",
+                sub_menu_items: [
+                  {
+                    title: "Driver Selector",
+                    link: "/srixon/clubs/drivers/driver-selector",
+                  },
+                  {
+                    title: "ZXi Driver",
+                    link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-driver/zxi-driver/MZXIDRV.html",
+                  },
+                  {
+                    title: "ZXi LS Driver",
+                    link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-ls-driver/zxi-ls-driver/MZXILSDRV.html",
+                  },
+                  {
+                    title: "ZXi MAX Driver",
+                    link: "https://us.dunlopsports.com/srixon/clubs/drivers/zxi-max-driver/zxi-max-driver/MZXIMAXDRV.html",
+                  },
+                  {
+                    title: "Women's ZXi MAX Driver",
+                    link: "https://us.dunlopsports.com/srixon/clubs/drivers/womens-zxi-max-driver/womens-zxi-max-driver/MWZXIMAXDRV.html",
+                  },
+                ],
+              },
+              {
+                title: "Fairway Woods",
+                link: "/srixon/clubs/fairway-woods",
+                sub_menu_items: [
+                  {
+                    title: "ZXi Fairway",
+                    link: "https://us.dunlopsports.com/srixon/clubs/fairway-woods/zxi-fairway/zxi-fairway-woods/MZXIFWY.html",
+                  },
+                  {
+                    title: "Women's ZXi Fairway",
+                    link: "https://us.dunlopsports.com/srixon/clubs/fairway-woods/womens-zxi-fairway/womens-zxi-fairway-woods/MWZXIFWY.html",
+                  },
+                ],
+              },
+              {
+                title: "Hybrids",
+                link: "/srixon/clubs/hybrids",
+                sub_menu_items: [
+                  {
+                    title: "ZXi Hybrid",
+                    link: "https://us.dunlopsports.com/srixon/clubs/hybrids/zxi-hybrid/zxi-hybrid/MZXIHYB.html",
+                  },
+                  {
+                    title: "Women's ZXi Hybrid",
+                    link: "https://us.dunlopsports.com/srixon/clubs/hybrids/womens-zxi-hybrid/womens-zxi-hybrid/MWZXIHYB.html",
+                  },
+                ],
+              },
+              {
+                title: "Explore",
+                link: "/srixon/clubs/explore",
+                sub_menu_items: [
+                  {
+                    title: "ZXiR Irons Series",
+                    link: "/srixon/clubs/explore/zxir-irons-series",
+                  },
+                  {
+                    title: "Personalized",
+                    link: "/srixon/clubs/explore/personalized",
+                  },
+                ],
+              },
               {
                 title: "Trade-In Program",
                 link: "/srixon/clubs/trade-in-program",
@@ -670,12 +859,73 @@ Preview:
             title: "Gear",
             link: "/srixon/gear",
             sub_menu_items: [
-              { title: "Bags", link: "/srixon/gear/bags" },
-              { title: "Apparel", link: "/srixon/gear/apparel" },
-              { title: "Accessories", link: "/srixon/gear/accessories" },
+              {
+                title: "Bags",
+                link: "/srixon/gear/bags",
+                sub_menu_items: [
+                  { title: "Golf Bags", link: "/srixon/gear/bags/golf-bags" },
+                  {
+                    title: "Travel Gear",
+                    link: "/srixon/gear/bags/travel-gear",
+                  },
+                ],
+              },
+              {
+                title: "Apparel",
+                link: "/srixon/gear/apparel",
+                sub_menu_items: [
+                  { title: "Gloves", link: "/srixon/gear/apparel/gloves" },
+                  { title: "Headwear", link: "/srixon/gear/apparel/headwear" },
+                ],
+              },
+              {
+                title: "Accessories",
+                link: "/srixon/gear/accessories",
+                sub_menu_items: [
+                  {
+                    title: "Headcovers",
+                    link: "/srixon/gear/accessories/headcovers",
+                  },
+                  { title: "Towels", link: "/srixon/gear/accessories/towels" },
+                  {
+                    title: "Umbrella",
+                    link: "/srixon/gear/accessories/umbrella",
+                  },
+                  {
+                    title: "Components",
+                    link: "/srixon/gear/accessories/components",
+                  },
+                ],
+              },
               {
                 title: "Limited Edition",
                 link: "/srixon/gear/limited-edition",
+                sub_menu_items: [
+                  {
+                    title: "Spring Collection",
+                    link: "/srixon/gear/limited-edition/spring-collection",
+                  },
+                  {
+                    title: "Golf Balls",
+                    link: "/srixon/gear/limited-edition/golf-balls",
+                  },
+                  {
+                    title: "Headwear",
+                    link: "/srixon/gear/limited-edition/headwear",
+                  },
+                  {
+                    title: "Golf Bags",
+                    link: "/srixon/gear/limited-edition/golf-bags",
+                  },
+                  {
+                    title: "Headcovers",
+                    link: "/srixon/gear/limited-edition/headcovers",
+                  },
+                  {
+                    title: "Towels",
+                    link: "/srixon/gear/limited-edition/towels",
+                  },
+                ],
               },
             ],
           },
@@ -686,6 +936,10 @@ Preview:
               {
                 title: "Blackout Collection",
                 link: "/srixon/limited-edition/blackout-collection",
+              },
+              {
+                title: "Tour Ink Collection",
+                link: "/srixon/limited-edition/tour-ink-collection",
               },
               {
                 title: "Hawaii Floral Collection",
@@ -709,8 +963,34 @@ Preview:
             title: "Fitting",
             link: "/srixon/fitting",
             sub_menu_items: [
-              { title: "Selector", link: "/srixon/fitting/selector" },
-              { title: "Events", link: "/srixon/fitting/events" },
+              {
+                title: "Selector",
+                link: "/srixon/fitting/selector",
+                sub_menu_items: [
+                  {
+                    title: "Irons Selector",
+                    link: "/srixon/fitting/selector/irons-selector",
+                  },
+                  {
+                    title: "Ball Selector",
+                    link: "/srixon/fitting/selector/ball-selector",
+                  },
+                  {
+                    title: "Driver Selector",
+                    link: "/srixon/fitting/selector/driver-selector",
+                  },
+                ],
+              },
+              {
+                title: "Events",
+                link: "/srixon/fitting/events",
+                sub_menu_items: [
+                  {
+                    title: "Event Days",
+                    link: "/srixon/fitting/events/event-days",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -738,8 +1018,68 @@ Preview:
             title: "Clubs",
             link: "/cleveland-golf/clubs",
             sub_menu_items: [
-              { title: "Wedges", link: "/cleveland-golf/clubs/wedges" },
-              { title: "Putters", link: "/cleveland-golf/clubs/putters" },
+              {
+                title: "Wedges",
+                link: "/cleveland-golf/clubs/wedges",
+                sub_menu_items: [
+                  {
+                    title: "My Custom Wedge",
+                    link: "/cleveland-golf/clubs/wedges/my-custom-wedge",
+                  },
+                  {
+                    title: "Wedge Selector",
+                    link: "/cleveland-golf/clubs/wedges/wedge-selector",
+                  },
+                  {
+                    title: "RTZ Set Builder",
+                    link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/rtz-set-builder/rtz-wedge-set-builder/rtz-wedge-set.html",
+                  },
+                  { title: "RTZ", link: "/cleveland-golf/clubs/wedges/rtz" },
+                  {
+                    title: "RTX 6 ZipCore",
+                    link: "/cleveland-golf/clubs/wedges/rtx-6-zipcore",
+                  },
+                  {
+                    title: "CBX Full-Face 2",
+                    link: "/cleveland-golf/clubs/wedges/cbx-full-face-2",
+                  },
+                  { title: "CBZ", link: "/cleveland-golf/clubs/wedges/cbz" },
+                  {
+                    title: "Smart Sole Full-Face",
+                    link: "https://us.dunlopsports.com/cleveland-golf/clubs/wedges/smart-sole-full-face/smart-sole-full-face-wedge/MSMARTSOLEFF.html",
+                  },
+                  {
+                    title: "Women's Wedges",
+                    link: "/cleveland-golf/clubs/wedges/womens-wedges",
+                  },
+                ],
+              },
+              {
+                title: "Putters",
+                link: "/cleveland-golf/clubs/putters",
+                sub_menu_items: [
+                  {
+                    title: "Putter Selector",
+                    link: "/cleveland-golf/clubs/putters/putter-selector",
+                  },
+                  {
+                    title: "HB SOFT 2 Black",
+                    link: "/cleveland-golf/clubs/putters/hb-soft-2-black",
+                  },
+                  {
+                    title: "HB SOFT 2",
+                    link: "/cleveland-golf/clubs/putters/hb-soft-2",
+                  },
+                  {
+                    title: "HB SOFT Milled",
+                    link: "/cleveland-golf/clubs/putters/hb-soft-milled",
+                  },
+                  {
+                    title: "Women's Putters",
+                    link: "/cleveland-golf/clubs/putters/womens-putters",
+                  },
+                ],
+              },
               { title: "Club Sets", link: "/cleveland-golf/clubs/club-sets" },
               {
                 title: "Trade-In Program",
@@ -751,15 +1091,61 @@ Preview:
             title: "Gear",
             link: "/cleveland-golf/gear",
             sub_menu_items: [
-              { title: "Bags", link: "/cleveland-golf/gear/bags" },
-              { title: "Apparel", link: "/cleveland-golf/gear/apparel" },
+              {
+                title: "Bags",
+                link: "/cleveland-golf/gear/bags",
+                sub_menu_items: [
+                  {
+                    title: "Cart Bags",
+                    link: "/cleveland-golf/gear/bags/cart-bags",
+                  },
+                  {
+                    title: "Stand Bags",
+                    link: "/cleveland-golf/gear/bags/stand-bags",
+                  },
+                ],
+              },
+              {
+                title: "Apparel",
+                link: "/cleveland-golf/gear/apparel",
+                sub_menu_items: [
+                  {
+                    title: "Headwear",
+                    link: "/cleveland-golf/gear/apparel/headwear",
+                  },
+                ],
+              },
               {
                 title: "Accessories",
                 link: "/cleveland-golf/gear/accessories",
+                sub_menu_items: [
+                  {
+                    title: "Headcovers",
+                    link: "/cleveland-golf/gear/accessories/headcovers",
+                  },
+                  {
+                    title: "Towels",
+                    link: "/cleveland-golf/gear/accessories/towels",
+                  },
+                  {
+                    title: "Umbrella",
+                    link: "/cleveland-golf/gear/accessories/umbrella",
+                  },
+                  {
+                    title: "Components",
+                    link: "/cleveland-golf/gear/accessories/components",
+                  },
+                ],
               },
               {
                 title: "Limited Edition",
                 link: "/cleveland-golf/gear/limited-edition",
+                sub_menu_items: [
+                  {
+                    title: "Hats",
+                    link: "/cleveland-golf/gear/limited-edition/hats",
+                  },
+                ],
               },
             ],
           },
@@ -767,8 +1153,30 @@ Preview:
             title: "Fitting",
             link: "/cleveland-golf/fitting",
             sub_menu_items: [
-              { title: "Selector", link: "/cleveland-golf/fitting/selector" },
-              { title: "Events", link: "/cleveland-golf/fitting/events" },
+              {
+                title: "Selector",
+                link: "/cleveland-golf/fitting/selector",
+                sub_menu_items: [
+                  {
+                    title: "Wedge Selector",
+                    link: "/cleveland-golf/fitting/selector/wedge-selector",
+                  },
+                  {
+                    title: "Putter Selector",
+                    link: "/cleveland-golf/fitting/selector/putter-selector",
+                  },
+                ],
+              },
+              {
+                title: "Events",
+                link: "/cleveland-golf/fitting/events",
+                sub_menu_items: [
+                  {
+                    title: "Event Days",
+                    link: "/cleveland-golf/fitting/events/event-days",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -789,8 +1197,38 @@ Preview:
             title: "Sale",
             link: "/cleveland-golf/sale",
             sub_menu_items: [
-              { title: "Wedges", link: "/cleveland-golf/sale/wedges" },
-              { title: "Putters", link: "/cleveland-golf/sale/putters" },
+              {
+                title: "Wedges",
+                link: "/cleveland-golf/sale/wedges",
+                sub_menu_items: [
+                  {
+                    title: "RTX Full-Face 2 Wedges",
+                    link: "/cleveland-golf/sale/wedges/rtx-full-face-2-wedges",
+                  },
+                  {
+                    title: "CBX 4 ZipCore Wedges",
+                    link: "/cleveland-golf/sale/wedges/cbx-4-zipcore-wedges",
+                  },
+                  {
+                    title: "CBX ZipCore Wedges",
+                    link: "/cleveland-golf/sale/wedges/cbx-zipcore-wedges",
+                  },
+                  {
+                    title: "Women's CBX 4 ZipCore Wedges",
+                    link: "/cleveland-golf/sale/wedges/womens-cbx-4-zipcore-wedges",
+                  },
+                ],
+              },
+              {
+                title: "Putters",
+                link: "/cleveland-golf/sale/putters",
+                sub_menu_items: [
+                  {
+                    title: "Frontline Elite Putters",
+                    link: "/cleveland-golf/sale/putters/frontline-elite-putters",
+                  },
+                ],
+              },
             ],
           },
         ],
@@ -804,11 +1242,108 @@ Preview:
             title: "Clubs",
             link: "/xxio/clubs",
             sub_menu_items: [
-              { title: "Drivers", link: "/xxio/clubs/drivers" },
-              { title: "Fairway Woods", link: "/xxio/clubs/fairway-woods" },
-              { title: "Hybrids", link: "/xxio/clubs/hybrids" },
-              { title: "Irons", link: "/xxio/clubs/irons" },
-              { title: "Club Sets", link: "/xxio/clubs/club-sets" },
+              {
+                title: "Drivers",
+                link: "/xxio/clubs/drivers",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 14 Drivers",
+                    link: "/xxio/clubs/drivers/xxio-14-drivers",
+                  },
+                  {
+                    title: "XXIO Prime Driver",
+                    link: "/xxio/clubs/drivers/xxio-prime-driver",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Drivers",
+                    link: "/xxio/clubs/drivers/xxio-prime-royal-edition-drivers",
+                  },
+                ],
+              },
+              {
+                title: "Fairway Woods",
+                link: "/xxio/clubs/fairway-woods",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 14 Fairway Woods",
+                    link: "/xxio/clubs/fairway-woods/xxio-14-fairway-woods",
+                  },
+                  {
+                    title: "XXIO Prime Fairway Woods",
+                    link: "/xxio/clubs/fairway-woods/xxio-prime-fairway-woods",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Fairway Woods",
+                    link: "/xxio/clubs/fairway-woods/xxio-prime-royal-edition-fairway-woods",
+                  },
+                ],
+              },
+              {
+                title: "Hybrids",
+                link: "/xxio/clubs/hybrids",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 14 Hybrids",
+                    link: "/xxio/clubs/hybrids/xxio-14-hybrids",
+                  },
+                  {
+                    title: "XXIO Prime Hybrids",
+                    link: "/xxio/clubs/hybrids/xxio-prime-hybrids",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Hybrids",
+                    link: "/xxio/clubs/hybrids/xxio-prime-royal-edition-hybrids",
+                  },
+                ],
+              },
+              {
+                title: "Irons",
+                link: "/xxio/clubs/irons",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 14 Irons",
+                    link: "/xxio/clubs/irons/xxio-14-irons",
+                  },
+                  {
+                    title: "XXIO Prime Irons",
+                    link: "/xxio/clubs/irons/xxio-prime-irons",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Irons",
+                    link: "/xxio/clubs/irons/xxio-prime-royal-edition-irons",
+                  },
+                ],
+              },
+              {
+                title: "Club Sets",
+                link: "/xxio/clubs/club-sets",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 14 Set Builder",
+                    link: "/xxio/clubs/club-sets/xxio-14-set-builder",
+                  },
+                  {
+                    title: "XXIO 14 Hybrid / Iron Combo Set",
+                    link: "/xxio/clubs/club-sets/xxio-14-hybrid-iron-combo-set",
+                  },
+                  {
+                    title: "XXIO 14 Ladies Vessel Package Sets",
+                    link: "/xxio/clubs/club-sets/xxio-14-ladies-vessel-package-sets",
+                  },
+                  {
+                    title: "Explore XXIO x Vessel Package Set",
+                    link: "https://us.dunlopsports.com/xxio/xxio-x-vessel.html",
+                  },
+                  {
+                    title: "XXIO Prime Set Builder",
+                    link: "/xxio/clubs/club-sets/xxio-prime-set-builder",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Set Builder",
+                    link: "/xxio/clubs/club-sets/xxio-prime-royal-edition-set-builder",
+                  },
+                ],
+              },
               {
                 title: "Trade-In Program",
                 link: "https://us.dunlopsports.com/xxio/xxio-trade-in-program.html",
@@ -830,7 +1365,14 @@ Preview:
             title: "Gear",
             link: "/xxio/gear",
             sub_menu_items: [
-              { title: "Bags", link: "/xxio/gear/bags" },
+              {
+                title: "Bags",
+                link: "/xxio/gear/bags",
+                sub_menu_items: [
+                  { title: "Golf Bags", link: "/xxio/gear/bags/golf-bags" },
+                  { title: "Travel Gear", link: "/xxio/gear/bags/travel-gear" },
+                ],
+              },
               { title: "Apparel", link: "/xxio/gear/apparel" },
               { title: "Accessories", link: "/xxio/gear/accessories" },
             ],
@@ -880,7 +1422,20 @@ Preview:
             title: "Fitting",
             link: "/never-compromise/fitting",
             sub_menu_items: [
-              { title: "Fitting", link: "/never-compromise/fitting/fitting" },
+              {
+                title: "Fitting",
+                link: "/never-compromise/fitting/fitting",
+                sub_menu_items: [
+                  {
+                    title: "Online Fitting",
+                    link: "/never-compromise/fitting/fitting/online-fitting",
+                  },
+                  {
+                    title: "In-Store Fitting",
+                    link: "/never-compromise/fitting/fitting/in-store-fitting",
+                  },
+                ],
+              },
               { title: "Events", link: "/never-compromise/fitting/events" },
             ],
           },
@@ -895,12 +1450,132 @@ Preview:
             title: "Tennis",
             link: "/dunlop/tennis",
             sub_menu_items: [
-              { title: "Rackets", link: "/dunlop/tennis/rackets" },
-              { title: "Balls", link: "/dunlop/tennis/balls" },
-              { title: "Strings", link: "/dunlop/tennis/strings" },
-              { title: "Grips", link: "/dunlop/tennis/grips" },
-              { title: "Bags", link: "/dunlop/tennis/bags" },
-              { title: "Accessories", link: "/dunlop/tennis/accessories" },
+              {
+                title: "Rackets",
+                link: "/dunlop/tennis/rackets",
+                sub_menu_items: [
+                  {
+                    title: "FX Series",
+                    link: "/dunlop/tennis/rackets/fx-series",
+                  },
+                  {
+                    title: "SX Series",
+                    link: "/dunlop/tennis/rackets/sx-series",
+                  },
+                  {
+                    title: "LX Series",
+                    link: "/dunlop/tennis/rackets/lx-series",
+                  },
+                  { title: "LX TEAM", link: "/dunlop/tennis/rackets/lx-team" },
+                  {
+                    title: "CX Series",
+                    link: "/dunlop/tennis/rackets/cx-series",
+                  },
+                  {
+                    title: "Mid Range & Juniors",
+                    link: "/dunlop/tennis/rackets/mid-range-and-juniors",
+                  },
+                ],
+              },
+              {
+                title: "Balls",
+                link: "/dunlop/tennis/balls",
+                sub_menu_items: [
+                  {
+                    title: "Wimbledon Slazenger",
+                    link: "/dunlop/tennis/balls/wimbledon-slazenger",
+                  },
+                  {
+                    title: "Australian Open (AO)",
+                    link: "/dunlop/tennis/balls/australian-open-%28ao%29",
+                  },
+                  { title: "ATP", link: "/dunlop/tennis/balls/atp" },
+                  {
+                    title: "ATP Championship",
+                    link: "/dunlop/tennis/balls/atp-championship",
+                  },
+                  {
+                    title: "Grand Prix",
+                    link: "/dunlop/tennis/balls/grand-prix",
+                  },
+                  { title: "Training", link: "/dunlop/tennis/balls/training" },
+                ],
+              },
+              {
+                title: "Strings",
+                link: "/dunlop/tennis/strings",
+                sub_menu_items: [
+                  {
+                    title: "Multifilament",
+                    link: "/dunlop/tennis/strings/multifilament",
+                  },
+                  {
+                    title: "Polyester",
+                    link: "/dunlop/tennis/strings/polyester",
+                  },
+                  {
+                    title: "Synthetic",
+                    link: "/dunlop/tennis/strings/synthetic",
+                  },
+                  { title: "Reels", link: "/dunlop/tennis/strings/reels" },
+                  {
+                    title: "Grommets",
+                    link: "/dunlop/tennis/strings/grommets",
+                  },
+                  {
+                    title: "Stencils",
+                    link: "/dunlop/tennis/strings/stencils",
+                  },
+                ],
+              },
+              {
+                title: "Grips",
+                link: "/dunlop/tennis/grips",
+                sub_menu_items: [
+                  {
+                    title: "Gecko-Tac",
+                    link: "/dunlop/tennis/grips/gecko-tac",
+                  },
+                  { title: "U-Sweat", link: "/dunlop/tennis/grips/u-sweat" },
+                  {
+                    title: "Viper Dry",
+                    link: "/dunlop/tennis/grips/viper-dry",
+                  },
+                  {
+                    title: "Super Tac",
+                    link: "/dunlop/tennis/grips/super-tac",
+                  },
+                ],
+              },
+              {
+                title: "Bags",
+                link: "/dunlop/tennis/bags",
+                sub_menu_items: [
+                  {
+                    title: "Backpack / Tote Bags",
+                    link: "/dunlop/tennis/bags/backpack-tote-bags",
+                  },
+                  {
+                    title: "Racket Bags",
+                    link: "/dunlop/tennis/bags/racket-bags",
+                  },
+                  {
+                    title: "Travel Bags",
+                    link: "/dunlop/tennis/bags/travel-bags",
+                  },
+                ],
+              },
+              {
+                title: "Accessories",
+                link: "/dunlop/tennis/accessories",
+                sub_menu_items: [
+                  {
+                    title: "Coaching",
+                    link: "/dunlop/tennis/accessories/coaching",
+                  },
+                  { title: "Other", link: "/dunlop/tennis/accessories/other" },
+                ],
+              },
               {
                 title: "ATP Collection",
                 link: "/dunlop/tennis/atp-collection",
@@ -911,13 +1586,87 @@ Preview:
             title: "Squash",
             link: "/dunlop/squash",
             sub_menu_items: [
-              { title: "Rackets", link: "/dunlop/squash/rackets" },
-              { title: "Balls", link: "/dunlop/squash/balls" },
-              { title: "Strings", link: "/dunlop/squash/strings" },
-              { title: "Accessories", link: "/dunlop/squash/accessories" },
+              {
+                title: "Rackets",
+                link: "/dunlop/squash/rackets",
+                sub_menu_items: [
+                  { title: "CX", link: "/dunlop/squash/rackets/cx" },
+                  { title: "FX", link: "/dunlop/squash/rackets/fx" },
+                  { title: "FX TEAM", link: "/dunlop/squash/rackets/fx-team" },
+                  {
+                    title: "Tristorm",
+                    link: "/dunlop/squash/rackets/tristorm",
+                  },
+                  {
+                    title: "Sonic Core",
+                    link: "/dunlop/squash/rackets/sonic-core",
+                  },
+                  {
+                    title: "Blackstorm",
+                    link: "/dunlop/squash/rackets/blackstorm",
+                  },
+                  { title: "Tempo", link: "/dunlop/squash/rackets/tempo" },
+                  { title: "Blaze", link: "/dunlop/squash/rackets/blaze" },
+                  { title: "Sonic", link: "/dunlop/squash/rackets/sonic" },
+                  {
+                    title: "Tristorm Elite",
+                    link: "/dunlop/squash/rackets/tristorm-elite",
+                  },
+                ],
+              },
+              {
+                title: "Balls",
+                link: "/dunlop/squash/balls",
+                sub_menu_items: [
+                  { title: "Pro", link: "/dunlop/squash/balls/pro" },
+                  {
+                    title: "Competition",
+                    link: "/dunlop/squash/balls/competition",
+                  },
+                  { title: "Progress", link: "/dunlop/squash/balls/progress" },
+                  { title: "Intro", link: "/dunlop/squash/balls/intro" },
+                  { title: "Elite", link: "/dunlop/squash/balls/elite" },
+                  {
+                    title: "Training / Mini",
+                    link: "/dunlop/squash/balls/training-mini",
+                  },
+                ],
+              },
+              {
+                title: "Strings",
+                link: "/dunlop/squash/strings",
+                sub_menu_items: [
+                  { title: "Iconic", link: "/dunlop/squash/strings/iconic" },
+                  {
+                    title: "Stencils",
+                    link: "/dunlop/squash/strings/stencils",
+                  },
+                  {
+                    title: "Squash Reels",
+                    link: "/dunlop/squash/strings/squash-reels",
+                  },
+                ],
+              },
+              {
+                title: "Accessories",
+                link: "/dunlop/squash/accessories",
+                sub_menu_items: [
+                  {
+                    title: "Eyewear",
+                    link: "/dunlop/squash/accessories/eyewear",
+                  },
+                  { title: "Grips", link: "/dunlop/squash/accessories/grips" },
+                ],
+              },
               {
                 title: "Junior Rackets",
                 link: "/dunlop/squash/junior-rackets",
+                sub_menu_items: [
+                  {
+                    title: "Mini Squash",
+                    link: "/dunlop/squash/junior-rackets/mini-squash",
+                  },
+                ],
               },
             ],
           },
@@ -935,18 +1684,107 @@ Preview:
             title: "Badminton",
             link: "/dunlop/badminton",
             sub_menu_items: [
-              { title: "Rackets", link: "/dunlop/badminton/rackets" },
-              { title: "Bags", link: "/dunlop/badminton/bags" },
+              {
+                title: "Rackets",
+                link: "/dunlop/badminton/rackets",
+                sub_menu_items: [
+                  {
+                    title: "Aero-Star",
+                    link: "/dunlop/badminton/rackets/aero-star",
+                  },
+                  {
+                    title: "Revo-Star",
+                    link: "/dunlop/badminton/rackets/revo-star",
+                  },
+                  {
+                    title: "Nitro-Star",
+                    link: "/dunlop/badminton/rackets/nitro-star",
+                  },
+                  {
+                    title: "Nanoblade",
+                    link: "/dunlop/badminton/rackets/nanoblade",
+                  },
+                  {
+                    title: "Fusion Z",
+                    link: "/dunlop/badminton/rackets/fusion-z",
+                  },
+                  {
+                    title: "Blast SS",
+                    link: "/dunlop/badminton/rackets/blast-ss",
+                  },
+                ],
+              },
+              {
+                title: "Bags",
+                link: "/dunlop/badminton/bags",
+                sub_menu_items: [
+                  {
+                    title: "Racket Bags",
+                    link: "/dunlop/badminton/bags/racket-bags",
+                  },
+                  {
+                    title: "Backpacks",
+                    link: "/dunlop/badminton/bags/backpacks",
+                  },
+                ],
+              },
             ],
           },
           {
             title: "Apparel",
             link: "/dunlop/apparel",
             sub_menu_items: [
-              { title: "Men's Apparel", link: "/dunlop/apparel/mens-apparel" },
+              {
+                title: "Men's Apparel",
+                link: "/dunlop/apparel/mens-apparel",
+                sub_menu_items: [
+                  {
+                    title: "Shirts",
+                    link: "/dunlop/apparel/mens-apparel/shirts",
+                  },
+                  {
+                    title: "Shorts",
+                    link: "/dunlop/apparel/mens-apparel/shorts",
+                  },
+                  {
+                    title: "Hoodies",
+                    link: "/dunlop/apparel/mens-apparel/hoodies",
+                  },
+                  {
+                    title: "Jackets",
+                    link: "/dunlop/apparel/mens-apparel/jackets",
+                  },
+                  {
+                    title: "Pants",
+                    link: "/dunlop/apparel/mens-apparel/pants",
+                  },
+                  {
+                    title: "Footwear",
+                    link: "/dunlop/apparel/mens-apparel/footwear",
+                  },
+                ],
+              },
               {
                 title: "Women's Apparel",
                 link: "/dunlop/apparel/womens-apparel",
+                sub_menu_items: [
+                  {
+                    title: "Shirts",
+                    link: "/dunlop/apparel/womens-apparel/shirts",
+                  },
+                  {
+                    title: "Jackets",
+                    link: "/dunlop/apparel/womens-apparel/jackets",
+                  },
+                  {
+                    title: "Shorts",
+                    link: "/dunlop/apparel/womens-apparel/shorts",
+                  },
+                  {
+                    title: "Pants",
+                    link: "/dunlop/apparel/womens-apparel/pants",
+                  },
+                ],
               },
             ],
           },
@@ -1090,13 +1928,13 @@ Preview:
       <div class="ab-nav-brand-list-wrapper">
         <h4 class="ab-nav-brand-list-header">Also Shop</h4>
         <ul class="ab-nav-brand-list">
-          ${Object.values(DATA.brand_items)
+          ${window.Object.values(DATA.brand_items)
             .map(
               ({ title, link }) => /* HTML  */ `
-                            <li class="ab-nav-brand-item">
-                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
-                            </li>
-                        `,
+                        <li class="ab-nav-brand-item">
+                            <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                        </li>
+                    `,
             )
             .join("")}
         </ul>
@@ -1105,23 +1943,26 @@ Preview:
   }
 
   const level2BrandLayout = getLevel2BrandLayout();
-  let activeBrand = DATA.brand_items["dunlop"];
+  let defaultBrand = DATA.brand_items["dunlop"];
 
-  function setActiveBrand() {
+  function setDefaultBrand() {
     const pathname = window.location.pathname;
 
     if (pathname.includes("/srixon")) {
-      activeBrand = DATA.brand_items["srixon"];
-    } else if (pathname.includes("/cleveland-golf")) {
-      activeBrand = DATA.brand_items["cleveland-golf"];
+      defaultBrand = DATA.brand_items["srixon"];
+    } else if (
+      pathname.includes("/cleveland-golf") ||
+      pathname.includes("/clevelandgolf")
+    ) {
+      defaultBrand = DATA.brand_items["cleveland-golf"];
     } else if (pathname.includes("/xxio")) {
-      activeBrand = DATA.brand_items["xxio"];
+      defaultBrand = DATA.brand_items["xxio"];
     } else if (pathname.includes("/never-compromise")) {
-      activeBrand = DATA.brand_items["never-compromise"];
+      defaultBrand = DATA.brand_items["never-compromise"];
     } else if (pathname.includes("/dunlop")) {
-      activeBrand = DATA.brand_items["dunlop"];
+      defaultBrand = DATA.brand_items["dunlop"];
     } else if (pathname.includes("/asics")) {
-      activeBrand = DATA.brand_items["asics"];
+      defaultBrand = DATA.brand_items["asics"];
     }
   }
 
@@ -1131,26 +1972,19 @@ Preview:
     parent_link = "",
     level = 1,
   ) {
-    console.log(
-      "getNavLayout: recursive call",
-      menu_items,
-      parent_title,
-      level,
-    );
-
     return /* HTML */ `
       <div
         class="
                     ab-nav-menu-container 
                     ab-nav-menu-container-level-${level} 
-                    ${level === 2 && parent_title === activeBrand.title
+                    ${level === 2 && parent_title === defaultBrand.title
           ? "ab-nav-menu-container--show"
           : ""}"
       >
         ${level === 1
           ? ` 
                     <div class="ab-nav-menu-top">
-                        <div class="ab-nav-top-logo">${activeBrand.logo}</div>
+                        <div class="ab-nav-top-logo">${defaultBrand.logo}</div>
                         <div class="ab-nav-close-cta">×</div>
                     </div>`
           : ` 
@@ -1173,11 +2007,11 @@ Preview:
           ${menu_items
             .map(
               ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
-                            <li class="ab-nav-menu-item">
-                                <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
-                            </li>
-                        `,
+                        <li class="ab-nav-menu-item">
+                            <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
+                            ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
+                        </li>
+                    `,
             )
             .join("")}
         </ul>
@@ -1212,11 +2046,41 @@ Preview:
     );
   }
 
+  function handleTier2Reset() {
+    const isTier1Visible = !q(".ab-nav-menu-container--show");
+
+    const isTier2Visible = !!(
+      q(".ab-nav-menu-container--show") &&
+      q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show") &&
+      !q(
+        ".ab-nav-menu-container-level-2.ab-nav-menu-container--show  .ab-nav-menu-container--show",
+      )
+    );
+
+    const expandedTier2Title =
+      q(
+        ".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text",
+      )?.textContent || "";
+
+    if (
+      isTier1Visible ||
+      (isTier2Visible && expandedTier2Title.trim() !== defaultBrand.title)
+    ) {
+      q(".ab-nav-menu-container--show")?.classList.remove(
+        "ab-nav-menu-container--show",
+      );
+      q(
+        `a.ab-nav-menu-item-link[href="${defaultBrand.link}"] ~ .ab-nav-menu-container-level-2`,
+      ).classList.add("ab-nav-menu-container--show");
+    }
+  }
+
   function clickFunction() {
     q(".ab-nav-container").addEventListener("click", (e) => {
       const closeButton = e.target.closest(".ab-nav-close-cta");
       if (closeButton) {
         q(".close-button button.close").click();
+        handleTier2Reset();
       }
 
       const subMenuLinkExpandable = e.target.closest(
@@ -1225,14 +2089,12 @@ Preview:
       if (subMenuLinkExpandable) {
         e.preventDefault();
         const siblingDropdownMenu = subMenuLinkExpandable.nextElementSibling;
-        console.log("siblingDropdownMenu", siblingDropdownMenu);
         siblingDropdownMenu.classList.add("ab-nav-menu-container--show");
       }
 
       const backToParentCta = e.target.closest("button.ab-nav-menu-back-cta");
       if (backToParentCta) {
         const parentDropdownMenu = backToParentCta.parentElement.parentElement;
-        console.log("parentDropdownMenu", parentDropdownMenu);
         parentDropdownMenu.classList.remove("ab-nav-menu-container--show");
       }
     });
@@ -1245,7 +2107,7 @@ Preview:
       `${page_initials}--version:${test_version}`,
     );
     console.table(TEST_CONFIG);
-    setActiveBrand();
+    setDefaultBrand();
     createLayout();
     clickFunction();
   }

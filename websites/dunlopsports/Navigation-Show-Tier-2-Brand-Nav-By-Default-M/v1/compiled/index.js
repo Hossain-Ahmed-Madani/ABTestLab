@@ -1169,10 +1169,12 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             !q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show  .ab-nav-menu-container--show")
         );
 
-        const expandedTier2Title = q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text")?.textContent || "";
+        const expandedTier2TitleElement = q(".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text");
+        const expandedTier2Title = expandedTier2TitleElement ? expandedTier2TitleElement.textContent.trim() : "";
 
-        if (isTier1Visible || (isTier2Visible && expandedTier2Title.trim() !== defaultBrand.title)) {
-            q(".ab-nav-menu-container--show")?.classList.remove("ab-nav-menu-container--show");
+        if (isTier1Visible || (isTier2Visible && expandedTier2Title !== defaultBrand.title)) {
+            const visibleNavContainer = q(".ab-nav-menu-container--show");
+            if (visibleNavContainer) visibleNavContainer.classList.remove("ab-nav-menu-container--show");
             q(`a.ab-nav-menu-item-link[href="${defaultBrand.link}"] ~ .ab-nav-menu-container-level-2`).classList.add("ab-nav-menu-container--show");
         }
     }
