@@ -198,9 +198,12 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
 }
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover,
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus,
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):hover,
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):focus,
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):active {
   text-decoration: underline;
 }
 .AB-NAV-TIER-2-BRAND-M
@@ -337,7 +340,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
     page_initials: "AB-NAV-TIER-2-BRAND-M",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1381,8 +1384,26 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             title: "Fitting",
             link: "/xxio/fitting",
             sub_menu_items: [
-              { title: "Selector", link: "/xxio/fitting/selector" },
-              { title: "Events", link: "/xxio/fitting/events" },
+              {
+                title: "Selector",
+                link: "/xxio/fitting/selector",
+                sub_menu_items: [
+                  {
+                    title: "XXIO  Selector",
+                    link: "/xxio/fitting/selector/xxio--selector",
+                  },
+                ],
+              },
+              {
+                title: "Events",
+                link: "/xxio/fitting/events",
+                sub_menu_items: [
+                  {
+                    title: "Events Days",
+                    link: "/xxio/fitting/events/events-days",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -1396,11 +1417,124 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             title: "Sale",
             link: "/xxio/sale",
             sub_menu_items: [
-              { title: "Drivers", link: "/xxio/sale/drivers" },
-              { title: "Fairway Woods", link: "/xxio/sale/fairway-woods" },
-              { title: "Hybrids", link: "/xxio/sale/hybrids" },
-              { title: "Irons", link: "/xxio/sale/irons" },
-              { title: "Balls", link: "/xxio/sale/balls" },
+              {
+                title: "Drivers",
+                link: "/xxio/sale/drivers",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 13 Drivers",
+                    link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-driver/MX13D.html",
+                  },
+                  {
+                    title: "XXIO X Drivers",
+                    link: "/xxio/sale/drivers/xxio-x-drivers",
+                  },
+                  {
+                    title: "XXIO Prime Driver",
+                    link: "/xxio/sale/drivers/xxio-prime-driver",
+                  },
+                ],
+              },
+              {
+                title: "Fairway Woods",
+                link: "/xxio/sale/fairway-woods",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 13 Fairway Woods",
+                    link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-fairway-woods/MX13F.html",
+                  },
+                  {
+                    title: "XXIO X Fairway Woods",
+                    link: "/xxio/sale/fairway-woods/xxio-x-fairway-woods",
+                  },
+                  {
+                    title: "XXIO 12 Fairway Woods",
+                    link: "/xxio/sale/fairway-woods/xxio-12-fairway-woods",
+                  },
+                  {
+                    title: "XXIO Prime Fairway Woods",
+                    link: "/xxio/sale/fairway-woods/xxio-prime-fairway-woods",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Fairway Woods",
+                    link: "/xxio/sale/fairway-woods/xxio-prime-royal-edition-fairway-woods",
+                  },
+                ],
+              },
+              {
+                title: "Hybrids",
+                link: "/xxio/sale/hybrids",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 13 Hybrids",
+                    link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-hybrids/MX13H.html",
+                  },
+                  {
+                    title: "XXIO X Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-x-hybrids",
+                  },
+                  {
+                    title: "XXIO 12 Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-12-hybrids",
+                  },
+                  {
+                    title: "XXIO Prime Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-prime-hybrids",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-prime-royal-edition-hybrids",
+                  },
+                  {
+                    title: "XXIO Ladies Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-ladies-hybrids",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Ladies Hybrids",
+                    link: "/xxio/sale/hybrids/xxio-prime-royal-edition-ladies-hybrids",
+                  },
+                ],
+              },
+              {
+                title: "Irons",
+                link: "/xxio/sale/irons",
+                sub_menu_items: [
+                  {
+                    title: "XXIO 13 Irons",
+                    link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-irons/MX13I.html",
+                  },
+                  {
+                    title: "XXIO X Irons",
+                    link: "/xxio/sale/irons/xxio-x-irons",
+                  },
+                  {
+                    title: "XXIO 12 Irons",
+                    link: "/xxio/sale/irons/xxio-12-irons",
+                  },
+                  {
+                    title: "XXIO Prime Irons",
+                    link: "/xxio/sale/irons/xxio-prime-irons",
+                  },
+                  {
+                    title: "XXIO Ladies Irons",
+                    link: "/xxio/sale/irons/xxio-ladies-irons",
+                  },
+                  {
+                    title: "XXIO Prime Royal Edition Ladies Irons",
+                    link: "/xxio/sale/irons/xxio-prime-royal-edition-ladies-irons",
+                  },
+                ],
+              },
+              {
+                title: "Balls",
+                link: "/xxio/sale/balls",
+                sub_menu_items: [
+                  {
+                    title: "XXIO Rebound Drive Golf Balls",
+                    link: "/xxio/sale/balls/xxio-rebound-drive-golf-balls",
+                  },
+                ],
+              },
             ],
           },
         ],
@@ -1436,7 +1570,16 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                   },
                 ],
               },
-              { title: "Events", link: "/never-compromise/fitting/events" },
+              {
+                title: "Events",
+                link: "/never-compromise/fitting/events",
+                sub_menu_items: [
+                  {
+                    title: "Events Days",
+                    link: "/never-compromise/fitting/events/events-days",
+                  },
+                ],
+              },
             ],
           },
         ],
@@ -1864,8 +2007,26 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             title: "Fitting",
             link: "/asics/fitting",
             sub_menu_items: [
-              { title: "Selector", link: "/asics/fitting/selector" },
-              { title: "Events", link: "/asics/fitting/events" },
+              {
+                title: "Selector",
+                link: "/asics/fitting/selector",
+                sub_menu_items: [
+                  {
+                    title: "Shoes Selector",
+                    link: "/asics/fitting/selector/shoes-selector",
+                  },
+                ],
+              },
+              {
+                title: "Events",
+                link: "/asics/fitting/events",
+                sub_menu_items: [
+                  {
+                    title: "Events Days",
+                    link: "/asics/fitting/events/events-days",
+                  },
+                ],
+              },
             ],
           },
           {
@@ -1923,6 +2084,23 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     return document.querySelector(s);
   }
 
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  function isSafari() {
+    const userAgent = navigator.userAgent;
+    return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+  }
+
   function getLevel2BrandLayout() {
     return /* HTML */ `
       <div class="ab-nav-brand-list-wrapper">
@@ -1931,10 +2109,10 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
           ${window.Object.values(DATA.brand_items)
             .map(
               ({ title, link }) => /* HTML  */ `
-                        <li class="ab-nav-brand-item">
-                            <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
-                        </li>
-                    `,
+                            <li class="ab-nav-brand-item">
+                                <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
+                            </li>
+                        `,
             )
             .join("")}
         </ul>
@@ -2007,11 +2185,11 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
           ${menu_items
             .map(
               ({ title, link, sub_menu_items = [] }) => /* HTML  */ `
-                        <li class="ab-nav-menu-item">
-                            <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
-                            ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
-                        </li>
-                    `,
+                            <li class="ab-nav-menu-item">
+                                <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
+                                ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
+                            </li>
+                        `,
             )
             .join("")}
         </ul>
@@ -2057,18 +2235,20 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
       )
     );
 
-    const expandedTier2Title =
-      q(
-        ".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text",
-      )?.textContent || "";
+    const expandedTier2TitleElement = q(
+      ".ab-nav-menu-container-level-2.ab-nav-menu-container--show > .ab-nav-menu-header .ab-nav-menu-back-cta__text",
+    );
+    const expandedTier2Title = expandedTier2TitleElement
+      ? expandedTier2TitleElement.textContent.trim()
+      : "";
 
     if (
       isTier1Visible ||
-      (isTier2Visible && expandedTier2Title.trim() !== defaultBrand.title)
+      (isTier2Visible && expandedTier2Title !== defaultBrand.title)
     ) {
-      q(".ab-nav-menu-container--show")?.classList.remove(
-        "ab-nav-menu-container--show",
-      );
+      const visibleNavContainer = q(".ab-nav-menu-container--show");
+      if (visibleNavContainer)
+        visibleNavContainer.classList.remove("ab-nav-menu-container--show");
       q(
         `a.ab-nav-menu-item-link[href="${defaultBrand.link}"] ~ .ab-nav-menu-container-level-2`,
       ).classList.add("ab-nav-menu-container--show");
@@ -2100,6 +2280,42 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     });
   }
 
+  // Prevent Scroll
+  function preventScroll(e) {
+    if (e.target.closest("nav .main-menu.in")) return;
+    e.preventDefault();
+  }
+
+  function enableScroll() {
+    // Enable Scrolling
+    document.removeEventListener("wheel", preventScroll);
+    document.removeEventListener("touchmove", preventScroll);
+  }
+
+  function disableScroll() {
+    // Disable Scrolling
+    document.addEventListener("wheel", preventScroll, { passive: false });
+    document.addEventListener("touchmove", preventScroll, { passive: false });
+  }
+
+  function addOrRemoveScrollHander() {
+    if (q("nav .main-menu.in")) {
+      disableScroll();
+    } else {
+      enableScroll();
+    }
+  }
+
+  function mutationObserverFunction() {
+    const targetNode = q("nav .main-menu");
+    const debouncedUpdate = debounce(addOrRemoveScrollHander, 250);
+    return new MutationObserver(debouncedUpdate).observe(targetNode, {
+      childList: false,
+      subtree: false,
+      attributes: true,
+    });
+  }
+
   function init() {
     q("body").classList.add(
       page_initials,
@@ -2110,6 +2326,11 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     setDefaultBrand();
     createLayout();
     clickFunction();
+
+    if (!isSafari()) return;
+
+    addOrRemoveScrollHander();
+    mutationObserverFunction();
   }
 
   function checkForItems() {
