@@ -16,7 +16,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
         page_initials: "AB-NAV-TIER-2-BRAND-M",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -723,8 +723,8 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         title: "Fitting",
                         link: "/xxio/fitting",
                         sub_menu_items: [
-                            { title: "Selector", link: "/xxio/fitting/selector" },
-                            { title: "Events", link: "/xxio/fitting/events" },
+                            { title: "Selector", link: "/xxio/fitting/selector", sub_menu_items: [{ title: "XXIO  Selector", link: "/xxio/fitting/selector/xxio--selector" }] },
+                            { title: "Events", link: "/xxio/fitting/events", sub_menu_items: [{ title: "Events Days", link: "/xxio/fitting/events/events-days" }] },
                         ],
                     },
                     {
@@ -736,11 +736,115 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         title: "Sale",
                         link: "/xxio/sale",
                         sub_menu_items: [
-                            { title: "Drivers", link: "/xxio/sale/drivers" },
-                            { title: "Fairway Woods", link: "/xxio/sale/fairway-woods" },
-                            { title: "Hybrids", link: "/xxio/sale/hybrids" },
-                            { title: "Irons", link: "/xxio/sale/irons" },
-                            { title: "Balls", link: "/xxio/sale/balls" },
+                            {
+                                title: "Drivers",
+                                link: "/xxio/sale/drivers",
+                                sub_menu_items: [
+                                    { title: "XXIO 13 Drivers", link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-driver/MX13D.html" },
+                                    { title: "XXIO X Drivers", link: "/xxio/sale/drivers/xxio-x-drivers" },
+                                    { title: "XXIO Prime Driver", link: "/xxio/sale/drivers/xxio-prime-driver" },
+                                ],
+                            },
+                            {
+                                title: "Fairway Woods",
+                                link: "/xxio/sale/fairway-woods",
+                                sub_menu_items: [
+                                    {
+                                        title: "XXIO 13 Fairway Woods",
+                                        link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-fairway-woods/MX13F.html",
+                                    },
+                                    {
+                                        title: "XXIO X Fairway Woods",
+                                        link: "/xxio/sale/fairway-woods/xxio-x-fairway-woods",
+                                    },
+                                    {
+                                        title: "XXIO 12 Fairway Woods",
+                                        link: "/xxio/sale/fairway-woods/xxio-12-fairway-woods",
+                                    },
+                                    {
+                                        title: "XXIO Prime Fairway Woods",
+                                        link: "/xxio/sale/fairway-woods/xxio-prime-fairway-woods",
+                                    },
+                                    {
+                                        title: "XXIO Prime Royal Edition Fairway Woods",
+                                        link: "/xxio/sale/fairway-woods/xxio-prime-royal-edition-fairway-woods",
+                                    },
+                                ],
+                            },
+                            {
+                                title: "Hybrids",
+                                link: "/xxio/sale/hybrids",
+                                sub_menu_items: [
+                                    {
+                                        title: "XXIO 13 Hybrids",
+                                        link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-hybrids/MX13H.html",
+                                    },
+                                    {
+                                        title: "XXIO X Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-x-hybrids",
+                                    },
+                                    {
+                                        title: "XXIO 12 Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-12-hybrids",
+                                    },
+                                    {
+                                        title: "XXIO Prime Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-prime-hybrids",
+                                    },
+                                    {
+                                        title: "XXIO Prime Royal Edition Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-prime-royal-edition-hybrids",
+                                    },
+                                    {
+                                        title: "XXIO Ladies Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-ladies-hybrids",
+                                    },
+                                    {
+                                        title: "XXIO Prime Royal Edition Ladies Hybrids",
+                                        link: "/xxio/sale/hybrids/xxio-prime-royal-edition-ladies-hybrids",
+                                    },
+                                ],
+                            },
+                            {
+                                title: "Irons",
+                                link: "/xxio/sale/irons",
+                                sub_menu_items: [
+                                    {
+                                        title: "XXIO 13 Irons",
+                                        link: "https://us.dunlopsports.com/xxio/clubs/mens-golf-clubs/xxio-13/xxio-13-irons/MX13I.html",
+                                    },
+                                    {
+                                        title: "XXIO X Irons",
+                                        link: "/xxio/sale/irons/xxio-x-irons",
+                                    },
+                                    {
+                                        title: "XXIO 12 Irons",
+                                        link: "/xxio/sale/irons/xxio-12-irons",
+                                    },
+                                    {
+                                        title: "XXIO Prime Irons",
+                                        link: "/xxio/sale/irons/xxio-prime-irons",
+                                    },
+                                    {
+                                        title: "XXIO Ladies Irons",
+                                        link: "/xxio/sale/irons/xxio-ladies-irons",
+                                    },
+                                    {
+                                        title: "XXIO Prime Royal Edition Ladies Irons",
+                                        link: "/xxio/sale/irons/xxio-prime-royal-edition-ladies-irons",
+                                    },
+                                ],
+                            },
+                            {
+                                title: "Balls",
+                                link: "/xxio/sale/balls",
+                                sub_menu_items: [
+                                    {
+                                        title: "XXIO Rebound Drive Golf Balls",
+                                        link: "/xxio/sale/balls/xxio-rebound-drive-golf-balls",
+                                    },
+                                ],
+                            },
                         ],
                     },
                 ],
@@ -770,7 +874,11 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                     { title: "In-Store Fitting", link: "/never-compromise/fitting/fitting/in-store-fitting" },
                                 ],
                             },
-                            { title: "Events", link: "/never-compromise/fitting/events" },
+                            {
+                                title: "Events",
+                                link: "/never-compromise/fitting/events",
+                                sub_menu_items: [{ title: "Events Days", link: "/never-compromise/fitting/events/events-days" }],
+                            },
                         ],
                     },
                 ],
@@ -929,18 +1037,18 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                     { title: "Nitro-Star", link: "/dunlop/badminton/rackets/nitro-star" },
                                     { title: "Nanoblade", link: "/dunlop/badminton/rackets/nanoblade" },
                                     { title: "Fusion Z", link: "/dunlop/badminton/rackets/fusion-z" },
-                                    { title: "Blast SS", link: "/dunlop/badminton/rackets/blast-ss" },
-                                ],
+                                    { title: "Blast SS", link: "/dunlop/badminton/rackets/blast-ss" }
+                                ]
                             },
                             {
                                 title: "Bags",
                                 link: "/dunlop/badminton/bags",
                                 sub_menu_items: [
                                     { title: "Racket Bags", link: "/dunlop/badminton/bags/racket-bags" },
-                                    { title: "Backpacks", link: "/dunlop/badminton/bags/backpacks" },
-                                ],
-                            },
-                        ],
+                                    { title: "Backpacks", link: "/dunlop/badminton/bags/backpacks" }
+                                ]
+                            }
+                        ]
                     },
                     {
                         title: "Apparel",
@@ -965,18 +1073,18 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                     { title: "Shirts", link: "/dunlop/apparel/womens-apparel/shirts" },
                                     { title: "Jackets", link: "/dunlop/apparel/womens-apparel/jackets" },
                                     { title: "Shorts", link: "/dunlop/apparel/womens-apparel/shorts" },
-                                    { title: "Pants", link: "/dunlop/apparel/womens-apparel/pants" },
-                                ],
-                            },
-                        ],
+                                    { title: "Pants", link: "/dunlop/apparel/womens-apparel/pants" }
+                                ]
+                            }
+                        ]
                     },
                     {
                         title: "Equipment",
                         link: "/dunlop/equipment",
                         sub_menu_items: [
                             { title: "Coaching Equipment", link: "/dunlop/equipment/coaching-equipment" },
-                            { title: "Machines", link: "/dunlop/equipment/machines" },
-                        ],
+                            { title: "Machines", link: "/dunlop/equipment/machines" }
+                        ]
                     },
                 ],
             },
@@ -993,8 +1101,8 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             { title: "ASICS GEL-PRESHOT", link: "/asics/mens-golf-shoes/asics-gel-preshot" },
                             { title: "ASICS GEL-ACE PRO M STANDARD", link: "/asics/mens-golf-shoes/asics-gel-ace-pro-m-standard" },
                             { title: "ASICS GEL-COURSE DUO BOA", link: "/asics/mens-golf-shoes/asics-gel-course-duo-boa" },
-                            { title: "ASICS GEL-COURSE GLIDE", link: "/asics/mens-golf-shoes/asics-gel-course-glide" },
-                        ],
+                            { title: "ASICS GEL-COURSE GLIDE", link: "/asics/mens-golf-shoes/asics-gel-course-glide" }
+                        ]
                     },
                     {
                         title: "Women's Golf Shoes",
@@ -1002,20 +1110,28 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                         sub_menu_items: [
                             { title: "ASICS WOMEN'S JAPAN S GOLF", link: "/asics/womens-golf-shoes/asics-womens-japan-s-golf" },
                             { title: "ASICS WOMEN'S GEL KAYANO ACE 2", link: "/asics/womens-golf-shoes/asics-womens-gel-kayano-ace-2" },
-                            { title: "ASICS WOMEN'S GEL-COURSE GLIDE", link: "/asics/womens-golf-shoes/asics-womens-gel-course-glide" },
-                        ],
+                            { title: "ASICS WOMEN'S GEL-COURSE GLIDE", link: "/asics/womens-golf-shoes/asics-womens-gel-course-glide" }
+                        ]
                     },
                     {
                         title: "Limited Edition Golf Shoes",
                         link: "/asics/limited-edition-golf-shoes",
-                        sub_menu_items: [{ title: "ASICS GEL-KAYANO ACE 2 LIMITED EDITION", link: "/asics/limited-edition-golf-shoes/asics-gel-kayano-ace-2-limited-edition" }],
+                        sub_menu_items: [{ title: "ASICS GEL-KAYANO ACE 2 LIMITED EDITION", link: "/asics/limited-edition-golf-shoes/asics-gel-kayano-ace-2-limited-edition" }]
                     },
                     {
                         title: "Fitting",
                         link: "/asics/fitting",
                         sub_menu_items: [
-                            { title: "Selector", link: "/asics/fitting/selector" },
-                            { title: "Events", link: "/asics/fitting/events" },
+                            {
+                                title: "Selector",
+                                link: "/asics/fitting/selector",
+                                sub_menu_items: [{ title: "Shoes Selector", link: "/asics/fitting/selector/shoes-selector" }]
+                            },
+                            {
+                                title: "Events",
+                                link: "/asics/fitting/events",
+                                sub_menu_items: [{ title: "Events Days", link: "/asics/fitting/events/events-days" }]
+                            },
                         ],
                     },
                     {
@@ -1027,7 +1143,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             { title: "ASICS GEL-COURSE GLIDE", link: "/asics/sale/asics-gel-course-glide" },
                             { title: "ASICS GEL-KAYANO ACE 2", link: "/asics/sale/asics-gel-kayano-ace-2" },
                             { title: "ASICS GEL-COURSE DUO BOA", link: "/asics/sale/asics-gel-course-duo-boa" },
-                            { title: "ASICS WOMEN'S GEL-COURSE ACE", link: "/asics/sale/asics-womens-gel-course-ace" },
+                            { title: "ASICS WOMEN'S GEL-COURSE ACE", link: "/asics/sale/asics-womens-gel-course-ace" }
                         ],
                     },
                 ],
@@ -1050,7 +1166,6 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         return document.querySelector(s);
     }
 
-    
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -1062,7 +1177,6 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
             timeout = setTimeout(later, wait);
         };
     }
-
 
     function isSafari() {
         const userAgent = navigator.userAgent;
@@ -1079,7 +1193,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                             <li class="ab-nav-brand-item">
                                 <a href="${link}" class="ab-nav-brand-item-link">${title}</a>
                             </li>
-                    `).join("")}
+                        `).join("")}
                 </ul>
             </div>
         `;
@@ -1143,7 +1257,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                                 <a href="${link}" class="ab-nav-menu-item-link ${sub_menu_items && sub_menu_items.length > 0 ? "ab-nav-menu-item-link--has-sub-menu" : ""}">${title}</a>
                                 ${sub_menu_items && sub_menu_items.length > 0 ? getNavLayout(sub_menu_items, title, link, level + 1) : ""}
                             </li>
-                    `).join("")}
+                        `).join("")}
                 </ul>
 
                 ${level === 2 ? level2BrandLayout : ""}
@@ -1158,7 +1272,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `
+            `,
         );
 
         const targetNode = q(".main-menu.navbar-toggleable-sm .container-fluid");
@@ -1169,7 +1283,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
                 <div class="ab-nav-container">
                     <div class="ab-nav-menu-wrapper">${getNavLayout()}</div>
                 </div>
-            `
+            `,
         );
     }
 
@@ -1254,7 +1368,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         createLayout();
         clickFunction();
 
-        if(!isSafari()) return;
+        if (!isSafari()) return;
 
         addOrRemoveScrollHander();
         mutationObserverFunction();

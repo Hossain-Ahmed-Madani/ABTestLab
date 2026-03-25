@@ -182,6 +182,7 @@
   background-color: rgba(0, 0, 0, 0);
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover, .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus, .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
+  color: #000;
   text-decoration: underline;
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link::before,
