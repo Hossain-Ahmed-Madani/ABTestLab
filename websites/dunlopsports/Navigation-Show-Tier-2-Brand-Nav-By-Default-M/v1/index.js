@@ -16,7 +16,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
         test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
         page_initials: "AB-NAV-TIER-2-BRAND-M",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

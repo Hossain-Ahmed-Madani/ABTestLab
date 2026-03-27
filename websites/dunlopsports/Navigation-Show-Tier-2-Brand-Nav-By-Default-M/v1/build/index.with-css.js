@@ -198,13 +198,18 @@
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
 }
-.AB-NAV-TIER-2-BRAND-M
-  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):hover,
-.AB-NAV-TIER-2-BRAND-M
-  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):focus,
-.AB-NAV-TIER-2-BRAND-M
-  .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):active {
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
   text-decoration: underline;
+}
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:hover,
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:focus,
+.AB-NAV-TIER-2-BRAND-M
+  .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:active {
+  text-decoration: none;
 }
 .AB-NAV-TIER-2-BRAND-M
   .ab-nav-menu-item--shop-all
@@ -340,7 +345,7 @@ v1: https://us.dunlopsports.com/homepage?optimizely_token=4f9123072cf44c1a8a972e
     test_name: "Navigation - Show Tier 2 Brand Nav By Default [M]",
     page_initials: "AB-NAV-TIER-2-BRAND-M",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0007,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

@@ -13,7 +13,6 @@
 }
 
 .AB-NAV-TIER-2-BRAND-M {
-
     &:has(nav .main-menu.in) {
         overflow-y: hidden;
     }
@@ -238,11 +237,19 @@
         color: #444;
         text-decoration: none;
         background-color: rgba(0, 0, 0, 0);
+
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: underline;
+        }
     }
 
-    .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu) {
-        &:hover, &:focus, &:active {
-            text-decoration: underline;
+    .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu {
+        &:hover,
+        &:focus,
+        &:active {
+            text-decoration: none;
         }
     }
 

@@ -183,10 +183,15 @@
     text-decoration: none;
     background-color: rgba(0, 0, 0, 0);
 }
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):hover,
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):focus,
-.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:not(.ab-nav-menu-item-link--has-sub-menu):active {
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:hover,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:focus,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link:active {
     text-decoration: underline;
+}
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:hover,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:focus,
+.AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link.ab-nav-menu-item-link--has-sub-menu:active {
+    text-decoration: none;
 }
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item--shop-all .ab-nav-menu-item-link::before,
 .AB-NAV-TIER-2-BRAND-M .ab-nav-menu-item-link--has-sub-menu::before {
