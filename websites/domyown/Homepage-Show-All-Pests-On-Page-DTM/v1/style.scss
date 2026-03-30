@@ -1,0 +1,75 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-HOME-SHOW-ALL-PESTS {
+    div[id*="category-carousel"] div[class="mt-4"] ,
+    div[id*="category-carousel"] div.swiper.mt-2 {
+        display: none;
+    }
+
+    // .ab-content {
+    //     border: 1px solid red;
+    // }
+
+    .ab-pests-grid {
+        // padding: 0 5px;
+
+        margin: auto;
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 15px 10px;
+    }
+
+    .ab-pest-item {
+        width: 100%;
+    }
+
+    .ab-pest-item img {
+        // max-width: 70px;
+        height: auto;
+    }
+
+    .ab-pest-item a:has(img) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        font-size: 0.75rem;
+    }
+
+    // .ab-pest-item a:not(:has(img)) {
+    //     display: block;
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    //     white-space: nowrap;
+    //     font-size: 0.75rem;
+    // }
+
+    @media screen and (min-width: 991px) {
+        .ab-pests-grid {
+            width: 90%;
+            padding: 0;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px 20px;
+        }
+
+        .ab-pest-item img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
