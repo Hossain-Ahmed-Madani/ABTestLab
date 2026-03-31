@@ -7,31 +7,28 @@
   margin-top: 1rem;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 15px 10px;
+  gap: 13px 10px;
 }
 .AB-HOME-SHOW-ALL-PESTS .ab-pest-item {
   width: 100%;
 }
-.AB-HOME-SHOW-ALL-PESTS .ab-pest-item img {
-  height: auto;
-}
-.AB-HOME-SHOW-ALL-PESTS .ab-pest-item a:has(img) {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  font-size: 0.75rem;
+@media screen and (max-width: 990.5px) {
+  .AB-HOME-SHOW-ALL-PESTS .ab-pests-grid {
+    padding: 0 0.25rem;
+  }
 }
 @media screen and (min-width: 991px) {
   .AB-HOME-SHOW-ALL-PESTS .ab-pests-grid {
-    width: 90%;
+    width: 90.6%;
     padding: 0;
+    padding-right: 1.45rem;
     grid-template-columns: repeat(6, 1fr);
-    gap: 15px 20px;
+    gap: 10px 15px;
   }
-  .AB-HOME-SHOW-ALL-PESTS .ab-pest-item img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
+  .AB-HOME-SHOW-ALL-PESTS .ab-pest-item {
+    padding: 0.25rem;
+  }
+  .AB-HOME-SHOW-ALL-PESTS .ab-pest-item a:not(:has(img)) {
+    padding: 0 0.25rem;
   }
 }

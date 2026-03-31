@@ -50,19 +50,15 @@
         const layout = /* HTML */ `
             <div class="ab-content ab-pests-grid mt-4">
                 ${qq("div[id*='category-carousel'] .w-1\\/4 > .flex.flex-col.mx-auto.h-full")
-                    .map(
-                        (item) => `<div class="ab-pest-item flex flex-col leading-tight ">${item.innerHTML}</div>
-                `,
-                    )
+                    .map((item) => /* HTML */ `<div class="ab-pest-item flex flex-col leading-tight ">${item.innerHTML}</div>`)
                     .join("")}
                 ${qq("div[id*='category-carousel'] .w-1\\/6 > .text-center.h-full.border.border-grey.p-1")
-                    .map(
-                        (item) => `<div class="ab-pest-item flex flex-col leading-tight">
-                        <div class="text-center h-full border border-grey p-1">${item.innerHTML}</div>
-                        </div>
-                `,
-                    )
-                    .join("")}
+                    .map((item) =>
+                        /* HTML */ ` 
+                        <div class="ab-pest-item flex flex-col leading-tight">
+                            <div class="text-center h-full border border-grey p-1">${item.innerHTML}</div>
+                        </div>`
+                    ).join("")}
             </div>
         `;
 
