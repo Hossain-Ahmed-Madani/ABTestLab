@@ -1,3 +1,14 @@
+/* 
+
+Test container: https://app.vwo.com/#/test/ab/287/edit/urls/?accountId=348406
+
+Preview:
+Control: https://www.domyown.com/?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI4NyI6eyJ2IjoiMSIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tIiwiYXBwIjoiYXBwIiwidHMiOjE3NzQ5NTMwNDA4ODZ9fX0=
+
+Variation: https://www.domyown.com/?_vis_preview_data=eyJhIjoiMTc3MWUwM2QyNzcxMmQ4ZmU0YjRmOThlYzEzMjhhOWQiLCJlIjp7IjI4NyI6eyJ2IjoiMiIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmRvbXlvd24uY29tIiwiYXBwIjoiYXBwIiwidHMiOjE3NzQ5NTExMTkwMDV9fX0=
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -50,11 +61,11 @@
         const layout = /* HTML */ `
             <div class="ab-content ab-pests-grid mt-4">
                 ${qq("div[id*='category-carousel'] .w-1\\/4 > .flex.flex-col.mx-auto.h-full")
-                    .map((item) => /* HTML */ `<div class="ab-pest-item flex flex-col leading-tight ">${item.innerHTML}</div>`)
+                    .map((item) => /* HTML -> Mobile */ `<div class="ab-pest-item flex flex-col leading-tight ">${item.innerHTML}</div>`)
                     .join("")}
                 ${qq("div[id*='category-carousel'] .w-1\\/6 > .text-center.h-full.border.border-grey.p-1")
                     .map((item) =>
-                        /* HTML */ ` 
+                        /* HTML -> Desktop */ ` 
                         <div class="ab-pest-item flex flex-col leading-tight">
                             <div class="text-center h-full border border-grey p-1">${item.innerHTML}</div>
                         </div>`
@@ -68,6 +79,8 @@
     function checkForItems() {
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("div[id*='category-carousel']"));
     }
+
+    return
 
     try {
         await waitForElementAsync(checkForItems);

@@ -12,3 +12,10 @@ const newData = qq("div[id*='category-carousel'] .w-1\\/6 > .flex.flex-col.mx-au
 }).join("");
 
 console.log(newData);
+
+
+// body div[id*='category-carousel'] .w-1\\/4,
+// body div[id*='category-carousel'] .w-1\\/6,
+// body div[id*='category-carousel'] .ab-pest-item {
+// 	border: 1px solid red;
+// }
