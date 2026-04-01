@@ -1,4 +1,5 @@
-.AB-MMI20 #main, .AB-MMI20 .shopify-section.logos {
+.AB-MMI20 #main,
+.AB-MMI20 .shopify-section.logos {
   background-color: #fff;
 }
 .AB-MMI20 main .shopify-section.ingredients-slider-v2 {
@@ -20,5 +21,152 @@
   .AB-MMI20 .shopify-section.product-benefits {
     margin-top: 120px;
     margin-bottom: 80px;
+  }
+}
+
+.AB-MMI20--v2 .ab-accordion-grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 14px;
+}
+.AB-MMI20--v2 .ab-accordion-grid-item {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.AB-MMI20--v2 .ab-accordion {
+  border: 1px solid #b2b4b5;
+  border-radius: 7px;
+  padding: 9px 17px 8px 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: all 0.3s ease-in-out;
+  will-change: padding;
+}
+.AB-MMI20--v2 .ab-accordion__left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-right: 16px;
+  cursor: pointer;
+}
+.AB-MMI20--v2 .ab-accordion__middle {
+  flex-grow: 1;
+  margin: auto;
+}
+.AB-MMI20--v2 .ab-accordion__left img {
+  width: 62px;
+  min-width: 62px;
+  height: 62px;
+  min-height: 62px;
+  object-fit: contain;
+  object-position: center;
+}
+.AB-MMI20--v2 .ab-accordion__head {
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.AB-MMI20--v2 .ab-accordion__heading {
+  font-family: Circular, sans-serif;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #000000;
+}
+.AB-MMI20--v2 .ab-accordion__chevron:after {
+  content: "";
+  display: block;
+  width: 22px;
+  height: 9px;
+  background: url("https://magicmind.com/cdn/shop/files/arrow-down.svg?v=1770640687&width=66") center/contain no-repeat;
+  transition: all 0.3s ease-in-out;
+}
+.AB-MMI20--v2 .ab-accordion__info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+  will-change: height;
+}
+.AB-MMI20--v2 .ab-accordion__info-title {
+  font-family: Akkurat Mono, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 120%;
+  letter-spacing: 2%;
+  color: #000000;
+}
+.AB-MMI20--v2 .ab-accordion__info-exclusive {
+  height: 9px;
+  border-radius: 2px;
+  background-color: #00A087;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Akkurat Mono, sans-serif;
+  font-weight: 400;
+  font-style: Regular;
+  font-size: 13px;
+  leading-trim: NONE;
+  line-height: 120%;
+  letter-spacing: 10%;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.AB-MMI20--v2 .ab-accordion__info-sub-title {
+  font-family: Circular, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 120%;
+  letter-spacing: 0;
+  color: #000000;
+}
+.AB-MMI20--v2 .ab-accordion__info-content {
+  font-family: Circular, sans-serif;
+  font-weight: 450;
+  font-size: 12px;
+  line-height: 120%;
+  letter-spacing: 0;
+  color: #000000;
+}
+.AB-MMI20--v2 .ab-accordion.ab-accordion--expanded {
+  padding: 15px 17px 15px 10px;
+}
+.AB-MMI20--v2 .ab-accordion.ab-accordion--expanded .ab-accordion__chevron:after {
+  width: 24px;
+  height: 24px;
+  background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="12" transform="matrix(-1 0 0 1 24 0)" fill="white"/><path d="M7.00586 7.00006L16.9988 16.993" stroke="black"/><path d="M7.00208 16.993L16.995 7.00001" stroke="black"/></svg>') center/contain no-repeat;
+}
+.AB-MMI20--v2 .ab-accordion.ab-accordion--expanded .ab-accordion__middle {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.AB-MMI20--v2 .ab-accordion.ab-accordion--expanded .ab-accordion__head {
+  height: auto;
+}
+.AB-MMI20--v2 .ab-accordion.ab-accordion--expanded .ab-accordion__info {
+  height: 100%;
+  max-height: 1200px;
+}
+@media screen and (min-width: 1200px) {
+  .AB-MMI20--v2 .ab-accordion-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .AB-MMI20--v2 .ab-accordion__left img {
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
+    min-height: 62px;
+    object-fit: contain;
   }
 }

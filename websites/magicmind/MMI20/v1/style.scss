@@ -1,25 +1,128 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
-
-	@media screen and (min-width: 991px) {
-		//
-	}
-
-	@media screen and (min-width: 1200px) {
-		//
-	}
-}
-
-.AB-MMI20 {
-
-    #main, .shopify-section.logos {
-        background-color: #fff;  
+    @media screen and (min-width: 768px) {
+        //
     }
 
-    main
-    .shopify-section.ingredients-slider-v2 {
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+// FONTS
+
+// @import "https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Montserrat:ital,wght@0,400&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Roboto:ital,wght@0,400;0,700&family=Source+Sans+3:ital,wght@0,400&display=swap";
+// @import "https://use.typekit.net/trp4jrt.css";
+
+// @font-face {
+//     font-family: "Akkurat Mono";
+//     src: url(https://db.onlinewebfonts.com/t/2ae387e9fd826eca2b02f780e91333c7.woff);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Circular";
+//     src: url(https://cdn.shopify.com/s/files/1/0251/9524/9748/t/124/assets/CircularStd-Medium.woff2?v=6935581151678300821675182958);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Gotham";
+//     src: url(https://cdn.shopify.com/s/files/1/0217/2305/4144/files/gotham-book-webfont.woff2?v=1692289287);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Poppins-Klaviyo-Hosted";
+//     src: url(https://static.klaviyo.com/onsite/hosted-fonts/Poppins/latin/poppins_latin_italic_400.woff2);
+//     font-weight: 400;
+//     font-style: italic;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Poppins-Klaviyo-Hosted";
+//     src: url(https://static.klaviyo.com/onsite/hosted-fonts/Poppins/latin/poppins_latin_italic_700.woff2);
+//     font-weight: 700;
+//     font-style: italic;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Poppins-Klaviyo-Hosted";
+//     src: url(https://static.klaviyo.com/onsite/hosted-fonts/Poppins/latin/poppins_latin_regular_400_2.woff2);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Poppins-Klaviyo-Hosted";
+//     src: url(https://static.klaviyo.com/onsite/hosted-fonts/Poppins/latin/poppins_latin_regular_700.woff2);
+//     font-weight: 700;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-Bold.ttf?v=1695138188);
+//     font-weight: 700;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-Heavy.ttf?v=1695138203);
+//     font-weight: 800;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-Light.ttf?v=1695138199);
+//     font-weight: 300;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-Medium.woff2?v=1691651027);
+//     font-weight: 500;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-Regular.woff2?v=1691651039);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Roobert";
+//     src: url(https://cdn.shopify.com/s/files/1/0606/7162/3406/files/Roobert-SemiBold.ttf?v=1695138194);
+//     font-weight: 600;
+//     font-style: normal;
+//     font-display: swap;
+// }
+// @font-face {
+//     font-family: "Swiss";
+//     src: url(https://cdn.shopify.com/s/files/1/0235/6658/1806/t/24/assets/Swiss721BT-Regular.woff);
+//     font-weight: 400;
+//     font-style: normal;
+//     font-display: swap;
+// }
+
+.AB-MMI20 {
+    #main,
+    .shopify-section.logos {
+        background-color: #fff;
+    }
+
+    main .shopify-section.ingredients-slider-v2 {
         padding-bottom: 0 !important;
     }
 
@@ -44,5 +147,187 @@
             margin-top: 120px;
             margin-bottom: 80px;
         }
-	}
+    }
+}
+
+.AB-MMI20--v2 {
+    .ab-accordion-grid-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 14px;
+    }
+
+    .ab-accordion-grid-item {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .ab-accordion {
+        border: 1px solid #b2b4b5;
+        border-radius: 7px;
+        padding: 9px 17px 8px 10px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        transition: all 0.3s ease-in-out;
+        will-change: padding;
+    }
+
+    .ab-accordion__left {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-right: 16px;
+        cursor: pointer;
+    }
+
+    .ab-accordion__middle {
+        flex-grow: 1;
+        margin: auto;
+    }
+
+    .ab-accordion__left img {
+        width: 62px;
+        min-width: 62px;
+        height: 62px;
+        min-height: 62px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .ab-accordion__head {
+        height: 62px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .ab-accordion__heading {
+        font-family: Circular, sans-serif;
+        font-weight: 500;
+        font-size: 19px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: #000000;
+    }
+
+    .ab-accordion__chevron {
+        &:after {
+            content: "";
+            display: block;
+            width: 22px;
+            height: 9px;
+            background: url("https://magicmind.com/cdn/shop/files/arrow-down.svg?v=1770640687&width=66") center / contain no-repeat;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+
+    .ab-accordion__info {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        height: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        will-change: height;
+    }
+
+    .ab-accordion__info-title {
+        font-family:
+            Akkurat Mono,
+            sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 120%;
+        letter-spacing: 2%;
+        color: #000000;
+    }
+
+    .ab-accordion__info-exclusive {
+        height: 9px;
+        border-radius: 2px;
+        background-color: #00A087;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family:
+            Akkurat Mono,
+            sans-serif;
+        font-weight: 400;
+        font-style: Regular;
+        font-size: 13px;
+        leading-trim: NONE;
+        line-height: 120%;
+        letter-spacing: 10%;
+        text-align: center;
+        text-transform: uppercase;
+        color: #ffffff;
+    }
+
+    .ab-accordion__info-sub-title {
+        font-family: Circular, sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 120%;
+        letter-spacing: 0;
+        color: #000000;
+    }
+
+    .ab-accordion__info-content {
+        font-family: Circular, sans-serif;
+        font-weight: 450;
+        font-size: 12px;
+        line-height: 120%;
+        letter-spacing: 0;
+        color: #000000;
+    }
+
+    // EXPANDED STATE
+    .ab-accordion.ab-accordion--expanded {
+        padding: 15px 17px 15px 10px;
+
+        .ab-accordion__chevron {
+            &:after {
+                width: 24px;
+                height: 24px;
+                background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="12" transform="matrix(-1 0 0 1 24 0)" fill="white"/><path d="M7.00586 7.00006L16.9988 16.993" stroke="black"/><path d="M7.00208 16.993L16.995 7.00001" stroke="black"/></svg>')
+                    center/contain no-repeat;
+            }
+        }
+
+        .ab-accordion__middle {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ab-accordion__head {
+            height: auto;
+        }
+
+        .ab-accordion__info {
+            height: 100%;
+            max-height: 1200px;
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        .ab-accordion-grid-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .ab-accordion__left img {
+            width: 62px;
+            min-width: 62px;
+            height: 62px;
+            min-height: 62px;
+            object-fit: contain;
+        }
+    }
 }
