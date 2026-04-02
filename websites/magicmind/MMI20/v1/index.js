@@ -207,7 +207,7 @@
                                                     </div>
                                                     <div class="ab-accordion__info">
                                                         <div class="ab-accordion__info-title">${info_title}</div>
-                                                        ${is_exclusive ? `<div class="ab-accordion__info-exclusive">Exclusive</div>` : ""}
+                                                        ${is_exclusive ? `<div class="ab-accordion__info-exclusive">Exclusive ingredient</div>` : ""}
                                                         <div class="ab-accordion__info-sub-title">${info_sub_title}</div>
                                                         <div class="ab-accordion__info-content">${info_content}</div>
                                                     </div>
@@ -225,6 +225,17 @@
                     .join("")}
             </div>`,
         );
+
+        q(".ab-accordion-grid-container").addEventListener("click", (e) => {
+            if (e.target.closest(".ab-accordion") && !e.target.closest(".ab-accordion__info, a, .ab-accordion__info-exclusive")) {
+                console.log("clicked");
+                e.target.closest(".ab-accordion").classList.toggle("ab-accordion--expanded");
+            }
+
+            if(e.target.closest(".ab-accordion__info-exclusive")) { 
+                q('component-accordions .ingredients-v2__open-modal-btn').click();
+            }
+        });
     }
 
     function init() {

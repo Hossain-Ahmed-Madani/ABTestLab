@@ -151,6 +151,11 @@
 }
 
 .AB-MMI20--v2 {
+
+    component-accordions {
+        display: none;
+    }
+
     .ab-accordion-grid-container {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
@@ -166,13 +171,14 @@
     .ab-accordion {
         border: 1px solid #b2b4b5;
         border-radius: 7px;
-        padding: 9px 17px 8px 10px;
+        // padding: 9px 17px 8px 10px;
+        padding: 15px 17px 15px 10px;
 
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
 
-        transition: all 0.3s ease-in-out;
+        transition: padding 0.3s ease-in-out;
         will-change: padding;
     }
 
@@ -189,21 +195,35 @@
         margin: auto;
     }
 
+    .ab-accordion__right {
+        width: 30px;
+        min-width: 30px;
+        cursor: pointer;
+        display: flex;
+        justify-content: flex-end;
+    }
+
     .ab-accordion__left img {
-        width: 62px;
-        min-width: 62px;
-        height: 62px;
-        min-height: 62px;
+        // width: 62px;
+        // min-width: 62px;
+        // height: 62px;
+        // min-height: 62px;
+        width: 50px;
+        min-width: 50px;
+        height: 50px;
+        min-height: 50px;
         object-fit: contain;
         object-position: center;
     }
 
     .ab-accordion__head {
-        height: 62px;
+        // height: 62px;
+        height: 50px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         cursor: pointer;
+        user-select: none;
     }
 
     .ab-accordion__heading {
@@ -216,6 +236,11 @@
     }
 
     .ab-accordion__chevron {
+        // margin-top: 25px;
+        margin-top: 20px;
+        will-change: margin-top;
+        transition: margin-top 0.3s ease-in-out;
+
         &:after {
             content: "";
             display: block;
@@ -250,9 +275,10 @@
     }
 
     .ab-accordion__info-exclusive {
-        height: 9px;
+        height: 19px;
         border-radius: 2px;
-        background-color: #00A087;
+        padding-top: 3px;
+        background-color: #00a087;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -260,14 +286,13 @@
             Akkurat Mono,
             sans-serif;
         font-weight: 400;
-        font-style: Regular;
         font-size: 13px;
-        leading-trim: NONE;
         line-height: 120%;
         letter-spacing: 10%;
         text-align: center;
         text-transform: uppercase;
         color: #ffffff;
+        cursor: pointer;
     }
 
     .ab-accordion__info-sub-title {
@@ -290,25 +315,32 @@
 
     // EXPANDED STATE
     .ab-accordion.ab-accordion--expanded {
-        padding: 15px 17px 15px 10px;
+        // padding: 15px 17px 15px 10px;
 
         .ab-accordion__chevron {
+            // margin-top: 10px;
+            // margin-top: 22px;
+            margin-top: 17px;
+            
             &:after {
-                width: 24px;
-                height: 24px;
-                background: url('data:image/svg+xml;utf8,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="12" transform="matrix(-1 0 0 1 24 0)" fill="white"/><path d="M7.00586 7.00006L16.9988 16.993" stroke="black"/><path d="M7.00208 16.993L16.995 7.00001" stroke="black"/></svg>')
-                    center/contain no-repeat;
+                width: 14px;
+                height: 14px;
+                background: url('data:image/svg+xml,<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.353516 14.3535L7.35352 7.35352L14.3535 0.353516" stroke="%2305060A"/><path d="M14.3535 14.3535L7.35352 7.35352L0.353516 0.353516" stroke="%2305060A"/></svg>')
+                center/contain no-repeat;
+                transform: rotate(-180deg);
             }
         }
 
         .ab-accordion__middle {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            // gap: 16px;
         }
 
         .ab-accordion__head {
-            height: auto;
+            // height: auto;
+            // height: 62px;
+            height: 50px;
         }
 
         .ab-accordion__info {
@@ -323,10 +355,14 @@
         }
 
         .ab-accordion__left img {
-            width: 62px;
-            min-width: 62px;
-            height: 62px;
-            min-height: 62px;
+            // width: 62px;
+            // min-width: 62px;
+            // height: 62px;
+            // min-height: 62px;
+            width: 50px;
+            min-width: 50px;
+            height: 50px;
+            min-height: 50px;
             object-fit: contain;
         }
     }
