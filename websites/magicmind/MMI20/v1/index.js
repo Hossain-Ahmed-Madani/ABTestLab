@@ -19,7 +19,7 @@
         site_url: "https://magicmind.com",
         test_name: "MMI20: [PRODUCT] Move Up Ingredients BTF (2) SET UP TEST",
         page_initials: "AB-MMI20",
-        test_variation: 2 /* 0, 1, 2 */,
+        test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -197,7 +197,7 @@
                                 ${accordion_items
                                     .map(
                                         ({ heading, imgUrl, is_exclusive, info_title, info_sub_title, info_content }, idx) => /* HTML */ `
-                                            <div class="ab-accordion ${col_idx === 0 && idx === 0 ? "ab-accordion--expanded" : ""}">
+                                            <div class="ab-accordion ${col_idx === 0 && idx === 0 && (window.innerWidth < 991 || isTouchEnabled()) ? "ab-accordion--expanded" : ""}">
                                                 <div class="ab-accordion__left">
                                                     <img src="${imgUrl}" alt="${heading}" width="60" height="60" />
                                                 </div>
@@ -226,16 +226,30 @@
             </div>`,
         );
 
-        q(".ab-accordion-grid-container").addEventListener("click", (e) => {
-            if (e.target.closest(".ab-accordion") && !e.target.closest(".ab-accordion__info, a, .ab-accordion__info-exclusive")) {
-                console.log("clicked");
-                e.target.closest(".ab-accordion").classList.toggle("ab-accordion--expanded");
+    }
+    
+    function clickFunction () {
+        // Control Accordion
+        q(".shopify-section.ingredients-slider-v2 component-accordions")?.addEventListener("click", (e) => {
+            const accordion = e.target.closest(".accordion__item");
+            if (accordion) {
+                fireGA4Event('MM120_IngredientClick', q(accordion, ".ingredients-v2__block-btn").textContent.trim());
             }
+        });
 
+        // V2 Accordion
+        q(".ab-accordion-grid-container")?.addEventListener("click", (e) => {
+            const accordion = e.target.closest(".ab-accordion");
+            if (accordion && !e.target.closest("a, .ab-accordion__info-exclusive")) {
+                accordion.classList.toggle("ab-accordion--expanded");
+                fireGA4Event('MM120_IngredientClick', q(accordion, ".ab-accordion__heading").textContent.trim());
+            }
+    
             if(e.target.closest(".ab-accordion__info-exclusive")) { 
                 q('component-accordions .ingredients-v2__open-modal-btn').click();
             }
         });
+
     }
 
     function init() {
@@ -244,6 +258,9 @@
 
         q(".shopify-section.ingredients-slider-v2").insertAdjacentElement("afterend", q(".shopify-section.product-benefits"));
         q(".shopify-section.ingredients-slider-v2").insertAdjacentElement("afterend", q(".shopify-section.logos"));
+
+        
+        clickFunction();
 
         if (test_variation === 2) createV2Layout();
     }
