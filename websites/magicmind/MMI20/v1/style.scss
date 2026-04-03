@@ -122,20 +122,15 @@
         background-color: #fff;
     }
 
-    main .shopify-section.ingredients-slider-v2 {
-        padding-bottom: 0 !important;
+    main .shopify-section.main-product-v2 {
+        background-color: #fcfcfc !important;
     }
 
-    .shopify-section.logos {
-        padding-top: 24px;
-        padding-bottom: 40px;
+    main .shopify-section.ingredients-slider-v2 {
+        background-color: #fff !important;
     }
 
     .shopify-section.product-benefits {
-        margin-top: 0;
-        margin-bottom: 87px;
-        // background-color: #fff;
-
         .product-benefits__wrapper::before,
         .product-benefits__wrapper::after {
             z-index: 1;
@@ -143,16 +138,47 @@
     }
 
     @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-MMI20--v1 {
+
+    main .shopify-section.ingredients-slider-v2 {
+        padding-bottom: 0 !important;
+        background-color: #fff !important;
+    }
+
+
+    .shopify-section.logos {
+        padding-top: 59px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .shopify-section.product-benefits {
+        padding-top: 125px !important;
+        padding-bottom: 160px !important;
+    }
+
+    @media screen and (min-width: 1200px) {
+
+        main .shopify-section.ingredients-slider-v2 {
+            padding-bottom: 25px !important;
+        }
+        
+        .shopify-section.logos {
+            padding-top: 61px !important;
+            padding-bottom: 61px !important;
+        }
+
         .shopify-section.product-benefits {
-            margin-top: 120px;
-            margin-bottom: 80px;
+            padding-bottom: calc(110px + 80px) !important;
         }
     }
 }
 
 .AB-MMI20--v2 {
-
-    component-accordions {
+    .shopify-section.ingredients-slider-v2 component-accordions {
         display: none;
     }
 
@@ -321,12 +347,12 @@
             // margin-top: 10px;
             // margin-top: 22px;
             margin-top: 17px;
-            
+
             &:after {
                 width: 14px;
                 height: 14px;
                 background: url('data:image/svg+xml,<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.353516 14.3535L7.35352 7.35352L14.3535 0.353516" stroke="%2305060A"/><path d="M14.3535 14.3535L7.35352 7.35352L0.353516 0.353516" stroke="%2305060A"/></svg>')
-                center/contain no-repeat;
+                    center/contain no-repeat;
                 transform: rotate(-180deg);
             }
         }

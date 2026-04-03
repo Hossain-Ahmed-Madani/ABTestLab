@@ -2,29 +2,42 @@
 .AB-MMI20 .shopify-section.logos {
   background-color: #fff;
 }
+.AB-MMI20 main .shopify-section.main-product-v2 {
+  background-color: #fcfcfc !important;
+}
 .AB-MMI20 main .shopify-section.ingredients-slider-v2 {
-  padding-bottom: 0 !important;
-}
-.AB-MMI20 .shopify-section.logos {
-  padding-top: 24px;
-  padding-bottom: 40px;
-}
-.AB-MMI20 .shopify-section.product-benefits {
-  margin-top: 0;
-  margin-bottom: 87px;
+  background-color: #fff !important;
 }
 .AB-MMI20 .shopify-section.product-benefits .product-benefits__wrapper::before,
 .AB-MMI20 .shopify-section.product-benefits .product-benefits__wrapper::after {
   z-index: 1;
 }
+.AB-MMI20--v1 main .shopify-section.ingredients-slider-v2 {
+  padding-bottom: 0 !important;
+  background-color: #fff !important;
+}
+.AB-MMI20--v1 .shopify-section.logos {
+  padding-top: 59px !important;
+  padding-bottom: 40px !important;
+}
+.AB-MMI20--v1 .shopify-section.product-benefits {
+  padding-top: 125px !important;
+  padding-bottom: 160px !important;
+}
 @media screen and (min-width: 1200px) {
-  .AB-MMI20 .shopify-section.product-benefits {
-    margin-top: 120px;
-    margin-bottom: 80px;
+  .AB-MMI20--v1 main .shopify-section.ingredients-slider-v2 {
+    padding-bottom: 25px !important;
+  }
+  .AB-MMI20--v1 .shopify-section.logos {
+    padding-top: 61px !important;
+    padding-bottom: 61px !important;
+  }
+  .AB-MMI20--v1 .shopify-section.product-benefits {
+    padding-bottom: 190px !important;
   }
 }
 
-.AB-MMI20--v2 component-accordions {
+.AB-MMI20--v2 .shopify-section.ingredients-slider-v2 component-accordions {
   display: none;
 }
 .AB-MMI20--v2 .ab-accordion-grid-container {
