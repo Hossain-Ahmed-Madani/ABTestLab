@@ -31,9 +31,15 @@
     }
 
     .ab-card-wrapper {
-        display: flex;
-        justify-content: flex-start;
-        gap: 11px;
+        &--mobile {
+            display: block;
+        }
+
+        &--desktop {
+            display: none;
+            justify-content: flex-start;
+            gap: 11px;
+        }
     }
 
     .ab-card {
@@ -164,6 +170,16 @@
             font-size: 24px;
             line-height: 100%;
             border-radius: 25.5px;
+        }
+
+        .ab-card-wrapper {
+            &--mobile {
+                display: none;
+            }
+
+            &--desktop {
+                display: flex;
+            }
         }
 
         .ab-card {

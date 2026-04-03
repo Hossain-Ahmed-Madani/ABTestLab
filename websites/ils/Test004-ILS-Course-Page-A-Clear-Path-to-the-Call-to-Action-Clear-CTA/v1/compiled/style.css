@@ -13,8 +13,11 @@
   vertical-align: middle;
   color: #f55a00;
 }
-.AB-TEST004 .ab-card-wrapper {
-  display: flex;
+.AB-TEST004 .ab-card-wrapper--mobile {
+  display: block;
+}
+.AB-TEST004 .ab-card-wrapper--desktop {
+  display: none;
   justify-content: flex-start;
   gap: 11px;
 }
@@ -126,6 +129,12 @@
     font-size: 24px;
     line-height: 100%;
     border-radius: 25.5px;
+  }
+  .AB-TEST004 .ab-card-wrapper--mobile {
+    display: none;
+  }
+  .AB-TEST004 .ab-card-wrapper--desktop {
+    display: flex;
   }
   .AB-TEST004 .ab-card {
     border-radius: 20px;

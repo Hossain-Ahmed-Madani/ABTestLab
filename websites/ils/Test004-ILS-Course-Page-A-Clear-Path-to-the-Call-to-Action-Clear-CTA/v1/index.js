@@ -11,6 +11,24 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    function loadSwiperWithCDN() {
+        return new Promise((resolve, reject) => {
+            if (typeof Swiper !== "undefined") return resolve(Swiper);
+
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+            link.onerror = reject;
+            document.head.appendChild(link);
+
+            const script = document.createElement("script");
+            script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+            script.onload = () => resolve(window.Swiper);
+            script.onerror = reject;
+            document.head.appendChild(script);
+        });
+    }
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -53,8 +71,55 @@
         <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="27" height="27" rx="13.5" fill="white"/>
             <path d="M21.3738 13.4572L14.5295 6.61279L13.1606 7.98167L17.6683 12.4894H6.59375V14.425H17.6683L13.1606 18.9327L14.5295 20.3016L21.3738 13.4572Z" fill="#166ADB"/>
-        </svg>`
+        </svg>`,
     };
+
+    const DATA = [
+        {
+            type: "downloads",
+            header: "Klarheit gewinnen: Fordern Sie jetzt Ihr <br/> kostenloses Infopaket an",
+            list: [
+                { icon: "✅", text: "Alle Preise und Fördermöglichkeiten auf einen Blick erhalten" },
+                { icon: "✅", text: "Detaillierten Studienablauf und alle Kursinhalte einsehen" },
+                { icon: "✅", text: "Konkrete Job-Perspektiven nach dem Abschluss verstehen" },
+                { icon: "✅", text: "100% kostenlos und absolut unverbindlich" },
+            ],
+            cta: {
+                type: "downloads",
+                icon: ASSETS.downloads_svg,
+                text: "Jetzt kostenloses Infopaket anfordern",
+            },
+            footer: "Keine Buchung. Unverbindlich alle Informationen einsehen.",
+        },
+        {
+            type: "sign-up",
+            header: "Bereit für den nächsten Schritt? Starten Sie <br/> jetzt Ihre Transformation",
+            list: [
+                { icon: "🚀", text: "Sofortiger Zugang: Starten Sie flexibel, wann immer Sie bereit sind" },
+                { icon: "📚", text: "Ihre persönlichen Studienunterlagen werden direkt freigeschaltet" },
+                { icon: "🎯", text: "Klarer Fahrplan: Sie erhalten Schritt-für-Schritt-Anleitungen" },
+                { icon: "🏆", text: "Beginnen Sie noch heute den Weg zu Gehaltserhöhung und Jobsicherheit" },
+            ],
+            cta: { type: "sign-up", icon: ASSETS.sign_up_svg, text: "Jetzt Kursplatz sichern & starten" },
+            footer: "Flexibel neben dem Beruf. Jetzt 4 Wochen kostenlos testen.",
+        },
+    ];
+
+    function getCardLayout({ type, header, list, cta, footer, className = "" }) {
+        return /* HTML */ `
+            <div class="ab-card ab-card--${type} ${className}">
+                <div class="ab-card__header">${header}</div>
+                <ul class="ab-card__list">
+                    ${list.map(({ icon, text }) => /* HTML */ ` <li class="ab-card__list-item"><span class="ab-card__list-item-icon">${icon}</span> ${text}</li>`).join("")}
+                </ul>
+                <div class="ab-card__cta ab-card__cta--${cta.type}">
+                    <div class="ab-card__cta-icon">${cta.icon}</div>
+                    <div class="ab-card__cta-text">${cta.text}</div>
+                </div>
+                <div class="ab-card__footer-info">${footer}</div>
+            </div>
+        `;
+    }
 
     function createLayout() {
         q("section:has(.triple-info-panel)").insertAdjacentHTML(
@@ -63,58 +128,10 @@
                 <div class="section ab-section section--bg-orange">
                     <div class="container">
                         <div class="ab-pill-header">Auf einen Blick: der Fahrplan für Buchung und Weiterbildung</div>
-                        <div class="ab-card-wrapper">
-                            ${[
-                                {
-                                    type: "downloads",
-                                    header: "Klarheit gewinnen: Fordern Sie jetzt Ihr kostenloses Infopaket an",
-                                    list: [
-                                        { icon: "✅", text: "Alle Preise und Fördermöglichkeiten auf einen Blick erhalten" },
-                                        { icon: "✅", text: "Detaillierten Studienablauf und alle Kursinhalte einsehen" },
-                                        { icon: "✅", text: "Konkrete Job-Perspektiven nach dem Abschluss verstehen" },
-                                        { icon: "✅", text: "100% kostenlos und absolut unverbindlich" },
-                                    ],
-                                    cta: {
-                                        type: "downloads",
-                                        icon: ASSETS.downloads_svg,
-                                        text: "Jetzt kostenloses Infopaket anfordern",
-                                    },
-                                    footer: "Keine Buchung. Unverbindlich alle Informationen einsehen.",
-                                },
-                                {
-                                    type: "sign-up",
-                                    header: "Bereit für den nächsten Schritt? Starten Sie jetzt Ihre Transformation",
-                                    list: [
-                                        { icon: "🚀", text: "Sofortiger Zugang: Starten Sie flexibel, wann immer Sie bereit sind" },
-                                        { icon: "📚", text: "Ihre persönlichen Studienunterlagen werden direkt freigeschaltet" },
-                                        { icon: "🎯", text: "Klarer Fahrplan: Sie erhalten Schritt-für-Schritt-Anleitungen" },
-                                        { icon: "🏆", text: "Beginnen Sie noch heute den Weg zu Gehaltserhöhung und Jobsicherheit" },
-                                    ],
-                                    cta: { type: "sign-up", icon: ASSETS.sign_up_svg, text: "Jetzt Kursplatz sichern & starten" },
-                                    footer: "Flexibel neben dem Beruf. Jetzt 4 Wochen kostenlos testen.",
-                                },
-                            ]
-                                .map(
-                                    ({ type, header, list, cta, footer }) => /* HTML */ `
-                                        <div class="ab-card ab-card--${type}">
-                                            <div class="ab-card__header">${header}</div>
-                                            <ul class="ab-card__list">
-                                                ${list.map(({ icon, text }) =>/* HTML */ `
-                                                    <li class="ab-card__list-item"><span class="ab-card__list-item-icon">${icon}</span> ${text}</li>`
-                                                ).join("")}
-                                            </ul>
-                                            <div class="ab-card__cta ab-card__cta--${cta.type}">
-                                                <div class="ab-card__cta-icon">    
-                                                    ${cta.icon}
-                                                </div>
-                                                <div class="ab-card__cta-text">${cta.text}</div>
-                                            </div>
-                                            <div class="ab-card__footer-info">${footer}</div>
-                                        </div>
-                                    `,
-                                )
-                                .join("")}
+                        <div class="ab-card-wrapper ab-card-wrapper--mobile swiper">
+                            <div class="swiper-wrapper">${DATA.map((item) => getCardLayout({ ...item, className: "swiper-slide" })).join("")}</div>
                         </div>
+                        <div class="ab-card-wrapper ab-card-wrapper--desktop">${DATA.map((item) => getCardLayout({ ...item })).join("")}</div>
                     </div>
                 </div>
             `,
@@ -131,6 +148,16 @@
         console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
+
+        if (window.innerWidth > 991) return;
+
+        loadSwiperWithCDN().then((Swiper) => {
+            console.log("Swiper loaded");
+            const swiper = new Swiper(".ab-card-wrapper--mobile", {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            });
+        });
     }
 
     function checkForItems() {
