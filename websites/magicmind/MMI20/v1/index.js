@@ -19,7 +19,7 @@
         site_url: "https://magicmind.com",
         test_name: "MMI20: [PRODUCT] Move Up Ingredients BTF (2) SET UP TEST",
         page_initials: "AB-MMI20",
-        test_variation: 1 /* 0, 1, 2 */,
+        test_variation: 2 /* 0, 1, 2 */,
         test_version: 0.0001,
     };
 

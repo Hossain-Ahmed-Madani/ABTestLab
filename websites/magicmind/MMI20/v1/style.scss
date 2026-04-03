@@ -143,12 +143,10 @@
 }
 
 .AB-MMI20--v1 {
-
     main .shopify-section.ingredients-slider-v2 {
         padding-bottom: 0 !important;
         background-color: #fff !important;
     }
-
 
     .shopify-section.logos {
         padding-top: 59px !important;
@@ -161,11 +159,10 @@
     }
 
     @media screen and (min-width: 1200px) {
-
         main .shopify-section.ingredients-slider-v2 {
             padding-bottom: 25px !important;
         }
-        
+
         .shopify-section.logos {
             padding-top: 61px !important;
             padding-bottom: 61px !important;
@@ -182,6 +179,55 @@
         display: none;
     }
 
+    main .shopify-section.ingredients-slider-v2 {
+        padding-top: 40px !important;
+        padding-bottom: 0 !important;
+
+        .ingredients-v2__title {
+            margin-bottom: 30px !important;
+        }
+
+        .ingredients-v2__heading {
+            margin-bottom: 64px !important;
+        }
+    }
+
+    .shopify-section.logos {
+        padding-top: 59px !important;
+        padding-bottom: 40px !important;
+    }
+
+    .shopify-section.product-benefits {
+        padding-top: 120px !important;
+        padding-bottom: 160px !important;
+    }
+
+    @media screen and (min-width: 1200px) {
+        main .shopify-section.ingredients-slider-v2 {
+            padding-top: 45px !important;
+
+            .ingredients-v2__title {
+                margin-bottom: 45px !important;
+            }
+
+            .ingredients-v2__heading {
+                margin-bottom: 96px !important;
+            }
+        }
+
+        .shopify-section.logos {
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
+        }
+
+        .shopify-section.product-benefits {
+            padding-top: 120px !important;
+            padding-bottom: 160px !important;
+        }
+    
+    }
+
+    // Accordion Section
     .ab-accordion-grid-container {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
