@@ -89,11 +89,23 @@
 .AB-TEST004 .ab-card__cta--downloads .ab-card__cta-text {
   color: #09479b;
 }
+.AB-TEST004 .ab-card__cta--downloads:hover {
+  background-color: #87b9fa;
+}
+.AB-TEST004 .ab-card__cta--downloads:hover .ab-card__cta-text {
+  color: #043271;
+}
 .AB-TEST004 .ab-card__cta--sign-up {
-  background-color: #166ADB;
+  background-color: #166adb;
 }
 .AB-TEST004 .ab-card__cta--sign-up .ab-card__cta-text {
-  color: #FFFFFF;
+  color: #ffffff;
+}
+.AB-TEST004 .ab-card__cta--sign-up:hover {
+  background-color: #09479b;
+}
+.AB-TEST004 .ab-card__cta--sign-up:hover .ab-card__cta-text {
+  color: #fff;
 }
 .AB-TEST004 .ab-card__footer-info {
   font-family: Noto Sans;
@@ -142,12 +154,13 @@
     line-height: 186%;
   }
   .AB-TEST004 .ab-card__cta {
+    width: 100%;
     max-width: 443px;
     margin: auto;
     margin-top: auto;
     padding: 10px 20px;
     gap: 20px;
-    height: 47px;
+    height: auto;
     margin-bottom: 7px;
   }
   .AB-TEST004 .ab-card__cta-text {
@@ -155,6 +168,8 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
+    text-align: center;
+    margin: auto;
   }
   .AB-TEST004 .ab-card__footer-info {
     font-family: Noto Sans;

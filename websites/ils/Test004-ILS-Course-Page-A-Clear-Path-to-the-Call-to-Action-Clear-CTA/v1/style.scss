@@ -116,13 +116,29 @@
             .ab-card__cta-text {
                 color: #09479b;
             }
+
+            &:hover {
+                background-color: #87b9fa;
+
+                .ab-card__cta-text {
+                    color: #043271;
+                }
+            }
         }
 
         &__cta--sign-up {
-            background-color: #166ADB;
+            background-color: #166adb;
 
             .ab-card__cta-text {
-                color: #FFFFFF;
+                color: #ffffff;
+            }
+
+            &:hover {
+                background-color: #09479b;
+
+                .ab-card__cta-text {
+                    color: #fff;
+                }
             }
         }
 
@@ -182,12 +198,14 @@
             }
 
             &__cta {
+                width: 100%;
                 max-width: 443px;
                 margin: auto;
                 margin-top: auto;
                 padding: 10px 20px;
                 gap: 20px;
-                height: 47px;
+                // height: 47px;
+                height: auto;
                 margin-bottom: 7px;
             }
 
@@ -196,6 +214,8 @@
                 font-weight: 400;
                 font-size: 18px;
                 line-height: 27px;
+                text-align: center;
+                margin: auto;
             }
 
             &__footer-info {
