@@ -1,0 +1,166 @@
+.AB-TEST004 .ab-pill-header {
+  background-color: #fff;
+  padding: 1rem 1.5rem;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-bottom: 22px;
+  font-family: Noto Sans;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: #f55a00;
+}
+.AB-TEST004 .ab-card-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 11px;
+}
+.AB-TEST004 .ab-card {
+  border-radius: 15px;
+  background-color: #ffffff;
+  padding: 16px;
+  padding-bottom: 26px;
+}
+.AB-TEST004 .ab-card__header {
+  font-family: Noto Sans;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 186%;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #000000;
+  margin-bottom: 10px;
+}
+.AB-TEST004 .ab-card br {
+  display: none;
+}
+.AB-TEST004 .ab-card__list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 19px;
+}
+.AB-TEST004 .ab-card__list-item {
+  font-family: Noto Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #000000;
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+}
+.AB-TEST004 .ab-card__cta {
+  height: 47px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid rgba(0, 0, 0, 0);
+  border-radius: 300px;
+  margin-bottom: 9px;
+  padding: 10px 7px;
+  cursor: pointer;
+}
+.AB-TEST004 .ab-card__cta-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TEST004 .ab-card__cta-icon svg {
+  width: 27px;
+  height: 27px;
+}
+.AB-TEST004 .ab-card__cta-text {
+  font-family: Noto Sans;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+}
+.AB-TEST004 .ab-card__cta--downloads {
+  background-color: #bcd8fa;
+}
+.AB-TEST004 .ab-card__cta--downloads .ab-card__cta-text {
+  color: #09479b;
+}
+.AB-TEST004 .ab-card__cta--sign-up {
+  background-color: #166ADB;
+}
+.AB-TEST004 .ab-card__cta--sign-up .ab-card__cta-text {
+  color: #FFFFFF;
+}
+.AB-TEST004 .ab-card__footer-info {
+  font-family: Noto Sans;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 27px;
+  letter-spacing: 0px;
+  text-align: center;
+  vertical-align: middle;
+  color: #000000;
+}
+@media screen and (min-width: 991px) {
+  .AB-TEST004 .ab-pill-header {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 29px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 100%;
+    border-radius: 25.5px;
+  }
+  .AB-TEST004 .ab-card {
+    border-radius: 20px;
+    padding: 16px 39px;
+    width: calc(50% - 5.5px);
+    height: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .AB-TEST004 .ab-card__header {
+    font-family: Noto Sans;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 186%;
+    margin-bottom: 10px;
+  }
+  .AB-TEST004 .ab-card br {
+    display: inline-block;
+  }
+  .AB-TEST004 .ab-card__list {
+    margin-bottom: 19px;
+  }
+  .AB-TEST004 .ab-card__list-item {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 186%;
+  }
+  .AB-TEST004 .ab-card__cta {
+    max-width: 443px;
+    margin: auto;
+    margin-top: auto;
+    padding: 10px 20px;
+    gap: 20px;
+    height: 47px;
+    margin-bottom: 7px;
+  }
+  .AB-TEST004 .ab-card__cta-text {
+    font-family: Noto Sans;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+  }
+  .AB-TEST004 .ab-card__footer-info {
+    font-family: Noto Sans;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 27px;
+    letter-spacing: 0px;
+  }
+}
