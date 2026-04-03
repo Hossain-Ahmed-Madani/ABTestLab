@@ -165,9 +165,10 @@
         q(".shopify-section.ingredients-slider-v2").insertAdjacentElement("afterend", q(".shopify-section.logos"));
 
         
+        if (test_variation === 2) {
+            createV2Layout();
+        }
         clickFunction();
-
-        if (test_variation === 2) createV2Layout();
     }
 
     function checkForItems() {
