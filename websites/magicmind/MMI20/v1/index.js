@@ -1,3 +1,21 @@
+/* 
+
+Test container: https://marketer.monetate.net/control/a-d6198f6f/p/magicmind.com/experience/2101827#c2639836:what
+
+Preview including all experiences: 
+control: https://marketer.monetate.net/control/preview/13487/VRCQIRJ5HH82WSRHVVHLYTD22SM0JFJT/20-product-move-up-ingredients-btf
+v1: https://marketer.monetate.net/control/preview/13487/IMMA1FQ0ZI1VP1ROI8G24F6BA2PDXIVA/20-product-move-up-ingredients-btf
+v2: https://marketer.monetate.net/control/preview/13487/23WS0EW2TBFF1XZKGKPF6NG22BW8TTYU/20-product-move-up-ingredients-btf
+
+
+Preview excluding all experiences:
+control: https://marketer.monetate.net/control/preview/13487/K048RNXDRVU7BWJAP2ANDCYC43Q142SB/20-product-move-up-ingredients-btf
+v1: https://marketer.monetate.net/control/preview/13487/ANX5YNXHPC7PJ4KUFSQGKSM4SZGBOD5X/20-product-move-up-ingredients-btf
+v2: https://marketer.monetate.net/control/preview/13487/Y41T6WH20FT9NTCXN2XOEL973RTZDC0C/20-product-move-up-ingredients-btf
+
+
+*/
+
 (async () => {
     const TEST_ID = "MMI20";
     const VARIANT_ID = "V1"; /* Control, V1, V2 */
@@ -19,7 +37,7 @@
         site_url: "https://magicmind.com",
         test_name: "MMI20: [PRODUCT] Move Up Ingredients BTF (2) SET UP TEST",
         page_initials: "AB-MMI20",
-        test_variation: 2 /* 0, 1, 2 */,
+        test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.0001,
     };
 
