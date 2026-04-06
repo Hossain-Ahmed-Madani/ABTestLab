@@ -1,3 +1,21 @@
+/* 
+
+Test container: https://marketer.monetate.net/control/a-46f7a9a8/p/portlandleathergoods.com/experience/2100001
+
+Preview excluding all experiences:
+
+v1: https://marketer.monetate.net/control/preview/12047/QRIP8O161PTH00DQ1L2M8SQTWXZGDGD5/119-cart-add-usps
+v2: https://marketer.monetate.net/control/preview/12047/WATLTNZH8E3WATPZHPP3LPUYLALCG6AS/119-cart-add-usps
+v3: https://marketer.monetate.net/control/preview/12047/20VUZJ6F6VXQ8BLLLAYF81QBX6WJQB5H/119-cart-add-usps
+
+Preview including all experiences:
+
+v1: https://marketer.monetate.net/control/preview/12047/63AAN7RMXE9GI5D2M2CECUOU2E3KAZB4/119-cart-add-usps
+v2: https://marketer.monetate.net/control/preview/12047/NBLPR2PJIPYR4C3QPUY2NQZM5OGQ2YCC/119-cart-add-usps
+v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8SBFC88JY/119-cart-add-usps
+
+*/
+
 (async () => {
     const TEST_ID = "PLG119";
     const VARIANT_ID = "V1"; /* V1, V2, V3 */
