@@ -13,6 +13,11 @@
 }
 
 .AB-TEST004 {
+
+    .ab-section {
+        overflow: hidden;
+    }
+
     .ab-pill-header {
         background-color: #fff;
         padding: 1rem 1.5rem;
@@ -31,14 +36,46 @@
     }
 
     .ab-card-wrapper {
+        // position: relative;
         &--mobile {
             display: block;
+            overflow: visible;
+            // width: 357px;
+            max-width: 357px;
         }
 
         &--desktop {
             display: none;
             justify-content: flex-start;
             gap: 11px;
+        }
+
+        .swiper-button[aria-disabled="true"] {
+            opacity: 0;
+        }
+
+        .swiper-button {
+            width: 30px;
+            height: 56px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+
+            &::after {
+                color: #000000;
+                font-size: 14px;
+                font-weight: 700;
+            }
+        }
+
+        .swiper-button.swiper-button-prev {
+            margin-left: -2rem;
+        }
+        
+        .swiper-button.swiper-button-next {
+            margin-right: -2rem;
         }
     }
 
@@ -84,7 +121,7 @@
         }
 
         &__cta {
-            height: 47px;
+            min-height: 47px;
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -157,6 +194,18 @@
             text-align: center;
             vertical-align: middle;
             color: #000000;
+        }
+    }
+
+    @media screen and (min-width: 400px) {
+        .ab-card-wrapper {
+            .swiper-button.swiper-button-prev {
+                margin-left: -2.6rem;
+            }
+            
+            .swiper-button.swiper-button-next {
+                margin-right: -2.6rem;
+            }
         }
     }
 

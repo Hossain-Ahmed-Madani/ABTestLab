@@ -1,3 +1,11 @@
+/* 
+
+Test container:  https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34434&variation_id=51547&search=Test004+%5BILS%5D+-+Course+Page+-+A+Clear+Path+to+the+Call+to+Action+%2B+Clear+CTA
+
+Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=34434-51547  
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "Netzproduzenten",
@@ -130,6 +138,10 @@
                         <div class="ab-pill-header">Auf einen Blick: der Fahrplan für Buchung und Weiterbildung</div>
                         <div class="ab-card-wrapper ab-card-wrapper--mobile swiper">
                             <div class="swiper-wrapper">${DATA.map((item) => getCardLayout({ ...item, className: "swiper-slide" })).join("")}</div>
+                            <div class="swiper-button-wrapper">
+                                <div class="swiper-button swiper-button-prev"></div>
+                                <div class="swiper-button swiper-button-next"></div>
+                            </div>
                         </div>
                         <div class="ab-card-wrapper ab-card-wrapper--desktop">${DATA.map((item) => getCardLayout({ ...item })).join("")}</div>
                     </div>
@@ -152,10 +164,13 @@
         if (window.innerWidth > 991) return;
 
         loadSwiperWithCDN().then((Swiper) => {
-            console.log("Swiper loaded");
             const swiper = new Swiper(".ab-card-wrapper--mobile", {
                 slidesPerView: 1,
-                spaceBetween: 10,
+                spaceBetween: 50,
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
             });
         });
     }

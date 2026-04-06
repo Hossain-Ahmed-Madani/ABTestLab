@@ -1,3 +1,6 @@
+.AB-TEST004 .ab-section {
+  overflow: hidden;
+}
 .AB-TEST004 .ab-pill-header {
   background-color: #fff;
   padding: 1rem 1.5rem;
@@ -15,11 +18,36 @@
 }
 .AB-TEST004 .ab-card-wrapper--mobile {
   display: block;
+  overflow: visible;
+  max-width: 357px;
 }
 .AB-TEST004 .ab-card-wrapper--desktop {
   display: none;
   justify-content: flex-start;
   gap: 11px;
+}
+.AB-TEST004 .ab-card-wrapper .swiper-button[aria-disabled=true] {
+  opacity: 0;
+}
+.AB-TEST004 .ab-card-wrapper .swiper-button {
+  width: 30px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.AB-TEST004 .ab-card-wrapper .swiper-button::after {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 700;
+}
+.AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-prev {
+  margin-left: -2rem;
+}
+.AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-next {
+  margin-right: -2rem;
 }
 .AB-TEST004 .ab-card {
   border-radius: 15px;
@@ -58,7 +86,7 @@
   gap: 5px;
 }
 .AB-TEST004 .ab-card__cta {
-  height: 47px;
+  min-height: 47px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -119,6 +147,14 @@
   text-align: center;
   vertical-align: middle;
   color: #000000;
+}
+@media screen and (min-width: 400px) {
+  .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-prev {
+    margin-left: -2.6rem;
+  }
+  .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-next {
+    margin-right: -2.6rem;
+  }
 }
 @media screen and (min-width: 991px) {
   .AB-TEST004 .ab-pill-header {
