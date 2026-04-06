@@ -19,7 +19,7 @@
         site_url: "https://www.portlandleathergoods.com/",
         test_name: "PLG119: [CART] Add USPs (2) SET UP TEST",
         page_initials: "AB-PLG119",
-        test_variation: 2 /* 1, 2, 3 */,
+        test_variation: 1 /* 1, 2, 3 */,
         test_version: 0.0001,
     };
 
@@ -104,7 +104,6 @@
         };
     }
 
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -115,15 +114,16 @@
     }
 
     function getRewardPoints() {
-        const priceText = q(".money.mw-price")?.textContent ?? "";
+        const foundNodes = qq("#CartDrawer-Checkout .money.mw-price");
+        const priceText = foundNodes[foundNodes.length - 1]?.textContent ?? "";
         const numericValue = Math.floor(parseFloat(priceText.replace(/[^0-9.]/g, "")) || 0);
         return numericValue;
     }
 
     function updateLayout() {
-        if(!q(".money.mw-price")) return
+        if (!q("#CartDrawer-Checkout .money.mw-price")) return;
 
-        q('.ab-usp-item__reward-points').textContent = getRewardPoints();
+        q(".ab-usp-item__reward-points").textContent = getRewardPoints();
     }
 
     function createLayout() {
@@ -183,8 +183,7 @@
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q("#shoppinggives-accordion__cartdrawer ~ .mt-3.text-center.text-xs") &&
-            q(".money.mw-price") &&
-            q("#CartDrawer-Checkout")
+            q("#CartDrawer-Checkout .money.mw-price")
         );
     }
 
