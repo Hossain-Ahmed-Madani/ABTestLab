@@ -1,0 +1,108 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-TTP37 {
+    //
+}
+
+.AB-TTP37--v1 {
+    .ab-engagement-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .ab-engagement-counter-wrapper {
+        width: 352px;
+        background-color: #fff;
+        border: 1px solid;
+        border-image-source: linear-gradient(90deg, rgba(0, 0, 0, 0.1) 0%, rgba(102, 102, 102, 0.1) 100%);
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px 0px #0000000d;
+        padding: 10px;
+    }
+
+    .ab-engagement-counter {
+
+        width: 100%;
+        height: auto;
+        padding: 12px 0;
+
+        border: 1px solid;
+        border-image-source: linear-gradient(180deg, rgba(102, 102, 102, 0.05) 0%, rgba(102, 102, 102, 0) 100%);
+        border-radius: 5px;
+        box-shadow: 0px 5px 10px 0px #0000001a inset;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // padding: 12px 36px;
+
+        font-family: Bitter;
+        font-weight: 600;
+        font-size: 44px;
+        line-height: 100%;
+        letter-spacing: 0%;
+        text-align: center;
+        text-transform: capitalize;
+        background: linear-gradient(180deg, #fc6a01 0%, rgba(252, 106, 1, 0.7) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .ab-engagement-subtitle {
+        font-family: Lato;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0px;
+        text-align: center;
+        color: #082556;
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-engagement-section {
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .ab-engagement-counter-wrapper {
+            width: 400px;
+        }
+
+        .ab-engagement-counter {
+            padding: 13px 0;
+        }
+
+        .ab-engagement-subtitle {
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-align: center;
+
+            br {
+                display: none;
+            }
+        }
+    }
+}
+
+.AB-TTP37--v2 {
+    //
+}
