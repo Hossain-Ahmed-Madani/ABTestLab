@@ -49,11 +49,12 @@
     cursor: pointer;
 }
 .AB-PLG119 .ab-usp-item__reward-info__icon svg {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
+    opacity: 0.9;
 }
 .AB-PLG119 .ab-usp-item__reward-info__popup {
-    bottom: 20px;
+    bottom: 22px;
     right: -15px;
     display: none;
     width: 67px;

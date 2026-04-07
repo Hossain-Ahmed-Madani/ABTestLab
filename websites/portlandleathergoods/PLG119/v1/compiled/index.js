@@ -32,13 +32,9 @@ v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "Portland Leather",
-        site_url: "https://www.portlandleathergoods.com/",
-        test_name: "PLG119: [CART] Add USPs (2) SET UP TEST",
         page_initials: "AB-PLG119",
         test_variation: 1 /* 1, 2, 3 */,
-        test_version: 0.0001,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -160,12 +156,12 @@ v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8
         );
 
         q("cart-container-drawer").addEventListener("click", (e) => {
-            if (e.target.closest(".ab-usp-item--reward") && !e.target.closest(".ab-usp-item__reward-info__popup")) {
+            if (e.target.closest(".ab-usp-item__reward-info__icon") && !e.target.closest(".ab-usp-item__reward-info__popup")) {
                 q(".ab-usp-item__reward-info__popup").classList.toggle("ab-usp-item__reward-info__popup--show");
                 return;
             }
 
-            if (!e.target.closest(".ab-usp-item--reward, .ab-usp-item__reward-info__popup")) {
+            if (!e.target.closest(".ab-usp-item__reward-info__icon, .ab-usp-item__reward-info__popup")) {
                 q(".ab-usp-item__reward-info__popup").classList.remove("ab-usp-item__reward-info__popup--show");
                 return;
             }
@@ -180,7 +176,6 @@ v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         createLayout();
         mutationObserverFunction();
@@ -198,7 +193,6 @@ v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

@@ -55,11 +55,12 @@
   cursor: pointer;
 }
 .AB-PLG119 .ab-usp-item__reward-info__icon svg {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  opacity: 0.9;
 }
 .AB-PLG119 .ab-usp-item__reward-info__popup {
-  bottom: 20px;
+  bottom: 22px;
   right: -15px;
   display: none;
   width: 67px;
@@ -104,6 +105,24 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+
+Test container: https://marketer.monetate.net/control/a-46f7a9a8/p/portlandleathergoods.com/experience/2100001
+
+Preview excluding all experiences:
+
+v1: https://marketer.monetate.net/control/preview/12047/QRIP8O161PTH00DQ1L2M8SQTWXZGDGD5/119-cart-add-usps
+v2: https://marketer.monetate.net/control/preview/12047/WATLTNZH8E3WATPZHPP3LPUYLALCG6AS/119-cart-add-usps
+v3: https://marketer.monetate.net/control/preview/12047/20VUZJ6F6VXQ8BLLLAYF81QBX6WJQB5H/119-cart-add-usps
+
+Preview including all experiences:
+
+v1: https://marketer.monetate.net/control/preview/12047/63AAN7RMXE9GI5D2M2CECUOU2E3KAZB4/119-cart-add-usps
+v2: https://marketer.monetate.net/control/preview/12047/NBLPR2PJIPYR4C3QPUY2NQZM5OGQ2YCC/119-cart-add-usps
+v3: https://marketer.monetate.net/control/preview/12047/XQNS9K7FV7KHHMF522352HY8SBFC88JY/119-cart-add-usps
+
+*/
+
 (async () => {
   const TEST_ID = "PLG119";
   const VARIANT_ID = "V1"; /* V1, V2, V3 */
@@ -125,8 +144,8 @@
     site_url: "https://www.portlandleathergoods.com/",
     test_name: "PLG119: [CART] Add USPs (2) SET UP TEST",
     page_initials: "AB-PLG119",
-    test_variation: 2 /* 1, 2, 3 */,
-    test_version: 0.0001,
+    test_variation: 1 /* 1, 2, 3 */,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -225,6 +244,10 @@
     return document.querySelector(s);
   }
 
+  function qq(s, o) {
+    return [...document.querySelectorAll(s)];
+  }
+
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -238,7 +261,8 @@
   }
 
   function getRewardPoints() {
-    const priceText = q(".money.mw-price")?.textContent ?? "";
+    const foundNodes = qq("#CartDrawer-Checkout .money.mw-price");
+    const priceText = foundNodes[foundNodes.length - 1]?.textContent ?? "";
     const numericValue = Math.floor(
       parseFloat(priceText.replace(/[^0-9.]/g, "")) || 0,
     );
@@ -246,7 +270,7 @@
   }
 
   function updateLayout() {
-    if (!q(".money.mw-price")) return;
+    if (!q("#CartDrawer-Checkout .money.mw-price")) return;
 
     q(".ab-usp-item__reward-points").textContent = getRewardPoints();
   }
@@ -287,7 +311,7 @@
 
     q("cart-container-drawer").addEventListener("click", (e) => {
       if (
-        e.target.closest(".ab-usp-item--reward") &&
+        e.target.closest(".ab-usp-item__reward-info__icon") &&
         !e.target.closest(".ab-usp-item__reward-info__popup")
       ) {
         q(".ab-usp-item__reward-info__popup").classList.toggle(
@@ -298,7 +322,7 @@
 
       if (
         !e.target.closest(
-          ".ab-usp-item--reward, .ab-usp-item__reward-info__popup",
+          ".ab-usp-item__reward-info__icon, .ab-usp-item__reward-info__popup",
         )
       ) {
         q(".ab-usp-item__reward-info__popup").classList.remove(
@@ -337,8 +361,7 @@
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
       q("#shoppinggives-accordion__cartdrawer ~ .mt-3.text-center.text-xs") &&
-      q(".money.mw-price") &&
-      q("#CartDrawer-Checkout")
+      q("#CartDrawer-Checkout .money.mw-price")
     );
   }
 
