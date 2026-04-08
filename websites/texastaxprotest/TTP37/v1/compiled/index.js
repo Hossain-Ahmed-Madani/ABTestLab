@@ -1,5 +1,8 @@
 /* 
 
+
+Preview control only: https://marketer.monetate.net/control/preview/12476/XTV6WQ6TZZPBD5R5KK7FMF8Q6WLC2AZW/ttp37-landing-page-counting-up-engagement-section
+
 Locations: 
 https://www.texastaxprotest.com/lower-your-property-taxes/
 
@@ -12,7 +15,7 @@ https://www.texastaxprotest.com/blog-contact-us/
 
 (async () => {
     const TEST_ID = "TTP37";
-    const VARIANT_ID = "Control"; /* Control, V1, V2 */
+    const VARIANT_ID = "V1"; /* Control, V1, V2 */
 
     function logInfo(message) {
         console.log(
@@ -31,7 +34,7 @@ https://www.texastaxprotest.com/blog-contact-us/
         site_url: "https://www.texastaxprotest.com/",
         test_name: "TTP37: [Landing Page] Counting Up Engagement Section-(2) SET UP TEST",
         page_initials: "AB-TTP37",
-        test_variation: 1,
+        test_variation: 2,
         test_version: 0.0001,
     };
 
@@ -67,10 +70,22 @@ https://www.texastaxprotest.com/blog-contact-us/
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
 
-    let counterValue = DATA[test_variation][0];
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    let counterValue = window.sessionStorage.getItem(page_initials) === "true" ? DATA[test_variation][DATA[test_variation].length - 1] : DATA[test_variation][0];
 
     function createLayoutV1() {
         q("body > .mantine-Container-root").insertAdjacentHTML(
@@ -93,7 +108,11 @@ https://www.texastaxprotest.com/blog-contact-us/
         q("body > .mantine-Container-root").insertAdjacentHTML("afterbegin", /* HTML */ ` <div>My New Content V2</div> `);
     }
 
-    function updateCounterValue () {
+    function updateCounterValue() {
+        if (window.sessionStorage.getItem(page_initials) === "true") return;
+
+        window.sessionStorage.setItem(page_initials, true);
+
         const valueList = DATA[test_variation];
         const duration = 1500;
         const loopCount = Math.ceil(duration / valueList.length);
@@ -109,36 +128,71 @@ https://www.texastaxprotest.com/blog-contact-us/
 
             counterValue = valueList[currentIndex];
             q(".ab-engagement-counter").textContent = counterValue;
-            
         }, loopCount);
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
+    function handleLocationChanges() {
+        const pathname = window.location.pathname;
+        const targetLocations = ["/lower-your-property-taxes/", "/facebook-landing-page/", "/blog-contact-us/"];
 
-        switch (test_variation) {
-            case 1:
-                createLayoutV1();
-                break;
-            case 2:
-                createLayoutV2();
-                break;
+        if (targetLocations.some((currentPathName) => currentPathName === pathname)) {
+            init_TTP37();
+        } else {
+            window[page_initials] = false;
+            document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         }
+    }
 
+    function urlObserver() {
+        const debouncedChanges = debounce(handleLocationChanges, 150);
 
-        updateCounterValue();
+        const originalPushState = history.pushState;
+        history.pushState = function () {
+            originalPushState.apply(history, arguments);
+            window.dispatchEvent(new Event("pushstate"));
+        };
+
+        // Listen for back/forward button clicks
+        window.addEventListener("popstate", function (event) {
+            debouncedChanges();
+        });
+
+        window.addEventListener("pushstate", function () {
+            debouncedChanges();
+        });
     }
 
     function checkForItems() {
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("body > .mantine-Container-root") && document.readyState === "complete");
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
+    async function init_TTP37() {
+        try {
+            if (window[page_initials] === true) return;
+
+            window[page_initials] = true;
+            await waitForElementAsync(checkForItems);
+            q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+
+            console.table(TEST_CONFIG);
+
+            switch (test_variation) {
+                case 1:
+                    createLayoutV1();
+                    break;
+                case 2:
+                    createLayoutV2();
+                    break;
+            }
+
+            updateCounterValue();
+
+        } catch (error) {
+            console.warn(error);
+            return false;
+        }
     }
+
+    init_TTP37();
+    urlObserver();
 })();
