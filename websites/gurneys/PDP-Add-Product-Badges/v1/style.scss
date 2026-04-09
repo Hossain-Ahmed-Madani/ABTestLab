@@ -1,0 +1,61 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-PRODUCT-BADGES {
+    .ab-product-badges-container {
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .ab-product-badge {
+        height: 23px;
+
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 11px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 10px;
+
+
+        &--only-from-gurneys {
+            background-color: #F3D56A;
+        }
+
+        &--bestseller {
+            background-color: #ECBD94;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+
+        .ab-product-badges-container  {
+            margin-bottom: 5px;
+        }
+
+        .ab-product-badge {
+            height: 25px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+    }
+}
