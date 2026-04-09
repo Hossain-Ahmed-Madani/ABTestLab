@@ -58,7 +58,7 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
   display: none;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 32px;
 }
 .AB-GUARANTEE-VERBIAGE__modal-backdrop {
   display: none;
@@ -67,39 +67,42 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: rgba(0, 0, 0, 0.3);
 }
 .AB-GUARANTEE-VERBIAGE__modal {
   opacity: 1;
-  box-shadow: 0px 4px 23.9px 0px rgba(0, 0, 0, 0.1607843137);
+  border: 4px solid #004925;
   width: 100%;
   min-height: max-content;
   max-height: auto;
   background: #ffffff;
   position: relative;
   z-index: 1;
-  padding: 15px 15px 15px 15px;
+  padding: 18px 15px 24px 16px;
 }
 .AB-GUARANTEE-VERBIAGE__modal__head {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.AB-GUARANTEE-VERBIAGE__modal__head__img-container {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 15px;
-  font-family: Roboto, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 132%;
-  text-align: left;
-  color: #547351;
+}
+.AB-GUARANTEE-VERBIAGE__modal__head__img-container img {
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
 }
 .AB-GUARANTEE-VERBIAGE__modal__head__close-cta {
   margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 15px;
-  right: 18px;
+  padding: 6.5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .AB-GUARANTEE-VERBIAGE__modal__head__close-cta svg {
   width: 18px;
@@ -107,45 +110,46 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
 }
 .AB-GUARANTEE-VERBIAGE__modal__body {
   width: 100%;
-  font-family: Roboto, sans-serif;
-  font-size: 14px;
+  font-family: geneo-std;
   font-weight: 400;
-  line-height: 150%; /* 24px */
+  line-height: 1.5;
+  font-size: 14px;
   text-align: left;
   text-wrap: pretty;
 }
-.AB-GUARANTEE-VERBIAGE__modal__body .table.table-bordered {
-  width: 100%;
-  margin-bottom: 0;
-}
-.AB-GUARANTEE-VERBIAGE__modal__body .table.table-bordered tr td {
-  background: none;
+.AB-GUARANTEE-VERBIAGE__modal .divider {
+  display: block;
+  margin-bottom: 20px;
 }
 
 @media screen and (min-width: 650px) {
   .AB-GUARANTEE-VERBIAGE__modal {
-    width: 643px;
-    padding: 48px 32px 32px 32px;
-    min-height: 298px;
+    width: 711px;
+    min-height: 366px;
+    padding: 33px 32px 39px 40px;
   }
   .AB-GUARANTEE-VERBIAGE__modal__head {
-    font-size: 32px;
-    font-weight: 700;
-    line-height: 42.24px;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
+  }
+  .AB-GUARANTEE-VERBIAGE__modal__head__img-container img {
+    width: 102px;
+    height: 102px;
+    object-fit: contain;
   }
   .AB-GUARANTEE-VERBIAGE__modal__head__close-cta {
-    top: 32px;
-    right: 32px;
+    padding: 0;
   }
   .AB-GUARANTEE-VERBIAGE__modal__head__close-cta svg {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
   }
   .AB-GUARANTEE-VERBIAGE__modal__body {
+    padding: 10px 0;
     font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
+  }
+  .AB-GUARANTEE-VERBIAGE__modal .divider {
+    display: block;
+    margin-bottom: 20px;
   }
 }
 .slide-bottom {

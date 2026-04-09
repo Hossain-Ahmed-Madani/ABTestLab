@@ -1,3 +1,10 @@
+/* 
+Test container: https://app.convert.com/accounts/100412411/projects/100414848/experiences/1004192238/summary
+
+Preview URL: https://www.gurneys.com/products/dwarf_burning_bush_?_conv_eforce=1004192238.1004452006&utm_campaign=qa5
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -20,6 +27,15 @@
                 fill="#004925"
             />
         </svg> `,
+        close_svg: /* HTML */ `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M0.378316 0.378316C0.882751 -0.126105 1.70058 -0.126105 2.20502 0.378316L9.04167 7.21499L15.8783 0.378316C16.3827 -0.126105 17.2006 -0.126105 17.705 0.378316C18.2094 0.882751 18.2094 1.70058 17.705 2.20502L10.8683 9.04167L17.705 15.8783C18.2094 16.3827 18.2094 17.2006 17.705 17.705C17.2006 18.2094 16.3827 18.2094 15.8783 17.705L9.04167 10.8683L2.20502 17.705C1.70058 18.2094 0.882751 18.2094 0.378316 17.705C-0.126105 17.2006 -0.126105 16.3827 0.378316 15.8783L7.21499 9.04167L0.378316 2.20502C-0.126105 1.70058 -0.126105 0.882751 0.378316 0.378316Z"
+                fill="#0F1729"
+            />
+        </svg> `,
+        no_risk_guarantee_img_url: "https://cdn.shopify.com/s/files/1/0867/8676/9195/files/No-RiskLogoGU_480x480.jpg?v=1730483097",
     };
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -54,18 +70,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -95,19 +99,17 @@
                     <div class="${page_initials}__modal-backdrop"></div>
                     <div class="${page_initials}__modal">
                         <div class="${page_initials}__modal__head">
-                            <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
-                            <div class="${page_initials}__modal__head__close-cta">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                                    <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
-                                </svg>
+                            <div class="${page_initials}__modal__head__img-container">
+                                <img src="${ASSETS.no_risk_guarantee_img_url}" alt="No Risk Guarantee" />
                             </div>
+                            <div class="${page_initials}__modal__head__close-cta">${ASSETS.close_svg}</div>
                         </div>
                         <div class="${page_initials}__modal__body">
-                            <div class="${page_initials}__modal__body__text-content">
-                                Frisches Hähnchenfleisch 70 %, Bruchreis, Mais (gentechnikfrei), Bierhefe*, Apfelpulpe*, Lachsöl** (Omega-3), Yucca-Extrakt, Leinsamenöl** (Omega-3),
-                                Olivenöl**, Grünlippmuschel-Extrakt, Karotten*, Tomaten*, Aufrechte Studentenblume*, Löwenzahn*, Brokkoli*, grüner Tee*, Kamille*, Oregano*,
-                                Mariendistelsamen*, Cranberrysamen*, Algen*, Kaliumchlorid. (*getrocknet, **kaltgepresst, nativ)
-                            </div>
+                            We stand behind every one of our product offerings, and we want you to be satisfied! If you're not happy with your purchase, we'll replace it or provide
+                            merchandise credit for the full amount of your purchase price.
+                            <b>All nursery stock, trees, plants, seeds and merchandise are guaranteed for one full year.</b>
+                            <div class="divider"></div>
+                            Our confidence is backed by our dedication to quality, innovation and garden performance.
                         </div>
                     </div>
                 </div>
@@ -127,7 +129,6 @@
     }
 
     function handleModalView(action = "show") {
-
         const modal = q(`.${page_initials}__modal`);
         const modalShowClass = `${page_initials}--modal-show`;
         const body = document.body;
@@ -144,26 +145,21 @@
             setTimeout(() => body.classList.remove(modalShowClass), 200);
             document.removeEventListener("touchmove", preventScroll);
         }
-
     }
 
     function clickFunction() {
-        document.body.addEventListener("click", (e) => {
-            // ====== MODAL ======
 
-            // OPEN MODAL
-            if (e.target.closest(".ab-modal-open-cta")) {
-                handleModalView("show");
-            }
+        q(".ab-modal-open-cta").addEventListener("click", () => {
+            handleModalView("show");
+        });
 
-            // CLOSE MODAL
+        q(`.${page_initials}__modal__head__close-cta`).addEventListener("click", () => {
+            handleModalView("hide");
+        });
 
-            if (
-                e.target.closest(`.${page_initials}__modal__head__close-cta`) ||
-                (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))
-            ) {
-                handleModalView("hide");
-            }
+        q(`.${page_initials}__modal-backdrop`).addEventListener("click", (e) => {
+            if(e.target.closest(`.${page_initials}__modal`)) return;
+            handleModalView("hide");
         });
 
         // CLOSE POPUP -> ON ESC CLICK

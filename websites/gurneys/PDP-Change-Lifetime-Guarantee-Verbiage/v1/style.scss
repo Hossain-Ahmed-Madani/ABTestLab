@@ -93,7 +93,7 @@ body.AB-GUARANTEE-VERBIAGE--modal-show {
         // display: flex;
         justify-content: center;
         align-items: center;
-        padding: 0 10px;
+        padding: 0 32px;
     }
 
     &__modal-backdrop {
@@ -104,14 +104,12 @@ body.AB-GUARANTEE-VERBIAGE--modal-show {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0);
-        backdrop-filter: blur(30px);
-        -webkit-backdrop-filter: blur(30px);
+        background: rgba(0, 0, 0, 0.3);
     }
 
     &__modal {
         opacity: 1;
-        box-shadow: 0px 4px 23.9px 0px #00000029;
+        border: 4px solid #004925;
 
         width: 100%;
         min-height: max-content;
@@ -119,27 +117,34 @@ body.AB-GUARANTEE-VERBIAGE--modal-show {
         background: #ffffff;
         position: relative;
         z-index: 1;
-        padding: 15px 15px 15px 15px;
+        padding: 18px 15px 24px 16px;
 
         &__head {
             display: flex;
-            align-items: center;
-            margin-bottom: 15px;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 8px;
 
-            font-family: Roboto, sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            line-height: 132%;
-            text-align: left;
-            color: #547351;
+            &__img-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                img {
+                    width: 85px;
+                    height: 85px;
+                    object-fit: contain;
+                }
+            }
 
             &__close-cta {
                 margin: 0;
-                padding: 0;
-                position: absolute;
-                top: 15px;
-                right: 18px;
+                padding: 6.5px;
                 cursor: pointer;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
 
                 svg {
                     width: 18px;
@@ -150,23 +155,19 @@ body.AB-GUARANTEE-VERBIAGE--modal-show {
 
         &__body {
             width: 100%;
-            font-family: Roboto, sans-serif;
 
-            font-size: 14px;
+            font-family: geneo-std;
             font-weight: 400;
-            line-height: 150%; /* 24px */
+            line-height: 1.5;
+            font-size: 14px;
 
             text-align: left;
             text-wrap: pretty;
+        }
 
-            // ADDITIONAL STYLES
-            .table.table-bordered {
-                width: 100%;
-                margin-bottom: 0;
-                tr td {
-                    background: none;
-                }
-            }
+        .divider {
+            display: block;
+            margin-bottom: 20px;
         }
     }
 }
@@ -183,31 +184,40 @@ body.AB-GUARANTEE-VERBIAGE--modal-show {
         }
 
         &__modal {
-            width: 643px;
-            padding: 48px 32px 32px 32px;
-            min-height: 298px;
+            width: 711px;
+            min-height: 366px;
+            padding: 33px 32px 39px 40px;
 
             &__head {
-                font-size: 32px;
-                font-weight: 700;
-                line-height: 42.24px;
-                margin-bottom: 32px;
+
+                margin-bottom: 20px;
+
+                &__img-container {
+                    img {
+                        width: 102px;
+                        height: 102px;
+                        object-fit: contain;
+                    }
+                }
 
                 &__close-cta {
-                    top: 32px;
-                    right: 32px;
+                    padding: 0;
 
                     svg {
-                        width: 24px;
-                        height: 24px;
+                        width: 30px;
+                        height: 30px;
                     }
                 }
             }
 
             &__body {
+                padding: 10px 0;
                 font-size: 16px;
-                font-weight: 400;
-                line-height: 24px;
+            }
+
+            .divider {
+                display: block;
+                margin-bottom: 20px;
             }
         }
     }
