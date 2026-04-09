@@ -4,7 +4,14 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-GP102 .ab-magazine-tag {
+      style.innerHTML = `.AB-GP102
+  .woocommerce-product-gallery:has(
+    .woocommerce-product-gallery__image.wpgs_image.slick-active
+  )
+  .ab-magazine-tag {
+  display: flex;
+}
+.AB-GP102 .ab-magazine-tag {
   position: absolute;
   top: 0;
   right: 10px;
@@ -13,7 +20,7 @@
   height: 64px;
   padding: 8px;
   border-radius: 0 0 8px 8px;
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -43,6 +50,31 @@
     right: 20px;
   }
 }
+
+.AB-GP102--v1 .ab-magazine-tag {
+  width: 65px;
+  max-width: 65px;
+  height: 64px;
+}
+@media screen and (min-width: 990.5px) {
+  .AB-GP102--v1 .ab-magazine-tag {
+    width: 65px;
+    max-width: 65px;
+  }
+}
+
+.AB-GP102--v2 .ab-magazine-tag {
+  width: 55px;
+  max-width: 55px;
+  height: 64px;
+}
+@media screen and (min-width: 990.5px) {
+  .AB-GP102--v2 .ab-magazine-tag {
+    width: 55px;
+    max-width: 55px;
+    height: 64px;
+  }
+}
 `;
       document.head.appendChild(style);
       setTimeout(() => {
@@ -51,6 +83,19 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+Test container: https://marketer.monetate.net/control/a-880bc965/p/shopguideposts.org/experience/2102196#
+
+Preview excluding all:
+v1: https://marketer.monetate.net/control/preview/12053/N3NPRQWUEMY6RVF1UA7LZ1RGGDUGQ3NB/102-product-magazine-gifting
+v2: https://marketer.monetate.net/control/preview/12053/LEQTX4SV57Y3YK8WMH0V8S3602V848O5/102-product-magazine-gifting
+
+Preview including all:
+v1: https://marketer.monetate.net/control/preview/12053/LXPDSGEB1HN94DB5X3C5IDHQN6BJK46E/102-product-magazine-gifting
+v2: https://marketer.monetate.net/control/preview/12053/UYOLGGWT5KX59R61A5LFVBSW60N9O4CX/102-product-magazine-gifting
+
+*/
+
 (async () => {
   const TEST_ID = "GP102";
   const VARIANT_ID = "V1"; /* Control, V1, V2 */
@@ -67,13 +112,9 @@
   logInfo("fired");
 
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "Guide Posts",
-    site_url: "https://guideposts.org",
-    test_name: "GP102: [PRODUCT] Magazine Gifting - (2) SET UP TEST",
     page_initials: "AB-GP102",
-    test_variation: 2 /* 0, 1, 2 */,
-    test_version: 0.0001,
+    test_variation: 1 /* 0, 1, 2 */,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -163,7 +204,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
 
     q(".woocommerce-product-gallery .wpgs-image").insertAdjacentHTML(
       "afterend",
@@ -180,7 +220,9 @@
     return !!(
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
-      ) && q(".woocommerce-product-gallery .wpgs-image")
+      ) &&
+      q(".woocommerce-product-gallery .wpgs-image") &&
+      q(".woocommerce-product-gallery__image.slick-active")
     );
   }
 
@@ -188,7 +230,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

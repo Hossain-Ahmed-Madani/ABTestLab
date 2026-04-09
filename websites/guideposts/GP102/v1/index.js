@@ -33,7 +33,7 @@ v2: https://marketer.monetate.net/control/preview/12053/UYOLGGWT5KX59R61A5LFVBSW
         test_name: "GP102: [PRODUCT] Magazine Gifting - (2) SET UP TEST",
         page_initials: "AB-GP102",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -112,7 +112,6 @@ v2: https://marketer.monetate.net/control/preview/12053/UYOLGGWT5KX59R61A5LFVBSW
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         q(".woocommerce-product-gallery .wpgs-image").insertAdjacentHTML(
             "afterend",
@@ -126,14 +125,17 @@ v2: https://marketer.monetate.net/control/preview/12053/UYOLGGWT5KX59R61A5LFVBSW
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".woocommerce-product-gallery .wpgs-image"));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".woocommerce-product-gallery .wpgs-image") &&
+            q(".woocommerce-product-gallery__image.slick-active")
+        );
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
