@@ -6,12 +6,12 @@
       var style = document.createElement("style");
       style.innerHTML = `.AB-TEST004 .ab-section {
   overflow: hidden;
+  padding-top: 27px;
+  padding-top: 26px;
 }
 .AB-TEST004 .ab-pill-header {
   background-color: #fff;
   padding: 1rem 1.5rem;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
   margin-bottom: 22px;
   font-family: Noto Sans;
   font-weight: 700;
@@ -20,12 +20,13 @@
   letter-spacing: 0px;
   text-align: center;
   vertical-align: middle;
-  color: #f55a00;
+  color: #fa6400;
 }
 .AB-TEST004 .ab-card-wrapper--mobile {
   display: block;
   overflow: visible;
-  max-width: 357px;
+  padding-left: 35px;
+  padding-right: 35px;
 }
 .AB-TEST004 .ab-card-wrapper--desktop {
   display: none;
@@ -50,10 +51,10 @@
   font-weight: 700;
 }
 .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-prev {
-  margin-left: -2rem;
+  left: 0;
 }
 .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-next {
-  margin-right: -2rem;
+  right: 0;
 }
 .AB-TEST004 .ab-card {
   border-radius: 15px;
@@ -93,7 +94,7 @@
 }
 .AB-TEST004 .ab-card__cta {
   min-height: 47px;
-  display: flex;
+  display: flex !important;
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
@@ -102,6 +103,14 @@
   margin-bottom: 9px;
   padding: 10px 7px;
   cursor: pointer;
+  text-decoration: none !important;
+  outline: none;
+}
+.AB-TEST004 .ab-card__cta:hover,
+.AB-TEST004 .ab-card__cta:focus {
+  border: 2px solid rgba(0, 0, 0, 0);
+  text-decoration: none;
+  outline: none;
 }
 .AB-TEST004 .ab-card__cta-icon {
   display: flex;
@@ -121,28 +130,28 @@
   vertical-align: middle;
 }
 .AB-TEST004 .ab-card__cta--downloads {
-  background-color: #bcd8fa;
+  background-color: #bcd8fa !important;
 }
 .AB-TEST004 .ab-card__cta--downloads .ab-card__cta-text {
-  color: #09479b;
+  color: #09479b !important;
 }
 .AB-TEST004 .ab-card__cta--downloads:hover {
-  background-color: #87b9fa;
+  background-color: #87b9fa !important;
 }
 .AB-TEST004 .ab-card__cta--downloads:hover .ab-card__cta-text {
-  color: #043271;
+  color: #043271 !important;
 }
 .AB-TEST004 .ab-card__cta--sign-up {
-  background-color: #166adb;
+  background-color: #166adb !important;
 }
 .AB-TEST004 .ab-card__cta--sign-up .ab-card__cta-text {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 .AB-TEST004 .ab-card__cta--sign-up:hover {
-  background-color: #09479b;
+  background-color: #09479b !important;
 }
 .AB-TEST004 .ab-card__cta--sign-up:hover .ab-card__cta-text {
-  color: #fff;
+  color: #fff !important;
 }
 .AB-TEST004 .ab-card__footer-info {
   font-family: Noto Sans;
@@ -154,15 +163,38 @@
   vertical-align: middle;
   color: #000000;
 }
-@media screen and (min-width: 400px) {
-  .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-prev {
-    margin-left: -2.6rem;
+@media screen and (max-width: 400px) {
+  .AB-TEST004 .ab-card__header {
+    font-size: 14px;
+    line-height: 186%;
   }
-  .AB-TEST004 .ab-card-wrapper .swiper-button.swiper-button-next {
-    margin-right: -2.6rem;
+  .AB-TEST004 .ab-card br {
+    display: none;
+  }
+  .AB-TEST004 .ab-card__list-item {
+    font-size: 14px;
+    line-height: 28px;
+  }
+  .AB-TEST004 .ab-card__cta-text {
+    font-size: 12px;
+    line-height: 120%;
+  }
+  .AB-TEST004 .ab-card__footer-info {
+    font-size: 12px;
+    line-height: 24px;
+  }
+}
+@media screen and (max-width: 990.5px) {
+  .AB-TEST004 .ab-section .container {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 @media screen and (min-width: 991px) {
+  .AB-TEST004 .ab-section {
+    padding-top: 23px;
+    padding-bottom: 66px;
+  }
   .AB-TEST004 .ab-pill-header {
     margin-left: 0;
     margin-right: 0;
@@ -238,6 +270,14 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+
+Test container:  https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34434&variation_id=51547&search=Test004+%5BILS%5D+-+Course+Page+-+A+Clear+Path+to+the+Call+to+Action+%2B+Clear+CTA
+
+Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=34434-51547  
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "Netzproduzenten",
@@ -247,7 +287,7 @@
       "Test004 [ILS] - Course Page - A Clear Path to the Call to Action + Clear CTA",
     page_initials: "AB-TEST004",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -345,6 +385,7 @@
         type: "downloads",
         icon: ASSETS.downloads_svg,
         text: "Jetzt kostenloses Infopaket anfordern",
+        href: "#sud-formular",
       },
       footer: "Keine Buchung. Unverbindlich alle Informationen einsehen.",
     },
@@ -374,6 +415,7 @@
         type: "sign-up",
         icon: ASSETS.sign_up_svg,
         text: "Jetzt Kursplatz sichern & starten",
+        href: "https://www.ils.de/fernstudium/onlineanmeldung/",
       },
       footer: "Flexibel neben dem Beruf. Jetzt 4 Wochen kostenlos testen.",
     },
@@ -387,16 +429,28 @@
           ${list
             .map(
               ({ icon, text }) =>
-                /* HTML */ ` <li class="ab-card__list-item">
+                /* HTML */ `<li class="ab-card__list-item">
                   <span class="ab-card__list-item-icon">${icon}</span> ${text}
                 </li>`,
             )
             .join("")}
         </ul>
-        <div class="ab-card__cta ab-card__cta--${cta.type}">
-          <div class="ab-card__cta-icon">${cta.icon}</div>
-          <div class="ab-card__cta-text">${cta.text}</div>
-        </div>
+        ${cta.href
+          ? /* HTML */ `
+              <a
+                href="${cta.href}"
+                class="ab-card__cta ab-card__cta--${cta.type}"
+              >
+                <div class="ab-card__cta-icon">${cta.icon}</div>
+                <div class="ab-card__cta-text">${cta.text}</div>
+              </a>
+            `
+          : /* HTML */ `
+              <div class="ab-card__cta ab-card__cta--${cta.type}">
+                <div class="ab-card__cta-icon">${cta.icon}</div>
+                <div class="ab-card__cta-text">${cta.text}</div>
+              </div>
+            `}
         <div class="ab-card__footer-info">${footer}</div>
       </div>
     `;
@@ -432,12 +486,15 @@
   }
 
   function clickFunction() {
-    q(".ab-card__cta--downloads").addEventListener("click", () =>
-      q('a[href="#sud-formular"]').click(),
-    );
-    q(".ab-card__cta--sign-up").addEventListener("click", () =>
-      q('a[href*="/fernstudium/onlineanmeldung/"]').click(),
-    );
+    q(".ab-card__cta--sign-up").addEventListener("click", () => {
+      const targetNode = q('a[href*="/fernstudium/onlineanmeldung/"]');
+      if (targetNode) {
+        targetNode.click();
+        return;
+      }
+
+      window.location.href = "https://www.ils.de/fernstudium/onlineanmeldung/";
+    });
   }
 
   function init() {

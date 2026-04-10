@@ -1,3 +1,11 @@
+/* 
+
+Test container:  https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34434&variation_id=51547&search=Test004+%5BILS%5D+-+Course+Page+-+A+Clear+Path+to+the+Call+to+Action+%2B+Clear+CTA
+
+Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=34434-51547  
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "Netzproduzenten",
@@ -7,7 +15,7 @@
       "Test004 [ILS] - Course Page - A Clear Path to the Call to Action + Clear CTA",
     page_initials: "AB-TEST004",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -105,6 +113,7 @@
         type: "downloads",
         icon: ASSETS.downloads_svg,
         text: "Jetzt kostenloses Infopaket anfordern",
+        href: "#sud-formular",
       },
       footer: "Keine Buchung. Unverbindlich alle Informationen einsehen.",
     },
@@ -134,6 +143,7 @@
         type: "sign-up",
         icon: ASSETS.sign_up_svg,
         text: "Jetzt Kursplatz sichern & starten",
+        href: "https://www.ils.de/fernstudium/onlineanmeldung/",
       },
       footer: "Flexibel neben dem Beruf. Jetzt 4 Wochen kostenlos testen.",
     },
@@ -147,16 +157,28 @@
           ${list
             .map(
               ({ icon, text }) =>
-                /* HTML */ ` <li class="ab-card__list-item">
+                /* HTML */ `<li class="ab-card__list-item">
                   <span class="ab-card__list-item-icon">${icon}</span> ${text}
                 </li>`,
             )
             .join("")}
         </ul>
-        <div class="ab-card__cta ab-card__cta--${cta.type}">
-          <div class="ab-card__cta-icon">${cta.icon}</div>
-          <div class="ab-card__cta-text">${cta.text}</div>
-        </div>
+        ${cta.href
+          ? /* HTML */ `
+              <a
+                href="${cta.href}"
+                class="ab-card__cta ab-card__cta--${cta.type}"
+              >
+                <div class="ab-card__cta-icon">${cta.icon}</div>
+                <div class="ab-card__cta-text">${cta.text}</div>
+              </a>
+            `
+          : /* HTML */ `
+              <div class="ab-card__cta ab-card__cta--${cta.type}">
+                <div class="ab-card__cta-icon">${cta.icon}</div>
+                <div class="ab-card__cta-text">${cta.text}</div>
+              </div>
+            `}
         <div class="ab-card__footer-info">${footer}</div>
       </div>
     `;
@@ -192,12 +214,15 @@
   }
 
   function clickFunction() {
-    q(".ab-card__cta--downloads").addEventListener("click", () =>
-      q('a[href="#sud-formular"]').click(),
-    );
-    q(".ab-card__cta--sign-up").addEventListener("click", () =>
-      q('a[href*="/fernstudium/onlineanmeldung/"]').click(),
-    );
+    q(".ab-card__cta--sign-up").addEventListener("click", () => {
+      const targetNode = q('a[href*="/fernstudium/onlineanmeldung/"]');
+      if (targetNode) {
+        targetNode.click();
+        return;
+      }
+
+      window.location.href = "https://www.ils.de/fernstudium/onlineanmeldung/";
+    });
   }
 
   function init() {

@@ -13,16 +13,17 @@
 }
 
 .AB-TEST004 {
-
     .ab-section {
         overflow: hidden;
+        padding-top: 27px;
+        padding-top: 26px;
     }
 
     .ab-pill-header {
         background-color: #fff;
         padding: 1rem 1.5rem;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
+        // margin-left: -1.5rem;
+        // margin-right: -1.5rem;
         margin-bottom: 22px;
 
         font-family: Noto Sans;
@@ -32,7 +33,7 @@
         letter-spacing: 0px;
         text-align: center;
         vertical-align: middle;
-        color: #f55a00;
+        color: #fa6400;
     }
 
     .ab-card-wrapper {
@@ -41,7 +42,9 @@
             display: block;
             overflow: visible;
             // width: 357px;
-            max-width: 357px;
+            // max-width: 357px;
+            padding-left: 35px;
+            padding-right: 35px;
         }
 
         &--desktop {
@@ -71,11 +74,13 @@
         }
 
         .swiper-button.swiper-button-prev {
-            margin-left: -2rem;
+            // margin-left: -2rem;
+            left: 0;
         }
-        
+
         .swiper-button.swiper-button-next {
-            margin-right: -2rem;
+            // margin-right: -2rem;
+            right: 0;
         }
     }
 
@@ -122,7 +127,7 @@
 
         &__cta {
             min-height: 47px;
-            display: flex;
+            display: flex !important;
             justify-content: flex-start;
             align-items: center;
             gap: 10px;
@@ -131,6 +136,16 @@
             margin-bottom: 9px;
             padding: 10px 7px;
             cursor: pointer;
+
+            text-decoration: none !important;
+            outline: none;
+
+            &:hover,
+            &:focus {
+                border: 2px solid #00000000;
+                text-decoration: none;
+                outline: none;
+            }
         }
 
         &__cta-icon {
@@ -154,33 +169,33 @@
         }
 
         &__cta--downloads {
-            background-color: #bcd8fa;
+            background-color: #bcd8fa !important;
 
             .ab-card__cta-text {
-                color: #09479b;
+                color: #09479b !important;
             }
 
             &:hover {
-                background-color: #87b9fa;
+                background-color: #87b9fa !important;
 
                 .ab-card__cta-text {
-                    color: #043271;
+                    color: #043271 !important;
                 }
             }
         }
 
         &__cta--sign-up {
-            background-color: #166adb;
+            background-color: #166adb !important;
 
             .ab-card__cta-text {
-                color: #ffffff;
+                color: #ffffff !important;
             }
 
             &:hover {
-                background-color: #09479b;
+                background-color: #09479b !important;
 
                 .ab-card__cta-text {
-                    color: #fff;
+                    color: #fff !important;
                 }
             }
         }
@@ -197,19 +212,61 @@
         }
     }
 
-    @media screen and (min-width: 400px) {
-        .ab-card-wrapper {
-            .swiper-button.swiper-button-prev {
-                margin-left: -2.6rem;
+    // @media screen and (min-width: 400px) {
+    //     .ab-card-wrapper {
+    //         .swiper-button.swiper-button-prev {
+    //             margin-left: -2.6rem;
+    //         }
+
+    //         .swiper-button.swiper-button-next {
+    //             margin-right: -2.6rem;
+    //         }
+    //     }
+    // }
+
+    @media screen and (max-width: 400px) {
+        .ab-card {
+
+            &__header {
+                font-size: 14px;
+                line-height: 186%;
             }
-            
-            .swiper-button.swiper-button-next {
-                margin-right: -2.6rem;
+
+            br {
+                display: none;
+            }
+
+
+            &__list-item {
+                font-size: 14px;
+                line-height: 28px;
+            }
+
+            &__cta-text {
+                font-size: 12px;
+                line-height: 120%;
+            }
+
+            &__footer-info {
+                font-size: 12px;
+                line-height: 24px;
             }
         }
     }
 
+    @media screen and (max-width: 990.5px) {
+        .ab-section .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
     @media screen and (min-width: 991px) {
+        .ab-section {
+            padding-top: 23px;
+            padding-bottom: 66px;
+        }
+
         .ab-pill-header {
             margin-left: 0;
             margin-right: 0;

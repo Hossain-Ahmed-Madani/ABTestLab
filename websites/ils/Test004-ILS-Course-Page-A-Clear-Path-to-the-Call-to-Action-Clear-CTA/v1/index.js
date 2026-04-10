@@ -14,7 +14,7 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
         test_name: "Test004 [ILS] - Course Page - A Clear Path to the Call to Action + Clear CTA",
         page_initials: "AB-TEST004",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -96,6 +96,7 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
                 type: "downloads",
                 icon: ASSETS.downloads_svg,
                 text: "Jetzt kostenloses Infopaket anfordern",
+                href: "#sud-formular",
             },
             footer: "Keine Buchung. Unverbindlich alle Informationen einsehen.",
         },
@@ -108,7 +109,7 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
                 { icon: "🎯", text: "Klarer Fahrplan: Sie erhalten Schritt-für-Schritt-Anleitungen" },
                 { icon: "🏆", text: "Beginnen Sie noch heute den Weg zu Gehaltserhöhung und Jobsicherheit" },
             ],
-            cta: { type: "sign-up", icon: ASSETS.sign_up_svg, text: "Jetzt Kursplatz sichern & starten" },
+            cta: { type: "sign-up", icon: ASSETS.sign_up_svg, text: "Jetzt Kursplatz sichern & starten", href: "https://www.ils.de/fernstudium/onlineanmeldung/" },
             footer: "Flexibel neben dem Beruf. Jetzt 4 Wochen kostenlos testen.",
         },
     ];
@@ -118,12 +119,21 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
             <div class="ab-card ab-card--${type} ${className}">
                 <div class="ab-card__header">${header}</div>
                 <ul class="ab-card__list">
-                    ${list.map(({ icon, text }) => /* HTML */ ` <li class="ab-card__list-item"><span class="ab-card__list-item-icon">${icon}</span> ${text}</li>`).join("")}
+                    ${list.map(({ icon, text }) => /* HTML */ `<li class="ab-card__list-item"><span class="ab-card__list-item-icon">${icon}</span> ${text}</li>`).join("")}
                 </ul>
-                <div class="ab-card__cta ab-card__cta--${cta.type}">
-                    <div class="ab-card__cta-icon">${cta.icon}</div>
-                    <div class="ab-card__cta-text">${cta.text}</div>
-                </div>
+                ${cta.href
+                    ? /* HTML */ `
+                        <a href="${cta.href}" class="ab-card__cta ab-card__cta--${cta.type}">
+                            <div class="ab-card__cta-icon">${cta.icon}</div>
+                            <div class="ab-card__cta-text">${cta.text}</div>
+                        </a>
+                    `
+                    : /* HTML */ `
+                        <div class="ab-card__cta ab-card__cta--${cta.type}">
+                            <div class="ab-card__cta-icon">${cta.icon}</div>
+                            <div class="ab-card__cta-text">${cta.text}</div>
+                        </div>
+                    `}
                 <div class="ab-card__footer-info">${footer}</div>
             </div>
         `;
@@ -151,13 +161,19 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
     }
 
     function clickFunction() {
-        q(".ab-card__cta--downloads").addEventListener("click", () => q('a[href="#sud-formular"]').click());
-        q(".ab-card__cta--sign-up").addEventListener("click", () => q('a[href*="/fernstudium/onlineanmeldung/"]').click());
+        q(".ab-card__cta--sign-up").addEventListener("click", () => {
+            const targetNode = q('a[href*="/fernstudium/onlineanmeldung/"]');
+            if (targetNode) {
+                targetNode.click();
+                return;
+            }
+
+            window.location.href = "https://www.ils.de/fernstudium/onlineanmeldung/";
+        });
     }
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
 
@@ -183,7 +199,6 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
