@@ -1,0 +1,13 @@
+{
+  "id": "1775829568288_9238_Mobile_Production_Offer_bar_on_sticky_CTA",
+  "name": "Mobile-Production-Offer-bar-on-sticky-CTA",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-10T13:59:28.288Z",
+  "createdAtReadable": "4/10/2026, 7:59:28 PM",
+  "lastUpdated": "2026-04-10T13:59:28.394Z"
+}
