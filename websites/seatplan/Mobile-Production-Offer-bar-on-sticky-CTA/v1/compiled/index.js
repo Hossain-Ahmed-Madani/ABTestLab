@@ -66,7 +66,7 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
         q("#production-page-mobile-sticky-bar").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
-                <div class="ab-offer-bar ab-offer-bar--expanded">
+                <div class="ab-offer-bar">
                     <div class="ab-offer-bar__header">
                         <div class="ab-offer-bar__header__text">${q(offerElement, ".sp-production-offer-content__badge-wrap .sp-badge").textContent}</div>
                         <div class="ab-offer-bar__header__icon">${ASSETS.chevron_down}</div>
