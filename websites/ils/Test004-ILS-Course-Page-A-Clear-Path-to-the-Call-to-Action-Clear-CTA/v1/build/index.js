@@ -8,11 +8,6 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
 
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "ILS",
-    site_url: "https://www.ils.de",
-    test_name:
-      "Test004 [ILS] - Course Page - A Clear Path to the Call to Action + Clear CTA",
     page_initials: "AB-TEST004",
     test_variation: 1,
     test_version: 0.0003,
@@ -231,7 +226,6 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
     createLayout();
     clickFunction();
 
@@ -261,7 +255,6 @@ Preview/Forced Variation: https://www.ils.de/fernkurse/buchhalter/?varify-force=
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

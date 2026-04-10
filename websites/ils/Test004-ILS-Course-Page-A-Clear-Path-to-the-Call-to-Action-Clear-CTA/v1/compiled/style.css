@@ -1,7 +1,7 @@
 .AB-TEST004 .ab-section {
   overflow: hidden;
   padding-top: 27px;
-  padding-top: 26px;
+  padding-bottom: 26px;
 }
 .AB-TEST004 .ab-pill-header {
   background-color: #fff;
@@ -117,8 +117,8 @@
 .AB-TEST004 .ab-card__cta-text {
   font-family: Noto Sans;
   font-weight: 400;
-  font-size: 16px;
-  line-height: 27px;
+  font-size: 14px;
+  line-height: 25px;
   letter-spacing: 0px;
   vertical-align: middle;
 }
