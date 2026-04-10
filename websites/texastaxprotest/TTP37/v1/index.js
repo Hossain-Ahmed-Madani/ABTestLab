@@ -45,7 +45,7 @@ V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P
         test_name: "TTP37: [Landing Page] Counting Up Engagement Section-(2) SET UP TEST",
         page_initials: "AB-TTP37",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -151,7 +151,7 @@ V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P
         window.sessionStorage.setItem(page_initials, true);
 
         const valueList = DATA[test_variation];
-        const duration = 1500;
+        const duration = 750;
         const loopCount = Math.ceil(duration / valueList.length);
         let currentIndex = 0;
 
@@ -211,8 +211,6 @@ V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P
             await waitForElementAsync(checkForItems);
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
-            console.table(TEST_CONFIG);
-
             switch (test_variation) {
                 case 1:
                     createLayoutV1();
@@ -224,7 +222,6 @@ V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P
 
             updateCounterValue();
         } catch (error) {
-            console.warn(error);
             return false;
         }
     }
