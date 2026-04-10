@@ -1,0 +1,13 @@
+{
+  "id": "1775211226243_9863_Test004_ILS_Course_Page_A_Clear_Path_to_the_Call_to_Action_Clear_CTA",
+  "name": "Test004-ILS-Course-Page-A-Clear-Path-to-the-Call-to-Action-Clear-CTA",
+  "type": "A/B",
+  "website": "ils",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-03T10:13:46.243Z",
+  "createdAtReadable": "4/3/2026, 4:13:46 PM",
+  "lastUpdated": "2026-04-03T10:13:46.596Z"
+}
