@@ -1,3 +1,7 @@
+.AB-EXP-299 p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
+.AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
+  display: none;
+}
 .AB-EXP-299 #trust_signal {
   padding: 13px;
   flex-direction: column;
@@ -38,6 +42,12 @@
   height: 28px;
 }
 @media screen and (min-width: 1024px) {
+  .AB-EXP-299 .mt-2.w-full[x-data="initCutOffTimer()"] {
+    display: none;
+  }
+  .AB-EXP-299 .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 {
+    align-items: flex-start;
+  }
   .AB-EXP-299 .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 > .w-full.sm\:max-w-\[250px\] {
     width: 257px;
     max-width: 257px;

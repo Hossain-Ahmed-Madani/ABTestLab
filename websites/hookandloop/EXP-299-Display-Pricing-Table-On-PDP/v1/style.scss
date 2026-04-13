@@ -13,6 +13,11 @@
 }
 
 .AB-EXP-299 {
+    p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
+    .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
+        display: none;
+    }
+
     #trust_signal {
         padding: 13px;
         flex-direction: column;
@@ -47,6 +52,7 @@
         letter-spacing: 0;
         vertical-align: middle;
         color: #374151;
+        // white-space: nowrap;
     }
 
     #trust_signal .element.flex.items-center.justify-center.gap-2.min-h-\[25px\].w-auto {
@@ -59,6 +65,15 @@
     }
 
     @media screen and (min-width: 1024px) {
+        .mt-2.w-full[x-data="initCutOffTimer()"] {
+            display: none;
+        }
+
+        // Main Wrapper
+        .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 {
+            align-items: flex-start;
+        }
+
         // Right Section
         .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 > .w-full.sm\:max-w-\[250px\] {
             width: 257px;
