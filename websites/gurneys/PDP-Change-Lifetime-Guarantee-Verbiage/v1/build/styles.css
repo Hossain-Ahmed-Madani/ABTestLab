@@ -115,7 +115,6 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
     line-height: 1.5;
     font-size: 14px;
     text-align: left;
-    text-wrap: pretty;
 }
 .AB-GUARANTEE-VERBIAGE__modal .divider {
     display: block;

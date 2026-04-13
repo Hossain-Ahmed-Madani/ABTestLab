@@ -121,7 +121,6 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
   line-height: 1.5;
   font-size: 14px;
   text-align: left;
-  text-wrap: pretty;
 }
 .AB-GUARANTEE-VERBIAGE__modal .divider {
   display: block;
@@ -262,9 +261,9 @@ body.AB-GUARANTEE-VERBIAGE--modal-show .AB-GUARANTEE-VERBIAGE__modal-backdrop {
   }, 100); // Check every 100ms for <head>
 })();
 /* 
-Test container: 
+Test container: https://app.convert.com/accounts/100412411/projects/100414848/experiences/1004192238/summary
 
-Preview URL: 
+Preview URL: https://www.gurneys.com/products/dwarf_burning_bush_?_conv_eforce=1004192238.1004452006&utm_campaign=qa5
 
 */
 

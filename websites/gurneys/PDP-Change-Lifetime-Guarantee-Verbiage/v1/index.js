@@ -13,7 +13,7 @@ Preview URL: https://www.gurneys.com/products/dwarf_burning_bush_?_conv_eforce=1
         test_name: "PDP - Change Lifetime Guarantee Verbiage [DTM]",
         page_initials: "AB-GUARANTEE-VERBIAGE",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
