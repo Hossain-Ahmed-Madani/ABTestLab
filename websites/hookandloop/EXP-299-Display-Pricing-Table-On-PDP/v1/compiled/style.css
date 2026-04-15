@@ -11,6 +11,10 @@
 .AB-EXP-299 .final-price.inline-block .price {
   display: inline-block;
 }
+.AB-EXP-299 .final-price.inline-block span:has(meta),
+.AB-EXP-299 .final-price.inline-block *:empty {
+  display: none;
+}
 .AB-EXP-299 #trust_signal {
   padding: 13px;
   flex-direction: column;
@@ -136,8 +140,12 @@
   padding: 12px 8px;
   display: flex;
   flex-direction: column;
+  background-color: #f9f9fb;
 }
-.AB-EXP-299 .ab-pricing-table__pricing__roll-count {
+.AB-EXP-299 .ab-pricing-table__pricing__item--active {
+  background-color: #fff4f4;
+}
+.AB-EXP-299 .ab-pricing-table__pricing__quantity {
   font-family: helvetica, san-serif;
   font-weight: 700;
   font-size: 14px;
@@ -232,7 +240,6 @@
   }
   .AB-EXP-299 .ab-pricing-table__pricing__item {
     padding: 12px 16px;
-    background-color: #f9f9fb;
     justify-content: space-between;
     flex-direction: row;
   }
@@ -240,7 +247,19 @@
     border-right: none;
     border-bottom: 1px solid #e5e7eb;
   }
-  .AB-EXP-299 .ab-pricing-table__pricing__roll-count {
+  .AB-EXP-299 .ab-pricing-table__pricing__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__quantity {
     text-align: left;
     margin-bottom: 5px;
   }

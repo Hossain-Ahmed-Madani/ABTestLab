@@ -36,7 +36,88 @@
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
+    let basePricePerQuantity = 0;
+    let currentSelectedQuantity = 0;
+
+    function getPricingTableLayout() {
+        basePricePerQuantity = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "");
+        currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
+        let activeQuantity;
+
+        const data = qq(".discount-box ul li").reduce((acc, li) => {
+            const quantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
+            const savePercentage = +q(li, '.save_percent span[x-text="discount.discount"]').textContent ?? 0;
+
+            if (!activeQuantity && currentSelectedQuantity <= quantity) {
+                activeQuantity = quantity;
+            }
+
+            acc.push({
+                unit: q(li, '.roll-no span[x-text="discount.unit"]').textContent ?? "",
+                quantity: quantity,
+                discountedPrice: quantity * basePricePerQuantity * (1 - savePercentage / 100),
+                "price-per-yard": "",
+                saveAmount: (quantity * basePricePerQuantity * (savePercentage / 100)).toFixed(2),
+                savePercentage: savePercentage,
+            });
+
+            return acc;
+        }, []);
+
+        return /* HTML */ `
+            <div class="ab-pricing-table">
+                <div class="ab-pricing-table__sub-header">✦ Add ${currentSelectedQuantity - data[0].quantity} more roll to unlock ${data[0].savePercentage}% off</div>
+                <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
+                    ${data
+                        .map(
+                            ({ savePercentage, quantity, unit, discountedPrice, pricePerYard, saveAmount }, index) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item ${activeQuantity === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
+                                    <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
+                                    <div class="ab-pricing-table__pricing__quantity">${quantity}+ ${unit}</div>
+                                    <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
+                                    ${pricePerYard ? `<div class="ab-pricing-table__pricing__price-per-yard">(${pricePerYard.toFixed(2)}/yard)</div>` : ""}
+                                    <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                                </li>
+                            `,
+                        )
+                        .join("")}
+                </ul>
+                <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
+                    ${data
+                        .map(
+                            ({ quantity, unit, discountedPrice, pricePerYard, saveAmount, savePercentage }, index) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item ${activeQuantity === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
+                                    <div class="ab-pricing-table__pricing__left">
+                                        <div class="ab-pricing-table__pricing__quantity">Buy ${quantity}+ ${unit}</div>
+                                        <div class="ab-pricing-table__pricing__save-container">
+                                            <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                                            <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
+                                        </div>
+                                    </div>
+                                    <div class="ab-pricing-table__pricing__right">
+                                        <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
+                                        ${pricePerYard ? `<div class="ab-pricing-table__pricing__price-per-yard">(${pricePerYard.toFixed(2)}/yard)</div>` : ""}
+                                    </div>
+                                </li>
+                            `,
+                        )
+                        .join("")}
+                </ul>
+                <div class="ab-pricing-table__footer">
+                    <div class="ab-pricing-table__footer__left"></div>
+                    <div class="ab-pricing-table__footer__right">
+                        <a href="https://www.hookandloop.com/price-sheet?sku=Fasteners-DG-Sew-On" target="_blank" class="">See Full Price List →</a>
+                    </div>
+                </div>
+            </div>
+        `;
     }
 
     function createLayout() {
@@ -53,51 +134,7 @@
                         <div class="ab-pricing-header__left">Volume Discount</div>
                         <div class="ab-pricing-header__right">Auto-applied at checkout</div>
                     </div>
-                    <div class="ab-pricing-table">
-                        <div class="ab-pricing-table__sub-header">✦ Add 11 more roll to unlock 10% off</div>
-                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
-                            ${Array.from({ length: 3 })
-                                .map(
-                                    (_, index) => /* HTML */ `
-                                        <li class="ab-pricing-table__pricing__item">
-                                            <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
-                                            <div class="ab-pricing-table__pricing__roll-count">6 ROLLS+</div>
-                                            <div class="ab-pricing-table__pricing__price">$11.25</div>
-                                            <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
-                                            <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                        </li>
-                                    `,
-                                )
-                                .join("")}
-                        </ul>
-                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
-                            ${Array.from({ length: 3 })
-                                .map(
-                                    (_, index) => /* HTML */ `
-                                        <li class="ab-pricing-table__pricing__item">
-                                            <div class="ab-pricing-table__pricing__left">
-                                                <div class="ab-pricing-table__pricing__roll-count">Buy 6+ ROLLS</div>
-                                                <div class="ab-pricing-table__pricing__save-container">
-                                                    <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                                    <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
-                                                </div>
-                                            </div>
-                                            <div class="ab-pricing-table__pricing__item__right">
-                                                <div class="ab-pricing-table__pricing__price">$11.25</div>
-                                                <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
-                                            </div>
-                                        </li>
-                                    `,
-                                )
-                                .join("")}
-                        </ul>
-                        <div class="ab-pricing-table__footer">
-                            <div class="ab-pricing-table__footer__left"></div>
-                            <div class="ab-pricing-table__footer__right">
-                                <a href="https://www.hookandloop.com/price-sheet?sku=Fasteners-DG-Sew-On" target="_blank" class="">See Full Price List →</a>
-                            </div>
-                        </div>
-                    </div>
+                    ${getPricingTableLayout()}
                 </div>
             `,
         );
@@ -114,15 +151,14 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".flex.flex-col.sm\\:flex-row.md\\:flex-col.xl\\:flex-row.items-end.my-4 > .w-full.sm\\:max-w-\\[250px\\]") &&
             q("#trust_signal") &&
-            q(".flex.flex-row.gap-2.flex-wrap.items-center.my-6.justify-end.font-bold")
+            q(".flex.flex-row.gap-2.flex-wrap.items-center.my-6.justify-end.font-bold") &&
+            q(".price[x-html='getFormattedFinalPrice()']") &&
+            q(".discount-box") &&
+            document.readyState === "complete"
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
+    waitForElementAsync(checkForItems).then(() => {
         init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    });
 })();

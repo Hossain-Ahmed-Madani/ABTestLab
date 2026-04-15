@@ -28,6 +28,11 @@
             display: inline-block;
             // margin-top: 2px;
         }
+
+        span:has(meta),
+        *:empty {
+            display: none;
+        }
     }
 
     #trust_signal {
@@ -181,9 +186,14 @@
                 padding: 12px 8px;
                 display: flex;
                 flex-direction: column;
+                background-color: #f9f9fb;
+
+                &--active {
+                    background-color: #fff4f4;
+                }
             }
 
-            &__roll-count {
+            &__quantity {
                 font-family: helvetica, san-serif;
                 font-weight: 700;
                 font-size: 14px;
@@ -299,7 +309,6 @@
 
                 &__item {
                     padding: 12px 16px;
-                    background-color: #f9f9fb;
                     justify-content: space-between;
                     flex-direction: row;
                 }
@@ -309,7 +318,21 @@
                     border-bottom: 1px solid #e5e7eb;
                 }
 
-                &__roll-count {
+                &__left {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    justify-content: center;
+                }
+
+                &__right {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: flex-end;
+                    justify-content: center;
+                }
+
+                &__quantity {
                     text-align: left;
                     margin-bottom: 5px;
                 }
@@ -349,7 +372,6 @@
                     letter-spacing: 0px;
                     text-align: right;
                     margin-bottom: 0;
-                    
                 }
             }
         }
