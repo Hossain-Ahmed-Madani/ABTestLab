@@ -89,4 +89,203 @@
     }
 }
 
+// ============ PRICING TABLE ============
+.AB-EXP-299 {
+    .ab-pricing-table-wrapper {
+        width: 100%;
+    }
+
+    .ab-pricing-header {
+        background-color: #101828;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 10px 10px 16px;
+        border-radius: 4px 4px 0 0;
+
+        &__left {
+            font-family: helvetica, san-serif;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: -0.15px;
+            color: #ffffff;
+        }
+
+        &__right {
+            font-family: helvetica, san-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0px;
+            color: #ffffff;
+        }
+    }
+
+    .ab-pricing-table {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e5e7eb;
+        border-radius: 0 0 4px 4px;
+        overflow: hidden;
+
+        &__sub-header {
+            padding: 7px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #75757526;
+
+            font-family: helvetica, san-serif;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0px;
+            text-align: left;
+            color: #1d1d1d;
+        }
+
+        &__pricing {
+            &--mobile {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            }
+
+            &--desktop {
+                display: none;
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            background-color: #f9f9fb;
+
+            border-bottom: 1px solid #e5e7eb;
+
+            li:not(:last-child) {
+                border-right: 1px solid #e5e7eb;
+            }
+
+            &__item {
+                padding: 12px 8px;
+                display: flex;
+                flex-direction: column;
+            }
+
+            &__roll-count {
+                font-family: helvetica, san-serif;
+                font-weight: 700;
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: -0.15px;
+                text-align: center;
+                color: #1d1d1d;
+                margin-bottom: 4px;
+            }
+
+            &__save {
+                font-family: helvetica, san-serif;
+                font-weight: 400;
+                font-size: 11px;
+                line-height: 18px;
+                letter-spacing: 0px;
+                text-align: center;
+                color: #1d1d1d;
+            }
+
+            &__save-percentage {
+                margin: auto;
+                width: 49px;
+                height: 20px;
+                background-color: #eb00001a;
+                border-radius: 4px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                font-family: helvetica, san-serif;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 18px;
+                letter-spacing: 0px;
+                text-align: center;
+                color: #eb0000;
+
+                margin-bottom: 8px;
+            }
+
+            &__price {
+                font-family: helvetica, san-serif;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 16.5px;
+                letter-spacing: 0.06px;
+                text-align: center;
+                color: #1d1d1d;
+                // margin-bottom: 2px;
+            }
+
+            &__price-per-yard {
+                font-family: helvetica, san-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 16.5px;
+                letter-spacing: 0.06px;
+                text-align: center;
+                color: #6A7282;
+                margin-bottom: 4px;
+            }
+        }
+
+        &__footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 16px;
+            background-color: #ffffff;
+
+            &__right {
+                a {
+                    font-family: helvetica, san-serif;
+                    font-weight: 700;
+                    font-size: 12px;
+                    line-height: 16px;
+                    letter-spacing: 0px;
+                    text-align: right;
+                    color: #cc0000;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-pricing-table-wrapper {
+            flex-grow: 1;
+            padding-right: 24px;
+        }
+
+        .ab-pricing-header {
+            border: 1px solid #e5e7eb;
+            border-bottom: none;
+            padding: 10px 16px 10px 16px;
+        }
+
+        .ab-pricing-table {
+            &__sub-header {
+                padding: 7px 16px;
+                background-color: #ffffff;
+            }
+
+            &__pricing {
+                &--mobile {
+                    display: none;
+                }
+
+                &--desktop {
+                    display: grid;
+                }
+            }
+        }
+    }
+}
+
 // font-family: helvetica,san-serif;
