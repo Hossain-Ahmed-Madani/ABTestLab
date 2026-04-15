@@ -13,6 +13,10 @@
 }
 
 .AB-ECX-186 {
+    .sp-footer {
+        padding-bottom: 7rem;
+    }
+
     .ab-offer-bar {
         background-color: #ff0066;
         color: #fff;
@@ -36,7 +40,6 @@
             }
 
             &__icon {
-
                 position: relative;
 
                 width: 24px;
@@ -46,7 +49,6 @@
                 align-items: center;
 
                 svg {
-
                     position: relative;
                     top: 0;
                     left: 0;
@@ -69,6 +71,8 @@
 
         &__content {
             padding-top: 8px;
+            padding-left: 8px;
+            padding-right: 8px;
             color: #fff;
 
             font-family: Roboto, sans-serif;

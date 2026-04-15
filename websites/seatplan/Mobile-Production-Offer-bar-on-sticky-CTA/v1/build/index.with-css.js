@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-ECX-186 .ab-offer-bar {
+      style.innerHTML = `.AB-ECX-186 .sp-footer {
+  padding-bottom: 7rem;
+}
+.AB-ECX-186 .ab-offer-bar {
   background-color: #ff0066;
   color: #fff;
   margin: -8px -8px 8px -8px;
@@ -51,6 +54,8 @@
 }
 .AB-ECX-186 .ab-offer-bar__content {
   padding-top: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
   color: #fff;
   font-family: Roboto, sans-serif;
   font-weight: 400;
@@ -81,15 +86,17 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004194368/summary
+
+Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_eforce=1004194368.1004456989&utm_campaign=qa5
+*/
+
 (async () => {
   const TEST_CONFIG = {
-    client: "SeatPlan",
-    project: "SeatPlan",
-    site_url: "https://seatplan.com",
-    test_name: "[ECX-186] - Mobile - Production - Offer bar on sticky CTA",
     page_initials: "AB-ECX-186",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -154,7 +161,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
 
     const offerElement = q(
       ".sp-production-offer-content.sp-production-offer-content--v2",
@@ -163,7 +169,7 @@
     q("#production-page-mobile-sticky-bar").insertAdjacentHTML(
       "afterbegin",
       /* HTML */ `
-        <div class="ab-offer-bar ab-offer-bar--expanded">
+        <div class="ab-offer-bar">
           <div class="ab-offer-bar__header">
             <div class="ab-offer-bar__header__text">
               ${q(
@@ -188,7 +194,6 @@
           const targetNode = q(".ab-offer-bar");
 
           if (!targetNode.classList.contains("ab-offer-bar--expanded")) {
-            console.log("GOAL: Expands sticky CTA offer bar | JS: 1004117485");
             window._conv_q = window._conv_q || [];
             window._conv_q.push(["triggerConversion", "1004117485"]);
           }
@@ -213,7 +218,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

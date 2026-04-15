@@ -1,3 +1,6 @@
+.AB-ECX-186 .sp-footer {
+    padding-bottom: 7rem;
+}
 .AB-ECX-186 .ab-offer-bar {
     background-color: #ff0066;
     color: #fff;
@@ -45,6 +48,8 @@
 }
 .AB-ECX-186 .ab-offer-bar__content {
     padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
     color: #fff;
     font-family: Roboto, sans-serif;
     font-weight: 400;

@@ -12,7 +12,7 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
         test_name: "[ECX-186] - Mobile - Production - Offer bar on sticky CTA",
         page_initials: "AB-ECX-186",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -68,7 +68,6 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         const offerElement = q(".sp-production-offer-content.sp-production-offer-content--v2");
 
@@ -92,7 +91,6 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
                 const targetNode =  q('.ab-offer-bar');
 
                 if(!targetNode.classList.contains('ab-offer-bar--expanded')) { 
-                    console.log('GOAL: Expands sticky CTA offer bar | JS: 1004117485');
                     window._conv_q = window._conv_q || [];
                     window._conv_q.push(["triggerConversion", "1004117485"]);
                 }
@@ -114,7 +112,6 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
