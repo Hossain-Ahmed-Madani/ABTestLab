@@ -2,6 +2,15 @@
 .AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
   display: none;
 }
+.AB-EXP-299 .final-price.inline-block {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  white-space: nowrap;
+}
+.AB-EXP-299 .final-price.inline-block .price {
+  display: inline-block;
+}
 .AB-EXP-299 #trust_signal {
   padding: 13px;
   flex-direction: column;
@@ -60,6 +69,7 @@
 }
 
 .AB-EXP-299 .ab-pricing-table-wrapper {
+  margin-top: 17px;
   width: 100%;
 }
 .AB-EXP-299 .ab-pricing-header {
@@ -180,7 +190,7 @@
   line-height: 16.5px;
   letter-spacing: 0.06px;
   text-align: center;
-  color: #6A7282;
+  color: #6a7282;
   margin-bottom: 4px;
 }
 .AB-EXP-299 .ab-pricing-table__footer {
@@ -219,5 +229,51 @@
   }
   .AB-EXP-299 .ab-pricing-table__pricing--desktop {
     display: grid;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__item {
+    padding: 12px 16px;
+    background-color: #f9f9fb;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing li:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid #e5e7eb;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__roll-count {
+    text-align: left;
+    margin-bottom: 5px;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__save-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__save {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__save-percentage {
+    margin-bottom: 0;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__price {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: -0.15px;
+    text-align: right;
+    margin-bottom: 2px;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing__price-per-yard {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: right;
+    margin-bottom: 0;
   }
 }

@@ -58,34 +58,35 @@
                         <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                             ${Array.from({ length: 3 })
                                 .map(
-                                    (_, index) => `
-                                    <li class="ab-pricing-table__pricing__item">
-                                
-                                    <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
+                                    (_, index) => /* HTML */ `
+                                        <li class="ab-pricing-table__pricing__item">
+                                            <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
                                             <div class="ab-pricing-table__pricing__roll-count">6 ROLLS+</div>
                                             <div class="ab-pricing-table__pricing__price">$11.25</div>
                                             <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
                                             <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                    </li>
+                                        </li>
                                     `,
                                 )
                                 .join("")}
                         </ul>
-                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop" style="border:1px solid red;">
+                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                             ${Array.from({ length: 3 })
                                 .map(
-                                    (_, index) => `
-                                    <li class="ab-pricing-table__pricing__item">
-                                        <div class="ab-pricing-table__pricing__left">
-                                            <div class="ab-pricing-table__pricing__roll-count">6 ROLLS+</div>
-                                            <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                            <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
-                                        </div>
-                                        <div class="ab-pricing-table__pricing__item__right">
-                                            <div class="ab-pricing-table__pricing__price">$11.25</div>
-                                            <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
-                                        </div>
-                                    </li>
+                                    (_, index) => /* HTML */ `
+                                        <li class="ab-pricing-table__pricing__item">
+                                            <div class="ab-pricing-table__pricing__left">
+                                                <div class="ab-pricing-table__pricing__roll-count">Buy 6+ ROLLS</div>
+                                                <div class="ab-pricing-table__pricing__save-container">
+                                                    <div class="ab-pricing-table__pricing__save">You save $25.00</div>
+                                                    <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
+                                                </div>
+                                            </div>
+                                            <div class="ab-pricing-table__pricing__item__right">
+                                                <div class="ab-pricing-table__pricing__price">$11.25</div>
+                                                <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
+                                            </div>
+                                        </li>
                                     `,
                                 )
                                 .join("")}

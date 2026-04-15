@@ -11,31 +11,6 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -60,28 +35,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -90,43 +43,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
 
     function isSafari() {
         const userAgent = navigator.userAgent;
@@ -135,12 +51,6 @@
 
     function isTouchEnabled() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
     function createLayout() {
@@ -162,34 +72,35 @@
                         <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                             ${Array.from({ length: 3 })
                                 .map(
-                                    (_, index) => `
-                                    <li class="ab-pricing-table__pricing__item">
-                                
-                                    <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
+                                    (_, index) => /* HTML */ `
+                                        <li class="ab-pricing-table__pricing__item">
+                                            <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
                                             <div class="ab-pricing-table__pricing__roll-count">6 ROLLS+</div>
                                             <div class="ab-pricing-table__pricing__price">$11.25</div>
                                             <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
                                             <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                    </li>
+                                        </li>
                                     `,
                                 )
                                 .join("")}
                         </ul>
-                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop" style="border:1px solid red;">
+                        <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                             ${Array.from({ length: 3 })
                                 .map(
-                                    (_, index) => `
-                                    <li class="ab-pricing-table__pricing__item">
-                                        <div class="ab-pricing-table__pricing__left">
-                                            <div class="ab-pricing-table__pricing__roll-count">6 ROLLS+</div>
-                                            <div class="ab-pricing-table__pricing__save">You save $25.00</div>
-                                            <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
-                                        </div>
-                                        <div class="ab-pricing-table__pricing__item__right">
-                                            <div class="ab-pricing-table__pricing__price">$11.25</div>
-                                            <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
-                                        </div>
-                                    </li>
+                                    (_, index) => /* HTML */ `
+                                        <li class="ab-pricing-table__pricing__item">
+                                            <div class="ab-pricing-table__pricing__left">
+                                                <div class="ab-pricing-table__pricing__roll-count">Buy 6+ ROLLS</div>
+                                                <div class="ab-pricing-table__pricing__save-container">
+                                                    <div class="ab-pricing-table__pricing__save">You save $25.00</div>
+                                                    <div class="ab-pricing-table__pricing__save-percentage">-10%</div>
+                                                </div>
+                                            </div>
+                                            <div class="ab-pricing-table__pricing__item__right">
+                                                <div class="ab-pricing-table__pricing__price">$11.25</div>
+                                                <div class="ab-pricing-table__pricing__price-per-yard">($0.45/yard)</div>
+                                            </div>
+                                        </li>
                                     `,
                                 )
                                 .join("")}
