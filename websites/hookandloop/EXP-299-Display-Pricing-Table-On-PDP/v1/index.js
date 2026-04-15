@@ -52,28 +52,45 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    let basePricePerQuantity = 0;
-    let currentSelectedQuantity = 0;
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    let startingPrice;
+    let pricePerYard;
+    let currentSelectedQuantity;
+    let soldInSize;
+    let closestQuantityToApplyDiscount;
 
     function getPricingTableLayout() {
-        basePricePerQuantity = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "");
+        startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "");
+        pricePerYard = +q(" span[x-html='getPerYardPrice()']").textContent.replace("$", "");
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
-        let activeQuantity;
+        soldInSize = currentSelectedQuantity; /* Initially soldInSize can be determined by initial quantity of the product */
 
         const data = qq(".discount-box ul li").reduce((acc, li) => {
-            const quantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
+            const controlPriceTableQuantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
             const savePercentage = +q(li, '.save_percent span[x-text="discount.discount"]').textContent ?? 0;
 
-            if (!activeQuantity && currentSelectedQuantity <= quantity) {
-                activeQuantity = quantity;
+            if (currentSelectedQuantity >= controlPriceTableQuantity) {
+                closestQuantityToApplyDiscount = controlPriceTableQuantity;
             }
 
             acc.push({
                 unit: q(li, '.roll-no span[x-text="discount.unit"]').textContent ?? "",
-                quantity: quantity,
-                discountedPrice: quantity * basePricePerQuantity * (1 - savePercentage / 100),
-                "price-per-yard": "",
-                saveAmount: (quantity * basePricePerQuantity * (savePercentage / 100)).toFixed(2),
+                quantity: controlPriceTableQuantity,
+                // discountedPrice: controlPriceTableQuantity * startingPrice * (1 - savePercentage / 100),
+                discountedPrice: controlPriceTableQuantity * (startingPrice / soldInSize) * (1 - savePercentage / 100),
+                discountPerYard: pricePerYard - pricePerYard * (1 - savePercentage / 100),
+                saveAmount: (controlPriceTableQuantity * startingPrice * (savePercentage / 100)).toFixed(2),
                 savePercentage: savePercentage,
             });
 
@@ -82,16 +99,18 @@
 
         return /* HTML */ `
             <div class="ab-pricing-table">
-                <div class="ab-pricing-table__sub-header">✦ Add ${currentSelectedQuantity - data[0].quantity} more roll to unlock ${data[0].savePercentage}% off</div>
+                <div class="ab-pricing-table__sub-header">
+                    ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more roll to unlock ${data[0].savePercentage}% off
+                </div>
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                     ${data
                         .map(
-                            ({ savePercentage, quantity, unit, discountedPrice, pricePerYard, saveAmount }, index) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item ${activeQuantity === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
+                            ({ savePercentage, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
                                     <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
-                                    <div class="ab-pricing-table__pricing__quantity">${quantity}+ ${unit}</div>
+                                    <div class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
                                     <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
-                                    ${pricePerYard ? `<div class="ab-pricing-table__pricing__price-per-yard">(${pricePerYard.toFixed(2)}/yard)</div>` : ""}
+                                    ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
                                     <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
                                 </li>
                             `,
@@ -101,10 +120,10 @@
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                     ${data
                         .map(
-                            ({ quantity, unit, discountedPrice, pricePerYard, saveAmount, savePercentage }, index) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item ${activeQuantity === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
+                            ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, savePercentage }) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
                                     <div class="ab-pricing-table__pricing__left">
-                                        <div class="ab-pricing-table__pricing__quantity">Buy ${quantity}+ ${unit}</div>
+                                        <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
                                         <div class="ab-pricing-table__pricing__save-container">
                                             <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
                                             <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
@@ -112,7 +131,7 @@
                                     </div>
                                     <div class="ab-pricing-table__pricing__right">
                                         <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
-                                        ${pricePerYard ? `<div class="ab-pricing-table__pricing__price-per-yard">(${pricePerYard.toFixed(2)}/yard)</div>` : ""}
+                                        ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
                                     </div>
                                 </li>
                             `,
@@ -127,6 +146,17 @@
                 </div>
             </div>
         `;
+    }
+
+    function updatePricingTableActiveQuantity() {
+        qq(".ab-pricing-table__pricing__item--active")?.forEach((item) => {
+            item.classList.remove("ab-pricing-table__pricing__item--active");
+        });
+
+        qq(".ab-pricing-table__pricing__item")?.forEach((item) => {
+            const priceTableQuantity = +q(item, ".ab-quantity").textContent;
+            if (currentSelectedQuantity >= priceTableQuantity && priceTableQuantity === closestQuantityToApplyDiscount) item.classList.add("ab-pricing-table__pricing__item--active");
+        });
     }
 
     function createLayout() {
@@ -149,10 +179,42 @@
         );
     }
 
+    const debouncedFinalPriceAndActiveQuantityUpdate = debounce((e) => {
+        startingPrice = +e.detail;
+        currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
+        closestQuantityToApplyDiscount = null;
+        qq(".ab-quantity").forEach((item) => {
+            const priceTableQuantity = +item.textContent;
+            if (currentSelectedQuantity >= priceTableQuantity) closestQuantityToApplyDiscount = priceTableQuantity;
+        });
+
+        qq(".ab-pricing-table__pricing__item--active")?.forEach((item) => {
+            item.classList.remove("ab-pricing-table__pricing__item--active");
+        });
+
+        qq(".ab-pricing-table__pricing__item")?.forEach((item) => {
+            const priceTableQuantity = +q(item, ".ab-quantity").textContent;
+            if (currentSelectedQuantity >= priceTableQuantity && priceTableQuantity === closestQuantityToApplyDiscount) item.classList.add("ab-pricing-table__pricing__item--active");
+        });
+
+        const nextNearestQuantity = +qq(".ab-quantity").find((item) => currentSelectedQuantity < item.textContent)?.textContent ?? 0;
+        q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
+    }, 150);
+
+    function eventListener() {
+        window.addEventListener("update-product-final-price", (e) => debouncedFinalPriceAndActiveQuantityUpdate(e));
+
+        window.addEventListener("configurable-selection-changed", (e) => {
+            console.log("==== bothSelected | discount [] | smeasureSoldInSize | configurable-selection-changed ====", e.detail);
+            const { discounts, smeasureSoldInSize } = e.detail;
+        });
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         createLayout();
+        eventListener();
     }
 
     function checkForItems() {
