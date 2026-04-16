@@ -1,0 +1,13 @@
+{
+  "id": "1776074762821_6546_EXP_299_Display_Pricing_Table_On_PDP",
+  "name": "EXP-299-Display-Pricing-Table-On-PDP",
+  "type": "A/B",
+  "website": "hookandloop",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-13T10:06:02.821Z",
+  "createdAtReadable": "4/13/2026, 4:06:02 PM",
+  "lastUpdated": "2026-04-13T10:06:02.929Z"
+}
