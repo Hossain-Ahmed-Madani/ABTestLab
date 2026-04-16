@@ -1,3 +1,10 @@
+/* 
+
+Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34857&variation_id=52180&search=Hook+%26+Loop+299+-+A%2FB+test+idea+-+Display+pricing+table+on+PDP+instead+of+single+price
+Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-force=34857-52180
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "Hook and Loop",
