@@ -100,7 +100,8 @@
         return /* HTML */ `
             <div class="ab-pricing-table">
                 <div class="ab-pricing-table__sub-header">
-                    ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more roll to unlock ${data[0].savePercentage}% off
+                    ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more roll to unlock
+                    <span class="ab-save-percentage-to-unlock">${data[0].savePercentage}%</span> off
                 </div>
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                     ${data
@@ -197,8 +198,17 @@
             if (currentSelectedQuantity >= priceTableQuantity && priceTableQuantity === closestQuantityToApplyDiscount) item.classList.add("ab-pricing-table__pricing__item--active");
         });
 
-        const nextNearestQuantity = +qq(".ab-quantity").find((item) => currentSelectedQuantity < item.textContent)?.textContent ?? 0;
+        const nextNearestQuantity = +qq(".ab-quantity").find((item) => currentSelectedQuantity < item.textContent)?.textContent || null;
+        const nextNearestDiscountNode = qq(".ab-pricing-table__pricing__item").find((item) => {
+            const priceTableQuantity = +q(item, ".ab-quantity").textContent;
+            return nextNearestQuantity ? priceTableQuantity === nextNearestQuantity : priceTableQuantity === closestQuantityToApplyDiscount;
+        });
+
+        const nextNearestDiscountPercentage = q(nextNearestDiscountNode, ".ab-pricing-table__pricing__save-percentage").textContent.replace("-", "");
+
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
+        q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
+        
     }, 150);
 
     function eventListener() {
