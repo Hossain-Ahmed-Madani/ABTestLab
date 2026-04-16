@@ -1,3 +1,4 @@
+.AB-EXP-299 #qty-counter,
 .AB-EXP-299 p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
 .AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
   display: none;
@@ -125,14 +126,6 @@
   background-color: #f9f9fb;
   border-bottom: 1px solid #e5e7eb;
 }
-.AB-EXP-299 .ab-pricing-table__pricing--mobile {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-}
-.AB-EXP-299 .ab-pricing-table__pricing--desktop {
-  display: none;
-  grid-template-columns: repeat(1, 1fr);
-}
 .AB-EXP-299 .ab-pricing-table__pricing li:not(:last-child) {
   border-right: 1px solid #e5e7eb;
 }
@@ -201,6 +194,14 @@
   color: #6a7282;
   margin-bottom: 4px;
 }
+.AB-EXP-299 .ab-pricing-table__pricing--mobile {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+}
+.AB-EXP-299 .ab-pricing-table__pricing--desktop {
+  display: none;
+  grid-template-columns: repeat(1, 1fr);
+}
 .AB-EXP-299 .ab-pricing-table__footer {
   display: flex;
   justify-content: space-between;
@@ -231,12 +232,6 @@
   .AB-EXP-299 .ab-pricing-table__sub-header {
     padding: 7px 16px;
     background-color: #ffffff;
-  }
-  .AB-EXP-299 .ab-pricing-table__pricing--mobile {
-    display: none;
-  }
-  .AB-EXP-299 .ab-pricing-table__pricing--desktop {
-    display: grid;
   }
   .AB-EXP-299 .ab-pricing-table__pricing__item {
     padding: 12px 16px;
@@ -294,5 +289,11 @@
     letter-spacing: 0px;
     text-align: right;
     margin-bottom: 0;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing--mobile {
+    display: none;
+  }
+  .AB-EXP-299 .ab-pricing-table__pricing--desktop {
+    display: grid;
   }
 }

@@ -62,14 +62,14 @@
     let closestQuantityToApplyDiscount;
 
     function getPricingTableLayout() {
-        startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "");
         pricePerYard = +q(" span[x-html='getPerYardPrice()']").textContent.replace("$", "");
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         soldInSize = currentSelectedQuantity; /* Initially soldInSize can be determined by initial quantity of the product */
+        startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "") / soldInSize;
 
         const data = qq(".discount-box ul li").reduce((acc, li) => {
             const controlPriceTableQuantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
-            const savePercentage = +q(li, '.save_percent span[x-text="discount.discount"]').textContent ?? 0;
+            const discount = +q(li, '.save_percent span[x-text="discount.discount"]').textContent ?? 0;
 
             if (currentSelectedQuantity >= controlPriceTableQuantity) {
                 closestQuantityToApplyDiscount = controlPriceTableQuantity;
@@ -78,11 +78,11 @@
             acc.push({
                 unit: q(li, '.roll-no span[x-text="discount.unit"]').textContent ?? "",
                 quantity: controlPriceTableQuantity,
-                // discountedPrice: controlPriceTableQuantity * startingPrice * (1 - savePercentage / 100),
-                discountedPrice: controlPriceTableQuantity * (startingPrice / soldInSize) * (1 - savePercentage / 100),
-                discountPerYard: pricePerYard - pricePerYard * (1 - savePercentage / 100),
-                saveAmount: (controlPriceTableQuantity * startingPrice * (savePercentage / 100)).toFixed(2),
-                savePercentage: savePercentage,
+                discountedPrice: (startingPrice - (startingPrice * (discount / 100))) * controlPriceTableQuantity,
+                discountPerYard: pricePerYard - pricePerYard * (discount / 100),
+                saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
+                saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
+                discount: discount,
             });
 
             return acc;
@@ -92,14 +92,14 @@
             <div class="ab-pricing-table">
                 <div class="ab-pricing-table__sub-header">
                     ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more roll to unlock
-                    <span class="ab-save-percentage-to-unlock">${data[0].savePercentage}%</span> off
+                    <span class="ab-save-percentage-to-unlock">${data[0].discount}%</span> off
                 </div>
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                     ${data
                         .map(
-                            ({ savePercentage, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
-                                    <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
+                            ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item">
+                                    <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
                                     <div class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
                                     <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
                                     ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
@@ -112,13 +112,13 @@
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                     ${data
                         .map(
-                            ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, savePercentage }) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount === quantity ? "ab-pricing-table__pricing__item--active" : ""}">
+                            ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
+                                <li class="ab-pricing-table__pricing__item">
                                     <div class="ab-pricing-table__pricing__left">
                                         <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
                                         <div class="ab-pricing-table__pricing__save-container">
                                             <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
-                                            <div class="ab-pricing-table__pricing__save-percentage">-${savePercentage}%</div>
+                                            <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
                                         </div>
                                     </div>
                                     <div class="ab-pricing-table__pricing__right">
@@ -164,6 +164,7 @@
         startingPrice = +e.detail;
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         closestQuantityToApplyDiscount = null;
+
         qq(".ab-quantity").forEach((item) => {
             const priceTableQuantity = +item.textContent;
             if (currentSelectedQuantity >= priceTableQuantity) closestQuantityToApplyDiscount = priceTableQuantity;
@@ -188,16 +189,82 @@
 
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
         q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
-        
     }, 150);
 
-    function eventListener() {
-        window.addEventListener("update-product-final-price", (e) => debouncedFinalPriceAndActiveQuantityUpdate(e));
+    const debouncedRecreatePricingTable = debounce((e) => {
+        const { bothSelected, discounts, smeasureSoldInSize } = e.detail;
 
-        window.addEventListener("configurable-selection-changed", (e) => {
-            console.log("==== bothSelected | discount [] | smeasureSoldInSize | configurable-selection-changed ====", e.detail);
-            const { discounts, smeasureSoldInSize } = e.detail;
-        });
+        soldInSize = smeasureSoldInSize;
+        pricePerYard =  (startingPrice / soldInSize ) / (bothSelected  === true ? 2 : 1);
+        currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
+
+        const data = discounts.reduce((acc, { qty, discount, unit }) => {
+            acc.push({
+                unit: unit,
+                quantity: qty,
+                discountedPrice: (startingPrice - (startingPrice * (discount / 100))) * qty,
+                discountPerYard: pricePerYard - pricePerYard * (discount / 100),
+                saveAmount: (qty * startingPrice * (discount / 100)).toFixed(2),
+                discount: discount,
+            });
+
+            return acc;
+        }, []);
+
+        q(".ab-pricing-table").innerHTML = /* HTML */ `
+            <div class="ab-pricing-table__sub-header">
+                ✦ Add <span class="ab-quantity-to-unlock">${discounts[0].qty - currentSelectedQuantity}</span> more roll to unlock
+                <span class="ab-save-percentage-to-unlock">${discounts[0].discount}%</span> off
+            </div>
+            <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
+                ${data
+                    .map(
+                        ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
+                            <li class="ab-pricing-table__pricing__item">
+                                <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
+                                <div class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
+                                <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
+                                ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
+                                <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                            </li>
+                        `,
+                    )
+                    .join("")}
+            </ul>
+            <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
+                ${data
+                    .map(
+                        ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
+                            <li class="ab-pricing-table__pricing__item">
+                                <div class="ab-pricing-table__pricing__left">
+                                    <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
+                                    <div class="ab-pricing-table__pricing__save-container">
+                                        <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                                        <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
+                                    </div>
+                                </div>
+                                <div class="ab-pricing-table__pricing__right">
+                                    <div class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</div>
+                                    ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
+                                </div>
+                            </li>
+                        `,
+                    )
+                    .join("")}
+            </ul>
+            <div class="ab-pricing-table__footer">
+                <div class="ab-pricing-table__footer__left"></div>
+                <div class="ab-pricing-table__footer__right">
+                    <a href="https://www.hookandloop.com/price-sheet?sku=Fasteners-DG-Sew-On" target="_blank" class="">See Full Price List →</a>
+                </div>
+            </div>
+        `;
+    }, 200);
+
+    function eventListener() {
+        window.addEventListener("update-product-final-price", debouncedFinalPriceAndActiveQuantityUpdate);
+
+        window.addEventListener("configurable-selection-changed", debouncedRecreatePricingTable);
     }
 
     function init() {
@@ -219,7 +286,14 @@
         );
     }
 
-    waitForElementAsync(checkForItems).then(() => {
-        init();
-    });
+    waitForElementAsync(checkForItems).then(init);
+
+
+    // AFTER QA COMPLETED
+    // try {
+    //     await waitForElementAsync(checkForItems);
+    //     init();
+    // } catch (error) {
+    //     return false
+    // }
 })();

@@ -13,6 +13,7 @@
 }
 
 .AB-EXP-299 {
+    #qty-counter,
     p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
     .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
         display: none;
@@ -164,18 +165,7 @@
         }
 
         &__pricing {
-            &--mobile {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-            }
-
-            &--desktop {
-                display: none;
-                grid-template-columns: repeat(1, 1fr);
-            }
-
             background-color: #f9f9fb;
-
             border-bottom: 1px solid #e5e7eb;
 
             li:not(:last-child) {
@@ -258,6 +248,16 @@
             }
         }
 
+        &__pricing--mobile {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+        }
+
+        &__pricing--desktop {
+            display: none;
+            grid-template-columns: repeat(1, 1fr);
+        }
+
         &__footer {
             display: flex;
             justify-content: space-between;
@@ -299,13 +299,7 @@
             }
 
             &__pricing {
-                &--mobile {
-                    display: none;
-                }
-
-                &--desktop {
-                    display: grid;
-                }
+             
 
                 &__item {
                     padding: 12px 16px;
@@ -373,6 +367,14 @@
                     text-align: right;
                     margin-bottom: 0;
                 }
+            }
+
+            &__pricing--mobile {
+                display: none;
+            }
+
+            &__pricing--desktop {
+                display: grid;
             }
         }
     }
