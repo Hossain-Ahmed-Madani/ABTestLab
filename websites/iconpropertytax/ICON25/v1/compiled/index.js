@@ -29,6 +29,41 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const DATA = [
+        // Date format: MM-DD-YYYY
+        // Timezone: USA Eastern
+        {
+            start_date: "" /* Now */,
+            end_date: "04-22-2026",
+            location: "Wake County",
+        },
+        {
+            start_date: "04-23-2026",
+            end_date: "05-04-2026",
+            location: "Mecklenburg County",
+        },
+        {
+            start_date: "05-05-2026",
+            end_date: "05-08-2026",
+            location: "Durham County",
+        },
+        {
+            start_date: "05-09-2026",
+            end_date: "05-15-2026",
+            location: "Guildord County",
+        },
+        {
+            start_date: "05-16-2026",
+            end_date: "05-20-2026",
+            location: "Cumberland County",
+        },
+        {
+            start_date: "05-21-2026",
+            end_date: "06-30-2026",
+            location: "Forsyth County",
+        },
+    ];
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -57,6 +92,10 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         return o ? s.querySelector(o) : document.querySelector(s);
     }
 
+    function qq(s, o) {
+        return [...document.querySelectorAll(s)];
+    }
+
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -68,7 +107,6 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
             timeout = setTimeout(later, wait);
         };
     }
-
 
     function createLayout() {
         q("head").insertAdjacentHTML(
@@ -98,28 +136,105 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
                     </div>
                     <ul class="ab-deadline-promo-bar__countdown">
                         <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">5</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
                             <span class="ab-deadline-promo-bar__countdown-item-label">DAYS</span>
                         </li>
                         <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
                         <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">16</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
                             <span class="ab-deadline-promo-bar__countdown-item-label">HRS</span>
                         </li>
                         <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
                         <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">11</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
                             <span class="ab-deadline-promo-bar__countdown-item-label">MINS</span>
                         </li>
                         <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
                         <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">49</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
                             <span class="ab-deadline-promo-bar__countdown-item-label">SECS</span>
                         </li>
                     </ul>
                 </div>
             `,
         );
+    }
+
+    let countdownInterval = null;
+
+    // Converts a MM-DD-YYYY end_date string to the UTC timestamp for
+    // 23:59:59 on that day in US Eastern time (handles EST/EDT automatically)
+    function parseEasternEndDate(dateStr) {
+        const [month, day, year] = dateStr.split("-");
+        const isoStr = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}T23:59:59`;
+        const ref = new Date(isoStr);
+        const easternRef = new Date(ref.toLocaleString("en-US", { timeZone: "America/New_York" }));
+        return new Date(ref.getTime() + (ref - easternRef));
+    }
+
+    // Step 1-5: Walk DATA and return the first entry whose end_date has not yet passed
+    function getActiveEntry() {
+        const now = new Date();
+        for (let i = 0; i < DATA.length; i++) {
+            if (now <= parseEasternEndDate(DATA[i].end_date)) {
+                return DATA[i];
+            }
+        }
+        return null; // Step 4: past every end_date
+    }
+
+    function pad(n) {
+        return String(n).padStart(2, "0");
+    }
+
+    function tick() {
+        const entry = getActiveEntry();
+        const countryEl = q(".ab-deadline-promo-bar__country");
+        const endDateEl = q(".ab-deadline-promo-bar__end-date");
+        const valueEls = qq(".ab-deadline-promo-bar__countdown-item-value");
+
+        // Step 4: all deadlines passed — zero out and stop
+        if (!entry) {
+            clearInterval(countdownInterval);
+            if (countryEl) countryEl.textContent = "";
+            if (endDateEl) endDateEl.textContent = "";
+            valueEls.forEach((el) => (el.textContent = "00"));
+            return;
+        }
+
+        // Step 8a: update location label
+        if (countryEl) countryEl.textContent = entry.location;
+
+        // Step 8b: update end-date label (e.g. " April 22")
+        const [month, day, year] = entry.end_date.split("-");
+        const endDateDisplay = new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+        });
+        if (endDateEl) endDateEl.textContent = ` ${endDateDisplay}`;
+
+        // Step 6: difference in milliseconds
+        const now = new Date();
+        const endTimestamp = parseEasternEndDate(entry.end_date);
+        const diff = Math.max(0, endTimestamp - now);
+
+        // Step 7: break into days / hours / minutes / seconds
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.floor((totalSeconds % 86400) / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        // Step 8c: push values into the four countdown spans
+        if (valueEls[0]) valueEls[0].textContent = pad(days);
+        if (valueEls[1]) valueEls[1].textContent = pad(hours);
+        if (valueEls[2]) valueEls[2].textContent = pad(minutes);
+        if (valueEls[3]) valueEls[3].textContent = pad(seconds);
+    }
+
+    function initCountdown() {
+        tick();
+        countdownInterval = setInterval(tick, 1000);
     }
 
     function handleLocationChanges() {
@@ -162,6 +277,7 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
             console.log("ICON25 initialized");
 
             createLayout();
+            initCountdown();
         } catch (error) {
             return false;
         }

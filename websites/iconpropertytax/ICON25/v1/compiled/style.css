@@ -68,7 +68,7 @@
   text-transform: capitalize;
   color: rgb(25, 33, 67);
 }
-.AB-ICON25 header.with-border .ab-deadline-promo-bar {
+.AB-ICON25 header.with-border {
   display: none;
 }
 @media screen and (max-width: 990.5px) {
