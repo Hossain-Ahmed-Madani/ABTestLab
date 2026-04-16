@@ -69,8 +69,61 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         };
     }
 
+
+    function createLayout() {
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <!-- Montserrat -->
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+                <!-- Bitter -->
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
+        q("header").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-deadline-promo-bar">
+                    <div class="ab-deadline-promo-bar__location-with-end-date">
+                        <span class="ab-deadline-promo-bar__country">Wake County</span>
+                        Appeals <br />
+                        Open — Deadline:
+                        <span class="ab-deadline-promo-bar__end-date"> April 22</span>
+                    </div>
+                    <ul class="ab-deadline-promo-bar__countdown">
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">5</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">DAYS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">16</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">HRS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">11</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">MINS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">49</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">SECS</span>
+                        </li>
+                    </ul>
+                </div>
+            `,
+        );
+    }
+
     function handleLocationChanges() {
-        if(q('.ab-cta-container')) return;
+        if (q(".ab-cta-container")) return;
 
         document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = false;
@@ -107,13 +160,15 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
             console.log("ICON25 initialized");
+
+            createLayout();
         } catch (error) {
             return false;
         }
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && document.readyState === "complete");
     }
 
     init_ICON25();

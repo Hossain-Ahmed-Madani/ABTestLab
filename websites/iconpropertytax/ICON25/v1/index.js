@@ -33,31 +33,6 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -82,28 +57,6 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -124,32 +77,6 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -159,14 +86,61 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
+
+    function createLayout() {
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <!-- Montserrat -->
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+
+                <!-- Bitter -->
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
+        q("header").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-deadline-promo-bar">
+                    <div class="ab-deadline-promo-bar__location-with-end-date">
+                        <span class="ab-deadline-promo-bar__country">Wake County</span>
+                        Appeals <br />
+                        Open — Deadline:
+                        <span class="ab-deadline-promo-bar__end-date"> April 22</span>
+                    </div>
+                    <ul class="ab-deadline-promo-bar__countdown">
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">5</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">DAYS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">16</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">HRS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">11</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">MINS</span>
+                        </li>
+                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                        <li class="ab-deadline-promo-bar__countdown-item">
+                            <span class="ab-deadline-promo-bar__countdown-item-value">49</span>
+                            <span class="ab-deadline-promo-bar__countdown-item-label">SECS</span>
+                        </li>
+                    </ul>
+                </div>
+            `,
+        );
     }
 
     function handleLocationChanges() {
-        if(q('.ab-cta-container')) return;
+        if (q(".ab-cta-container")) return;
 
         document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = false;
@@ -203,13 +177,15 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
             console.log("ICON25 initialized");
+
+            createLayout();
         } catch (error) {
             return false;
         }
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && document.readyState === "complete");
     }
 
     init_ICON25();
