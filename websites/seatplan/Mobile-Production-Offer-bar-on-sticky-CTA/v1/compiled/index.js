@@ -8,7 +8,7 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
     const TEST_CONFIG = {
         page_initials: "AB-ECX-186",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -84,6 +84,10 @@ Forced Variation: https://seatplan.com/london/les-miserables-tickets/?_conv_efor
 
                 q('.ab-offer-bar').classList.toggle('ab-offer-bar--expanded');
             });
+        });
+
+        q('.ab-offer-bar #offers-accordion-link').addEventListener('click', () => {
+            q('.sp-production-offer-content.sp-production-offer-content--v2 #offers-accordion-link').click();
         });
     }
 
