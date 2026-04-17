@@ -17,7 +17,41 @@
         display: none !important;
     }
 
+    &:has(header) {
+        
+
+        .ab-deadline-promo-bar {
+            position: fixed;
+        }
+
+        @media screen and (min-width: 991px) {
+            padding-top: 45px;
+        }
+    }
+
+    &--show-deadline-promo-bar {
+        header {
+            top: 45px;
+        }
+
+        header > div[style*="background: rgb(233, 255, 217)"][style*="position:fixed"],
+        header > div[style*="background:#E9FFD9"][style*="position:fixed"] {
+            top: calc(6.3125rem + 45px * var(--mantine-scale)) !important;
+        }
+
+        .ab-deadline-promo-bar {
+            // top: 0 !important;
+        }
+
+        @media screen and (min-width: 991px) {
+            // padding-top: 45px;
+        }
+    }
+
     .ab-deadline-promo-bar {
+        top: 0;
+        z-index: 100;
+
         width: 100%;
         height: 45px;
         background-color: rgba(242, 187, 53, 1);
@@ -92,15 +126,6 @@
         }
     }
 
-    header.with-border {
-        display: none;
-    }
-
-    @media screen and (max-width: 990.5px) {
-        header {
-            height: calc(104px + 45px);
-        }
-    }
     @media screen and (min-width: 991px) {
         .ab-deadline-promo-bar {
             width: 100%;

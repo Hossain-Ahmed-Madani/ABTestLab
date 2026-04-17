@@ -1,7 +1,24 @@
 .AB-ICON25 .ab-hidden {
   display: none !important;
 }
+.AB-ICON25:has(header) .ab-deadline-promo-bar {
+  position: fixed;
+}
+@media screen and (min-width: 991px) {
+  .AB-ICON25:has(header) {
+    padding-top: 45px;
+  }
+}
+.AB-ICON25--show-deadline-promo-bar header {
+  top: 45px;
+}
+.AB-ICON25--show-deadline-promo-bar header > div[style*="background: rgb(233, 255, 217)"][style*="position:fixed"],
+.AB-ICON25--show-deadline-promo-bar header > div[style*="background:#E9FFD9"][style*="position:fixed"] {
+  top: calc(6.3125rem + 45px * var(--mantine-scale)) !important;
+}
 .AB-ICON25 .ab-deadline-promo-bar {
+  top: 0;
+  z-index: 100;
   width: 100%;
   height: 45px;
   background-color: rgb(242, 187, 53);
@@ -67,14 +84,6 @@
   vertical-align: middle;
   text-transform: capitalize;
   color: rgb(25, 33, 67);
-}
-.AB-ICON25 header.with-border {
-  display: none;
-}
-@media screen and (max-width: 990.5px) {
-  .AB-ICON25 header {
-    height: 149px;
-  }
 }
 @media screen and (min-width: 991px) {
   .AB-ICON25 .ab-deadline-promo-bar {

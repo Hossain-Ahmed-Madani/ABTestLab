@@ -3,7 +3,7 @@
 Ticket: https://trello.com/c/GaLBAkwG/5089-%F0%9F%92%9B-icon25-sitewide-countdown-to-deadline-promo-bar-2-set-up-test
 Figma Design: https://www.figma.com/design/4QmluoK4icCDESChcVvgR5/ICON25---SITEWIDE--Countdown-to-Deadline-Promo-Bar?node-id=12-2&p=f&t=UtTy2T3CdFvDB9dn-0
 Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertytax.com/experience/2103890#c2642366:what
-
+https://www.iconpropertytax.com/trends/
 */
 
 (async () => {
@@ -154,7 +154,9 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
 
     function createLayout() {
         q("head").insertAdjacentHTML("beforeend", fontCDN);
-        q("header").insertAdjacentHTML("afterbegin", layout);
+        q("body").insertAdjacentHTML("afterbegin", layout);
+
+        q("body").classList.add(`${page_initials}--show-deadline-promo-bar`);
     }
 
     let countdownInterval = null;
@@ -237,30 +239,30 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         if (valueEls[2]) valueEls[2].textContent = pad(minutes);
         if (valueEls[3]) valueEls[3].textContent = pad(seconds);
 
+        const targetNodes = qq(".ab-deadline-promo-bar__countdown > li:nth-child(1), .ab-deadline-promo-bar__countdown > li:nth-child(2)");
 
-        const targetNodes = qq('.ab-deadline-promo-bar__countdown > li:nth-child(1), .ab-deadline-promo-bar__countdown > li:nth-child(2)');
-
-        if(days <= 0 ) {
-            targetNodes.forEach(node => node.classList.add('ab-hidden'));
+        if (days <= 0) {
+            targetNodes.forEach((node) => node.classList.add("ab-hidden"));
         } else {
-            targetNodes.forEach(node => node.classList.remove('ab-hidden'));
+            targetNodes.forEach((node) => node.classList.remove("ab-hidden"));
         }
 
-        if(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0 && entry.location !==  DATA[DATA.length - 1].location) {
+        if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0 && entry.location !== DATA[DATA.length - 1].location) {
             initCountdown();
         }
     }
 
     function initCountdown() {
-        if(countdownInterval) {
-            clearInterval(countdownInterval);
-        }
+        console.log("initCountdown");
+
+        if (countdownInterval) clearInterval(countdownInterval);
+
         tick();
         countdownInterval = setInterval(tick, 1000);
     }
 
     function handleLocationChanges() {
-        if (q(".ab-cta-container")) return;
+        if (q(".ab-deadline-promo-bar")) return;
 
         document.body.classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = false;
@@ -287,6 +289,21 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         });
     }
 
+    function showHidePromoBarOnScroll() {
+
+        // if(window.scrollY > 50) {
+        //     q("body").classList.remove(`${page_initials}--show-deadline-promo-bar`);
+        // } 
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY <= 10) {
+                q("body").classList.add(`${page_initials}--show-deadline-promo-bar`);
+            } else {
+                q("body").classList.remove(`${page_initials}--show-deadline-promo-bar`);
+            }
+        });
+    }
+
     async function init_ICON25() {
         if (window[page_initials] === true) return;
 
@@ -300,6 +317,7 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
 
             createLayout();
             initCountdown();
+            showHidePromoBarOnScroll();
         } catch (error) {
             return false;
         }
