@@ -176,8 +176,9 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
     // Step 1-5: Walk DATA and return the first entry whose end_date has not yet passed
     function getActiveEntry() {
         const now = new Date();
+        const nowEastern = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
         for (let i = 0; i < DATA.length; i++) {
-            if (now <= parseEasternEndDate(DATA[i].end_date)) {
+            if (nowEastern <= parseEasternEndDate(DATA[i].end_date)) {
                 return DATA[i];
             }
         }
@@ -239,9 +240,25 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         if (valueEls[1]) valueEls[1].textContent = pad(hours);
         if (valueEls[2]) valueEls[2].textContent = pad(minutes);
         if (valueEls[3]) valueEls[3].textContent = pad(seconds);
+
+
+        const targetNodes = qq('.ab-deadline-promo-bar__countdown > li:nth-child(1), .ab-deadline-promo-bar__countdown > li:nth-child(2)');
+
+        if(days <= 0 ) {
+            targetNodes.forEach(node => node.classList.add('ab-hidden'));
+        } else {
+            targetNodes.forEach(node => node.classList.remove('ab-hidden'));
+        }
+
+        if(days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0 && entry.location !==  DATA[DATA.length - 1].location) {
+            initCountdown();
+        }
     }
 
     function initCountdown() {
+        if(countdownInterval) {
+            clearInterval(countdownInterval);
+        }
         tick();
         countdownInterval = setInterval(tick, 1000);
     }

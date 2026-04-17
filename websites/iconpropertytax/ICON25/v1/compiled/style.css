@@ -1,5 +1,5 @@
 .AB-ICON25 .ab-hidden {
-  display: none;
+  display: none !important;
 }
 .AB-ICON25 .ab-deadline-promo-bar {
   width: 100%;
