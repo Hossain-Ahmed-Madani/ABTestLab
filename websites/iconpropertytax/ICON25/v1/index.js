@@ -112,65 +112,53 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
         };
     }
 
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
+    const fontCDN = /* HTML */ `
+        <!-- Montserrat -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
+        <!-- Bitter -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+    `;
+
+    const layout = /* HTML */ `
+        <div class="ab-deadline-promo-bar">
+            <div class="ab-deadline-promo-bar__location-with-end-date">
+                <span class="ab-deadline-promo-bar__country">Wake County</span>
+                Appeals <br />
+                Open — Deadline:
+                <span class="ab-deadline-promo-bar__end-date"> April 22</span>
+            </div>
+            <ul class="ab-deadline-promo-bar__countdown">
+                <li class="ab-deadline-promo-bar__countdown-item">
+                    <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
+                    <span class="ab-deadline-promo-bar__countdown-item-label">DAYS</span>
+                </li>
+                <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                <li class="ab-deadline-promo-bar__countdown-item">
+                    <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
+                    <span class="ab-deadline-promo-bar__countdown-item-label">HRS</span>
+                </li>
+                <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                <li class="ab-deadline-promo-bar__countdown-item">
+                    <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
+                    <span class="ab-deadline-promo-bar__countdown-item-label">MINS</span>
+                </li>
+                <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
+                <li class="ab-deadline-promo-bar__countdown-item">
+                    <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
+                    <span class="ab-deadline-promo-bar__countdown-item-label">SECS</span>
+                </li>
+            </ul>
+        </div>
+    `;
 
     function createLayout() {
-        q("head").insertAdjacentHTML(
-            "beforeend",
-            /* HTML */ `
-                <!-- Montserrat -->
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-
-                <!-- Bitter -->
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-                <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `,
-        );
-
-        q("header").insertAdjacentHTML(
-            "afterbegin",
-            /* HTML */ `
-                <div class="ab-deadline-promo-bar">
-                    <div class="ab-deadline-promo-bar__location-with-end-date">
-                        <span class="ab-deadline-promo-bar__country">Wake County</span>
-                        Appeals <br />
-                        Open — Deadline:
-                        <span class="ab-deadline-promo-bar__end-date"> April 22</span>
-                    </div>
-                    <ul class="ab-deadline-promo-bar__countdown">
-                        <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
-                            <span class="ab-deadline-promo-bar__countdown-item-label">DAYS</span>
-                        </li>
-                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
-                        <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
-                            <span class="ab-deadline-promo-bar__countdown-item-label">HRS</span>
-                        </li>
-                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
-                        <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
-                            <span class="ab-deadline-promo-bar__countdown-item-label">MINS</span>
-                        </li>
-                        <li class="ab-deadline-promo-bar__countdown-item-separator">:</li>
-                        <li class="ab-deadline-promo-bar__countdown-item">
-                            <span class="ab-deadline-promo-bar__countdown-item-value">00</span>
-                            <span class="ab-deadline-promo-bar__countdown-item-label">SECS</span>
-                        </li>
-                    </ul>
-                </div>
-            `,
-        );
+        q("head").insertAdjacentHTML("beforeend", fontCDN);
+        q("header").insertAdjacentHTML("afterbegin", layout);
     }
 
     let countdownInterval = null;
@@ -208,10 +196,18 @@ Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertyt
 
         // Step 4: all deadlines passed — zero out and stop
         if (!entry) {
-            clearInterval(countdownInterval);
-            if (countryEl) countryEl.textContent = "";
-            if (endDateEl) endDateEl.textContent = "";
+            const lastEntry = DATA[DATA.length - 1];
+            const [month, day, year] = lastEntry.end_date.split("-");
+            const endDateDisplay = new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+            });
+
+            if (countryEl) countryEl.textContent = lastEntry.location;
+            if (endDateEl) endDateEl.textContent = ` ${endDateDisplay}`;
             valueEls.forEach((el) => (el.textContent = "00"));
+
+            clearInterval(countdownInterval);
             return;
         }
 
