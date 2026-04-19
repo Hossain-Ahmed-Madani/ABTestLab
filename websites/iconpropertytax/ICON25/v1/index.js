@@ -5,6 +5,16 @@ Figma Design: https://www.figma.com/design/4QmluoK4icCDESChcVvgR5/ICON25---SITEW
 Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertytax.com/experience/2103890#c2642366:what
 https://www.iconpropertytax.com/trends/
 https://www.iconpropertytax.com/signup/state-lead/
+
+Preview URL:
+Excluding other experiences:
+V1: https://marketer.monetate.net/control/preview/12917/F2RGHD4QWUUIZJQKCNYUTZ172H58CR8V/icon25-sitewide-countdown-to-deadline-promo-bar
+
+Including all experiences:
+V1: https://marketer.monetate.net/control/preview/12917/R0KWJCIY7C3PS4KU6DGUCCYD52WO6ZF9/icon25-sitewide-countdown-to-deadline-promo-bar
+
+
+
 */
 
 (async () => {
