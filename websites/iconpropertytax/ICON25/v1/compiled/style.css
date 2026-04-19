@@ -1,24 +1,7 @@
 .AB-ICON25 .ab-hidden {
   display: none !important;
 }
-.AB-ICON25:has(header) .ab-deadline-promo-bar {
-  position: fixed;
-}
-@media screen and (min-width: 991px) {
-  .AB-ICON25:has(header) {
-    padding-top: 45px;
-  }
-}
-.AB-ICON25--show-deadline-promo-bar header {
-  top: 45px;
-}
-.AB-ICON25--show-deadline-promo-bar header > div[style*="background: rgb(233, 255, 217)"][style*="position:fixed"],
-.AB-ICON25--show-deadline-promo-bar header > div[style*="background:#E9FFD9"][style*="position:fixed"] {
-  top: calc(6.3125rem + 45px * var(--mantine-scale)) !important;
-}
 .AB-ICON25 .ab-deadline-promo-bar {
-  top: 0;
-  z-index: 100;
   width: 100%;
   height: 45px;
   background-color: rgb(242, 187, 53);
@@ -85,6 +68,11 @@
   text-transform: capitalize;
   color: rgb(25, 33, 67);
 }
+@media screen and (max-width: 991px) {
+  .AB-ICON25 nav {
+    top: calc(6.3125rem + 45px * var(--mantine-scale)) !important;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-ICON25 .ab-deadline-promo-bar {
     width: 100%;
@@ -133,5 +121,24 @@
     font-size: 24px;
     line-height: 100%;
     letter-spacing: -0.73px;
+  }
+}
+
+@media screen and (min-width: 991px) {
+  .AB-ICON25--show-sticky-deadline-promo-bar {
+    padding-top: 45px;
+  }
+  .AB-ICON25--show-sticky-deadline-promo-bar header {
+    top: 45px;
+  }
+  .AB-ICON25--show-sticky-deadline-promo-bar header > div[style*="background: rgb(233, 255, 217); position: fixed; top: calc(6.3125rem * var(--mantine-scale)); left: 0rem; right: 0rem;"],
+  .AB-ICON25--show-sticky-deadline-promo-bar header > div[style*="background: rgb(233, 255, 217)"][style*="position:fixed"],
+  .AB-ICON25--show-sticky-deadline-promo-bar header > div[style*="background:#E9FFD9"][style*="position:fixed"] {
+    top: calc(6.3125rem + 45px * var(--mantine-scale)) !important;
+  }
+  .AB-ICON25--show-sticky-deadline-promo-bar .ab-deadline-promo-bar {
+    position: fixed;
+    top: 0;
+    z-index: 100;
   }
 }

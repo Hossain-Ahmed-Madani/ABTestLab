@@ -4,6 +4,7 @@ Ticket: https://trello.com/c/GaLBAkwG/5089-%F0%9F%92%9B-icon25-sitewide-countdow
 Figma Design: https://www.figma.com/design/4QmluoK4icCDESChcVvgR5/ICON25---SITEWIDE--Countdown-to-Deadline-Promo-Bar?node-id=12-2&p=f&t=UtTy2T3CdFvDB9dn-0
 Test container: https://marketer.monetate.net/control/a-0e709fac/p/iconpropertytax.com/experience/2103890#c2642366:what
 https://www.iconpropertytax.com/trends/
+https://www.iconpropertytax.com/signup/state-lead/
 */
 
 (async () => {
@@ -160,7 +161,7 @@ https://www.iconpropertytax.com/trends/
         q("head").insertAdjacentHTML("beforeend", fontCDN);
         q("body").insertAdjacentHTML("afterbegin", layout);
 
-        q("body").classList.add(`${page_initials}--show-deadline-promo-bar`);
+        q("body").classList.add(`${page_initials}--show-sticky-deadline-promo-bar`);
     }
 
     let countdownInterval = null;
@@ -257,7 +258,6 @@ https://www.iconpropertytax.com/trends/
     }
 
     function initCountdown() {
-        console.log("initCountdown");
 
         if (countdownInterval) clearInterval(countdownInterval);
 
@@ -294,23 +294,15 @@ https://www.iconpropertytax.com/trends/
     }
 
     function showHidePromoBarOnScroll() {
-
-        // if(window.scrollY > 50) {
-        //     q("body").classList.remove(`${page_initials}--show-deadline-promo-bar`);
-        // } 
-
-        /* FUNCTIONALITY TO ADD
-            1. The Promo bar will initially be static 
-            2. If page has header and a position fixed class will be applied on the body to make the bar sticky
-            3. Then the on scroll function will initiate
-        
-        */
+        if(window.scrollY > 100) {
+            q("body").classList.remove(`${page_initials}--show-sticky-deadline-promo-bar`);
+        }
 
         window.addEventListener("scroll", () => {
-            if (window.scrollY <= 10) {
-                q("body").classList.add(`${page_initials}--show-deadline-promo-bar`);
+            if (q("header") && window.scrollY <= 10 && window.innerWidth >= 991) {
+                q("body").classList.add(`${page_initials}--show-sticky-deadline-promo-bar`);
             } else {
-                q("body").classList.remove(`${page_initials}--show-deadline-promo-bar`);
+                q("body").classList.remove(`${page_initials}--show-sticky-deadline-promo-bar`);
             }
         });
     }
@@ -323,8 +315,6 @@ https://www.iconpropertytax.com/trends/
 
             window[page_initials] = true;
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-
-            console.log("ICON25 initialized");
 
             createLayout();
             initCountdown();
