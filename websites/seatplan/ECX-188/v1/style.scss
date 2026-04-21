@@ -1,13 +1,98 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-EXP-188 {
+
+    .ab-seat-view-messaging-section {
+        margin-top: 18px;
+        margin-bottom: 10px;
+    }
+
+    .ab-seat-view-messaging-item {
+        border: 0.5px solid rgba(2, 87, 130, 0.5);
+        border-radius: 4px;
+        padding: 8px 16px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 17px;
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 20px;
+                height: 18px;
+            }
+        }
+
+        &__text-content {
+            strong {
+                font-family: Roboto;
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: rgba(2, 87, 130, 1);
+            }
+
+            span {
+                font-family: Roboto;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 24px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: rgba(2, 87, 130, 1);
+            }
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-seat-view-messaging-section {
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+    
+
+        .ab-seat-view-messaging-item {
+            padding: 16px 16px;
+            gap: 16px;
+
+            &__text-content {
+                display: flex;
+                gap: 3px;
+    
+                strong {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+    
+                br {
+                    display: none;
+                }
+    
+                span {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+        }
+
+    }
 }
