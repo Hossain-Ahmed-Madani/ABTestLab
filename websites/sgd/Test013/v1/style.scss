@@ -23,7 +23,7 @@
     div.my-3:has(> .badge.badge-.badge-type-action) ~ span:has(ul),
     .header-navigation-wrapper,
     .container-md:has(> div.h2),
-    .container-md ~ .frame-type-teaser_course_registration,
+    // .container-md ~ .frame-type-teaser_course_registration,
     .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
     .container-md:has(> #course_accordion),
     .container-md.mb-2.tab-393-none,
@@ -32,7 +32,9 @@
     .quick-info:not(:has(.mb-2:empty)) p,
     .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
     #downloadForm .list-type-none.list-style-check,
-    .registration-left .form-button-submit {
+    .registration-left .form-button-submit,
+    .container-md.frame-space-after-medium.tab-393-none ,
+    #js-card-download + .container-md:has(> hr) {
         display: none !important;
     }
 
@@ -85,6 +87,11 @@
         margin-bottom: 21px !important;
     }
 
+    .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 {
+        margin-top: 0 !important;
+        margin-bottom: 21px !important;
+    }
+
     .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
         padding-left: 0;
         padding-right: 16px;
@@ -96,6 +103,17 @@
         text-align: center;
         vertical-align: middle;
         color: rgba(26, 43, 73, 1);
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 14.4px;
+        line-height: 14.4px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: rgba(26, 43, 73, 1) !important;
     }
 
     .ab-course-info-box {
@@ -168,7 +186,11 @@
         }
     }
 
-    .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+    // .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+    //     display: none;
+    // }
+
+    .ab-course-info-box-btn-desktop-mobile ~ span:has(ul) {
         display: none;
     }
 
@@ -199,7 +221,16 @@
     }
 
     .ab-course-info-box-btn-desktop-mobile {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
         margin-bottom: 25px;
+    }
+
+    .ab-course-info-box-btn-desktop {
+        display: none !important;
     }
 
     #js-card-download .container-md:has(> hr) {
@@ -627,9 +658,8 @@
             transition: background-color 5000s ease-in-out 0s;
             box-shadow: none;
         }
-
     }
-    
+
     .registration-left .form-control:invalid,
     .registration-left .form-control.is-invalid {
         background-size: 15px;
@@ -642,7 +672,6 @@
     .registration-left .form-control.is-invalid.select-representation-input {
         background-position: right 30px top 2.5px !important;
     }
-
 
     .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
         background-color: transparent;
@@ -701,6 +730,17 @@
 
     .registration-left .form-field-city {
         width: calc(100% - (120px + 14px));
+    }
+
+    #courseTabContent .h4.mb-2 {
+        text-align: left;
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        color: #1a2b49;
+        margin-bottom: 15px !important;
     }
 
     // From Responsive
@@ -802,6 +842,14 @@
 
     @media screen and (min-width: 991px) {
 
+        #courseTabContent .h4.mb-2 {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 44px;
+            letter-spacing: 0px;
+            margin-bottom: 10px !important;
+        }
+
         .ab-price-and-sample-btn-container {
             display: none;
         }
@@ -845,6 +893,10 @@
             margin-bottom: 26px !important;
         }
 
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 {
+            margin-bottom: 26px !important;
+        }
+
         .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
             padding-right: 18px;
             font-size: 14.4px;
@@ -852,6 +904,16 @@
             letter-spacing: 0px;
             text-align: center;
             vertical-align: middle;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+            // font-weight: 700;
+            font-size: 14.4px;
+            line-height: 14.4px;
+            letter-spacing: 0px;
+            text-align: center;
+            vertical-align: middle;
+            color: rgba(26, 43, 73, 1) !important;
         }
 
         .ab-course-info-box {
@@ -886,18 +948,30 @@
         }
 
         .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
-            background-color: rgba(38, 139, 46, 1);
-            border: 1px solid rgba(102, 204, 0, 1);
+            // background-color: rgb(38, 139, 46);
+            // border: 1px solid rgb(102, 204, 0);
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            // width: 651px;
+            // height: 56px;
+            // font-family: "Onest Bold";
+            // font-weight: 700;
+            // font-size: 32px;
+            // line-height: 30px;
+            // letter-spacing: 0px;
+            // text-align: center;
 
+            background-color: rgb(38, 139, 46);
+            border: 1px solid rgb(102, 204, 0);
             display: flex;
             justify-content: center;
             align-items: center;
-
-            width: 651px;
-            height: 56px;
+            width: 600px;
+            height: 50px;
             font-family: "Onest Bold";
             font-weight: 700;
-            font-size: 32px;
+            font-size: 23px;
             line-height: 30px;
             letter-spacing: 0px;
             text-align: center;
@@ -909,14 +983,30 @@
             margin-bottom: 60px;
         }
 
+        .wf-course-badges-desktop + .container-md:has(> hr) {
+            display: none;
+        }
+
         .ab-course-info-box-btn-desktop-mobile {
             display: none !important;
+        }
+
+        .ab-course-info-box-btn-desktop {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .ab-course-info-box-btn-desktop + .container-md:has(> hr) hr {
+            margin-top: 41px;
+            margin-bottom: 36px;
         }
 
         .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
             display: block;
             margin-top: 0 !important;
-            margin-bottom: 0 !important;
+            margin-bottom: 29px !important;
         }
 
         .registration-right {
@@ -1077,6 +1167,13 @@
             margin-bottom: 0;
         }
     }
+
+    @media screen and (min-width: 991px) {
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+            padding: 10px;
+            margin-right: 10px !important;
+        }
+    }
 }
 
 // Step Two Items
@@ -1140,7 +1237,7 @@
             }
 
             .ab-faq-accordion-item__body {
-                max-height: 1600px;
+                max-height: 10000px;
             }
 
             .ab-faq-accordion-item__collapsed-text {
