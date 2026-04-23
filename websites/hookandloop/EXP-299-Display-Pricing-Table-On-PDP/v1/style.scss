@@ -13,6 +13,10 @@
 }
 
 .AB-EXP-299 {
+    .ab-hidden {
+        display: none !important;
+    }
+
     #qty-counter,
     p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
     .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
@@ -83,9 +87,9 @@
     }
 
     @media screen and (min-width: 1024px) {
-        .mt-2.w-full[x-data="initCutOffTimer()"] {
-            display: none;
-        }
+        // .mt-2.w-full[x-data="initCutOffTimer()"] {
+        //     display: none;
+        // }
 
         // Main Wrapper
         .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 {
@@ -97,6 +101,7 @@
             width: 257px;
             max-width: 257px;
             min-width: 257px;
+            margin-left: auto;
         }
 
         // Payment Options Images
@@ -164,6 +169,20 @@
             color: #1d1d1d;
         }
 
+        &__sub-header-unlocked {
+            padding: 7px 16px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #75757526;
+
+            font-family: helvetica, san-serif;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 18px;
+            letter-spacing: 0px;
+            text-align: left;
+            color: #1d1d1d;
+        }
+
         &__pricing {
             background-color: #f9f9fb;
             border-bottom: 1px solid #e5e7eb;
@@ -206,6 +225,7 @@
 
             &__save-percentage {
                 margin: auto;
+                margin-top: 0;
                 width: 49px;
                 height: 20px;
                 background-color: #eb00001a;
@@ -275,6 +295,16 @@
                     text-align: right;
                     color: #cc0000;
                     cursor: pointer;
+
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-end;
+                    gap: 5px;
+                }
+
+                .ab-arrow {
+                    font-size: 15px;
+                    margin-top: -3px;
                 }
             }
         }
@@ -297,10 +327,12 @@
                 padding: 7px 16px;
                 background-color: #ffffff;
             }
+            &__sub-header-unlocked {
+                padding: 7px 16px;
+                background-color: #ffffff;
+            }
 
             &__pricing {
-             
-
                 &__item {
                     padding: 12px 16px;
                     justify-content: space-between;
@@ -375,6 +407,19 @@
 
             &__pricing--desktop {
                 display: grid;
+            }
+
+            &__footer {
+                &__right {
+                    a {
+                        gap: 5px;
+                    }
+
+                    .ab-arrow {
+                        font-size: 15px;
+                        margin-top: -4px;
+                    }
+                }
             }
         }
     }
