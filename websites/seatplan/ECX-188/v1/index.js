@@ -20,7 +20,7 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
         test_name: "[ECX - 188] Production - Seat View Messaging",
         page_initials: "AB-EXP-188",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -77,7 +77,7 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
                     <div class="ab-seat-view-messaging-item">
                         <div class="ab-seat-view-messaging-item__icon">${ASSETS.camera_svg}</div>
                         <div class="ab-seat-view-messaging-item__text-content">
-                            <strong>Book with confidence.</strong> 
+                            <strong>Book with confidence<span class="ab-hidden-mobile">.</span></strong> 
                             <br/>
                             <span>See real seat view photos before you buy<span class="ab-hidden-mobile">.</span></span>
                         </div>
