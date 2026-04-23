@@ -223,9 +223,11 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     }, 150);
 
     const debouncedRecreatePricingTable = debounce((e) => {
-        const { bothSelected, discounts, smeasureSoldInSize } = e.detail;
+        const { bothSelected, discounts, smeasureSoldInSize, sminqty } = e.detail;
 
-        soldInSize = smeasureSoldInSize;
+        console.log("debouncedRecreatePricingTable", startingPrice, e.detail);
+
+        soldInSize = +smeasureSoldInSize === 1 && +sminqty > 1 ? +sminqty : +smeasureSoldInSize;
         pricePerYard = (startingPrice / soldInSize) / (bothSelected === true ? 2 : 1);
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         unit = discounts[0].unit;
