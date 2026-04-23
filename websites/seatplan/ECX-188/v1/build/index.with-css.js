@@ -44,6 +44,11 @@
   vertical-align: middle;
   color: rgb(2, 87, 130);
 }
+@media screen and (max-width: 990.5px) {
+  .AB-EXP-188 .ab-hidden-mobile {
+    display: none;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-EXP-188 .ab-seat-view-messaging-section {
     margin-top: 20px;
@@ -55,7 +60,7 @@
   }
   .AB-EXP-188 .ab-seat-view-messaging-item__text-content {
     display: flex;
-    gap: 2px;
+    gap: 3px;
   }
   .AB-EXP-188 .ab-seat-view-messaging-item__text-content strong {
     font-size: 16px;
@@ -77,15 +82,25 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+
+https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004194313/summary ->  Interact with calendar | Production Page | JS
+
+
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004195515/summary
+
+Forced Variation:
+
+control: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=1004195515.1004459737&utm_campaign=qa5
+variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=1004195515.1004459738&utm_campaign=qa5
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
-    client: "Seatplan",
-    project: "Seatplan",
-    site_url: "https://seatplan.com",
-    test_name: "[ECX - 188] Production - Seat View Messaging",
     page_initials: "AB-EXP-188",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -149,7 +164,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
 
     q(".production-overview__nav-section").insertAdjacentHTML(
       "afterend",
@@ -162,7 +176,12 @@
             <div class="ab-seat-view-messaging-item__text-content">
               <strong>Book with confidence.</strong>
               <br />
-              <span>See real seat view photos before you buy.</span>
+              <span
+                >See real seat view photos before you buy<span
+                  class="ab-hidden-mobile"
+                  >.</span
+                ></span
+              >
             </div>
           </div>
         </section>

@@ -13,7 +13,6 @@
 }
 
 .AB-EXP-188 {
-
     .ab-seat-view-messaging-section {
         margin-top: 18px;
         margin-bottom: 10px;
@@ -63,12 +62,17 @@
         }
     }
 
+    @media screen and (max-width: 990.5px) {
+        .ab-hidden-mobile {
+            display: none;
+        }
+    }
+
     @media screen and (min-width: 991px) {
         .ab-seat-view-messaging-section {
             margin-top: 20px;
             margin-bottom: 8px;
         }
-    
 
         .ab-seat-view-messaging-item {
             padding: 16px 16px;
@@ -77,22 +81,21 @@
             &__text-content {
                 display: flex;
                 gap: 3px;
-    
+
                 strong {
                     font-size: 16px;
                     line-height: 24px;
                 }
-    
+
                 br {
                     display: none;
                 }
-    
+
                 span {
                     font-size: 16px;
                     line-height: 24px;
                 }
             }
         }
-
     }
 }

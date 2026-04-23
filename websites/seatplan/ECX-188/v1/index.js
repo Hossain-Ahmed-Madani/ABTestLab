@@ -20,7 +20,7 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
         test_name: "[ECX - 188] Production - Seat View Messaging",
         page_initials: "AB-EXP-188",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -69,7 +69,6 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         q(".production-overview__nav-section").insertAdjacentHTML(
             "afterend",
@@ -80,7 +79,7 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
                         <div class="ab-seat-view-messaging-item__text-content">
                             <strong>Book with confidence.</strong> 
                             <br/>
-                            <span>See real seat view photos before you buy.</span>
+                            <span>See real seat view photos before you buy<span class="ab-hidden-mobile">.</span></span>
                         </div>
                     </div>
                 </section>
@@ -100,7 +99,6 @@ variation: https://seatplan.com/london/the-jungle-book-tickets/?_conv_eforce=100
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
