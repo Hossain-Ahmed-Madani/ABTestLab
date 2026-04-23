@@ -1,25 +1,24 @@
-// body.page-product-configurable #qty-counter .discount-box
-
-
-async function waitForPromiseOnMutation(predicate, maxCount = 1000) {
-    let count = 0;
+async function waitForElementAsync(predicate, timeout = 10000, frequency = 150) {
+    const startTime = Date.now();
 
     return new Promise((resolve, reject) => {
         if (typeof predicate === "function" && predicate()) {
             return resolve(true);
         }
 
-        new MutationObserver((mutationList, observer) => {
-            count++;
+        const interval = setInterval(() => {
+            const elapsed = Date.now() - startTime;
+
+            if (elapsed >= timeout) {
+                clearInterval(interval);
+                return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
+            }
 
             if (typeof predicate === "function" && predicate()) {
-                observer.disconnect();
+                clearInterval(interval);
                 return resolve(true);
-            } else if (count > maxCount) {
-                observer.disconnect();
-                return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
             }
-        }).observe(document.body, { childList: true, subtree: true });
+        }, frequency);
     });
 }
 
@@ -27,6 +26,6 @@ function q(s, o) {
     return o ? s.querySelector(o) : document.querySelector(s);
 }
 
-return waitForPromiseOnMutation(() => !!(q("body.page-product-configurable #qty-counter .discount-box")))
+return waitForElementAsync(() => !!(q("meta[property='og:type'][content='product']") && q(".discount-box ul li")))
     .then(() => true)
     .catch(() => false);

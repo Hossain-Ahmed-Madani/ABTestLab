@@ -1,7 +1,6 @@
 .AB-EXP-299 .ab-hidden {
   display: none !important;
 }
-.AB-EXP-299 #qty-counter,
 .AB-EXP-299 p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
 .AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
   display: none;

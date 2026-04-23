@@ -13,7 +13,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         test_name: "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
         page_initials: "AB-EXP-299",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -77,13 +77,15 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     let soldInSize;
     let closestQuantityToApplyDiscount;
     let link
+    let unit
 
     function getPricingTableLayout() {
-        pricePerYard = +q(" span[x-html='getPerYardPrice()']").textContent.replace("$", "");
+        pricePerYard = +q(" span[x-html='getPerYardPrice()']")?.textContent?.replace("$", "") ?? 0;
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         soldInSize = currentSelectedQuantity; /* Initially soldInSize can be determined by initial quantity of the product */
         startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "") / soldInSize;
         link = q(".discount-box ul li a.text-black").getAttribute("href");
+        unit = q(".discount-box ul li .roll-no span[x-text='discount.unit']").textContent || "ROLLS";
 
         const data = qq(".discount-box ul li").reduce((acc, li) => {
             const controlPriceTableQuantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
@@ -97,7 +99,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                 unit: q(li, '.roll-no span[x-text="discount.unit"]').textContent ?? "",
                 quantity: controlPriceTableQuantity,
                 discountedPrice: (startingPrice - (startingPrice * (discount / 100))) * controlPriceTableQuantity,
-                discountPerYard: pricePerYard - pricePerYard * (discount / 100),
+                discountPerYard:  pricePerYard - pricePerYard * (discount / 100),
                 saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
                 saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
                 discount: discount,
@@ -109,7 +111,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         return /* HTML */ `
             <div class="ab-pricing-table">
                 <div class="ab-pricing-table__sub-header">
-                    ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more roll to unlock
+                    ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock">${unit.toLowerCase()}</span> to unlock
                     <span class="ab-save-percentage-to-unlock">${data[0].discount}%</span> off
                 </div>
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
@@ -151,7 +153,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                 <div class="ab-pricing-table__footer">
                     <div class="ab-pricing-table__footer__left"></div>
                     <div class="ab-pricing-table__footer__right">
-                        <a href="https://www.hookandloop.com/price-sheet?sku=Fasteners-DG-Sew-On" target="_blank" class="">See Full Price List <span class="ab-arrow">→</span></a>
+                        <a href="${q('.discountBox-footer a').getAttribute('href')}" target="_blank" class="">See Full Price List <span class="ab-arrow">→</span></a>
                     </div>
                 </div>
             </div>
@@ -215,6 +217,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         soldInSize = smeasureSoldInSize;
         pricePerYard =  (startingPrice / soldInSize ) / (bothSelected  === true ? 2 : 1)
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
+        unit = discounts[0].unit;
 
         const data = discounts.reduce((acc, { qty, discount, unit }) => {
             acc.push({
@@ -231,7 +234,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
 
         q(".ab-pricing-table").innerHTML = /* HTML */ `
             <div class="ab-pricing-table__sub-header">
-                ✦ Add <span class="ab-quantity-to-unlock">${discounts[0].qty - currentSelectedQuantity}</span> more roll to unlock
+                ✦ Add <span class="ab-quantity-to-unlock">${discounts[0].qty - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock">${unit.toLowerCase()}</span> to unlock
                 <span class="ab-save-percentage-to-unlock">${discounts[0].discount}%</span> off
             </div>
             <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
@@ -273,7 +276,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
             <div class="ab-pricing-table__footer">
                 <div class="ab-pricing-table__footer__left"></div>
                 <div class="ab-pricing-table__footer__right">
-                    <a href="https://www.hookandloop.com/price-sheet?sku=Fasteners-DG-Sew-On" target="_blank" class="">See Full Price List <span class="ab-arrow">→</span></a>
+                    <a href="${q('.discountBox-footer a').getAttribute('href')}" target="_blank" class="">See Full Price List <span class="ab-arrow">→</span></a>
                 </div>
             </div>
         `;
