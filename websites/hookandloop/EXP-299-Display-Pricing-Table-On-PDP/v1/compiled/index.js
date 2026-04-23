@@ -77,6 +77,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "") / soldInSize;
         link = q(".discount-box ul li a.text-black").getAttribute("href");
         unit = q(".discount-box ul li .roll-no span[x-text='discount.unit']").textContent || "ROLLS";
+        const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
 
         const data = qq(".discount-box ul li").reduce((acc, li) => {
             const controlPriceTableQuantity = +q(li, '.roll-no span[x-text="discount.qty"]').textContent ?? 0;
@@ -90,7 +91,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                 unit: q(li, '.roll-no span[x-text="discount.unit"]').textContent ?? "",
                 quantity: controlPriceTableQuantity,
                 discountedPrice: (startingPrice - (startingPrice * (discount / 100))) * controlPriceTableQuantity,
-                discountPerYard:  pricePerYard - pricePerYard * (discount / 100),
+                discountPerYard: pricePerYard - pricePerYard * (discount / 100),
                 saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
                 saveAmount: (controlPriceTableQuantity * startingPrice * (discount / 100)).toFixed(2),
                 discount: discount,
@@ -105,25 +106,29 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                     ✦ Add <span class="ab-quantity-to-unlock">${data[0].quantity - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock">${unit.toLowerCase()}</span> to unlock
                     <span class="ab-save-percentage-to-unlock">${data[0].discount}%</span> off
                 </div>
-                <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
+                <div class="ab-pricing-table__sub-header-max-discount-unlocked ab-hidden">
+                    ✦ You're saving <span class="ab-currently-saving">${controlDiscountAmountStr}</span>!
+                </div>
+                <ul  class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile" >
                     ${data
-                        .map(
-                            ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item">
-                                    <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
-                                    <a href="${link}" class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></a>
-                                    <a href="${link}" class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</a>
-                                    ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
-                                    <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
-                                </li>
-                            `,
-                        )
-                        .join("")}
+                .map(
+                    ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
+                                    <li class="ab-pricing-table__pricing__item">
+                                        <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
+                                        <a href="${link}" class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></a>
+                                        <a href="${link}" class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</a>
+                                        ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
+                                        <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                                    </li>
+                                `,
+                )
+                .join("")
+            }
                 </ul>
                 <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                     ${data
-                        .map(
-                            ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
+                .map(
+                    ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
                                 <li class="ab-pricing-table__pricing__item">
                                     <a href="${link}" class="ab-pricing-table__pricing__left">
                                         <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
@@ -138,8 +143,8 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                                     </div>
                                 </li>
                             `,
-                        )
-                        .join("")}
+                )
+                .join("")}
                 </ul>
                 <div class="ab-pricing-table__footer">
                     <div class="ab-pricing-table__footer__left"></div>
@@ -148,7 +153,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                     </div>
                 </div>
             </div>
-        `;
+            `;
     }
 
     function createLayout() {
@@ -160,11 +165,11 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         q(".flex.flex-col.sm\\:flex-row.md\\:flex-col.xl\\:flex-row.items-end.my-4 > div[role='group']").insertAdjacentHTML(
             "beforeend",
             /* HTML */ `
-                <div class="ab-pricing-table-wrapper">
-                    <div class="ab-pricing-header">
-                        <div class="ab-pricing-header__left">Volume Discount</div>
-                        <div class="ab-pricing-header__right">Auto-applied at checkout</div>
-                    </div>
+            <div class="ab-pricing-table-wrapper">
+                <div class="ab-pricing-header">
+                    <div class="ab-pricing-header__left">Volume Discount</div>
+                    <div class="ab-pricing-header__right">Auto-applied at checkout</div>
+                </div>
                     ${getPricingTableLayout()}
                 </div>
             `,
@@ -175,6 +180,11 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         startingPrice = +e.detail;
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         closestQuantityToApplyDiscount = null;
+
+        const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
+        if (controlDiscountAmountStr && controlDiscountAmountStr !== '') {
+            q('.ab-currently-saving').textContent = controlDiscountAmountStr;
+        }
 
         qq(".ab-quantity").forEach((item) => {
             const priceTableQuantity = +item.textContent;
@@ -200,15 +210,26 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
 
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
         q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
+
+        if (nextNearestDiscountPercentage && currentSelectedQuantity >= nextNearestQuantity && controlDiscountAmountStr !== '') {
+            q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.remove("ab-hidden");
+            q(".ab-pricing-table__sub-header").classList.add("ab-hidden");
+        } else {
+            q(".ab-pricing-table__sub-header").classList.remove("ab-hidden");
+            q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.add("ab-hidden");
+        }
+
+
     }, 150);
 
     const debouncedRecreatePricingTable = debounce((e) => {
         const { bothSelected, discounts, smeasureSoldInSize } = e.detail;
 
         soldInSize = smeasureSoldInSize;
-        pricePerYard =  (startingPrice / soldInSize ) / (bothSelected  === true ? 2 : 1);
+        pricePerYard = (startingPrice / soldInSize) / (bothSelected === true ? 2 : 1);
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         unit = discounts[0].unit;
+        const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
 
         const data = discounts.reduce((acc, { qty, discount, unit }) => {
             acc.push({
@@ -224,14 +245,17 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         }, []);
 
         q(".ab-pricing-table").innerHTML = /* HTML */ `
-            <div class="ab-pricing-table__sub-header">
-                ✦ Add <span class="ab-quantity-to-unlock">${discounts[0].qty - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock">${unit.toLowerCase()}</span> to unlock
-                <span class="ab-save-percentage-to-unlock">${discounts[0].discount}%</span> off
+            <div class="ab-pricing-table__sub-header" >
+                ✦ Add <span class="ab-quantity-to-unlock"> ${discounts[0].qty - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock"> ${unit.toLowerCase()}</span> to unlock
+            <span class="ab-save-percentage-to-unlock" > ${discounts[0].discount}%</span> off
+            </div>
+            <div class="ab-pricing-table__sub-header-max-discount-unlocked ab-hidden">
+                ✦ You're saving <span class="ab-currently-saving">${controlDiscountAmountStr}</span>!
             </div>
             <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                 ${data
-                    .map(
-                        ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
+                .map(
+                    ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
                             <li class="ab-pricing-table__pricing__item">
                                 <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
                                 <div class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
@@ -240,13 +264,13 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                                 <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
                             </li>
                         `,
-                    )
-                    .join("")}
+                )
+                .join("")}
             </ul>
             <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--desktop">
                 ${data
-                    .map(
-                        ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
+                .map(
+                    ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
                             <li class="ab-pricing-table__pricing__item">
                                 <div class="ab-pricing-table__pricing__left">
                                     <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
@@ -261,8 +285,8 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                                 </div>
                             </li>
                         `,
-                    )
-                    .join("")}
+                )
+                .join("")}
             </ul>
             <div class="ab-pricing-table__footer">
                 <div class="ab-pricing-table__footer__left"></div>
