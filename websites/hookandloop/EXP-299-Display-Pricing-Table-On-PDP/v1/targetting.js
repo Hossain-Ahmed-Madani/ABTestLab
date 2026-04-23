@@ -29,6 +29,3 @@ function q(s, o) {
 return waitForElementAsync(() => !!(q("meta[property='og:type'][content='product']") && q(".discount-box ul li")))
     .then(() => true)
     .catch(() => false);
-
-
-    // document.querySelector('span[x-text="getDiscountAmount()"]')?.textContent
