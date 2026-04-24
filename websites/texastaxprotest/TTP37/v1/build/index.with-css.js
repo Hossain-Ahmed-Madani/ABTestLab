@@ -1,0 +1,433 @@
+(function () {
+  var interval = setInterval(function () {
+    if (document.head) {
+      // Check if <head> exists
+      clearInterval(interval); // Stop checking once found
+      var style = document.createElement("style");
+      style.innerHTML = `.AB-TTP37
+  > .mantine-Container-root
+  > .mantine-Group-root
+  > .mantine-Card-root:first-child {
+  display: none !important;
+}
+@media screen and (max-width: 990.5px) {
+  .AB-TTP37
+    .mantine-hidden-from-md[style="padding:10px;border:1px solid rgba(255, 255, 255, 0.10);border-radius:15px;background:rgba(255, 255, 255, 0.10);box-shadow:0px 14px 25px 0px #041126;backdrop-filter:blur(50px);width:90%"],
+  .AB-TTP37 div:has(> #lead-form) {
+    margin-bottom: 30px;
+  }
+}
+
+.AB-TTP37--v1 .ab-engagement-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+.AB-TTP37--v1 .ab-engagement-counter-wrapper {
+  width: 352px;
+  background-color: #fff;
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.1) 0%,
+    rgba(102, 102, 102, 0.1) 100%
+  );
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.0509803922);
+  padding: 10px;
+}
+.AB-TTP37--v1 .ab-engagement-counter {
+  width: 100%;
+  height: auto;
+  padding: 12px 0;
+  border: 1px solid;
+  border-image-source: linear-gradient(
+    180deg,
+    rgba(102, 102, 102, 0.05) 0%,
+    rgba(102, 102, 102, 0) 100%
+  );
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1019607843) inset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Bitter;
+  font-weight: 600;
+  font-size: 44px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  text-transform: capitalize;
+  background: linear-gradient(180deg, #fc6a01 0%, rgba(252, 106, 1, 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+.AB-TTP37--v1 .ab-engagement-subtitle {
+  font-family: Lato;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #082556;
+}
+@media screen and (max-width: 990.5px) {
+  .AB-TTP37--v1 > .mantine-Container-root {
+    margin-top: 0 !important;
+    padding-top: 40px !important;
+  }
+}
+@media screen and (min-width: 991px) {
+  .AB-TTP37--v1 .ab-engagement-section {
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+  .AB-TTP37--v1 .ab-engagement-counter-wrapper {
+    width: 400px;
+  }
+  .AB-TTP37--v1 .ab-engagement-counter {
+    padding: 13px 0;
+  }
+  .AB-TTP37--v1 .ab-engagement-subtitle {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-align: center;
+  }
+  .AB-TTP37--v1 .ab-engagement-subtitle br {
+    display: none;
+  }
+}
+
+.AB-TTP37--v2 .ab-engagement-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+}
+.AB-TTP37--v2 .ab-engagement-counter-wrapper {
+  width: 126px;
+}
+.AB-TTP37--v2 .ab-engagement-counter {
+  font-family: Bitter;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-transform: capitalize;
+  color: rgb(252, 106, 1);
+}
+.AB-TTP37--v2 .ab-engagement-divider {
+  display: block;
+  width: 1px;
+  height: 28px;
+  background-color: rgb(217, 217, 217);
+}
+.AB-TTP37--v2 .ab-engagement-subtitle {
+  font-family: Lato;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  color: rgb(8, 37, 86);
+}
+@media screen and (max-width: 990.5px) {
+  .AB-TTP37--v2 > .mantine-Container-root {
+    margin-top: 0 !important;
+    padding-top: 25px !important;
+  }
+}
+@media screen and (min-width: 991px) {
+  .AB-TTP37--v2 .ab-engagement-section {
+    margin-bottom: 70px;
+    gap: 20px;
+  }
+  .AB-TTP37--v2 .ab-engagement-counter-wrapper {
+    width: 220px;
+  }
+  .AB-TTP37--v2 .ab-engagement-counter {
+    font-family: Bitter;
+    font-weight: 600;
+    font-size: 70px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+  }
+  .AB-TTP37--v2 .ab-engagement-divider {
+    height: 49px;
+  }
+  .AB-TTP37--v2 .ab-engagement-subtitle {
+    font-family: Lato;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0px;
+  }
+}
+`;
+      document.head.appendChild(style);
+      setTimeout(() => {
+        clearInterval(interval); // Clear the interval after 5 seconds
+      }, 5000);
+    }
+  }, 100); // Check every 100ms for <head>
+})();
+/* 
+
+
+Preview control only: https://marketer.monetate.net/control/preview/12476/XTV6WQ6TZZPBD5R5KK7FMF8Q6WLC2AZW/ttp37-landing-page-counting-up-engagement-section
+
+Locations: 
+https://www.texastaxprotest.com/lower-your-property-taxes/
+
+https://www.texastaxprotest.com/facebook-landing-page/
+
+https://www.texastaxprotest.com/blog-contact-us/
+
+
+Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2103664
+
+Preview including all:
+V1: https://marketer.monetate.net/control/preview/12476/3RK4Y5UH3MPV0DDHSZTR5ZJH8BIF4TGR/ttp37-landing-page-counting-up-engagement-section
+V2: https://marketer.monetate.net/control/preview/12476/A8V66KGI07342OTP2LH88METNRKWK8E6/ttp37-landing-page-counting-up-engagement-section
+
+Preview excluding all:
+V1: https://marketer.monetate.net/control/preview/12476/1S0SB22GRQBQSMJQKNJ0LV06D37WPVVF/ttp37-landing-page-counting-up-engagement-section
+V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P41263P76/ttp37-landing-page-counting-up-engagement-section
+
+*/
+
+(async () => {
+  const TEST_ID = "TTP37";
+  const VARIANT_ID = "V1"; /* Control, V1, V2 */
+
+  function logInfo(message) {
+    console.log(
+      `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+      "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+      message,
+    );
+  }
+
+  logInfo("fired");
+
+  const TEST_CONFIG = {
+    page_initials: "AB-TTP37",
+    test_variation: 2,
+    test_version: 0.0003,
+  };
+
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  const DATA = {
+    1: [
+      "$84,900,995",
+      "$84,900,996",
+      "$84,900,997",
+      "$84,900,998",
+      "$84,900,999",
+      "$85,000,000+",
+    ],
+    2: ["4,996", "4,997", "4,998", "4,999", "5,000+"],
+  };
+
+  async function waitForElementAsync(
+    predicate,
+    timeout = 20000,
+    frequency = 150,
+  ) {
+    const startTime = Date.now();
+
+    return new Promise((resolve, reject) => {
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
+
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+
+        if (elapsed >= timeout) {
+          clearInterval(interval);
+          return reject(
+            new Error(
+              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
+            ),
+          );
+        }
+
+        if (typeof predicate === "function" && predicate()) {
+          clearInterval(interval);
+          return resolve(true);
+        }
+      }, frequency);
+    });
+  }
+
+  function q(s, o) {
+    return o ? s.querySelector(o) : document.querySelector(s);
+  }
+
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  let counterValue =
+    window.sessionStorage.getItem(page_initials) === "true"
+      ? DATA[test_variation][DATA[test_variation].length - 1]
+      : DATA[test_variation][0];
+
+  function createLayoutV1() {
+    q("body > .mantine-Container-root").insertAdjacentHTML(
+      "afterbegin",
+      /* HTML */ `
+        <div class="ab-engagement-section">
+          <div class="ab-engagement-counter-wrapper">
+            <div class="ab-engagement-counter">${counterValue}</div>
+          </div>
+          <div class="ab-engagement-subtitle">
+            Saved for Texas homeowners through successful <br />
+            property tax protests.
+          </div>
+        </div>
+      `,
+    );
+  }
+
+  function createLayoutV2() {
+    q("body > .mantine-Container-root").insertAdjacentHTML(
+      "afterbegin",
+      /* HTML */ `
+        <div class="ab-engagement-section">
+          <div class="ab-engagement-counter-wrapper">
+            <div class="ab-engagement-counter">${counterValue}</div>
+          </div>
+          <div class="ab-engagement-divider"></div>
+          <div class="ab-engagement-subtitle">
+            Appeals won for Texas <br />
+            homeowners last year.
+          </div>
+        </div>
+      `,
+    );
+  }
+
+  function updateCounterValue() {
+    if (window.sessionStorage.getItem(page_initials) === "true") return;
+
+    window.sessionStorage.setItem(page_initials, true);
+
+    const valueList = DATA[test_variation];
+    const duration = 750;
+    const loopCount = Math.ceil(duration / valueList.length);
+    let currentIndex = 0;
+
+    const interval = setInterval(() => {
+      currentIndex++;
+
+      if (currentIndex >= valueList.length) {
+        clearInterval(interval);
+        return;
+      }
+
+      counterValue = valueList[currentIndex];
+      q(".ab-engagement-counter").textContent = counterValue;
+    }, loopCount);
+  }
+
+  function handleLocationChanges() {
+    const pathname = window.location.pathname;
+    const targetLocations = [
+      "/lower-your-property-taxes/",
+      "/facebook-landing-page/",
+      "/blog-contact-us/",
+    ];
+
+    if (
+      targetLocations.some((currentPathName) => currentPathName === pathname)
+    ) {
+      init_TTP37();
+    } else {
+      window[page_initials] = false;
+      document.body.classList.remove(
+        page_initials,
+        `${page_initials}--v${test_variation}`,
+        `${page_initials}--version:${test_version}`,
+      );
+    }
+  }
+
+  function urlObserver() {
+    const debouncedChanges = debounce(handleLocationChanges, 150);
+
+    const originalPushState = history.pushState;
+    history.pushState = function () {
+      originalPushState.apply(history, arguments);
+      window.dispatchEvent(new Event("pushstate"));
+    };
+
+    // Listen for back/forward button clicks
+    window.addEventListener("popstate", function (event) {
+      debouncedChanges();
+    });
+
+    window.addEventListener("pushstate", function () {
+      debouncedChanges();
+    });
+  }
+
+  function checkForItems() {
+    return !!(
+      q(
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+      ) &&
+      q("body > .mantine-Container-root") &&
+      document.readyState === "complete"
+    );
+  }
+
+  async function init_TTP37() {
+    try {
+      if (window[page_initials] === true) return;
+
+      window[page_initials] = true;
+      await waitForElementAsync(checkForItems);
+      q("body").classList.add(
+        page_initials,
+        `${page_initials}--v${test_variation}`,
+        `${page_initials}--version:${test_version}`,
+      );
+
+      switch (test_variation) {
+        case 1:
+          createLayoutV1();
+          break;
+        case 2:
+          createLayoutV2();
+          break;
+      }
+
+      updateCounterValue();
+    } catch (error) {
+      return false;
+    }
+  }
+
+  init_TTP37();
+  urlObserver();
+})();
