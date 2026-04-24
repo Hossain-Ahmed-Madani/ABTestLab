@@ -9,6 +9,11 @@ URL Targeting: 2 URLs:
 1. https://www.domyown.com/subscriptions/pest-box-program/signup#/checkout/shipping/address
 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/checkout/shipping/address
 
+Forced Variation: 
+
+URL 1. https://www.domyown.com/subscriptions/pest-box-program/signup#/page/1/inputs?&utm_campaign=qa5
+URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inputs?&utm_campaign=qa5
+
 */
 
 (async () => {
@@ -259,14 +264,25 @@ URL Targeting: 2 URLs:
         q("body").classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
     }
 
-    waitForElementAsync(checkForItems).then(() => {
+    // waitForElementAsync(checkForItems).then(() => {
+    //     console.log("===== TEST STARTED ====");
+    //     addTestInitials();
+    //     createLayout();
+    //     addEventListener();
+    //     urlObserver();
+    //     if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
+    // });
+
+    try {
+        await waitForElementAsync(checkForItems);
         console.log("===== TEST STARTED ====");
         addTestInitials();
         createLayout();
         addEventListener();
         urlObserver();
         if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
-    });
-
-    // Use try catch after test is ready
+    } catch (e) {
+        console.error("Error: ", e);
+        return;
+    }
 })();
