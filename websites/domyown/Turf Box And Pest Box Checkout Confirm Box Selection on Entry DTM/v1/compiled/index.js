@@ -60,14 +60,22 @@ URL Targeting: 2 URLs:
         };
     }
 
-
     const TEST_START_LOCATIONS = ["/subscriptions/pest-box-program/signup#", "/subscriptions/lawn-box-program/signup#"];
     const LAYOUT_LOCATIONS = ["/subscriptions/pest-box-program/signup#/checkout/shipping/address", "/subscriptions/lawn-box-program/signup#/checkout/shipping/address"];
 
-    const DATA = {
-        "lawn-box": {
-            title: "Lawn Box"}};
 
+    const DATA = {
+        "turf-box": {
+            title: "New to Turf Box?",
+            product: "Kentucky Bluegrass Weed",
+            program: "Disease Prevention Program",
+        },
+        "pest-box": {
+            title: "New to Pest Box?",
+            product: "Chapin Premier 1 Gallon Sprayer (#21210XP)",
+            program: "Perimeter Defense Program",
+        },
+    };
 
     function eventHandler() {
         console.log("===== EVENT HANDLER ====");
@@ -77,30 +85,28 @@ URL Targeting: 2 URLs:
         console.log("===== REMOVING EVENT HANDLER ====");
     }
 
-    function checkForHeader() {
-        return !!q("#new-customer h1");
-    }
 
-    async function createTurfBoxLayout() {
-        await waitForElementAsync(checkForHeader);
-        console.log("===== CREATING TURF BOX LAYOUT ====");
-        const targetNode = q("#new-customer h1");
-        targetNode.textContent = DATA["lawn-box"].title;
-    }
 
-    async function createPestBoxLayout() {
-        await waitForElementAsync(checkForHeader);
-        console.log("===== CREATING PEST BOX LAYOUT ====");
-    }
-
-    function createLayout() {
+    async function createLayout() {
         const locationHref = window.location.href;
 
-        if (locationHref.includes("/subscriptions/lawn-box-program/signup#/checkout/shipping/address")) {
-            createTurfBoxLayout();
-        } else if (locationHref.includes("/subscriptions/pest-box-program/signup#/checkout/shipping/address")) {
-            createPestBoxLayout();
+        let matchedData; 
+
+        if(locationHref.includes(LAYOUT_LOCATIONS[0])) {
+            matchedData = DATA["pest-box"];
+        } else if(locationHref.includes(LAYOUT_LOCATIONS[1])) {
+            matchedData = DATA["turf-box"];
         }
+
+        if(!matchedData) return
+
+        await waitForElementAsync(() => !!(q("#new-customer h1:not(.ab-header)") && !q(".ab-selection")));
+        console.log("===== CREATING PEST BOX LAYOUT ====");
+        const targetNode = q("#new-customer h1:not(.ab-header)");
+        targetNode.textContent = matchedData.title;
+        targetNode.classList.add("ab-header");
+
+        targetNode.insertAdjacentHTML("afterend", `<p class="ab-selection"> Create and account to get your <strong>${matchedData.product} & ${matchedData.program}</strong> Box started </p>`);
     }
 
     function handleLocationChanges() {
@@ -122,12 +128,11 @@ URL Targeting: 2 URLs:
             return;
         }
 
-        if(LAYOUT_LOCATIONS.some((currentPathName) => locationHref.includes(currentPathName))) {
+        if (LAYOUT_LOCATIONS.some((currentPathName) => locationHref.includes(currentPathName))) {
             console.log("===== CREATING LAYOUT ====");
             createLayout();
             return;
         }
-
     }
 
     function urlObserver() {
