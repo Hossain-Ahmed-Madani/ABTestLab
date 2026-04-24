@@ -13,14 +13,16 @@
 }
 
 .AB-TTP37 {
+    & > .mantine-Container-root > .mantine-Group-root > .mantine-Card-root:first-child {
+        display: none !important;
+    }
+
     //
     @media screen and (max-width: 990.5px) {
         .mantine-hidden-from-md[style="padding:10px;border:1px solid rgba(255, 255, 255, 0.10);border-radius:15px;background:rgba(255, 255, 255, 0.10);box-shadow:0px 14px 25px 0px #041126;backdrop-filter:blur(50px);width:90%"],
         div:has(> #lead-form) {
             margin-bottom: 30px;
         }
-
-
     }
 }
 
@@ -81,10 +83,8 @@
         text-align: center;
         color: #082556;
     }
-    
-    
+
     @media screen and (max-width: 990.5px) {
-        
         & > .mantine-Container-root {
             margin-top: 0 !important;
             padding-top: 40px !important;
@@ -92,7 +92,6 @@
     }
 
     @media screen and (min-width: 991px) {
-
         // & > .mantine-Container-root {
         //     padding-top: 70px !important;
         // }
@@ -163,9 +162,7 @@
         color: rgba(8, 37, 86, 1);
     }
 
-        
     @media screen and (max-width: 990.5px) {
-        
         & > .mantine-Container-root {
             margin-top: 0 !important;
             padding-top: 25px !important;

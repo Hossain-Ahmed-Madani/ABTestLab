@@ -11,6 +11,16 @@ https://www.texastaxprotest.com/facebook-landing-page/
 https://www.texastaxprotest.com/blog-contact-us/
 
 
+Test container: https://marketer.monetate.net/control/a-7b7b9c2b/p/texastaxprotest.com/experience/2103664
+
+Preview including all:
+V1: https://marketer.monetate.net/control/preview/12476/3RK4Y5UH3MPV0DDHSZTR5ZJH8BIF4TGR/ttp37-landing-page-counting-up-engagement-section
+V2: https://marketer.monetate.net/control/preview/12476/A8V66KGI07342OTP2LH88METNRKWK8E6/ttp37-landing-page-counting-up-engagement-section
+
+Preview excluding all:
+V1: https://marketer.monetate.net/control/preview/12476/1S0SB22GRQBQSMJQKNJ0LV06D37WPVVF/ttp37-landing-page-counting-up-engagement-section
+V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P41263P76/ttp37-landing-page-counting-up-engagement-section
+
 */
 
 (async () => {
@@ -29,14 +39,9 @@ https://www.texastaxprotest.com/blog-contact-us/
   logInfo("fired");
 
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "Texas Tax Protest",
-    site_url: "https://www.texastaxprotest.com/",
-    test_name:
-      "TTP37: [Landing Page] Counting Up Engagement Section-(2) SET UP TEST",
     page_initials: "AB-TTP37",
     test_variation: 2,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -147,7 +152,7 @@ https://www.texastaxprotest.com/blog-contact-us/
     window.sessionStorage.setItem(page_initials, true);
 
     const valueList = DATA[test_variation];
-    const duration = 1500;
+    const duration = 750;
     const loopCount = Math.ceil(duration / valueList.length);
     let currentIndex = 0;
 
@@ -227,8 +232,6 @@ https://www.texastaxprotest.com/blog-contact-us/
         `${page_initials}--version:${test_version}`,
       );
 
-      console.table(TEST_CONFIG);
-
       switch (test_variation) {
         case 1:
           createLayoutV1();
@@ -240,7 +243,6 @@ https://www.texastaxprotest.com/blog-contact-us/
 
       updateCounterValue();
     } catch (error) {
-      console.warn(error);
       return false;
     }
   }

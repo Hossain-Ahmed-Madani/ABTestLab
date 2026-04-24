@@ -1,3 +1,9 @@
+.AB-TTP37
+  > .mantine-Container-root
+  > .mantine-Group-root
+  > .mantine-Card-root:first-child {
+  display: none !important;
+}
 @media screen and (max-width: 990.5px) {
   .AB-TTP37
     .mantine-hidden-from-md[style="padding:10px;border:1px solid rgba(255, 255, 255, 0.10);border-radius:15px;background:rgba(255, 255, 255, 0.10);box-shadow:0px 14px 25px 0px #041126;backdrop-filter:blur(50px);width:90%"],

@@ -40,8 +40,8 @@ V2: https://marketer.monetate.net/control/preview/12476/NEP0ML9L42RI7IJANGN1QY0P
 
     const TEST_CONFIG = {
         page_initials: "AB-TTP37",
-        test_variation: 1,
-        test_version: 0.0002,
+        test_variation: 2,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
