@@ -45,7 +45,11 @@ URL Targeting: 2 URLs:
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
+    }
+
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
     function debounce(func, wait) {
@@ -63,42 +67,96 @@ URL Targeting: 2 URLs:
     const TEST_START_LOCATIONS = ["/subscriptions/pest-box-program/signup#", "/subscriptions/lawn-box-program/signup#"];
     const LAYOUT_LOCATIONS = ["/subscriptions/pest-box-program/signup#/checkout/shipping/address", "/subscriptions/lawn-box-program/signup#/checkout/shipping/address"];
 
-
     const DATA = {
         "turf-box": {
             title: "New to Turf Box?",
-            product: "Kentucky Bluegrass Weed",
-            program: "Disease Prevention Program",
+            product: "",
+            program: "",
         },
         "pest-box": {
             title: "New to Pest Box?",
-            product: "Chapin Premier 1 Gallon Sprayer (#21210XP)",
-            program: "Perimeter Defense Program",
+            product: "",
+            program: "",
         },
     };
 
-    function eventHandler() {
-        console.log("===== EVENT HANDLER ====");
+    // Functions to get, set, and remove session storage values
+    function getStorageValue(key) {
+        try {
+            return JSON.parse(window.sessionStorage.getItem(key));
+        } catch (e) {
+            console.warn("Unable to get window.sessionStorage value:", e);
+            return null;
+        }
     }
 
-    function removeEventHandler() {
+    function setSessionStorageValue(key, value) {
+        try {
+            window.sessionStorage.setItem(key, JSON.stringify(value));
+        } catch (e) {
+            console.warn("Unable to set window.sessionStorage value:", e);
+        }
+    }
+
+    function handleBodyClick(e) {
+        console.log("====== BODY CLICK DETECTED ======");
+
+        const pestBoxProgramButton = e.target.closest("#offers span.uppercase[role='button']");
+        if (window.location.href.includes(TEST_START_LOCATIONS[0]) && pestBoxProgramButton) {
+            const title = q(pestBoxProgramButton.parentNode.parentNode, ".md\\:h-24 p.text-base.font-bold").textContent.trim();
+            console.log("PEST BOX PROGRAM: ", title);
+            DATA["pest-box"].program = title;
+        }
+
+        const pestBoxProductDoNotAddButton = e.target.closest("#addons button:not(#continue)");
+        if (window.location.href.includes(TEST_START_LOCATIONS[0]) && pestBoxProductDoNotAddButton) {
+            console.log("PEST BOX PRODUCT DO NOT ADD: ");
+            DATA["pest-box"].product = "";
+        }
+
+        setSessionStorageValue(page_initials, DATA);
+    }
+
+    async function addPestProductCardEventListener() {
+        await waitForElementAsync(() => !!q('div[role="radiogroup"] div.border-2.block.cursor-pointer'));
+
+        qq('div[role="radiogroup"] div.border-2.block.cursor-pointer').forEach((item) => {
+            console.log(item);
+            item.addEventListener("click", (e) => {
+                console.log(e.target);
+                const title = q(e.currentTarget, "p.no-underline.text-sm.font-bold.text-blue").textContent.trim();
+                console.log("PEST BOX PRODUCT CARD: ", title);
+                DATA["pest-box"].product = title;
+                setSessionStorageValue(page_initials, DATA);
+            });
+        });
+    }
+
+    function addEventListener() {
+        console.log("===== ADD EVENT HANDLER ====");
+        q("body").addEventListener("click", handleBodyClick);
+    }
+
+    function removeEventListener() {
         console.log("===== REMOVING EVENT HANDLER ====");
+        q("body").removeEventListener("click", handleBodyClick);
     }
-
-
 
     async function createLayout() {
         const locationHref = window.location.href;
 
-        let matchedData; 
+        let matchedData;
 
-        if(locationHref.includes(LAYOUT_LOCATIONS[0])) {
-            matchedData = DATA["pest-box"];
-        } else if(locationHref.includes(LAYOUT_LOCATIONS[1])) {
-            matchedData = DATA["turf-box"];
+        const storageData = getStorageValue(page_initials);
+        console.log("STORAGE DATA: ", storageData);
+
+        if (locationHref.includes(LAYOUT_LOCATIONS[0])) {
+            matchedData = storageData["pest-box"];
+        } else if (locationHref.includes(LAYOUT_LOCATIONS[1])) {
+            matchedData = storageData["turf-box"];
         }
 
-        if(!matchedData) return
+        if (!matchedData) return;
 
         await waitForElementAsync(() => !!(q("#new-customer h1:not(.ab-header)") && !q(".ab-selection")));
         console.log("===== CREATING PEST BOX LAYOUT ====");
@@ -106,7 +164,9 @@ URL Targeting: 2 URLs:
         targetNode.textContent = matchedData.title;
         targetNode.classList.add("ab-header");
 
-        targetNode.insertAdjacentHTML("afterend", `<p class="ab-selection"> Create and account to get your <strong>${matchedData.product} & ${matchedData.program}</strong> Box started </p>`);
+        const dynamicTxt = matchedData.product && matchedData.program ? `${matchedData.program} & ${matchedData.product}` : matchedData.program || matchedData.product;
+
+        targetNode.insertAdjacentHTML("afterend", `<p class="ab-selection"> Create and account to get your <strong>${dynamicTxt}</strong> Box started </p>`);
     }
 
     function handleLocationChanges() {
@@ -114,23 +174,29 @@ URL Targeting: 2 URLs:
 
         const locationHref = window.location.href;
 
-        if (!TEST_START_LOCATIONS.some((currentPathName) => locationHref.includes(currentPathName))) {
+        if (!TEST_START_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
             console.log("===== NOT TARGET LOCATION  | REMOVING CLASS ====");
             removeTestInitials();
-            removeEventHandler();
+            removeEventListener();
             return;
         }
 
-        if (!window[page_initials] === true) {
+        if (!window[page_initials] === true && TEST_START_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
             console.log("===== NOT INITIALIZED | ADDING TEST INITIALS ====");
             addTestInitials();
-            eventHandler();
+            addEventListener();
             return;
         }
 
-        if (LAYOUT_LOCATIONS.some((currentPathName) => locationHref.includes(currentPathName))) {
+        if (LAYOUT_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
             console.log("===== CREATING LAYOUT ====");
             createLayout();
+            return;
+        }
+
+        if (locationHref.includes(TEST_START_LOCATIONS[0]) && locationHref.includes("addons")) {
+            console.log("===== ADDING PEST PRODUCT CARD EVENT LISTENER ====");
+            addPestProductCardEventListener();
             return;
         }
     }
@@ -178,7 +244,11 @@ URL Targeting: 2 URLs:
         console.log("===== TEST STARTED ====");
         addTestInitials();
         createLayout();
-        eventHandler();
+        addEventListener();
         urlObserver();
+        if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
+   
     });
+
+    // Use try catch after test is ready
 })();
