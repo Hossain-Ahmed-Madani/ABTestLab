@@ -126,6 +126,13 @@ URL Targeting: 2 URLs:
             DATA["pest-box"].product = "";
         }
 
+        const turfBoxProgramButton = e.target.closest("#offers span.uppercase[role='button']");
+        if (window.location.href.includes(TEST_START_LOCATIONS[1]) && turfBoxProgramButton) {
+            const title = q(turfBoxProgramButton.parentNode.parentNode, ".md\\:h-16 p.text-base.font-bold").textContent.trim();
+            console.log("TURF BOX PROGRAM: ", title);
+            DATA["turf-box"].program = title;
+        }
+
         setSessionStorageValue(page_initials, DATA);
     }
 
@@ -259,9 +266,7 @@ URL Targeting: 2 URLs:
         addEventListener();
         urlObserver();
         if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
-   
     });
-    3;
 
     // Use try catch after test is ready
 })();
