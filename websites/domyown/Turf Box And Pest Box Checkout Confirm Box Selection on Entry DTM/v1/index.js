@@ -11,8 +11,9 @@ URL Targeting: 2 URLs:
 
 Forced Variation: 
 
-URL 1. https://www.domyown.com/subscriptions/pest-box-program/signup#/page/1/inputs?&utm_campaign=qa5
-URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inputs?&utm_campaign=qa5
+URL 1. https://www.domyown.com/?_conv_eforce=100139236.1001215278&utm_campaign=qa5
+URL 1. https://www.domyown.com/subscriptions/pest-box-program/signup#/page/1/inputs?_conv_eforce=100139236.1001215278&utm_campaign=qa5
+URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inputs?_conv_eforce=100139236.1001215278&utm_campaign=qa5
 
 */
 
@@ -73,7 +74,7 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         };
     }
 
-    const TEST_START_LOCATIONS = ["/subscriptions/pest-box-program/signup#", "/subscriptions/lawn-box-program/signup#"];
+    const TEST_START_LOCATIONS = ["/subscriptions/pest-box-program/signup", "/subscriptions/lawn-box-program/signup"];
     const LAYOUT_LOCATIONS = ["/subscriptions/pest-box-program/signup#/checkout/shipping/address", "/subscriptions/lawn-box-program/signup#/checkout/shipping/address"];
 
     const DATA = {
