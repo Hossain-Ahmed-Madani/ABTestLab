@@ -25,7 +25,7 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         test_name: "Turf Box & Pest Box Checkout – Confirm Box Selection on Entry [DTM]",
         page_initials: "AB-CONFIRM-BOX-SELECTION",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -95,7 +95,6 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         try {
             return JSON.parse(window.sessionStorage.getItem(key));
         } catch (e) {
-            console.warn("Unable to get window.sessionStorage value:", e);
             return null;
         }
     }
@@ -104,38 +103,26 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         try {
             window.sessionStorage.setItem(key, JSON.stringify(value));
         } catch (e) {
-            console.warn("Unable to set window.sessionStorage value:", e);
-        }
-    }
-
-    function removeSessionStorageValue(key) {
-        try {
-            window.sessionStorage.removeItem(key);
-        } catch (e) {
-            console.warn("Unable to remove window.sessionStorage value:", e);
+            return;
         }
     }
 
     function handleBodyClick(e) {
-        console.log("====== BODY CLICK DETECTED ======");
 
         const pestBoxProgramButton = e.target.closest("#offers span.uppercase[role='button']");
         if (window.location.href.includes(TEST_START_LOCATIONS[0]) && pestBoxProgramButton) {
             const title = q(pestBoxProgramButton.parentNode.parentNode, ".md\\:h-24 p.text-base.font-bold").textContent.trim();
-            console.log("PEST BOX PROGRAM: ", title);
             DATA["pest-box"].program = title;
         }
 
         const pestBoxProductDoNotAddButton = e.target.closest("#addons button:not(#continue)");
         if (window.location.href.includes(TEST_START_LOCATIONS[0]) && pestBoxProductDoNotAddButton) {
-            console.log("PEST BOX PRODUCT DO NOT ADD: ");
             DATA["pest-box"].product = "";
         }
 
         const turfBoxProgramButton = e.target.closest("#offers span.uppercase[role='button']");
         if (window.location.href.includes(TEST_START_LOCATIONS[1]) && turfBoxProgramButton) {
             const title = q(turfBoxProgramButton.parentNode.parentNode, ".md\\:h-16 p.text-base.font-bold").textContent.trim();
-            console.log("TURF BOX PROGRAM: ", title);
             DATA["turf-box"].program = title;
         }
 
@@ -146,11 +133,8 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         await waitForElementAsync(() => !!q('div[role="radiogroup"] div.border-2.block.cursor-pointer'));
 
         qq('div[role="radiogroup"] div.border-2.block.cursor-pointer').forEach((item) => {
-            console.log(item);
             item.addEventListener("click", (e) => {
-                console.log(e.target);
                 const title = q(e.currentTarget, "p.no-underline.text-sm.font-bold.text-blue").textContent.trim();
-                console.log("PEST BOX PRODUCT CARD: ", title);
                 DATA["pest-box"].product = title;
                 setSessionStorageValue(page_initials, DATA);
             });
@@ -158,12 +142,10 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
     }
 
     function addEventListener() {
-        console.log("===== ADD EVENT HANDLER ====");
         q("body").addEventListener("click", handleBodyClick);
     }
 
     function removeEventListener() {
-        console.log("===== REMOVING EVENT HANDLER ====");
         q("body").removeEventListener("click", handleBodyClick);
     }
 
@@ -173,7 +155,6 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         let matchedData;
 
         const storageData = getStorageValue(page_initials);
-        console.log("STORAGE DATA: ", storageData);
 
         if (locationHref.includes(LAYOUT_LOCATIONS[0])) {
             matchedData = storageData["pest-box"];
@@ -184,43 +165,37 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         if (!matchedData) return;
 
         await waitForElementAsync(() => !!(q("#new-customer h1:not(.ab-header)") && !q(".ab-selection")));
-        console.log("===== CREATING PEST BOX LAYOUT ====");
         const targetNode = q("#new-customer h1:not(.ab-header)");
         targetNode.textContent = matchedData.title;
         targetNode.classList.add("ab-header");
 
         const dynamicTxt = matchedData.product && matchedData.program ? `${matchedData.program} & ${matchedData.product}` : matchedData.program || matchedData.product;
 
-        targetNode.insertAdjacentHTML("afterend", `<p class="ab-selection"> Create and account to get your <strong>${dynamicTxt}</strong> Box started </p>`);
+        targetNode.insertAdjacentHTML("afterend", `<p class="ab-selection"> Create an account to get your <strong>${dynamicTxt}</strong> Box started </p>`);
     }
 
     function handleLocationChanges() {
-        console.log("=====handleLocationChanges ====");
 
         const locationHref = window.location.href;
 
         if (!TEST_START_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
-            console.log("===== NOT TARGET LOCATION  | REMOVING CLASS ====");
             removeTestInitials();
             removeEventListener();
             return;
         }
 
         if (!window[page_initials] === true && TEST_START_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
-            console.log("===== NOT INITIALIZED | ADDING TEST INITIALS ====");
             addTestInitials();
             addEventListener();
             return;
         }
 
         if (LAYOUT_LOCATIONS.some((pathName) => locationHref.includes(pathName))) {
-            console.log("===== CREATING LAYOUT ====");
             createLayout();
             return;
         }
 
         if (locationHref.includes(TEST_START_LOCATIONS[0]) && locationHref.includes("addons")) {
-            console.log("===== ADDING PEST PRODUCT CARD EVENT LISTENER ====");
             addPestProductCardEventListener();
             return;
         }
@@ -265,25 +240,14 @@ URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inp
         q("body").classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
     }
 
-    // waitForElementAsync(checkForItems).then(() => {
-    //     console.log("===== TEST STARTED ====");
-    //     addTestInitials();
-    //     createLayout();
-    //     addEventListener();
-    //     urlObserver();
-    //     if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
-    // });
-
     try {
         await waitForElementAsync(checkForItems);
-        console.log("===== TEST STARTED ====");
         addTestInitials();
         createLayout();
         addEventListener();
         urlObserver();
         if (!getStorageValue(page_initials)) setSessionStorageValue(page_initials, DATA);
     } catch (e) {
-        console.error("Error: ", e);
         return;
     }
 })();
