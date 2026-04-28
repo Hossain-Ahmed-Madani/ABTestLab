@@ -23,6 +23,7 @@ Homepage: ^https:\/.seatplan\.com\/?(?:\?[^\/]*)?$
     }
 
     function triggerExperimentOnClick() {
+        console.log("triggerExperimentOnClick : 1004196271");
         window["AB-EXP-1004196271"] = true;
         window._conv_q = window._conv_q || [];
         window._conv_q.push(["executeExperiment", "1004196271"]);
@@ -50,7 +51,7 @@ Homepage: ^https:\/.seatplan\.com\/?(?:\?[^\/]*)?$
         convert_recheck_experiment();
         return false;
     }
-});
+})()
 
 
 

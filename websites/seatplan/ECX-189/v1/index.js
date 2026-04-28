@@ -64,8 +64,6 @@ Forced Variation: https://seatplan.com/?_conv_eforce=1004196271.1004461480&utm_c
 
     function moveToTopIfNeeded(targetNode) {
         if(!targetNode) return;
-
-        console.log("moveToTopIfNeeded", targetNode);
         
         const rect = targetNode.getBoundingClientRect();
         const tolerance = 2;
