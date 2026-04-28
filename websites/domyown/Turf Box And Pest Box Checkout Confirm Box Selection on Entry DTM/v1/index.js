@@ -11,6 +11,8 @@ URL Targeting: 2 URLs:
 
 Forced Variation: 
 
+https://www.domyown.com/?utm_campaign=qa5
+
 URL 1. https://www.domyown.com/?_conv_eforce=100139236.1001215278&utm_campaign=qa5
 URL 1. https://www.domyown.com/subscriptions/pest-box-program/signup#/page/1/inputs?_conv_eforce=100139236.1001215278&utm_campaign=qa5
 URL 2. https://www.domyown.com/subscriptions/lawn-box-program/signup#/page/1/inputs?_conv_eforce=100139236.1001215278&utm_campaign=qa5
