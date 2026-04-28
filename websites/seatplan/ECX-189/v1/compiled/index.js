@@ -1,3 +1,13 @@
+/* 
+
+Ticket: https://trello.com/c/N6k9DeiA/5156-ecx-189-mobile-homepage-smooth-scroll-hero-search-field-to-top-of-page-when-selected
+Test container: https://app.convert.com/accounts/1004737/projects/1004631/experiences/1004196271/summary
+Forced Variation: https://seatplan.com/?_conv_eforce=1004196271.1004461480&utm_campaign=qa5
+
+
+*/
+
+
 (async () => {
     const TEST_CONFIG = {
         client: "SeatPlan",
@@ -45,13 +55,15 @@
 
     function moveToTopIfNeeded(targetNode) {
         if(!targetNode) return;
+
+        console.log("moveToTopIfNeeded", targetNode);
         
         const rect = targetNode.getBoundingClientRect();
         const tolerance = 2;
-        if (Math.abs(rect.top - 50) <= tolerance) {
+        if (Math.abs(rect.top - 100) <= tolerance) {
             return; 
         }
-        const scrollOffset = rect.top - 50;
+        const scrollOffset = rect.top - 100;
         window.scrollBy({
             top: scrollOffset,
             behavior: "smooth",
@@ -65,6 +77,7 @@
         const eventName = isTouchEnabled() ? "touchend" : "click";
 
         const targetNode = q("#search-input");
+        moveToTopIfNeeded(targetNode);
         targetNode.addEventListener(eventName, () => moveToTopIfNeeded(targetNode));
     }
 
