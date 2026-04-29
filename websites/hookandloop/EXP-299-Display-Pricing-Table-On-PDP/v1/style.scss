@@ -17,9 +17,21 @@
         display: none !important;
     }
 
-    #qty-counter,
-    p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
-    .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
+    // #qty-counter,
+    // p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
+    // .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
+    //     display: none;
+    // }
+
+    // .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
+    //     border: 1px solid red;
+    // }
+
+    .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"]:has(> .hidden) {
+        display: none;
+    }
+
+    #qty-counter {
         display: none;
     }
 
@@ -87,9 +99,9 @@
     }
 
     @media screen and (min-width: 1024px) {
-        .mt-2.w-full[x-data="initCutOffTimer()"] {
-            display: none;
-        }
+        // .mt-2.w-full[x-data="initCutOffTimer()"] {
+        //     display: none;
+        // }
 
         // Main Wrapper
         .flex.flex-col.sm\:flex-row.md\:flex-col.xl\:flex-row.items-end.my-4 {
@@ -180,7 +192,7 @@
             line-height: 18px;
             letter-spacing: 0px;
             text-align: left;
-            color: #1d1d1d;
+            color: #eb0000;
         }
 
         &__pricing {

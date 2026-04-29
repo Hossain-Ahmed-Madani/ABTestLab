@@ -13,7 +13,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         test_name: "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
         page_initials: "AB-EXP-299",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -211,12 +211,17 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
         q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
 
+
+        const controlSavingOnVolumeNode = q(".mt-2.bb-4.lg\\:ml-auto.xl\\:ml-0.py-2[x-data='initSavingOnVolume()']");
+
         if (nextNearestDiscountPercentage && currentSelectedQuantity >= nextNearestQuantity && controlDiscountAmountStr !== '') {
             q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.remove("ab-hidden");
             q(".ab-pricing-table__sub-header").classList.add("ab-hidden");
+            controlSavingOnVolumeNode?.classList.add("hidden");
         } else {
             q(".ab-pricing-table__sub-header").classList.remove("ab-hidden");
             q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.add("ab-hidden");
+            controlSavingOnVolumeNode?.classList.remove("hidden");
         }
 
 
@@ -324,14 +329,15 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         );
     }
 
-    waitForElementAsync(checkForItems).then(init);
+    // Development Mode
+    // waitForElementAsync(checkForItems).then(init);
 
 
-    // AFTER QA COMPLETED
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     return false
-    // }
+    // Live Mode
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false
+    }
 })();
