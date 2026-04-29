@@ -1,6 +1,9 @@
 .AB-EXP-299 .ab-hidden {
     display: none !important;
 }
+.AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"]:has([x-show="getQtyForMoreDiscount()"][style*="display: none;"]) {
+    display: none !important;
+}
 .AB-EXP-299 .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"]:has(> .hidden) {
     display: none;
 }

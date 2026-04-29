@@ -14,7 +14,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
       "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
     page_initials: "AB-EXP-299",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -324,6 +324,10 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     q(".ab-save-percentage-to-unlock").textContent =
       nextNearestDiscountPercentage;
 
+    const controlSavingOnVolumeNode = q(
+      ".mt-2.bb-4.lg\\:ml-auto.xl\\:ml-0.py-2[x-data='initSavingOnVolume()']",
+    );
+
     if (
       nextNearestDiscountPercentage &&
       currentSelectedQuantity >= nextNearestQuantity &&
@@ -333,11 +337,13 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         "ab-hidden",
       );
       q(".ab-pricing-table__sub-header").classList.add("ab-hidden");
+      controlSavingOnVolumeNode?.classList.add("hidden");
     } else {
       q(".ab-pricing-table__sub-header").classList.remove("ab-hidden");
       q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.add(
         "ab-hidden",
       );
+      controlSavingOnVolumeNode?.classList.remove("hidden");
     }
   }, 150);
 
@@ -401,13 +407,13 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                 <div class="ab-pricing-table__pricing__save-percentage">
                   -${discount}%
                 </div>
-                <div class="ab-pricing-table__pricing__quantity">
-                  <span class="ab-quantity">${quantity}</span>+
-                  <span class="ab-unit">${unit}</span>
-                </div>
-                <div class="ab-pricing-table__pricing__price">
-                  $${discountedPrice.toFixed(2)}
-                </div>
+                <a href="${link}" class="ab-pricing-table__pricing__quantity"
+                  ><span class="ab-quantity">${quantity}</span>+
+                  <span class="ab-unit">${unit}</span></a
+                >
+                <a href="${link}" class="ab-pricing-table__pricing__price"
+                  >$${discountedPrice.toFixed(2)}</a
+                >
                 ${discountPerYard > 0
                   ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>`
                   : ""}
@@ -431,7 +437,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
               discount,
             }) => /* HTML */ `
               <li class="ab-pricing-table__pricing__item">
-                <div class="ab-pricing-table__pricing__left">
+                <a href="${link}" class="ab-pricing-table__pricing__left">
                   <div class="ab-pricing-table__pricing__quantity">
                     Buy <span class="ab-quantity">${quantity}</span>+
                     <span class="ab-unit">${unit}</span>
@@ -444,7 +450,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                       -${discount}%
                     </div>
                   </div>
-                </div>
+                </a>
                 <div class="ab-pricing-table__pricing__right">
                   <div class="ab-pricing-table__pricing__price">
                     $${discountedPrice.toFixed(2)}
@@ -516,13 +522,14 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     );
   }
 
-  waitForElementAsync(checkForItems).then(init);
+  // Development Mode
+  // waitForElementAsync(checkForItems).then(init);
 
-  // AFTER QA COMPLETED
-  // try {
-  //     await waitForElementAsync(checkForItems);
-  //     init();
-  // } catch (error) {
-  //     return false
-  // }
+  // Live Mode
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
 })();
