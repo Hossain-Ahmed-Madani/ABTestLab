@@ -163,6 +163,10 @@
         }
     }
 
+    .ab-contact-us {
+        text-decoration: underline;
+    }
+
     .ab-pricing-table {
         width: 100%;
         display: flex;
@@ -217,7 +221,7 @@
 
                 &--active {
                     // background-color: #fff4f4;
-                    background-color: #f7e1e1;
+                    background-color: #eecccc;
                 }
             }
 

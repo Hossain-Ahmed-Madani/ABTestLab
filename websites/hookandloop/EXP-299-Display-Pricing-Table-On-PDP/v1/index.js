@@ -13,7 +13,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         test_name: "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
         page_initials: "AB-EXP-299",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -86,7 +86,6 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "") / soldInSize;
         link = q(".discount-box ul li a.text-black").getAttribute("href");
         unit = q(".discount-box ul li .roll-no span[x-text='discount.unit']").textContent || "ROLLS";
-        const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
         const maxDiscountQuantity = +q(".discount-box ul li:last-child .roll-no span[x-text='discount.qty']").textContent ?? 0;
 
         const data = qq(".discount-box ul li").reduce((acc, li) => {
@@ -110,6 +109,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
             return acc;
         }, []);
 
+
         return /* HTML */ `
             <div class="ab-pricing-table">
                 <div class="ab-pricing-table__sub-header ${currentSelectedQuantity >= maxDiscountQuantity ? "ab-hidden" : ""}">
@@ -117,20 +117,20 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                     <span class="ab-save-percentage-to-unlock">${data[0].discount}%</span> off
                 </div>
                 <div class="ab-pricing-table__sub-header-max-discount-unlocked  ${currentSelectedQuantity < maxDiscountQuantity ? "ab-hidden" : ""}"">
-                    ✦ You're saving <span class="ab-currently-saving">${controlDiscountAmountStr}</span>!
+                    ✦ Larger quantities? <a href="/contact" class="ab-contact-us">Contact us</a>.
                 </div>
-                <ul  class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile" >
+                <ul  class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                     ${data
                 .map(
                     ({ discount, quantity, unit, discountedPrice, discountPerYard, saveAmount }) => /* HTML */ `
-                                    <li class="ab-pricing-table__pricing__item">
-                                        <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
-                                        <a href="${link}" class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></a>
-                                        <a href="${link}" class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</a>
-                                        ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
-                                        <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
-                                    </li>
-                                `,
+                        <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount && quantity === closestQuantityToApplyDiscount ? "ab-pricing-table__pricing__item--active" : ""}">
+                            <div class="ab-pricing-table__pricing__save-percentage">-${discount}%</div>
+                            <a href="${link}" class="ab-pricing-table__pricing__quantity"><span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></a>
+                            <a href="${link}" class="ab-pricing-table__pricing__price">$${discountedPrice.toFixed(2)}</a>
+                            ${discountPerYard > 0 ? `<div class="ab-pricing-table__pricing__price-per-yard">($${discountPerYard.toFixed(2)}/yard)</div>` : ""}
+                            <div class="ab-pricing-table__pricing__save">You save $${saveAmount}</div>
+                        </li>
+                    `,
                 )
                 .join("")
             }
@@ -139,7 +139,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                     ${data
                 .map(
                     ({ quantity, unit, discountedPrice, discountPerYard, saveAmount, discount }) => /* HTML */ `
-                                <li class="ab-pricing-table__pricing__item">
+                                <li class="ab-pricing-table__pricing__item ${closestQuantityToApplyDiscount && quantity === closestQuantityToApplyDiscount ? "ab-pricing-table__pricing__item--active" : ""}">
                                     <a href="${link}" class="ab-pricing-table__pricing__left">
                                         <div class="ab-pricing-table__pricing__quantity">Buy <span class="ab-quantity">${quantity}</span>+ <span class="ab-unit">${unit}</span></div>
                                         <div class="ab-pricing-table__pricing__save-container">
@@ -192,9 +192,6 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         closestQuantityToApplyDiscount = null;
 
         const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
-        if (controlDiscountAmountStr && controlDiscountAmountStr !== '') {
-            q('.ab-currently-saving').textContent = controlDiscountAmountStr;
-        }
 
         qq(".ab-quantity").forEach((item) => {
             const priceTableQuantity = +item.textContent;
@@ -221,17 +218,12 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
         q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
 
-
-        const controlSavingOnVolumeNode = q(".mt-2.bb-4.lg\\:ml-auto.xl\\:ml-0.py-2[x-data='initSavingOnVolume()']");
-
-        if (nextNearestDiscountPercentage && currentSelectedQuantity >= nextNearestQuantity && controlDiscountAmountStr !== '') {
+        if(currentSelectedQuantity >= +q('ul.ab-pricing-table__pricing > li.ab-pricing-table__pricing__item:last-child .ab-quantity').textContent) {
             q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.remove("ab-hidden");
             q(".ab-pricing-table__sub-header").classList.add("ab-hidden");
-            // controlSavingOnVolumeNode?.classList.add("hidden");
         } else {
             q(".ab-pricing-table__sub-header").classList.remove("ab-hidden");
             q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.add("ab-hidden");
-            // controlSavingOnVolumeNode?.classList.remove("hidden");
         }
 
 
@@ -244,7 +236,6 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         pricePerYard = (startingPrice / soldInSize) / (bothSelected === true ? 2 : 1)
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         unit = discounts[0].unit;
-        const controlDiscountAmountStr = q('span[x-text="getDiscountAmount()"]')?.textContent ?? '';
 
         const data = discounts.reduce((acc, { qty, discount, unit }) => {
             acc.push({
@@ -264,8 +255,8 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
                 ✦ Add <span class="ab-quantity-to-unlock"> ${discounts[0].qty - currentSelectedQuantity}</span> more <span class="ab-unit-to-unlock"> ${unit.toLowerCase()}</span> to unlock
             <span class="ab-save-percentage-to-unlock" > ${discounts[0].discount}%</span> off
             </div>
-            <div class="ab-pricing-table__sub-header-max-discount-unlocked ab-hidden">
-                ✦ You're saving <span class="ab-currently-saving">${controlDiscountAmountStr}</span>!
+            <div class="ab-pricing-table__sub-header-max-discount-unlocked  ab-hidden">
+                ✦ Larger quantities? <a href="/contact" class="ab-contact-us">Contact us</a>.
             </div>
             <ul class="ab-pricing-table__pricing ab-pricing-table__pricing--mobile">
                 ${data
