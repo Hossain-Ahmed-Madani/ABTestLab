@@ -17,20 +17,6 @@
         display: none !important;
     }
 
-    // #qty-counter,
-    // p.text-\[18px\][x-show="getQtyForMoreDiscount()"],
-    // .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
-    //     display: none;
-    // }
-
-    // .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"] {
-    //     border: 1px solid red;
-    // }
-
-    // .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"]:has([x-show="getQtyForMoreDiscount()"][style*="display: none;"]) {
-    //     display: none !important;
-    // }
-
     .mt-2.bb-4.lg\:ml-auto.xl\:ml-0.py-2[x-data="initSavingOnVolume()"]:has(> .hidden) {
         display: none;
     }
@@ -336,7 +322,7 @@
     @media screen and (min-width: 991px) {
         .ab-pricing-table-wrapper {
             flex-grow: 1;
-            padding-right: 24px;
+            // padding-right: 24px;
         }
 
         .ab-pricing-header {
@@ -444,6 +430,12 @@
                     }
                 }
             }
+        }
+    }
+
+    @media screen and (min-width: 1280px) {
+        .ab-pricing-table-wrapper {
+            padding-right: 24px;
         }
     }
 }

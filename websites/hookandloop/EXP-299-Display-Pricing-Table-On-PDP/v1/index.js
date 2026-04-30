@@ -13,7 +13,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         test_name: "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
         page_initials: "AB-EXP-299",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -84,6 +84,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         soldInSize = currentSelectedQuantity; /* Initially soldInSize can be determined by initial quantity of the product */
         startingPrice = +q(".price[x-html='getFormattedFinalPrice()']").textContent.replace("$", "").replace(",", "") / soldInSize;
+        const startingPricePerQuantity = startingPrice / currentSelectedQuantity;
         link = q(".discount-box ul li a.text-black").getAttribute("href");
         unit = q(".discount-box ul li .roll-no span[x-text='discount.unit']").textContent || "ROLLS";
         const maxDiscountQuantity = +q(".discount-box ul li:last-child .roll-no span[x-text='discount.qty']").textContent ?? 0;
@@ -188,6 +189,10 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
 
     const debouncedFinalPriceAndActiveQuantityUpdate = debounce((e) => {
         startingPrice = +e.detail;
+
+        console.log("===== debouncedFinalPriceAndActiveQuantityUpdate ===== 0");
+        console.log("startingPrice", startingPrice);
+
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         closestQuantityToApplyDiscount = null;
 
@@ -218,7 +223,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         q(".ab-quantity-to-unlock").textContent = nextNearestQuantity ? nextNearestQuantity - currentSelectedQuantity : 0;
         q(".ab-save-percentage-to-unlock").textContent = nextNearestDiscountPercentage;
 
-        if(currentSelectedQuantity >= +q('ul.ab-pricing-table__pricing > li.ab-pricing-table__pricing__item:last-child .ab-quantity').textContent) {
+        if (currentSelectedQuantity >= +q('ul.ab-pricing-table__pricing > li.ab-pricing-table__pricing__item:last-child .ab-quantity').textContent) {
             q(".ab-pricing-table__sub-header-max-discount-unlocked").classList.remove("ab-hidden");
             q(".ab-pricing-table__sub-header").classList.add("ab-hidden");
         } else {
@@ -232,18 +237,30 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     const debouncedRecreatePricingTable = debounce((e) => {
         const { bothSelected, discounts, smeasureSoldInSize, sminqty } = e.detail;
 
+        const startingPricePerQuantity = startingPrice / currentSelectedQuantity;
         soldInSize = +smeasureSoldInSize === 1 && +sminqty > 1 ? +sminqty : +smeasureSoldInSize;
         pricePerYard = (startingPrice / soldInSize) / (bothSelected === true ? 2 : 1)
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         unit = discounts[0].unit;
 
+
+        console.log("===== debouncedRecreatePricingTable ===== 1");
+        console.log("startingPrice", startingPrice);
+        console.log("currentSelectedQuantity", currentSelectedQuantity);
+        console.log("unit", unit);
+        console.log("discounts", discounts);
+        console.log("pricePerYard", pricePerYard);
+        console.log("soldInSize", soldInSize);
+        console.log("link", link);
+        console.log("unit", unit);
+
         const data = discounts.reduce((acc, { qty, discount, unit }) => {
             acc.push({
                 unit: unit,
                 quantity: qty,
-                discountedPrice: (startingPrice - (startingPrice * (discount / 100))) * qty,
+                discountedPrice: (startingPricePerQuantity- (startingPricePerQuantity* (discount / 100))) * qty,
                 discountPerYard: pricePerYard - pricePerYard * (discount / 100),
-                saveAmount: (qty * startingPrice * (discount / 100)).toFixed(2),
+                saveAmount: (qty * startingPricePerQuantity * (discount / 100)).toFixed(2),
                 discount: discount,
             });
 
