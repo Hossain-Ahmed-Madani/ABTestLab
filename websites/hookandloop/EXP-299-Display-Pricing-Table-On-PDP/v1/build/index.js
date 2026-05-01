@@ -3,6 +3,15 @@
 Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34857&variation_id=52180&search=Hook+%26+Loop+299+-+A%2FB+test+idea+-+Display+pricing+table+on+PDP+instead+of+single+price
 Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-force=34857-52180
 
+
+URL's to test: 
+
+1. https://www.hookandloop.com/brands/duragrip/sew-on
+2. https://www.hookandloop.com/brands/duragrip/wide-loop/display-loop
+3. https://www.hookandloop.com/brands/duragrip/wide-loop/tempo-60-display-laminated-loop-fabric
+4. https://www.hookandloop.com/brands/velcro/cable-ties -> discounts do not apply to this product | facing discount issue | need to discuss with Khairul bhai
+
+
 */
 
 (async () => {
@@ -14,7 +23,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
       "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
     page_initials: "AB-EXP-299",
     test_variation: 1,
-    test_version: 0.0007,
+    test_version: 0.0009,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -279,6 +288,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
 
   const debouncedFinalPriceAndActiveQuantityUpdate = debounce((e) => {
     startingPrice = +e.detail;
+
     currentSelectedQuantity =
       +q('.product-info-main  input[name="qty"]').value ?? 1;
     closestQuantityToApplyDiscount = null;
@@ -349,6 +359,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
   const debouncedRecreatePricingTable = debounce((e) => {
     const { bothSelected, discounts, smeasureSoldInSize, sminqty } = e.detail;
 
+    const startingPricePerQuantity = startingPrice / currentSelectedQuantity;
     soldInSize =
       +smeasureSoldInSize === 1 && +sminqty > 1
         ? +sminqty
@@ -363,9 +374,13 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         unit: unit,
         quantity: qty,
         discountedPrice:
-          (startingPrice - startingPrice * (discount / 100)) * qty,
+          (startingPricePerQuantity -
+            startingPricePerQuantity * (discount / 100)) *
+          qty,
         discountPerYard: pricePerYard - pricePerYard * (discount / 100),
-        saveAmount: (qty * startingPrice * (discount / 100)).toFixed(2),
+        saveAmount: (qty * startingPricePerQuantity * (discount / 100)).toFixed(
+          2,
+        ),
         discount: discount,
       });
 

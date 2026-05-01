@@ -3,6 +3,15 @@
 Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=34857&variation_id=52180&search=Hook+%26+Loop+299+-+A%2FB+test+idea+-+Display+pricing+table+on+PDP+instead+of+single+price
 Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-force=34857-52180
 
+
+URL's to test: 
+
+1. https://www.hookandloop.com/brands/duragrip/sew-on
+2. https://www.hookandloop.com/brands/duragrip/wide-loop/display-loop
+3. https://www.hookandloop.com/brands/duragrip/wide-loop/tempo-60-display-laminated-loop-fabric
+4. https://www.hookandloop.com/brands/velcro/cable-ties -> discounts do not apply to this product | facing discount issue | need to discuss with Khairul bhai
+
+
 */
 
 (async () => {
@@ -13,7 +22,7 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         test_name: "Hook & Loop 299 - A/B test idea - Display pricing table on PDP instead of single price.",
         page_initials: "AB-EXP-299",
         test_variation: 1,
-        test_version: 0.0008,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -180,9 +189,6 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
     const debouncedFinalPriceAndActiveQuantityUpdate = debounce((e) => {
         startingPrice = +e.detail;
 
-        console.log("===== debouncedFinalPriceAndActiveQuantityUpdate ===== 0");
-        console.log("startingPrice", startingPrice);
-
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         closestQuantityToApplyDiscount = null;
 
@@ -232,17 +238,6 @@ Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on/?varify-for
         pricePerYard = (startingPrice / soldInSize) / (bothSelected === true ? 2 : 1);
         currentSelectedQuantity = +q('.product-info-main  input[name="qty"]').value ?? 1;
         unit = discounts[0].unit;
-
-
-        console.log("===== debouncedRecreatePricingTable ===== 1");
-        console.log("startingPrice", startingPrice);
-        console.log("currentSelectedQuantity", currentSelectedQuantity);
-        console.log("unit", unit);
-        console.log("discounts", discounts);
-        console.log("pricePerYard", pricePerYard);
-        console.log("soldInSize", soldInSize);
-        console.log("link", link);
-        console.log("unit", unit);
 
         const data = discounts.reduce((acc, { qty, discount, unit }) => {
             acc.push({
