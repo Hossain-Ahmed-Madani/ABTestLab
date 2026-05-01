@@ -38,7 +38,7 @@ v2: https://marketer.monetate.net/control/preview/13487/Y41T6WH20FT9NTCXN2XOEL97
         test_name: "MMI20: [PRODUCT] Move Up Ingredients BTF (2) SET UP TEST",
         page_initials: "AB-MMI20",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

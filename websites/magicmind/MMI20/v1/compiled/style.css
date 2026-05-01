@@ -1,6 +1,6 @@
 .AB-MMI20 #main,
 .AB-MMI20 .shopify-section.logos {
-  background-color: #fff;
+  background-color: #fff !important;
 }
 .AB-MMI20 main .shopify-section.main-product-v2 {
   background-color: #fcfcfc !important;
@@ -12,6 +12,22 @@
 .AB-MMI20 .shopify-section.product-benefits .product-benefits__wrapper::after {
   z-index: 1;
 }
+.AB-MMI20 .shopify-section:has(> .hm-v3-faq) {
+  background: #f7f7f7;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.AB-MMI20 .shopify-section:has(> .hm-v3-faq) > .hm-v3-faq {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+@media screen and (min-width: 1200px) {
+  .AB-MMI20 .shopify-section:has(> .hm-v3-faq) {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+}
+
 .AB-MMI20--v1 main .shopify-section.ingredients-slider-v2 {
   padding-bottom: 0 !important;
   background-color: #fff !important;

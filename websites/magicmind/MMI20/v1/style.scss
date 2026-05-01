@@ -119,7 +119,7 @@
 .AB-MMI20 {
     #main,
     .shopify-section.logos {
-        background-color: #fff;
+        background-color: #fff !important;
     }
 
     main .shopify-section.main-product-v2 {
@@ -137,8 +137,22 @@
         }
     }
 
+    .shopify-section:has(> .hm-v3-faq) {
+        background: #f7f7f7;
+        padding-top: 50px;
+        padding-bottom: 50px;
+
+        & > .hm-v3-faq {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+
     @media screen and (min-width: 1200px) {
-        //
+        .shopify-section:has(> .hm-v3-faq) {
+            padding-top: 100px;
+            padding-bottom: 100px;
+        }
     }
 }
 
@@ -224,7 +238,6 @@
             padding-top: 120px !important;
             padding-bottom: 160px !important;
         }
-    
     }
 
     // Accordion Section
