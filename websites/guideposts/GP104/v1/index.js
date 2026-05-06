@@ -112,16 +112,15 @@
         },
     ];
 
-    function faqAccordionSectionLayout() {
+    function filterAccordionSectionLayout() {
         const layout = /* HTML */ `
             <div class="ab__filter-accordion-section">
-                ${accordionData.reduce(
-                    (acc, cItem, index) =>
-                        acc +
-                        /* HTML */ `
+                ${qq("#shop-filters .wpfFilterWrapper")
+                    .map(
+                        (item, index) => /* HTML */ `
                             <div class="ab__filter-accordion-item" data-toggle-id="${index + 1}">
                                 <div class="ab__filter-accordion-item__head">
-                                    <div class="ab__filter-accordion-item__head__title">${cItem.title}</div>
+                                    <div class="ab__filter-accordion-item__head__title">${q(item, ".wpfFilterTitle .wfpTitle").textContent}</div>
                                     <div class="ab__filter-accordion-item__head__toggle-icon">
                                         <div class="ab-accordion-icon ab-accordion-icon--plus">${ASSETS.plus_svg}</div>
                                         <div class="ab-accordion-icon ab-accordion-icon--minus">${ASSETS.minus_svg}</div>
@@ -129,28 +128,18 @@
                                 </div>
                                 <div class="ab__filter-accordion-item__body">
                                     <ul class="ab-filter-list">
-                                        ${[
-                                            "Bibles",
-                                            "Caregiving",
-                                            "Best Sellers",
-                                            "Books on Prayer",
-                                            "Bible References",
-                                            "Bibles & References",
-                                            "Christian Magazines",
-                                            "2026 Annual Devotionals",
-                                            "Books About Better Living",
-                                            "Books About Better Living",
-                                            "Animal Books & Magazines",
-                                            "Best Selling Christian Non-Fiction Books",
-                                        ]
-                                            .map((item) => /* HTML */ ` <li class="ab-filter-item">${item}</li> `)
-                                            .join("")}
+                                        ${qq(item, "li").map(
+                                            (listItem) => /* HTML */ `
+                                                <li class="ab-filter-item ${listItem.classList.contains("wpfTermChecked") || q(listItem, ".wpfTermChecked") || q(listItem, ".selected") ? "ab-selected" : ""}">
+                                                    ${q(listItem, ".wpfValue").textContent}
+                                                </li>`
+                                            ).join("")}
                                     </ul>
                                 </div>
                             </div>
                         `,
-                    "",
-                )}
+                    )
+                    .join("")}
             </div>
         `;
 
@@ -173,7 +162,7 @@
                             <div class="${page_initials}__modal__close-cta">${ASSETS.cross_svg}</div>
                         </div>
                         <div class="${page_initials}__modal__body">
-                            <div class="${page_initials}__modal__filter__accordion-wrapper">${faqAccordionSectionLayout()}</div>
+                            <div class="${page_initials}__modal__filter__accordion-wrapper">${filterAccordionSectionLayout()}</div>
                             <div class="${page_initials}__modal__filter-cta-wrapper">
                                 <div class="ab-apply-filter-cta">Apply Filters</div>
                                 <div class="ab-clear-filter-cta">X Clear Filters</div>
@@ -219,20 +208,15 @@
         }
     }
     function clickFunction() {
-        document.body.addEventListener("click", (e) => {
-            // ====== MODAL ======
+        q(".elementor-button#shop-by").addEventListener("click", () => {
+            handleModalView("show");
+        });
 
-            // OPEN MODAL
-            if (e.target.closest(".elementor-button.elementor-button-link.elementor-size-sm")) {
-                handleModalView("show");
-            }
+        q(`.${page_initials}__modal__close-cta`).addEventListener("click", () => {
+            handleModalView("hide");
+        });
 
-            // CLOSE MODAL
-            if (e.target.closest(`.${page_initials}__modal__close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
-                handleModalView("hide");
-            }
-
-            // TOGGLE ACCORDION
+        q(".ab__filter-accordion-section").addEventListener("click", (e) => {
             if (e.target.closest(".ab__filter-accordion-item__head")) {
                 const accordionElement = e.target.closest(".ab__filter-accordion-item__head").parentNode;
                 toggleAccordion(accordionElement);
@@ -259,7 +243,7 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".elementor-button#shop-by") && q("#shop-filters .wpfFilterWrapper"));
     }
 
     try {
