@@ -93,11 +93,14 @@
                             <div class="${page_initials}__modal__close-cta">${ASSETS.cross_svg}</div>
                         </div>
                         <div class="${page_initials}__modal__body">
-                            <div class="${page_initials}__modal__body__text-content">Modal Content</div>
-                        </div>
-                        <div class="${page_initials}__modal__footer">
-                            <div class="ab-apply-filter-cta">Apply Filters</div>
-                            <div class="ab-clear-filter-cta">X Clear Filters</div>
+                        
+                            <div class="${page_initials}__modal__filter__accordion-wrapper">
+                                Filter Accordion
+                            </div>
+                            <div class="${page_initials}__modal__filter-cta-wrapper">
+                                <div class="ab-apply-filter-cta">Apply Filters</div>
+                                <div class="ab-clear-filter-cta">X Clear Filters</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -148,10 +151,7 @@
 
             // CLOSE MODAL
 
-            if (
-                e.target.closest(`.${page_initials}__modal__close-cta`) ||
-                (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))
-            ) {
+            if (e.target.closest(`.${page_initials}__modal__close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
                 handleModalView("hide");
             }
         });
@@ -171,7 +171,6 @@
 
         createLayout();
         clickFunction();
-
 
         handleModalView("show");
     }
