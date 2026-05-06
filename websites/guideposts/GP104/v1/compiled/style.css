@@ -3,6 +3,10 @@
 		 *			ACCORDION
  * ----------------------------------------
  */
+.AB-GP104 .ab__filter-accordion-section {
+  max-height: calc(100dvh - 200px);
+  overflow: auto;
+}
 .AB-GP104 .ab__filter-accordion-item {
   transition: all 0.3s ease-in-out;
   border-bottom: 1px solid rgb(229, 229, 229);
@@ -68,9 +72,11 @@
   opacity: 1;
 }
 .AB-GP104 .ab__filter-accordion-item--open .ab__filter-accordion-item__body {
-  max-height: 265px;
+  max-height: 500px;
   margin-bottom: 22px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 .AB-GP104 ul.ab-filter-list {
   list-style: none;
@@ -171,7 +177,6 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
 }
 .AB-GP104__modal__body {
   margin-top: 49px;
-  border: 1px solid red;
   height: calc(100dvh - 49px);
   width: 100%;
   display: flex;
@@ -185,6 +190,9 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
   justify-content: space-between;
   gap: 12px;
   padding: 0 15px 18px 21px;
+  position: relative;
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
 }
 .AB-GP104__modal__filter-cta-wrapper .ab-apply-filter-cta {
   width: 100%;

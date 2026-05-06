@@ -26,7 +26,8 @@ $page_initials: "AB-GP104";
 // MAIN CSS -> Accordion Section
 .#{$page_initials} {
     .ab__filter-accordion-section {
-        //
+        max-height: calc(100dvh - 200px);
+        overflow: auto;
     }
 
     .ab__filter-accordion-item {
@@ -109,9 +110,11 @@ $page_initials: "AB-GP104";
         }
 
         .ab__filter-accordion-item__body {
-            max-height: 265px;
+            max-height: 500px;
             margin-bottom: 22px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-y;
         }
     }
 
@@ -239,7 +242,6 @@ body.#{$page_initials}--modal-show {
 
         &__body {
             margin-top: 49px;
-            border: 1px solid red;
             height: calc(100dvh - 49px);
             width: 100%;
             display: flex;
@@ -254,6 +256,9 @@ body.#{$page_initials}--modal-show {
             justify-content: space-between;
             gap: 12px;
             padding: 0 15px 18px 21px;
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 1);
 
             .ab-apply-filter-cta {
                 width: 100%;

@@ -193,6 +193,7 @@
     }
 
     function preventScroll(e) {
+        if (e.target.closest(".ab__filter-accordion-section")) return;
         e.preventDefault();
     }
 
