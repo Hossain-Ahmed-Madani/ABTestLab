@@ -127,7 +127,26 @@
                                         <div class="ab-accordion-icon ab-accordion-icon--minus">${ASSETS.minus_svg}</div>
                                     </div>
                                 </div>
-                                <div class="ab__filter-accordion-item__body">${cItem.description}</div>
+                                <div class="ab__filter-accordion-item__body">
+                                    <ul class="ab-filter-list">
+                                        ${[
+                                            "Bibles",
+                                            "Caregiving",
+                                            "Best Sellers",
+                                            "Books on Prayer",
+                                            "Bible References",
+                                            "Bibles & References",
+                                            "Christian Magazines",
+                                            "2026 Annual Devotionals",
+                                            "Books About Better Living",
+                                            "Books About Better Living",
+                                            "Animal Books & Magazines",
+                                            "Best Selling Christian Non-Fiction Books",
+                                        ]
+                                            .map((item) => /* HTML */ ` <li class="ab-filter-item">${item}</li> `)
+                                            .join("")}
+                                    </ul>
+                                </div>
                             </div>
                         `,
                     "",
@@ -139,20 +158,7 @@
     }
 
     function toggleAccordion(clickedElement) {
-        const currentAccordionElement = clickedElement;
-        const dataToggleId = clickedElement.getAttribute("data-toggle-id");
-        const clickedItemIsOpen = currentAccordionElement.classList.contains("ab__filter-accordion-item--open");
-
-        const accordionELements = document.querySelectorAll(".ab__filter-accordion-item");
-        accordionELements.forEach((elem) => {
-            elem.classList.remove("ab__filter-accordion-item--open");
-        });
-
-        if (clickedItemIsOpen) {
-            currentAccordionElement.classList.remove("ab__filter-accordion-item--open");
-        } else {
-            currentAccordionElement.classList.add("ab__filter-accordion-item--open");
-        }
+        clickedElement.classList.toggle("ab__filter-accordion-item--open");
     }
 
     function createLayout() {
