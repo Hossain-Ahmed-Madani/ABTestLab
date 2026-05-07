@@ -1,3 +1,14 @@
+.AB-GP104 .mobilefilter .elementor-widget-button,
+.AB-GP104 #shop-filters .elementor-widget-container {
+  display: none;
+}
+.AB-GP104 .mobilefilter {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
 /**
  * ----------------------------------------
 		 *			ACCORDION
@@ -119,6 +130,21 @@ body.AB-GP104--modal-show {
 }
 body.AB-GP104--modal-show .AB-GP104__modal-layout {
   display: flex;
+}
+.AB-GP104__modal__open-cta {
+  width: max-content;
+  cursor: pointer;
+  padding: 14px 30px 14px 30px;
+  border-top-left-radius: 40px !important;
+  border-top-right-radius: 40px !important;
+  border-bottom-right-radius: 40px !important;
+  border-bottom-left-radius: 40px !important;
+  border-color: #4a73b6;
+  background-color: #4a73b6;
+  font-size: 1rem;
+  font-family: "Inter", Sans-serif !important;
+  font-weight: 500;
+  color: #ffffff;
 }
 .AB-GP104__modal-layout {
   display: none;

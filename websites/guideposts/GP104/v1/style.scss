@@ -12,10 +12,21 @@
     }
 }
 
-.AB-GP104 {
-    //
-}
 $page_initials: "AB-GP104";
+
+.#{$page_initials} {
+    .mobilefilter .elementor-widget-button ,
+    #shop-filters .elementor-widget-container {
+        display: none;
+    }
+
+    .mobilefilter {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        flex-direction: row;
+    }
+}
 
 /**
  * ----------------------------------------
@@ -136,7 +147,6 @@ $page_initials: "AB-GP104";
         padding: 0 14px 0 8px;
         cursor: pointer;
 
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -179,6 +189,25 @@ body.#{$page_initials}--modal-show {
 }
 
 .#{$page_initials} {
+    &__modal__open-cta {
+
+        width: max-content;
+
+        cursor: pointer;
+        padding: 14px 30px 14px 30px;
+        border-top-left-radius: 40px !important;
+        border-top-right-radius: 40px !important;
+        border-bottom-right-radius: 40px !important;
+        border-bottom-left-radius: 40px !important;
+        border-color: #4a73b6;
+        background-color: #4a73b6;
+
+        font-size: 1rem;
+        font-family: "Inter", Sans-serif !important;
+        font-weight: 500;
+        color: #ffffff;
+    }
+
     &__modal-layout {
         display: none;
 

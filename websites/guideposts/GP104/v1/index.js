@@ -1,11 +1,25 @@
 (async () => {
+    const TEST_ID = "GP104";
+    const VARIANT_ID = "V1"; /* Control, V1, V2 */
+
+    function logInfo(message) {
+        console.log(
+            `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+            "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+            message,
+        );
+    }
+
+    logInfo("fired");
+
     const TEST_CONFIG = {
         client: "Acadia",
         project: "Guideposts",
         site_url: "https://guideposts.org",
         test_name: "GP104: [COLLECTION] Mobile Filter Panel (2) SET UP TEST",
         page_initials: "AB-GP104",
-        test_variation: 1,
+        test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -41,6 +55,19 @@
             </svg>
         `,
     };
+
+    function fireGA4Event(eventName, eventLabel = "") {
+        console.log("fireGA4Event", eventName, eventLabel);
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "GA4event",
+            "ga4-event-name": "cro_event",
+            "ga4-event-p1-name": "event_category",
+            "ga4-event-p1-value": eventName,
+            "ga4-event-p2-name": "event_label",
+            "ga4-event-p2-value": eventLabel,
+        });
+    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -101,24 +128,13 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    const accordionData = [
-        {
-            title: "Category",
-            description: `Ist Ihre Bestellung bei uns eingegangen, erhalten Sie von uns eine Auftragsbestätigung per E-Mail zugesendet und wir beginnen mit der Bearbeitung. Sie werden stets auf dem aktuellen Stand gehalten - über jeden Produktionsprozess erhalten Sie automatisch eine E-Mail vom Auftragseingang über die Produktion und bis zur Fertigstellung Ihrer Ware. Sobald Ihr Auftrag abschließend bearbeitet und kommissioniert wurde, teilen wir Ihnen per E-Mail einen Liefertermin mit. Über den Status Ihres Auftrags können Sie sich jederzeit in unserem <a href="https://www.zaun-idee.de/sendungsnummer">Sendungstool</a> informieren.`,
-        },
-        {
-            title: "Price",
-            description: `Paketdienstleister: Ihre Sendung wird dem Dienstleister übergeben und Ihnen an Ihrer Adresse zugestellt. Sie erhalten via E-Mail eine Sendungsnummer und sind somit jederzeit über den Stand Ihrer Bestellung informiert. Spedition: Wir sorgen dafür, dass alle bestellten Artikel unbeschädigt und sicher bei Ihnen angeliefert werden. Deshalb erfolgt der Versand ausschließlich durch Transportunternehmen, die unser gesamtes Produktportfolio kennen. Weitere Informationen haben wir <a href="https://www.zaun-idee.de/lieferung">hier</a> für Sie zusammengestellt.`,
-        },
-    ];
-
     function filterAccordionSectionLayout() {
         const layout = /* HTML */ `
             <div class="ab__filter-accordion-section">
                 ${qq("#shop-filters .wpfFilterWrapper")
                     .map(
                         (item, index) => /* HTML */ `
-                            <div class="ab__filter-accordion-item" data-toggle-id="${index + 1}">
+                            <div class="ab__filter-accordion-item ${test_variation === 1 || (test_variation === 2 && index === 0 )? 'ab__filter-accordion-item--open' : ''}" data-toggle-id="${index + 1}">
                                 <div class="ab__filter-accordion-item__head">
                                     <div class="ab__filter-accordion-item__head__title">${q(item, ".wpfFilterTitle .wfpTitle").textContent}</div>
                                     <div class="ab__filter-accordion-item__head__toggle-icon">
@@ -128,12 +144,23 @@
                                 </div>
                                 <div class="ab__filter-accordion-item__body">
                                     <ul class="ab-filter-list">
-                                        ${qq(item, "li").map(
-                                            (listItem) => /* HTML */ `
-                                                <li class="ab-filter-item ${listItem.classList.contains("wpfTermChecked") || q(listItem, ".wpfTermChecked") || q(listItem, ".selected") ? "ab-selected" : ""}">
-                                                    ${q(listItem, ".wpfValue").textContent}
-                                                </li>`
-                                            ).join("")}
+                                        ${qq(item, "li")
+                                            .map(
+                                                (listItem) => /* HTML */ `
+                                                    <li
+                                                        class="ab-filter-item ${listItem.classList.contains("wpfTermChecked") ||
+                                                        q(listItem, ".wpfTermChecked") ||
+                                                        q(listItem, ".selected")
+                                                            ? "ab-selected"
+                                                            : ""}"
+                                                        ${listItem.hasAttribute("data-term-slug") ? `data-term-slug="${listItem.getAttribute("data-term-slug")}"` : ""}
+                                                        ${listItem.hasAttribute("data-range") ? `data-range="${listItem.getAttribute("data-range")}"` : ""}
+                                                    >
+                                                        ${q(listItem, ".wpfValue").textContent}
+                                                    </li>
+                                                `,
+                                            )
+                                            .join("")}
                                     </ul>
                                 </div>
                             </div>
@@ -146,11 +173,9 @@
         return layout;
     }
 
-    function toggleAccordion(clickedElement) {
-        clickedElement.classList.toggle("ab__filter-accordion-item--open");
-    }
-
     function createLayout() {
+        q(".mobilefilter").insertAdjacentHTML("afterbegin", /* HTML */ ` <button class="${page_initials}__modal__open-cta">Filters</button> `);
+
         q("body").insertAdjacentHTML(
             "afterbegin",
             /* HTML */ `
@@ -208,7 +233,13 @@
         }
     }
     function clickFunction() {
-        q(".elementor-button#shop-by").addEventListener("click", () => {
+        // q(".elementor-button#shop-by").addEventListener("click", () => {
+        //     handleModalView("show");
+        // });
+
+        // Alterative
+        q(`.${page_initials}__modal__open-cta`).addEventListener("click", () => {
+            fireGA4Event("GP104_FilterOpen");
             handleModalView("show");
         });
 
@@ -219,8 +250,57 @@
         q(".ab__filter-accordion-section").addEventListener("click", (e) => {
             if (e.target.closest(".ab__filter-accordion-item__head")) {
                 const accordionElement = e.target.closest(".ab__filter-accordion-item__head").parentNode;
-                toggleAccordion(accordionElement);
+                accordionElement.classList.toggle("ab__filter-accordion-item--open");
             }
+
+            if (e.target.closest(".ab-filter-item[data-term-slug]")) {
+                const filterItem = e.target.closest(".ab-filter-item");
+                filterItem.classList.toggle("ab-selected");
+            }
+            if (e.target.closest(".ab-filter-item[data-range]")) {
+                const filterItem = e.target.closest(".ab-filter-item");
+                filterItem.classList.toggle("ab-selected");
+
+                qq(".ab-filter-item[data-range]").forEach((item) => {
+                    if (item !== filterItem) {
+                        item.classList.remove("ab-selected");
+                    }
+                });
+            }
+        });
+
+        q(".ab-apply-filter-cta").addEventListener("click", () => {
+            qq(".ab-filter-item.ab-selected").forEach((item) => {
+                if (item.hasAttribute("data-term-slug")) {
+                    const termSlug = item.getAttribute("data-term-slug");
+                    const targetNode = q(`#shop-filters .wpfFilterWrapper li.wpfTermWrapper[data-term-slug="${termSlug}"]`);
+                    targetNode.click();
+                }
+                if (item.hasAttribute("data-range")) {
+                    const priceRange = item.getAttribute("data-range");
+                    const targetNode = q(`#shop-filters .wpfFilterWrapper li[data-range="${priceRange}"] label.wpfLiLabel`);
+                    targetNode.click();
+                }
+            });
+
+            handleModalView("hide");
+        });
+
+        q(".ab-clear-filter-cta").addEventListener("click", () => {
+            qq(".ab-filter-item").forEach((item) => {
+                item.classList.remove("ab-selected");
+            });
+
+            qq("#shop-filters .wpfFilterWrapper li.wpfTermWrapper.wpfTermChecked").forEach((item) => {
+                item.click();
+            });
+            qq("#shop-filters .wpfFilterWrapper li[data-range]:has(.selected)").forEach((item) => {
+                q(item, "label").click();
+            });
+
+            // Remove all query parameters without reloading the page
+            window.history.replaceState({}, document.title, window.location.pathname);
+            window.location.reload();
         });
 
         // CLOSE POPUP -> ON ESC CLICK
@@ -238,8 +318,6 @@
 
         createLayout();
         clickFunction();
-
-        handleModalView("show");
     }
 
     function checkForItems() {
