@@ -1,6 +1,6 @@
 .AB-GP104 .mobilefilter .elementor-widget-button,
 .AB-GP104 #shop-filters .elementor-widget-container {
-    display: none;
+    display: none !important;
 }
 .AB-GP104 .mobilefilter {
     display: flex;

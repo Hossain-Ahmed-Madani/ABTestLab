@@ -18,7 +18,7 @@ $page_initials: "AB-GP104";
     // NEED TO UNCOMMENT
     .mobilefilter .elementor-widget-button ,
     #shop-filters .elementor-widget-container {
-        display: none;
+        display: none !important;
     }
 
     .mobilefilter {

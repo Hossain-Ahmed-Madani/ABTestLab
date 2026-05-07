@@ -1,3 +1,23 @@
+/* 
+
+Test container: https://marketer.monetate.net/control/a-880bc965/p/shopguideposts.org/experience/2113014#
+
+
+Preview including all experiences:
+control: https://marketer.monetate.net/control/preview/12053/TDA1TDFFLCXJKYMK73N2G9V3J97WVLWU/104-collection-mobile-filter-panel
+v1: https://marketer.monetate.net/control/preview/12053/Q2V23NOO0KGU0BVWHXOPEK9JMOU84RPY/104-collection-mobile-filter-panel
+v2: https://marketer.monetate.net/control/preview/12053/EO426R5HFVBS4OKG0ZPWNBNMNM6V6BEB/104-collection-mobile-filter-panel
+
+
+Preview excluding all experiences:
+control: https://marketer.monetate.net/control/preview/12053/C2BHRAD0P6VVS3EU5XD32JVR2NLPQR7Q/104-collection-mobile-filter-panel
+v1: https://marketer.monetate.net/control/preview/12053/ODFLJRI0QI2OJFPWWIZHCCYTLJM3TX5W/104-collection-mobile-filter-panel
+v2: https://marketer.monetate.net/control/preview/12053/G8OOE0KCDAA10FKDZDMUP926YPYQE1WI/104-collection-mobile-filter-panel
+
+
+*/
+
+
 (async () => {
     const TEST_ID = "GP104";
     const VARIANT_ID = "V1"; /* Control, V1, V2 */
@@ -324,7 +344,11 @@
     }
 
     function init() {
+
+        if(window[page_initials] === true) return;
+
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
 
         createLayout();
         clickFunction();

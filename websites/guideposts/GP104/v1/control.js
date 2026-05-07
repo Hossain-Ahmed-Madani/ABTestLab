@@ -71,7 +71,11 @@
     }
 
     function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);;
+
+        if(window[page_initials] === true) return;
+
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
         q(".elementor-button#shop-by").addEventListener("click", () => {
             fireGA4Event("GP104_FilterOpen");
         });
