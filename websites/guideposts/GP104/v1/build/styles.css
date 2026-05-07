@@ -141,7 +141,7 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
     border-bottom-left-radius: 40px !important;
     border-color: #4a73b6;
     background-color: #4a73b6;
-    font-size: 1rem;
+    font-size: 1rem !important;
     font-family: "Inter", Sans-serif !important;
     font-weight: 500;
     color: #ffffff;

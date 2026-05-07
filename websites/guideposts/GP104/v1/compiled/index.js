@@ -14,10 +14,6 @@
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "Guideposts",
-        site_url: "https://guideposts.org",
-        test_name: "GP104: [COLLECTION] Mobile Filter Panel (2) SET UP TEST",
         page_initials: "AB-GP104",
         test_variation: 1 /* 0, 1, 2 */,
         test_version: 0.0001,
@@ -107,7 +103,10 @@
                 ${qq("#shop-filters .wpfFilterWrapper")
                     .map(
                         (item, index) => /* HTML */ `
-                            <div class="ab__filter-accordion-item ${'ab__filter-accordion-item--open' }" data-toggle-id="${index + 1}">
+                            <div
+                                class="ab__filter-accordion-item ${"ab__filter-accordion-item--open" }"
+                                data-toggle-id="${index + 1}"
+                            >
                                 <div class="ab__filter-accordion-item__head">
                                     <div class="ab__filter-accordion-item__head__title">${q(item, ".wpfFilterTitle .wfpTitle").textContent}</div>
                                     <div class="ab__filter-accordion-item__head__toggle-icon">
@@ -206,11 +205,7 @@
         }
     }
     function clickFunction() {
-        // q(".elementor-button#shop-by").addEventListener("click", () => {
-        //     handleModalView("show");
-        // });
-
-        // Alterative
+        // Alterative Filter CTA
         q(`.${page_initials}__modal__open-cta`).addEventListener("click", () => {
             fireGA4Event("GP104_FilterOpen");
             handleModalView("show");
@@ -230,6 +225,7 @@
                 const filterItem = e.target.closest(".ab-filter-item");
                 filterItem.classList.toggle("ab-selected");
             }
+
             if (e.target.closest(".ab-filter-item[data-range]")) {
                 const filterItem = e.target.closest(".ab-filter-item");
                 filterItem.classList.toggle("ab-selected");
@@ -243,19 +239,30 @@
         });
 
         q(".ab-apply-filter-cta").addEventListener("click", () => {
-            qq(".ab-filter-item.ab-selected").forEach((item) => {
-                if (item.hasAttribute("data-term-slug")) {
-                    const termSlug = item.getAttribute("data-term-slug");
-                    const targetNode = q(`#shop-filters .wpfFilterWrapper li.wpfTermWrapper[data-term-slug="${termSlug}"]`);
-                    targetNode.click();
-                }
-                if (item.hasAttribute("data-range")) {
-                    const priceRange = item.getAttribute("data-range");
-                    const targetNode = q(`#shop-filters .wpfFilterWrapper li[data-range="${priceRange}"] label.wpfLiLabel`);
+            // Categories
+            qq(".ab-filter-item[data-term-slug").forEach((item) => {
+                const termSlug = item.getAttribute("data-term-slug");
+                const targetNode = q(`#shop-filters .wpfFilterWrapper li.wpfTermWrapper[data-term-slug="${termSlug}"]`);
+
+                const isVariantSelected = item.classList.contains("ab-selected");
+                const isControlSelected = targetNode.classList.contains("wpfTermChecked");
+                if (isVariantSelected !== isControlSelected) {
                     targetNode.click();
                 }
             });
 
+
+            // Price Range
+            q("#shop-filters .wpfFilterWrapper li[data-range]:has(.selected) label")?.click();
+            const selectedPriceRangeItem =  q(".ab-filter-item.ab-selected[data-range]");
+            if(selectedPriceRangeItem) {
+                const priceRange = selectedPriceRangeItem.getAttribute("data-range");
+                const targetNode = q(`#shop-filters .wpfFilterWrapper li[data-range="${priceRange}"] label.wpfLiLabel`);
+                targetNode.click();
+            }
+
+
+            // Hide Modal
             handleModalView("hide");
         });
 
@@ -287,7 +294,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         createLayout();
         clickFunction();
@@ -301,7 +307,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

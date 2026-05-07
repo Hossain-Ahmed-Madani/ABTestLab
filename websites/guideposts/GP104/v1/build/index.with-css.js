@@ -147,7 +147,7 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
   border-bottom-left-radius: 40px !important;
   border-color: #4a73b6;
   background-color: #4a73b6;
-  font-size: 1rem;
+  font-size: 1rem !important;
   font-family: "Inter", Sans-serif !important;
   font-weight: 500;
   color: #ffffff;
@@ -389,10 +389,6 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
   logInfo("fired");
 
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "Guideposts",
-    site_url: "https://guideposts.org",
-    test_name: "GP104: [COLLECTION] Mobile Filter Panel (2) SET UP TEST",
     page_initials: "AB-GP104",
     test_variation: 1 /* 0, 1, 2 */,
     test_version: 0.0001,
@@ -631,11 +627,7 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
     }
   }
   function clickFunction() {
-    // q(".elementor-button#shop-by").addEventListener("click", () => {
-    //     handleModalView("show");
-    // });
-
-    // Alterative
+    // Alterative Filter CTA
     q(`.${page_initials}__modal__open-cta`).addEventListener("click", () => {
       fireGA4Event("GP104_FilterOpen");
       handleModalView("show");
@@ -657,6 +649,7 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
         const filterItem = e.target.closest(".ab-filter-item");
         filterItem.classList.toggle("ab-selected");
       }
+
       if (e.target.closest(".ab-filter-item[data-range]")) {
         const filterItem = e.target.closest(".ab-filter-item");
         filterItem.classList.toggle("ab-selected");
@@ -670,23 +663,37 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
     });
 
     q(".ab-apply-filter-cta").addEventListener("click", () => {
-      qq(".ab-filter-item.ab-selected").forEach((item) => {
-        if (item.hasAttribute("data-term-slug")) {
-          const termSlug = item.getAttribute("data-term-slug");
-          const targetNode = q(
-            `#shop-filters .wpfFilterWrapper li.wpfTermWrapper[data-term-slug="${termSlug}"]`,
-          );
-          targetNode.click();
-        }
-        if (item.hasAttribute("data-range")) {
-          const priceRange = item.getAttribute("data-range");
-          const targetNode = q(
-            `#shop-filters .wpfFilterWrapper li[data-range="${priceRange}"] label.wpfLiLabel`,
-          );
+      // Categories
+      qq(".ab-filter-item[data-term-slug").forEach((item) => {
+        const termSlug = item.getAttribute("data-term-slug");
+        const targetNode = q(
+          `#shop-filters .wpfFilterWrapper li.wpfTermWrapper[data-term-slug="${termSlug}"]`,
+        );
+
+        const isVariantSelected = item.classList.contains("ab-selected");
+        const isControlSelected =
+          targetNode.classList.contains("wpfTermChecked");
+        if (isVariantSelected !== isControlSelected) {
           targetNode.click();
         }
       });
 
+      // Price Range
+      q(
+        "#shop-filters .wpfFilterWrapper li[data-range]:has(.selected) label",
+      )?.click();
+      const selectedPriceRangeItem = q(
+        ".ab-filter-item.ab-selected[data-range]",
+      );
+      if (selectedPriceRangeItem) {
+        const priceRange = selectedPriceRangeItem.getAttribute("data-range");
+        const targetNode = q(
+          `#shop-filters .wpfFilterWrapper li[data-range="${priceRange}"] label.wpfLiLabel`,
+        );
+        targetNode.click();
+      }
+
+      // Hide Modal
       handleModalView("hide");
     });
 
@@ -726,7 +733,6 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
 
     createLayout();
     clickFunction();
@@ -746,7 +752,6 @@ body.AB-GP104--modal-show .AB-GP104__modal-layout {
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

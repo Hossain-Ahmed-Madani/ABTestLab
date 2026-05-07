@@ -15,6 +15,7 @@
 $page_initials: "AB-GP104";
 
 .#{$page_initials} {
+    // NEED TO UNCOMMENT
     .mobilefilter .elementor-widget-button ,
     #shop-filters .elementor-widget-container {
         display: none;
@@ -24,7 +25,13 @@ $page_initials: "AB-GP104";
         display: flex;
         flex-wrap: nowrap;
         justify-content: flex-start;
+        
+        // NEED TO UNCOMMENT
         flex-direction: row;
+
+        // ONLY FOR TESTING
+        // flex-direction: column;
+        // gap: 10px;
     }
 }
 
@@ -202,7 +209,7 @@ body.#{$page_initials}--modal-show {
         border-color: #4a73b6;
         background-color: #4a73b6;
 
-        font-size: 1rem;
+        font-size: 1rem !important;
         font-family: "Inter", Sans-serif !important;
         font-weight: 500;
         color: #ffffff;
