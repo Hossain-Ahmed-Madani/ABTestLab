@@ -1,0 +1,156 @@
+<!--  Modal Content Initial Empty Structure -->
+<div class="ab-carousel-container">
+    <div class="ab-swiper swiper">
+        <!-- Dynamically Added Content -->
+    </div>
+    <div class="ab-carousel-skeleton-loader">
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+    </div>
+</div>
+<div class="ab-product-title">
+    <!-- Dynamically Added Content -->
+</div>
+<div class="ab-product-price-container">
+    <!-- Dynamically Added Content -->
+</div>
+<div class="ab-afterpay-container">
+    <!-- Dynamically Added Content -->
+</div>
+<div class="ab-color-swatch-container">
+    <h2 class="product__active-color">
+        <span class="product__label product__active-color-label">Color:</span>
+        <span class="product__value product__active-color-value">
+            <!-- Dynamically Added Content | The entire innerHTML of .ab-color-swatch-container is replaced -->
+        </span>
+    </h2>
+    <div class="product__swatches" data-colors="">
+        <!-- Dynamically Added Content -->
+    </div>
+</div>
+<div class="ab-product-size-selector-container">
+    <h2 class="product__label product__label--size">
+        <span class="product__active-size-label">Size:</span>
+        <span class="product__size-value" data-product-size-value=""></span>
+        <span class="product__low-stock" data-product-low-stock="" style="display: none"></span>
+    </h2>
+    <div class="product__select-sizes" data-product-sizes="">
+        <!-- Dynamically Added Content -->
+    </div>
+</div>
+<button class="ab-add-to-cart-cta" disabled>
+    <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
+    <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag">ADD TO BAG</span>
+</button>
+<a href="#" class="ab-view-full-details">View Full Details</a>
+
+<!-- Modal Content Content Loaded Structure -->
+<div class="ab-carousel-container">
+    <div class="ab-swiper swiper">
+        <div class="ab-swiper-wrapper swiper-wrapper">
+            ${thumbnails .map( (thumbnail) => /* HTML */ `
+            <div class="ab-swiper-slide swiper-slide">
+                <img src="${thumbnail}" alt="" />
+            </div>
+            `, ) .join("")}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="ab-carousel-skeleton-loader">
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+        <div class="ab-carousel-skeleton-loader__item"></div>
+    </div>
+</div>
+<div class="ab-product-title">Yumiko Romper Black</div>
+<div class="ab-product-price-container">
+    <div class="product__sale-price-row">
+        <span data-shop-currency="">USD</span>
+        <span data-product-price="" data-currency-conversion="3500">$35.00</span>
+        <span><s data-compare-price="">$65.00</s> </span>
+        <span class="product__price-savings-percent">46% off</span>
+    </div>
+</div>
+<div class="ab-afterpay-container">
+    <afterpay-placement
+        id="afterpay-placement-pdp"
+        data-locale="en_US"
+        data-currency="USD"
+        data-amount="65"
+        data-currency-conversion="65.00"
+        data-amount-attribute="amount"
+        data-currency-attribute="currency"
+        data-logo-type="lockup"
+        data-size="sm"
+        data-show-interest-free="false"
+    ></afterpay-placement>
+</div>
+<div class="ab-color-swatch-container">
+    <h2 class="product__active-color">
+        <span class="product__label product__active-color-label">Color:</span>
+        <span class="product__value product__active-color-value">Slate Grey</span>
+    </h2>
+    <div class="product__swatches" data-colors="">
+        <a
+            href="/products/yumiko-romper-black"
+            class="swatch swatch--active"
+            data-product-variant-id=""
+            data-product-variant-color="#5b5b5b"
+            style="background-color: #000000"
+            aria-label="Yumiko Romper Black"
+        >
+        </a>
+        <a
+            href="/products/yumiko-romper-cream-1"
+            class="swatch"
+            data-product-variant-id=""
+            data-product-variant-color="#5b5b5b"
+            style="background-color: #ffffff"
+            aria-label="Yumiko Romper Brown Stripe"
+        >
+        </a>
+    </div>
+</div>
+<div class="ab-product-size-selector-container">
+    <h2 class="product__label product__label--size">
+        <span class="product__active-size-label">Size:</span>
+        <span class="product__size-value" data-product-size-value=""></span>
+        <span class="product__low-stock" data-product-low-stock="" style="display: none"></span>
+    </h2>
+    <div class="product__select-sizes" data-product-sizes="">
+        <ul class="product__select-sizes-list">
+            <li class="product__select-sizes-item active">
+                <button
+                    type="button"
+                    class="product__select-sizes-button"
+                    data-size-label="US 0"
+                    data-size-variant-id="40812272975956"
+                    data-size-value="US 0"
+                    data-product-handle="yumiko-romper-slate-grey"
+                    data-inventory-label=""
+                >
+                    US 0
+                </button>
+            </li>
+            <li class="product__select-sizes-item">
+                <button
+                    type="button"
+                    class="product__select-sizes-button"
+                    data-size-label="US 2"
+                    data-size-variant-id="40812273008724"
+                    data-size-value="US 2"
+                    data-product-handle="yumiko-romper-slate-grey"
+                    data-inventory-label=""
+                >
+                    US 2
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+<button class="ab-add-to-cart-cta" disabled>
+    <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--select-size">SELECT A SIZE</span>
+    <span class="ab-add-to-cart-cta__text ab-add-to-cart-cta__text--add-to-bag">ADD TO BAG</span>
+</button>
+<a href="#" class="ab-view-full-details">View Full Details</a>
