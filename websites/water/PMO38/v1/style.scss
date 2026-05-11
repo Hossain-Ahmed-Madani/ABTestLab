@@ -1,0 +1,279 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+/* 
+    text-left 
+    text-right 
+    uppercase
+    text-nowrap
+
+
+*/
+
+.AB-PMO38 {
+    // .summit-Title-root.wrapper-section__head.text-xl.font-semibold,
+    // .wrapper-section.flex.flex-col.gap-2\.5 {
+    //     display: none;
+    // }
+
+    .wrapper-summary-totals__inner .wrapper-section {
+        display: none;
+    }
+
+    .wrapper-outer .wrapper-head .wrapper-heading {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: rgba(0, 5, 62, 1);
+        margin-bottom: 6px;
+    }
+
+    
+    .wrapper-coupon-code {
+        min-height: 15px;
+    }
+
+    .wrapper-coupon-code__inner .text-base {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-transform: capitalize;
+        color: rgba(0, 5, 62, 1);
+    }
+
+    .wrapper-coupon-code__inner {
+        margin-bottom: -4px;
+    }
+
+    .ab-summary-wrapper {
+        margin-bottom: -9px;
+    }
+
+    .usp-section {
+        margin-top: 6px;
+    }
+
+    .ab-summary-wrapper {
+        border: 1px solid rgba(229, 230, 236, 1);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 1);
+        overflow: hidden;
+    }
+
+    .ab-wrapper-section__total {
+        padding: 17px 15px 18px;
+        gap: 12px;
+    }
+
+    .ab-summary-row-others {
+        gap: 12px;
+    }
+
+    .ab-summary-row--total .ab-summary-value {
+        gap: 12px;
+    }
+
+    .ab-summary-dropdown {
+        user-select: none;
+        border-bottom: 1px solid rgba(229, 230, 236, 1);
+        background: rgba(240, 241, 244, 1);
+
+        &[aria-expanded="true"] {
+            .ab-summary-dropdown__arrow svg {
+                transform: rotate(180deg);
+            }
+
+            .ab-summary-dropdown__body {
+                //
+            }
+        }
+
+        &[aria-expanded="false"] {
+            .ab-summary-dropdown__body {
+                display: none;
+            }
+        }
+
+        &__head {
+            padding: 15px 15px 17px;
+            cursor: pointer;
+        }
+
+        &__arrow {
+            margin-left: 10px;
+            svg {
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                width: 10px;
+                min-width: 10px;
+                height: 6px;
+                min-height: 6px;
+            }
+        }
+
+        &__body {
+            padding: 3px 15px 14px;
+            gap: 20px;
+            overflow: hidden;
+            will-change: height;
+            transition: all 0.3s;
+        }
+    }
+
+    .ab-summary-more-info {
+        margin-left: 7px;
+        cursor: pointer;
+
+        svg {
+            margin-top: -1px;
+            width: 12px;
+            min-width: 12px;
+            height: 12px;
+            min-height: 12px;
+        }
+    }
+
+    // Util
+    .ab-txt-sm {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-align: right;
+        color: rgba(98, 98, 98, 1);
+    }
+
+    .ab-txt-regular {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(0, 5, 62, 1);
+    }
+
+    .ab-txt-lg {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: rgba(0, 5, 62, 1);
+    }
+
+    .wrapper-faq {
+        font-family:
+            Nunito Sans,
+            Nunito Sans Fallback;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-align: center;
+        color: rgba(0, 5, 62, 1);
+
+        a {
+            font-weight: 700;
+            color: rgba(0, 103, 195, 1);
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .wrapper-outer .wrapper-head .wrapper-heading {
+            font-size: 20px;
+            line-height: 100%;
+            margin-bottom: 16px;
+        }
+
+        .wrapper-coupon-code__inner .text-base {
+            font-size: 14px;
+            line-height: 100%;
+        }
+
+        .wrapper-coupon-code__inner {
+            //
+        }
+
+        .ab-summary-wrapper {
+            margin-bottom: -13px;
+        }
+
+        .ab-summary-dropdown {
+            &__head {
+                padding: 18px 15px 21px;
+            }
+
+            &__arrow {
+                //
+            }
+
+            &__body {
+                padding: 3px 15px 21px;
+            }
+        }
+
+        .ab-summary-more-info {
+            cursor: pointer;
+            margin-left: 4px;
+
+            svg {
+                margin-top: -1.2px;
+            }
+        }
+
+        // Util
+        .ab-txt-sm {
+            //
+        }
+
+        .ab-txt-regular {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .ab-txt-lg {
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 100%;
+            letter-spacing: 0px;
+        }
+
+        .ab-wrapper-section__total {
+            gap: 15px;
+        }
+
+        .ab-summary-row-others {
+            gap: 15px;
+        }
+
+        .ab-summary-row--total .ab-summary-value {
+            gap: 15px;
+        }
+    }
+}
