@@ -1,0 +1,67 @@
+.AB-GP102 .woocommerce-product-gallery:has(.woocommerce-product-gallery__image.wpgs_image.slick-active) .ab-magazine-tag {
+  display: flex;
+}
+.AB-GP102 .ab-magazine-tag {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  z-index: 2;
+  background-color: #041a72;
+  height: 64px;
+  padding: 8px;
+  border-radius: 0 0 8px 8px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.AB-GP102 .ab-magazine-tag__icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.AB-GP102 .ab-magazine-tag__icon svg {
+  width: 20px;
+  height: 20px;
+}
+.AB-GP102 .ab-magazine-tag__text {
+  font-family: STIX Two Text;
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 10px;
+  line-height: 120%;
+  letter-spacing: 0.21px;
+  text-align: center;
+  color: #ffffff;
+}
+@media screen and (min-width: 991px) {
+  .AB-GP102 .ab-magazine-tag {
+    right: 20px;
+  }
+}
+
+.AB-GP102--v1 .ab-magazine-tag {
+  width: 65px;
+  max-width: 65px;
+  height: 64px;
+}
+@media screen and (min-width: 990.5px) {
+  .AB-GP102--v1 .ab-magazine-tag {
+    width: 65px;
+    max-width: 65px;
+  }
+}
+
+.AB-GP102--v2 .ab-magazine-tag {
+  width: 55px;
+  max-width: 55px;
+  height: 64px;
+}
+@media screen and (min-width: 990.5px) {
+  .AB-GP102--v2 .ab-magazine-tag {
+    width: 55px;
+    max-width: 55px;
+    height: 64px;
+  }
+}

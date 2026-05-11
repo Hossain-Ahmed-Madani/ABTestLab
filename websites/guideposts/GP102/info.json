@@ -1,0 +1,13 @@
+{
+  "id": "1775554673532_9974_GP102",
+  "name": "GP102",
+  "type": "A/B",
+  "website": "guideposts",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-07T09:37:53.532Z",
+  "createdAtReadable": "4/7/2026, 3:37:53 PM",
+  "lastUpdated": "2026-04-07T09:37:53.826Z"
+}
