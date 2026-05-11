@@ -1,0 +1,43 @@
+.AB-VC120 .collection-filters-modal__inner-content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+.AB-VC120 header.collection-filters-modal__header {
+    min-height: 3.75rem;
+    order: -7;
+}
+.AB-VC120 .collection-filters-modal__refinements-wrapper {
+    order: -6;
+}
+
+.AB-VC120--v1 ul.vue-accordion[ab-filter-type="Size"] {
+    order: -5;
+}
+.AB-VC120--v1 ul.vue-accordion[ab-filter-type="Style"] {
+    order: -4;
+}
+.AB-VC120--v1 ul.vue-accordion[ab-filter-type="Color"] {
+    order: -3;
+}
+.AB-VC120--v1 ul.vue-accordion[ab-filter-type="By Price"] {
+    order: -2;
+}
+.AB-VC120--v1 ul.vue-accordion[ab-filter-type="Category"] {
+    order: -1;
+}
+
+.AB-VC120--v2 ul.vue-accordion[ab-filter-type="Style"] {
+    order: -5;
+}
+.AB-VC120--v2 ul.vue-accordion[ab-filter-type="Color"] {
+    order: -4;
+}
+.AB-VC120--v2 ul.vue-accordion[ab-filter-type="Size"] {
+    order: -3;
+}
+.AB-VC120--v2 ul.vue-accordion[ab-filter-type="Category"] {
+    order: -2;
+}
+.AB-VC120--v2 ul.vue-accordion[ab-filter-type="By Price"] {
+    order: -1;
+}
