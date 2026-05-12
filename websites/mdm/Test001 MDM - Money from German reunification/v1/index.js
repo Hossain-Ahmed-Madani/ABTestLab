@@ -31,6 +31,66 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    collection_at_glance_content: /* HTML */ `
+                        <b>Für Sammler deutscher Geschichte und alle, die mit der</b>
+                        <p>
+                            Die D-Mark prägte über 50 Jahre deutsche Geschichte – von der Währungsreform 1948 bis zur Euro-Einführung 2002. Sie begleitete den wirtschaftlichen Aufstieg
+                            Deutschlands und war für viele ein Symbol von Stabilität und Vertrauen.
+                        </p>
+                        <br />
+
+                        <p>Diese bedeutende Epoche lebt heute als exklusive Gold-Kollektion weiter. Jede Ausgabe erinnert an ein Stück dieser Geschichte.</p>
+                        <br />
+
+                        <b>Warum Sammler diese D-Mark Neuprägungen wählen:</b>
+                        <ul>
+                            <li><b>Historischer Wert:</b> Die Neuprägungen zur letzten vollständigen D-Mark-Generation als abgeschlossenes Kapitel deutscher Geldgeschichte.</li>
+                            <li><b>Premium Goldqualität:</b> 999/1000 Feingold in numismatischer Sammlerqualität.</li>
+                            <li><b>Werterhalt:</b> Schutz vor Inflation durch physisches Gold + historischen Sammlerwert.</li>
+                            <li><b>Begrenzte Verfügbarkeit:</b> Nur 20.000 komplette Kollektionen weltweit verfügbar.</li>
+                        </ul>
+
+                        <p>
+                            Diese meisterhaften Neuprägungen verwandeln Erinnerungen an das deutsche Wirtschaftswunder in greifbares Gold. Perfekt für Sammler deutscher Numismatik und
+                            Goldkäufer mit Geschichtsbewusstsein.
+                        </p>
+                        <br />
+
+                        <img src="https://cdn.media.amplience.net/i/MDM/352039_006_1080x1080" alt="" width="380" height="380" />
+
+                        <br />
+                        <br />
+
+                        <b>So erhalten Sie Ihre vollständige Kollektion</b>
+                        <p>
+                            Mit diesem Angebot sichern Sie sich alle 14 Gold-Neuprägungen der D-Mark-Serie. Die ersten beiden Ausgaben beginnen sofort, die weiteren folgen regelmäßig
+                            alle 3–4 Wochen in zufälliger Reihenfolge.
+                        </p>
+                        <br />
+
+                        <b>Ausgabe 1 · 5-D-Mark (Startausgabe)</b>
+                        <p>
+                            Die Gold-Neuprägung der historischen 5-DM-Münze erinnert an eine der beliebtesten Kursmünzen der D-Mark-Ära – bekannt als „Heiermann“ oder „Silberadler“. Die
+                            Vorderseite trägt den Nennwert "5 Deutsche Mark" und die Umschrift "Bundesrepublik Deutschland", die Rückseite zeigt den Bundesadler – ein Symbol des
+                            deutschen Wiederaufbaus und kultureller Identität.
+                        </p>
+                        <br />
+
+                        <b>Ausgabe 2 · D-Mark 1-Pfennig (Gratis Startausgabe)</b>
+                        <p>
+                            Gold-Neuprägung der kleinsten D-Mark-Einheit mit dem ikonischen Eichenlaub-Motiv. Diese Ausgabe erhalten Sie kostenlos zu Ihrer ersten Lieferung – im Wert
+                            von 79,99 €.
+                        </p>
+                        <br />
+
+                        <b>Ausgabe 3-14 · Weitere Ausgaben</b>
+                        <p>
+                            Die weiteren zwölf Gold-Neuprägungen erhalten Sie in regelmäßigen Abständen – darunter die Motive aller Kursmünzen von 1-Pfennig bis 5-D-Mark inklusive der
+                            2-D-Mark-Ausgaben der Politiker-Serie und ausgewählter Gedenkmünzen Deutschlands. Jede Ausgabe ist Teil der vollständigen Serie.
+                        </p>
+
+                        <br />
+                    `,
                 },
                 352040: {
                     heading: "DDR Kursmünzen in neuer Form",
@@ -59,6 +119,55 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    collection_at_glance_content: /* HTML */ `
+                        <b>Vom Mauerfall zur Geschichtsstunde in Gold</b>
+                        <p>
+                            Die Mark der DDR war über vier Jahrzehnte stiller Begleiter eines ganz eigenen Kapitels deutscher Geschichte — von den frühen Jahren der DDR bis zur
+                            Währungsunion 1990. Diese Münzen lagen in den Portemonnaies zwischen Rostock und Plauen, kauften die Schrippe und finanzierten den ersten Trabi. Heute leben
+                            sie als exklusive Gold-Kollektion weiter.
+                        </p>
+                        <br />
+                        <p>Diese bedeutende Epoche lebt heute als exklusive Gold-Kollektion weiter. Jede Ausgabe erinnert an ein Stück dieser Geschichte.</p>
+                        <br />
+                        <b>Warum Sammler diese DDR Goldmünzen wählen:</b>
+                        <ul>
+                            <li><b>Historischer Wert: </b>Die Neuprägungen zum DDR-Kursmünzensatz von 1990 als vollständige Serie in Gold.</li>
+                            <li><b>Premium Goldqualität: </b>999/1000 Feingold in numismatischer Sammlerqualität.</li>
+                            <li><b>Werterhalt: </b>Schutz vor Inflation durch physisches Gold + historischen Sammlerwert.</li>
+                            <li><b>Begrenzte Verfügbarkeit: </b>Nur 20.000 komplette Kollektionen weltweit verfügbar.</li>
+                        </ul>
+                        <p>
+                            Diese Neuprägungen verwandeln Erinnerungen an ein einzigartiges Kapitel deutscher Geschichte in greifbares Gold. Perfekt für Sammler deutscher Numismatik und
+                            Geschichtsbewusste mit Sinn für bleibenden Wert.
+                        </p>
+                        <br />
+                        <b>So erhalten Sie Ihre vollständige Kollektion</b>
+                        <p>
+                            Mit diesem Angebot sichern Sie sich alle 14 Gold-Neuprägungen des DDR-Kursmünzensatzes. Die ersten beiden Ausgaben beginnen sofort, die weiteren folgen alle
+                            3-4 Wochen in zufälliger Reihenfolge.
+                        </p>
+                        <br />
+                        <b>Ausgabe 1 · 5-Mark der DDR (Startausgabe)</b>
+                        <p>
+                            Die Gold-Neuprägung der historischen 5-Mark-Münze würdigt die höchste Kursmünze der DDR. Die Vorderseite trägt das DDR-Staatswappen — Hammer, Zirkel und
+                            Ährenkranz, umrahmt von der Umschrift „Deutsche Demokratische Republik“ und dem Nennwert "5 Mark der DDR" samt Jahrespunze. Die Rückseite zeigt das
+                            Brandenburger Tor — ein Stück deutsche Zeitgeschichte in reinstem Gold.
+                        </p>
+                        <br />
+                        <b>Ausgabe 2 · 1 Pfennig der DDR (Gratis Startausgabe)</b>
+                        <p>
+                            Gold-Neuprägung der kleinsten DDR-Mark-Einheit. Die Vorderseite trägt das DDR-Staatswappen, die Rückseite den Nennwert „1 Pfennig“. Eine Münze, die
+                            jahrzehntelang in jedem ostdeutschen Geldbeutel lag — der erste Pfennig fürs Sparbuch, das Wechselgeld an der Kaufhalle. Diese Ausgabe erhalten Sie kostenlos
+                            zu Ihrer ersten Lieferung — im Wert von 79,99 €.
+                        </p>
+                        <br />
+                        <b>Ausgabe 3-14 · Weitere Ausgaben in zufälliger Reihenfolge</b>
+                        <p>
+                            Die weiteren zwölf Gold-Neuprägungen erhalten Sie in regelmäßigen Abständen — darunter Kursmünzen aus dem vollständigen DDR-Kursmünzensatz (5 Pfennig bis 2
+                            Mark) und eine Auswahl historischer Gedenkmünzen aus 1966–1990. Jede Ausgabe ist Teil der vollständigen Serie.
+                        </p>
+                        <br />
+                    `,
                 },
                 352155: {
                     heading: "Staatsgold Deutschland – Goldbarren Vermögens-Edition",
@@ -87,6 +196,33 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Flatrate Preis - nur 64,99 € pro Sendung", "Offiziell mehrwertsteuerfrei"],
+                    collection_at_glance_content: /* HTML */ `
+                        <b>Die Sammleredition „Staatsgold — Deutschland“ - Für alle, die sich mit Vermögensaufbau und Edelmetallen beschäftigen</b>
+                        <p>
+                            Die 1/200-Unzen-Barren aus reinstem Feingold (999,9/1000) stehen jeweils für einen Begriff aus der Finanzwelt, mit dem sich ein kleiner Edelmetallschatz
+                            aufbauen lässt. Jede Ausgabe ist eigenständig gestaltet.
+                        </p>
+                        <br />
+                        <b>Warum Sammler diese Staatsgold Goldbarren wählen:</b>
+                        <ul>
+                            <li>
+                                <b>Thematischer Wert: </b>Deutschlands Wege zum Vermögensaufbau als Goldbarren-Edition. Jede Ausgabe mit eigenem Namen und thematischer Gestaltung mit 14
+                                unterschiedliche Goldbarren als zusammenhängende Kollektion.
+                            </li>
+                            <li><b>Premium Goldqualität: </b>999,9/1000 Feingold in numismatischer Sammlerqualität.</li>
+                            <li><b>Werterhalt:</b> Schutz vor Inflation durch physische, mehrwertsteuerfreie Goldbarren.</li>
+                            <li><b>Exklusiver Doppelstart: </b>“Deutscher Staatsbarren” zum Flatrate-Preis, “Deutscher Vermögensbarren” gratis dazu.</li>
+                        </ul>
+                        <b>So erhalten Sie Ihre vollständige Kollektion</b>
+                        <p>Mit diesem Angebot sichern Sie sich alle 14 Goldbarren der Edition “Staatsgold – Deutschland”.</p>
+                        <ul>
+                            <li>Sie starten mit zwei Ausgaben gleichzeitig</li>
+                            <li>Weitere Barren folgen alle 3–4 Wochen</li>
+                            <li>Jeder Barren ergänzt die Serie um ein weiteres Thema</li>
+                            <li>Die Flatrate endet automatisch nach 14 Ausgaben</li>
+                        </ul>
+                        <br />
+                    `,
                 },
                 25817: {
                     heading: "Goldbarren Sternzeichen – die zwölf Tierkreiszeichen",
@@ -115,6 +251,60 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999,9/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    collection_at_glance_content: /* HTML */ `
+                        <b>Für alle, die sich für Sternzeichen und persönliche Symbole interessieren</b>
+                        <p>
+                            Die zwölf Sternzeichen stehen seit Jahrhunderten für Eigenschaften, Charakterzüge und persönliche Zuordnung. Für viele Menschen sind sie ein fester
+                            Bestandteil der eigenen Identität.
+                        </p>
+                        <br />
+                        <p>Diese Symbolik wird in dieser Gold-Kollektion dauerhaft festgehalten.</p>
+                        <br />
+                        <b>Warum Sammler diese Sternzeichen Goldbarren wählen:</b>
+                        <ul>
+                            <li>
+                                Thematischer Wert: Die 12 Tierkreiszeichen der westlichen Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe mit eigenständigem Design, klar
+                                erkennbarem Sternzeichen-Symbol und feiner Sternbild-Gravur.
+                            </li>
+                            <li>Premium Goldqualität: 999,9/1000 Feingold in numismatischer Sammlerqualität</li>
+                            <li>Werterhalt: Schutz vor Inflation durch physisches Gold + persönlicher Bezug zum eigenen Sternzeichen</li>
+                            <li>Streng begrenzte Verfügbarkeit: Nur 10.000 komplette Kollektionen weltweit verfügbar.</li>
+                            <li>
+                                Umfangreiche Sammler‑Extras: Vergoldete Kette mit Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung jedes Goldbarrens in einer
+                                schützenden Kapsel.
+                            </li>
+                        </ul>
+                        <p>
+                            Diese meisterhaften Goldbarrenmünzen verbinden uralte Mythologie mit greifbarem Wert. Perfekt für Astrologie-Begeisterte, Goldanleger und alle, die ein Stück
+                            Himmel in den Händen halten möchten.
+                        </p>
+                        <br />
+                        <b>So erhalten Sie Ihre vollständige Kollektion</b>
+                        <p>
+                            Mit diesem Angebot sichern Sie sich alle 12 Gold-Barrenmünzen der Sternzeichen-Kollektion. Die ersten beiden Ausgaben beginnen sofort, die weiteren folgen
+                            alle 3–4 Wochen in zufälliger Reihenfolge.
+                        </p>
+                        <br />
+                        <b>Ausgabe 1 · Fische (Startausgabe)</b>
+                        <p>
+                            Die Gold‑Barrenmünze “Fische” bildet den Auftakt der Kollektion. Das Motiv zeigt zwei geschwungene Fische mit dem zugehörigen Sternbild. Das offizielle
+                            Porträt von König Charles III. Auf der Rückseite kennzeichnet das Stück eindeutig als Münze.
+                        </p>
+                        <br />
+                        <b>Ausgabe 2 · Widder (Gratis Startausgabe)</b>
+                        <p>
+                            Die zweite Ausgabe zeigt den Widder - die markanten Hörner und die ruhige, konzentrierte Darstellung stehen für Stärke und Entschlossenheit. Das fein
+                            ausgearbeitete Sternbild des Widders im Hintergrund verbindet das Tiermotiv mit seiner astrologischen Herkunft. Diese Ausgabe erhalten Sie kostenlos zu Ihrer
+                            ersten Lieferung — im Wert von 84,99 €.
+                        </p>
+                        <br />
+                        <b>Ausgabe 3-12 · Die weiteren zehn Sternzeichen</b>
+                        <p>
+                            Die weiteren zehn Gold-Barrenmünzen erhalten Sie alle 3 bis 4 Wochen — Stier, Zwillinge, Krebs, Löwe, Jungfrau, Waage, Skorpion, Schütze, Steinbock und
+                            Wassermann.
+                        </p>
+                        <br />
+                    `,
                 },
             };
 
@@ -154,7 +344,7 @@
                         return;
                     }
 
-                    const { heading, sub_title, benefits_bar, uspTexts } = dataObj;
+                    const { heading, sub_title, benefits_bar, uspTexts, collection_at_glance_content } = dataObj;
 
                     waitUntil(
                         () => document.querySelector(".dop-product-heading__title"),
@@ -182,7 +372,9 @@
                             if (!document.querySelector(".Test001__benefits-bar .benefit-item")) {
                                 document.querySelector(".dop-product-heading__title").innerText = heading;
 
-                                document.querySelector(".dop-product-heading__title").insertAdjacentHTML("afterend", `<p class="Test001__dop-product-heading__subtitle">${sub_title}</p>`);
+                                document
+                                    .querySelector(".dop-product-heading__title")
+                                    .insertAdjacentHTML("afterend", `<p class="Test001__dop-product-heading__subtitle">${sub_title}</p>`);
                             }
 
                             if (!document.querySelector(".Test001__benefits-bar .benefit-item")) {
@@ -218,49 +410,7 @@
                             const accordion1 = document.querySelector("#\\31 -panel > div");
                             const image = accordion1.querySelector("img");
 
-                            accordion1.innerHTML =
-                                `
-								<b>Für Sammler deutscher Geschichte und alle, die mit der</b>
-								<p>Die D-Mark prägte über 50 Jahre deutsche Geschichte – von der Währungsreform 1948 bis zur Euro-Einführung 2002. Sie begleitete den wirtschaftlichen Aufstieg Deutschlands und war für viele ein Symbol von Stabilität und Vertrauen.</p>
-								<br>
-
-								<p>Diese bedeutende Epoche lebt heute als exklusive Gold-Kollektion weiter. Jede Ausgabe erinnert an ein Stück dieser Geschichte.</p>
-								<br>
-								
-								<b>Warum Sammler diese D-Mark Neuprägungen wählen:</b>
-								<ul>
-									<li><b>Historischer Wert:</b> Die Neuprägungen zur letzten vollständigen D-Mark-Generation als abgeschlossenes Kapitel deutscher Geldgeschichte.</li>
-									<li><b>Premium Goldqualität:</b> 999/1000 Feingold in numismatischer Sammlerqualität.</li>
-									<li><b>Werterhalt:</b> Schutz vor Inflation durch physisches Gold + historischen Sammlerwert.</li>
-									<li><b>Begrenzte Verfügbarkeit:</b> Nur 20.000 komplette Kollektionen weltweit verfügbar.</li>
-								</ul>
-							
-								<p>Diese meisterhaften Neuprägungen verwandeln Erinnerungen an das deutsche Wirtschaftswunder in greifbares Gold. Perfekt für Sammler deutscher Numismatik und Goldkäufer mit Geschichtsbewusstsein.</p>
-								<br>
-
-								` +
-                                `<img src="https://cdn.media.amplience.net/i/MDM/352039_006_1080x1080" alt="" width="380" height="380">` +
-                                `
-								<br>
-								<br>
-								
-								<b>So erhalten Sie Ihre vollständige Kollektion</b> 
-								<p>Mit diesem Angebot sichern Sie sich alle 14 Gold-Neuprägungen der D-Mark-Serie. Die ersten beiden Ausgaben beginnen sofort, die weiteren folgen regelmäßig alle 3–4 Wochen in zufälliger Reihenfolge.</p>
-								<br>
-
-								<b>Ausgabe 1 · 5-D-Mark (Startausgabe)</b> 
-								<p>Die Gold-Neuprägung der historischen 5-DM-Münze erinnert an eine der beliebtesten Kursmünzen der D-Mark-Ära – bekannt als „Heiermann“ oder „Silberadler“. Die Vorderseite trägt den Nennwert "5 Deutsche Mark" und die Umschrift "Bundesrepublik Deutschland", die Rückseite zeigt den Bundesadler – ein Symbol des deutschen Wiederaufbaus und kultureller Identität.</p>
-								<br>
-
-								<b>Ausgabe 2 · D-Mark 1-Pfennig (Gratis Startausgabe)</b>
-								<p>Gold-Neuprägung der kleinsten D-Mark-Einheit mit dem ikonischen Eichenlaub-Motiv. Diese Ausgabe erhalten Sie kostenlos zu Ihrer ersten Lieferung – im Wert von 79,99 €.</p>
-								<br>
-	
-								<b>Ausgabe 3-14 · Weitere Ausgaben</b>
-								<p>Die weiteren zwölf Gold-Neuprägungen erhalten Sie in regelmäßigen Abständen – darunter die Motive aller Kursmünzen von 1-Pfennig bis 5-D-Mark inklusive der 2-D-Mark-Ausgaben der Politiker-Serie und ausgewählter Gedenkmünzen Deutschlands. Jede Ausgabe ist Teil der vollständigen Serie.</p>
-								
-								<br>
-							`;
+                            accordion1.innerHTML = collection_at_glance_content;
 
                             const accordion2 = document.querySelector("#\\32 -panel > div");
                             accordion2.innerHTML = `
