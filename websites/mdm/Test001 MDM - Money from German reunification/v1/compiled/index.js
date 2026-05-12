@@ -136,6 +136,13 @@
                         <br />
                         <br />
                     `,
+                    extras_conent: /* HTML */ `
+                        <p>
+                            Gleich mit Ihrer Doppel-Ausgabe erhalten Sie ein <strong>edles Präsentationsalbum</strong>, das für die Ausgaben einen schützenden und eindrucksvollen Platz
+                            bietet. Jede Goldausgabe wird in einer Sicherheits-Kapsel ausgeliefert und von einem&nbsp;<strong>Echtheits-Zertifikat</strong>&nbsp;begleitet.
+                        </p>
+                        <br />
+                    `,
                 },
                 352040: {
                     heading: "DDR Kursmünzen in neuer Form",
@@ -248,6 +255,15 @@
                         <br />
                         <br />
                     `,
+                    extras_conent: /* HTML */ `
+                        <h3>Zum Start – GRATIS</h3>
+                        <span>Eine zusätzliche Gold-Ausgabe “1 Pfennig der DDR Neuprägung” sowie ein edles Präsentationsalbum.</span><br />
+                        <h3>Zu jeder Ausgabe – GRATIS</h3>
+                        <span>Jede Goldausgabe in einer Schutzkapsel zur sicheren Aufbewahrung.</span><br />
+                        <h3>Zu jeder Ausgabe – INKLUSIVE</h3>
+                        <span>Ein Echtheits-Zertifikat zur Bestätigung von Material und Qualität.</span><br />
+                        <br />
+                    `,
                 },
                 352155: {
                     heading: "Staatsgold Deutschland – Goldbarren Vermögens-Edition",
@@ -334,6 +350,15 @@
                         <span>Artikel-Nr.: 352155/002#n2</span><br />
                         <span>Serie: Staatsgold - Deutschland</span>
                         <br />
+                        <br />
+                    `,
+                    extras_conent: /* HTML */ `
+                        <h3>Zum Start – GRATIS</h3>
+                        <span>Eine zusätzliche Gold-Ausgabe "Deutscher Vermögensbarren" sowie ein edles Präsentationsalbum.</span><br />
+                        <h3>Zu jeder Ausgabe – GRATIS</h3>
+                        <span>Jede Goldausgabe in einer Schutzkapsel zur sicheren Aufbewahrung.</span><br />
+                        <h3>Zu jeder Ausgabe – INKLUSIVE</h3>
+                        <span>Ein Echtheits-Zertifikat zur Bestätigung von Material und Qualität.</span><br />
                         <br />
                     `,
                 },
@@ -455,6 +480,22 @@
                         <span>Serie: Die 12 Sternzeichen</span><br />
                         <br />
                     `,
+                    extras_conent: /* HTML */ `
+                        <h3>Zum Start – GRATIS</h3>
+                        <span>Eine zusätzliche Gold-Ausgabe “Sternzeichen Widder (Aries)”.</span><br />
+                        <h3>Mit der zweiten Lieferung – GRATIS</h3>
+                        <span>Ein edles Präsentationsalbum für Ihre Kollektion.</span><br />
+                        <h3>Mit der dritten Lieferung – GRATIS</h3>
+                        <span
+                            >Eine vergoldete Halskette mit edlem Anhänger. Der Anhänger ist so gestaltet, dass Sie Ihren Sternzeichen-Goldbarren individuell einsetzen und jederzeit
+                            austauschen können. </span
+                        ><br />
+                        <h3>Zu jeder Ausgabe – GRATIS</h3>
+                        <span>Jede Goldausgabe in einer Schutzkapsel zur sicheren Aufbewahrung.</span><br />
+                        <h3>Zu jeder Ausgabe – INKLUSIVE</h3>
+                        <span>Ein Echtheits-Zertifikat zur Bestätigung von Material und Qualität.</span><br />
+                         <br />
+                    `,
                 },
             };
 
@@ -505,7 +546,9 @@
                         accordion_four_heading,
                         collection_at_glance_content,
                         initial_delivery_content,
+                        extras_conent,
                     } = dataObj;
+
 
                     waitUntil(
                         () => document.querySelector(".dop-product-heading__title"),
@@ -570,73 +613,73 @@
                     waitUntil(
                         () => document.querySelector(".az-accordion-panel"),
                         () => {
-                            const accordion1 = document.querySelector("#\\31 -panel > div");
+                            const accordion1 = document.querySelector("#\\31-panel > div");
                             accordion1.querySelector("img");
 
                             accordion1.innerHTML = collection_at_glance_content;
 
-                            const accordion2 = document.querySelector("#\\32 -panel > div");
+                            const accordion2 = document.querySelector("#\\32-panel > div");
                             accordion2.innerHTML = initial_delivery_content;
 
-                            const accordion3 = document.querySelector("#\\33 -panel > div");
-                            accordion3.innerHTML = `
+                            const accordion3 = document.querySelector("#\\33-panel > div");
+                            accordion3.innerHTML = /* HTML */ `
 								<div class="Test001-table-container">
 									<div class="Test001-td-11">
-										<b class="Test001-text-golden">IHRE KOLLEKTION IM <br>VERGLEICH</b></td>
+										<b class="Test001-text-golden">IHRE KOLLEKTION IM <br/>VERGLEICH</b></td>
 									</div>
 									<div class="Test001-text-center Test001-td-12">
 										<b>EINZELKAUF</b>
 										<img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/increase.png" alt="Increase Graph">
-										<span>Preise steigen <br>mit dem Markt</span>
+										<span>Preise steigen <br/>mit dem Markt</span>
 									</div>
 									<div class="Test001-bg-golden Test001-td-13">
 										<b>FLATRATE</b>
 										<img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/lock.png" alt="Price Lock">
-										<span>Preis garantiert <br>für 1 Jahr</span>
+										<span>Preis garantiert <br/>für 1 Jahr</span>
 									</div>
 									<div class="Test001-td-21">
-										<b>1× Start-Ausgabe</b><br>
+										<b>1× Start-Ausgabe</b><br/>
 										<span>5 D-Mark der BRD Neuprägung</span>
 									</div>
 									<div class="Test001-td-22">79,99 €*</div>
 									<div class="Test001-td-23">64,99 €</div>
 									<div class="Test001-td-31">
-										<b>1× Zusatz zur Start-Ausgabe</b><br>
+										<b>1× Zusatz zur Start-Ausgabe</b><br/>
 										<span>1 Pfennig der BRD Neuprägung</span>
 									</div>
 									<div class="Test001-td-32">79,99 €*</div>
 									<div class="Test001-td-33">GRATIS</div>
 									<div  class="Test001-td-41">
-										<b>12× weitere Ausgaben</b><br>
+										<b>12× weitere Ausgaben</b><br/>
 										<span>Das Geld der Deutschen - BRD Neuprägungen</span>
 									</div>
-									<div class="Test001-td-42">aktuell<br>je 79,99 €*</div>
+									<div class="Test001-td-42">aktuell<br/>je 79,99 €*</div>
 									<div class="Test001-td-43">je 64,99 €</div>
 									<div class="Test001-td-51">
-										<span><b>Versandkosten</b><br>Pro Lieferung</span>
+										<span><b>Versandkosten</b><br/>Pro Lieferung</span>
 									</div>
 									<div class="Test001-td-52">je 6,95 €*</div>
 									<div class="Test001-td-53">
 										<div>
-											<b>1. Lieferung frei</b> <br>
+											<b>1. Lieferung frei</b> <br/>
 											<span>Folgelieferungen je 6,95€ </span>
 										</div>
 									</div>
 									<div class="Test001-td-61">
-										<b>Sammelalbum & Zertifikate</b><br>
+										<b>Sammelalbum & Zertifikate</b><br/>
 										<span>Zubehör je Ausgabe</span>
 									</div>
 									<div class="Test001-td-62">gesondert</div>
 									<div class="Test001-td-63">INKLUSIVE</div>
 									<div class="Test001-td-71">
-										<b>Ihre Gesamtersparnis</b> <br>
+										<b>Ihre Gesamtersparnis</b> <br/>
 										<span>15€ pro Ausgabe · Gratis-Goldprägung · Album inklusive</span>
 									</div>
 									<div class="Test001-td-72"></div>
 									<div class="Test001-td-73" class="Test001-text-center">275 €</div>
 									
 									<div class="Test001-td-81">
-										<b class="Test001-text-golden">SIE BEHALTEN DIE KONTROLLE</b> <br>
+										<b class="Test001-text-golden">SIE BEHALTEN DIE KONTROLLE</b> <br/>
 										<ul>
 											<li>
 												<span class="Test001-tick">✓</span>
@@ -660,6 +703,9 @@
 									</div>
 								</table>
 							`;
+
+                            const accordion4 = document.querySelector("#\\34-panel > div");
+                            accordion4.innerHTML = extras_conent;
                         },
                     );
                 },
