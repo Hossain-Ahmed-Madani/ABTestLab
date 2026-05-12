@@ -1,0 +1,13 @@
+{
+  "id": "1778581623317_3650_Test001_MDM___Money_from_German_reunification",
+  "name": "Test001 MDM - Money from German reunification",
+  "type": "A/B",
+  "website": "mdm",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-05-12T10:27:03.317Z",
+  "createdAtReadable": "5/12/2026, 4:27:03 PM",
+  "lastUpdated": "2026-05-12T10:27:03.710Z"
+}
