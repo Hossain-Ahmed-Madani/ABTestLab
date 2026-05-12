@@ -31,6 +31,10 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    accordion_one_heading: "Ihre Kollektion im Überblick",
+                    accordion_two_heading: "Angaben zur Sammlung",
+                    accordion_three_heading: "Flatrate im Überblick",
+                    accordion_four_heading: "Freuen Sie sich auf Ihre umfangreiche Gratis-Ausstattung",
                     collection_at_glance_content: /* HTML */ `
                         <b>Für Sammler deutscher Geschichte und alle, die mit der</b>
                         <p>
@@ -91,6 +95,47 @@
 
                         <br />
                     `,
+                    initial_delivery_content: /* HTML */ `
+                        <h3>Motive & Design</h3>
+                        <span>Startausgabe 1: 5-D-Mark-Neuprägung mit Jahrespunze</span><br />
+                        <span>Gratis Startausgabe 2: 1-Pfennig-Neuprägung mit Jahrespunze</span><br />
+
+                        <h3>Material & Qualität</h3>
+                        <span>Edelmetall: Feingold (999/1000)</span>
+                        <br />
+                        <span>Prägequalität: Polierte Platte</span>
+                        <br />
+
+                        <h3>Größe & Gewicht</h3>
+                        <span>Durchmesser: 13,92 mm</span>
+                        <br />
+                        <span>Gewicht: je 1/200 Unzen</span>
+                        <br />
+
+                        <h3>Limitierung & Zertifikat</h3>
+                        <span>Weltweite Auflage: Nur 20.000 komplette Kollektionen</span>
+                        <br />
+                        <span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span>
+                        <br />
+
+                        <h3>Preise & Lieferung</h3>
+                        <span>Startpreis:</span><br />
+                        <span>– 5 D-Mark: 64,99 € (statt 79,99 €)</span>
+                        <br />
+                        <span>– Gratis: 1 Pfennig (Wert: 79,99 €)</span>
+                        <br />
+                        <span>– Folgeausgaben: je 64,99 € (statt 79,99 €)</span>
+                        <br />
+                        <span>– Lieferrhythmus: ca. 3–4 Wochen</span>
+                        <br />
+
+                        <h3>Artikel-Details</h3>
+                        <span>Artikel-Nr.: 352039/006</span><br />
+                        <span>Jahrespunze: 2025</span><br />
+                        <span>Serie: Das Geld der Deutschen BRD</span>
+                        <br />
+                        <br />
+                    `,
                 },
                 352040: {
                     heading: "DDR Kursmünzen in neuer Form",
@@ -119,6 +164,10 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    accordion_one_heading: "Ihre Kollektion im Überblick",
+                    accordion_two_heading: "Angaben zur Startlieferung",
+                    accordion_three_heading: "So funktioniert Flatrate ",
+                    accordion_four_heading: "Ihre Extras",
                     collection_at_glance_content: /* HTML */ `
                         <b>Vom Mauerfall zur Geschichtsstunde in Gold</b>
                         <p>
@@ -168,6 +217,37 @@
                         </p>
                         <br />
                     `,
+                    initial_delivery_content: /* HTML */ `
+                        <h3>Motive & Design</h3>
+                        <span>Startausgabe 1: 5-Mark Neuprägung des DDR-Kursmünzensatzes mit Jahrespunze</span><br />
+                        <span>Gratis Startausgabe 2: 1 Pfennig Neuprägung des DDR-Kursmünzensatzes mit Jahrespunze</span>
+                        <br />
+                        <h3>Material & Qualität</h3>
+                        <span>Edelmetall: Feingold (999/1000)</span><br />
+                        <span>Prägequalität: Polierte Platte</span><br />
+                        <br />
+                        <h3>Größe & Gewicht</h3>
+                        <span>Durchmesser: 13,92 mm</span><br />
+                        <span>Gewicht: je 1/200 Unzen</span>
+                        <br />
+                        <h3>Limitierung & Zertifikat</h3>
+                        <span>Weltweite Auflage: Nur 20.000 komplette Kollektionen</span><br />
+                        <span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span>
+                        <br />
+                        <h3>Preise & Lieferung</h3>
+                        <span> Startpreis:</span>
+                        <span>- 5-Mark der DDR: 64,99 € (statt 79,99 €)</span><br />
+                        <span>- Gratis: 1 Pfennig der DDR (Wert: 79,99 €)</span><br />
+                        <span>- Folgeausgaben: je 64,99 € (statt 79,99 €)</span>
+                        <span>- Lieferrhythmus: ca. 3-4 Wochen</span>
+                        <br />
+                        <h3>Artikel-Details</h3>
+                        <span>Artikel-Nr.: 352040/005#n2</span><br />
+                        <span>Jahrespunze: 2025</span><br />
+                        <span>Serie: Das Geld der Deutschen - DDR</span>
+                        <br />
+                        <br />
+                    `,
                 },
                 352155: {
                     heading: "Staatsgold Deutschland – Goldbarren Vermögens-Edition",
@@ -196,6 +276,10 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Flatrate Preis - nur 64,99 € pro Sendung", "Offiziell mehrwertsteuerfrei"],
+                    accordion_one_heading: "Ihre Kollektion im Überblick",
+                    accordion_two_heading: "Angaben zur Startlieferung",
+                    accordion_three_heading: "So funktioniert Flatrate ",
+                    accordion_four_heading: "Ihre Extras",
                     collection_at_glance_content: /* HTML */ `
                         <b>Die Sammleredition „Staatsgold — Deutschland“ - Für alle, die sich mit Vermögensaufbau und Edelmetallen beschäftigen</b>
                         <p>
@@ -221,6 +305,35 @@
                             <li>Jeder Barren ergänzt die Serie um ein weiteres Thema</li>
                             <li>Die Flatrate endet automatisch nach 14 Ausgaben</li>
                         </ul>
+                        <br />
+                    `,
+                    initial_delivery_content: /* HTML */ `
+                        <h3>Motive & Design</h3>
+                        <span>Startausgabe 1: Deutscher Staatsbarren</span><br />
+                        <span>Gratis Startausgabe 2: Deutscher Vermögensbarren</span>
+                        <br />
+                        <h3>Material & Qualität</h3>
+                        <span>Edelmetall: Feingold (999,9/1000)</span><br />
+                        <span>Prägequalität: Polierte Platte</span>
+                        <br />
+                        <h3>Größe & Gewicht</h3>
+                        <span>Maße: 15,2 x 8,6 mm</span><br />
+                        <span>Gewicht: je 1/200 Unzen</span>
+                        <br />
+                        <h3>Limitierung & Zertifikat</h3>
+                        <span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span>
+                        <br />
+                        <h3>Preise & Lieferung</h3>
+                        <span>Startpreis:</span><br />
+                        <span>– Deutscher Staatsbarren 64,99 € (statt 74,99 €)</span><br />
+                        <span>– Gratis: Deutscher Vermögensbarren (Wert: 74,99 €)</span><br />
+                        <span>– Folgeausgaben: je 64,99 € (statt 74,99 €)</span><br />
+                        <span>– Lieferrhythmus: ca. 3–4 Wochen</span>
+                        <br />
+                        <h3>Artikel-Details</h3>
+                        <span>Artikel-Nr.: 352155/002#n2</span><br />
+                        <span>Serie: Staatsgold - Deutschland</span>
+                        <br />
                         <br />
                     `,
                 },
@@ -251,6 +364,10 @@
                         </div>
                     `,
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999,9/1000)", "Höchste Prägequalität - Polierte Platte"],
+                    accordion_one_heading: "Ihre Kollektion im Überblick",
+                    accordion_two_heading: "Angaben zur Startlieferung",
+                    accordion_three_heading: "So funktioniert Flatrate ",
+                    accordion_four_heading: "Ihre Extras",
                     collection_at_glance_content: /* HTML */ `
                         <b>Für alle, die sich für Sternzeichen und persönliche Symbole interessieren</b>
                         <p>
@@ -305,6 +422,39 @@
                         </p>
                         <br />
                     `,
+                    initial_delivery_content: /* HTML */ `
+                        <h3>Motive & Design</h3>
+                        <span>Startausgabe 1: Sternzeichen Fische (Pisces)</span><br />
+                        <span>Gratis Startausgabe 2: Widder (Aries)</span><br />
+
+                        <h3>Material & Qualität</h3>
+                        <span>Edelmetall: Feingold (999,9/1000)</span><br />
+                        <span>Prägequalität: Polierte Platte </span><br />
+
+                        <h3>Größe & Gewicht</h3>
+                        <span>Maße: 8,6 x 15,2 mm</span><br />
+                        <span>Gewicht: je 1/200 Unzen</span><br />
+                        <h3>Herkunft & Nennwert</h3>
+                        <span>Ausgabeland: Salomonen</span><br />
+                        <span>Währung: Dollar (SBD)</span><br />
+                        <span>Nennwert: 10 $ + 10 $</span><br />
+
+                        <h3>Limitierung & Zertifikat</h3>
+                        <span>Weltweite Auflage: Nur 10.000 komplette Kollektionen</span><br />
+                        <span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span><br />
+
+                        <h3>Preise & Lieferung</h3>
+                        <span>Startpreis:</span><br />
+                        <span>– Sternzeichen “Fische” : 69,99 € (statt 84,99 €)</span><br />
+                        <span>– Gratis: Goldbarren “Widder” (Wert 84,99 €) </span><br />
+                        <span>– Folgeausgaben: je 69,99 € (statt 84,99 €) und vergoldete Kette mit Anhänger gratis</span><br />
+                        <span>– Lieferrhythmus: ca. 3–4 Wochen</span><br />
+
+                        <h3>Artikel-Details</h3>
+                        <span>Artikel-Nr.: 25817/004#d1</span><br />
+                        <span>Serie: Die 12 Sternzeichen</span><br />
+                        <br />
+                    `,
                 },
             };
 
@@ -344,7 +494,18 @@
                         return;
                     }
 
-                    const { heading, sub_title, benefits_bar, uspTexts, collection_at_glance_content } = dataObj;
+                    const {
+                        heading,
+                        sub_title,
+                        benefits_bar,
+                        uspTexts,
+                        accordion_one_heading,
+                        accordion_two_heading,
+                        accordion_three_heading,
+                        accordion_four_heading,
+                        collection_at_glance_content,
+                        initial_delivery_content,
+                    } = dataObj;
 
                     waitUntil(
                         () => document.querySelector(".dop-product-heading__title"),
@@ -399,8 +560,10 @@
                     waitUntil(
                         () => document.querySelector(".dop-product-content__title"),
                         () => {
-                            replaceText("#\\31 -header .dop-product-content__title", "Ihre Kollektion im Überblick");
-                            replaceText("#\\33 -header .dop-product-content__title", "Flatrate im Überblick");
+                            replaceText("#\\31-header .dop-product-content__title", accordion_one_heading);
+                            replaceText("#\\32-header .dop-product-content__title", accordion_two_heading);
+                            replaceText("#\\33-header .dop-product-content__title", accordion_three_heading);
+                            replaceText("#\\34-header .dop-product-content__title", accordion_four_heading);
                         },
                     );
 
@@ -413,35 +576,7 @@
                             accordion1.innerHTML = collection_at_glance_content;
 
                             const accordion2 = document.querySelector("#\\32 -panel > div");
-                            accordion2.innerHTML = `
-								<h3>Motive & Design</h3>
-								<span>Startausgabe 1: 5-D-Mark-Neuprägung mit Jahrespunze</span><br>
-								<span>Gratis Startausgabe 2: 1-Pfennig-Neuprägung mit Jahrespunze</span><br>
-
-								<h3>Material & Qualität</h3>
-								<span>Edelmetall: Feingold (999/1000)</span><br>
-								<span>Prägequalität: Polierte Platte</span><br>
-
-								<h3>Größe & Gewicht</h3>
-								<span>Durchmesser: 13,92 mm</span><br>
-								<span>Gewicht: je 1/200 Unzen</span><br>
-
-								<h3>Limitierung & Zertifikat</h3>
-								<span>Weltweite Auflage: Nur 20.000 komplette Kollektionen</span><br>
-								<span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span><br>
-
-								<h3>Preise & Lieferung</h3>
-								<span>Startpreis:</span><br>
-								<span>– 5 D-Mark: 64,99 € (statt 79,99 €)</span><br>
-								<span>– Gratis: 1 Pfennig (Wert: 79,99 €)</span><br>
-								<span>– Folgeausgaben: je 64,99 € (statt 79,99 €)</span><br>
-								<span>– Lieferrhythmus: ca. 3–4 Wochen</span><br>
-
-								<h3>Artikel-Details</h3>
-								<span>Artikel-Nr.: 352039/006</span><br>
-								<span>Jahrespunze: 2025</span><br>
-								<span>Serie: Das Geld der Deutschen BRD</span><br><br>
-							`;
+                            accordion2.innerHTML = initial_delivery_content;
 
                             const accordion3 = document.querySelector("#\\33 -panel > div");
                             accordion3.innerHTML = `
