@@ -1,0 +1,13 @@
+{
+  "id": "1778673865120_1788_Homepage___Convert_More_to_Explore_to_Grid_Layout_M",
+  "name": "Homepage - Convert More to Explore to Grid Layout M",
+  "type": "A/B",
+  "website": "gardeners",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-05-13T12:04:25.120Z",
+  "createdAtReadable": "5/13/2026, 6:04:25 PM",
+  "lastUpdated": "2026-05-13T12:04:25.311Z"
+}
