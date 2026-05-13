@@ -539,3 +539,189 @@
   margin: 0;
   padding: 0;
 }
+
+.exp-Test001-variation .benefits-bar,
+.exp-Test001-variation .header-banner,
+.exp-Test001-variation-layout-v2 .az-buy-box__badges,
+.exp-Test001-variation-layout-v2 .az-buy-box__delivery,
+.exp-Test001-variation-layout-v2 .az-buy-box__availability {
+  display: none !important;
+}
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 .dop-product-content__title {
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  font-style: italic;
+  color: rgb(33, 33, 33);
+}
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .ab-green {
+  color: rgb(61, 140, 64);
+}
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-11 b {
+  color: rgb(157, 125, 49);
+}
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-81 > b {
+  color: rgb(157, 125, 49) !important;
+}
+
+@media screen and (min-width: 991px) {
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .Test001__benefits-bar {
+    border-radius: 0;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 12px 24px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .Test001__benefits-bar .benefit-text {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 [id="3-panel"].az-accordion-panel > div {
+    padding: 0;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-11 {
+    border-top: 0;
+    border-left: 0;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-11 b {
+    font-family: "Roboto";
+    line-height: 30px;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 24px;
+    color: rgb(157, 125, 49);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-11 br {
+    display: none;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-12 > b {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(255, 255, 255);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-12 > span {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(255, 255, 255);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-12 > span .ab-bold {
+    font-weight: 700;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-13 > b {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: rgb(33, 33, 33);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-13 > span {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(33, 33, 33);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-13 > span .ab-bold {
+    font-weight: 700;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-21,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-22,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-23,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-31,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-32,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-33,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-41,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-42,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-43,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-51,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-52,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-53,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-61,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-62,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-63,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-71,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-73,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-81 {
+    border-left: 0;
+    border-right: 0;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-23,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-33,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-43,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-53,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-63 {
+    padding: 0;
+    background: none;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-23 > span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-33 > span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-43 > span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-53 > span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-63 > span {
+    width: 100%;
+    text-align: center;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    background-color: rgba(201, 169, 97, 0.05);
+    border-left: 1px solid rgba(33, 33, 33, 0.08);
+    border-right: 1px solid rgba(33, 33, 33, 0.08);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .ab-green {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-71 {
+    grid-column: span 2;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-72 {
+    display: none;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 [id="3-panel"].az-accordion-panel b {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: rgb(33, 33, 33);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-21 span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-31 span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-41 span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-51 span,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-61 span {
+    font-family: "Roboto";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: rgb(119, 119, 119);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-81 > b {
+    font-family: "Roboto";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-81 ul {
+    margin-top: 14px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 div .Test001-td-81 ul > li:not(:last-child) {
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgb(228, 224, 216);
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-81 {
+    border-bottom: 0;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-table-container {
+    padding-bottom: 36px;
+  }
+}

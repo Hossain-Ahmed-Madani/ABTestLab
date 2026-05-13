@@ -2,12 +2,29 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.002,
+        textVersion: 0.003,
         getLayoutData: function () {
             const data = {
                 352039: {
+                    sku: "352039",
                     heading: "D-Mark Kursmünzen der Bundesrepublik in neuer Form",
                     sub_title: "14 originalgetreue Gold-Neuprägungen des D-Mark-Kursmünzensatzes – von 1 Pfennig bis 5 D-Mark",
+                    trust_content: /* HTML */ `
+                        <div class="Test001__trust-container">
+                            <div class="Test001__trust-item Test001__item-shipping">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
+                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-retoure">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
+                                <span class="trust-text">30 Tage Rückgabe</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-ssl">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
+                                <span class="trust-text">SSL-gesichert</span>
+                            </div>
+                        </div>
+                    `,
                     benefits_bar: /* HTML */ `
                         <div class="Test001__benefits-bar">
                             <div class="benefit-item">
@@ -221,8 +238,25 @@
                     `,
                 },
                 352040: {
+                    sku: "352040",
                     heading: "DDR Kursmünzen in neuer Form",
                     sub_title: "14 originalgetreue Gold-Neuprägungen des DDR-Kursmünzensatzes von 1990 – von 1 Pfennig bis 5 Mark",
+                    trust_content: /* HTML */ `
+                        <div class="Test001__trust-container">
+                            <div class="Test001__trust-item Test001__item-shipping">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
+                                <span class="trust-text">Versandfrei ab 200 €</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-retoure">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
+                                <span class="trust-text">30 Tage Rückgaberecht</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-ssl">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
+                                <span class="trust-text">SSL-gesichert</span>
+                            </div>
+                        </div>
+                    `,
                     benefits_bar: /* HTML */ `
                         <div class="Test001__benefits-bar">
                             <div class="benefit-item">
@@ -339,47 +373,49 @@
                             <div class="Test001-text-center Test001-td-12">
                                 <b>EINZELKAUF</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/increase.png" alt="Increase Graph" />
-                                <span>Preise steigen <br />mit dem Markt</span>
+                                <span><span class="ab-bold">Preise steigen</span> <br />mit dem Markt</span>
                             </div>
                             <div class="Test001-bg-golden Test001-td-13">
                                 <b>FLATRATE</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/lock.png" alt="Price Lock" />
-                                <span>Preis garantiert <br />für 1 Jahr</span>
+                                <span><span class="ab-bold">Preis garantiert</span> <br />für 1 Jahr</span>
                             </div>
                             <div class="Test001-td-21">
                                 <b>1 × Start-Ausgabe</b><br />
                                 <span>5-Mark der DDR Neuprägung</span>
                             </div>
                             <div class="Test001-td-22">79,99€</div>
-                            <div class="Test001-td-23">64,99€</div>
+                            <div class="Test001-td-23"><span>64,99€</span></div>
                             <div class="Test001-td-31">
                                 <b>1 × Zusatz zur Start-Ausgabe</b><br />
                                 <span>1 Pfennig der DDR Neuprägung</span>
                             </div>
                             <div class="Test001-td-32">79,99€</div>
-                            <div class="Test001-td-33">GRATIS</div>
+                            <div class="Test001-td-33"><span class="ab-green">GRATIS</span></div>
                             <div class="Test001-td-41">
                                 <b>12 × weitere Ausgaben</b><br />
                                 <span>Das Geld der Deutschen - DDR Neuprägungen</span>
                             </div>
                             <div class="Test001-td-42">aktuell<br />je 79,99€</div>
-                            <div class="Test001-td-43">je 64,99€</div>
+                            <div class="Test001-td-43"><span>je 64,99€</span></div>
                             <div class="Test001-td-51">
                                 <span><b>Versandkosten</b><br />Pro Lieferung</span>
                             </div>
                             <div class="Test001-td-52">je 6,95€</div>
                             <div class="Test001-td-53">
-                                <div>
-                                    <b>1. Lieferung frei</b> <br />
-                                    <span>Folgelieferungen je 6,95€ </span>
-                                </div>
+                                <span>
+                                    <div>
+                                        <b>1. Lieferung frei</b> <br />
+                                        <span>Folgelieferungen je 6,95€ </span>
+                                    </div>
+                                </span>
                             </div>
                             <div class="Test001-td-61">
                                 <b>Sammelalbum &amp; Zertifikate</b><br />
                                 <span>Zubehör je Ausgabe</span>
                             </div>
                             <div class="Test001-td-62">gesondert</div>
-                            <div class="Test001-td-63">INKLUSIVE</div>
+                            <div class="Test001-td-63"><span class="ab-green">INKLUSIVE</span></div>
                             <div class="Test001-td-71">
                                 <b>Ihre Gesamtersparnis</b> <br />
                                 <span>15€ pro Ausgabe · Gratis-Goldprägung · Album inklusive</span>
@@ -417,8 +453,25 @@
                     `,
                 },
                 352155: {
+                    sku: "352155",
                     heading: "Staatsgold Deutschland – Goldbarren Vermögens-Edition",
                     sub_title: "14 thematische Goldbarren rund um Vermögensaufbau und finanzielle Grundlagen",
+                    trust_content: /* HTML */ `
+                        <div class="Test001__trust-container">
+                            <div class="Test001__trust-item Test001__item-shipping">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
+                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-retoure">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
+                                <span class="trust-text">30 Tage Rückgabe</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-ssl">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
+                                <span class="trust-text">SSL-gesichert</span>
+                            </div>
+                        </div>
+                    `,
                     benefits_bar: /* HTML */ `
                         <div class="Test001__benefits-bar">
                             <div class="benefit-item">
@@ -511,47 +564,49 @@
                             <div class="Test001-text-center Test001-td-12">
                                 <b>EINZELKAUF</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/increase.png" alt="Increase Graph" />
-                                <span>Preise steigen <br />mit dem Markt</span>
+                                <span><span class="ab-bold">Preise steigen</span> <br />mit dem Markt</span>
                             </div>
                             <div class="Test001-bg-golden Test001-td-13">
                                 <b>FLATRATE</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/lock.png" alt="Price Lock" />
-                                <span>Preis garantiert <br />für 1 Jahr</span>
+                                <span><span class="ab-bold">Preis garantiert</span> <br />für 1 Jahr</span>
                             </div>
                             <div class="Test001-td-21">
                                 <b>1 × Start-Ausgabe</b><br />
                                 <span>Deutscher Staatsbarren</span>
                             </div>
                             <div class="Test001-td-22">79,99€</div>
-                            <div class="Test001-td-23">64,99€</div>
+                            <div class="Test001-td-23"><span>64,99€</span></div>
                             <div class="Test001-td-31">
                                 <b>1 × Zusatz zur Start-Ausgabe</b><br />
                                 <span>Deutscher Vermögensbarren</span>
                             </div>
                             <div class="Test001-td-32">79,99€</div>
-                            <div class="Test001-td-33">GRATIS</div>
+                            <div class="Test001-td-33"><span class="ab-green">GRATIS</span></div>
                             <div class="Test001-td-41">
                                 <b>12 × Weitere Ausgaben</b><br />
                                 <span>Staatsgold - Deutschland</span>
                             </div>
                             <div class="Test001-td-42">aktuell<br />je 79,99€</div>
-                            <div class="Test001-td-43">je 64,99€</div>
+                            <div class="Test001-td-43"><span>je 64,99€</span></div>
                             <div class="Test001-td-51">
                                 <span><b>Versandkosten</b><br />Pro Lieferung</span>
                             </div>
                             <div class="Test001-td-52">je 6,95€</div>
                             <div class="Test001-td-53">
-                                <div>
-                                    <b>1. Lieferung frei</b> <br />
-                                    <span>Folgelieferungen je 6,95€ </span>
-                                </div>
+                                <span
+                                    ><div>
+                                        <b>1. Lieferung frei</b> <br />
+                                        <span>Folgelieferungen je 6,95€ </span>
+                                    </div></span
+                                >
                             </div>
                             <div class="Test001-td-61">
                                 <b>Sammelalbum &amp; Zertifikate</b><br />
                                 <span>Zubehör je Ausgabe</span>
                             </div>
                             <div class="Test001-td-62">gesondert</div>
-                            <div class="Test001-td-63">INKLUSIVE</div>
+                            <div class="Test001-td-63"><span class="ab-green">INKLUSIVE</span></div>
                             <div class="Test001-td-71">
                                 <b>Ihre Gesamtersparnis</b> <br />
                                 <span>15€ pro Ausgabe · Gratis-Goldbarren · Album inklusive</span>
@@ -589,8 +644,25 @@
                     `,
                 },
                 25817: {
+                    sku: "25817",
                     heading: "Goldbarren Sternzeichen – die zwölf Tierkreiszeichen",
                     sub_title: "12 Goldbarren mit allen Sternzeichen der Astrologie – als vollständige Serie",
+                    trust_content: /* HTML */ `
+                        <div class="Test001__trust-container">
+                            <div class="Test001__trust-item Test001__item-shipping">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
+                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-retoure">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
+                                <span class="trust-text">30 Tage Rückgabe</span>
+                            </div>
+                            <div class="Test001__trust-item Test001__item-ssl">
+                                <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
+                                <span class="trust-text">SSL-gesichert</span>
+                            </div>
+                        </div>
+                    `,
                     benefits_bar: /* HTML */ `
                         <div class="Test001__benefits-bar">
                             <div class="benefit-item">
@@ -714,54 +786,55 @@
                             <div class="Test001-text-center Test001-td-12">
                                 <b>EINZELKAUF</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/increase.png" alt="Increase Graph" />
-                                <span>Preise steigen <br />mit dem Markt</span>
+                                <span><span class="ab-bold">Preise steigen</span> <br />mit dem Markt</span>
                             </div>
                             <div class="Test001-bg-golden Test001-td-13">
                                 <b>FLATRATE</b>
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/lock.png" alt="Price Lock" />
-                                <span>Preis garantiert <br />für 1 Jahr</span>
+                                <span><span class="ab-bold">Preis garantiert</span> <br />für 1 Jahr</span>
                             </div>
                             <div class="Test001-td-21">
                                 <b>1 × Start-Ausgabe</b><br />
                                 <span>Sternzeichen Fische (Pisces)</span>
                             </div>
                             <div class="Test001-td-22">784,99€</div>
-                            <div class="Test001-td-23">69,99€</div>
+                            <div class="Test001-td-23"><span>69,99€</span></div>
                             <div class="Test001-td-31">
                                 <b>1 × Zusatz zur Start-Ausgabe</b><br />
                                 <span>Sternzeichen Widder (Aries)</span>
                             </div>
                             <div class="Test001-td-32">84,99€</div>
-                            <div class="Test001-td-33">GRATIS</div>
+                            <div class="Test001-td-33"><span class="ab-green">GRATIS</span></div>
                             <div class="Test001-td-41">
                                 <b>10 × weitere Ausgaben</b><br />
                                 <span>Stier bis Wassermann (10 weitere Tierkreiszeichen)</span>
                             </div>
                             <div class="Test001-td-42">je 84,99€</div>
-                            <div class="Test001-td-43">je 64,99 €</div>
+                            <div class="Test001-td-43"><span>je 64,99€</span></div>
                             <div class="Test001-td-51">
                                 <span><b>Versandkosten</b><br />Pro Lieferung</span>
                             </div>
                             <div class="Test001-td-52">aktuell€<br />je 6,95</div>
                             <div class="Test001-td-53">
-                                <div>
-                                    <b>1. Lieferung frei</b> <br />
-                                    <span>Folgelieferungen je 6,95€</span>
-                                </div>
+                                <span
+                                    ><div>
+                                        <b>1. Lieferung frei</b> <br />
+                                        <span>Folgelieferungen je 6,95€</span>
+                                    </div></span
+                                >
                             </div>
                             <div class="Test001-td-61">
                                 <b>Sammelalbum &amp; Zertifikate</b><br />
                                 <span>Zubehör je Ausgabe</span>
                             </div>
                             <div class="Test001-td-62">gesondert</div>
-                            <div class="Test001-td-63">INKLUSIVE</div>
+                            <div class="Test001-td-63"><span class="ab-green">INKLUSIVE</span></div>
                             <div class="Test001-td-71">
                                 <b>Ihre Gesamtersparnis</b> <br />
                                 <span>15€ pro Ausgabe · Gratis-Ausgabe · Album · Vergoldete Kette mit Anhänger inklusive</span>
                             </div>
                             <div class="Test001-td-72"></div>
                             <div class="Test001-td-73">250€</div>
-
                             <div class="Test001-td-81">
                                 <b class="Test001-text-golden">SIE BEHALTEN DIE KONTROLLE</b> <br />
                                 <ul>
@@ -800,7 +873,6 @@
                 },
             };
 
-            console.log("======== GET DATA ========");
             const urlParams = new URLSearchParams(window.location.search);
             const sku = urlParams.get("sku");
             const targetValue = sku.split("/")[0];
@@ -811,8 +883,6 @@
         },
 
         build: function () {
-            console.log("======== BUILD TEST ========");
-
             /* ============================== BUILD START ============================== */
             const scope = {
                 utils: {
@@ -837,8 +907,10 @@
                     }
 
                     const {
+                        sku,
                         heading,
                         sub_title,
+                        trust_content,
                         benefits_bar,
                         uspTexts,
                         accordion_one_heading,
@@ -851,27 +923,15 @@
                         extras_conent,
                     } = dataObj;
 
+                    if (sku !== "352039") {
+                        document.querySelector("body").classList.add("exp-" + exp.exp + "-" + exp.var.toLowerCase() + "-" + "layout-v2");
+                    }
+
                     waitUntil(
                         () => document.querySelector(".dop-product-heading__title"),
                         () => {
                             if (!document.querySelector(".Test001__trust-container")) {
-                                document.querySelector(".default-layout__wrapper").insertAdjacentHTML(
-                                    "afterbegin",
-                                    `<div class="Test001__trust-container">
-										<div class="Test001__trust-item Test001__item-shipping">
-											<img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img">
-											<span class="trust-text">Versandkostenfrei ab 200 €</span>
-										</div>
-										<div class="Test001__trust-item Test001__item-retoure">
-											<img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img">
-											<span class="trust-text">30 Tage Rückgabe</span>
-										</div>
-										<div class="Test001__trust-item Test001__item-ssl">
-											<img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img">
-											<span class="trust-text">SSL-gesichert</span>
-										</div>
-									</div>`,
-                                );
+                                document.querySelector(".default-layout__wrapper").insertAdjacentHTML("afterbegin", trust_content);
                             }
 
                             if (!document.querySelector(".Test001__benefits-bar .benefit-item")) {
@@ -904,7 +964,6 @@
                     waitUntil(
                         () => document.querySelector(".dop-product-content__title"),
                         () => {
-                            
                             // Collapse All Accordion Items
                             document.querySelectorAll(".az-accordion-header-large").forEach((item) => {
                                 item.setAttribute("aria-expanded", "false");
@@ -912,7 +971,7 @@
                             document.querySelectorAll(".az-accordion-panel").forEach((item) => {
                                 item.setAttribute("aria-hidden", "true");
                             });
-                            
+
                             if (window.innerWidth >= 991) {
                                 // Expand First Accordion
                                 const header1 = document.querySelector("#\\31-header");
