@@ -1,0 +1,13 @@
+{
+  "id": "1774879951535_27_Homepage_Show_All_Pests_On_Page_DTM",
+  "name": "Homepage-Show-All-Pests-On-Page-DTM",
+  "type": "A/B",
+  "website": "domyown",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-03-30T14:12:31.535Z",
+  "createdAtReadable": "3/30/2026, 8:12:31 PM",
+  "lastUpdated": "2026-03-30T14:12:31.737Z"
+}

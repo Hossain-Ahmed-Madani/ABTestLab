@@ -1,0 +1,63 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+// Goal Selector CSS:
+// body .pt-1.pb-3.px-2:not(.bg-transparent) + .pt-1.pb-3.px-2.bg-transparent.border-0 > div[id*="category-carousel"] .flex.flex-col.mx-auto.h-full a,
+// body div.bg-grey-lightest[id*="category-carousel"] .flex.flex-col.leading-tight a,
+// body div[id*="category-carousel"] .ab-pest-item {
+//     border: 1px solid red;
+// }
+
+.AB-HOME-SHOW-ALL-PESTS {
+    div[id*="category-carousel"] div[class="mt-4"],
+    div[id*="category-carousel"] div.swiper.mt-2 {
+        display: none;
+    }
+
+    .ab-pests-grid {
+        margin: auto;
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 13px 10px;
+    }
+
+    .ab-pest-item {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 990.5px) {
+        .ab-pests-grid {
+            padding: 0 0.25rem;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-pests-grid {
+            width: 90.6%;
+            padding: 0;
+            padding-right: 1.45rem;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px 15px;
+        }
+
+        .ab-pest-item {
+            padding: 0.25rem;
+        }
+
+        .ab-pest-item a:not(:has(img)) {
+            padding: 0 0.25rem;
+        }
+    }
+}

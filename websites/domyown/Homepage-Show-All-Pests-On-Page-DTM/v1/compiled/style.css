@@ -1,0 +1,34 @@
+.AB-HOME-SHOW-ALL-PESTS div[id*=category-carousel] div[class=mt-4],
+.AB-HOME-SHOW-ALL-PESTS div[id*=category-carousel] div.swiper.mt-2 {
+  display: none;
+}
+.AB-HOME-SHOW-ALL-PESTS .ab-pests-grid {
+  margin: auto;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px 10px;
+}
+.AB-HOME-SHOW-ALL-PESTS .ab-pest-item {
+  width: 100%;
+}
+@media screen and (max-width: 990.5px) {
+  .AB-HOME-SHOW-ALL-PESTS .ab-pests-grid {
+    padding: 0 0.25rem;
+  }
+}
+@media screen and (min-width: 991px) {
+  .AB-HOME-SHOW-ALL-PESTS .ab-pests-grid {
+    width: 90.6%;
+    padding: 0;
+    padding-right: 1.45rem;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px 15px;
+  }
+  .AB-HOME-SHOW-ALL-PESTS .ab-pest-item {
+    padding: 0.25rem;
+  }
+  .AB-HOME-SHOW-ALL-PESTS .ab-pest-item a:not(:has(img)) {
+    padding: 0 0.25rem;
+  }
+}
