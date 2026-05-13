@@ -293,8 +293,6 @@
                             sie als exklusive Gold-Kollektion weiter.
                         </p>
                         <br />
-                        <p>Diese bedeutende Epoche lebt heute als exklusive Gold-Kollektion weiter. Jede Ausgabe erinnert an ein Stück dieser Geschichte.</p>
-                        <br />
                         <b>Warum Sammler diese DDR Goldmünzen wählen:</b>
                         <ul>
                             <li><b>Historischer Wert: </b>Die Neuprägungen zum DDR-Kursmünzensatz von 1990 als vollständige Serie in Gold.</li>
@@ -342,7 +340,6 @@
                         <h3>Material & Qualität</h3>
                         <span>Edelmetall: Feingold (999/1000)</span><br />
                         <span>Prägequalität: Polierte Platte</span><br />
-                        <br />
                         <h3>Größe & Gewicht</h3>
                         <span>Durchmesser: 13,92 mm</span><br />
                         <span>Gewicht: je 1/200 Unzen</span>
@@ -352,11 +349,11 @@
                         <span>Zertifikat: Echtheits-Zertifikat zu jeder Ausgabe inklusive</span>
                         <br />
                         <h3>Preise & Lieferung</h3>
-                        <span> Startpreis:</span>
-                        <span>- 5-Mark der DDR: 64,99 € (statt 79,99 €)</span><br />
-                        <span>- Gratis: 1 Pfennig der DDR (Wert: 79,99 €)</span><br />
-                        <span>- Folgeausgaben: je 64,99 € (statt 79,99 €)</span>
-                        <span>- Lieferrhythmus: ca. 3-4 Wochen</span>
+                        <span>Startpreis:</span><br />
+                        <span>– 5-Mark der DDR: 64,99 € (statt 79,99 €)</span><br />
+                        <span>– Gratis: 1 Pfennig der DDR (Wert: 79,99 €)</span><br />
+                        <span>– Folgeausgaben: je 64,99 € (statt 79,99 €)</span><br />
+                        <span>– Lieferrhythmus: ca. 3–4 Wochen</span>
                         <br />
                         <h3>Artikel-Details</h3>
                         <span>Artikel-Nr.: 352040/005#n2</span><br />
@@ -428,15 +425,15 @@
                                 <ul>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>30 Tage Testphase</b> <span>— Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht</span></div>
+                                        <div><b>30 Tage Testphase —</b><span> Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht</span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Fester Preis</b><span>— 64,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis</span></div>
+                                        <div><b>Fester Preis —</b><span> 64,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis</span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Automatisches Ende</b><span>— die Flatrate endet nach 14 Ausgaben automatisch</span></div>
+                                        <div><b>Automatisches Ende —</b><span> die Flatrate endet nach 14 Ausgaben automatisch</span></div>
                                     </li>
                                 </ul>
                             </div>
