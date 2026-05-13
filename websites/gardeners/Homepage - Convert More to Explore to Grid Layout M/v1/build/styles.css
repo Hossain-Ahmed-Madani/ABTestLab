@@ -1,38 +1,38 @@
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) scroll-slider-component {
-  display: none;
+    display: none;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) .section-inner {
-  padding-top: 30px;
+    padding-top: 30px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column .icon-with-text-column__icon-wrapper {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column .image {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column img {
-  width: 100px;
-  max-width: 100px;
+    width: 100px;
+    max-width: 100px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column p,
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column a {
-  color: #565656;
-  text-decoration: none;
-  font-family: "adelle-sans", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  line-height: 1.5;
-  font-size: 14px;
+    color: #565656;
+    text-decoration: none;
+    font-family: "adelle-sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.5;
+    font-size: 14px;
 }
