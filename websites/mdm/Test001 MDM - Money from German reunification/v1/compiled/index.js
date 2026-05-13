@@ -2,6 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
+        textVersion: 0.002,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -903,6 +904,24 @@
                     waitUntil(
                         () => document.querySelector(".dop-product-content__title"),
                         () => {
+                            
+                            // Collapse All Accordion Items
+                            document.querySelectorAll(".az-accordion-header-large").forEach((item) => {
+                                item.setAttribute("aria-expanded", "false");
+                            });
+                            document.querySelectorAll(".az-accordion-panel").forEach((item) => {
+                                item.setAttribute("aria-hidden", "true");
+                            });
+                            
+                            if (window.innerWidth >= 991) {
+                                // Expand First Accordion
+                                const header1 = document.querySelector("#\\31-header");
+                                const panel1 = document.querySelector("#\\31-panel");
+                                header1.setAttribute("aria-expanded", "true");
+                                panel1.setAttribute("aria-hidden", "false");
+                            }
+
+                            // Replace Text
                             replaceText("#\\31-header .dop-product-content__title", accordion_one_heading);
                             replaceText("#\\32-header .dop-product-content__title", accordion_two_heading);
                             replaceText("#\\33-header .dop-product-content__title", accordion_three_heading);
