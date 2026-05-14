@@ -1,5 +1,7 @@
-.AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) scroll-slider-component {
-  display: none;
+.AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) .icon-with-text-columns__columns.icon-modifiers,
+.AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) scroll-slider-component,
+.AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) scroll-slider-page-dots {
+  display: none !important;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) .section-inner {
   padding-top: 30px;
@@ -7,7 +9,7 @@
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column {
   display: flex;
@@ -33,6 +35,6 @@
   font-family: "adelle-sans", sans-serif;
   font-weight: 400;
   font-style: normal;
-  line-height: 1.5;
+  line-height: 1.3;
   font-size: 14px;
 }

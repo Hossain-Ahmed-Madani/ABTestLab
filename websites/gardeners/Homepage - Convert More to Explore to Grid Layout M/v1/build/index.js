@@ -1,3 +1,12 @@
+/* 
+
+Test container: https://app.convert.com/accounts/100412411/projects/100417633/experiences/1004197571/summary
+Forced url:
+control   https://www.gardeners.com/?_conv_eforce=1004197571.1004464404&utm_campaign=qa5
+variation: https://www.gardeners.com/?_conv_eforce=1004197571.1004464405&utm_campaign=qa5
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
@@ -6,7 +15,7 @@
     test_name: "Homepage - Convert “More to Explore” to Grid Layout [M]",
     page_initials: "AB-MORE-TO-EXPLORE-GRID-LAYOUT",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -376,7 +385,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

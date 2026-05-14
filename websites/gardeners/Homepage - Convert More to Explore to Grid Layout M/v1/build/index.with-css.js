@@ -7,8 +7,16 @@
       style.innerHTML = `.AB-MORE-TO-EXPLORE-GRID-LAYOUT
   main
   > section:nth-child(3)
-  scroll-slider-component {
-  display: none;
+  .icon-with-text-columns__columns.icon-modifiers,
+.AB-MORE-TO-EXPLORE-GRID-LAYOUT
+  main
+  > section:nth-child(3)
+  scroll-slider-component,
+.AB-MORE-TO-EXPLORE-GRID-LAYOUT
+  main
+  > section:nth-child(3)
+  scroll-slider-page-dots {
+  display: none !important;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT main > section:nth-child(3) .section-inner {
   padding-top: 30px;
@@ -16,7 +24,7 @@
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 20px;
 }
 .AB-MORE-TO-EXPLORE-GRID-LAYOUT .ab-more-explore-grid .icon-with-text-column {
   display: flex;
@@ -51,7 +59,7 @@
   font-family: "adelle-sans", sans-serif;
   font-weight: 400;
   font-style: normal;
-  line-height: 1.5;
+  line-height: 1.3;
   font-size: 14px;
 }
 `;
@@ -62,6 +70,15 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+
+Test container: https://app.convert.com/accounts/100412411/projects/100417633/experiences/1004197571/summary
+Forced url:
+control   https://www.gardeners.com/?_conv_eforce=1004197571.1004464404&utm_campaign=qa5
+variation: https://www.gardeners.com/?_conv_eforce=1004197571.1004464405&utm_campaign=qa5
+
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
@@ -70,7 +87,7 @@
     test_name: "Homepage - Convert “More to Explore” to Grid Layout [M]",
     page_initials: "AB-MORE-TO-EXPLORE-GRID-LAYOUT",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -440,7 +457,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();
