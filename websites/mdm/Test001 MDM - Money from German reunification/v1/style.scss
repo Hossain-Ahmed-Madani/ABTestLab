@@ -497,6 +497,7 @@
 
 //  =========== AMENDS ==========
 
+.exp-Test001-variation .ab-hidden,
 .exp-Test001-variation .benefits-bar,
 .exp-Test001-variation .header-banner,
 .exp-Test001-variation-layout-v2 .az-buy-box__badges,
@@ -618,10 +619,31 @@
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-62,
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-63,
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-71,
-    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-73,
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-81 {
         border-left: 0;
         border-right: 0;
+    }
+
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-61,
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-62,
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-63 {
+        border-bottom: 1px solid rgba(228, 224, 216, 1);
+        margin-bottom: 2px;
+    }
+
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-71 {
+        border-bottom-left-radius: 3px;
+    }
+
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-73 {
+        border-left: 1px solid rgba(6, 55, 100, 0.1);
+        border-right: 0;
+        border-bottom: 0;
+        border-bottom-right-radius: 3px;
+    }
+
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .Test001-td-81 {
+        border-top: 0;
     }
 
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-23,
@@ -702,7 +724,7 @@
         border-bottom: 0;
     }
 
-    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-table-container  {
+    .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-table-container {
         padding-bottom: 36px;
     }
 }

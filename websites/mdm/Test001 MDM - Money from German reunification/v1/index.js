@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.004,
+        textVersion: 0.00005,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -48,6 +48,7 @@
                             </div>
                         </div>
                     `,
+                    buy_box_bar_txt: "Neuprägungen D-Mark Kursmünzen in Gold – Ihr doppelter Start",
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
                     accordion_one_heading: "Ihre Kollektion im Überblick",
                     accordion_two_heading: "Angaben zur Sammlung",
@@ -280,6 +281,7 @@
                             </div>
                         </div>
                     `,
+                    buy_box_bar_txt: "DDR-Kursmünzensatz in Gold — Ihr Doppelstart mit Gratis-Ausgabe",
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999/1000)", "Höchste Prägequalität - Polierte Platte"],
                     accordion_one_heading: "Ihre Kollektion im Überblick",
                     accordion_two_heading: "Angaben zur Startlieferung",
@@ -457,11 +459,11 @@
                         <div class="Test001__trust-container">
                             <div class="Test001__trust-item Test001__item-shipping">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
-                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                                <span class="trust-text">Versandfrei ab 200 €</span>
                             </div>
                             <div class="Test001__trust-item Test001__item-retoure">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
-                                <span class="trust-text">30 Tage Rückgabe</span>
+                                <span class="trust-text">30 Tage Rückgaberecht</span>
                             </div>
                             <div class="Test001__trust-item Test001__item-ssl">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
@@ -492,7 +494,8 @@
                             </div>
                         </div>
                     `,
-                    uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Flatrate Preis - nur 64,99 € pro Sendung", "Offiziell mehrwertsteuerfrei"],
+                    buy_box_bar_txt: "Staatsgold – Deutschland",
+                    uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999,9/1000)", "Offiziell mehrwertsteuerfrei"],
                     accordion_one_heading: "Ihre Kollektion im Überblick",
                     accordion_two_heading: "Angaben zur Startlieferung",
                     accordion_three_heading: "So funktioniert Flatrate ",
@@ -514,6 +517,7 @@
                             <li><b>Werterhalt:</b> Schutz vor Inflation durch physische, mehrwertsteuerfreie Goldbarren.</li>
                             <li><b>Exklusiver Doppelstart: </b>“Deutscher Staatsbarren” zum Flatrate-Preis, “Deutscher Vermögensbarren” gratis dazu.</li>
                         </ul>
+                        <br />
                         <b>So erhalten Sie Ihre vollständige Kollektion</b>
                         <p>Mit diesem Angebot sichern Sie sich alle 14 Goldbarren der Edition “Staatsgold – Deutschland”.</p>
                         <ul>
@@ -616,15 +620,15 @@
                                 <ul>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>30 Tage Testphase</b> <span>— Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht</span></div>
+                                        <div><b>30 Tage Testphase —</b><span> Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht</span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Fester Preis</b><span>— 64,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis</span></div>
+                                        <div><b>Fester Preis —</b><span> 64,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis</span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Automatisches Ende</b><span>— Die Flatrate endet nach 14 Ausgaben automatisch</span></div>
+                                        <div><b>Automatisches Ende —</b><span> Die Flatrate endet nach 14 Ausgaben automatisch</span></div>
                                     </li>
                                 </ul>
                             </div>
@@ -648,11 +652,11 @@
                         <div class="Test001__trust-container">
                             <div class="Test001__trust-item Test001__item-shipping">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
-                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                                <span class="trust-text">Versandfrei ab 200 €</span>
                             </div>
                             <div class="Test001__trust-item Test001__item-retoure">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
-                                <span class="trust-text">30 Tage Rückgabe</span>
+                                <span class="trust-text">30 Tage Rückgaberecht</span>
                             </div>
                             <div class="Test001__trust-item Test001__item-ssl">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/ssl.png" alt="SSL-gesichert" class="Test001__icon-img" />
@@ -683,6 +687,7 @@
                             </div>
                         </div>
                     `,
+                    buy_box_bar_txt: "Sternzeichen Gold",
                     uspTexts: ["Flatrate Preis - nur 64,99 € pro Sendung", "Je 1/200 Unze aus reinstem Feingold (999,9/1000)", "Höchste Prägequalität - Polierte Platte"],
                     accordion_one_heading: "Ihre Kollektion im Überblick",
                     accordion_two_heading: "Angaben zur Startlieferung",
@@ -700,14 +705,14 @@
                         <b>Warum Sammler diese Sternzeichen Goldbarren wählen:</b>
                         <ul>
                             <li>
-                                Thematischer Wert: Die 12 Tierkreiszeichen der westlichen Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe mit eigenständigem Design, klar
+                                <b>Thematischer Wert:</b> Die 12 Tierkreiszeichen der westlichen Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe mit eigenständigem Design, klar
                                 erkennbarem Sternzeichen-Symbol und feiner Sternbild-Gravur.
                             </li>
-                            <li>Premium Goldqualität: 999,9/1000 Feingold in numismatischer Sammlerqualität</li>
-                            <li>Werterhalt: Schutz vor Inflation durch physisches Gold + persönlicher Bezug zum eigenen Sternzeichen</li>
-                            <li>Streng begrenzte Verfügbarkeit: Nur 10.000 komplette Kollektionen weltweit verfügbar.</li>
+                            <li><b>Premium Goldqualität:</b> 999,9/1000 Feingold in numismatischer Sammlerqualität</li>
+                            <li><b>Werterhalt:</b> Schutz vor Inflation durch physisches Gold + persönlicher Bezug zum eigenen Sternzeichen</li>
+                            <li><b>Streng begrenzte Verfügbarkeit:</b> Nur 10.000 komplette Kollektionen weltweit verfügbar.</li>
                             <li>
-                                Umfangreiche Sammler‑Extras: Vergoldete Kette mit Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung jedes Goldbarrens in einer
+                                <b>Umfangreiche Sammler‑Extras:</b> Vergoldete Kette mit Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung jedes Goldbarrens in einer
                                 schützenden Kapsel.
                             </li>
                         </ul>
@@ -794,7 +799,7 @@
                                 <b>1 × Start-Ausgabe</b><br />
                                 <span>Sternzeichen Fische (Pisces)</span>
                             </div>
-                            <div class="Test001-td-22">784,99€</div>
+                            <div class="Test001-td-22">84,99€</div>
                             <div class="Test001-td-23"><span>69,99€</span></div>
                             <div class="Test001-td-31">
                                 <b>1 × Zusatz zur Start-Ausgabe</b><br />
@@ -811,7 +816,7 @@
                             <div class="Test001-td-51">
                                 <span><b>Versandkosten</b><br />Pro Lieferung</span>
                             </div>
-                            <div class="Test001-td-52">aktuell€<br />je 6,95</div>
+                            <div class="Test001-td-52">aktuell<br />je 6,95€</div>
                             <div class="Test001-td-53">
                                 <span
                                     ><div>
@@ -837,15 +842,15 @@
                                 <ul>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>30 Tage Testphase</b> <span>— Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht </span></div>
+                                        <div><b>30 Tage Testphase —</b><span> Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht </span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Fester Preis</b><span>— 69,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis </span></div>
+                                        <div><b>Fester Preis —</b><span> 69,99 € je Ausgabe – für ein Jahr garantiert, auch bei steigendem Goldpreis </span></div>
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Automatisches Ende</b><span>— Die Flatrate endet nach 12 Ausgaben automatisch </span></div>
+                                        <div><b>Automatisches Ende —</b><span> Die Flatrate endet nach 12 Ausgaben automatisch </span></div>
                                     </li>
                                 </ul>
                             </div>
@@ -909,6 +914,7 @@
                         sub_title,
                         trust_content,
                         benefits_bar,
+                        buy_box_bar_txt,
                         uspTexts,
                         accordion_one_heading,
                         accordion_two_heading,
@@ -945,15 +951,30 @@
                         },
                     );
 
+                    replaceText(".az-buy-box__title", buy_box_bar_txt);
                     replaceText(".az-badge__text", "Flatrate Kollektion");
 
                     waitUntil(
                         () => document.querySelector(".az-buy-box__usps-item"),
                         () => {
                             document.querySelectorAll(".az-buy-box__usps-item").forEach((item, index) => {
-                                const icon = item.querySelector("i");
+
+                                if(!uspTexts[index]) {
+                                    item.classList.add('ab-hidden')
+                                }
+
                                 item.textContent = uspTexts[index];
-                                item.prepend(icon);
+                                // const icon = item.querySelector("i");
+                                // item.prepend(icon);
+                                item.insertAdjacentHTML(
+                                    "afterbegin",
+                                    /* HTML */ `
+                                        <i class="az-icon az-buy-box__usps-icon" style="width:18px;height:18px;" role="button" aria-hidden="false" aria-label="icon" data-test-id="icon"
+                                            ><svg style="fill:#737373;" width="18" height="18">
+                                                <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" transform="scale(0.75)"></path></svg
+                                        ></i>
+                                    `,
+                                );
                             });
                         },
                     );

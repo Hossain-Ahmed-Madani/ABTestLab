@@ -550,6 +550,7 @@
   padding: 0;
 }
 
+.exp-Test001-variation .ab-hidden,
 .exp-Test001-variation .benefits-bar,
 .exp-Test001-variation .header-banner,
 .exp-Test001-variation-layout-v2 .az-buy-box__badges,
@@ -599,7 +600,7 @@
     .benefit-text {
     font-family: "Roboto";
     font-weight: 400;
-    font-size: 24px;
+    font-size: 20px;
     line-height: 32px;
   }
   .exp-Test001-variation.exp-Test001-variation-layout-v2
@@ -743,12 +744,39 @@
     .Test001-td-71,
   .exp-Test001-variation.exp-Test001-variation-layout-v2
     .az-accordion-panel
-    .Test001-td-73,
-  .exp-Test001-variation.exp-Test001-variation-layout-v2
-    .az-accordion-panel
     .Test001-td-81 {
     border-left: 0;
     border-right: 0;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-61,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-62,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-63 {
+    border-bottom: 1px solid rgb(228, 224, 216);
+    margin-bottom: 2px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-71 {
+    border-bottom-left-radius: 3px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-73 {
+    border-left: 1px solid rgba(6, 55, 100, 0.1);
+    border-right: 0;
+    border-bottom: 0;
+    border-bottom-right-radius: 3px;
+  }
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    .Test001-td-81 {
+    border-top: 0;
   }
   .exp-Test001-variation.exp-Test001-variation-layout-v2
     .az-accordion-panel
@@ -907,7 +935,7 @@
   const exp = {
     exp: "Test001",
     var: "variation",
-    textVersion: 0.003,
+    textVersion: 0.00005,
     getLayoutData: function () {
       const data = {
         352039: {
@@ -966,6 +994,8 @@
               </div>
             </div>
           `,
+          buy_box_bar_txt:
+            "Neuprägungen D-Mark Kursmünzen in Gold – Ihr doppelter Start",
           uspTexts: [
             "Flatrate Preis - nur 64,99 € pro Sendung",
             "Je 1/200 Unze aus reinstem Feingold (999/1000)",
@@ -1285,6 +1315,8 @@
               </div>
             </div>
           `,
+          buy_box_bar_txt:
+            "DDR-Kursmünzensatz in Gold — Ihr Doppelstart mit Gratis-Ausgabe",
           uspTexts: [
             "Flatrate Preis - nur 64,99 € pro Sendung",
             "Je 1/200 Unze aus reinstem Feingold (999/1000)",
@@ -1555,7 +1587,7 @@
                   alt="Versand"
                   class="Test001__icon-img"
                 />
-                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                <span class="trust-text">Versandfrei ab 200 €</span>
               </div>
               <div class="Test001__trust-item Test001__item-retoure">
                 <img
@@ -1563,7 +1595,7 @@
                   alt="30 Tage Rückgabe"
                   class="Test001__icon-img"
                 />
-                <span class="trust-text">30 Tage Rückgabe</span>
+                <span class="trust-text">30 Tage Rückgaberecht</span>
               </div>
               <div class="Test001__trust-item Test001__item-ssl">
                 <img
@@ -1598,9 +1630,10 @@
               </div>
             </div>
           `,
+          buy_box_bar_txt: "Staatsgold – Deutschland",
           uspTexts: [
             "Flatrate Preis - nur 64,99 € pro Sendung",
-            "Flatrate Preis - nur 64,99 € pro Sendung",
+            "Je 1/200 Unze aus reinstem Feingold (999,9/1000)",
             "Offiziell mehrwertsteuerfrei",
           ],
           accordion_one_heading: "Ihre Kollektion im Überblick",
@@ -1640,6 +1673,7 @@
                 Flatrate-Preis, “Deutscher Vermögensbarren” gratis dazu.
               </li>
             </ul>
+            <br />
             <b>So erhalten Sie Ihre vollständige Kollektion</b>
             <p>
               Mit diesem Angebot sichern Sie sich alle 14 Goldbarren der Edition
@@ -1770,9 +1804,9 @@
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>30 Tage Testphase</b>
-                      <span
-                        >— Erstausgabe zur Ansicht mit kostenlosem
+                      <b>30 Tage Testphase —</b
+                      ><span>
+                        Erstausgabe zur Ansicht mit kostenlosem
                         Rückgaberecht</span
                       >
                     </div>
@@ -1780,19 +1814,19 @@
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>Fester Preis</b
-                      ><span
-                        >— 64,99 € je Ausgabe – für ein Jahr garantiert, auch
-                        bei steigendem Goldpreis</span
+                      <b>Fester Preis —</b
+                      ><span>
+                        64,99 € je Ausgabe – für ein Jahr garantiert, auch bei
+                        steigendem Goldpreis</span
                       >
                     </div>
                   </li>
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>Automatisches Ende</b
-                      ><span
-                        >— Die Flatrate endet nach 14 Ausgaben automatisch</span
+                      <b>Automatisches Ende —</b
+                      ><span>
+                        Die Flatrate endet nach 14 Ausgaben automatisch</span
                       >
                     </div>
                   </li>
@@ -1832,7 +1866,7 @@
                   alt="Versand"
                   class="Test001__icon-img"
                 />
-                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                <span class="trust-text">Versandfrei ab 200 €</span>
               </div>
               <div class="Test001__trust-item Test001__item-retoure">
                 <img
@@ -1840,7 +1874,7 @@
                   alt="30 Tage Rückgabe"
                   class="Test001__icon-img"
                 />
-                <span class="trust-text">30 Tage Rückgabe</span>
+                <span class="trust-text">30 Tage Rückgaberecht</span>
               </div>
               <div class="Test001__trust-item Test001__item-ssl">
                 <img
@@ -1875,6 +1909,7 @@
               </div>
             </div>
           `,
+          buy_box_bar_txt: "Sternzeichen Gold",
           uspTexts: [
             "Flatrate Preis - nur 64,99 € pro Sendung",
             "Je 1/200 Unze aus reinstem Feingold (999,9/1000)",
@@ -1903,27 +1938,27 @@
             <b>Warum Sammler diese Sternzeichen Goldbarren wählen:</b>
             <ul>
               <li>
-                Thematischer Wert: Die 12 Tierkreiszeichen der westlichen
+                <b>Thematischer Wert:</b> Die 12 Tierkreiszeichen der westlichen
                 Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe
                 mit eigenständigem Design, klar erkennbarem Sternzeichen-Symbol
                 und feiner Sternbild-Gravur.
               </li>
               <li>
-                Premium Goldqualität: 999,9/1000 Feingold in numismatischer
-                Sammlerqualität
+                <b>Premium Goldqualität:</b> 999,9/1000 Feingold in
+                numismatischer Sammlerqualität
               </li>
               <li>
-                Werterhalt: Schutz vor Inflation durch physisches Gold +
+                <b>Werterhalt:</b> Schutz vor Inflation durch physisches Gold +
                 persönlicher Bezug zum eigenen Sternzeichen
               </li>
               <li>
-                Streng begrenzte Verfügbarkeit: Nur 10.000 komplette
+                <b>Streng begrenzte Verfügbarkeit:</b> Nur 10.000 komplette
                 Kollektionen weltweit verfügbar.
               </li>
               <li>
-                Umfangreiche Sammler‑Extras: Vergoldete Kette mit Anhänger zum
-                Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung
-                jedes Goldbarrens in einer schützenden Kapsel.
+                <b>Umfangreiche Sammler‑Extras:</b> Vergoldete Kette mit
+                Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum
+                sowie Lieferung jedes Goldbarrens in einer schützenden Kapsel.
               </li>
             </ul>
             <p>
@@ -2039,7 +2074,7 @@
                 <b>1 × Start-Ausgabe</b><br />
                 <span>Sternzeichen Fische (Pisces)</span>
               </div>
-              <div class="Test001-td-22">784,99€</div>
+              <div class="Test001-td-22">84,99€</div>
               <div class="Test001-td-23"><span>69,99€</span></div>
               <div class="Test001-td-31">
                 <b>1 × Zusatz zur Start-Ausgabe</b><br />
@@ -2058,7 +2093,7 @@
               <div class="Test001-td-51">
                 <span><b>Versandkosten</b><br />Pro Lieferung</span>
               </div>
-              <div class="Test001-td-52">aktuell€<br />je 6,95</div>
+              <div class="Test001-td-52">aktuell<br />je 6,95€</div>
               <div class="Test001-td-53">
                 <span
                   ><div>
@@ -2091,28 +2126,28 @@
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>30 Tage Testphase</b>
-                      <span
-                        >— Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht
+                      <b>30 Tage Testphase —</b
+                      ><span>
+                        Erstausgabe zur Ansicht mit kostenlosem Rückgaberecht
                       </span>
                     </div>
                   </li>
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>Fester Preis</b
-                      ><span
-                        >— 69,99 € je Ausgabe – für ein Jahr garantiert, auch
-                        bei steigendem Goldpreis
+                      <b>Fester Preis —</b
+                      ><span>
+                        69,99 € je Ausgabe – für ein Jahr garantiert, auch bei
+                        steigendem Goldpreis
                       </span>
                     </div>
                   </li>
                   <li>
                     <span class="Test001-tick">✓</span>
                     <div>
-                      <b>Automatisches Ende</b
-                      ><span
-                        >— Die Flatrate endet nach 12 Ausgaben automatisch
+                      <b>Automatisches Ende —</b
+                      ><span>
+                        Die Flatrate endet nach 12 Ausgaben automatisch
                       </span>
                     </div>
                   </li>
@@ -2190,6 +2225,7 @@
             sub_title,
             trust_content,
             benefits_bar,
+            buy_box_bar_txt,
             uspTexts,
             accordion_one_heading,
             accordion_two_heading,
@@ -2248,6 +2284,7 @@
             },
           );
 
+          replaceText(".az-buy-box__title", buy_box_bar_txt);
           replaceText(".az-badge__text", "Flatrate Kollektion");
 
           waitUntil(
@@ -2256,9 +2293,31 @@
               document
                 .querySelectorAll(".az-buy-box__usps-item")
                 .forEach((item, index) => {
-                  const icon = item.querySelector("i");
+                  if (!uspTexts[index]) {
+                    item.classList.add("ab-hidden");
+                  }
+
                   item.textContent = uspTexts[index];
-                  item.prepend(icon);
+                  // const icon = item.querySelector("i");
+                  // item.prepend(icon);
+                  item.insertAdjacentHTML(
+                    "afterbegin",
+                    /* HTML */ `
+                      <i
+                        class="az-icon az-buy-box__usps-icon"
+                        style="width:18px;height:18px;"
+                        role="button"
+                        aria-hidden="false"
+                        aria-label="icon"
+                        data-test-id="icon"
+                        ><svg style="fill:#737373;" width="18" height="18">
+                          <path
+                            d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
+                            transform="scale(0.75)"
+                          ></path></svg
+                      ></i>
+                    `,
+                  );
                 });
             },
           );
