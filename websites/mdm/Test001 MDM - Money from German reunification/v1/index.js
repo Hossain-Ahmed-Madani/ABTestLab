@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.003,
+        textVersion: 0.004,
         getLayoutData: function () {
             const data = {
                 352039: {
