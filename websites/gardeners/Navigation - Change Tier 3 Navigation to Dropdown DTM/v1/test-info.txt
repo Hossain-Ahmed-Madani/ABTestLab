@@ -1,0 +1,3 @@
+URL: https://www.gardeners.com/
+Figma: https://www.figma.com/design/9JhvESiGmUH7UEXd0rEUDe/Gardens-Alive-?node-id=4149-77&t=IO2kXpZ3iswItwPs-1
+Test container: https://app.convert.com/accounts/100412411/projects/100417633/experiences/1004197580/summary
