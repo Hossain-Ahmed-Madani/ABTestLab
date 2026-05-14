@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         client: "ROI Revolutions",
         project: "Gardeners",
-        site_url: "https:[]//www.gardeners.com",
+        site_url: "https://www.gardeners.com",
         test_name: "Navigation - Change Tier 3 Navigation to Dropdown [DTM]",
         page_initials: "AB-NAV",
         test_variation: 1,
@@ -875,118 +875,15 @@
 
     function toggleAccordion(clickedElement) {
         const currentAccordionElement = clickedElement;
-        const clickedItemIsOpen = currentAccordionElement.classList.contains("ab-nav-accordion-item--open");
+        currentAccordionElement.classList.toggle("ab-nav-accordion-item--open");
 
         const accordionELements = document.querySelectorAll(".ab-nav-accordion-item");
         accordionELements.forEach((elem) => {
-            elem.classList.remove("ab-nav-accordion-item--open");
+            if (elem !== currentAccordionElement) {
+                elem.classList.remove("ab-nav-accordion-item--open");
+            }
         });
-
-        if (clickedItemIsOpen) {
-            currentAccordionElement.classList.remove("ab-nav-accordion-item--open");
-        } else {
-            currentAccordionElement.classList.add("ab-nav-accordion-item--open");
-        }
     }
-
-    const accordionData = [
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/ZwGvyiBDKEqbakt7ApOPavMcVxXPmB5NQSH2gJ81.png",
-            title: "Was passiert nach der Bestellung?",
-            description: /* HTML */ `
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-            `,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/OMZ0jFCYjx2ZmQmcqieAPJvXghwb8UlGFizq1teE.png",
-            title: "Wie läuft der Versand ab?",
-            description: /* HTML */ `
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-            `,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/xjyeXdF2vIQQwgdRijmHXn66pPM5272uDBUGL5v6.png",
-            title: "Wie läuft die Montage ab?",
-            description: /* HTML */ `
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-            `,
-        },
-        {
-            imgUrl: "https://assets.ablyft.com/22263542/jzH089DBid8YmWDhQflthxFleVqXUdSG6UcPaSUp.png",
-            title: "Sie benötigen eine Beratung?",
-            description: /* HTML */ `
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-                <li class="ab-third-tier-nav-item">
-                    <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                </li>
-            `,
-        },
-    ];
 
     function init() {
         if (window[page_initials] === true) return;
@@ -996,51 +893,43 @@
 
         console.table(TEST_CONFIG);
 
-        qq('ul[data-menu-depth="1"]').forEach((item) => {
-            item.insertAdjacentHTML(
+        console.log("DATA", DATA);
+
+        DATA.forEach((tierOneNavItemData) => {
+            console.log("tierOneNavItemData", tierOneNavItemData);
+            q(`ul[data-menu-depth="1"][data-pane-key="${tierOneNavItemData["data-link-target-pane-key"]}"]`).insertAdjacentHTML(
                 "beforeend",
                 /* HTML */ `
-                    ${accordionData
+                    ${tierOneNavItemData.subMenuList
                         .map(
-                            (item, index) => /* HTML */ `
-                                <li class="ab-nav-accordion-item" data-toggle-id="${index + 1}">
-                                    <a href="#" class="ab-nav-accordion-item__head">
-                                        <div class="ab-nav-accordion-item__head__title">${item.title}</div>
-                                        <div class="ab-nav-accordion-item__head__toggle-icon">
+                            (tierTwoNavItemData) => /* HTML */ `
+                                <li class="ab-nav-accordion-item">
+                                    <a
+                                        href="${tierTwoNavItemData.link}"
+                                        class="ab-nav-accordion-item__second-tier-link ${!tierTwoNavItemData.subMenuList ? "ab-nav-accordion-item__second-tier-link--no-sub-menu" : ""}"
+                                    >
+                                        <div class="ab-nav-accordion-item__second-tier-link__title">${tierTwoNavItemData.label}</div>
+                                        <div class="ab-nav-accordion-item__second-tier-link__toggle-icon">
                                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.875 7.438 12 17.563 22.125 7.438" stroke="currentColor" stroke-width="2"></path>
                                             </svg>
                                         </div>
                                     </a>
-                                    <ul class="ab-nav-accordion-item__third-tier-list">
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                        <li class="ab-third-tier-nav-item">
-                                            <a href="#" class="ab-third-tier-nav-item__link">Link Item</a>
-                                        </li>
-                                    </ul>
+                                    ${tierTwoNavItemData?.subMenuList?.length > 0
+                                        ? /* HTML */ `
+                                              <ul class="ab-nav-accordion-item__third-tier-list">
+                                                  ${tierTwoNavItemData.subMenuList
+                                                      .map(
+                                                          (tierThreeNavItemData) => /* HTML */ `
+                                                              <li class="ab-third-tier-nav-item">
+                                                                  <a href="${tierThreeNavItemData.link}" class="ab-third-tier-nav-item__link">${tierThreeNavItemData.label}</a>
+                                                              </li>
+                                                          `,
+                                                      )
+                                                      .join("")}
+                                              </ul>
+                                          `
+                                        : ""}
                                 </li>
                             `,
                         )
@@ -1050,8 +939,10 @@
         });
 
         q(".mobile-menu").addEventListener("click", (e) => {
-            if (e.target.closest(".ab-nav-accordion-item__head")) {
-                const accordionElement = e.target.closest(".ab-nav-accordion-item__head").parentNode;
+            const tierTwoMenuLink = e.target.closest(".ab-nav-accordion-item__second-tier-link:not(.ab-nav-accordion-item__second-tier-link--no-sub-menu)");
+            if (tierTwoMenuLink) {
+                e.preventDefault();
+                const accordionElement = tierTwoMenuLink.parentNode;
                 toggleAccordion(accordionElement);
             }
         });
