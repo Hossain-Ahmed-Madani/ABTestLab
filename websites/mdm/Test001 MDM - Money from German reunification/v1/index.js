@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.00005,
+        textVersion: 0.00007,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -363,6 +363,29 @@
                         <span>Serie: Das Geld der Deutschen - DDR</span>
                         <br />
                         <br />
+
+                        <div class="ab-video-container">
+                            <div class="az-video__lazy" height="100%" width="100%">
+                                <video
+                                    class="az-video__video"
+                                    controls=""
+                                    controlslist="nodownload"
+                                    disablepictureinpicture=""
+                                    playsinline=""
+                                    poster=""
+                                    width="100%"
+                                    height="100%"
+                                    style=""
+                                    muted
+                                >
+                                    <source src="https://cdn.media.amplience.net/v/MDM/352040_001_Movie_Das_Geld_der_Deutschen_DDR_16_9_Flatrate/mp4_720p" />
+                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
                     `,
                     flat_rate_conent: /* HTML */ `
                         <div class="Test001-table-container">
@@ -556,6 +579,29 @@
                         <span>Serie: Staatsgold - Deutschland</span>
                         <br />
                         <br />
+
+                        <div class="ab-video-container">
+                            <div class="az-video__lazy" height="100%" width="100%">
+                                <video
+                                    class="az-video__video"
+                                    controls=""
+                                    controlslist="nodownload"
+                                    disablepictureinpicture=""
+                                    playsinline=""
+                                    poster=""
+                                    width="100%"
+                                    height="100%"
+                                    style=""
+                                    muted
+                                >
+                                    <source src="https://cdn.media.amplience.net/v/MDM/352155_001_Movie_Staatsgold_16_9/mp4_720p" />
+                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
                     `,
                     flat_rate_conent: /* HTML */ `
                         <div class="Test001-table-container">
@@ -705,15 +751,15 @@
                         <b>Warum Sammler diese Sternzeichen Goldbarren wählen:</b>
                         <ul>
                             <li>
-                                <b>Thematischer Wert:</b> Die 12 Tierkreiszeichen der westlichen Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe mit eigenständigem Design, klar
-                                erkennbarem Sternzeichen-Symbol und feiner Sternbild-Gravur.
+                                <b>Thematischer Wert:</b> Die 12 Tierkreiszeichen der westlichen Astrologie als geschlossener Jahreskreis in Gold. Jede Ausgabe mit eigenständigem
+                                Design, klar erkennbarem Sternzeichen-Symbol und feiner Sternbild-Gravur.
                             </li>
                             <li><b>Premium Goldqualität:</b> 999,9/1000 Feingold in numismatischer Sammlerqualität</li>
                             <li><b>Werterhalt:</b> Schutz vor Inflation durch physisches Gold + persönlicher Bezug zum eigenen Sternzeichen</li>
                             <li><b>Streng begrenzte Verfügbarkeit:</b> Nur 10.000 komplette Kollektionen weltweit verfügbar.</li>
                             <li>
-                                <b>Umfangreiche Sammler‑Extras:</b> Vergoldete Kette mit Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung jedes Goldbarrens in einer
-                                schützenden Kapsel.
+                                <b>Umfangreiche Sammler‑Extras:</b> Vergoldete Kette mit Anhänger zum Tragen der Sternzeichen‑Goldbarren, Sammelalbum sowie Lieferung jedes Goldbarrens
+                                in einer schützenden Kapsel.
                             </li>
                         </ul>
                         <p>
@@ -777,7 +823,31 @@
 
                         <h3>Artikel-Details</h3>
                         <span>Artikel-Nr.: 25817/004#d1</span><br />
-                        <span>Serie: Die 12 Sternzeichen</span><br />
+                        <span>Serie: Die 12 Sternzeichen</span>
+                        <br />
+                        <br />
+
+                        <div class="ab-video-container">
+                            <div class="az-video__lazy" height="100%" width="100%">
+                                <video
+                                    class="az-video__video"
+                                    controls=""
+                                    controlslist="nodownload"
+                                    disablepictureinpicture=""
+                                    playsinline=""
+                                    poster=""
+                                    width="100%"
+                                    height="100%"
+                                    style=""
+                                    muted
+                                >
+                                    <source src="https://cdn.media.amplience.net/v/MDM/25817_001_Movie_Sternzeichen_16_9_Flatrate/mp4_720p" />
+                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
+                                </video>
+                            </div>
+                        </div>
+
+                        <br />
                         <br />
                     `,
                     flat_rate_conent: /* HTML */ `
@@ -958,9 +1028,8 @@
                         () => document.querySelector(".az-buy-box__usps-item"),
                         () => {
                             document.querySelectorAll(".az-buy-box__usps-item").forEach((item, index) => {
-
-                                if(!uspTexts[index]) {
-                                    item.classList.add('ab-hidden')
+                                if (!uspTexts[index]) {
+                                    item.classList.add("ab-hidden");
                                 }
 
                                 item.textContent = uspTexts[index];

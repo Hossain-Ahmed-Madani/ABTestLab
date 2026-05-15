@@ -588,6 +588,30 @@
   color: rgb(157, 125, 49) !important;
 }
 
+@media screen and (max-width: 768px) {
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    div
+    .Test001-td-21,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    div
+    .Test001-td-31,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    div
+    .Test001-td-41,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    div
+    .Test001-td-51,
+  .exp-Test001-variation.exp-Test001-variation-layout-v2
+    .az-accordion-panel
+    div
+    .Test001-td-61 {
+    line-height: 21px;
+  }
+}
 @media screen and (min-width: 991px) {
   .exp-Test001-variation.exp-Test001-variation-layout-v2
     .Test001__benefits-bar {
@@ -935,7 +959,7 @@
   const exp = {
     exp: "Test001",
     var: "variation",
-    textVersion: 0.00005,
+    textVersion: 0.00006,
     getLayoutData: function () {
       const data = {
         352039: {
