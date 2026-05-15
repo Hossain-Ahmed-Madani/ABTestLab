@@ -302,6 +302,7 @@
                             <li><b>Werterhalt: </b>Schutz vor Inflation durch physisches Gold + historischen Sammlerwert.</li>
                             <li><b>Begrenzte Verfügbarkeit: </b>Nur 20.000 komplette Kollektionen weltweit verfügbar.</li>
                         </ul>
+                        <br />
                         <p>
                             Diese Neuprägungen verwandeln Erinnerungen an ein einzigartiges Kapitel deutscher Geschichte in greifbares Gold. Perfekt für Sammler deutscher Numismatik und
                             Geschichtsbewusste mit Sinn für bleibenden Wert.
@@ -762,6 +763,7 @@
                                 in einer schützenden Kapsel.
                             </li>
                         </ul>
+                        <br />
                         <p>
                             Diese meisterhaften Goldbarrenmünzen verbinden uralte Mythologie mit greifbarem Wert. Perfekt für Astrologie-Begeisterte, Goldanleger und alle, die ein Stück
                             Himmel in den Händen halten möchten.
@@ -1039,9 +1041,10 @@
                                     "afterbegin",
                                     /* HTML */ `
                                         <i class="az-icon az-buy-box__usps-icon" style="width:18px;height:18px;" role="button" aria-hidden="false" aria-label="icon" data-test-id="icon"
-                                            ><svg style="fill:#737373;" width="18" height="18">
-                                                <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" transform="scale(0.75)"></path></svg
-                                        ></i>
+                                            ><svg style="fill:#212121;" width="18" height="18">
+                                                <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" transform="scale(0.75)"></path>
+                                            </svg>
+                                        </i>
                                     `,
                                 );
                             });

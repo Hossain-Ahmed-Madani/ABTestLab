@@ -533,6 +533,12 @@
     padding: 0;
 }
 
+
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div ul {
+    margin-bottom: 0;
+}
+
 @media screen and (max-width: 768px) {
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-21,
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-31,
@@ -540,6 +546,7 @@
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-51,
     .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel div .Test001-td-61 {
         line-height: 21px;
+        align-content: center;
     }
 }
 

@@ -2,7 +2,7 @@
   const exp = {
     exp: "Test001",
     var: "variation",
-    textVersion: 0.00006,
+    textVersion: 0.00007,
     getLayoutData: function () {
       const data = {
         352039: {
@@ -423,6 +423,7 @@
                 Kollektionen weltweit verfügbar.
               </li>
             </ul>
+            <br />
             <p>
               Diese Neuprägungen verwandeln Erinnerungen an ein einzigartiges
               Kapitel deutscher Geschichte in greifbares Gold. Perfekt für
@@ -504,6 +505,34 @@
             <span>Artikel-Nr.: 352040/005#n2</span><br />
             <span>Jahrespunze: 2025</span><br />
             <span>Serie: Das Geld der Deutschen - DDR</span>
+            <br />
+            <br />
+
+            <div class="ab-video-container">
+              <div class="az-video__lazy" height="100%" width="100%">
+                <video
+                  class="az-video__video"
+                  controls=""
+                  controlslist="nodownload"
+                  disablepictureinpicture=""
+                  playsinline=""
+                  poster=""
+                  width="100%"
+                  height="100%"
+                  style=""
+                  muted
+                >
+                  <source
+                    src="https://cdn.media.amplience.net/v/MDM/352040_001_Movie_Das_Geld_der_Deutschen_DDR_16_9_Flatrate/mp4_720p"
+                  />
+                  <img
+                    src=""
+                    title="Your browser does not support the &lt;video&gt; tag"
+                  />
+                </video>
+              </div>
+            </div>
+
             <br />
             <br />
           `,
@@ -785,6 +814,34 @@
             <span>Serie: Staatsgold - Deutschland</span>
             <br />
             <br />
+
+            <div class="ab-video-container">
+              <div class="az-video__lazy" height="100%" width="100%">
+                <video
+                  class="az-video__video"
+                  controls=""
+                  controlslist="nodownload"
+                  disablepictureinpicture=""
+                  playsinline=""
+                  poster=""
+                  width="100%"
+                  height="100%"
+                  style=""
+                  muted
+                >
+                  <source
+                    src="https://cdn.media.amplience.net/v/MDM/352155_001_Movie_Staatsgold_16_9/mp4_720p"
+                  />
+                  <img
+                    src=""
+                    title="Your browser does not support the &lt;video&gt; tag"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <br />
+            <br />
           `,
           flat_rate_conent: /* HTML */ `
             <div class="Test001-table-container">
@@ -1028,6 +1085,7 @@
                 sowie Lieferung jedes Goldbarrens in einer schützenden Kapsel.
               </li>
             </ul>
+            <br />
             <p>
               Diese meisterhaften Goldbarrenmünzen verbinden uralte Mythologie
               mit greifbarem Wert. Perfekt für Astrologie-Begeisterte,
@@ -1105,7 +1163,36 @@
 
             <h3>Artikel-Details</h3>
             <span>Artikel-Nr.: 25817/004#d1</span><br />
-            <span>Serie: Die 12 Sternzeichen</span><br />
+            <span>Serie: Die 12 Sternzeichen</span>
+            <br />
+            <br />
+
+            <div class="ab-video-container">
+              <div class="az-video__lazy" height="100%" width="100%">
+                <video
+                  class="az-video__video"
+                  controls=""
+                  controlslist="nodownload"
+                  disablepictureinpicture=""
+                  playsinline=""
+                  poster=""
+                  width="100%"
+                  height="100%"
+                  style=""
+                  muted
+                >
+                  <source
+                    src="https://cdn.media.amplience.net/v/MDM/25817_001_Movie_Sternzeichen_16_9_Flatrate/mp4_720p"
+                  />
+                  <img
+                    src=""
+                    title="Your browser does not support the &lt;video&gt; tag"
+                  />
+                </video>
+              </div>
+            </div>
+
+            <br />
             <br />
           `,
           flat_rate_conent: /* HTML */ `
@@ -1377,12 +1464,13 @@
                         aria-hidden="false"
                         aria-label="icon"
                         data-test-id="icon"
-                        ><svg style="fill:#737373;" width="18" height="18">
+                        ><svg style="fill:#212121;" width="18" height="18">
                           <path
                             d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"
                             transform="scale(0.75)"
-                          ></path></svg
-                      ></i>
+                          ></path>
+                        </svg>
+                      </i>
                     `,
                   );
                 });
