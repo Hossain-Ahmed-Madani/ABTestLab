@@ -531,6 +531,16 @@
 .exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .az-video__lazy {
     margin: 0;
     padding: 0;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    overflow: hidden;
+}
+
+.exp-Test001-variation.exp-Test001-variation-layout-v2 .az-accordion-panel .az-video__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 

@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.00007,
+        textVersion: 0.00008,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -373,9 +373,10 @@
                                     controlslist="nodownload"
                                     disablepictureinpicture=""
                                     playsinline=""
-                                    poster=""
+                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=25817_001_001&muenze_2=25817_001_12&muenze_3=25817_001_2&muenze_4=25817_001_13&muenze_5=25817_001_1&muenze_7=25817_001_3&muenze_9=25817_001_5&muenze_10=25817_001_10&muenze_11=25817_001_11&muenze_12=25817_004_01&wa_1=25817_001_zub1_1&wa_2=25817_001_zub2&wa_10=SKG_Produktshot_1200x900_25817_Sternzeichen_Abo_2025_Flatrate&fmt=auto&w=600"
                                     width="100%"
                                     height="100%"
+                                    preload="metadata"
                                     style=""
                                     muted
                                 >
@@ -589,7 +590,8 @@
                                     controlslist="nodownload"
                                     disablepictureinpicture=""
                                     playsinline=""
-                                    poster=""
+                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=352155_Staatsgold_1&muenze_2=352155_Staatsgold_2&muenze_3=352155_Staatsgold_5&muenze_4=352155_Staatsgold_3&muenze_5=352155_Staatsgold_4&muenze_6=352155_Staatsgold_Folder_1&muenze_7=352155_001_6&muenze_8=352155_001_7&muenze_9=352155_001_8&muenze_10=352155_002_9&muenze_11=352155_002_10&muenze_12=352155_002_11&wa_1=352155_002_Zub1&wa_2=352155_001_zub2&wa_10=Produktshot_1200x900_352155_Staatsgold_OffiziellerAnsatz_V2_2&fmt=auto&w=600"
+                                    preload="metadata"
                                     width="100%"
                                     height="100%"
                                     style=""
@@ -837,7 +839,8 @@
                                     controlslist="nodownload"
                                     disablepictureinpicture=""
                                     playsinline=""
-                                    poster=""
+                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=25817_001_001&muenze_2=25817_001_12&muenze_3=25817_001_2&muenze_4=25817_001_13&muenze_5=25817_001_1&muenze_7=25817_001_3&muenze_9=25817_001_5&muenze_10=25817_001_10&muenze_11=25817_001_11&muenze_12=25817_004_01&wa_1=25817_001_zub1_1&wa_2=25817_001_zub2&wa_10=SKG_Produktshot_1200x900_25817_Sternzeichen_Abo_2025_Flatrate&fmt=auto&w=600"
+                                    preload="metadata"
                                     width="100%"
                                     height="100%"
                                     style=""
