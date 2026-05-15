@@ -1,3 +1,10 @@
+/* 
+Test container: https://app.convert.com/accounts/100412411/projects/100417633/experiences/1004197580/summary
+Forced Variation:
+control: https://www.gardeners.com/?_conv_eforce=1004197580.1004464421&utm_campaign=qa5
+v1: https://www.gardeners.com/?_conv_eforce=1004197580.1004464422&utm_campaign=qa5
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -893,10 +900,7 @@
 
         console.table(TEST_CONFIG);
 
-        console.log("DATA", DATA);
-
         DATA.forEach((tierOneNavItemData) => {
-            console.log("tierOneNavItemData", tierOneNavItemData);
             q(`ul[data-menu-depth="1"][data-pane-key="${tierOneNavItemData["data-link-target-pane-key"]}"]`).insertAdjacentHTML(
                 "beforeend",
                 /* HTML */ `
