@@ -1,18 +1,78 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
-
 .AB-PMO52 {
-    //
+    .cart__banner + .ab-social-proof-badge {
+        margin-left: 4px;
+        margin-top: 18px;
+        margin-bottom: 5px;
+    }
+
+    .summit-Title-root.summary-head.cart__section-title + .ab-social-proof-badge  {
+        display: none;
+    }
+
+    .ab-social-proof-badge {
+        background-color: #9ce6f733;
+        width: max-content;
+        padding: 4px 15px 4px 7px;
+        border-radius: 3000px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 23px;
+                height: auto;
+            }
+        }
+
+        &__txt {
+            font-family:
+                Nunito Sans,
+                Nunito Sans Fallback;
+            font-weight: 400;
+            font-style: Regular;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #00053e;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .cart__banner + .ab-social-proof-badge {
+            display: none;
+        }
+    
+
+        .summit-Title-root.summary-head.cart__section-title + .ab-social-proof-badge  {
+            display: flex;
+            margin-top: -16px;
+            padding: 4px 10px;
+        }
+    
+        .ab-social-proof-badge  + 
+        .summary-coupon  {
+            margin-top: -15px;
+        }
+    }
 }
