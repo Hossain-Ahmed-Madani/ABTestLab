@@ -1,4 +1,4 @@
-(async () => {
+(async () => { /* Remove the self calling function when pasting into the tool !important */
     const TEST_ID = "PMO52";
     const VARIANT_ID = "V1"; /* V1, V2 */
 
@@ -19,7 +19,7 @@
         site_url: "https://www.water.com",
         test_name: "PMO52: [CART] Add Social Proof-(2) SET UP TEST",
         page_initials: "AB-PMO52",
-        test_variation: 2, /* 1, 2 */
+        test_variation: 1, /* 1, 2 */
         test_version: 0.0001,
     };
 
@@ -119,12 +119,10 @@
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             debouncedLocationChanges();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             debouncedLocationChanges();
         });
     }
@@ -143,7 +141,6 @@
         try {
             await waitForElementAsync(checkForItems);
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-            console.table(TEST_CONFIG);
 
             const TXT = ["Delivered to 8,271 homes this week", "Delivered to 8,200+ homes this week"];
 
@@ -159,7 +156,6 @@
                 );
             });
         } catch (error) {
-            console.warn(error);
             return false;
         }
     }
