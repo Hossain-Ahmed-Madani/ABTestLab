@@ -1,4 +1,4 @@
-(async () => {
+(async () => { /* Remove the self calling function when pasting into the tool !important */
     const TEST_ID = "PMO52";
     const VARIANT_ID = "V1"; /* V1, V2 */
 
@@ -19,11 +19,13 @@
         site_url: "https://www.water.com",
         test_name: "PMO52: [CART] Add Social Proof-(2) SET UP TEST",
         page_initials: "AB-PMO52",
-        test_variation: 2, /* 1, 2 */
-        test_version: 0.0001,
+        test_variation: 1, /* 1, 2 */
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+    if(window[page_initials] === true) return;
 
     const ASSETS = {
         truck_svg: /* HTML */ `
@@ -52,6 +54,77 @@
             </svg>
         `,
     };
+
+
+    function injectStyles () {
+        // Functionality to inject styles
+        const styleId = `${page_initials}-STYLES`;
+        if (document.getElementById(styleId)) return; // Prevent double-inject
+
+        const css = `
+
+            .AB-PMO52 .cart__banner + .ab-social-proof-badge {
+                margin-left: 4px;
+                margin-top: 18px;
+                margin-bottom: 5px;
+            }
+            .AB-PMO52 .summit-Title-root.summary-head.cart__section-title + .ab-social-proof-badge {
+                display: none;
+            }
+            .AB-PMO52 .ab-social-proof-badge {
+                background-color: rgba(156, 230, 247, 0.2);
+                width: max-content;
+                padding: 4px 15px 4px 7px;
+                border-radius: 3000px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 5px;
+            }
+            .AB-PMO52 .ab-social-proof-badge__icon {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .AB-PMO52 .ab-social-proof-badge__icon svg {
+                width: 23px;
+                height: auto;
+            }
+            .AB-PMO52 .ab-social-proof-badge__txt {
+                font-family:
+                    Nunito Sans,
+                    Nunito Sans Fallback;
+                font-weight: 400;
+                font-style: Regular;
+                font-size: 16px;
+                line-height: 24px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: #00053e;
+            }
+            @media screen and (min-width: 991px) {
+                .AB-PMO52 .cart__banner + .ab-social-proof-badge {
+                    display: none;
+                }
+                .AB-PMO52 .summit-Title-root.summary-head.cart__section-title + .ab-social-proof-badge {
+                    display: flex;
+                    margin-top: -16px;
+                    padding: 4px 10px;
+                }
+                .AB-PMO52 .ab-social-proof-badge + .summary-coupon {
+                    margin-top: -15px;
+                }
+            }
+
+            
+        `;
+
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.type = 'text/css';
+        style.textContent = css;
+        document.head.appendChild(style);
+    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -103,7 +176,7 @@
         } else {
             q("body").classList.remove(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
             window[page_initials] = false;
-            qq(".ab-social-proof-badge").forEach((item) => item.remove());
+            qq(`#${page_initials}-STYLES, .ab-social-proof-badge`).forEach((item) => item.remove());
         }
     }
 
@@ -119,12 +192,10 @@
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
-            console.log("==== < Navigation occurred (back/forward button) ====");
             debouncedLocationChanges();
         });
 
         window.addEventListener("pushstate", function () {
-            console.log("=== > History state was changed programmatically ===");
             debouncedLocationChanges();
         });
     }
@@ -132,18 +203,23 @@
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q("meta[property='og:title'][content='Your Cart']") &&
             qq(".cart__banner, .summit-Title-root.summary-head.cart__section-title").length === 2 &&
             document.readyState === "complete"
         );
     }
+    
 
     async function INIT_PMO32() {
-        if (window[page_initials] === true) return;
-
+        
         try {
             await waitForElementAsync(checkForItems);
+            
+            if (window[page_initials] === true || !q("meta[property='og:title'][content='Your Cart']")) return;
+
+            injectStyles();
+
             q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-            console.table(TEST_CONFIG);
 
             const TXT = ["Delivered to 8,271 homes this week", "Delivered to 8,200+ homes this week"];
 
@@ -159,7 +235,6 @@
                 );
             });
         } catch (error) {
-            console.warn(error);
             return false;
         }
     }

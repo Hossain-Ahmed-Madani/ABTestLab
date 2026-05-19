@@ -1,4 +1,5 @@
 (async () => {
+  /* Remove the self calling function when pasting into the tool !important */
   const TEST_ID = "PMO52";
   const VARIANT_ID = "V1"; /* V1, V2 */
 
@@ -14,16 +15,14 @@
   logInfo("fired");
 
   const TEST_CONFIG = {
-    client: "Acadia",
-    project: "Water",
-    site_url: "https://www.water.com",
-    test_name: "PMO52: [CART] Add Social Proof-(2) SET UP TEST",
     page_initials: "AB-PMO52",
-    test_variation: 2 /* 1, 2 */,
-    test_version: 0.0001,
+    test_variation: 1 /* 1, 2 */,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  if (window[page_initials] === true) return;
 
   const ASSETS = {
     truck_svg: /* HTML */ `
@@ -98,7 +97,7 @@
   }
 
   function q(s, o) {
-    return o ? s.querySelector(o) : document.querySelector(s);
+    return document.querySelector(s);
   }
 
   function qq(s, o) {
@@ -143,12 +142,10 @@
 
     // Listen for back/forward button clicks
     window.addEventListener("popstate", function (event) {
-      console.log("==== < Navigation occurred (back/forward button) ====");
       debouncedLocationChanges();
     });
 
     window.addEventListener("pushstate", function () {
-      console.log("=== > History state was changed programmatically ===");
       debouncedLocationChanges();
     });
   }
@@ -158,6 +155,7 @@
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
+      q("meta[property='og:title'][content='Your Cart']") &&
       qq(".cart__banner, .summit-Title-root.summary-head.cart__section-title")
         .length === 2 &&
       document.readyState === "complete"
@@ -165,16 +163,20 @@
   }
 
   async function INIT_PMO32() {
-    if (window[page_initials] === true) return;
-
     try {
       await waitForElementAsync(checkForItems);
+
+      if (
+        window[page_initials] === true ||
+        !q("meta[property='og:title'][content='Your Cart']")
+      )
+        return;
+
       q("body").classList.add(
         page_initials,
         `${page_initials}--v${test_variation}`,
         `${page_initials}--version:${test_version}`,
       );
-      console.table(TEST_CONFIG);
 
       const TXT = [
         "Delivered to 8,271 homes this week",
@@ -197,7 +199,6 @@
         );
       });
     } catch (error) {
-      console.warn(error);
       return false;
     }
   }
