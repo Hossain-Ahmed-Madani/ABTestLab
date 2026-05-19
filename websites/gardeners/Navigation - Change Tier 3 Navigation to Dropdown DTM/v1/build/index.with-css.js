@@ -80,15 +80,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  padding: var(--spacing-3) var(--spacing-4);
-  padding-left: 25px;
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
   background-color: transparent;
   color: inherit;
   border: none;
+  padding: 0;
+}
+.AB-NAV .ab-third-tier-nav-item__link {
+  flex-grow: 1;
+  padding: 12px 16px;
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: 30px;
 }
 `;
       document.head.appendChild(style);
@@ -98,6 +102,13 @@
     }
   }, 100); // Check every 100ms for <head>
 })();
+/* 
+Test container: https://app.convert.com/accounts/100412411/projects/100417633/experiences/1004197580/summary
+Forced Variation:
+control: https://www.gardeners.com/?_conv_eforce=1004197580.1004464421&utm_campaign=qa5
+v1: https://www.gardeners.com/?_conv_eforce=1004197580.1004464422&utm_campaign=qa5
+*/
+
 (async () => {
   const TEST_CONFIG = {
     client: "ROI Revolutions",
@@ -106,7 +117,7 @@
     test_name: "Navigation - Change Tier 3 Navigation to Dropdown [DTM]",
     page_initials: "AB-NAV",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1017,10 +1028,7 @@
 
     console.table(TEST_CONFIG);
 
-    console.log("DATA", DATA);
-
     DATA.forEach((tierOneNavItemData) => {
-      console.log("tierOneNavItemData", tierOneNavItemData);
       q(
         `ul[data-menu-depth="1"][data-pane-key="${tierOneNavItemData["data-link-target-pane-key"]}"]`,
       ).insertAdjacentHTML(
@@ -1058,6 +1066,13 @@
                   ${tierTwoNavItemData?.subMenuList?.length > 0
                     ? /* HTML */ `
                         <ul class="ab-nav-accordion-item__third-tier-list">
+                          <li class="ab-third-tier-nav-item">
+                            <a
+                              href="${tierTwoNavItemData.link}"
+                              class="ab-third-tier-nav-item__link"
+                              >Shop All ${tierTwoNavItemData.label}</a
+                            >
+                          </li>
                           ${tierTwoNavItemData.subMenuList
                             .map(
                               (tierThreeNavItemData) => /* HTML */ `

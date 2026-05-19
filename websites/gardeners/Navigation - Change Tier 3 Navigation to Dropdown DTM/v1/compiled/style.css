@@ -68,13 +68,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
-  padding: var(--spacing-3) var(--spacing-4);
-  padding-left: 25px;
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
   background-color: transparent;
   color: inherit;
   border: none;
+  padding: 0;
+}
+.AB-NAV .ab-third-tier-nav-item__link {
+  flex-grow: 1;
+  padding: 12px 16px;
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: 30px;
 }
