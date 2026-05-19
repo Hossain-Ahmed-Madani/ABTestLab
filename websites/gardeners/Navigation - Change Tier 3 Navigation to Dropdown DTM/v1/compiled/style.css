@@ -1,0 +1,80 @@
+.AB-NAV ul[data-menu-depth="1"] .mobile-menu__item.fs-body-100[data-list-item] {
+  display: none;
+}
+
+.AB-NAV .ab-nav-accordion-item {
+  transition: all 0.3s ease-in-out;
+}
+.AB-NAV .ab-nav-accordion-item--open .ab-nav-accordion-item__second-tier-link__title {
+  font-weight: 700;
+}
+.AB-NAV .ab-nav-accordion-item--open .ab-nav-accordion-item__second-tier-link__toggle-icon {
+  transform: rotate(180deg);
+}
+.AB-NAV .ab-nav-accordion-item--open .ab-nav-accordion-item__third-tier-list {
+  max-height: 1000px;
+}
+.AB-NAV .ab-nav-accordion-item__second-tier-link {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+}
+.AB-NAV .ab-nav-accordion-item__second-tier-link--no-sub-menu .ab-nav-accordion-item__second-tier-link__toggle-icon {
+  display: none;
+}
+.AB-NAV .ab-nav-accordion-item__second-tier-link__title {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #333;
+}
+.AB-NAV .ab-nav-accordion-item__second-tier-link__toggle-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.AB-NAV .ab-nav-accordion-item__second-tier-link__toggle-icon svg {
+  width: 12px;
+  height: auto;
+  object-fit: contain;
+}
+.AB-NAV .ab-nav-accordion-item__third-tier-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.AB-NAV ul.ab-nav-accordion-item__third-tier-list {
+  list-style: none;
+  padding-left: 0;
+}
+.AB-NAV li.ab-third-tier-nav-item {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  padding: var(--spacing-3) var(--spacing-4);
+  padding-left: 25px;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  background-color: transparent;
+  color: inherit;
+  border: none;
+}

@@ -1,0 +1,13 @@
+{
+  "id": "1778510729724_6540_Navigation___Change_Tier_3_Navigation_to_Dropdown_DTM",
+  "name": "Navigation - Change Tier 3 Navigation to Dropdown DTM",
+  "type": "A/B",
+  "website": "gardeners",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-05-11T14:45:29.724Z",
+  "createdAtReadable": "5/11/2026, 8:45:29 PM",
+  "lastUpdated": "2026-05-11T14:45:29.991Z"
+}
