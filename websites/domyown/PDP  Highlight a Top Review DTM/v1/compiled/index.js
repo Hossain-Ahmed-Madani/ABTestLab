@@ -35,7 +35,6 @@
         });
     }
 
-
     function q(s, o) {
         return document.querySelector(s);
     }
@@ -44,7 +43,37 @@
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
+        // GET ITEMS
+        const targetNode = q(".leading-none:has(.price-breaks)");
+        const isMobile = !!q("body#mobile");
+        const insertPosition = isMobile ? "beforebegin" : "afterend";
+        const reviewTxt = q(
+            "li:has(p img[alt='5 of 5 Stars']) div.product-review, li:has(p img[alt='5 of 5 Stars']) p.paragraphs-bottom.leading-normal.md\\:leading-loose.text-grey-darkest",
+        ).textContent;
 
+        // CREATE MARKUP
+        const layout = /* HTML */ `
+            <div class="ab-review">
+                <div class="ab-review__txt">${reviewTxt}</div>
+                <div class="ab-review__icon">
+                    <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 1L8 9L15 1" stroke="#315CAA" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+        `;
+
+        // INSERT ELEMENTS
+        if (isMobile) targetNode.insertAdjacentElement(insertPosition, q("div:has(>#product-title)"));
+        targetNode.insertAdjacentHTML(insertPosition, layout);
+
+        // HANDLE FUNCTIONALITIES
+        const abReviewTxtDiv = q(".ab-review__txt");
+        abReviewTxtDiv.style.width = `${abReviewTxtDiv.getBoundingClientRect().width}px`;
+
+        q(".ab-review").addEventListener("click", (e) => {
+            e.currentTarget.classList.toggle("ab-review--expanded");
+        });
     }
 
     function checkForItems() {

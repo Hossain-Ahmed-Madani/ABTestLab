@@ -1,13 +1,90 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-HIGHLIGHT-TOP-REVIEW {
+    .ab-review {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+        margin: 10px 0;
+        cursor: pointer;
+
+        &--expanded {
+            .ab-review__icon {
+                transform: rotate(-180deg);
+            }
+            .ab-review__txt {
+                width: initial;
+                overflow: visible;
+                white-space: normal;
+                text-overflow: unset;
+                max-height: 3000px;
+            }
+        }
+
+        &__txt {
+            flex: 1;
+            font-family: Open Sans;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 1.5;
+            letter-spacing: 0px;
+            color: #424242;
+            max-height: 25px;
+
+            transition: all 0.3s;
+            text-align: left;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: block;
+
+            user-select: none;
+        }
+
+        &__icon {
+            margin-top: 7px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: max-content;
+            height: max-content;
+            transition: all 0.3s;
+
+            svg {
+                width: 14px;
+            }
+        }
+    }
+
+
+    &#desktop {
+        .ab-review  {
+            gap: 13px;
+            
+            &__txt {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 150%;
+                letter-spacing: 0;
+                
+            }
+
+            &__icon {
+                margin-top: 5px;
+            }
+        }
+    }
 }
