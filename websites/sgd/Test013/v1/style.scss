@@ -1,0 +1,1400 @@
+.BODY-WRAPPER-CLASS {
+    @media screen and (min-width: 768px) {
+        //
+    }
+
+    @media screen and (min-width: 991px) {
+        //
+    }
+
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-TEST013 {
+    .ab-hidden,
+    .header-phone.d-none.d-lg-flex,
+    .page-header .header-elements .header-wrapper .header-button-wrapper,
+    .page-header .header-elements .header-banner,
+    .page-header .header-elements .header-wrapper .header-grid-right,
+    .page-header .header-elements .header-buttons,
+    .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0,
+    div.my-3:has(> .badge.badge-.badge-type-action) ~ span:has(ul),
+    .header-navigation-wrapper,
+    .container-md:has(> div.h2),
+    // .container-md ~ .frame-type-teaser_course_registration,
+    .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
+    .container-md:has(> #course_accordion),
+    .container-md.mb-2.tab-393-none,
+    .container-md:has(> .tab-393-none),
+    .quick-info:not(:has(.mb-2:empty)) h2,
+    .quick-info:not(:has(.mb-2:empty)) p,
+    .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
+    #downloadForm .list-type-none.list-style-check,
+    .registration-left .form-button-submit,
+    .container-md.frame-space-after-medium.tab-393-none ,
+    #js-card-download + .container-md:has(> hr) {
+        display: none !important;
+    }
+
+    .ab-ml-auto {
+        margin-left: auto !important;
+    }
+
+    .header-wrapper.container-md {
+        display: none !important;
+    }
+
+    .header-grid-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .page-content {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    main.page-content {
+        margin-top: 0px !important;
+    }
+
+    .container-md.frame-space-before-medium.frame-space-after-medium {
+        margin-top: 17px;
+    }
+
+    .ab-header-wrapper.container-md {
+        padding-top: 9px;
+        padding-bottom: 9px;
+        border-bottom: 2px solid rgba(224, 224, 224, 1);
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: rgba(26, 43, 73, 1);
+        margin-bottom: 13px;
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+        margin-top: 0 !important;
+        margin-bottom: 21px !important;
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 {
+        margin-top: 0 !important;
+        margin-bottom: 21px !important;
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+        padding-left: 0;
+        padding-right: 16px;
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12.6px;
+        line-height: 12.6px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: rgba(26, 43, 73, 1);
+    }
+
+    .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 14.4px;
+        line-height: 14.4px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: rgba(26, 43, 73, 1) !important;
+    }
+
+    .ab-course-info-box {
+        background-color: rgba(235, 235, 235, 1);
+        box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding: 11px 13px 13px 10px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+
+        margin-bottom: 23px;
+    }
+
+    .ab-course-info-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 9px;
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &__text {
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: rgba(26, 43, 73, 1);
+        }
+    }
+
+    .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0 {
+        display: none;
+    }
+
+    .wf-course-badges-mobile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 17px;
+        margin-bottom: 34px;
+
+        img {
+            width: auto;
+            height: 57px;
+        }
+    }
+
+    .wf-course-badges-desktop {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        gap: 28px;
+
+        img {
+            width: auto;
+            height: 92px;
+        }
+    }
+
+    // .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+    //     display: none;
+    // }
+
+    .ab-course-info-box-btn-desktop-mobile ~ span:has(ul) {
+        display: none;
+    }
+
+    .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
+        background-color: rgba(38, 139, 46, 1);
+        border: 1px solid rgba(102, 204, 0, 1);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: 56px;
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        text-decoration: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: auto;
+        color: rgba(255, 255, 255, 1);
+
+        white-space: nowrap;
+        padding: 0;
+    }
+
+    .ab-course-info-box-btn-desktop-mobile {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        margin-bottom: 25px;
+    }
+
+    .ab-course-info-box-btn-desktop {
+        display: none !important;
+    }
+
+    #js-card-download .container-md:has(> hr) {
+        display: none;
+    }
+
+    .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) hr {
+        margin-top: 41px;
+        margin-bottom: 32px;
+    }
+
+    .registration {
+        background-color: #97fffc;
+    }
+
+    #downloadForm {
+        background-color: #ffffff;
+        box-shadow: 4px 4px 4px 0px #00000040;
+        border-radius: 8px;
+    }
+
+    .ab-form-content-right {
+        display: none;
+    }
+
+    .registration-inner-container {
+        background-color: transparent;
+        padding: 7px 21px 22px !important;
+    }
+
+    .registration-left h2.mb-2 {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: #1a2b49;
+        margin-top: 15px;
+    }
+
+    .ab-form-submit-action-container {
+        width: 100%;
+        margin-top: 17px;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .ab-form-action-cta {
+        width: 100%;
+        height: 36px;
+        border-radius: 30px;
+        box-shadow: 2px 2px 4px 0px #00000040;
+        background-color: #66cc0080;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+
+        &__text {
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            text-align: center;
+            vertical-align: middle;
+            color: #212529;
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 25px;
+                height: auto;
+            }
+        }
+    }
+
+    .ab-form-submit-cta {
+        background-color: #66cc0080;
+        display: none;
+
+        .ab-form-action-cta {
+            &__text {
+                font-family: "Onest Bold";
+                font-weight: 700;
+            }
+        }
+    }
+
+    .ab-action-note-text {
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        text-align: center;
+        color: rgba(37, 135, 45, 1);
+    }
+
+    .registration-left p.mt-2 {
+        display: none;
+
+        max-width: 677px;
+        font-family: "Onest Regular";
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+
+        text-align: left;
+        text-wrap: pretty;
+        margin-top: 8px !important;
+        margin-bottom: 0;
+    }
+
+    .registration-left .ab-description {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        margin-bottom: 14px;
+    }
+
+    .registration-left .form .form-group-customer-type {
+        margin-bottom: 0 !important;
+        width: 100%;
+        margin-bottom: 6px !important;
+    }
+    .registration-left .form .form-group-customer-type .form-check {
+        margin-right: 25px;
+    }
+
+    .ab-form-progress-container {
+        width: 100%;
+        background-color: rgba(255, 255, 255, 1);
+        border: 0.3px solid rgba(190, 190, 190, 1);
+        height: 12px;
+        border-radius: 6px;
+        overflow: hidden;
+        margin-bottom: 22px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .ab-form-progress {
+        width: 50%;
+        position: relative;
+        background-color: rgba(178, 229, 128, 1);
+        border-radius: 6px;
+        will-change: width;
+        transition: width 0.3s ease-in-out;
+    }
+
+    .ab-progress-text {
+        font-family: "Inter", sans-serif;
+        font-weight: 500;
+        font-size: 8px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: rgba(98, 98, 98, 1);
+    }
+
+    .ab-step-two-text {
+        display: none;
+    }
+
+    .ab-advantage-mobile {
+        width: 100%;
+        margin-bottom: 26px;
+    }
+
+    .ab-advantage-mobile .ab-advantage-title {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: rgba(26, 43, 73, 1);
+        margin-bottom: 21px;
+    }
+
+    .ab-advantage-mobile .ab-advantage-list {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+
+    .ab-advantage-mobile .ab-advantage-list-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 11px;
+
+        &__svg {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        &__title {
+            font-family: "Onest Bold";
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: rgba(26, 43, 73, 1);
+        }
+    }
+
+    .ab-form-step-two-message-mobile {
+        width: 100%;
+        background-color: rgba(178, 229, 128, 0.3);
+        padding: 2px 5px 2px 9px;
+        display: none;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .ab-form-step-two-message-mobile .ab-form-step-two-message-text-strong {
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 8px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgba(0, 0, 0, 1);
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .ab-form-step-two-message-mobile .ab-form-step-two-message-text-regular {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        font-size: 8px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgba(0, 0, 0, 1);
+        margin-bottom: 0;
+    }
+
+    .registration-left .form .form-group-customer-type label.btn {
+        width: 105px;
+        height: 34px;
+        background-color: #ffffff;
+        border: 1px solid #25872d;
+        border-radius: 5px;
+
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+        color: #5c5f63;
+    }
+
+    .registration-left .form .form-group-customer-type label.btn.active {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        color: #ffffff;
+        background-color: #25872d;
+    }
+
+    .ab-price-and-sample-btn-container {
+        margin-bottom: 60px;
+    }
+
+    // Form Start
+
+    .form .form-group.form-input-group.form-field-group-street,
+    .form .form-group.form-input-group.form-field-group-city,
+    .form .form-group.form-input.form-field-land,
+    .form .form-group.form-input.form-field-phone {
+        display: none;
+    }
+
+    .ab-row:has(> .form-group),
+    .ab-row:has(> .form-field-street),
+    .ab-row:has(> .form-field-postal-code) {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 14px;
+    }
+
+    .registration-left .form-group.form-input-group {
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
+
+    .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
+    .registration-left .form-field-street,
+    .registration-left .form-field-house-number,
+    .registration-left .form-field-postal-code,
+    .registration-left .form-field-city {
+        height: 49px;
+        background-color: rgba(247, 247, 247, 1);
+        padding: 14px 7px 11px 11px;
+        border: 1px solid rgba(217, 217, 217, 1);
+        border-radius: 5px;
+        margin: 0;
+        position: relative;
+    }
+
+    .registration-left .select-list-search {
+        margin-bottom: 5px;
+    }
+
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) {
+        margin: 0;
+        border: none;
+        border-bottom: 1px solid #66cc00;
+        border-radius: 0;
+        padding: 0;
+        height: 35px;
+        background-color: transparent;
+    }
+
+    .registration-left .form-group:not(.form-input-group) .is-valid,
+    .registration-left .form-field-street .is-valid,
+    .registration-left .form-field-house-number .is-valid,
+    .registration-left .form-field-postal-code .is-valid,
+    .registration-left .form-field-city .is-valid {
+        background-image: none;
+    }
+
+    .registration-left .form-group:not(.form-input-group) label,
+    .registration-left .form-group.form-input .form-field-street label,
+    .registration-left .form-group.form-input .form-field-house-number label,
+    .registration-left .form-group.form-input .form-field-postal-code label,
+    .registration-left .form-group.form-input .form-field-city label {
+        top: 13px;
+        transform: translateY(0);
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        padding: 0;
+    }
+
+    .registration-left .form-group:not(.form-input-group) label.active,
+    .registration-left .form-group.form-input .form-field-street label.active,
+    .registration-left .form-group.form-input .form-field-house-number label.active,
+    .registration-left .form-group.form-input .form-field-postal-code label.active,
+    .registration-left .form-group.form-input .form-field-city label.active {
+        top: 0px;
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 8px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        transition: all 0.1s ease-in-out;
+        padding: 0;
+        transform: translateY(0);
+    }
+
+    .registration-left .form-field-street label.active,
+    .registration-left .form-field-house-number label.active,
+    .registration-left .form-field-postal-code label.active,
+    .registration-left .form-field-city label.active {
+        top: 20px;
+    }
+
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) label.active {
+        top: -10px;
+    }
+
+    .registration-left .form-group:not(.form-input-group) input,
+    .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only,
+    .registration-left .form-field-street input,
+    .registration-left .form-field-house-number input,
+    .registration-left .form-field-postal-code input,
+    .registration-left .form-field-city input {
+        margin: 0;
+        padding: 0;
+        padding-left: 0;
+        padding-right: 0;
+        border: none !important;
+
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        background-color: rgba(247, 247, 247, 1);
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #1a2b49;
+            background-color: rgba(247, 247, 247, 1);
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: none;
+        }
+    }
+
+    .registration-left .form-control:invalid,
+    .registration-left .form-control.is-invalid {
+        background-size: 15px;
+    }
+
+    .registration-left .form-control.is-invalid:not(.select-representation-input) {
+        background-position: right -1px top 2.5px !important;
+    }
+
+    .registration-left .form-control.is-invalid.select-representation-input {
+        background-position: right 30px top 2.5px !important;
+    }
+
+    .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
+        background-color: transparent;
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: #1a2b49;
+            background-color: transparent;
+            transition: background-color 5000s ease-in-out 0s;
+            box-shadow: none;
+        }
+    }
+
+    .registration-left .form-group:not(.form-input-group) em.is-invalid,
+    .registration-left .form-field-street em.is-invalid,
+    .registration-left .form-field-house-number em.is-invalid,
+    .registration-left .form-field-postal-code em.is-invalid,
+    .registration-left .form-field-city em.is-invalid {
+        display: none !important;
+    }
+
+    .registration-left .form .form-group.form-input .select-list {
+        left: 0;
+    }
+
+    // Form Layout
+    .registration-left .form-select-salutation,
+    .registration-left .form-field-first-name,
+    .registration-left .form-field-last-name,
+    .registration-left .form-field-email,
+    .registration-left .form-field-land,
+    .registration-left .form-field-phone,
+    .registration-left .form-field-company-position,
+    .registration-left .form-field-company-name {
+        width: 100%;
+    }
+
+    .registration-left .form-field-street {
+        width: calc(100% - 62px - 14px);
+    }
+
+    .registration-left .form-field-house-number {
+        width: 62px;
+    }
+
+    .registration-left .form-field-group-city {
+        width: 100%;
+    }
+
+    .registration-left .form-field-postal-code {
+        width: 120px;
+    }
+
+    .registration-left .form-field-city {
+        width: calc(100% - (120px + 14px));
+    }
+
+    #courseTabContent .h4.mb-2 {
+        text-align: left;
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        color: #1a2b49;
+        margin-bottom: 15px !important;
+    }
+
+    // From Responsive
+    @media screen and (min-width: 1400px) {
+        .ab-row:has(> .form-group),
+        .ab-row:has(> .form-field-street),
+        .ab-row:has(> .form-field-postal-code) {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 56px;
+        }
+
+        .ab-row:has(> .form-field-postal-code) {
+            width: 306px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .registration-left .form-field-group-city {
+            width: 306px;
+        }
+
+        .registration-left .form-select-salutation,
+        .registration-left .form-field-first-name,
+        .registration-left .form-field-last-name,
+        .registration-left .form-field-street,
+        .registration-left .form-field-land,
+        .registration-left .form-field-phone,
+        .registration-left .form-field-company-position,
+        .registration-left .form-field-company-name {
+            width: 306px;
+        }
+
+        .registration-left .form-select-salutation.form-group:not(.form-input-group):not(.form-button-submit) {
+            margin-right: calc(100% - 306px - 56px);
+        }
+        .registration-left .form-field-email {
+            width: 668px;
+        }
+
+        .registration-left .form-field-postal-code {
+            width: 120px;
+        }
+        .registration-left .form-field-city {
+            width: 169px;
+        }
+    }
+
+    // FROM END
+
+    // Main Responsive
+    @media screen and (max-width: 768px) {
+        .page-header.pinned .header-elements {
+            position: static;
+        }
+
+        .page-header .header-elements .header-wrapper {
+            border-bottom: 2px solid rgba(224, 224, 224, 1);
+            box-shadow: none;
+        }
+
+        .page-header.pinned .header-elements {
+            box-shadow: none;
+        }
+
+        .container-md:has(> .grid-container) {
+            margin-bottom: 72px;
+        }
+
+        .container-md:has(> .grid-container) + .container-md:has(> hr) {
+            display: none;
+        }
+
+        .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) {
+            display: none;
+        }
+
+        #js-card-download .container-md:has(> hr) {
+            display: block;
+        }
+
+        #js-card-download .container-md hr {
+            margin-top: 25px;
+            margin-bottom: 22px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .header-wrapper.container-md {
+            display: flex !important;
+        }
+
+        .ab-header-wrapper.container-md {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+
+        #courseTabContent .h4.mb-2 {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 44px;
+            letter-spacing: 0px;
+            margin-bottom: 10px !important;
+        }
+
+        .ab-price-and-sample-btn-container {
+            display: none;
+        }
+
+        .registration .registration-left {
+            padding: 0;
+        }
+
+        h2.ce-headline-center {
+            text-align: left;
+        }
+
+        .registration-left h2.mb-2 {
+            margin-top: 32px;
+        }
+
+        .page-header .header-elements .header-wrapper {
+            padding-top: 13px;
+            padding-bottom: 35px;
+        }
+
+        .container-md.frame-space-before-medium.frame-space-after-medium {
+            display: block;
+            margin-top: 30px;
+            margin-bottom: 0;
+        }
+
+        .container-md.tab-393-none + .ab-course-accordion,
+        .container-md.frame-space-after-medium + .ab-course-accordion {
+            margin-bottom: 44px;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 44px;
+            margin-bottom: 22px !important;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+            margin-bottom: 26px !important;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 {
+            margin-bottom: 26px !important;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+            padding-right: 18px;
+            font-size: 14.4px;
+            line-height: 14.4px;
+            letter-spacing: 0px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+            // font-weight: 700;
+            font-size: 14.4px;
+            line-height: 14.4px;
+            letter-spacing: 0px;
+            text-align: center;
+            vertical-align: middle;
+            color: rgba(26, 43, 73, 1) !important;
+        }
+
+        .ab-course-info-box {
+            border-radius: 10px;
+            padding: 17px 7px 13px 17px;
+            width: 520px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .ab-course-info-item {
+            gap: 14px;
+
+            &__icon {
+                svg {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+
+            &__text {
+                font-size: 20px;
+                line-height: 30px;
+                letter-spacing: 0px;
+            }
+        }
+
+        .wf-course-badges-mobile {
+            display: none;
+        }
+
+        .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
+            // background-color: rgb(38, 139, 46);
+            // border: 1px solid rgb(102, 204, 0);
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+            // width: 651px;
+            // height: 56px;
+            // font-family: "Onest Bold";
+            // font-weight: 700;
+            // font-size: 32px;
+            // line-height: 30px;
+            // letter-spacing: 0px;
+            // text-align: center;
+
+            background-color: rgb(38, 139, 46);
+            border: 1px solid rgb(102, 204, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 600px;
+            height: 50px;
+            font-family: "Onest Bold";
+            font-weight: 700;
+            font-size: 23px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            text-align: center;
+        }
+
+        .wf-course-badges-desktop {
+            display: flex;
+            margin-top: 43px;
+            margin-bottom: 60px;
+        }
+
+        .wf-course-badges-desktop + .container-md:has(> hr) {
+            display: none;
+        }
+
+        .ab-course-info-box-btn-desktop-mobile {
+            display: none !important;
+        }
+
+        .ab-course-info-box-btn-desktop {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+        }
+
+        .ab-course-info-box-btn-desktop + .container-md:has(> hr) hr {
+            margin-top: 41px;
+            margin-bottom: 36px;
+        }
+
+        .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+            display: block;
+            margin-top: 0 !important;
+            margin-bottom: 29px !important;
+        }
+
+        .registration-right {
+            display: none;
+        }
+
+        #downloadForm {
+            display: flex;
+        }
+
+        .registration-inner-container {
+            display: flex;
+            flex-direction: column;
+            padding: 8px 0 21px 31px !important;
+        }
+
+        .ab-form-content-right {
+            display: flex;
+            flex-direction: column;
+            padding: 42px 50px 21px 0 !important;
+            width: 528px;
+            min-width: 528px;
+            align-items: end;
+        }
+
+        .registration-left h2.mb-2 {
+            font-size: 32px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            margin-bottom: 25px !important;
+        }
+
+        .registration-left .ab-description {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 28px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            margin-bottom: 17px;
+            max-width: 560px;
+        }
+
+        .registration-left .form .form-group-customer-type .form-check {
+            margin-right: 25px;
+        }
+
+        .ab-advantage-mobile {
+            display: none;
+        }
+
+        .ab-form-step-two-message-mobile {
+            display: none;
+        }
+
+        .ab-form-submit-action-container {
+            width: 100%;
+            margin-top: 27px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .ab-form-action-cta {
+            width: 297px;
+            gap: 20px;
+        }
+
+        .ab-action-note-text {
+            text-align: left;
+        }
+
+        .ab-form-progress-container {
+            width: 306px;
+            margin-bottom: 17px;
+        }
+
+        .ab-advantage-desktop {
+            border: 2px solid #1a2b49;
+            width: 355px;
+            padding: 21px 34px 39px;
+            border-radius: 10px;
+            margin-bottom: 41px;
+            background-color: rgba(246, 246, 246, 1);
+        }
+
+        .ab-advantage-desktop .ab-advantage-title {
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #1a2b49;
+            margin-bottom: 8px;
+        }
+
+        .ab-advantage-desktop .ab-advantage-list {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .ab-advantage-desktop .ab-advantage-list-item {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 11px;
+
+            &__svg {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            &__title {
+                font-family: "Onest Bold";
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: #1a2b49;
+            }
+        }
+
+        .ab-form-step-two-message-desktop {
+            width: 353px;
+            background-color: rgba(178, 229, 128, 0.3);
+            padding: 10px;
+            display: none;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .ab-form-step-two-message-desktop .ab-form-step-two-message-text-strong {
+            font-family: "Inter", sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 150%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+            margin-bottom: 0;
+        }
+
+        .ab-form-step-two-message-desktop .ab-form-step-two-message-text-regular {
+            font-family: "Inter", sans-serif;
+            font-weight: 300;
+            font-size: 12px;
+            line-height: 150%;
+            letter-spacing: 0px;
+            color: rgba(0, 0, 0, 1);
+            margin-bottom: 0;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .col-12.col-md-6 h1.h2.mb-3 ~ .tag-line.mb-4 > .badge {
+            padding: 10px;
+            margin-right: 10px !important;
+        }
+    }
+}
+
+// Step Two Items
+.AB-TEST013 {
+    .registration-left.ab-show-step-two-items {
+        .ab-form-progress {
+            width: 100%;
+        }
+
+        .form .form-group.form-input-group.form-field-group-street,
+        .form .form-group.form-input-group.form-field-group-city,
+        .form .form-group.form-input.form-field-land,
+        .form .form-group.form-input.form-field-phone,
+        .ab-step-two-text,
+        p.mt-2 {
+            display: block;
+        }
+
+        .ab-step-one-text,
+        .ab-show-contact-details-cta {
+            display: none;
+        }
+
+        .ab-form-step-two-message-mobile,
+        .ab-form-submit-cta {
+            display: flex;
+        }
+
+        @media screen and (min-width: 991px) {
+            .ab-form-step-two-message-mobile {
+                display: none;
+            }
+
+            .ab-form-step-two-message-desktop {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}
+
+// MAIN CSS -> Accordion Section
+.AB-TEST013 {
+    .ab-faq-accordion-section {
+        hr {
+            margin-top: 26px;
+            margin-bottom: 26px;
+        }
+    }
+
+    .ab-faq-accordion-item {
+        margin-left: -10px;
+        margin-right: -10px;
+        padding: 8px 25px 18px;
+        transition: all 0.3s ease-in-out;
+        background-color: #f7f7f7;
+
+        &--open {
+            .ab-faq-accordion-item__head__toggle-icon {
+                transform: rotate(180deg);
+            }
+
+            .ab-faq-accordion-item__body {
+                max-height: 10000px;
+            }
+
+            .ab-faq-accordion-item__collapsed-text {
+                opacity: 0;
+            }
+
+            .ab-faq-accordion-item__expanded-text {
+                opacity: 1;
+            }
+        }
+
+        &__head {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+            align-items: center;
+
+            text-align: left;
+            font-family: "Onest Bold";
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 30px;
+            letter-spacing: 0px;
+            color: #1a2b49;
+        }
+
+        &__body {
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.5s;
+        }
+
+        &__body__content {
+            padding: 15px 0 25px;
+
+            text-align: left;
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: #1a2b49;
+        }
+
+        strong {
+            font-family: "Onest Semibold";
+            color: #1a2b49;
+        }
+
+        a {
+            font-family: "Onest Medium";
+            color: #1a2b49;
+            text-align: underline;
+        }
+
+        &__cta {
+            margin-top: 4px;
+            cursor: pointer;
+            height: 20px;
+            position: relative;
+
+            text-align: left;
+            font-family: "Onest Regular";
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            color: rgba(26, 43, 73, 0.8);
+        }
+
+        &__collapsed-text {
+            overflow: hidden;
+            opacity: 1;
+            transition: all 0.1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        &__expanded-text {
+            position: absolute;
+            opacity: 0;
+            transition: all 0.1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        p {
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            text-wrap: pretty;
+            text-align: left;
+            display: block !important;
+            mask-image: none !important;
+            -webkit-mask-image: none !important;
+        }
+
+        .read-more-toggle {
+            display: none !important;
+        }
+
+        .read-more-wrapper {
+            display: block !important;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-faq-accordion-section {
+            hr {
+                margin-top: 41px;
+                margin-bottom: 36px;
+            }
+        }
+
+        #courseTabContent .ab-faq-accordion-item {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        .ab-faq-accordion-item {
+            // margin-left: 0;
+            // margin-right: 0;
+            padding: 10px 14px 14px;
+            transition: all 0.3s ease-in-out;
+            background-color: #f7f7f7;
+
+            &__head {
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 44px;
+                letter-spacing: 0px;
+            }
+
+            &__body {
+                max-height: 0;
+                overflow: hidden;
+                transition: all 0.3s;
+            }
+
+            &__body__content,
+            strong {
+                padding: 6px 0 29px;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 30px;
+                letter-spacing: 0px;
+                vertical-align: middle;
+                color: #000000;
+            }
+
+            &__cta {
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 20px;
+                letter-spacing: 0px;
+            }
+        }
+    }
+}

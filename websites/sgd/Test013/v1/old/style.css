@@ -1,0 +1,1090 @@
+.AB-TEST013 .ab-hidden,
+.AB-TEST013 .header-phone.d-none.d-lg-flex,
+.AB-TEST013 .page-header .header-elements .header-wrapper .header-button-wrapper,
+.AB-TEST013 .page-header .header-elements .header-banner,
+.AB-TEST013 .page-header .header-elements .header-wrapper .header-grid-right,
+.AB-TEST013 .page-header .header-elements .header-buttons,
+.AB-TEST013 .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0,
+.AB-TEST013 div.my-3:has(> .badge.badge-.badge-type-action) ~ span:has(ul),
+.AB-TEST013 .header-navigation-wrapper,
+.AB-TEST013 .container-md:has(> div.h2),
+.AB-TEST013 .container-md ~ .frame-type-teaser_course_registration,
+.AB-TEST013 .container-md ~ .frame-type-teaser_course_registration + .container-md:has(> hr),
+.AB-TEST013 .container-md:has(> #course_accordion),
+.AB-TEST013 .container-md.mb-2.tab-393-none,
+.AB-TEST013 .container-md:has(> .tab-393-none),
+.AB-TEST013 .quick-info:not(:has(.mb-2:empty)) h2,
+.AB-TEST013 .quick-info:not(:has(.mb-2:empty)) p,
+.AB-TEST013 .box-small.bg-blue-green:has(.course-tabs.tab-393.d-none),
+.AB-TEST013 #downloadForm .list-type-none.list-style-check,
+.AB-TEST013 .registration-left .form-button-submit {
+    display: none !important;
+}
+.AB-TEST013 .ab-ml-auto {
+    margin-left: auto !important;
+}
+.AB-TEST013 .header-wrapper.container-md {
+    display: none !important;
+}
+.AB-TEST013 .header-grid-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-TEST013 .page-content {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.AB-TEST013 main.page-content {
+    margin-top: 0px !important;
+}
+.AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium {
+    margin-top: 17px;
+}
+.AB-TEST013 .ab-header-wrapper.container-md {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-bottom: 2px solid rgb(224, 224, 224);
+}
+.AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 {
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: rgb(26, 43, 73);
+    margin-bottom: 13px;
+}
+.AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+    margin-top: 0 !important;
+    margin-bottom: 21px !important;
+}
+.AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+    padding-left: 0;
+    padding-right: 16px;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 12.6px;
+    line-height: 12.6px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    color: rgb(26, 43, 73);
+}
+.AB-TEST013 .ab-course-info-box {
+    background-color: rgb(235, 235, 235);
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: 11px 13px 13px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 23px;
+}
+.AB-TEST013 .ab-course-info-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 9px;
+}
+.AB-TEST013 .ab-course-info-item__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-TEST013 .ab-course-info-item__icon svg {
+    width: 20px;
+    height: 20px;
+}
+.AB-TEST013 .ab-course-info-item__text {
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: rgb(26, 43, 73);
+}
+.AB-TEST013 .seal.seal-course-detail-box.col-4.col-sm-2.my-3.my-md-0.mx-auto.mx-md-0 {
+    display: none;
+}
+.AB-TEST013 .wf-course-badges-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    margin-bottom: 34px;
+}
+.AB-TEST013 .wf-course-badges-mobile img {
+    width: auto;
+    height: 57px;
+}
+.AB-TEST013 .wf-course-badges-desktop {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+}
+.AB-TEST013 .wf-course-badges-desktop img {
+    width: auto;
+    height: 92px;
+}
+.AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+    display: none;
+}
+.AB-TEST013 .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
+    background-color: rgb(38, 139, 46);
+    border: 1px solid rgb(102, 204, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    color: rgb(255, 255, 255);
+    white-space: nowrap;
+    padding: 0;
+}
+.AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
+    margin-bottom: 25px;
+}
+.AB-TEST013 #js-card-download .container-md:has(> hr) {
+    display: none;
+}
+.AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) hr {
+    margin-top: 41px;
+    margin-bottom: 32px;
+}
+.AB-TEST013 .registration {
+    background-color: #97fffc;
+}
+.AB-TEST013 #downloadForm {
+    background-color: #ffffff;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    border-radius: 8px;
+}
+.AB-TEST013 .ab-form-content-right {
+    display: none;
+}
+.AB-TEST013 .registration-inner-container {
+    background-color: transparent;
+    padding: 7px 21px 22px !important;
+}
+.AB-TEST013 .registration-left h2.mb-2 {
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    color: #1a2b49;
+    margin-top: 15px;
+}
+.AB-TEST013 .ab-form-submit-action-container {
+    width: 100%;
+    margin-top: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+.AB-TEST013 .ab-form-action-cta {
+    width: 100%;
+    height: 36px;
+    border-radius: 30px;
+    box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.2509803922);
+    background-color: rgba(102, 204, 0, 0.5019607843);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+.AB-TEST013 .ab-form-action-cta__text {
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    color: #212529;
+}
+.AB-TEST013 .ab-form-action-cta__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-TEST013 .ab-form-action-cta__icon svg {
+    width: 25px;
+    height: auto;
+}
+.AB-TEST013 .ab-form-submit-cta {
+    background-color: rgba(102, 204, 0, 0.5019607843);
+    display: none;
+}
+.AB-TEST013 .ab-form-submit-cta .ab-form-action-cta__text {
+    font-family: "Onest Bold";
+    font-weight: 700;
+}
+.AB-TEST013 .ab-action-note-text {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    text-align: center;
+    color: rgb(37, 135, 45);
+}
+.AB-TEST013 .registration-left p.mt-2 {
+    display: none;
+    max-width: 677px;
+    font-family: "Onest Regular";
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    text-align: left;
+    text-wrap: pretty;
+    margin-top: 8px !important;
+    margin-bottom: 0;
+}
+.AB-TEST013 .registration-left .ab-description {
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    margin-bottom: 14px;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type {
+    margin-bottom: 0 !important;
+    width: 100%;
+    margin-bottom: 6px !important;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
+    margin-right: 25px;
+}
+.AB-TEST013 .ab-form-progress-container {
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    border: 0.3px solid rgb(190, 190, 190);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 22px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.AB-TEST013 .ab-form-progress {
+    width: 50%;
+    position: relative;
+    background-color: rgb(178, 229, 128);
+    border-radius: 6px;
+    will-change: width;
+    transition: width 0.3s ease-in-out;
+}
+.AB-TEST013 .ab-progress-text {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    color: rgb(98, 98, 98);
+}
+.AB-TEST013 .ab-step-two-text {
+    display: none;
+}
+.AB-TEST013 .ab-advantage-mobile {
+    width: 100%;
+    margin-bottom: 26px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-title {
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: rgb(26, 43, 73);
+    margin-bottom: 21px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 11px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__svg svg {
+    width: 20px;
+    height: 20px;
+}
+.AB-TEST013 .ab-advantage-mobile .ab-advantage-list-item__title {
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: rgb(26, 43, 73);
+}
+.AB-TEST013 .ab-form-step-two-message-mobile {
+    width: 100%;
+    background-color: rgba(178, 229, 128, 0.3);
+    padding: 2px 5px 2px 9px;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+}
+.AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-strong {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 8px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+    text-align: left;
+}
+.AB-TEST013 .ab-form-step-two-message-mobile .ab-form-step-two-message-text-regular {
+    font-family: "Inter", sans-serif;
+    font-weight: 300;
+    font-size: 8px;
+    line-height: 150%;
+    letter-spacing: 0px;
+    color: rgb(0, 0, 0);
+    margin-bottom: 0;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type label.btn {
+    width: 105px;
+    height: 34px;
+    background-color: #ffffff;
+    border: 1px solid #25872d;
+    border-radius: 5px;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    letter-spacing: 0px;
+    text-align: center;
+    vertical-align: middle;
+    color: #5c5f63;
+}
+.AB-TEST013 .registration-left .form .form-group-customer-type label.btn.active {
+    font-family: "Onest Bold";
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #25872d;
+}
+.AB-TEST013 .ab-price-and-sample-btn-container {
+    margin-bottom: 60px;
+}
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-street,
+.AB-TEST013 .form .form-group.form-input-group.form-field-group-city,
+.AB-TEST013 .form .form-group.form-input.form-field-land,
+.AB-TEST013 .form .form-group.form-input.form-field-phone {
+    display: none;
+}
+.AB-TEST013 .ab-row:has(> .form-group),
+.AB-TEST013 .ab-row:has(> .form-field-street),
+.AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 14px;
+}
+.AB-TEST013 .registration-left .form-group.form-input-group {
+    margin-top: 0;
+    margin-bottom: 0px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group):not(.form-button-submit),
+.AB-TEST013 .registration-left .form-field-street,
+.AB-TEST013 .registration-left .form-field-house-number,
+.AB-TEST013 .registration-left .form-field-postal-code,
+.AB-TEST013 .registration-left .form-field-city {
+    height: 49px;
+    background-color: rgb(247, 247, 247);
+    padding: 14px 7px 11px 11px;
+    border: 1px solid rgb(217, 217, 217);
+    border-radius: 5px;
+    margin: 0;
+    position: relative;
+}
+.AB-TEST013 .registration-left .select-list-search {
+    margin-bottom: 5px;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #66cc00;
+    border-radius: 0;
+    padding: 0;
+    height: 35px;
+    background-color: transparent;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) .is-valid,
+.AB-TEST013 .registration-left .form-field-street .is-valid,
+.AB-TEST013 .registration-left .form-field-house-number .is-valid,
+.AB-TEST013 .registration-left .form-field-postal-code .is-valid,
+.AB-TEST013 .registration-left .form-field-city .is-valid {
+    background-image: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-street label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-house-number label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-postal-code label,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-city label {
+    top: 13px;
+    transform: translateY(0);
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    padding: 0;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-street label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-group.form-input .form-field-city label.active {
+    top: 0px;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 8px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    transition: all 0.1s ease-in-out;
+    padding: 0;
+    transform: translateY(0);
+}
+.AB-TEST013 .registration-left .form-field-street label.active,
+.AB-TEST013 .registration-left .form-field-house-number label.active,
+.AB-TEST013 .registration-left .form-field-postal-code label.active,
+.AB-TEST013 .registration-left .form-field-city label.active {
+    top: 20px;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) label.active {
+    top: -10px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only,
+.AB-TEST013 .registration-left .form-field-street input,
+.AB-TEST013 .registration-left .form-field-house-number input,
+.AB-TEST013 .registration-left .form-field-postal-code input,
+.AB-TEST013 .registration-left .form-field-city input {
+    margin: 0;
+    padding: 0;
+    padding-left: 0;
+    padding-right: 0;
+    border: none !important;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1a2b49;
+    background-color: rgb(247, 247, 247);
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only:-webkit-autofill,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) input[type="text"]:read-only:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-street input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-house-number input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-postal-code input:-webkit-autofill:active,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .form-field-city input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #1a2b49;
+    background-color: rgb(247, 247, 247);
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: none;
+}
+.AB-TEST013 .registration-left .form-control:invalid,
+.AB-TEST013 .registration-left .form-control.is-invalid {
+    background-size: 15px;
+}
+.AB-TEST013 .registration-left .form-control.is-invalid:not(.select-representation-input) {
+    background-position: right -1px top 2.5px !important;
+}
+.AB-TEST013 .registration-left .form-control.is-invalid.select-representation-input {
+    background-position: right 30px top 2.5px !important;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input {
+    background-color: transparent;
+}
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill,
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:hover,
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:focus,
+.AB-TEST013 .registration-left .select-list-search .form-group:not(.form-input-group):not(.form-button-submit) input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: #1a2b49;
+    background-color: transparent;
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: none;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid,
+.AB-TEST013 .registration-left .form-field-street em.is-invalid,
+.AB-TEST013 .registration-left .form-field-house-number em.is-invalid,
+.AB-TEST013 .registration-left .form-field-postal-code em.is-invalid,
+.AB-TEST013 .registration-left .form-field-city em.is-invalid {
+    display: none !important;
+}
+.AB-TEST013 .registration-left .form .form-group.form-input .select-list {
+    left: 0;
+}
+.AB-TEST013 .registration-left .form-select-salutation,
+.AB-TEST013 .registration-left .form-field-first-name,
+.AB-TEST013 .registration-left .form-field-last-name,
+.AB-TEST013 .registration-left .form-field-email,
+.AB-TEST013 .registration-left .form-field-land,
+.AB-TEST013 .registration-left .form-field-phone,
+.AB-TEST013 .registration-left .form-field-company-position,
+.AB-TEST013 .registration-left .form-field-company-name {
+    width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-street {
+    width: calc(100% - 62px - 14px);
+}
+.AB-TEST013 .registration-left .form-field-house-number {
+    width: 62px;
+}
+.AB-TEST013 .registration-left .form-field-group-city {
+    width: 100%;
+}
+.AB-TEST013 .registration-left .form-field-postal-code {
+    width: 120px;
+}
+.AB-TEST013 .registration-left .form-field-city {
+    width: calc(100% - 134px);
+}
+@media screen and (min-width: 1400px) {
+    .AB-TEST013 .ab-row:has(> .form-group),
+    .AB-TEST013 .ab-row:has(> .form-field-street),
+    .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 56px;
+    }
+    .AB-TEST013 .ab-row:has(> .form-field-postal-code) {
+        width: 306px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .AB-TEST013 .registration-left .form-field-group-city {
+        width: 306px;
+    }
+    .AB-TEST013 .registration-left .form-select-salutation,
+    .AB-TEST013 .registration-left .form-field-first-name,
+    .AB-TEST013 .registration-left .form-field-last-name,
+    .AB-TEST013 .registration-left .form-field-street,
+    .AB-TEST013 .registration-left .form-field-land,
+    .AB-TEST013 .registration-left .form-field-phone,
+    .AB-TEST013 .registration-left .form-field-company-position,
+    .AB-TEST013 .registration-left .form-field-company-name {
+        width: 306px;
+    }
+    .AB-TEST013 .registration-left .form-select-salutation.form-group:not(.form-input-group):not(.form-button-submit) {
+        margin-right: calc(100% - 306px - 56px);
+    }
+    .AB-TEST013 .registration-left .form-field-email {
+        width: 668px;
+    }
+    .AB-TEST013 .registration-left .form-field-postal-code {
+        width: 120px;
+    }
+    .AB-TEST013 .registration-left .form-field-city {
+        width: 169px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .AB-TEST013 .page-header.pinned .header-elements {
+        position: static;
+    }
+    .AB-TEST013 .page-header .header-elements .header-wrapper {
+        border-bottom: 2px solid rgb(224, 224, 224);
+        box-shadow: none;
+    }
+    .AB-TEST013 .page-header.pinned .header-elements {
+        box-shadow: none;
+    }
+    .AB-TEST013 .container-md:has(> .grid-container) {
+        margin-bottom: 72px;
+    }
+    .AB-TEST013 .container-md:has(> .grid-container) + .container-md:has(> hr) {
+        display: none;
+    }
+    .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium + .container-md:has(> hr) {
+        display: none;
+    }
+    .AB-TEST013 #js-card-download .container-md:has(> hr) {
+        display: block;
+    }
+    .AB-TEST013 #js-card-download .container-md hr {
+        margin-top: 25px;
+        margin-bottom: 22px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .AB-TEST013 .header-wrapper.container-md {
+        display: flex !important;
+    }
+    .AB-TEST013 .ab-header-wrapper.container-md {
+        display: none;
+    }
+}
+@media screen and (min-width: 991px) {
+    .AB-TEST013 .ab-price-and-sample-btn-container {
+        display: none;
+    }
+    .AB-TEST013 .registration .registration-left {
+        padding: 0;
+    }
+    .AB-TEST013 h2.ce-headline-center {
+        text-align: left;
+    }
+    .AB-TEST013 .registration-left h2.mb-2 {
+        margin-top: 32px;
+    }
+    .AB-TEST013 .page-header .header-elements .header-wrapper {
+        padding-top: 13px;
+        padding-bottom: 35px;
+    }
+    .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium {
+        display: block;
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+    .AB-TEST013 .container-md.tab-393-none + .ab-course-accordion,
+    .AB-TEST013 .container-md.frame-space-after-medium + .ab-course-accordion {
+        margin-bottom: 44px;
+    }
+    .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 44px;
+        margin-bottom: 22px !important;
+    }
+    .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 {
+        margin-bottom: 26px !important;
+    }
+    .AB-TEST013 .col-12.col-md-6 h1.h2.mb-3 ~ .my-3 > .badge {
+        padding-right: 18px;
+        font-size: 14.4px;
+        line-height: 14.4px;
+        letter-spacing: 0px;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .AB-TEST013 .ab-course-info-box {
+        border-radius: 10px;
+        padding: 17px 7px 13px 17px;
+        width: 520px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+    .AB-TEST013 .ab-course-info-item {
+        gap: 14px;
+    }
+    .AB-TEST013 .ab-course-info-item__icon svg {
+        width: 28px;
+        height: 28px;
+    }
+    .AB-TEST013 .ab-course-info-item__text {
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+    }
+    .AB-TEST013 .wf-course-badges-mobile {
+        display: none;
+    }
+    .AB-TEST013 .d-flex.flex-column.align-items-center a.btn.btn-prio-1 {
+        background-color: rgb(38, 139, 46);
+        border: 1px solid rgb(102, 204, 0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 651px;
+        height: 56px;
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        text-align: center;
+    }
+    .AB-TEST013 .wf-course-badges-desktop {
+        display: flex;
+        margin-top: 43px;
+        margin-bottom: 60px;
+    }
+    .AB-TEST013 .ab-course-info-box-btn-desktop-mobile {
+        display: none !important;
+    }
+    .AB-TEST013 .container-md.frame-space-before-medium.frame-space-after-medium:not(:has(.ab-course-info-box-btn-desktop-mobile-link)) {
+        display: block;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    .AB-TEST013 .registration-right {
+        display: none;
+    }
+    .AB-TEST013 #downloadForm {
+        display: flex;
+    }
+    .AB-TEST013 .registration-inner-container {
+        display: flex;
+        flex-direction: column;
+        padding: 8px 0 21px 31px !important;
+    }
+    .AB-TEST013 .ab-form-content-right {
+        display: flex;
+        flex-direction: column;
+        padding: 42px 50px 21px 0 !important;
+        width: 528px;
+        min-width: 528px;
+        align-items: end;
+    }
+    .AB-TEST013 .registration-left h2.mb-2 {
+        font-size: 32px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        margin-bottom: 25px !important;
+    }
+    .AB-TEST013 .registration-left .ab-description {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        margin-bottom: 17px;
+        max-width: 560px;
+    }
+    .AB-TEST013 .registration-left .form .form-group-customer-type .form-check {
+        margin-right: 25px;
+    }
+    .AB-TEST013 .ab-advantage-mobile {
+        display: none;
+    }
+    .AB-TEST013 .ab-form-step-two-message-mobile {
+        display: none;
+    }
+    .AB-TEST013 .ab-form-submit-action-container {
+        width: 100%;
+        margin-top: 27px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    .AB-TEST013 .ab-form-action-cta {
+        width: 297px;
+        gap: 20px;
+    }
+    .AB-TEST013 .ab-action-note-text {
+        text-align: left;
+    }
+    .AB-TEST013 .ab-form-progress-container {
+        width: 306px;
+        margin-bottom: 17px;
+    }
+    .AB-TEST013 .ab-advantage-desktop {
+        border: 2px solid #1a2b49;
+        width: 355px;
+        padding: 21px 34px 39px;
+        border-radius: 10px;
+        margin-bottom: 41px;
+        background-color: rgb(246, 246, 246);
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-title {
+        font-family: "Onest Regular";
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        margin-bottom: 8px;
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-list {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 11px;
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__svg {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__svg svg {
+        width: 20px;
+        height: 20px;
+    }
+    .AB-TEST013 .ab-advantage-desktop .ab-advantage-list-item__title {
+        font-family: "Onest Bold";
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+    }
+    .AB-TEST013 .ab-form-step-two-message-desktop {
+        width: 353px;
+        background-color: rgba(178, 229, 128, 0.3);
+        padding: 10px;
+        display: none;
+        flex-direction: column;
+        gap: 3px;
+    }
+    .AB-TEST013 .ab-form-step-two-message-desktop .ab-form-step-two-message-text-strong {
+        font-family: "Inter", sans-serif;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgb(0, 0, 0);
+        margin-bottom: 0;
+    }
+    .AB-TEST013 .ab-form-step-two-message-desktop .ab-form-step-two-message-text-regular {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        font-size: 12px;
+        line-height: 150%;
+        letter-spacing: 0px;
+        color: rgb(0, 0, 0);
+        margin-bottom: 0;
+    }
+}
+
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-progress {
+    width: 100%;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input-group.form-field-group-street,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input-group.form-field-group-city,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input.form-field-land,
+.AB-TEST013 .registration-left.ab-show-step-two-items .form .form-group.form-input.form-field-phone,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-two-text,
+.AB-TEST013 .registration-left.ab-show-step-two-items p.mt-2 {
+    display: block;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-step-one-text,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-show-contact-details-cta {
+    display: none;
+}
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-mobile,
+.AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-submit-cta {
+    display: flex;
+}
+@media screen and (min-width: 991px) {
+    .AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-mobile {
+        display: none;
+    }
+    .AB-TEST013 .registration-left.ab-show-step-two-items .ab-form-step-two-message-desktop {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.AB-TEST013 .ab-faq-accordion-section hr {
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
+.AB-TEST013 .ab-faq-accordion-item {
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 8px 25px 18px;
+    transition: all 0.3s ease-in-out;
+    background-color: #f7f7f7;
+}
+.AB-TEST013 .ab-faq-accordion-item--open .ab-faq-accordion-item__head__toggle-icon {
+    transform: rotate(180deg);
+}
+.AB-TEST013 .ab-faq-accordion-item--open .ab-faq-accordion-item__body {
+    max-height: 1600px;
+}
+.AB-TEST013 .ab-faq-accordion-item--open .ab-faq-accordion-item__collapsed-text {
+    opacity: 0;
+}
+.AB-TEST013 .ab-faq-accordion-item--open .ab-faq-accordion-item__expanded-text {
+    opacity: 1;
+}
+.AB-TEST013 .ab-faq-accordion-item__head {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    font-family: "Onest Bold";
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #1a2b49;
+}
+.AB-TEST013 .ab-faq-accordion-item__body {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+.AB-TEST013 .ab-faq-accordion-item__body__content {
+    padding: 15px 0 25px;
+    text-align: left;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #1a2b49;
+}
+.AB-TEST013 .ab-faq-accordion-item strong {
+    font-family: "Onest Semibold";
+    color: #1a2b49;
+}
+.AB-TEST013 .ab-faq-accordion-item a {
+    font-family: "Onest Medium";
+    color: #1a2b49;
+    text-align: underline;
+}
+.AB-TEST013 .ab-faq-accordion-item__cta {
+    margin-top: 4px;
+    cursor: pointer;
+    height: 20px;
+    position: relative;
+    text-align: left;
+    font-family: "Onest Regular";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: rgba(26, 43, 73, 0.8);
+}
+.AB-TEST013 .ab-faq-accordion-item__collapsed-text {
+    overflow: hidden;
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.AB-TEST013 .ab-faq-accordion-item__expanded-text {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.1s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.AB-TEST013 .ab-faq-accordion-item p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    text-wrap: pretty;
+    text-align: left;
+    display: block !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+}
+.AB-TEST013 .ab-faq-accordion-item .read-more-toggle {
+    display: none !important;
+}
+.AB-TEST013 .ab-faq-accordion-item .read-more-wrapper {
+    display: block !important;
+}
+@media screen and (min-width: 991px) {
+    .AB-TEST013 .ab-faq-accordion-section hr {
+        margin-top: 41px;
+        margin-bottom: 36px;
+    }
+    .AB-TEST013 #courseTabContent .ab-faq-accordion-item {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .AB-TEST013 .ab-faq-accordion-item {
+        padding: 10px 14px 14px;
+        transition: all 0.3s ease-in-out;
+        background-color: #f7f7f7;
+    }
+    .AB-TEST013 .ab-faq-accordion-item__head {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 44px;
+        letter-spacing: 0px;
+    }
+    .AB-TEST013 .ab-faq-accordion-item__body {
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s;
+    }
+    .AB-TEST013 .ab-faq-accordion-item__body__content,
+    .AB-TEST013 .ab-faq-accordion-item strong {
+        padding: 6px 0 29px;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #000000;
+    }
+    .AB-TEST013 .ab-faq-accordion-item__cta {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        letter-spacing: 0px;
+    }
+}

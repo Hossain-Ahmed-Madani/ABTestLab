@@ -1,0 +1,13 @@
+{
+  "id": "1772199284088_6894_Test013",
+  "name": "Test013",
+  "type": "A/B",
+  "website": "sgd",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-02-27T13:34:44.089Z",
+  "createdAtReadable": "2/27/2026, 7:34:44 PM",
+  "lastUpdated": "2026-02-27T13:34:44.211Z"
+}
