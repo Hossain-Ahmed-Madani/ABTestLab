@@ -1,0 +1,42 @@
+
+Hypothesis: We believe highlighting a top product review above the fold will help users quickly build trust and confidence in the product. Surfacing social proof earlier in the experience will encourage more cart additions and ultimately conversions.
+
+Test Shell in Testing Platform: https://app.convert.com/accounts/10019048/projects/10019379/experiences/100140909/summary
+
+Audience: All Users
+
+Primary Goal: Transactions
+
+Secondary Goals: Cart Additions, Review Caret Clicks, Revenue
+
+Standard Goals: 
+
+URL Targeting: -p-
+
+QA URLs: 
+PDP with multiple 5-star reviews: https://www.domyown.com/termidor-sc-p-184.html
+PDP with only one 5-star review: https://www.domyown.com/outdoor-indoor-ant-kit-p-14505.html
+PDP with no 5-star reviews: https://www.domyown.com/pet-lodge-water-tower-deluxe-p-16435.html
+PDP with no reviews: https://www.domyown.com/banixx-wound-spray-for-pets-oz-p-18359.html
+
+QA Scenario: 
+Ensure the Top Review component only renders when a 5-star review exists.
+Ensure the review is truncated to a single line by default and display an ellipsis (...).
+Ensure a downward caret/icon appears in the collapsed state. If expanded, rotate it so the caret is facing upward.
+Ensure clicking/tapping the review expands to show the full review text and the expanded review can be collapsed again.
+
+Launch % of Traffic: 100%
+
+Variation Design Details: 
+Do My Own Branding Notes
+The review should display as a single truncated line with an ellipsis (...) and a downward caret to indicate the content is expandable. When expanded, display the full review text.
+Mobile: Position the Top Review component below the product star rating (under the product title).
+Desktop: TBD — likely positioned below the product star rating as well. 
+Note: the mockup currently shows three potential designs for desktop. We will remove the unused ones once we have confirm it with the client. 
+Logic:
+Conditionally render a Top Review from the Customer Reviews section  .product-page-reviews
+Select the first review with a 5-star rating (potential selector: li p img[alt="5 of 5 Stars"])
+Exception: If no 5-star review exists on the page, do not render the Top Review component.
+
+Variation Design Mockup: 
+https://www.figma.com/design/rjarBzPTOU1O5vS6HSbkiY/DoMyOwn?node-id=1701-75&t=EyXVJUEC7510JD3c-1
