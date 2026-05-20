@@ -3,7 +3,7 @@
         client: "ROI Revolutions",
         project: "Do My Own",
         site_url: "https://www.domyown.com",
-        test_name: "PDP – Highlight a Top Review [DTM]",
+        test_name: "PDP - Highlight a Top Review [DTM]",
         page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
         test_variation: 1,
         test_version: 0.0001,
@@ -56,7 +56,6 @@
         };
     }
 
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -75,10 +74,12 @@
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("#product-page-reviews") && q("li p img[alt='5 of 5 Stars']"));
     }
 
     try {
