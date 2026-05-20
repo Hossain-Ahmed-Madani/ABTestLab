@@ -20,7 +20,7 @@
         test_name: "PMO52: [CART] Add Social Proof-(2) SET UP TEST",
         page_initials: "AB-PMO52",
         test_variation: 1, /* 1, 2 */
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -181,7 +181,7 @@
     }
 
     function urlObserver() {
-        const debouncedLocationChanges = debounce(handleLocationChange, 150);
+        const debouncedLocationChanges = debounce(handleLocationChange, 250);
 
         // Optional: Track pushState/replaceState changes too
         const originalPushState = history.pushState;
@@ -192,10 +192,12 @@
 
         // Listen for back/forward button clicks
         window.addEventListener("popstate", function (event) {
+            console.log("====== < POP STATE ======");
             debouncedLocationChanges();
         });
-
+        
         window.addEventListener("pushstate", function () {
+            console.log("====== PUSH STATE > ======");
             debouncedLocationChanges();
         });
     }
