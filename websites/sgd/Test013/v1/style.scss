@@ -573,12 +573,30 @@
         background-color: transparent;
     }
 
+    // .registration-left .form-group:not(.form-input-group) .is-valid,
+    // .registration-left .form-field-street .is-valid,
+    // .registration-left .form-field-house-number .is-valid,
+    // .registration-left .form-field-postal-code .is-valid,
+    // .registration-left .form-field-city .is-valid {
+    //     background-image: none;
+    // }
+
     .registration-left .form-group:not(.form-input-group) .is-valid,
     .registration-left .form-field-street .is-valid,
     .registration-left .form-field-house-number .is-valid,
     .registration-left .form-field-postal-code .is-valid,
     .registration-left .form-field-city .is-valid {
-        background-image: none;
+        // background-image: none;
+        background-size: 15px;
+        // background-position: right -1px top 2.5px !important;
+    }
+
+    .registration-left .form-group:not(.form-input-group):not(.form-select-salutation):not(.form-field-land) .is-valid,
+    .registration-left .form-field-street .is-valid,
+    .registration-left .form-field-house-number .is-valid,
+    .registration-left .form-field-postal-code .is-valid,
+    .registration-left .form-field-city .is-valid {
+        background-position: right -1px top 2.5px !important;
     }
 
     .registration-left .form-group:not(.form-input-group) label,
@@ -688,17 +706,22 @@
         }
     }
 
+    // ================= LEFT HERE ==================
     .registration-left .form-group:not(.form-input-group) em.is-invalid,
     .registration-left .form-field-street em.is-invalid,
     .registration-left .form-field-house-number em.is-invalid,
     .registration-left .form-field-postal-code em.is-invalid,
     .registration-left .form-field-city em.is-invalid {
         display: none !important;
+        //     margin-top: 10px;
+        //     margin-left: -10px;
+        //     padding-left: 0;
+        //     white-space: nowrap;
     }
 
-    .registration-left .form .form-group.form-input .select-list {
-        left: 0;
-    }
+    // .registration-left div:has(> em.is-invalid) {
+    //     margin-bottom: 10px;
+    // }
 
     // Form Layout
     .registration-left .form-select-salutation,
@@ -841,7 +864,6 @@
     }
 
     @media screen and (min-width: 991px) {
-
         #courseTabContent .h4.mb-2 {
             font-weight: 700;
             font-size: 24px;

@@ -476,7 +476,14 @@
 .AB-TEST013 .registration-left .form-field-house-number .is-valid,
 .AB-TEST013 .registration-left .form-field-postal-code .is-valid,
 .AB-TEST013 .registration-left .form-field-city .is-valid {
-  background-image: none;
+  background-size: 15px;
+}
+.AB-TEST013 .registration-left .form-group:not(.form-input-group):not(.form-select-salutation):not(.form-field-land) .is-valid,
+.AB-TEST013 .registration-left .form-field-street .is-valid,
+.AB-TEST013 .registration-left .form-field-house-number .is-valid,
+.AB-TEST013 .registration-left .form-field-postal-code .is-valid,
+.AB-TEST013 .registration-left .form-field-city .is-valid {
+  background-position: right -1px top 2.5px !important;
 }
 .AB-TEST013 .registration-left .form-group:not(.form-input-group) label,
 .AB-TEST013 .registration-left .form-group.form-input .form-field-street label,
@@ -593,9 +600,6 @@
 .AB-TEST013 .registration-left .form-field-postal-code em.is-invalid,
 .AB-TEST013 .registration-left .form-field-city em.is-invalid {
   display: none !important;
-}
-.AB-TEST013 .registration-left .form .form-group.form-input .select-list {
-  left: 0;
 }
 .AB-TEST013 .registration-left .form-select-salutation,
 .AB-TEST013 .registration-left .form-field-first-name,
