@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.00008,
+        textVersion: 0.000011,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -1096,7 +1096,7 @@
                             accordion3.innerHTML = flat_rate_conent;
 
                             const accordion4 = document.querySelector("#\\34-panel > div");
-                            accordion4.innerHTML = extras_conent;
+                            if (accordion4) accordion4.innerHTML = extras_conent;
                         },
                     );
                 },
@@ -1109,21 +1109,59 @@
                 if (!allPresent) scope.mainJS();
             };
 
-            const observer = new MutationObserver((mutations, obs) => {
-                clearTimeout(observer._debounceTimer);
-
-                observer._debounceTimer = setTimeout(() => {
-                    checkAndTrigger();
-                }, 500);
-            });
-
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true,
-                attributes: true,
-            });
-
             checkAndTrigger();
+
+            let count = 0;
+            let timerId;
+
+            // Define the function
+            const tryInitInInterval = () => {
+                checkAndTrigger();
+                count++;
+
+                console.log(`Interval count: ${count}`);
+
+                // Stop after 5 executions
+                if (count >= 10) {
+                    clearInterval(timerId);
+                    console.log("Interval cleared!");
+                }
+            };
+
+            timerId = setInterval(tryInitInInterval, 1500);
+            // Start the interval (1000ms = 1s)
+
+            // setTimeout(() => {
+            //     checkAndTrigger();
+            // }, 3000);
+
+            // exp.waitUntil(
+            //     () => document.querySelector('body'),
+            //     () => {
+
+            //         const targetNode = document.querySelector('body')
+
+            //         const observer = new MutationObserver((mutations, obs) => {
+
+            //             if(!targetNode) {
+            //                 observer.disconnect();
+            //                 return
+            //             }
+
+            //             clearTimeout(observer._debounceTimer);
+
+            //             observer._debounceTimer = setTimeout(() => {
+            //                 checkAndTrigger();
+            //             }, 500);
+            //         });
+
+            //         observer?.observe(targetNode, {
+            //             childList: true,
+            //             subtree: true,
+            //             attributes: true,
+            //         });
+            //     },
+            // );
         },
         waitUntil: function (predicate, success, error, waitTime = 30000) {
             let int = setInterval(function () {
@@ -1148,7 +1186,7 @@
         },
     };
     exp.waitUntil(
-        () => document.querySelector("body"),
+        () => document.querySelector("body") && document.readyState === "complete",
         () => exp.init(),
     );
 })();
