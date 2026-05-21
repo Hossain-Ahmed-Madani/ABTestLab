@@ -40,3 +40,6 @@ Exception: If no 5-star review exists on the page, do not render the Top Review 
 
 Variation Design Mockup: 
 https://www.figma.com/design/rjarBzPTOU1O5vS6HSbkiY/DoMyOwn?node-id=1701-75&t=EyXVJUEC7510JD3c-1
+
+Forced Variation:
+https://www.domyown.com/termidor-sc-p-184.html?_conv_eforce=100140909.1001219122&utm_campaign=qa5
