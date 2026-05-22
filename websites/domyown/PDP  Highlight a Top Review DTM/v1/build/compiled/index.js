@@ -6,7 +6,7 @@
     test_name: "PDP - Highlight a Top Review [DTM]",
     page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

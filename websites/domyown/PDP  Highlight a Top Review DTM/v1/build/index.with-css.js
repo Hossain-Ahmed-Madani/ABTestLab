@@ -40,7 +40,7 @@
   user-select: none;
 }
 .AB-HIGHLIGHT-TOP-REVIEW .ab-review__icon {
-  margin-top: 7px;
+  margin-top: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +50,7 @@
 }
 .AB-HIGHLIGHT-TOP-REVIEW .ab-review__icon svg {
   width: 14px;
+  height: 8px;
 }
 .AB-HIGHLIGHT-TOP-REVIEW#desktop .ab-review {
   gap: 13px;
@@ -61,7 +62,7 @@
   letter-spacing: 0;
 }
 .AB-HIGHLIGHT-TOP-REVIEW#desktop .ab-review__icon {
-  margin-top: 5px;
+  margin-top: 7px;
 }
 `;
       document.head.appendChild(style);
@@ -79,7 +80,7 @@
     test_name: "PDP - Highlight a Top Review [DTM]",
     page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

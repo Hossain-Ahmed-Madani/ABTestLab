@@ -1,12 +1,8 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "ROI Revolutions",
-        project: "Do My Own",
-        site_url: "https://www.domyown.com",
-        test_name: "PDP - Highlight a Top Review [DTM]",
         page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -41,7 +37,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         // GET ITEMS
         const targetNode = q(".leading-none:has(.price-breaks)");
@@ -84,7 +79,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
