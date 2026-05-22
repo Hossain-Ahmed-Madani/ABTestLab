@@ -706,22 +706,27 @@
         }
     }
 
-    // ================= LEFT HERE ==================
-    .registration-left .form-group:not(.form-input-group) em.is-invalid,
-    .registration-left .form-field-street em.is-invalid,
-    .registration-left .form-field-house-number em.is-invalid,
-    .registration-left .form-field-postal-code em.is-invalid,
-    .registration-left .form-field-city em.is-invalid {
-        display: none !important;
-        //     margin-top: 10px;
-        //     margin-left: -10px;
-        //     padding-left: 0;
-        //     white-space: nowrap;
+    .registration-left em.is-invalid:not([style="display:none;"]) {
+        display: inline-block !important;
+        margin-top: 15px;
+        margin-left: -10px;
+        text-align: left;
+        line-height: 1.2;
+        min-width: 70px;
     }
 
-    // .registration-left div:has(> em.is-invalid) {
-    //     margin-bottom: 10px;
-    // }
+    .registration-left div:has(> input.is-invalid) {
+        margin-bottom: 15px !important;
+    }
+
+    .registration-left div.form-field-house-number:has(> input.is-invalid) {
+        margin-bottom: 45px !important;
+    }
+
+    .registration-left div.form-field-postal-code:has(> input.is-invalid),
+    .registration-left div.form-field-city:has(> input.is-invalid) {
+        margin-bottom: 30px !important;
+    }
 
     // Form Layout
     .registration-left .form-select-salutation,

@@ -31,7 +31,7 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     test_name: "Test013 [SGD] - landing pages - new structure",
     page_initials: "AB-TEST013",
     test_variation: 1,
-    test_version: 0.0007,
+    test_version: 0.0009,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

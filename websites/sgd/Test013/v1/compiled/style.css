@@ -594,12 +594,23 @@
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: none;
 }
-.AB-TEST013 .registration-left .form-group:not(.form-input-group) em.is-invalid,
-.AB-TEST013 .registration-left .form-field-street em.is-invalid,
-.AB-TEST013 .registration-left .form-field-house-number em.is-invalid,
-.AB-TEST013 .registration-left .form-field-postal-code em.is-invalid,
-.AB-TEST013 .registration-left .form-field-city em.is-invalid {
-  display: none !important;
+.AB-TEST013 .registration-left em.is-invalid:not([style="display:none;"]) {
+  display: inline-block !important;
+  margin-top: 15px;
+  margin-left: -10px;
+  text-align: left;
+  line-height: 1.2;
+  min-width: 70px;
+}
+.AB-TEST013 .registration-left div:has(> input.is-invalid) {
+  margin-bottom: 15px !important;
+}
+.AB-TEST013 .registration-left div.form-field-house-number:has(> input.is-invalid) {
+  margin-bottom: 45px !important;
+}
+.AB-TEST013 .registration-left div.form-field-postal-code:has(> input.is-invalid),
+.AB-TEST013 .registration-left div.form-field-city:has(> input.is-invalid) {
+  margin-bottom: 30px !important;
 }
 .AB-TEST013 .registration-left .form-select-salutation,
 .AB-TEST013 .registration-left .form-field-first-name,
