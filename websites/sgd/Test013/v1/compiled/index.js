@@ -25,10 +25,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
 (async () => {
     const TEST_CONFIG = {
-        client: "Netzproduzenten",
-        project: "SGD",
-        site_url: "https://www.sgd.de/",
-        test_name: "Test013 [SGD] - landing pages - new structure",
         page_initials: "AB-TEST013",
         test_variation: 1,
         test_version: 0.0009,
@@ -227,8 +223,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 <div class="ab-course-accordion container-md">
                     <div class="ab-faq-accordion-section">
                         ${data
-                            .map(
-                                (item, index) => /* HTML */ `
+                .map(
+                    (item, index) => /* HTML */ `
                                     <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
                                         <div class="ab-faq-accordion-item__head">
                                             <div class="ab-faq-accordion-item__head__title">${item.title}</div>
@@ -243,8 +239,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                     </div>
                                     ${index !== data.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
                                 `,
-                            )
-                            .join("")}
+                )
+                .join("")}
                     </div>
                 </div>
             `,
@@ -301,8 +297,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     <div class="ab-course-accordion mb-5">
                         <div class="ab-faq-accordion-section">
                             ${data1
-                                .map(
-                                    (item, index) => /* HTML */ `
+                .map(
+                    (item, index) => /* HTML */ `
                                         <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
                                             <div class="ab-faq-accordion-item__head">
                                                 <div class="ab-faq-accordion-item__head__title">${item.title}</div>
@@ -317,8 +313,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                         </div>
                                         ${index !== data1.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
                                     `,
-                                )
-                                .join("")}
+                )
+                .join("")}
                         </div>
                     </div>
                 </div>
@@ -333,8 +329,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     <div class="ab-course-accordion mb-5">
                         <div class="ab-faq-accordion-section">
                             ${data2
-                                .map(
-                                    (item, index) => /* HTML */ `
+                .map(
+                    (item, index) => /* HTML */ `
                                         <div class="ab-faq-accordion-item" data-toggle-id="${index + 1}">
                                             <div class="ab-faq-accordion-item__head">
                                                 <div class="ab-faq-accordion-item__head__title">${item.title}</div>
@@ -349,8 +345,8 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                         </div>
                                         ${index !== data2.length - 1 ? `<div class="container-md"><hr /></div>` : ""}
                                     `,
-                                )
-                                .join("")}
+                )
+                .join("")}
                         </div>
                     </div>
                 </div>
@@ -401,15 +397,15 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                 /* HTML */ `
                     <div class="ab-course-info-box">
                         ${infoList
-                            .map(
-                                (infoTxt) => /* HTML */ `
+                    .map(
+                        (infoTxt) => /* HTML */ `
                                     <div class="ab-course-info-item">
                                         <div class="ab-course-info-item__icon">${ASSETS.course_info_svg}</div>
                                         <div class="ab-course-info-item__text">${infoTxt}</div>
                                     </div>
                                 `,
-                            )
-                            .join("")}
+                    )
+                    .join("")}
                     </div>
                     <div class="wf-course-badges-mobile">
                         <img src="https://www.sgd.de/fileadmin/images/siegel/top-fernschule.png" alt="Top Fernschule" />
@@ -418,12 +414,12 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                     </div>
 
                     ${q(".container-md.frame-space-before-medium.frame-space-after-medium:has(a.btn.btn-prio-1)")
-                        ? /* HTML */ `
+                    ? /* HTML */ `
                             <div class="ab-course-info-box-btn-desktop-mobile d-flex flex-column align-items-center">
                                 <a href="#" class="ab-course-info-box-btn-desktop-mobile-link btn btn-prio-1">Preise &amp; Probeinhalte anfordern 111</a>
                             </div>
                         `
-                        : ""}
+                    : ""}
                 `,
             );
         }
@@ -500,21 +496,21 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                             <div class="ab-advantage-title">Sie erhalten sofort:</div>
                             <div class="ab-advantage-list">
                                 ${[
-                                    "Informationen zu den Studiengebühren (jetzt 10% sparen)",
-                                    "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
-                                    "Auszüge aus dem Original-Lernmaterial zum Downloaden",
-                                    "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
-                                    "Informationen zu den Seminaren/Webinaren",
-                                ]
-                                    .map(
-                                        (item) => /* HTML */ `
+                        "Informationen zu den Studiengebühren (jetzt 10% sparen)",
+                        "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                        "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                        "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                        "Informationen zu den Seminaren/Webinaren",
+                    ]
+                        .map(
+                            (item) => /* HTML */ `
                                             <div class="ab-advantage-list-item">
                                                 <span class="ab-advantage-list-item__svg">${ASSETS.check_svg}</span>
                                                 <span class="ab-advantage-list-item__title">${item}</span>
                                             </div>
                                         `,
-                                    )
-                                    .join("")}
+                        )
+                        .join("")}
                             </div>
                         </div>
                         <div class="ab-form-progress-container">
@@ -536,21 +532,21 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
                                 <div class="ab-advantage-title">Sie erhalten sofort:</div>
                                 <div class="ab-advantage-list">
                                     ${[
-                                        "Informationen zu den Studiengebühren",
-                                        "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
-                                        "Auszüge aus dem Original-Lernmaterial zum Downloaden",
-                                        "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
-                                        "Informationen zu den Seminaren/Webinaren",
-                                    ]
-                                        .map(
-                                            (item) => /* HTML */ `
+                        "Informationen zu den Studiengebühren",
+                        "Alle Förder- und Finanzierungs- möglichkeiten auf einen Blick.",
+                        "Auszüge aus dem Original-Lernmaterial zum Downloaden",
+                        "Kursguide: Ausführliche Infos zu Ihrem Wunschkurs",
+                        "Informationen zu den Seminaren/Webinaren",
+                    ]
+                        .map(
+                            (item) => /* HTML */ `
                                                 <div class="ab-advantage-list-item">
                                                     <span class="ab-advantage-list-item__svg">${ASSETS.course_info_svg}</span>
                                                     <span class="ab-advantage-list-item__title">${item}</span>
                                                 </div>
                                             `,
-                                        )
-                                        .join("")}
+                        )
+                        .join("")}
                                 </div>
                             </div>
                             <div class="ab-form-step-two-message-desktop">
@@ -619,7 +615,14 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
                 // Click Action
                 q(".ab-show-contact-details-cta").addEventListener("click", () => {
-                    registrationLeft.classList.add("ab-show-step-two-items");
+                    // registrationLeft.classList.add("ab-show-step-two-items");
+                    q(".ab-form-submit-cta").click();
+
+                    setTimeout(() => {
+                        if (qq(".registration-left div:has(> input.is-invalid)").length === 0) {
+                            registrationLeft.classList.add("ab-show-step-two-items");
+                        }
+                    }, 150);
                 });
 
                 q(".ab-form-submit-cta").addEventListener("click", () => {
@@ -632,8 +635,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     }
 
     function init() {
-        console.log(TEST_CONFIG);
-
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         updateMainLayout();
         updateFormLayout();
