@@ -16,6 +16,20 @@
   text-overflow: unset;
   max-height: 3000px;
 }
+.AB-HIGHLIGHT-TOP-REVIEW .ab-review--show-full-txt {
+  cursor: inherit;
+}
+.AB-HIGHLIGHT-TOP-REVIEW .ab-review--show-full-txt .ab-review__icon {
+  display: none;
+}
+.AB-HIGHLIGHT-TOP-REVIEW .ab-review--show-full-txt .ab-review__txt {
+  width: initial;
+  overflow: visible;
+  white-space: normal;
+  text-overflow: unset;
+  max-height: 3000px;
+  user-select: text;
+}
 .AB-HIGHLIGHT-TOP-REVIEW .ab-review__txt {
   flex: 1;
   font-family: Open Sans;

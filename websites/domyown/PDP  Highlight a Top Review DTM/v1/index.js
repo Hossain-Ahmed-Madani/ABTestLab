@@ -6,7 +6,7 @@
         test_name: "PDP - Highlight a Top Review [DTM]",
         page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -55,13 +55,12 @@
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
+
         // GET ITEMS
         const targetNode = q(".leading-none:has(.price-breaks)");
         const isMobile = !!q("body#mobile");
         const insertPosition = isMobile ? "beforebegin" : "afterend";
-        const reviewTxt = q(
-            "li:has(p img[alt='5 of 5 Stars']) div.product-review, li:has(p img[alt='5 of 5 Stars']) p.paragraphs-bottom.leading-normal.md\\:leading-loose.text-grey-darkest",
-        ).textContent;
+        const reviewTxt = q("li:has(p img[alt='5 of 5 Stars']) .product-review, li:has(p img[alt='5 of 5 Stars']) p.paragraphs-bottom.leading-normal.md\\:leading-loose.text-grey-darkest").textContent;
 
         // CREATE MARKUP
         const layout = /* HTML */ `
@@ -80,12 +79,16 @@
         targetNode.insertAdjacentHTML(insertPosition, layout);
 
         // HANDLE FUNCTIONALITIES
-        const abReviewTxtDiv = q(".ab-review__txt");
-        abReviewTxtDiv.style.width = `${abReviewTxtDiv.getBoundingClientRect().width}px`;
+        if (reviewTxt.trim().split(" ").length >= 20) {
+            const abReviewTxtDiv = q(".ab-review__txt");
+            abReviewTxtDiv.style.width = `${abReviewTxtDiv.getBoundingClientRect().width}px`;
+            q(".ab-review").addEventListener("click", (e) => {
+                e.currentTarget.classList.toggle("ab-review--expanded");
+            });
+        } else {
+            q(".ab-review").classList.add('ab-review--show-full-txt')
+        }
 
-        q(".ab-review").addEventListener("click", (e) => {
-            e.currentTarget.classList.toggle("ab-review--expanded");
-        });
     }
 
     function checkForItems() {

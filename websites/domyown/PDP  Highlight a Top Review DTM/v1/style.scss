@@ -34,6 +34,23 @@
             }
         }
 
+        &--show-full-txt {
+            cursor: inherit;
+
+            .ab-review__icon {
+                display: none;
+            }
+
+            .ab-review__txt {
+                width: initial;
+                overflow: visible;
+                white-space: normal;
+                text-overflow: unset;
+                max-height: 3000px;
+                user-select: text;
+            }
+        }
+
         &__txt {
             flex: 1;
             font-family: Open Sans;
@@ -70,17 +87,15 @@
         }
     }
 
-
     &#desktop {
-        .ab-review  {
+        .ab-review {
             gap: 13px;
-            
+
             &__txt {
                 font-weight: 400;
                 font-size: 14px;
                 line-height: 150%;
                 letter-spacing: 0;
-                
             }
 
             &__icon {
