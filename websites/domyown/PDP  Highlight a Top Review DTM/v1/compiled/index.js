@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-HIGHLIGHT-TOP-REVIEW",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -43,7 +43,12 @@
         const targetNode = q(".leading-none:has(.price-breaks)");
         const isMobile = !!q("body#mobile");
         const insertPosition = isMobile ? "beforebegin" : "afterend";
-        const reviewTxt = q("li:has(p img[alt='5 of 5 Stars']) .product-review, li:has(p img[alt='5 of 5 Stars']) p.paragraphs-bottom.leading-normal.md\\:leading-loose.text-grey-darkest").textContent;
+        const reviewTxt = (
+            q("div:has(>p img[alt='5 of 5 Stars']) + div > div.product-review.hidden") ||
+            q("div:has(>p img[alt='5 of 5 Stars']) + div > p.product-review") ||
+            q("li:has(p img[alt='5 of 5 Stars']) p.paragraphs-bottom.leading-normal.md\\:leading-loose.text-grey-darkest")
+        ).textContent.trim();
+        const reviewTxtLength = reviewTxt.split(" ").length;
 
         // CREATE MARKUP
         const layout = /* HTML */ `
@@ -62,7 +67,7 @@
         targetNode.insertAdjacentHTML(insertPosition, layout);
 
         // HANDLE FUNCTIONALITIES
-        if (reviewTxt.trim().split(" ").length >= 20) {
+        if (isMobile ? reviewTxtLength >= 10 : reviewTxtLength >= 22) {
             const abReviewTxtDiv = q(".ab-review__txt");
             abReviewTxtDiv.style.width = `${abReviewTxtDiv.getBoundingClientRect().width}px`;
             q(".ab-review").addEventListener("click", (e) => {
