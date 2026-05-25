@@ -1,3 +1,8 @@
+/* 
+https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
+
+*/
+
 (async () => {
     const TEST_CONFIG = {
         client: "ROI Revolutions",
@@ -10,31 +15,6 @@
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -57,28 +37,6 @@
                     return resolve(true);
                 }
             }, frequency);
-        });
-    }
-
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
         });
     }
 
@@ -143,13 +101,92 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    function getFilterData() {
+        const data = [];
+        const PlantingZone = getCookie("PlantingZone");
+        const matchingFilterNodeValue = qq('ul#filter-form__list-zone--sidebar input[type="checkbox"]').find((item) => PlantingZone && PlantingZone.includes(item.value))?.value ?? null;
+
+        if (PlantingZone && matchingFilterNodeValue) {
+            data.push({
+                label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
+                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"]`),
+            });
+        }
+
+        if (q(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`)) {
+            data.push({
+                label: "New Arrivals",
+                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`),
+            });
+        }
+
+        if (q(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`)) {
+            data.push({
+                label: "Ships Now",
+                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`),
+            });
+        }
+
+        qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"]`)?.forEach((item) =>
+            data.push({
+                label: item.getAttribute("value"),
+                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"]`),
+            }),
+        );
+
+        console.log("DATA", data);
+
+        return data;
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+        const filterData = getFilterData();
+        if (!filterData.length) return;
+
+        q(".collection__inner").parentNode.insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab--filter-chips-wrap">
+                    <div class="ab--filter-chips">
+                        ${filterData
+                            .map(
+                                ({ label, targetNodeSelectorJSON }) => /* HTML */ `
+                                    <button
+                                        type="button"
+                                        class="ab--filter-chip ${q(JSON.parse(targetNodeSelectorJSON))?.checked ? "ab--chip-active" : ""}"
+                                        targetNodeSelectorJSON=${targetNodeSelectorJSON}
+                                    >
+                                        <span class="ab--chip-label">${label}</span>
+                                    </button>
+                                `,
+                            )
+                            .join("")}
+                    </div>
+                </div>
+            `,
+        );
+
+        q(".ab--filter-chips").addEventListener("click", (e) => {
+            const button = e.target.closest(".ab--filter-chip");
+
+            if (button) {
+                button.classList.toggle("ab--chip-active");
+                const targetNodeSelector = button.getAttribute('targetNodeSelectorJSON');
+                console.log('targetNodeSelector', targetNodeSelector)
+            }
+        });
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".collection__inner") &&
+            q(".filter-form__content .filter-form__group") &&
+            document.readyState === "complete"
+        );
     }
 
     try {
