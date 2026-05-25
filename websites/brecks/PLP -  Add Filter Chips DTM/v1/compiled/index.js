@@ -48,6 +48,18 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         return [...document.querySelectorAll(s)];
     }
 
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     function getCookie(key) {
         try {
             if (!key || typeof key !== "string") ;
@@ -79,28 +91,28 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         if (PlantingZone && matchingFilterNodeValue) {
             data.push({
                 label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
-                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"]`),
+                targetNodeSelector: `ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"]`,
             });
         }
 
         if (q(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`)) {
             data.push({
                 label: "New Arrivals",
-                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`),
+                targetNodeSelector: `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
             });
         }
 
         if (q(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`)) {
             data.push({
                 label: "Ships Now",
-                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`),
+                targetNodeSelector: `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`,
             });
         }
 
         qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"]`)?.forEach((item) =>
             data.push({
                 label: item.getAttribute("value"),
-                targetNodeSelectorJSON: JSON.stringify(`ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"]`),
+                targetNodeSelector: `ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"]`,
             }),
         );
 
@@ -109,10 +121,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         return data;
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
+    function createLayout() {
         const filterData = getFilterData();
         if (!filterData.length) return;
 
@@ -123,11 +132,11 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
                     <div class="ab--filter-chips">
                         ${filterData
                             .map(
-                                ({ label, targetNodeSelectorJSON }) => /* HTML */ `
+                                ({ label, targetNodeSelector }) => /* HTML */ `
                                     <button
                                         type="button"
-                                        class="ab--filter-chip ${q(JSON.parse(targetNodeSelectorJSON))?.checked ? "ab--chip-active" : ""}"
-                                        targetNodeSelectorJSON=${targetNodeSelectorJSON}
+                                        class="ab--filter-chip ${q(targetNodeSelector)?.checked ? "ab--chip-active" : ""}"
+                                        data-selector="${encodeURIComponent(targetNodeSelector)}"
                                     >
                                         <span class="ab--chip-label">${label}</span>
                                     </button>
@@ -138,25 +147,50 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
                 </div>
             `,
         );
+    }
 
+    function updateLayout() {
+        qq(".ab--filter-chip").forEach((button) => {
+            const targetNodeSelector = decodeURIComponent(button.dataset.selector);
+            const targetNode = q(targetNodeSelector);
+
+            if (targetNode.checked) {
+                button.classList.add("ab--chip-active");
+            } else {
+                button.classList.remove("ab--chip-active");
+            }
+        });
+    }
+
+    function mutationObserverFunction() {
+        const targetNode = q(".filter-sidebar");
+        const debouncedUpdate = debounce(updateLayout, 150);
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: false });
+    }
+
+    function clickFunction() {
         q(".ab--filter-chips").addEventListener("click", (e) => {
             const button = e.target.closest(".ab--filter-chip");
 
             if (button) {
                 button.classList.toggle("ab--chip-active");
-                const targetNodeSelector = button.getAttribute('targetNodeSelectorJSON');
-                console.log('targetNodeSelector', targetNodeSelector);
+                const targetNodeSelector = decodeURIComponent(button.dataset.selector);
+                const targetNode = q(targetNodeSelector);
+                targetNode?.click();
             }
         });
     }
 
+    function init() {
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        console.table(TEST_CONFIG);
+        createLayout();
+        clickFunction();
+        mutationObserverFunction();
+    }
+
     function checkForItems() {
-        return !!(
-            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            q(".collection__inner") &&
-            q(".filter-form__content .filter-form__group") &&
-            document.readyState === "complete"
-        );
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".collection__inner") && q(".filter-form__content .filter-form__group"));
     }
 
     try {
