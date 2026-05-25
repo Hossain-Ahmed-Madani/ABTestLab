@@ -48,12 +48,30 @@
 .AB-FILTER-CHIPS .ab--chip-label {
   pointer-events: none;
 }
-@media (min-width: 768px) {
+@media (min-width: 991px) {
+  .AB-FILTER-CHIPS .filter-topbar__inner {
+    flex-wrap: nowrap;
+    width: 100%;
+  }
+  .AB-FILTER-CHIPS .filter-topbar__sidebar-toggle-wrapper,
+  .AB-FILTER-CHIPS .filter-topbar__sort-toggle {
+    white-space: nowrap;
+  }
+  .AB-FILTER-CHIPS .filter-topbar-wrap {
+    overflow: hidden;
+  }
   .AB-FILTER-CHIPS .ab--filter-chips-wrap {
-    padding: 0;
+    flex-grow: 1;
+    overflow: hidden;
   }
   .AB-FILTER-CHIPS .ab--filter-chips {
-    flex-wrap: wrap;
-    overflow-x: visible;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    cursor: grab;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chips.ab--is-dragging {
+    cursor: grabbing;
+    user-select: none;
   }
 }

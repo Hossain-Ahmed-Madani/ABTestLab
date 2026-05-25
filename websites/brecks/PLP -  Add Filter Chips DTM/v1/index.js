@@ -137,8 +137,23 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const filterData = getFilterData();
         if (!filterData.length) return;
 
-        q(".collection__inner").parentNode.insertAdjacentHTML(
-            "afterbegin",
+        const insertionConfig = {
+            "(max-width: 990.5px)": {
+                selector: ".section-inner.section-inner--full-width:has(>.collection__inner)",
+                insertPosition: "afterbegin",
+            },
+            "(min-width: 991px)": {
+                selector: ".filter-topbar__sidebar-toggle-wrapper",
+                insertPosition: "afterend",
+            },
+        };
+
+        const matchedQuery = Object.keys(insertionConfig).find((query) => window.matchMedia(query).matches);
+        const { selector, insertPosition } = insertionConfig[matchedQuery] ?? {};
+        if (!selector) return;
+
+        q(selector).insertAdjacentHTML(
+            insertPosition,
             /* HTML */ `
                 <div class="ab--filter-chips-wrap">
                     <div class="ab--filter-chips">
@@ -180,6 +195,60 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: false });
     }
 
+    function dragScrollFunction() {
+        if (!window.matchMedia("(min-width: 991px)").matches) return;
+        if (isTouchEnabled()) return;
+
+        const el = q(".ab--filter-chips");
+        if (!el) return;
+
+        let isDown = false;
+        let startX = 0;
+        let scrollLeft = 0;
+        let hasDragged = false;
+        const DRAG_THRESHOLD = 5;
+
+        el.addEventListener("mousedown", (e) => {
+            isDown = true;
+            hasDragged = false;
+            startX = e.pageX - el.getBoundingClientRect().left;
+            scrollLeft = el.scrollLeft;
+            el.classList.add("ab--is-dragging");
+        });
+
+        el.addEventListener("mouseleave", () => {
+            if (!isDown) return;
+            isDown = false;
+            el.classList.remove("ab--is-dragging");
+        });
+
+        el.addEventListener("mouseup", () => {
+            isDown = false;
+            el.classList.remove("ab--is-dragging");
+        });
+
+        el.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - el.getBoundingClientRect().left;
+            const delta = x - startX;
+            if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged = true;
+            el.scrollLeft = scrollLeft - delta;
+        });
+
+        // Suppress chip clicks that were actually drag gestures
+        el.addEventListener(
+            "click",
+            (e) => {
+                if (hasDragged) {
+                    e.stopImmediatePropagation();
+                    hasDragged = false;
+                }
+            },
+            true,
+        );
+    }
+
     function clickFunction() {
         q(".ab--filter-chips").addEventListener("click", (e) => {
             const button = e.target.closest(".ab--filter-chip");
@@ -198,6 +267,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         console.table(TEST_CONFIG);
         createLayout();
         clickFunction();
+        dragScrollFunction();
         mutationObserverFunction();
     }
 
