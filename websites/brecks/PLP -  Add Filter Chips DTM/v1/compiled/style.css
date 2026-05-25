@@ -1,17 +1,16 @@
 .AB-FILTER-CHIPS .ab--filter-chips-wrap {
   width: 100%;
   margin: 0 0 12px;
-  padding: 0 16px;
+  padding: 0 0 0 16px;
   box-sizing: border-box;
 }
 .AB-FILTER-CHIPS .ab--filter-chips {
   display: flex;
   flex-wrap: nowrap;
-  gap: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
+  gap: 4px;
+  overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 0;
+  padding: 4px 16px 4px 0;
 }
 .AB-FILTER-CHIPS .ab--filter-chips::-webkit-scrollbar {
   display: none;
@@ -21,29 +20,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 16px;
-  border: 1px solid #2c5e1a;
-  border-radius: 999px;
-  background: #ffffff;
-  color: #2c5e1a;
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.2;
+  padding: 8px 15px;
+  border: 1px solid #A0A0A0;
+  border-radius: 50px;
+  background: #F7F7F7;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #000000;
   white-space: nowrap;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 .AB-FILTER-CHIPS .ab--filter-chip:hover, .AB-FILTER-CHIPS .ab--filter-chip:focus-visible {
-  background: #f1f6ec;
+  background: #E5ECDD;
   outline: none;
 }
 .AB-FILTER-CHIPS .ab--chip-active {
-  background: #2c5e1a;
-  color: #ffffff;
+  border: 1.5px solid #487000;
+  background: #E5ECDD;
+  color: #487000;
+  font-weight: 700;
+  gap: 5px;
+}
+.AB-FILTER-CHIPS .ab--chip-active:before {
+  content: "";
+  background-image: url('data:image/svg+xml,<svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.825195 0.824951L4.8252 4.82495M4.8252 4.82495L8.8252 8.82495M4.8252 4.82495L8.8252 0.824951M4.8252 4.82495L0.825195 8.82495" stroke="%23487000" stroke-width="1.16667" stroke-linecap="square"/></svg>');
+  background-size: auto;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 8px;
+  height: 8px;
 }
 .AB-FILTER-CHIPS .ab--chip-active:hover, .AB-FILTER-CHIPS .ab--chip-active:focus-visible {
-  background: #234a14;
+  background: #E5ECDD;
 }
 .AB-FILTER-CHIPS .ab--chip-label {
   pointer-events: none;
@@ -57,12 +69,11 @@
   .AB-FILTER-CHIPS .filter-topbar__sort-toggle {
     white-space: nowrap;
   }
-  .AB-FILTER-CHIPS .filter-topbar-wrap {
-    overflow: hidden;
-  }
   .AB-FILTER-CHIPS .ab--filter-chips-wrap {
     flex-grow: 1;
     overflow: hidden;
+    padding: 0;
+    margin-bottom: 0;
   }
   .AB-FILTER-CHIPS .ab--filter-chips {
     max-width: 100%;

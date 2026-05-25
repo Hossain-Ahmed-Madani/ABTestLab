@@ -206,30 +206,81 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         let startX = 0;
         let scrollLeft = 0;
         let hasDragged = false;
+        let velocity = 0;
+        let lastX = 0;
+        let lastTime = 0;
+        let rafId = null;
+
         const DRAG_THRESHOLD = 5;
+        const FRICTION = 0.92;       // velocity multiplier per frame (~60fps decay)
+        const MIN_VELOCITY = 0.3;    // px/frame below which momentum stops
+        const VELOCITY_SCALE = 16;   // normalise raw px/ms to px/frame at ~60fps
+
+        function cancelMomentum() {
+            if (rafId !== null) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
+        }
+
+        function applyMomentum() {
+            velocity *= FRICTION;
+            if (Math.abs(velocity) < MIN_VELOCITY) {
+                velocity = 0;
+                rafId = null;
+                return;
+            }
+            el.scrollLeft -= velocity;
+            rafId = requestAnimationFrame(applyMomentum);
+        }
+
+        function endDrag() {
+            isDown = false;
+            el.classList.remove("ab--is-dragging");
+            if (hasDragged && Math.abs(velocity) > MIN_VELOCITY) {
+                rafId = requestAnimationFrame(applyMomentum);
+            }
+        }
 
         el.addEventListener("mousedown", (e) => {
+            cancelMomentum();
             isDown = true;
             hasDragged = false;
+            velocity = 0;
             startX = e.pageX - el.getBoundingClientRect().left;
             scrollLeft = el.scrollLeft;
+            lastX = e.pageX;
+            lastTime = performance.now();
             el.classList.add("ab--is-dragging");
         });
 
         el.addEventListener("mouseleave", () => {
             if (!isDown) return;
-            isDown = false;
-            el.classList.remove("ab--is-dragging");
+            endDrag();
         });
 
         el.addEventListener("mouseup", () => {
-            isDown = false;
-            el.classList.remove("ab--is-dragging");
+            if (!isDown) return;
+            endDrag();
         });
 
         el.addEventListener("mousemove", (e) => {
             if (!isDown) return;
             e.preventDefault();
+
+            const now = performance.now();
+            const dt = now - lastTime;
+            const dx = e.pageX - lastX;
+
+            // EMA keeps velocity smooth — downweights noisy single-frame spikes
+            if (dt > 0) {
+                const raw = (dx / dt) * VELOCITY_SCALE;
+                velocity = velocity * 0.4 + raw * 0.6;
+            }
+
+            lastX = e.pageX;
+            lastTime = now;
+
             const x = e.pageX - el.getBoundingClientRect().left;
             const delta = x - startX;
             if (Math.abs(delta) > DRAG_THRESHOLD) hasDragged = true;
