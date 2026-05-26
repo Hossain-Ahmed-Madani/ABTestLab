@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.000011,
+        textVersion: 0.000012,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -149,7 +149,7 @@
                         <br />
 
                         <h3>Artikel-Details</h3>
-                        <span>Artikel-Nr.: 352039/006</span><br />
+                        <span>Artikel-Nr.: 352039/006#d1</span><br />
                         <span>Jahrespunze: 2025</span><br />
                         <span>Serie: Das Geld der Deutschen BRD</span>
                         <br />
@@ -365,29 +365,6 @@
                         <br />
                         <br />
 
-                        <div class="ab-video-container">
-                            <div class="az-video__lazy" height="100%" width="100%">
-                                <video
-                                    class="az-video__video"
-                                    controls=""
-                                    controlslist="nodownload"
-                                    disablepictureinpicture=""
-                                    playsinline=""
-                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=25817_001_001&muenze_2=25817_001_12&muenze_3=25817_001_2&muenze_4=25817_001_13&muenze_5=25817_001_1&muenze_7=25817_001_3&muenze_9=25817_001_5&muenze_10=25817_001_10&muenze_11=25817_001_11&muenze_12=25817_004_01&wa_1=25817_001_zub1_1&wa_2=25817_001_zub2&wa_10=SKG_Produktshot_1200x900_25817_Sternzeichen_Abo_2025_Flatrate&fmt=auto&w=600"
-                                    width="100%"
-                                    height="100%"
-                                    preload="metadata"
-                                    style=""
-                                    muted
-                                >
-                                    <source src="https://cdn.media.amplience.net/v/MDM/352040_001_Movie_Das_Geld_der_Deutschen_DDR_16_9_Flatrate/mp4_720p" />
-                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
-                                </video>
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
                     `,
                     flat_rate_conent: /* HTML */ `
                         <div class="Test001-table-container">
@@ -582,29 +559,6 @@
                         <br />
                         <br />
 
-                        <div class="ab-video-container">
-                            <div class="az-video__lazy" height="100%" width="100%">
-                                <video
-                                    class="az-video__video"
-                                    controls=""
-                                    controlslist="nodownload"
-                                    disablepictureinpicture=""
-                                    playsinline=""
-                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=352155_Staatsgold_1&muenze_2=352155_Staatsgold_2&muenze_3=352155_Staatsgold_5&muenze_4=352155_Staatsgold_3&muenze_5=352155_Staatsgold_4&muenze_6=352155_Staatsgold_Folder_1&muenze_7=352155_001_6&muenze_8=352155_001_7&muenze_9=352155_001_8&muenze_10=352155_002_9&muenze_11=352155_002_10&muenze_12=352155_002_11&wa_1=352155_002_Zub1&wa_2=352155_001_zub2&wa_10=Produktshot_1200x900_352155_Staatsgold_OffiziellerAnsatz_V2_2&fmt=auto&w=600"
-                                    preload="metadata"
-                                    width="100%"
-                                    height="100%"
-                                    style=""
-                                    muted
-                                >
-                                    <source src="https://cdn.media.amplience.net/v/MDM/352155_001_Movie_Staatsgold_16_9/mp4_720p" />
-                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
-                                </video>
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
                     `,
                     flat_rate_conent: /* HTML */ `
                         <div class="Test001-table-container">
@@ -828,30 +782,6 @@
                         <h3>Artikel-Details</h3>
                         <span>Artikel-Nr.: 25817/004#d1</span><br />
                         <span>Serie: Die 12 Sternzeichen</span>
-                        <br />
-                        <br />
-
-                        <div class="ab-video-container">
-                            <div class="az-video__lazy" height="100%" width="100%">
-                                <video
-                                    class="az-video__video"
-                                    controls=""
-                                    controlslist="nodownload"
-                                    disablepictureinpicture=""
-                                    playsinline=""
-                                    poster="https://i8.amplience.net/i/MDM/?$tpl__fr_productshot$&muenze_1=25817_001_001&muenze_2=25817_001_12&muenze_3=25817_001_2&muenze_4=25817_001_13&muenze_5=25817_001_1&muenze_7=25817_001_3&muenze_9=25817_001_5&muenze_10=25817_001_10&muenze_11=25817_001_11&muenze_12=25817_004_01&wa_1=25817_001_zub1_1&wa_2=25817_001_zub2&wa_10=SKG_Produktshot_1200x900_25817_Sternzeichen_Abo_2025_Flatrate&fmt=auto&w=600"
-                                    preload="metadata"
-                                    width="100%"
-                                    height="100%"
-                                    style=""
-                                    muted
-                                >
-                                    <source src="https://cdn.media.amplience.net/v/MDM/25817_001_Movie_Sternzeichen_16_9_Flatrate/mp4_720p" />
-                                    <img src="" title="Your browser does not support the &lt;video&gt; tag" />
-                                </video>
-                            </div>
-                        </div>
-
                         <br />
                         <br />
                     `,
@@ -1085,18 +1015,23 @@
                         () => document.querySelector(".az-accordion-panel"),
                         () => {
                             const accordion1 = document.querySelector("#\\31-panel > div");
-                            accordion1.querySelector("img");
-
+                            // const image = accordion1.querySelector("img");
                             accordion1.innerHTML = collection_at_glance_content;
 
-                            const accordion2 = document.querySelector("#\\32-panel > div");
-                            accordion2.innerHTML = initial_delivery_content;
+                            const accordion2 = document.querySelector("#\\32-panel > div:not(:has(.ab-hidden))");
+                            if(accordion2) {
+                                accordion2.querySelector(":scope > *").classList.add("ab-hidden");
+                                accordion2.insertAdjacentHTML("afterbegin", initial_delivery_content);
+                                // accordion2.innerHTML = initial_delivery_content;
+                            }
 
                             const accordion3 = document.querySelector("#\\33-panel > div");
                             accordion3.innerHTML = flat_rate_conent;
 
                             const accordion4 = document.querySelector("#\\34-panel > div");
-                            if (accordion4) accordion4.innerHTML = extras_conent;
+                            if (accordion4) {
+                                accordion4.innerHTML = extras_conent;
+                            }
                         },
                     );
                 },
@@ -1119,12 +1054,9 @@
                 checkAndTrigger();
                 count++;
 
-                console.log(`Interval count: ${count}`);
-
                 // Stop after 5 executions
                 if (count >= 10) {
                     clearInterval(timerId);
-                    console.log("Interval cleared!");
                 }
             };
 
