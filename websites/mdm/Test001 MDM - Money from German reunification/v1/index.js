@@ -2,7 +2,7 @@
     const exp = {
         exp: "Test001",
         var: "variation",
-        textVersion: 0.000012,
+        textVersion: 0.000013,
         getLayoutData: function () {
             const data = {
                 352039: {
@@ -13,7 +13,7 @@
                         <div class="Test001__trust-container">
                             <div class="Test001__trust-item Test001__item-shipping">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/shipping.png" alt="Versand" class="Test001__icon-img" />
-                                <span class="trust-text">Versandkostenfrei ab 200 €</span>
+                                <span class="trust-text">Versandfrei ab 200 €</span>
                             </div>
                             <div class="Test001__trust-item Test001__item-retoure">
                                 <img src="https://assets-manager.abtasty.com/8d2a191170a55164917c790c6a928716/account/retoure.png" alt="30 Tage Rückgabe" class="Test001__icon-img" />
@@ -55,7 +55,7 @@
                     accordion_three_heading: "Flatrate im Überblick",
                     accordion_four_heading: "Freuen Sie sich auf Ihre umfangreiche Gratis-Ausstattung",
                     collection_at_glance_content: /* HTML */ `
-                        <b>Für Sammler deutscher Geschichte und alle, die mit der</b>
+                        <b>Für Sammler deutscher Geschichte und alle, die mit der D-Mark aufgewachsen sind</b>
                         <p>
                             Die D-Mark prägte über 50 Jahre deutsche Geschichte – von der Währungsreform 1948 bis zur Euro-Einführung 2002. Sie begleitete den wirtschaftlichen Aufstieg
                             Deutschlands und war für viele ein Symbol von Stabilität und Vertrauen.
@@ -172,7 +172,7 @@
                             </div>
                             <div class="Test001-td-21">
                                 <b>1 × Start-Ausgabe</b><br />
-                                <span>Sternzeichen Fische (Pisces)</span>
+                                <span>5 D-Mark der BRD Neuprägung </span>
                             </div>
                             <div class="Test001-td-22">79,99 €</div>
                             <div class="Test001-td-23">64,99 €</div>
@@ -437,7 +437,7 @@
                                     </li>
                                     <li>
                                         <span class="Test001-tick">✓</span>
-                                        <div><b>Automatisches Ende —</b><span> die Flatrate endet nach 14 Ausgaben automatisch</span></div>
+                                        <div><b>Automatisches Ende —</b><span> Die Flatrate endet nach 14 Ausgaben automatisch</span></div>
                                     </li>
                                 </ul>
                             </div>
