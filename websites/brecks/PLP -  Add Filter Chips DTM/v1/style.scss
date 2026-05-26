@@ -27,7 +27,7 @@
         overflow-x: scroll;
         // scrollbar-width: none;
         -webkit-overflow-scrolling: touch;
-        padding: 4px 16px 4px 0;
+        padding: 4px 20px 4px 0;
 
         &::-webkit-scrollbar {
             display: none;
@@ -58,6 +58,9 @@
             background-color 0.2s ease;
         &:hover,
         &:focus-visible {
+            border: 1px solid #487000;
+            color: #487000;
+            gap: 5px;
             background: #E5ECDD;
             outline: none;
         }

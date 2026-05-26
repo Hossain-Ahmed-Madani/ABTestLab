@@ -10,7 +10,7 @@
   gap: 4px;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 16px 4px 0;
+  padding: 4px 20px 4px 0;
 }
 .AB-FILTER-CHIPS .ab--filter-chips::-webkit-scrollbar {
   display: none;
@@ -35,6 +35,9 @@
   transition: background-color 0.2s ease;
 }
 .AB-FILTER-CHIPS .ab--filter-chip:hover, .AB-FILTER-CHIPS .ab--filter-chip:focus-visible {
+  border: 1px solid #487000;
+  color: #487000;
+  gap: 5px;
   background: #E5ECDD;
   outline: none;
 }

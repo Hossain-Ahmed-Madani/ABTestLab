@@ -11,7 +11,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         test_name: "PLP - Add Filter Chips [DTM]",
         page_initials: "AB-FILTER-CHIPS",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -212,9 +212,9 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         let rafId = null;
 
         const DRAG_THRESHOLD = 5;
-        const FRICTION = 0.92;       // velocity multiplier per frame (~60fps decay)
-        const MIN_VELOCITY = 0.3;    // px/frame below which momentum stops
-        const VELOCITY_SCALE = 16;   // normalise raw px/ms to px/frame at ~60fps
+        const FRICTION = 0.92; // velocity multiplier per frame (~60fps decay)
+        const MIN_VELOCITY = 0.3; // px/frame below which momentum stops
+        const VELOCITY_SCALE = 16; // normalise raw px/ms to px/frame at ~60fps
 
         function cancelMomentum() {
             if (rafId !== null) {
@@ -317,9 +317,14 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
         createLayout();
-        clickFunction();
-        dragScrollFunction();
-        mutationObserverFunction();
+
+        waitForElementAsync(() => q(".ab--filter-chips-wrap"))
+            .then(() => {
+                clickFunction();
+                dragScrollFunction();
+                mutationObserverFunction();
+            })
+            .catch(console.warn);
     }
 
     function checkForItems() {
