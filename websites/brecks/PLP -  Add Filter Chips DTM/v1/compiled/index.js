@@ -99,12 +99,12 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
             });
         }
 
-        if (q(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`)) {
-            data.push({
-                label: "New Arrivals",
-                targetNodeSelector: `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
-            });
-        }
+        // if (q(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`)) {
+        //     data.push({
+        //         label: "New Arrivals",
+        //         targetNodeSelector: `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
+        //     });
+        // }
 
         if (q(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`)) {
             data.push({
@@ -120,7 +120,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
             }),
         );
 
-        console.log("DATA", data);
+        // console.log("DATA", data);
 
         return data;
     }
