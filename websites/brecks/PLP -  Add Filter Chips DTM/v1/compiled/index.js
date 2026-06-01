@@ -16,7 +16,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+    async function waitForElementAsync(predicate, timeout = 5000, frequency = 150) {
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
@@ -90,33 +90,33 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     function getFilterData() {
         const data = [];
         const PlantingZone = getCookie("PlantingZone");
-        const matchingFilterNodeValue = qq('ul#filter-form__list-zone--sidebar input[type="checkbox"]').find((item) => PlantingZone && PlantingZone.includes(item.value))?.value ?? null;
+        const matchingFilterNodeValue =
+            qq('ul#filter-form__list-zone--sidebar input[type="checkbox"], main.search-results-page input[data-se-facet-default-title="Zone"][type="checkbox"]').find(
+                (item) => PlantingZone && PlantingZone.includes(item.value),
+            )?.value ?? null;
 
         if (PlantingZone && matchingFilterNodeValue) {
+            const zoneNodeSelector = `ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"],  main.search-results-page input[data-se-facet-default-title="Zone"][type="checkbox"][value="${matchingFilterNodeValue}"]`;
+
             data.push({
                 label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
-                targetNodeSelector: `ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"]`,
+                targetNodeSelector: zoneNodeSelector,
             });
         }
 
-        // if (q(`ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`)) {
-        //     data.push({
-        //         label: "New Arrivals",
-        //         targetNodeSelector: `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
-        //     });
-        // }
+        const fallNodeSelector = `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"],  main.search-results-page input[data-se-facet-default-title="Bloom Time"][type="checkbox"][value="Fall"]`;
 
-        if (q(`ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`)) {
+        if (q(fallNodeSelector)) {
             data.push({
                 label: "Ships Now",
-                targetNodeSelector: `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`,
+                targetNodeSelector: fallNodeSelector,
             });
         }
 
-        qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"]`)?.forEach((item) =>
+        qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"],  main.search-results-page input[data-se-facet-default-title="Usage"][type="checkbox"]`)?.forEach((item) =>
             data.push({
                 label: item.getAttribute("value"),
-                targetNodeSelector: `ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"]`,
+                targetNodeSelector: `ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"],  main.search-results-page input[data-se-facet-default-title="Usage"][type="checkbox"][value="${item.getAttribute("value")}"]`,
             }),
         );
 
@@ -129,11 +129,11 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
         const insertionConfig = {
             "(max-width: 990.5px)": {
-                selector: ".section-inner.section-inner--full-width:has(>.collection__inner)",
+                selector: ".section-inner.section-inner--full-width:has(>.collection__inner),  main.search-results-page .snize-horizontal-wrapper",
                 insertPosition: "afterbegin",
             },
             "(min-width: 991px)": {
-                selector: ".filter-topbar__sidebar-toggle-wrapper",
+                selector: ".filter-topbar__sidebar-toggle-wrapper, main.search-results-page .snize-horizontal-right",
                 insertPosition: "afterend",
             },
         };
@@ -152,7 +152,10 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
                                 ({ label, targetNodeSelector }) => /* HTML */ `
                                     <button
                                         type="button"
-                                        class="ab--filter-chip ${q(targetNodeSelector)?.checked && !q(targetNodeSelector)?.disabled ? "ab--chip-active" : ""} ${q(targetNodeSelector)?.disabled ? "ab--chip-disabled" : ""}"
+                                        class="ab--filter-chip ${q(targetNodeSelector)?.checked && !q(targetNodeSelector)?.disabled ? "ab--chip-active" : ""} ${q(targetNodeSelector)
+                                            ?.disabled
+                                            ? "ab--chip-disabled"
+                                            : ""}"
                                         data-selector="${encodeURIComponent(targetNodeSelector)}"
                                     >
                                         <span class="ab--chip-label">${label}</span>
@@ -210,12 +213,19 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
             const targetNodeSelector = decodeURIComponent(button.dataset.selector);
             const targetNode = q(targetNodeSelector);
 
+            console.log("TARGET NODE", targetNodeSelector, targetNode);
+
+            if (!targetNode) {
+                button.classList.remove("ab--chip-active");
+                button.classList.add("ab--chip-disabled");
+                return;
+            }
+
             if (targetNode.checked) {
                 button.classList.add("ab--chip-active");
             } else {
                 button.classList.remove("ab--chip-active");
             }
-
 
             if (targetNode.disabled) {
                 button.classList.remove("ab--chip-active");
@@ -223,13 +233,11 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
             } else {
                 button.classList.remove("ab--chip-disabled");
             }
-
-
         });
     }
 
     function mutationObserverFunction() {
-        const targetNode = q(".filter-sidebar");
+        const targetNode = q(".filter-sidebar, main.search-results-page .snize-filters-sidebar");
         const debouncedUpdate = debounce(() => {
             updateLayout();
             syncFilterChipsScrollbar();
@@ -371,7 +379,12 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".collection__inner") && q(".filter-form__content .filter-form__group"));
+        return !!(
+            document.readyState === "complete" &&
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".collection__inner, main.search-results-page .snize-search-results-main-content") &&
+            q(".filter-form__content .filter-form__group,  main.search-results-page .snize-filters-sidebar.snize-product-filters")
+        );
     }
 
     try {
