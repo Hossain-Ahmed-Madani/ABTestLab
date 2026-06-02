@@ -16,59 +16,6 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    const LAYOUT_CONFIG = {
-        collections: {
-            "(max-width: 990.5px)": {
-                insertElementSelector: ".section-inner.section-inner--full-width:has(>.collection__inner)",
-                insertPosition: "afterbegin",
-                mutationObserverSelector: ".filter-sidebar",
-                zoneSelector: 'ul#filter-form__list-zone--sidebar input[type="checkbox"]',
-                shippingSeasonSelector: 'ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]',
-                usageSelector: 'ul#filter-form__list-usage--sidebar input[type="checkbox"]',
-            },
-            "(min-width: 991px)": {
-                insertElementSelector: ".filter-topbar__sidebar-toggle-wrapper",
-                insertPosition: "afterend",
-                mutationObserverSelector: ".filter-sidebar",
-                zoneSelector: 'ul#filter-form__list-zone--sidebar input[type="checkbox"]',
-                shippingSeasonSelector: 'ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]',
-                usageSelector: 'ul#filter-form__list-usage--sidebar input[type="checkbox"]',
-            },
-        },
-        search: {
-            "(max-width: 990.5px)": {
-                insertElementSelector: "",
-                mutationObserverSelector: "",
-                insertPosition: "afterbegin",
-                zoneSelector: "",
-                shippingSeasonSelector: "",
-                usageSelector: "",
-            },
-            "(min-width: 991px)": {
-                insertElementSelector: "",
-                mutationObserverSelector: "",
-                insertPosition: "afterbegin",
-                zoneSelector: "",
-                shippingSeasonSelector: "",
-                usageSelector: "",
-            },
-        },
-    };
-
-    let CURRENT_LAYOUT_CONFIG = null;
-
-    function getLayoutConfig() {
-        const currentPath = window.location.pathname;
-
-        if (!(currentPath.includes("/collections/") || currentPath.includes("/search-results-page"))) {
-            return null;
-        }
-
-        const pathConfig = LAYOUT_CONFIG[currentPath.includes("collections") ? "collections" : "search"] ?? {};
-        const matchedQuery = Object.keys(pathConfig).find((query) => window.matchMedia(query).matches);
-        return pathConfig[matchedQuery] ?? null;
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -149,37 +96,35 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     }
 
     function getFilterData() {
-
-        const { zoneSelector, shippingSeasonSelector, usageSelector } = CURRENT_LAYOUT_CONFIG;
-        const PlantingZone = getCookie("PlantingZone");
-
         const data = [];
-
+        const PlantingZone = getCookie("PlantingZone");
         const matchingFilterNodeValue =
-            qq(zoneSelector).find(
+            qq('ul#filter-form__list-zone--sidebar input[type="checkbox"], main.search-results-page input[data-se-facet-default-title="Zone"][type="checkbox"]').find(
                 (item) => PlantingZone && PlantingZone.includes(item.value),
             )?.value ?? null;
 
         if (PlantingZone && matchingFilterNodeValue) {
-            const zoneNodeSelector = `${zoneSelector}[value="${matchingFilterNodeValue}"]`;
+            const zoneNodeSelector = `ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"],  main.search-results-page input[data-se-facet-default-title="Zone"][type="checkbox"][value="${matchingFilterNodeValue}"]`;
 
             data.push({
                 label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
-                controlNodeSelector: zoneNodeSelector,
+                targetNodeSelector: zoneNodeSelector,
             });
         }
 
-        if (q(shippingSeasonSelector)) {
+        const fallNodeSelector = `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"],  main.search-results-page input[data-se-facet-default-title="Bloom Time"][type="checkbox"][value="Fall"]`;
+
+        if (q(fallNodeSelector)) {
             data.push({
                 label: "Ships Now",
-                controlNodeSelector: shippingSeasonSelector,
+                targetNodeSelector: fallNodeSelector,
             });
         }
 
-        qq(usageSelector)?.forEach((item) =>
+        qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"],  main.search-results-page input[data-se-facet-default-title="Usage"][type="checkbox"]`)?.forEach((item) =>
             data.push({
                 label: item.getAttribute("value"),
-                controlNodeSelector: `${usageSelector}[value="${item.getAttribute("value")}"]`,
+                targetNodeSelector: `ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"],  main.search-results-page input[data-se-facet-default-title="Usage"][type="checkbox"][value="${item.getAttribute("value")}"]`,
             }),
         );
 
@@ -190,23 +135,39 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const filterData = getFilterData();
         if (!filterData.length) return;
 
-        const { insertElementSelector, insertPosition } = CURRENT_LAYOUT_CONFIG;
+        const insertionConfig = {
+            "(max-width: 990.5px)": {
+                selector: ".section-inner.section-inner--full-width:has(>.collection__inner),  main.search-results-page .snize-main-panel-mobile-filters",
+                insertPosition: window.location.href.includes("search-results-page") ? "afterend" : "afterbegin",
+            },
+            "(min-width: 991px)": {
+                selector: ".filter-topbar__sidebar-toggle-wrapper, main.search-results-page .snize-horizontal-right",
+                insertPosition: "afterend",
+            },
+        };
 
-        q(insertElementSelector).insertAdjacentHTML(
+        const matchedQuery = Object.keys(insertionConfig).find((query) => window.matchMedia(query).matches);
+        const { selector, insertPosition } = insertionConfig[matchedQuery] ?? {};
+
+        console.log("SELECTOR", selector, insertPosition);
+
+        if (!selector) return;
+
+        q(selector).insertAdjacentHTML(
             insertPosition,
             /* HTML */ `
                 <div class="ab--filter-chips-wrap">
                     <div class="ab--filter-chips">
                         ${filterData
                             .map(
-                                ({ label, controlNodeSelector }) => /* HTML */ `
+                                ({ label, targetNodeSelector }) => /* HTML */ `
                                     <button
                                         type="button"
-                                        class="ab--filter-chip ${q(controlNodeSelector)?.checked && !q(controlNodeSelector)?.disabled ? "ab--chip-active" : ""} ${q(controlNodeSelector)
+                                        class="ab--filter-chip ${q(targetNodeSelector)?.checked && !q(targetNodeSelector)?.disabled ? "ab--chip-active" : ""} ${q(targetNodeSelector)
                                             ?.disabled
                                             ? "ab--chip-disabled"
                                             : ""}"
-                                        data-selector="${encodeURIComponent(controlNodeSelector)}"
+                                        data-selector="${encodeURIComponent(targetNodeSelector)}"
                                     >
                                         <span class="ab--chip-label">${label}</span>
                                     </button>
@@ -260,10 +221,10 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
     function updateLayout() {
         qq(".ab--filter-chip").forEach((button) => {
-            const controlNodeSelector = decodeURIComponent(button.dataset.selector);
-            const targetNode = q(controlNodeSelector);
+            const targetNodeSelector = decodeURIComponent(button.dataset.selector);
+            const targetNode = q(targetNodeSelector);
 
-            console.log("TARGET NODE", controlNodeSelector, targetNode);
+            console.log("TARGET NODE", targetNodeSelector, targetNode);
 
             if (!targetNode) {
                 button.classList.remove("ab--chip-active");
@@ -287,8 +248,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     }
 
     function mutationObserverFunction() {
-        const { mutationObserverSelector } = CURRENT_LAYOUT_CONFIG;
-        const targetNode = q(mutationObserverSelector);
+        const targetNode = q(".filter-sidebar, main.search-results-page .snize-filters-sidebar");
         const debouncedUpdate = debounce(() => {
             updateLayout();
             syncFilterChipsScrollbar();
@@ -407,23 +367,16 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
             if (button) {
                 button.classList.toggle("ab--chip-active");
-                const controlNodeSelector = decodeURIComponent(button.dataset.selector);
-                const targetNode = q(controlNodeSelector);
+                const targetNodeSelector = decodeURIComponent(button.dataset.selector);
+                const targetNode = q(targetNodeSelector);
                 targetNode?.click();
             }
         });
     }
 
     function init() {
-        if (window[page_initials] === true) return;
-
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        window[page_initials] = true;
-        CURRENT_LAYOUT_CONFIG = getLayoutConfig();
-
         console.table(TEST_CONFIG);
-        console.table(CURRENT_LAYOUT_CONFIG);
-
         createLayout();
 
         waitForElementAsync(() => q(".ab--filter-chips-wrap"))
@@ -437,21 +390,19 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     }
 
     function checkForItems() {
-        const layoutConfig = getLayoutConfig();
-        if (!layoutConfig) return false;
-
-        console.log("LAYOUT CONFIG", layoutConfig);
-
-        const { insertElementSelector, mutationObserverSelector, zoneSelector, shippingSeasonSelector, usageSelector } = layoutConfig;
-
         return !!(
             document.readyState === "complete" &&
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            q(insertElementSelector) &&
-            q(mutationObserverSelector) &&
-            (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
+            q(".collection__inner, main.search-results-page .snize-search-results-main-content") &&
+            q(".filter-form__content .filter-form__group,  main.search-results-page .snize-filters-sidebar.snize-product-filters:not(:empty)")
         );
     }
 
-    waitForElementAsync(checkForItems).then(init);
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        console.warn(error);
+        return false;
+    }
 })();
