@@ -7,19 +7,96 @@
       style.innerHTML = `.AB-FILTER-CHIPS .ab--filter-chips-wrap {
   width: 100%;
   margin: 0 0 12px;
-  padding: 0 0 0 16px;
+  padding: 0 0 0 11px;
   box-sizing: border-box;
 }
 .AB-FILTER-CHIPS .ab--filter-chips {
   display: flex;
   flex-wrap: nowrap;
   gap: 4px;
-  overflow-x: scroll;
+  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 16px 4px 0;
+  padding: 4px 20px 4px 0;
+  scrollbar-width: none;
 }
 .AB-FILTER-CHIPS .ab--filter-chips::-webkit-scrollbar {
   display: none;
+  height: 0;
+}
+.AB-FILTER-CHIPS .ab--scrollbar {
+  height: 5px;
+  margin: 0 20px 0 0;
+  background: #fff;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+.AB-FILTER-CHIPS .ab--scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-width: 24px;
+  background: #d9d9d9;
+  border-radius: 50px;
+  will-change: transform;
+}
+.AB-FILTER-CHIPS .ab--scrollbar--hidden {
+  visibility: hidden;
+}
+@media (min-width: 991px) {
+  .AB-FILTER-CHIPS .ab--scrollbar {
+    display: none;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chips {
+    padding-bottom: 4px;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chips:not(.ab--has-overflow-x) {
+    scrollbar-width: none;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips:not(.ab--has-overflow-x)::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chips.ab--has-overflow-x {
+    padding-bottom: 8px;
+    scrollbar-color: #d9d9d9 #fff;
+    scrollbar-width: thin;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar {
+    display: block;
+    height: 5px;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-track {
+    background: #fff;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-thumb {
+    background: #d9d9d9;
+    border-radius: 50px;
+    border: none;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-thumb:hover,
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-thumb:active {
+    background: #d9d9d9;
+    border-radius: 50px;
+    border: none;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-button {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .AB-FILTER-CHIPS
+    .ab--filter-chips.ab--has-overflow-x::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 .AB-FILTER-CHIPS .ab--filter-chip {
   flex: 0 0 auto;
@@ -42,6 +119,9 @@
 }
 .AB-FILTER-CHIPS .ab--filter-chip:hover,
 .AB-FILTER-CHIPS .ab--filter-chip:focus-visible {
+  border: 1px solid #487000;
+  color: #487000;
+  gap: 5px;
   background: #e5ecdd;
   outline: none;
 }
@@ -61,9 +141,11 @@
   width: 8px;
   height: 8px;
 }
-.AB-FILTER-CHIPS .ab--chip-active:hover,
-.AB-FILTER-CHIPS .ab--chip-active:focus-visible {
-  background: #e5ecdd;
+.AB-FILTER-CHIPS .ab--chip-disabled {
+  pointer-events: none;
+  cursor: disabled;
+  opacity: 0.4;
+  filter: grayscale(100%);
 }
 .AB-FILTER-CHIPS .ab--chip-label {
   pointer-events: none;
@@ -85,13 +167,59 @@
   }
   .AB-FILTER-CHIPS .ab--filter-chips {
     max-width: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
     cursor: grab;
   }
   .AB-FILTER-CHIPS .ab--filter-chips.ab--is-dragging {
     cursor: grabbing;
     user-select: none;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(
+      .snize-product-filters:not(.snize-hidden)
+    )
+    .snize-horizontal-left {
+    width: 232px;
+    min-width: 232px;
+    height: 100%;
+    padding-right: 5px;
+    order: 0;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(
+      .snize-product-filters:not(.snize-hidden)
+    )
+    .snize-header {
+    width: 100%;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(
+      .snize-product-filters:not(.snize-hidden)
+    )
+    .snize-search-results-header {
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    font-size: 16px !important;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(
+      .snize-product-filters:not(.snize-hidden)
+    )
+    .snize-horizontal-right {
+    min-width: 200px;
+    margin-left: 15px;
+    display: flex;
+    order: 3;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(
+      .snize-product-filters:not(.snize-hidden)
+    )
+    .ab--filter-chips {
+    padding-top: 0;
+  }
+  .AB-FILTER-CHIPS.snize-results-page:has(.snize-product-filters.snize-hidden)
+    .ab--filter-chips-wrap {
+    display: none;
   }
 }
 `;
@@ -115,10 +243,85 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     test_name: "PLP - Add Filter Chips [DTM]",
     page_initials: "AB-FILTER-CHIPS",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  const LAYOUT_CONFIG = {
+    collections: {
+      "(max-width: 990.5px)": {
+        insertElementSelector:
+          ".section-inner.section-inner--full-width:has(>.collection__inner)",
+        insertPosition: "afterbegin",
+        mutationObserverSelector: ".filter-sidebar",
+        zoneSelector:
+          'ul#filter-form__list-zone--sidebar input[type="checkbox"]',
+        shippingSeasonSelector:
+          'ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]',
+        usageSelector:
+          'ul#filter-form__list-usage--sidebar input[type="checkbox"]',
+      },
+      "(min-width: 991px)": {
+        insertElementSelector: ".filter-topbar__sidebar-toggle-wrapper",
+        insertPosition: "afterend",
+        mutationObserverSelector: ".filter-sidebar",
+        zoneSelector:
+          'ul#filter-form__list-zone--sidebar input[type="checkbox"]',
+        shippingSeasonSelector:
+          'ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]',
+        usageSelector:
+          'ul#filter-form__list-usage--sidebar input[type="checkbox"]',
+      },
+    },
+    search: {
+      "(max-width: 990.5px)": {
+        insertElementSelector: "",
+        mutationObserverSelector: "",
+        insertPosition: "afterbegin",
+        zoneSelector: "",
+        shippingSeasonSelector: "",
+        usageSelector: "",
+      },
+      "(min-width: 991px)": {
+        insertElementSelector:
+          "main.search-results-page .snize-horizontal-right",
+        mutationObserverSelector:
+          "main.search-results-page .snize-filters-sidebar",
+        insertPosition: "afterend",
+        zoneSelector:
+          "main.search-results-page input[data-se-facet-default-title='Zone'][type='checkbox']",
+        shippingSeasonSelector:
+          "main.search-results-page input[data-se-facet-default-title='Bloom Time'][type='checkbox'][value='Fall']",
+        usageSelector:
+          "main.search-results-page input[data-se-facet-default-title='Usage'][type='checkbox']",
+      },
+    },
+  };
+
+  let CURRENT_LAYOUT_CONFIG = null;
+
+  function getLayoutConfig() {
+    const currentPath = window.location.pathname;
+
+    if (
+      !(
+        currentPath.includes("/collections/") ||
+        currentPath.includes("/search-results-page")
+      )
+    ) {
+      return null;
+    }
+
+    const pathConfig =
+      LAYOUT_CONFIG[
+        currentPath.includes("collections") ? "collections" : "search"
+      ] ?? {};
+    const matchedQuery = Object.keys(pathConfig).find(
+      (query) => window.matchMedia(query).matches,
+    );
+    return pathConfig[matchedQuery] ?? null;
+  }
 
   async function waitForElementAsync(
     predicate,
@@ -153,7 +356,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
   }
 
   function q(s, o) {
-    return document.querySelector(s);
+    return o ? s.querySelector(o) : document.querySelector(s);
   }
 
   function qq(s, o) {
@@ -204,51 +407,37 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
   }
 
   function getFilterData() {
-    const data = [];
+    const { zoneSelector, shippingSeasonSelector, usageSelector } =
+      CURRENT_LAYOUT_CONFIG;
     const PlantingZone = getCookie("PlantingZone");
+
+    const data = [];
+
     const matchingFilterNodeValue =
-      qq('ul#filter-form__list-zone--sidebar input[type="checkbox"]').find(
+      qq(zoneSelector).find(
         (item) => PlantingZone && PlantingZone.includes(item.value),
       )?.value ?? null;
 
     if (PlantingZone && matchingFilterNodeValue) {
       data.push({
         label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
-        targetNodeSelector: `ul#filter-form__list-zone--sidebar input[type="checkbox"][value="${matchingFilterNodeValue}"]`,
+        controlNodeSelector: `${zoneSelector}[value="${matchingFilterNodeValue}"]`,
       });
     }
 
-    if (
-      q(
-        `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
-      )
-    ) {
-      data.push({
-        label: "New Arrivals",
-        targetNodeSelector: `ul#filter-form__list-new-products--sidebar input[type="checkbox"][value="Yes"]`,
-      });
-    }
-
-    if (
-      q(
-        `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`,
-      )
-    ) {
+    if (q(shippingSeasonSelector)) {
       data.push({
         label: "Ships Now",
-        targetNodeSelector: `ul#filter-form__list-shipping-season--sidebar input[type="checkbox"][value="Fall"]`,
+        controlNodeSelector: shippingSeasonSelector,
       });
     }
 
-    qq(`ul#filter-form__list-usage--sidebar input[type="checkbox"]`)?.forEach(
-      (item) =>
-        data.push({
-          label: item.getAttribute("value"),
-          targetNodeSelector: `ul#filter-form__list-usage--sidebar input[type="checkbox"][value="${item.getAttribute("value")}"]`,
-        }),
+    qq(usageSelector)?.forEach((item) =>
+      data.push({
+        label: item.getAttribute("value"),
+        controlNodeSelector: `${usageSelector}[value="${item.getAttribute("value")}"]`,
+      }),
     );
-
-    console.log("DATA", data);
 
     return data;
   }
@@ -257,38 +446,25 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     const filterData = getFilterData();
     if (!filterData.length) return;
 
-    const insertionConfig = {
-      "(max-width: 990.5px)": {
-        selector:
-          ".section-inner.section-inner--full-width:has(>.collection__inner)",
-        insertPosition: "afterbegin",
-      },
-      "(min-width: 991px)": {
-        selector: ".filter-topbar__sidebar-toggle-wrapper",
-        insertPosition: "afterend",
-      },
-    };
+    const { insertElementSelector, insertPosition } = CURRENT_LAYOUT_CONFIG;
 
-    const matchedQuery = Object.keys(insertionConfig).find(
-      (query) => window.matchMedia(query).matches,
-    );
-    const { selector, insertPosition } = insertionConfig[matchedQuery] ?? {};
-    if (!selector) return;
-
-    q(selector).insertAdjacentHTML(
+    q(insertElementSelector).insertAdjacentHTML(
       insertPosition,
       /* HTML */ `
         <div class="ab--filter-chips-wrap">
           <div class="ab--filter-chips">
             ${filterData
               .map(
-                ({ label, targetNodeSelector }) => /* HTML */ `
+                ({ label, controlNodeSelector }) => /* HTML */ `
                   <button
                     type="button"
-                    class="ab--filter-chip ${q(targetNodeSelector)?.checked
+                    class="ab--filter-chip ${q(controlNodeSelector)?.checked &&
+                    !q(controlNodeSelector)?.disabled
                       ? "ab--chip-active"
+                      : ""} ${q(controlNodeSelector)?.disabled
+                      ? "ab--chip-disabled"
                       : ""}"
-                    data-selector="${encodeURIComponent(targetNodeSelector)}"
+                    data-selector="${encodeURIComponent(controlNodeSelector)}"
                   >
                     <span class="ab--chip-label">${label}</span>
                   </button>
@@ -296,27 +472,92 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
               )
               .join("")}
           </div>
+          <div class="ab--scrollbar" aria-hidden="true">
+            <div class="ab--scrollbar-thumb"></div>
+          </div>
         </div>
       `,
     );
   }
 
-  function updateLayout() {
-    qq(".ab--filter-chip").forEach((button) => {
-      const targetNodeSelector = decodeURIComponent(button.dataset.selector);
-      const targetNode = q(targetNodeSelector);
+  async function recreateInnerLayout() {
+    await waitForElementAsync(() => q(".ab--filter-chips"));
 
-      if (targetNode.checked) {
-        button.classList.add("ab--chip-active");
-      } else {
-        button.classList.remove("ab--chip-active");
-      }
+    const filterData = getFilterData();
+
+    if (!filterData.length) return;
+
+    q(".ab--filter-chips").innerHTML = /* HTML */ filterData
+      .map(
+        ({ label, controlNodeSelector }) => /* HTML */ `
+          <button
+            type="button"
+            class="ab--filter-chip ${q(controlNodeSelector)?.checked &&
+            !q(controlNodeSelector)?.disabled
+              ? "ab--chip-active"
+              : ""} ${q(controlNodeSelector)?.disabled
+              ? "ab--chip-disabled"
+              : ""}"
+            data-selector="${encodeURIComponent(controlNodeSelector)}"
+          >
+            <span class="ab--chip-label">${label}</span>
+          </button>
+        `,
+      )
+      .join("");
+  }
+
+  function syncFilterChipsScrollbar() {
+    const scroller = q(".ab--filter-chips");
+    if (!scroller) return;
+
+    const scrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+    scroller.classList.toggle("ab--has-overflow-x", scrollable);
+
+    if (window.matchMedia("(min-width: 991px)").matches) return;
+
+    const thumb = q(".ab--scrollbar-thumb");
+    const track = q(".ab--scrollbar");
+    if (!thumb || !track) return;
+
+    track.classList.toggle("ab--scrollbar--hidden", !scrollable);
+
+    if (!scrollable) return;
+
+    const trackWidth = track.clientWidth;
+    const thumbWidth = Math.max(
+      (scroller.clientWidth / scroller.scrollWidth) * trackWidth,
+      24,
+    );
+    const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+    const maxThumbOffset = trackWidth - thumbWidth;
+    const thumbOffset =
+      maxScrollLeft > 0
+        ? (scroller.scrollLeft / maxScrollLeft) * maxThumbOffset
+        : 0;
+
+    thumb.style.width = `${thumbWidth}px`;
+    thumb.style.transform = `translate3d(${thumbOffset}px, 0, 0)`;
+  }
+
+  function filterChipsScrollbarFunction() {
+    const scroller = q(".ab--filter-chips");
+    if (!scroller) return;
+
+    scroller.addEventListener("scroll", syncFilterChipsScrollbar, {
+      passive: true,
     });
+    new ResizeObserver(syncFilterChipsScrollbar).observe(scroller);
+    syncFilterChipsScrollbar();
   }
 
   function mutationObserverFunction() {
-    const targetNode = q(".filter-sidebar");
-    const debouncedUpdate = debounce(updateLayout, 150);
+    const { mutationObserverSelector } = CURRENT_LAYOUT_CONFIG;
+    const targetNode = q(mutationObserverSelector);
+    const debouncedUpdate = debounce(() => {
+      recreateInnerLayout();
+      syncFilterChipsScrollbar();
+    }, 250);
     return new MutationObserver(debouncedUpdate).observe(targetNode, {
       childList: true,
       subtree: true,
@@ -435,41 +676,63 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
       if (button) {
         button.classList.toggle("ab--chip-active");
-        const targetNodeSelector = decodeURIComponent(button.dataset.selector);
-        const targetNode = q(targetNodeSelector);
+        const controlNodeSelector = decodeURIComponent(button.dataset.selector);
+        const targetNode = q(controlNodeSelector);
         targetNode?.click();
       }
     });
   }
 
-  function init() {
+  async function init() {
+    if (window[page_initials] === true) return;
+
     q("body").classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
+    window[page_initials] = true;
+    CURRENT_LAYOUT_CONFIG = getLayoutConfig();
+
     console.table(TEST_CONFIG);
+    console.table(CURRENT_LAYOUT_CONFIG);
+
     createLayout();
+
+    await waitForElementAsync(() => q(".ab--filter-chips-wrap"));
+
     clickFunction();
     dragScrollFunction();
+    filterChipsScrollbarFunction();
     mutationObserverFunction();
   }
 
   function checkForItems() {
+    const layoutConfig = getLayoutConfig();
+    if (!layoutConfig) return false;
+
+    console.log("LAYOUT CONFIG", layoutConfig);
+
+    const {
+      insertElementSelector,
+      mutationObserverSelector,
+      zoneSelector,
+      shippingSeasonSelector,
+      usageSelector,
+    } = layoutConfig;
+
     return !!(
+      document.readyState === "complete" &&
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
-      q(".collection__inner") &&
-      q(".filter-form__content .filter-form__group")
+      q(insertElementSelector) &&
+      q(mutationObserverSelector) &&
+      (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
     );
   }
 
-  try {
-    await waitForElementAsync(checkForItems);
-    init();
-  } catch (error) {
-    console.warn(error);
-    return false;
-  }
+  //  ================ MAIN LOGIC ================
+  await waitForElementAsync(checkForItems);
+  init();
 })();

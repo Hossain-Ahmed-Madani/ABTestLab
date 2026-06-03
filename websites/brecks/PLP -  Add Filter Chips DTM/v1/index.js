@@ -157,11 +157,9 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const matchingFilterNodeValue = qq(zoneSelector).find((item) => PlantingZone && PlantingZone.includes(item.value))?.value ?? null;
 
         if (PlantingZone && matchingFilterNodeValue) {
-            const zoneNodeSelector = `${zoneSelector}[value="${matchingFilterNodeValue}"]`;
-
             data.push({
                 label: "Shop Your Zone: " + PlantingZone.toUpperCase(),
-                controlNodeSelector: zoneNodeSelector,
+                controlNodeSelector: `${zoneSelector}[value="${matchingFilterNodeValue}"]`,
             });
         }
 
@@ -282,7 +280,6 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const { mutationObserverSelector } = CURRENT_LAYOUT_CONFIG;
         const targetNode = q(mutationObserverSelector);
         const debouncedUpdate = debounce(() => {
-            // updateLayout();
             recreateInnerLayout();
             syncFilterChipsScrollbar();
         }, 250);
@@ -414,8 +411,8 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         window[page_initials] = true;
         CURRENT_LAYOUT_CONFIG = getLayoutConfig();
 
-        console.table(TEST_CONFIG);
-        console.table(CURRENT_LAYOUT_CONFIG);
+        // console.table(TEST_CONFIG);
+        // console.table(CURRENT_LAYOUT_CONFIG);
 
         createLayout();
 
@@ -431,7 +428,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const layoutConfig = getLayoutConfig();
         if (!layoutConfig) return false;
 
-        console.log("LAYOUT CONFIG", layoutConfig);
+        // console.log("LAYOUT CONFIG", layoutConfig);
 
         const { insertElementSelector, mutationObserverSelector, zoneSelector, shippingSeasonSelector, usageSelector } = layoutConfig;
 
@@ -444,9 +441,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         );
     }
 
-
     //  ================ MAIN LOGIC ================
     await waitForElementAsync(checkForItems);
     init();
-
 })();
