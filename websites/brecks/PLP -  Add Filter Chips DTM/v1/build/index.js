@@ -7,7 +7,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
   const TEST_CONFIG = {
     page_initials: "AB-FILTER-CHIPS",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0007,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -271,14 +271,16 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
       .join("");
   }
 
+  function isFilterChipsScrollable(scroller) {
+    return Math.ceil(scroller.scrollWidth) > Math.floor(scroller.clientWidth);
+  }
+
   function syncFilterChipsScrollbar() {
     const scroller = q(".ab--filter-chips");
     if (!scroller) return;
 
-    const scrollable = scroller.scrollWidth > scroller.clientWidth + 1;
+    const scrollable = isFilterChipsScrollable(scroller);
     scroller.classList.toggle("ab--has-overflow-x", scrollable);
-
-    if (window.matchMedia("(min-width: 991px)").matches) return;
 
     const thumb = q(".ab--scrollbar-thumb");
     const track = q(".ab--scrollbar");
@@ -286,7 +288,11 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
     track.classList.toggle("ab--scrollbar--hidden", !scrollable);
 
-    if (!scrollable) return;
+    if (!scrollable) {
+      thumb.style.width = "";
+      thumb.style.transform = "";
+      return;
+    }
 
     const trackWidth = track.clientWidth;
     const thumbWidth = Math.max(
@@ -301,7 +307,16 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         : 0;
 
     thumb.style.width = `${thumbWidth}px`;
+    thumb.style.height = "5px";
     thumb.style.transform = `translate3d(${thumbOffset}px, 0, 0)`;
+  }
+
+  function scheduleFilterChipsScrollbarSync() {
+    syncFilterChipsScrollbar();
+    requestAnimationFrame(() => {
+      syncFilterChipsScrollbar();
+      requestAnimationFrame(syncFilterChipsScrollbar);
+    });
   }
 
   function filterChipsScrollbarFunction() {
@@ -311,8 +326,152 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     scroller.addEventListener("scroll", syncFilterChipsScrollbar, {
       passive: true,
     });
-    new ResizeObserver(syncFilterChipsScrollbar).observe(scroller);
-    syncFilterChipsScrollbar();
+    const resizeObserver = new ResizeObserver(scheduleFilterChipsScrollbarSync);
+    resizeObserver.observe(scroller);
+    if (scroller.parentElement) resizeObserver.observe(scroller.parentElement);
+
+    scheduleFilterChipsScrollbarSync();
+    document.fonts?.ready?.then(scheduleFilterChipsScrollbarSync);
+    window.addEventListener("load", scheduleFilterChipsScrollbarSync, {
+      once: true,
+    });
+    window
+      .matchMedia("(min-width: 991px)")
+      .addEventListener("change", scheduleFilterChipsScrollbarSync);
+  }
+
+  function customScrollbarDragFunction() {
+    const wrap = q(".ab--filter-chips-wrap");
+    if (!wrap || wrap.dataset.abScrollbarDrag === "1") return;
+    wrap.dataset.abScrollbarDrag = "1";
+
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartThumbOffset = 0;
+
+    function getScrollbarElements() {
+      return {
+        scroller: q(".ab--filter-chips"),
+        track: q(".ab--scrollbar"),
+        thumb: q(".ab--scrollbar-thumb"),
+      };
+    }
+
+    function canDragCustomScrollbar() {
+      const { track } = getScrollbarElements();
+      return track && !track.classList.contains("ab--scrollbar--hidden");
+    }
+
+    function getScrollbarMetrics() {
+      const { scroller, track, thumb } = getScrollbarElements();
+      if (!scroller || !track || !thumb) return null;
+
+      const trackWidth = track.clientWidth;
+      const thumbWidth = thumb.offsetWidth;
+      const maxScrollLeft = scroller.scrollWidth - scroller.clientWidth;
+      const maxThumbOffset = Math.max(0, trackWidth - thumbWidth);
+
+      return { scroller, thumb, maxScrollLeft, maxThumbOffset };
+    }
+
+    function getThumbOffsetFromScroll() {
+      const metrics = getScrollbarMetrics();
+      if (!metrics || metrics.maxScrollLeft <= 0) return 0;
+      return (
+        (metrics.scroller.scrollLeft / metrics.maxScrollLeft) *
+        metrics.maxThumbOffset
+      );
+    }
+
+    function scrollFromThumbOffset(thumbOffset) {
+      const metrics = getScrollbarMetrics();
+      if (!metrics || metrics.maxThumbOffset <= 0 || metrics.maxScrollLeft <= 0)
+        return;
+
+      const clampedOffset = Math.max(
+        0,
+        Math.min(metrics.maxThumbOffset, thumbOffset),
+      );
+      metrics.scroller.scrollLeft =
+        (clampedOffset / metrics.maxThumbOffset) * metrics.maxScrollLeft;
+    }
+
+    function startThumbDrag(clientX) {
+      const { thumb } = getScrollbarElements();
+      if (!thumb) return;
+
+      dragging = true;
+      dragStartX = clientX;
+      dragStartThumbOffset = getThumbOffsetFromScroll();
+      thumb.classList.add("ab--scrollbar-thumb--dragging");
+      document.body.classList.add("ab--scrollbar-dragging");
+    }
+
+    function endThumbDrag() {
+      if (!dragging) return;
+      dragging = false;
+      q(".ab--scrollbar-thumb")?.classList.remove(
+        "ab--scrollbar-thumb--dragging",
+      );
+      document.body.classList.remove("ab--scrollbar-dragging");
+    }
+
+    wrap.addEventListener("mousedown", (e) => {
+      if (!canDragCustomScrollbar()) return;
+
+      const thumb = e.target.closest(".ab--scrollbar-thumb");
+      if (thumb) {
+        e.preventDefault();
+        startThumbDrag(e.clientX);
+        return;
+      }
+
+      const track = e.target.closest(".ab--scrollbar");
+      if (track) {
+        const metrics = getScrollbarMetrics();
+        if (!metrics) return;
+
+        const clickX = e.clientX - track.getBoundingClientRect().left;
+        scrollFromThumbOffset(clickX - metrics.thumb.offsetWidth / 2);
+        scheduleFilterChipsScrollbarSync();
+      }
+    });
+
+    wrap.addEventListener(
+      "touchstart",
+      (e) => {
+        if (
+          !canDragCustomScrollbar() ||
+          !e.target.closest(".ab--scrollbar-thumb")
+        )
+          return;
+        startThumbDrag(e.touches[0].clientX);
+      },
+      { passive: true },
+    );
+
+    document.addEventListener("mousemove", (e) => {
+      if (!dragging) return;
+      e.preventDefault();
+      scrollFromThumbOffset(dragStartThumbOffset + (e.clientX - dragStartX));
+    });
+
+    document.addEventListener("mouseup", endThumbDrag);
+
+    document.addEventListener(
+      "touchmove",
+      (e) => {
+        if (!dragging) return;
+        e.preventDefault();
+        scrollFromThumbOffset(
+          dragStartThumbOffset + (e.touches[0].clientX - dragStartX),
+        );
+      },
+      { passive: false },
+    );
+
+    document.addEventListener("touchend", endThumbDrag);
+    document.addEventListener("touchcancel", endThumbDrag);
   }
 
   function mutationObserverFunction() {
@@ -320,7 +479,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     const targetNode = q(mutationObserverSelector);
     const debouncedUpdate = debounce(() => {
       recreateInnerLayout();
-      syncFilterChipsScrollbar();
+      scheduleFilterChipsScrollbarSync();
     }, 250);
     return new MutationObserver(debouncedUpdate).observe(targetNode, {
       childList: true,
@@ -468,6 +627,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     clickFunction();
     dragScrollFunction();
     filterChipsScrollbarFunction();
+    customScrollbarDragFunction();
     mutationObserverFunction();
   }
 

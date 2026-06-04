@@ -1,4 +1,10 @@
-.AB-FILTER-CHIPS .ab--filter-chips-wrap {
+function injectStyles() {
+    const page_initials = "AB-FILTER-CHIPS";
+
+    const style = document.createElement("style");
+    style.id = `${page_initials}-STYLES`;
+    style.textContent = /* HTML */ `
+       .AB-FILTER-CHIPS .ab--filter-chips-wrap {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -168,3 +174,9 @@
 body.ab--scrollbar-dragging {
     user-select: none;
 }
+
+    `;
+    document.head.appendChild(style);
+}
+
+injectStyles();

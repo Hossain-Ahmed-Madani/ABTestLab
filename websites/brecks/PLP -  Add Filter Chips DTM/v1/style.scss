@@ -14,6 +14,8 @@
 
 .AB-FILTER-CHIPS {
     .ab--filter-chips-wrap {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         margin: 0 0 12px;
         padding: 0 0 0 11px;
@@ -24,99 +26,57 @@
         display: flex;
         flex-wrap: nowrap;
         gap: 4px;
+        flex: 0 0 auto;
+        min-width: 0;
         overflow-x: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
-        padding: 4px 20px 8px 0;
-
-        // Mobile: native scrollbars are overlay and auto-hide (iOS/Android)
+        padding: 4px 20px 0 0;
         scrollbar-width: none;
+        -ms-overflow-style: none;
 
         &::-webkit-scrollbar {
             display: none;
+            width: 0;
             height: 0;
         }
     }
 
     .ab--scrollbar {
+        flex: 0 0 5px;
         height: 5px;
-        margin: 0 20px 0 0;
+        margin: 6px 20px 0 0;
         background: #fff;
         border-radius: 50px;
         position: relative;
         overflow: hidden;
-        pointer-events: none;
+        pointer-events: auto;
+        cursor: pointer;
+        touch-action: pan-y;
     }
 
     .ab--scrollbar-thumb {
         position: absolute;
         top: 0;
         left: 0;
-        height: 100%;
+        height: 5px;
         min-width: 24px;
         background: #d9d9d9;
         border-radius: 50px;
         will-change: transform;
+        pointer-events: auto;
+        cursor: grab;
+        touch-action: none;
+        box-sizing: border-box;
+
+        &.ab--scrollbar-thumb--dragging {
+            cursor: grabbing;
+        }
     }
 
     .ab--scrollbar--hidden {
-        visibility: hidden;
-    }
-
-    @media (min-width: 991px) {
-        .ab--scrollbar {
-            display: none;
-        }
-
-        .ab--filter-chips {
-            padding-bottom: 4px;
-
-            &:not(.ab--has-overflow-x) {
-                scrollbar-width: none;
-
-                &::-webkit-scrollbar {
-                    display: none;
-                    height: 0;
-                }
-            }
-
-            &.ab--has-overflow-x {
-                padding-bottom: 8px;
-                scrollbar-color: #d9d9d9 #fff;
-                scrollbar-width: thin;
-
-                &::-webkit-scrollbar {
-                    display: block;
-                    height: 5px;
-                }
-
-                &::-webkit-scrollbar-track {
-                    background: #fff;
-                }
-
-                &::-webkit-scrollbar-thumb {
-                    background: #d9d9d9;
-                    border-radius: 50px;
-                    border: none;
-                }
-
-                &::-webkit-scrollbar-thumb:hover,
-                &::-webkit-scrollbar-thumb:active {
-                    background: #d9d9d9;
-                    border-radius: 50px;
-                    border: none;
-                }
-
-                &::-webkit-scrollbar-button {
-                    display: none;
-                    width: 0;
-                    height: 0;
-                }
-
-                &::-webkit-scrollbar-corner {
-                    background: transparent;
-                }
-            }
-        }
+        display: none;
+        pointer-events: none;
     }
 
     .ab--filter-chip {
@@ -139,7 +99,6 @@
 
         cursor: pointer;
         transition: background-color 0.2s ease;
- 
     }
 
     .ab--chip-active {
@@ -249,4 +208,8 @@
             display: none;
         }
     }
+}
+
+body.ab--scrollbar-dragging {
+    user-select: none;
 }
