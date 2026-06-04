@@ -5,10 +5,6 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "Brecks.com",
-    site_url: "https://www.brecks.com/",
-    test_name: "PLP - Add Filter Chips [DTM]",
     page_initials: "AB-FILTER-CHIPS",
     test_variation: 1,
     test_version: 0.0004,
@@ -462,8 +458,8 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     window[page_initials] = true;
     CURRENT_LAYOUT_CONFIG = getLayoutConfig();
 
-    console.table(TEST_CONFIG);
-    console.table(CURRENT_LAYOUT_CONFIG);
+    // console.table(TEST_CONFIG);
+    // console.table(CURRENT_LAYOUT_CONFIG);
 
     createLayout();
 
@@ -479,7 +475,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     const layoutConfig = getLayoutConfig();
     if (!layoutConfig) return false;
 
-    console.log("LAYOUT CONFIG", layoutConfig);
+    // console.log("LAYOUT CONFIG", layoutConfig);
 
     const {
       insertElementSelector,
@@ -490,13 +486,15 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     } = layoutConfig;
 
     return !!(
-      document.readyState === "complete" &&
-      q(
-        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
-      ) &&
-      q(insertElementSelector) &&
-      q(mutationObserverSelector) &&
-      (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
+      // document.readyState === "complete" &&
+      (
+        q(
+          `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+        ) &&
+        q(insertElementSelector) &&
+        q(mutationObserverSelector) &&
+        (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
+      )
     );
   }
 

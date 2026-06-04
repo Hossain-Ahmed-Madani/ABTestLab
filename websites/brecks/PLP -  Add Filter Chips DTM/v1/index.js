@@ -204,9 +204,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
                                     >
                                         <span class="ab--chip-label">${label}</span>
                                     </button>
-                                `,
-                            )
-                            .join("")}
+                                `).join("")}
                     </div>
                     <div class="ab--scrollbar" aria-hidden="true">
                         <div class="ab--scrollbar-thumb"></div>
@@ -433,7 +431,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
         const { insertElementSelector, mutationObserverSelector, zoneSelector, shippingSeasonSelector, usageSelector } = layoutConfig;
 
         return !!(
-            document.readyState === "complete" &&
+            // document.readyState === "complete" &&
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(insertElementSelector) &&
             q(mutationObserverSelector) &&

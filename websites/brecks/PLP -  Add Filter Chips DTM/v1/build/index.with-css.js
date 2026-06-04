@@ -16,7 +16,7 @@
   gap: 4px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 4px 20px 4px 0;
+  padding: 4px 20px 8px 0;
   scrollbar-width: none;
 }
 .AB-FILTER-CHIPS .ab--filter-chips::-webkit-scrollbar {
@@ -117,14 +117,6 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
-.AB-FILTER-CHIPS .ab--filter-chip:hover,
-.AB-FILTER-CHIPS .ab--filter-chip:focus-visible {
-  border: 1px solid #487000;
-  color: #487000;
-  gap: 5px;
-  background: #e5ecdd;
-  outline: none;
-}
 .AB-FILTER-CHIPS .ab--chip-active {
   border: 1.5px solid #487000;
   background: #e5ecdd;
@@ -174,6 +166,13 @@
   .AB-FILTER-CHIPS .ab--filter-chips.ab--is-dragging {
     cursor: grabbing;
     user-select: none;
+  }
+  .AB-FILTER-CHIPS .ab--filter-chip:hover {
+    border: 1px solid #487000;
+    color: #487000;
+    gap: 5px;
+    background: #e5ecdd;
+    outline: none;
   }
   .AB-FILTER-CHIPS.snize-results-page:has(
       .snize-product-filters:not(.snize-hidden)
@@ -237,10 +236,6 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
 
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "Brecks.com",
-    site_url: "https://www.brecks.com/",
-    test_name: "PLP - Add Filter Chips [DTM]",
     page_initials: "AB-FILTER-CHIPS",
     test_variation: 1,
     test_version: 0.0004,
@@ -694,8 +689,8 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     window[page_initials] = true;
     CURRENT_LAYOUT_CONFIG = getLayoutConfig();
 
-    console.table(TEST_CONFIG);
-    console.table(CURRENT_LAYOUT_CONFIG);
+    // console.table(TEST_CONFIG);
+    // console.table(CURRENT_LAYOUT_CONFIG);
 
     createLayout();
 
@@ -711,7 +706,7 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     const layoutConfig = getLayoutConfig();
     if (!layoutConfig) return false;
 
-    console.log("LAYOUT CONFIG", layoutConfig);
+    // console.log("LAYOUT CONFIG", layoutConfig);
 
     const {
       insertElementSelector,
@@ -722,13 +717,15 @@ https://www.brecks.com/collections/summer_flower_bulbs?sort_by=manual
     } = layoutConfig;
 
     return !!(
-      document.readyState === "complete" &&
-      q(
-        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
-      ) &&
-      q(insertElementSelector) &&
-      q(mutationObserverSelector) &&
-      (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
+      // document.readyState === "complete" &&
+      (
+        q(
+          `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+        ) &&
+        q(insertElementSelector) &&
+        q(mutationObserverSelector) &&
+        (q(zoneSelector) || q(shippingSeasonSelector) || q(usageSelector))
+      )
     );
   }
 
