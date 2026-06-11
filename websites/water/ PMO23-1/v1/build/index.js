@@ -1,4 +1,17 @@
-console.log("PMO23 V2");
+const TEST_ID = "PMO23";
+const VARIANT_ID = "V2";
+
+function logInfo(message) {
+  console.log(
+    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    message,
+  );
+}
+
+logInfo("fired");
+
 const TEST_CONFIG = {
   client: "Acadia",
   project: "Water",

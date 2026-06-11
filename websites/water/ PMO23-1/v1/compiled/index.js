@@ -12,7 +12,6 @@ function logInfo(message) {
 
 logInfo("fired");
 
-
 const TEST_CONFIG = {
     client: "Acadia",
     project: "Water",

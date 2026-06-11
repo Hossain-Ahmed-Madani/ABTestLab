@@ -526,7 +526,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   font-family:
     Nunito Sans,
     Nunito Sans Fallback;
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 12px; /* 100% */
@@ -784,7 +784,20 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
     }
   }, 100); // Check every 100ms for <head>
 })();
-console.log("PMO23 V2");
+const TEST_ID = "PMO23";
+const VARIANT_ID = "V2";
+
+function logInfo(message) {
+  console.log(
+    `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+    "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+    message,
+  );
+}
+
+logInfo("fired");
+
 const TEST_CONFIG = {
   client: "Acadia",
   project: "Water",
