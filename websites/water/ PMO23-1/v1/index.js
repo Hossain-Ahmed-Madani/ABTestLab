@@ -6,7 +6,7 @@ const TEST_CONFIG = {
     test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
     page_initials: "AB-PMO23",
     test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-    test_version: 0.0002,
+    test_version: 0.0003,
 };
 
 const { test_name, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -115,7 +115,7 @@ const ASSETS = {
 };
 
 const DATA = {
-    learn_more_txt: ["What's the Difference?", "How Much Do I Need?", "Water Guide?"],
+    learn_more_txt: ["What's the Difference?", "How much water do I need?", "Water Guide?"],
     water_types: [
         {
             icon: ASSETS.purified_svg,
@@ -345,39 +345,60 @@ function modalViewGoal() {
 }
 
 function createModalLayout() {
-
-    document.querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root").insertAdjacentHTML("afterend", /* HTML */ `<div class="${page_initials}__modal-open-cta">${DATA.learn_more_txt[test_variation - 1]}</div>`);
-
-    console.log("========== createModalLayout ==========");
+    document
+        .querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root")
+        .insertAdjacentHTML("afterend", /* HTML */ `<div class="${page_initials}__modal-open-cta">${DATA.learn_more_txt[test_variation - 1]}</div>`);
 
     const layout = /* HTML */ `
-        <div class="${page_initials}__modal-layout">
+        <div class="${page_initials}__modal-layout ab-wrapper-body">
             <div class="${page_initials}__modal-backdrop"></div>
             <div class="${page_initials}__modal">
                 <div class="${page_initials}__modal__head">
-                    <div class="${page_initials}__modal__head__title">Inhaltsstoffe</div>
                     <div class="${page_initials}__modal__head__close-cta">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" viewBox="0 0 27 27" fill="none">
-                            <path d="M25.4999 1.5001L1.5 25.5M1.4999 1.5L25.4998 25.4999" stroke="#547351" stroke-width="1.5" stroke-linecap="round" />
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M0.268984 0.268984C0.627628 -0.0896612 1.20911 -0.0896612 1.56775 0.268984L9.73102 8.43225C10.0897 8.79089 10.0897 9.37237 9.73102 9.73102C9.37237 10.0897 8.79089 10.0897 8.43225 9.73102L0.268984 1.56775C-0.0896612 1.20911 -0.0896612 0.627628 0.268984 0.268984Z"
+                                fill="#00053E"
+                            />
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M9.73102 0.268984C10.0897 0.627628 10.0897 1.20911 9.73102 1.56775L1.56775 9.73102C1.20911 10.0897 0.627628 10.0897 0.268984 9.73102C-0.0896612 9.37237 -0.0896612 8.79089 0.268984 8.43225L8.43225 0.268984C8.79089 -0.0896612 9.37237 -0.0896612 9.73102 0.268984Z"
+                                fill="#00053E"
+                            />
                         </svg>
                     </div>
                 </div>
-                <div class="${page_initials}__modal__body">
-                    <div class="${page_initials}__modal__body__text-content">
-                        Frisches Hähnchenfleisch 70 %, Bruchreis, Mais (gentechnikfrei), Bierhefe*, Apfelpulpe*, Lachsöl** (Omega-3), Yucca-Extrakt, Leinsamenöl** (Omega-3), Olivenöl**,
-                        Grünlippmuschel-Extrakt, Karotten*, Tomaten*, Aufrechte Studentenblume*, Löwenzahn*, Brokkoli*, grüner Tee*, Kamille*, Oregano*, Mariendistelsamen*,
-                        Cranberrysamen*, Algen*, Kaliumchlorid. (*getrocknet, **kaltgepresst, nativ)
+                <div
+                    class="${page_initials}__modal__body  ab-storyblok-modal ${TEST_CONFIG.test_variation === 2
+                        ? "ab-wrapper-body--quantity-active"
+                        : "ab-wrapper-body--water-type-active"}"
+                >
+                    <div class="wrapper-text flex flex-col">
+                        <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
+                        <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
+                            ${TEST_CONFIG.test_variation === 2 ? "How much </br> water do I need?" : "Water Guide"}
+                        </div>
+                    </div>
+                    <div class="ab-modal-tabs-wrapper flex justify-center items-center">
+                        <div class="ab-modal-tab-item ab-modal-tab-item--quantity flex justify-center items-center">Quantity</div>
+                        <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
+                    </div>
+                    ${createQuantityLayout()} ${createWaterTypeLayout()}
+                    <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
+                        <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
+                        <h5 class="ab-helpline-txt flex flex-wrap justify-center items-center">
+                            <span>Have Questions?</span><span>&nbspCall&nbsp<a href="tel:">800-201-6218</a></span>
+                        </h5>
                     </div>
                 </div>
             </div>
         </div>
     `;
 
-    console.log(11111, layout);
-
     document.querySelector("body").insertAdjacentHTML("afterbegin", layout);
-
-    console.log(111111, document.querySelector(`.${page_initials}__modal-layout`));
 }
 
 function animate(targetElement, className, interval) {
@@ -440,11 +461,7 @@ function clickFunction() {
 }
 
 function init() {
-    document.body.classList.add(
-        page_initials,
-        `${page_initials}--v${test_variation}`,
-        `${page_initials}--version-${test_version}`,
-    );
+    document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`);
 
     console.log(TEST_CONFIG);
 
@@ -458,8 +475,8 @@ function init() {
 
 function hasAllTargetElements() {
     return !!(
+        // document.readyState === "complete" &&
         (
-            // document.readyState === "complete" &&
             window.location.href.includes("start-water-delivery") &&
             document.querySelector(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
             document.querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root")
