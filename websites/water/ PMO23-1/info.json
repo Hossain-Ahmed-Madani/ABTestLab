@@ -1,0 +1,13 @@
+{
+  "id": "1781168187549_5477__PMO23_1",
+  "name": " PMO23-1",
+  "type": "A/B",
+  "website": "water",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-11T08:56:27.549Z",
+  "createdAtReadable": "6/11/2026, 2:56:27 PM",
+  "lastUpdated": "2026-06-11T08:56:28.169Z"
+}
