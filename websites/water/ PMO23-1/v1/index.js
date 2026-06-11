@@ -1,4 +1,18 @@
-console.log("PMO23 V2");
+const TEST_ID = "PMO23";
+const VARIANT_ID = "V2";
+
+function logInfo(message) {
+    console.log(
+        `%cAcadia%c${TEST_ID}-${VARIANT_ID}`,
+        "color: white; background: rgb(0, 0, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        "margin-left: 8px; color: white; background: rgb(0, 57, 57); font-weight: 700; padding: 2px 4px; border-radius: 2px;",
+        message,
+    );
+}
+
+logInfo("fired");
+
+
 const TEST_CONFIG = {
     client: "Acadia",
     project: "Water",
@@ -174,6 +188,7 @@ function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
 }
 
 function fireGA4Event(eventName, eventLabel = "") {
+    console.log("fireGA4Event", eventName, eventLabel);
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
         event: "GA4event",
@@ -299,6 +314,24 @@ function createLayout() {
 
 function clickEvents() {
     const actionList = [
+        // OPEN MODAL
+        {
+            selector: `.${page_initials}__modal-open-cta`,
+            callback: (e) => handleModalView("show"),
+        },
+        // CLOSE MODAL
+        {
+            selector: `.${page_initials}__modal__head__close-cta`,
+            callback: (e) => handleModalView("hide"),
+        },
+        {
+            selector: `.${page_initials}__modal-backdrop`,
+            callback: (e) => {
+                if (!e.target.closest(`.${page_initials}__modal`)) {
+                    handleModalView("hide");
+                }
+            },
+        },
         {
             selector: "a.text-primo-river[data-modal-v2-trigger]",
             callback: (e) => fireGA4Event("PMO23_Learn_More", e.target.innerText),
@@ -333,6 +366,13 @@ function clickEvents() {
             },
         ),
     );
+
+    document.addEventListener("keydown", function (evt) {
+        evt = evt || window.event; // Fallback for older browsers (optional)
+        if (evt.key === "Escape" || evt.key === "Esc") {
+            handleModalView("hide");
+        }
+    });
 }
 
 function modalViewGoal() {
@@ -419,45 +459,18 @@ function handleModalView(action = "show") {
     const modal = document.querySelector(`.${page_initials}__modal`);
 
     if (action === "show" && !body.classList.contains(modalShowClass)) {
-        animate(modal, "slide-bottom", 200);
-        modal.classList.add("slide-bottom");
+        fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
+        animate(modal, "scale-in", 200);
+        modal.classList.add("scale-in");
         body.classList.add(modalShowClass);
         document.addEventListener("touchmove", preventScroll, { passive: false });
     }
 
     if (action === "hide") {
-        animate(modal, "slide-top", 200);
+        animate(modal, "scale-out", 200);
         setTimeout(() => body.classList.remove(modalShowClass), 200);
         document.removeEventListener("touchmove", preventScroll);
     }
-}
-
-function clickFunction() {
-    document.body.addEventListener("click", (e) => {
-        // ====== MODAL ======
-
-        // OPEN MODAL
-        if (e.target.closest(`.${page_initials}__modal-open-cta`)) {
-            // const targetNode = e.target.closest('.plp-card-modal-trigger__item');
-            // updateModalContent(targetNode);
-
-            handleModalView("show");
-        }
-
-        // CLOSE MODAL
-
-        if (e.target.closest(`.${page_initials}__modal__head__close-cta`) || (e.target.closest(`.${page_initials}__modal-backdrop`) && !e.target.closest(`.${page_initials}__modal`))) {
-            handleModalView("hide");
-        }
-    });
-
-    // CLOSE POPUP -> ON ESC CLICK
-    document.addEventListener("keydown", function (evt) {
-        evt = evt || window.event; // Fallback for older browsers (optional)
-        if (evt.key === "Escape" || evt.key === "Esc") {
-            handleModalView("hide");
-        }
-    });
 }
 
 function init() {
@@ -466,10 +479,9 @@ function init() {
     console.log(TEST_CONFIG);
 
     createModalLayout();
-    clickFunction();
+    clickEvents();
 
     // createLayout();
-    // clickEvents();
     // modalViewGoal();
 }
 
