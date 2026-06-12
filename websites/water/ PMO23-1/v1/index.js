@@ -19,7 +19,7 @@ const TEST_CONFIG = {
     test_name: "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
     page_initials: "AB-PMO23",
     test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-    test_version: 0.0003,
+    test_version: 0.0004,
 };
 
 const { test_name, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -187,7 +187,6 @@ function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
 }
 
 function fireGA4Event(eventName, eventLabel = "") {
-    console.log("fireGA4Event", eventName, eventLabel);
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
         event: "GA4event",
@@ -276,47 +275,16 @@ function createWaterTypeLayout() {
     `;
 }
 
-function createLayout() {
-    const btn = document.querySelector("a.text-primo-river[data-modal-v2-trigger]");
-    if (btn) {
-        btn.innerText = DATA.learn_more_txt[TEST_CONFIG.test_variation - 1];
-    }
-
-    // const parent = document.querySelector(".storyblok-text-blocks").parentNode;
-    const parent = document.querySelector("#water-types .wrapper-body");
-    if (parent) {
-        parent.closest(".storyblok-modal").classList.add("ab-storyblok-modal");
-        const activeClass = TEST_CONFIG.test_variation === 2 ? "ab-wrapper-body--quantity-active" : "ab-wrapper-body--water-type-active";
-        parent.classList.add("ab-wrapper-body", activeClass);
-
-        parent.innerHTML = /* HTML */ `
-            <div class="wrapper-text flex flex-col">
-                <div class="ab-wrapper-heading ab-wrapper-heading--water-types wrapper-heading text-center">Water Types</div>
-                <div class="ab-wrapper-heading ab-wrapper-heading--quantity wrapper-heading text-center">
-                    ${TEST_CONFIG.test_variation === 2 ? "How much </br> water do I need?" : "Water Guide"}
-                </div>
-            </div>
-            <div class="ab-modal-tabs-wrapper flex justify-center items-center">
-                <div class="ab-modal-tab-item ab-modal-tab-item--quantity flex justify-center items-center">Quantity</div>
-                <div class="ab-modal-tab-item ab-modal-tab-item--type flex justify-center items-center">Type</div>
-            </div>
-            ${createQuantityLayout()} ${createWaterTypeLayout()}
-            <div class="ab-wrapper-bottom flex flex-col justify-center items-center">
-                <p class="ab-freq-txt">*Based on a two week delivery frequency.</p>
-                <h5 class="ab-helpline-txt flex flex-wrap justify-center items-center">
-                    <span>Have Questions?</span><span>&nbspCall&nbsp<a href="tel:">800-201-6218</a></span>
-                </h5>
-            </div>
-        `;
-    }
-}
-
 function clickEvents() {
     const actionList = [
         // OPEN MODAL
         {
             selector: `.${page_initials}__modal-open-cta`,
-            callback: (e) => handleModalView("show"),
+
+            callback: (e) => {
+                fireGA4Event("PMO231_ClickedModalLink");
+                handleModalView("show")
+            },
         },
         // CLOSE MODAL
         {
@@ -374,14 +342,6 @@ function clickEvents() {
     });
 }
 
-function modalViewGoal() {
-    new MutationObserver((mutationsList, observer) => {
-        if (document.querySelector("#water-types").getAttribute("aria-hidden") === "false") {
-            fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
-            observer.disconnect();
-        }
-    }).observe(document.querySelector("#water-types"), { attributes: true });
-}
 
 function createModalLayout() {
     document
@@ -458,7 +418,6 @@ function handleModalView(action = "show") {
     const modal = document.querySelector(`.${page_initials}__modal`);
 
     if (action === "show" && !body.classList.contains(modalShowClass)) {
-        fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
         animate(modal, "scale-in", 200);
         modal.classList.add("scale-in");
         body.classList.add(modalShowClass);
@@ -474,71 +433,16 @@ function handleModalView(action = "show") {
 
 function init() {
     document.body.classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`);
-
-    console.log(TEST_CONFIG);
-
     createModalLayout();
     clickEvents();
-
-    // createLayout();
-    // modalViewGoal();
 }
 
 function hasAllTargetElements() {
     return !!(
-        // document.readyState === "complete" &&
-        (
-            window.location.href.includes("start-water-delivery") &&
-            document.querySelector(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
-            document.querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root")
-        )
-        // document.querySelector("a.text-primo-river[data-modal-v2-trigger]") &&
-        // document.querySelector(".storyblok-text-blocks") &&
-        // document.querySelector("#water-types")
+        window.location.href.includes("start-water-delivery") &&
+        document.querySelector(`body:not(.${page_initials}):not(${page_initials}--v${test_variation})`) &&
+        document.querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root")
     );
 }
 
 waitForElement(hasAllTargetElements, init);
-
-// ============================ CLIENT CODE  ============================
-
-function waitForElm(selector) {
-    return new Promise((resolve) => {
-        if (document.querySelector(selector)) return resolve(document.querySelector(selector));
-
-        const observer = new MutationObserver(() => {
-            const el = document.querySelector(selector);
-            if (el) {
-                observer.disconnect();
-                resolve(el);
-            }
-        });
-        observer.observe(document.body, { childList: true, subtree: true });
-    });
-}
-
-function viewElementGoal(el) {
-    const intObserver = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    window.dataLayer.push({
-                        event: "GA4event",
-                        "ga4-event-name": "cro_event",
-                        "ga4-event-p1-name": "event_category",
-                        "ga4-event-p1-value": "PMO23_Modal_View",
-                        "ga4-event-p2-name": "event_label",
-                        "ga4-event-p2-value": "Water Guide Modal View",
-                    });
-                }
-            });
-        },
-        { root: null, rootMargin: "0px", threshold: 0.1 },
-    );
-
-    intObserver.observe(el);
-}
-
-waitForElm("#water-types").then((elm) => {
-    viewElementGoal(elm);
-});
