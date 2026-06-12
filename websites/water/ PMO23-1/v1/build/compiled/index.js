@@ -179,7 +179,7 @@ const DATA = {
     {
       imgSrc: ASSETS.one_two_people_img,
       title: "For 1-2 people",
-      desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*",
+      desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*.",
     },
     {
       imgSrc: ASSETS.three_five_people_img,

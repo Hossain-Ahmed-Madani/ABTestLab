@@ -436,6 +436,82 @@
     margin-bottom: 20px;
   }
 }
+@media screen and (min-width: 959px) {
+  .AB-PMO23--v2
+    .ab-storyblok-modal
+    .wrapper-inner.h-full.flex.lg\:flex-col.self-center {
+    flex-direction: column;
+  }
+  .AB-PMO23--v2 .ab-storyblok-modal .ab-wrapper-image-container {
+    justify-content: center;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
+    margin-bottom: 60px;
+  }
+  .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
+    min-width: 100%;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .wrapper-frames {
+    gap: 40px;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .wrapper-frame {
+    border: 0px;
+    background: #f2f5f7;
+    border-radius: 15px;
+    padding: 30px;
+    padding-bottom: 43px;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .wrapper-frame:not(:last-child) {
+    border: 0px;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .ab-wrapper-image-container {
+    margin-right: 0;
+    margin-bottom: 33px;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .ab-heading-2 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .AB-PMO23--v2 .ab-water-type-wrapper-block .wrapper-description {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block {
+    margin-bottom: 50px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .wrapper-frames {
+    gap: 40px;
+    width: max-content;
+    margin: auto;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .wrapper-frame {
+    max-width: 250px;
+    padding: 30px 25px 23px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image img {
+    width: 160px;
+    min-width: 160px;
+    height: 163px;
+    min-height: 163px;
+    object-fit: contain;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-heading-wrapper-inner {
+    margin-bottom: 0;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
 @media screen and (min-width: 1025.5px) {
   .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
@@ -560,7 +636,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   overflow: hidden;
   display: none;
   justify-content: center;
-  padding: 30px 20px 60px;
+  padding: 30px 20px 30px;
 }
 .AB-PMO23__modal-backdrop {
   display: none;
@@ -1008,7 +1084,7 @@ const DATA = {
     {
       imgSrc: ASSETS.one_two_people_img,
       title: "For 1-2 people",
-      desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*",
+      desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*.",
     },
     {
       imgSrc: ASSETS.three_five_people_img,

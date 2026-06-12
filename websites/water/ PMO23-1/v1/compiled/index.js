@@ -15,7 +15,7 @@ logInfo("fired");
 const TEST_CONFIG = {
     page_initials: "AB-PMO23",
     test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-    test_version: 0.0006,
+    test_version: 0.0007,
 };
 
 const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -151,7 +151,7 @@ const DATA = {
         {
             imgSrc: ASSETS.one_two_people_img,
             title: "For 1-2 people",
-            desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*",
+            desc: "We recommend <span>two 5 gallon</span> water bottles delivered every 2 weeks*.",
         },
         {
             imgSrc: ASSETS.three_five_people_img,
