@@ -13,14 +13,9 @@ function logInfo(message) {
 logInfo("fired");
 
 const TEST_CONFIG = {
-  client: "Acadia",
-  project: "Water",
-  site_url: "https://www.water.com/",
-  test_name:
-    "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
   page_initials: "AB-PMO23",
   test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-  test_version: 0.0003,
+  test_version: 0.0006,
 };
 
 const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -218,7 +213,6 @@ function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
 }
 
 function fireGA4Event(eventName, eventLabel = "") {
-  console.log("fireGA4Event", eventName, eventLabel);
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "GA4event",
@@ -349,7 +343,11 @@ function clickEvents() {
     // OPEN MODAL
     {
       selector: `.${page_initials}__modal-open-cta`,
-      callback: (e) => handleModalView("show"),
+
+      callback: (e) => {
+        fireGA4Event("PMO231_ClickedModalLink");
+        handleModalView("show");
+      },
     },
     // CLOSE MODAL
     {
@@ -505,6 +503,7 @@ function animate(targetElement, className, interval) {
 }
 
 function preventScroll(e) {
+  if (e.target.closest(`.${page_initials}__modal`)) return;
   e.preventDefault();
 }
 
@@ -515,7 +514,6 @@ function handleModalView(action = "show") {
   const modal = document.querySelector(`.${page_initials}__modal`);
 
   if (action === "show" && !body.classList.contains(modalShowClass)) {
-    fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
     animate(modal, "scale-in", 200);
     modal.classList.add("scale-in");
     body.classList.add(modalShowClass);
@@ -535,76 +533,20 @@ function init() {
     `${page_initials}--v${test_variation}`,
     `${page_initials}--version-${test_version}`,
   );
-
-  console.log(TEST_CONFIG);
-
   createModalLayout();
   clickEvents();
-
-  // createLayout();
-  // modalViewGoal();
 }
 
 function hasAllTargetElements() {
   return !!(
-    // document.readyState === "complete" &&
-    (
-      window.location.href.includes("start-water-delivery") &&
-      document.querySelector(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
-      ) &&
-      document.querySelector(
-        ".onboarding-wizard-step-filters-head > .summit-Title-root",
-      )
+    window.location.href.includes("start-water-delivery") &&
+    document.querySelector(
+      `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+    ) &&
+    document.querySelector(
+      ".onboarding-wizard-step-filters-head > .summit-Title-root",
     )
-    // document.querySelector("a.text-primo-river[data-modal-v2-trigger]") &&
-    // document.querySelector(".storyblok-text-blocks") &&
-    // document.querySelector("#water-types")
   );
 }
 
 waitForElement(hasAllTargetElements, init);
-
-// ============================ CLIENT CODE  ============================
-
-function waitForElm(selector) {
-  return new Promise((resolve) => {
-    if (document.querySelector(selector))
-      return resolve(document.querySelector(selector));
-
-    const observer = new MutationObserver(() => {
-      const el = document.querySelector(selector);
-      if (el) {
-        observer.disconnect();
-        resolve(el);
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-}
-
-function viewElementGoal(el) {
-  const intObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          window.dataLayer.push({
-            event: "GA4event",
-            "ga4-event-name": "cro_event",
-            "ga4-event-p1-name": "event_category",
-            "ga4-event-p1-value": "PMO23_Modal_View",
-            "ga4-event-p2-name": "event_label",
-            "ga4-event-p2-value": "Water Guide Modal View",
-          });
-        }
-      });
-    },
-    { root: null, rootMargin: "0px", threshold: 0.1 },
-  );
-
-  intObserver.observe(el);
-}
-
-waitForElm("#water-types").then((elm) => {
-  viewElementGoal(elm);
-});

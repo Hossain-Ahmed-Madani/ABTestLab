@@ -189,6 +189,7 @@
 }
 .AB-PMO23 .ab-quantity-wrapper-block .wrapper-description span {
   color: #0067c3;
+  font-weight: 600;
 }
 .AB-PMO23 .ab-freq-txt {
   font-family: Nunito Sans;
@@ -283,6 +284,9 @@
   .AB-PMO23 .ab-helpline-txt {
     font-size: 18px;
     line-height: 22px;
+  }
+  .AB-PMO23 .ab-helpline-txt a {
+    font-size: 18px;
   }
 }
 @media screen and (min-width: 1025.5px) {
@@ -413,6 +417,17 @@
 .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
   margin-bottom: 30px;
 }
+@media screen and (max-width: 355px) {
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image {
+    margin-right: 8px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image img {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    min-height: 80px;
+  }
+}
 @media screen and (max-width: 767.5px) {
   .AB-PMO23--v2 .ab-wrapper-body .ab-wrapper-heading--quantity {
     margin-bottom: 20px;
@@ -421,7 +436,7 @@
     margin-bottom: 20px;
   }
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1025.5px) {
   .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
   }
@@ -539,13 +554,13 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background: transparent;
   z-index: 10000;
-  overflow: auto;
+  overflow: hidden;
   display: none;
   justify-content: center;
-  padding: 30px 20px 30px;
+  padding: 30px 20px 60px;
 }
 .AB-PMO23__modal-backdrop {
   display: none;
@@ -560,8 +575,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
 .AB-PMO23__modal {
   opacity: 1;
   width: 100%;
-  min-height: max-content;
-  max-height: max-content;
+  height: 100%;
   background: #ffffff;
   position: relative;
   z-index: 1;
@@ -569,6 +583,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 100px 100px 0 rgba(0, 5, 62, 0.25);
+  overflow: hidden;
 }
 .AB-PMO23__modal__head {
   display: flex;
@@ -594,6 +609,8 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   line-height: 150%; /* 24px */
   text-align: left;
   text-wrap: pretty;
+  height: 100%;
+  overflow-y: auto;
 }
 .AB-PMO23__modal__body .table.table-bordered {
   width: 100%;
@@ -603,6 +620,32 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   background: none;
 }
 
+@media screen and (max-width: 1199.5px) {
+  .AB-PMO23__modal {
+    padding-right: 5px;
+  }
+  .AB-PMO23__modal__body {
+    padding-right: 20px;
+  }
+}
+@media screen and (min-width: 390px) {
+  .AB-PMO23__modal {
+    min-width: 355px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .AB-PMO23__modal {
+    height: max-content;
+  }
+  .AB-PMO23__modal__body {
+    overflow: hidden;
+  }
+}
+@media screen and (min-width: 959px) {
+  .AB-PMO23__modal-layout {
+    align-items: center;
+  }
+}
 @media screen and (min-width: 1200px) {
   .AB-PMO23__modal-open-cta {
     color: #0067c3;
@@ -799,14 +842,9 @@ function logInfo(message) {
 logInfo("fired");
 
 const TEST_CONFIG = {
-  client: "Acadia",
-  project: "Water",
-  site_url: "https://www.water.com/",
-  test_name:
-    "PMO23: [Start-water-delivery] Optimize “Learn More” Copy & Modal Design-(2) SET UP TEST",
   page_initials: "AB-PMO23",
   test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-  test_version: 0.0003,
+  test_version: 0.0006,
 };
 
 const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1004,7 +1042,6 @@ function waitForElement(predicate, callback, timer = 20000, frequency = 100) {
 }
 
 function fireGA4Event(eventName, eventLabel = "") {
-  console.log("fireGA4Event", eventName, eventLabel);
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
     event: "GA4event",
@@ -1135,7 +1172,11 @@ function clickEvents() {
     // OPEN MODAL
     {
       selector: `.${page_initials}__modal-open-cta`,
-      callback: (e) => handleModalView("show"),
+
+      callback: (e) => {
+        fireGA4Event("PMO231_ClickedModalLink");
+        handleModalView("show");
+      },
     },
     // CLOSE MODAL
     {
@@ -1291,6 +1332,7 @@ function animate(targetElement, className, interval) {
 }
 
 function preventScroll(e) {
+  if (e.target.closest(`.${page_initials}__modal`)) return;
   e.preventDefault();
 }
 
@@ -1301,7 +1343,6 @@ function handleModalView(action = "show") {
   const modal = document.querySelector(`.${page_initials}__modal`);
 
   if (action === "show" && !body.classList.contains(modalShowClass)) {
-    fireGA4Event("PMO23_Modal View", "Water Guide Modal View");
     animate(modal, "scale-in", 200);
     modal.classList.add("scale-in");
     body.classList.add(modalShowClass);
@@ -1321,76 +1362,20 @@ function init() {
     `${page_initials}--v${test_variation}`,
     `${page_initials}--version-${test_version}`,
   );
-
-  console.log(TEST_CONFIG);
-
   createModalLayout();
   clickEvents();
-
-  // createLayout();
-  // modalViewGoal();
 }
 
 function hasAllTargetElements() {
   return !!(
-    // document.readyState === "complete" &&
-    (
-      window.location.href.includes("start-water-delivery") &&
-      document.querySelector(
-        `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
-      ) &&
-      document.querySelector(
-        ".onboarding-wizard-step-filters-head > .summit-Title-root",
-      )
+    window.location.href.includes("start-water-delivery") &&
+    document.querySelector(
+      `body:not(.${page_initials}):not(${page_initials}--v${test_variation})`,
+    ) &&
+    document.querySelector(
+      ".onboarding-wizard-step-filters-head > .summit-Title-root",
     )
-    // document.querySelector("a.text-primo-river[data-modal-v2-trigger]") &&
-    // document.querySelector(".storyblok-text-blocks") &&
-    // document.querySelector("#water-types")
   );
 }
 
 waitForElement(hasAllTargetElements, init);
-
-// ============================ CLIENT CODE  ============================
-
-function waitForElm(selector) {
-  return new Promise((resolve) => {
-    if (document.querySelector(selector))
-      return resolve(document.querySelector(selector));
-
-    const observer = new MutationObserver(() => {
-      const el = document.querySelector(selector);
-      if (el) {
-        observer.disconnect();
-        resolve(el);
-      }
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-  });
-}
-
-function viewElementGoal(el) {
-  const intObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          window.dataLayer.push({
-            event: "GA4event",
-            "ga4-event-name": "cro_event",
-            "ga4-event-p1-name": "event_category",
-            "ga4-event-p1-value": "PMO23_Modal_View",
-            "ga4-event-p2-name": "event_label",
-            "ga4-event-p2-value": "Water Guide Modal View",
-          });
-        }
-      });
-    },
-    { root: null, rootMargin: "0px", threshold: 0.1 },
-  );
-
-  intObserver.observe(el);
-}
-
-waitForElm("#water-types").then((elm) => {
-  viewElementGoal(elm);
-});

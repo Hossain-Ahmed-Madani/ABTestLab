@@ -15,7 +15,7 @@ logInfo("fired");
 const TEST_CONFIG = {
     page_initials: "AB-PMO23",
     test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-    test_version: 0.0004,
+    test_version: 0.0006,
 };
 
 const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -403,6 +403,7 @@ function animate(targetElement, className, interval) {
 }
 
 function preventScroll(e) {
+    if(e.target.closest(`.${page_initials}__modal`)) return;
     e.preventDefault();
 }
 

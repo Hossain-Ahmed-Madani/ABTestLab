@@ -163,6 +163,7 @@
 }
 .AB-PMO23 .ab-quantity-wrapper-block .wrapper-description span {
   color: #0067c3;
+  font-weight: 600;
 }
 .AB-PMO23 .ab-freq-txt {
   font-family: Nunito Sans;
@@ -254,6 +255,9 @@
   .AB-PMO23 .ab-helpline-txt {
     font-size: 18px;
     line-height: 22px;
+  }
+  .AB-PMO23 .ab-helpline-txt a {
+    font-size: 18px;
   }
 }
 @media screen and (min-width: 1025.5px) {
@@ -384,6 +388,17 @@
 .AB-PMO23--v2 .ab-quantity-wrapper-sub-text {
   margin-bottom: 30px;
 }
+@media screen and (max-width: 355px) {
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image {
+    margin-right: 8px;
+  }
+  .AB-PMO23--v2 .ab-quantity-wrapper-block .ab-wrapper-image img {
+    width: 80px;
+    min-width: 80px;
+    height: 80px;
+    min-height: 80px;
+  }
+}
 @media screen and (max-width: 767.5px) {
   .AB-PMO23--v2 .ab-wrapper-body .ab-wrapper-heading--quantity {
     margin-bottom: 20px;
@@ -392,7 +407,7 @@
     margin-bottom: 20px;
   }
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1025.5px) {
   .AB-PMO23--v2 .ab-storyblok-modal > .wrapper-outer > .wrapper-inner {
     padding: 50px 55px;
   }
@@ -508,13 +523,13 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  height: 100dvh;
   background: transparent;
   z-index: 10000;
-  overflow: auto;
+  overflow: hidden;
   display: none;
   justify-content: center;
-  padding: 30px 20px 30px;
+  padding: 30px 20px 60px;
 }
 .AB-PMO23__modal-backdrop {
   display: none;
@@ -529,8 +544,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
 .AB-PMO23__modal {
   opacity: 1;
   width: 100%;
-  min-height: max-content;
-  max-height: max-content;
+  height: 100%;
   background: #ffffff;
   position: relative;
   z-index: 1;
@@ -538,6 +552,7 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   border-radius: 15px;
   background: #fff;
   box-shadow: 0 100px 100px 0 rgba(0, 5, 62, 0.25);
+  overflow: hidden;
 }
 .AB-PMO23__modal__head {
   display: flex;
@@ -563,6 +578,8 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   line-height: 150%; /* 24px */
   text-align: left;
   text-wrap: pretty;
+  height: 100%;
+  overflow-y: auto;
 }
 .AB-PMO23__modal__body .table.table-bordered {
   width: 100%;
@@ -572,6 +589,32 @@ body.AB-PMO23--modal-show .AB-PMO23__modal-backdrop {
   background: none;
 }
 
+@media screen and (max-width: 1199.5px) {
+  .AB-PMO23__modal {
+    padding-right: 5px;
+  }
+  .AB-PMO23__modal__body {
+    padding-right: 20px;
+  }
+}
+@media screen and (min-width: 390px) {
+  .AB-PMO23__modal {
+    min-width: 355px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .AB-PMO23__modal {
+    height: max-content;
+  }
+  .AB-PMO23__modal__body {
+    overflow: hidden;
+  }
+}
+@media screen and (min-width: 959px) {
+  .AB-PMO23__modal-layout {
+    align-items: center;
+  }
+}
 @media screen and (min-width: 1200px) {
   .AB-PMO23__modal-open-cta {
     color: #0067c3;
