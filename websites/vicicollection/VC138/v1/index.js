@@ -1,12 +1,3 @@
-/* 
-Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollection.com/experience/2097793#
-
-Preview excluding all: https://marketer.monetate.net/control/preview/12997/1QQDDYBO07OASN5V1GQSW9X6HI3S83UY/vc127-navigation-hide-search-in-mobile-nav-menu
-
-Preview including all: https://marketer.monetate.net/control/preview/12997/VTZ4M2GUPVAU0RJWL6N9GFYEMNGZX9E2/vc127-navigation-hide-search-in-mobile-nav-menu
-
-*/
-
 (async () => {
     const TEST_ID = "VC138";
     const VARIANT_ID = "V1"; /* Control, V1, V2 */
@@ -241,7 +232,6 @@ Preview including all: https://marketer.monetate.net/control/preview/12997/VTZ4M
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
 
-        console.clear();
         console.log(TEST_CONFIG);
 
         if (test_variation !== 0) applyChanges();
