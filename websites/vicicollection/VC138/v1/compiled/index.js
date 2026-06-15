@@ -14,19 +14,14 @@
     logInfo("fired");
 
     const TEST_CONFIG = {
-        client: "Acadia",
-        project: "vicicollection",
-        site_url: "https://www.vicicollection.com/",
-        test_name: " VC138: [NAVIGATION] Occasions Copy - Set Up Test",
         page_initials: "AB-VC138",
         test_variation: 1 /* 0, 1, 2 */,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     function fireGA4Event(eventName, eventLabel = "") {
-        console.log("fireGA4Event", eventName, eventLabel);
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             event: "GA4event",
@@ -95,30 +90,6 @@
         },
     };
 
-    // function injectStyles() {
-    //     const styleElement = document.createElement("style");
-    //     styleElement.type = "text/css";
-    //     styleElement.textContent = `
-    //         .AB-VC138--v1 a.nav__btn.nav__link[href="/pages/vici-shops"] {
-    //             font-size: 0;
-    //         }
-    //         .AB-VC138--v1 a.nav__btn.nav__link[href="/pages/vici-shops"]::after {
-    //             content: "${TXT[1].desktop.category_title}";
-    //             font-size: 0.85rem;
-    //         }
-
-    //         .AB-VC138--v2 a.nav__btn.nav__link[href="/pages/vici-shops"] {
-    //             font-size: 0;
-    //         }
-    //         .AB-VC138--v2 a.nav__btn.nav__link[href="/pages/vici-shops"]::after {
-    //             content: "${TXT[2].desktop.category_title}";
-    //             font-size: 0.85rem;
-    //         }
-
-    //     `;
-    //     document.head.appendChild(styleElement);
-    // }
-
     function applyClickEvents() {
         const mobileCategoryBtn = q('button.mega-menu-mobile__submenu[aria-controls="mobileMenuAcc-occasions"]');
         if (mobileCategoryBtn) {
@@ -152,7 +123,7 @@
                 const link = currentTarget.getAttribute("href");
                 const linkText = currentTarget.textContent;
                 e.preventDefault();
-                fireGA4Event("VC138_CategoryClick", linkText);
+                fireGA4Event("VC138_CTA Click", linkText);
 
                 if (e.ctrlKey || e.metaKey) {
                     window.open(link, "_blank");
@@ -171,7 +142,7 @@
                 const link = currentTarget.getAttribute("href");
                 const linkText = currentTarget.textContent;
                 e.preventDefault();
-                fireGA4Event("VC138_CategoryClick", linkText);
+                fireGA4Event("VC138_CTA Click", linkText);
 
                 if (e.ctrlKey || e.metaKey) {
                     window.open(link, "_blank");
@@ -200,13 +171,6 @@
         const mobileLinkBtn = q('a.mega-menu-mobile__submenu-menu-list-item-button[href="/pages/vici-shops"]');
         if (mobileLinkBtn) mobileLinkBtn.textContent = mobile.link_title;
 
-        // const desktopCategoryBtnContainer = q('div.nav__item[mega-menu-id="occasions-menu"]');
-        // if (desktopCategoryBtnContainer) {
-        //     q('a.nav__btn.nav__link[href="/pages/vici-shops"]').textContent = desktop.category_title;
-        //     desktopCategoryBtnContainer.setAttribute("style", `left:0; transform: translateX(${desktop.translate_value}%);`);
-        //     window.dispatchEvent(new Event("resize"));
-        // }
-
         const desktopCategoryBtn = q('a.nav__btn.nav__link[href="/pages/vici-shops"]');
         if (desktopCategoryBtn) {
             desktopCategoryBtn.textContent = desktop.category_title;
@@ -227,8 +191,6 @@
 
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-
-        console.log(TEST_CONFIG);
 
         applyChanges();
         applyClickEvents();
