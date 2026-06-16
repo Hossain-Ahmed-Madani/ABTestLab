@@ -1,0 +1,11 @@
+Figma Link: https://www.figma.com/design/HDmeC5XlKPbZQtqjBZP56m/VC139---COLLECTIONS---PDP--Sale-Math-Formatting-Update?node-id=0-1&t=EZcHoswoNu8LLGOi-1
+
+Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollection.com/experience/2125988#
+
+Preview excluding all:
+v1: https://marketer.monetate.net/control/preview/12997/XH1BNV7PKZG80CR7ETGYJ9CGNKS9S63Y/vc139-collections-pdp-sale-math-formatting-update
+
+
+Preview including all: 
+v1: https://marketer.monetate.net/control/preview/12997/K39YEXL3DGE7OTDCUJO3UMP0HFDBW6WA/vc139-collections-pdp-sale-math-formatting-update
+
