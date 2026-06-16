@@ -35,6 +35,34 @@
         });
     }
 
+    function formatDateToOrdinal(dateString) {
+        const date = new Date(dateString);
+
+        const day = date.getDate();
+        const month = date.toLocaleString("en-US", { month: "long" });
+
+        const getOrdinal = (n) => {
+            if (n > 3 && n < 21) return "th";
+            switch (n % 10) {
+                case 1:
+                    return "st";
+                case 2:
+                    return "nd";
+                case 3:
+                    return "rd";
+                default:
+                    return "th";
+            }
+        };
+
+        return `${day}${getOrdinal(day)} ${month}`;
+    }
+
+
+    function formatNumber(number) {
+        return number.toLocaleString("en-US");
+    }
+
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -46,10 +74,21 @@
         window[page_initials] = true;
 
         console.table(TEST_CONFIG);
+
+        q(".production-right-panel__sticky-container").insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                <div class="ab-offer-bar">
+                    <div class="ab-offer-bar__header">
+                        <div class="ab-offer-bar__header__text">${formatNumber(+window.numberOfOffers)} tickets on offer from ${formatDateToOrdinal(window.offerFromDate)}</div>
+                    </div>
+                </div>
+            `,
+        );
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".city-nav__container"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".production-right-panel__sticky-container") && window.numberOfOffers && window.offerFromDate);
     }
 
     await waitForElementAsync(checkForItems);
