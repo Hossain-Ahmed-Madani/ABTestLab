@@ -10,9 +10,10 @@
 .AB-EXP-193 .ab-offer-bar {
   background-color: #ff0066;
   color: #fff;
-  margin: -8px -8px 8px -8px;
+  margin: -8px -8px 0px -8px;
   height: 32px;
   display: flex;
+  transition: all 0.2s;
 }
 .AB-EXP-193 .ab-offer-bar__header {
   margin: auto;
@@ -31,10 +32,16 @@
   line-height: 24px;
   color: #fff;
 }
+.AB-EXP-193 .production-right-panel__sticky-container {
+  padding: 0 !important;
+}
+.AB-EXP-193 .production-right-panel__container {
+  padding: 8px !important;
+}
 .AB-EXP-193
   .production-right-panel__sticky-container--toggled-hidden
   .ab-offer-bar {
-  margin-bottom: -3px;
+  margin-bottom: -8px;
 }
 `;
       document.head.appendChild(style);
@@ -48,7 +55,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-EXP-193",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -129,7 +136,8 @@
   }
 
   function createLayout() {
-    if (q(".ab-offer-bar")) return;
+    if (q(".ab-offer-bar") || !window.numberOfOffers || !window.offerFromDate)
+      return;
 
     q(".production-right-panel__sticky-container").insertAdjacentHTML(
       "afterbegin",

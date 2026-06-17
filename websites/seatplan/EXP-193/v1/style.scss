@@ -19,9 +19,10 @@
     .ab-offer-bar {
         background-color: #ff0066;
         color: #fff;
-        margin: -8px -8px 8px -8px;
+        margin: -8px -8px 0px -8px;
         height: 32px;
         display: flex;
+        transition: all 0.2s;
     }
     .ab-offer-bar__header {
         margin: auto;
@@ -41,7 +42,16 @@
         color: #fff;
     }
 
+
+    .production-right-panel__sticky-container {
+        padding: 0 !important;
+    }
+
+    .production-right-panel__container {
+        padding: 8px !important;
+    }
+
     .production-right-panel__sticky-container--toggled-hidden .ab-offer-bar {
-        margin-bottom: -3px;
+        margin-bottom: -8px;
     }
 }
