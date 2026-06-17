@@ -1,12 +1,8 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "SeatPlan",
-        project: "SeatPlan",
-        host: "https://seatplan.com",
-        test_name: "[ECX - 193] VSP - Mobile - Offer bar on sticky CTA V2 - enhanced offer text",
         page_initials: "AB-EXP-193",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -58,7 +54,6 @@
         return `${day}${getOrdinal(day)} ${month}`;
     }
 
-
     function formatNumber(number) {
         return number.toLocaleString("en-US");
     }
@@ -67,13 +62,20 @@
         return o ? s.querySelector(o) : document.querySelector(s);
     }
 
-    function init() {
-        if (window[page_initials]) return;
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        window[page_initials] = true;
-
-        console.table(TEST_CONFIG);
+    function createLayout() {
+        if (q(".ab-offer-bar") || !window.numberOfOffers || !window.offerFromDate) return;
 
         q(".production-right-panel__sticky-container").insertAdjacentHTML(
             "afterbegin",
@@ -87,8 +89,29 @@
         );
     }
 
+    function mutationObserverFunction() {
+        const debouncedUpdate = debounce(createLayout, 150);
+        const observer = new MutationObserver(debouncedUpdate);
+        observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    function init() {
+        if (window[page_initials]) return;
+
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
+
+        createLayout();
+        mutationObserverFunction();
+    }
+
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".production-right-panel__sticky-container") && window.numberOfOffers && window.offerFromDate);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".production-right-panel__sticky-container") &&
+            window.numberOfOffers &&
+            window.offerFromDate
+        );
     }
 
     await waitForElementAsync(checkForItems);
