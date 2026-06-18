@@ -1,0 +1,13 @@
+{
+  "id": "1781512745569_3479_VC138",
+  "name": "VC138",
+  "type": "A/B",
+  "website": "vicicollection",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-15T08:39:05.569Z",
+  "createdAtReadable": "6/15/2026, 2:39:05 PM",
+  "lastUpdated": "2026-06-15T08:39:05.986Z"
+}

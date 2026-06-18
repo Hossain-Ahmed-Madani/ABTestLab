@@ -1,0 +1,11 @@
+Test container: https://marketer.monetate.net/control/a-41b13725/p/vicicollection.com/experience/2125670#
+
+Preview excluding all:
+control: https://marketer.monetate.net/control/preview/12997/4CX568UKPCRMLSY8MDD37LIBI7DGQ26C/vc138navigation-occasions-copy
+v1: https://marketer.monetate.net/control/preview/12997/0GVC1FSMKL5WOD2ML2QJP8YI6BUASQPL/vc138navigation-occasions-copy
+v2: https://marketer.monetate.net/control/preview/12997/YO9Q61V61RPBWYP2Z8TMUX36AFU1K64L/vc138navigation-occasions-copy
+
+Preview including all:
+control: https://marketer.monetate.net/control/preview/12997/8C4D1SDCQLO6QY0BN4DX7CKJHWP866EJ/vc138navigation-occasions-copy
+v1: https://marketer.monetate.net/control/preview/12997/DV7I3XIN97CXJ51HSLMORYQFTL67GD0G/vc138navigation-occasions-copy
+v2: https://marketer.monetate.net/control/preview/12997/1007XU188LZI1X45H2ITR6YRPS7QHKRM/vc138navigation-occasions-copy
