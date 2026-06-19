@@ -1,0 +1,13 @@
+{
+  "id": "1781883664277_8389_PLP___Optimize_Mobile_Experience_M",
+  "name": "PLP - Optimize Mobile Experience M",
+  "type": "A/B",
+  "website": "bestmaterials",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-19T15:41:04.277Z",
+  "createdAtReadable": "6/19/2026, 9:41:04 PM",
+  "lastUpdated": "2026-06-19T15:41:04.677Z"
+}
