@@ -21,7 +21,7 @@
 .AB-PMO23 .ab-storyblok-modal .storyblok-text-blocks .wrapper-frames .wrapper-frame:nth-child(3):last-child {
     grid-column: span 1;
 }
-.AB-PMO23 .ab-wrapper-body .wrapper-heading {
+Z .AB-PMO23 .ab-wrapper-body .wrapper-heading {
     font-family: Nunito Sans;
     font-weight: 600;
     font-size: 30px;

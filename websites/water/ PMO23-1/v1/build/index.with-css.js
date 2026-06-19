@@ -920,7 +920,7 @@ logInfo("fired");
 const TEST_CONFIG = {
   page_initials: "AB-PMO23",
   test_variation: 2 /* 0 -> control, 1, 2, 3 */,
-  test_version: 0.0006,
+  test_version: 0.0008,
 };
 
 const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1316,6 +1316,8 @@ function clickEvents() {
 }
 
 function createModalLayout() {
+  if (q(`.${page_initials}__modal-open-cta`)) return;
+
   document
     .querySelector(".onboarding-wizard-step-filters-head > .summit-Title-root")
     .insertAdjacentHTML(
@@ -1433,11 +1435,14 @@ function handleModalView(action = "show") {
 }
 
 function init() {
+  if (window[page_initials] === true) return;
+
   document.body.classList.add(
     page_initials,
     `${page_initials}--v${test_variation}`,
     `${page_initials}--version-${test_version}`,
   );
+  window[page_initials] = true;
   createModalLayout();
   clickEvents();
 }
@@ -1454,4 +1459,42 @@ function hasAllTargetElements() {
   );
 }
 
+function handleLocationChanges() {
+  const currentPath = window.location.pathname;
+
+  if (currentPath.includes("start-water-delivery")) {
+    waitForElement(hasAllTargetElements, init);
+  } else {
+    q(
+      `.${page_initials}__modal-layout, .${page_initials}__modal-open-cta`,
+    )?.forEach((item) => item.remove());
+    document.body.classList.remove(
+      page_initials,
+      `${page_initials}--v${test_variation}`,
+      `${page_initials}--version:${test_version}`,
+    );
+    window[page_initials] = false;
+  }
+}
+
+function urlObserver() {
+  const debouncedChanges = debounce(handleLocationChanges, 200);
+
+  const originalPushState = history.pushState;
+  history.pushState = function () {
+    originalPushState.apply(history, arguments);
+    window.dispatchEvent(new Event("pushstate"));
+  };
+
+  // Listen for back/forward button clicks
+  window.addEventListener("popstate", function (event) {
+    debouncedChanges();
+  });
+
+  window.addEventListener("pushstate", function () {
+    debouncedChanges();
+  });
+}
+
 waitForElement(hasAllTargetElements, init);
+urlObserver();
