@@ -152,11 +152,6 @@
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    await waitForElementAsync(checkForItems);
+    init();
 })();
