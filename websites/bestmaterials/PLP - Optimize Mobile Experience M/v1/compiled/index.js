@@ -100,7 +100,8 @@
                     if (countEl.textContent) {
                         if (cartQty.textContent !== countEl.textContent) {
                             cartQty.textContent = countEl.textContent;
-                        }                        cartQty.classList.remove("hide");
+                        }
+                        cartQty.classList.remove("hide");
                     } else {
                         cartQty.classList.add("hide");
                     }
@@ -140,9 +141,8 @@
 
     function checkForItems() {
         return !!(
-            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) 
+            (q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && typeof window.jQuery === "function")
             &&
-            typeof window.jQuery === "function" &&
             q("td#LeftColumnCell") &&
             q("#Top_Wrapper") &&
             q("#FooterCell")
