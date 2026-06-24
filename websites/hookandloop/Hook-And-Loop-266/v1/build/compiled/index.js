@@ -1,8 +1,3 @@
-/* 
-In Stock 
-Low Stock
-*/
-
 (async () => {
   const TEST_CONFIG = {
     client: "Hook & Loop",
@@ -12,7 +7,7 @@ Low Stock
       "Hook & Loop 266 - H & L - A/B test idea - Show product inventory/lead times on product pages.",
     page_initials: "AB-266",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -61,6 +56,7 @@ Low Stock
     "in stock": {
       icon: /* HTML */ `
         <svg
+          class="in-stock"
           width="640"
           height="640"
           viewBox="0 0 640 640"
@@ -78,6 +74,7 @@ Low Stock
     "low stock": {
       icon: /* HTML */ `
         <svg
+          class="low-stock"
           width="640"
           height="640"
           viewBox="0 0 640 640"
@@ -151,7 +148,9 @@ Low Stock
     return !!(
       q(
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
-      ) && qq("div:has(>.updated-stock-status)")
+      ) &&
+      q(".updated-stock-status p")?.textContent &&
+      qq("div:has(>.updated-stock-status)")
     );
   }
 
