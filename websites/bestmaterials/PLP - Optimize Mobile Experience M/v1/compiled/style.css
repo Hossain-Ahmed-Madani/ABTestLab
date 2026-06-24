@@ -142,7 +142,7 @@
   }
   .AB-PLP-OPTIMIZE-MOBILE #TopSubBanner1_SimpleSearch1_txtSimpleSearch {
     top: unset;
-    width: calc(100vw - 20px - 26px);
+    width: calc(100vw - 144px - 26px);
     margin-right: 4px;
   }
   .AB-PLP-OPTIMIZE-MOBILE #TopBanner_AdvancedSearch {
@@ -244,6 +244,7 @@
   .AB-PLP-OPTIMIZE-MOBILE > form {
     margin-bottom: 0;
     padding-bottom: 0;
+    overflow-x: hidden;
   }
   .AB-PLP-OPTIMIZE-MOBILE td.ContentTable {
     background: none;

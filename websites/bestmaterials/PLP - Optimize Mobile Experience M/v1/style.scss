@@ -180,7 +180,8 @@
 
         #TopSubBanner1_SimpleSearch1_txtSimpleSearch {
             top: unset;
-            width: calc(100vw - 20px - 26px);
+            // width: calc(100vw - 20px - 26px);
+            width: calc(100vw - 144px - 26px);
             margin-right: 4px;
         }
 
@@ -281,6 +282,7 @@
         }
 
         // ====== NEW ======
+
         #SearchTemplate13_pnlSort {
             display: flex;
             margin-bottom: 10px;
@@ -308,6 +310,7 @@
         & > form {
             margin-bottom: 0;
             padding-bottom: 0;
+            overflow-x: hidden;
         }
 
         td.ContentTable {
