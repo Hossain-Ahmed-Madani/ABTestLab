@@ -1,0 +1,5 @@
+Ticket: https://trello.com/c/llcLdRGf/5386-hook-loop-266-h-l-a-b-test-idea-show-product-inventory-lead-times-on-product-pages?search_id=c20b6169-ae5f-46e9-af1f-cf79a50d8ba6
+
+Test container: https://app.varify.io/dashboard?msg=variation-updated&variation_id=57042&search=Hook+%26+Loop+266+-+H+%26+L+-+A%2FB+test+idea+-+Show+product+inventory%2Flead+times+on+product+pages
+
+Preview: https://www.hookandloop.com/brands/duragrip/sew-on/3-8-duragrip-brand-sew-on-hook-black?varify-force=38042-57042

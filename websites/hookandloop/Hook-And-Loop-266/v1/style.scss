@@ -1,17 +1,55 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-266 {
-    //
+
+    div:has(> .updated-stock-status) p {
+        display: none;
+    }
+
+    .ab-stock-status-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .ab-stock-status-icon {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .ab-stock-status-text {
+        font-family: poppins, sans-serif;
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 500;
+        color: rgb(55, 65, 81);
+        white-space: nowrap;
+
+        &--in-stock {
+            color: #008800;
+        }
+
+        &--low-stock {
+            color: #ff9903;
+        }
+    }
 }

@@ -1,0 +1,32 @@
+.AB-266 div:has(> .updated-stock-status) p {
+  display: none;
+}
+.AB-266 .ab-stock-status-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2px;
+}
+.AB-266 .ab-stock-status-icon {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.AB-266 .ab-stock-status-icon svg {
+  width: 30px;
+  height: 30px;
+}
+.AB-266 .ab-stock-status-text {
+  font-family: poppins, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgb(55, 65, 81);
+  white-space: nowrap;
+}
+.AB-266 .ab-stock-status-text--in-stock {
+  color: #008800;
+}
+.AB-266 .ab-stock-status-text--low-stock {
+  color: #ff9903;
+}
