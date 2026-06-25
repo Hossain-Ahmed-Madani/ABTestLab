@@ -1,12 +1,8 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "ROI Revolutions",
-        project: "Best Materials",
-        site_url: "https://www.bestmaterials.com/",
-        test_name: "PLP - Optimize Mobile Experience [M]",
         page_initials: "AB-PLP-OPTIMIZE-MOBILE",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -45,7 +41,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         document.head.insertAdjacentHTML("beforeend", `<meta name="viewport" content="width=device-width, initial-scale=1">`);
         document.head.insertAdjacentHTML(

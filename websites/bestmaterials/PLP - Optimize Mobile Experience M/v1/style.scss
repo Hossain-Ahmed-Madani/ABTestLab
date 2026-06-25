@@ -286,6 +286,7 @@
         #SearchTemplate13_pnlSort {
             display: flex;
             margin-bottom: 10px;
+            align-items: center;
         }
         #SearchTemplate13_pnlSort font.Content {
             white-space: nowrap;
@@ -297,8 +298,13 @@
             display: inline-block;
         }
 
-        #SearchTemplate13_DataGrid1 > tbody > tr:first-child td {
+        #SearchTemplate13_DataGrid1 > tbody > tr:first-child td:has(> span) {
             border: none;
+        }
+
+        #SearchTemplate13_DataGrid1 > tbody > tr:first-child td {
+            border-left: 0;
+            border-right: 0;
         }
 
         #FooterCell {
@@ -398,7 +404,7 @@
             display: inline-block;
         }
 
-        div > table > tbody > tr:last-child td:not(.ContentTableHeader) {
+        div > table > tbody > tr:last-child:not(:nth-child(1)) td:not(.ContentTableHeader) {
             display: block;
             border: none;
             margin-top: 11px;
@@ -462,7 +468,7 @@
             display: block;
             margin-left: -10px;
             padding-top: 4px;
-            padding-bottom:  4px;
+            padding-bottom: 4px;
             padding-left: 10px;
             padding-right: 10px;
 
@@ -472,6 +478,15 @@
             line-height: 100%;
             letter-spacing: 0px;
             color: #000000;
+        }
+
+        table.ContentTableHeader:has(span.ContentTableHeader:empty) {
+            display: none;
+        }
+
+        select[name="SearchTemplate13$dlSortBy"] {
+            border: 1px solid #000000;
+            border-radius: 0;
         }
     }
 
