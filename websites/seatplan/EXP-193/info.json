@@ -1,0 +1,13 @@
+{
+  "id": "1781613474722_8689_EXP_193",
+  "name": "EXP-193",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-16T12:37:54.722Z",
+  "createdAtReadable": "6/16/2026, 6:37:54 PM",
+  "lastUpdated": "2026-06-16T12:37:54.854Z"
+}
