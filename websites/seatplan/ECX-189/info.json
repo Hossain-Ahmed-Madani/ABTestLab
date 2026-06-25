@@ -1,0 +1,13 @@
+{
+  "id": "1777375784874_879_ECX_189",
+  "name": "ECX-189",
+  "type": "A/B",
+  "website": "seatplan",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-28T11:29:44.874Z",
+  "createdAtReadable": "4/28/2026, 5:29:44 PM",
+  "lastUpdated": "2026-04-28T11:29:45.164Z"
+}
