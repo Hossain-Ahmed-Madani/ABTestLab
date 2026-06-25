@@ -244,7 +244,7 @@
 
         .stage-landingpage__header {
             padding-top: 40px;
-            padding-bottom: 32px;
+            padding-bottom: 0;
         }
 
         .stage-landingpage__header .stage-landingpage__picture-badge {
@@ -254,6 +254,7 @@
             display: flex;
             gap: 24px;
             width: auto;
+            max-width: max-content;
             height: max-content;
 
             border-top-left-radius: 0;
@@ -282,7 +283,7 @@
             max-width: 816px;
             display: block;
             background-color: #f6f5f3;
-            padding: 24px 0;
+            padding: 32px 0 24px;
         }
 
         .ab-header {
@@ -330,6 +331,10 @@
 
         .teaser-course-item {
             justify-content: space-between;
+        }
+
+        .section.section--pos-relative.section--spacing-top-none {
+            padding-bottom: 32px;
         }
     }
 }
