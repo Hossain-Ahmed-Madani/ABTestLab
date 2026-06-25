@@ -289,25 +289,35 @@
             /* HTML */ `<span class="ab-badge-text"> Lehrgang <b>4 Wochen kostenlos</b> ausprobieren und dann durchstarten </span> `,
         );
 
-        console.log("Pathname", window.location.pathname);
-
-        q(".section.section--pos-relative.section--spacing-top-none").insertAdjacentHTML("afterend", /* HTML */ `
-            <div class="ab-new-heading-section">
-                <div class="ab-header">Erreichen Sie mit dem ${q('.stage-landingpage__header h1.headline.headline--h1').textContent} Ihre neuen Ziele</div>
-                <div class="ab-description">
-                    ${DATA[window.location.pathname].description}
+        q(".section.section--pos-relative.section--spacing-top-none").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-new-heading-section-mobile">
+                    <div class="ab-header">Erreichen Sie mit dem ${q(".stage-landingpage__header h1.headline.headline--h1").textContent} Ihre neuen Ziele</div>
+                    <div class="ab-description">${DATA[window.location.pathname].description}</div>
                 </div>
-            </div> 
-        `);
+            `,
+        );
+
+        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange:has(.teaser-oiv)"));
+        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--conditional-instagram-spacing-top"));
+        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange.section--mobile-spacing-top-xxl"));
+        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend",  q('.section:has(.listbox)'));
     }
 
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".section.section--pos-relative.section--spacing-top-none") &&
-            q('.stage-landingpage__header h1.headline.headline--h1') &&
+            q(".stage-landingpage__header h1.headline.headline--h1") &&
             q("ul.list.list--unordered.list--unordered-with-icon") &&
-            q(".stage-landingpage__picture-badge")
+            q(".stage-landingpage__picture-badge") &&
+            q(".section.section--spacing-bottom-none") &&
+            q(".section.section--bg-orange:has(.teaser-oiv)") &&
+            q(".section.section--conditional-instagram-spacing-top") &&
+            q(".section.section--bg-orange:has(.teaser-oiv)") &&
+            q(".section.section--bg-orange.section--mobile-spacing-top-xxl") &&
+            q('.section:has(.listbox)')
         );
     }
 

@@ -13,6 +13,11 @@
 }
 
 .AB-TEST015 {
+
+    .section.section--bg-orange:has(.teaser-oiv) ~ .section  {
+        display: none;
+    }
+
     .section.section--pos-relative.section--spacing-top-none {
         background-color: #f6f5f3;
     }
@@ -181,7 +186,7 @@
         font-weight: 700;
     }
 
-    .ab-new-heading-section {
+    .ab-new-heading-section-mobile {
         background-color: #f6f5f3;
         padding: 24px;
     }
@@ -205,5 +210,10 @@
         letter-spacing: 0px;
         color: #1A0A00;
         
+    }
+
+
+    .section.section--spacing-bottom-none {
+        padding-top: 24px;
     }
 }
