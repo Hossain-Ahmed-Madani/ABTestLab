@@ -320,6 +320,8 @@
             /* HTML */ `<span class="ab-badge-text"> Lehrgang <b>4 Wochen kostenlos</b> ausprobieren und dann durchstarten </span> `,
         );
 
+        q(".stage-landingpage__header").insertAdjacentHTML("beforeend", /* HTML */ ` ${q(".stage-landingpage__picture-badge").outerHTML} `);
+
         q(".section.section--pos-relative.section--spacing-top-none").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
@@ -330,10 +332,21 @@
             `,
         );
 
+        q(".stage-landingpage__header").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-new-heading-section-desktop">
+                    <div class="ab-header">Erreichen Sie mit dem ${q(".stage-landingpage__header h1.headline.headline--h1").textContent} Ihre neuen Ziele</div>
+                    <div class="ab-description">${DATA[window.location.pathname].description}</div>
+                </div>
+            `,
+        );
+
+
         q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange:has(.teaser-oiv)"));
         q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--conditional-instagram-spacing-top"));
         q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange.section--mobile-spacing-top-xxl"));
-        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend",  q('.section:has(.listbox)'));
+        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section:has(.listbox)"));
     }
 
     function checkForItems() {
@@ -348,7 +361,7 @@
             q(".section.section--conditional-instagram-spacing-top") &&
             q(".section.section--bg-orange:has(.teaser-oiv)") &&
             q(".section.section--bg-orange.section--mobile-spacing-top-xxl") &&
-            q('.section:has(.listbox)')
+            q(".section:has(.listbox)")
         );
     }
 
