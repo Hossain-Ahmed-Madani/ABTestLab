@@ -3,7 +3,7 @@
         client: "Netzproduzenten",
         project: "ISL",
         site_url: "https://www.ils.de",
-        test_name: "Ticket Name",
+        test_name: "Test015 [ILS] - landing pages - Optimize above the fold area and links to courses",
         page_initials: "AB-TEST015",
         test_variation: 1,
         test_version: 0.0001,
@@ -288,10 +288,7 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function init() {
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
+    function updateLayout() {
         q("ul.list.list--unordered.list--unordered-with-icon").innerHTML = /* HTML */ `
             ${[
                 "Deutschlands größte Fernschule, mehrfach ausgezeichnet",
@@ -341,12 +338,34 @@
                 </div>
             `,
         );
+    }
 
+    async function repositionElements() {
+        const selector = ".section.section--spacing-bottom-none, .section:has(.teaser-course)";
+        const siblingNodesSelectorList = [
+            ".section.section--bg-orange:has(.teaser-oiv)",
+            ".section.section--conditional-instagram-spacing-top",
+            ".section.section--bg-orange.section--mobile-spacing-top-xxl",
+            ".section:has(.listbox)",
+        ]
 
-        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange:has(.teaser-oiv)"));
-        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--conditional-instagram-spacing-top"));
-        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section.section--bg-orange.section--mobile-spacing-top-xxl"));
-        q(".section.section--spacing-bottom-none").insertAdjacentElement("afterend", q(".section:has(.listbox)"));
+        await waitForElementAsync(() => q(selector));
+        await waitForElementAsync(() => q(siblingNodesSelectorList.join(',')));
+
+        const targetNode = q(selector);
+
+        siblingNodesSelectorList.forEach((cSelector) => {
+            const cNode = q(cSelector);
+            if (!cNode) return;
+            targetNode.insertAdjacentElement("afterend", cNode);
+        });
+    }
+
+    function init() {
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        console.table(TEST_CONFIG);
+        updateLayout();
+        repositionElements();
     }
 
     function checkForItems() {
@@ -355,13 +374,7 @@
             q(".section.section--pos-relative.section--spacing-top-none") &&
             q(".stage-landingpage__header h1.headline.headline--h1") &&
             q("ul.list.list--unordered.list--unordered-with-icon") &&
-            q(".stage-landingpage__picture-badge") &&
-            q(".section.section--spacing-bottom-none") &&
-            q(".section.section--bg-orange:has(.teaser-oiv)") &&
-            q(".section.section--conditional-instagram-spacing-top") &&
-            q(".section.section--bg-orange:has(.teaser-oiv)") &&
-            q(".section.section--bg-orange.section--mobile-spacing-top-xxl") &&
-            q(".section:has(.listbox)")
+            q(".stage-landingpage__picture-badge")
         );
     }
 
