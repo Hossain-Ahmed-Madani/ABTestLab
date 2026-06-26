@@ -6,7 +6,7 @@
         test_name: "Test015 [ILS] - landing pages - Optimize above the fold area and links to courses",
         page_initials: "AB-TEST015",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -254,10 +254,19 @@
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
 
     function updateLayout() {
+        q("head").insertAdjacentHTML(
+            "beforeend",
+            /* HTML */ `
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+                <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+            `,
+        );
+
         q("ul.list.list--unordered.list--unordered-with-icon").innerHTML = /* HTML */ `
             ${[
                 "Deutschlands größte Fernschule, mehrfach ausgezeichnet",
@@ -319,7 +328,7 @@
         ];
 
         await waitForElementAsync(() => q(selector));
-        await waitForElementAsync(() => q(siblingNodesSelectorList.join(',')));
+        await waitForElementAsync(() => q(siblingNodesSelectorList.join(",")));
 
         const targetNode = q(selector);
 
@@ -347,11 +356,6 @@
         );
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    await waitForElementAsync(checkForItems);
+    init();
 })();

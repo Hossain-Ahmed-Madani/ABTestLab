@@ -3,5 +3,12 @@ Not working on these urls
 https://www.ils.de/lp/ihk-abschluesse 
 https://www.ils.de/lp/englischkurse
 https://www.ils.de/lp/fotolehrgaenge/
-https://www.ils.de/lp/betriebswirt/ -> issue
+https://www.ils.de/lp/betriebswirt/ 
 https://www.ils.de/lp/sprachkurse/
+
+
+Test container: 
+https://app.varify.io/dashboard?msg=experiment-created&experiment_id=38165&variation_id=57217&search=Test015+%5BILS%5D+-+landing+pages+-+Optimize+above+the+fold+area+and+links+to+courses
+
+Forced Variation
+https://www.ils.de/lp/heilpraktiker-ausbildung/?varify-force=38165-57217
