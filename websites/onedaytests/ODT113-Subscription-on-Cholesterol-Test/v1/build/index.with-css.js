@@ -15,7 +15,7 @@
   display: none;
 }
 .AB-ODT113 .ab-subscription-dropdown__header {
-  width: auto;
+  width: max-content;
   display: flex;
   justify-content: flex-start;
   align-items: center;
