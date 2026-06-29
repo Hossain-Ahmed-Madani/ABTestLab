@@ -196,8 +196,8 @@
   }
   .AB-TEST015 .stage-landingpage__picture img {
     width: 100%;
-    height: 444px;
-    min-height: 444px;
+    height: 342px;
+    min-height: 342px;
     border-radius: 0 0 0 7.5em;
   }
   .AB-TEST015 .stage-landingpage__header {
@@ -242,16 +242,16 @@
   .AB-TEST015 .ab-header {
     font-family: Noto Sans;
     font-weight: 700;
-    font-size: 28px;
+    font-size: 40px;
     line-height: 130%;
     letter-spacing: 0px;
-    color: #f55a00;
+    color: #fa6400;
     margin-bottom: 16px;
   }
   .AB-TEST015 .ab-description {
     font-family: Noto Sans;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 150%;
     letter-spacing: 0px;
     color: #1a0a00;
@@ -282,6 +282,13 @@
   .AB-TEST015 .section.section--pos-relative.section--spacing-top-none {
     padding-bottom: 32px;
   }
+  .AB-TEST015 .ab-review-count {
+    font-size: 18px;
+  }
+  .AB-TEST015 .section:has(.listbox) {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
 }
 `;
       document.head.appendChild(style);
@@ -293,14 +300,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "ISL",
-    site_url: "https://www.ils.de",
-    test_name:
-      "Test015 [ILS] - landing pages - Optimize above the fold area and links to courses",
     page_initials: "AB-TEST015",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -716,7 +718,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
     updateLayout();
     repositionElements();
   }

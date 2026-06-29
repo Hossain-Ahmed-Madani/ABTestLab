@@ -6,7 +6,7 @@
         test_name: "Test015 [ILS] - landing pages - Optimize above the fold area and links to courses",
         page_initials: "AB-TEST015",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -372,7 +372,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
         updateLayout();
         repositionElements();
     }

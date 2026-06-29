@@ -5,6 +5,7 @@ https://www.ils.de/lp/englischkurse
 https://www.ils.de/lp/fotolehrgaenge/
 https://www.ils.de/lp/betriebswirt/ 
 https://www.ils.de/lp/sprachkurse/
+https://www.ils.de/lp/sozialwesen
 
 
 Test container: 
@@ -12,3 +13,5 @@ https://app.varify.io/dashboard?msg=experiment-created&experiment_id=38165&varia
 
 Forced Variation
 https://www.ils.de/lp/heilpraktiker-ausbildung/?varify-force=38165-57217
+
+https://www.ils.de/lp/sozialwesen/?varify-force=38165-57217
