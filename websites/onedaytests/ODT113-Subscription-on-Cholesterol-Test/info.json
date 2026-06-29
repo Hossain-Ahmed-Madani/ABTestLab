@@ -1,0 +1,13 @@
+{
+  "id": "1782725475396_8843_ODT113_Subscription_on_Cholesterol_Test",
+  "name": "ODT113-Subscription-on-Cholesterol-Test",
+  "type": "A/B",
+  "website": "onedaytests",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-29T09:31:15.397Z",
+  "createdAtReadable": "6/29/2026, 3:31:15 PM",
+  "lastUpdated": "2026-06-29T09:31:15.931Z"
+}
