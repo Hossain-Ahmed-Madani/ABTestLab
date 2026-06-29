@@ -76,6 +76,52 @@
         }
     }
 
+    .ab-description {
+        padding-left: 27px;
+        display: none;
+        flex-direction: column;
+        gap: 8px;
+
+        &__title {
+            font-family: Nunito Sans;
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #1d1d1d;
+        }
+
+        &__sub-title {
+            font-family: Nunito Sans;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #1d1d1d;
+        }
+
+        &__list {
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 17px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        &__list-item {
+            font-family: Nunito Sans;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #1d1d1d;
+        }
+    }
+
     // Control Items
     #new_place_for_paywhirl {
         margin-bottom: 40px !important;
@@ -101,6 +147,7 @@
 
     .paywhirl-plan-selector .paywhirl-plan-selector-group-container {
         padding: 16px;
+        margin-bottom: 16px;
         display: flex;
         flex-direction: column;
         gap: 16px;
@@ -154,6 +201,7 @@
         vertical-align: middle;
         color: #1d1d1d;
     }
+
     .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) select {
         max-width: 587px;
         height: auto;
@@ -165,11 +213,18 @@
         -webkit-appearance: none;
         -moz-appearance: none;
 
-        /* URL encoded SVG arrow */
         background-image: url('data:image/svg+xml,<svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 0.5L5.5 5.5L0.5 0.5" stroke="%231D1D1D" stroke-linecap="round" stroke-linejoin="round"/></svg>');
         background-repeat: no-repeat;
         background-position: right 15px center;
         background-size: 12px;
         background-color: #fff;
+    }
+
+    .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .ab-description {
+        display: flex;
+    }
+
+    .paywhirl-plan-selector-description.paywhirl-plan-selector-content {
+        display: none !important;
     }
 }

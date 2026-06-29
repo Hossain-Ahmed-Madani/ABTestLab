@@ -1,0 +1,181 @@
+.AB-ODT113 .ab-subscription-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.AB-ODT113 .ab-subscription-dropdown--collapsed .ab-subscription-dropdown__body {
+    display: none;
+}
+.AB-ODT113 .ab-subscription-dropdown__header {
+    width: auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 9px;
+    cursor: pointer;
+    user-select: none;
+}
+.AB-ODT113 .ab-subscription-dropdown__header__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.AB-ODT113 .ab-subscription-dropdown__header__icon svg {
+    width: 12px;
+    height: 13px;
+}
+.AB-ODT113 .ab-subscription-dropdown__header__text {
+    font-family: Nunito Sans;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+    vertical-align: middle;
+    color: #1d1d1d;
+}
+.AB-ODT113 .ab-subscription-dropdown__body {
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 16px;
+}
+.AB-ODT113 .ab-subscription-dropdown__body__text {
+    font-family: Nunito Sans;
+    font-weight: 400;
+    font-style: Italic;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    vertical-align: middle;
+    color: #1d1d1d;
+    padding: 0;
+    margin: 0;
+}
+.AB-ODT113 .ab-description {
+    padding-left: 27px;
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+.AB-ODT113 .ab-description__title {
+    font-family: Nunito Sans;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1d1d1d;
+}
+.AB-ODT113 .ab-description__sub-title {
+    font-family: Nunito Sans;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1d1d1d;
+}
+.AB-ODT113 .ab-description__list {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.AB-ODT113 .ab-description__list-item {
+    font-family: Nunito Sans;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1d1d1d;
+}
+.AB-ODT113 #new_place_for_paywhirl {
+    margin-bottom: 40px !important;
+}
+.AB-ODT113 .product-app,
+.AB-ODT113 .paywhirl-plan-selector {
+    margin-bottom: 0;
+}
+.AB-ODT113 .product-form--atc {
+    margin-top: 0;
+    padding-top: 0;
+}
+.AB-ODT113 .product-form--atc-button {
+    margin-top: 0;
+}
+.AB-ODT113 .paywhirl-info-popup {
+    display: none;
+}
+.AB-ODT113 .paywhirl-plan-selector .paywhirl-plan-selector-group-container {
+    padding: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.AB-ODT113 .paywhirl-plan-selector .paywhirl-plan-selector-group {
+    margin: 0;
+    padding: 0 16px;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) {
+    background-color: #e0eff6;
+    margin: 0;
+    padding: 16px;
+    border-radius: 4px;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-plan-selector-icon svg {
+    fill: #0070b9;
+    width: 17px;
+    height: 17px;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-plan-selector-group-price,
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-plan-selector-price {
+    display: none !important;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-plan-selector-group-name {
+    font-family: Nunito Sans;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #0070b9;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-plan-selector-plan {
+    margin-top: 16px;
+    margin-bottom: 12px;
+    margin-left: 27px;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .paywhirl-label {
+    font-family: Nunito Sans;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+    color: #1d1d1d;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) select {
+    max-width: 587px;
+    height: auto;
+    border: 1px solid #a1d3ea;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 10px 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml,<svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.5 0.5L5.5 5.5L0.5 0.5" stroke="%231D1D1D" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    background-color: #fff;
+}
+.AB-ODT113 .paywhirl-plan-selector-group.paywhirl-group-selected:not(#paywhirl-one-time-purchase-group) .ab-description {
+    display: flex;
+}
+.AB-ODT113 .paywhirl-plan-selector-description.paywhirl-plan-selector-content {
+    display: none !important;
+}

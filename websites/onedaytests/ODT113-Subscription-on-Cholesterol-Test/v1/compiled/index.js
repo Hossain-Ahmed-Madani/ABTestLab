@@ -69,6 +69,24 @@
                 </div>
             `,
         );
+
+        q('.paywhirl-plan-selector-description.paywhirl-plan-selector-content').insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <div class="ab-description">
+                    <div class="ab-description__title">The best way to look after your health is to do so continuously.</div>
+                    <div class="ab-description__sub-title">Your easy, hassle-free way to continually monitor your health with our subscription plans.</div>
+                    <ul class="ab-description__list">
+                        <li class="ab-description__list-item">Choose your frequency and we will do the rest.</li>
+                        <li class="ab-description__list-item">All of your results will be automatically updated in your Health Dashboard.</li>
+                        <li class="ab-description__list-item">Pause and restart any time.</li>
+                        <li class="ab-description__list-item">Available for home test or in-clinic test (clinic appointment not included).</li>
+                    </ul>
+                </div>
+            `,
+        );
+
+
     }
 
     function clickFunction() {
@@ -86,7 +104,7 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".paywhirl-info-popup"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".paywhirl-info-popup") && q('.paywhirl-plan-selector-description.paywhirl-plan-selector-content'));
     }
 
     try {
