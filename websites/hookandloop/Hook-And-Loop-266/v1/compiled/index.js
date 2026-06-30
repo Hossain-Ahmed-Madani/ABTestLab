@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-266",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -50,6 +50,7 @@
                 </svg>
             `,
             label: "In stock",
+            tooltip_message: '',
         },
         "low stock": {
             icon: /* HTML */ `
@@ -61,6 +62,19 @@
                 </svg>
             `,
             label: "Low stock",
+            tooltip_message: 'Low Stock: Available to order, but supply may be limited. Larger quantities may take additional time to fulfill.',
+        },
+        "available to order": {
+            icon: /* HTML */ `
+                <svg class="low-stock" width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576ZM320 384C302.3 384 288 398.3 288 416C288 433.7 302.3 448 320 448C337.7 448 352 433.7 352 416C352 398.3 337.7 384 320 384ZM320 192C301.8 192 287.3 207.5 288.6 225.7L296 329.7C296.9 342.3 307.4 352 319.9 352C332.5 352 342.9 342.3 343.8 329.7L351.2 225.7C352.5 207.5 338.1 192 319.8 192H320Z"
+                        fill="#FF9903"
+                    />
+                </svg>
+            `,
+            label: "Available to Order",
+            tooltip_message: 'Available to Order: This item may be ordered now, but it is not currently available for immediate shipment. Fulfillment timing may vary.',
         },
     };
 
@@ -74,9 +88,14 @@
             targetNode.insertAdjacentHTML(
                 "beforeend",
                 /* HTML */ `
-                    <div class="ab-stock-status-container">
+                    <div class="ab-stock-status-container ab-stock-status-container--${currentStatus.split(" ").join("-")}">
                         <div class="ab-stock-status-icon">${DATA[currentStatus].icon}</div>
-                        <div class="ab-stock-status-text ab-stock-status-text--${currentStatus.split(" ").join("-")}">${DATA[currentStatus].label}</div>
+                        <div class="ab-stock-status-text">${DATA[currentStatus].label}</div>
+                        ${DATA[currentStatus].tooltip_message !== "" ? `
+                            <div class="ab-stock-status-text-tooltip-arrow"></div>
+                            <div class="ab-stock-status-text-tooltip">
+                            
+                            <div class="ab-stock-status-text-tooltip-text">${DATA[currentStatus].tooltip_message}</div></div>` : ""} 
                     </div>
                 `,
             );

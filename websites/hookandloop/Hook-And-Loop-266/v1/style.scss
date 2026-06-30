@@ -13,7 +13,6 @@
 }
 
 .AB-266 {
-
     div:has(> .updated-stock-status) p {
         display: none;
     }
@@ -22,7 +21,35 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
+        position: relative;
         gap: 2px;
+
+        &--in-stock {
+            .ab-stock-status-text {
+                color: #008800;
+            }
+        }
+
+        &--low-stock {
+            .ab-stock-status-text {
+                color: #ff9903;
+            }
+            cursor: pointer;
+        }
+
+        &--available-to-order {
+            .ab-stock-status-text {
+                color: #ff9903;
+            }
+            cursor: pointer;
+        }
+
+        &:hover {
+            .ab-stock-status-text-tooltip,
+            .ab-stock-status-text-tooltip-arrow {
+                display: block;
+            }
+        }
     }
 
     .ab-stock-status-icon {
@@ -34,7 +61,6 @@
             width: 30px;
             height: 30px;
         }
-
     }
 
     .ab-stock-status-text {
@@ -44,13 +70,55 @@
         font-weight: 600;
         color: rgb(55, 65, 81);
         white-space: nowrap;
+    }
 
-        &--in-stock {
-            color: #008800;
+    .ab-stock-status-text-tooltip {
+        display: none;
+        width: 300px;
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 135%;
+        left: auto;
+        right: 0;
+        margin: auto;
+        z-index: 1;
+    }
+
+    .ab-stock-status-text-tooltip-text {
+        font-family: poppins, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        font-weight: 400;
+        color: #000;
+    }
+
+    .ab-stock-status-text-tooltip-arrow {
+        display: none;
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: #fff;
+        bottom: 110%;
+        left: 7px;
+        margin: auto;
+        transform: rotate(45deg);
+        z-index: 2;
+    }
+
+    @media screen and (max-width: 1200px) {
+        .product-info-main.container {
+            overflow-x: hidden;
         }
 
-        &--low-stock {
-            color: #ff9903;
+        .ab-stock-status-text-tooltip {
+            width: 250px;
+            left: auto;
+            right: 0;
         }
+
+
     }
 }
