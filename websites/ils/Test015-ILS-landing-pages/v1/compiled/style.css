@@ -281,4 +281,10 @@
     padding-top: 45px;
     padding-bottom: 45px;
   }
+  .AB-TEST015 section.section--spacing-bottom-none, .AB-TEST015 .section:has(.teaser-course) {
+    padding-bottom: 0;
+  }
+  .AB-TEST015 .section:not(.section--bg-beige):not(.section--bg-orange):not(.section--spacing-bottom-none) + .section--conditional-instagram-spacing-top {
+    margin-top: 0;
+  }
 }

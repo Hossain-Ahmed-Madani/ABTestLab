@@ -289,6 +289,17 @@
     padding-top: 45px;
     padding-bottom: 45px;
   }
+  .AB-TEST015 section.section--spacing-bottom-none,
+  .AB-TEST015 .section:has(.teaser-course) {
+    padding-bottom: 0;
+  }
+  .AB-TEST015
+    .section:not(.section--bg-beige):not(.section--bg-orange):not(
+      .section--spacing-bottom-none
+    )
+    + .section--conditional-instagram-spacing-top {
+    margin-top: 0;
+  }
 }
 `;
       document.head.appendChild(style);
@@ -302,7 +313,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-TEST015",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

@@ -345,5 +345,13 @@
             padding-top: 45px;
             padding-bottom: 45px;
         }
+
+        section.section--spacing-bottom-none, .section:has(.teaser-course) {
+            padding-bottom: 0;
+        }
+
+        .section:not(.section--bg-beige):not(.section--bg-orange):not(.section--spacing-bottom-none)+.section--conditional-instagram-spacing-top {
+            margin-top: 0;
+        }
     }
 }
