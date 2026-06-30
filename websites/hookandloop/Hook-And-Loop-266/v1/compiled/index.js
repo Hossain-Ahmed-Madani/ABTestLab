@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-266",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -50,7 +50,7 @@
                 </svg>
             `,
             label: "In stock",
-            tooltip_message: '',
+            tooltip_message: "",
         },
         "low stock": {
             icon: /* HTML */ `
@@ -62,7 +62,7 @@
                 </svg>
             `,
             label: "Low stock",
-            tooltip_message: 'Low Stock: Available to order, but supply may be limited. Larger quantities may take additional time to fulfill.',
+            tooltip_message: "Low Stock: Available to order, but supply may be limited. Larger quantities may take additional time to fulfill.",
         },
         "available to order": {
             icon: /* HTML */ `
@@ -74,7 +74,7 @@
                 </svg>
             `,
             label: "Available to Order",
-            tooltip_message: 'Available to Order: This item may be ordered now, but it is not currently available for immediate shipment. Fulfillment timing may vary.',
+            tooltip_message: "Available to Order: This item may be ordered now, but it is not currently available for immediate shipment. Fulfillment timing may vary.",
         },
     };
 
@@ -82,6 +82,13 @@
         if (!currentStatus) return;
 
         qq(".ab-stock-status-container")?.forEach((item) => item.remove());
+
+        let toolTipMessage = DATA[currentStatus].tooltip_message;
+        const leadTimeText = q("#backorder_lead_time")?.textContent ?? null;
+
+        if (currentStatus === "available to order") {
+            toolTipMessage += leadTimeText;
+        }
 
         const targetNodes = qq("div:has(>.updated-stock-status)");
         targetNodes.forEach((targetNode) => {
@@ -91,11 +98,13 @@
                     <div class="ab-stock-status-container ab-stock-status-container--${currentStatus.split(" ").join("-")}">
                         <div class="ab-stock-status-icon">${DATA[currentStatus].icon}</div>
                         <div class="ab-stock-status-text">${DATA[currentStatus].label}</div>
-                        ${DATA[currentStatus].tooltip_message !== "" ? `
+                        ${toolTipMessage !== ""
+                            ? `
                             <div class="ab-stock-status-text-tooltip-arrow"></div>
                             <div class="ab-stock-status-text-tooltip">
                             
-                            <div class="ab-stock-status-text-tooltip-text">${DATA[currentStatus].tooltip_message}</div></div>` : ""} 
+                            <div class="ab-stock-status-text-tooltip-text">${toolTipMessage}</div></div>`
+                            : ""}
                     </div>
                 `,
             );
@@ -121,7 +130,7 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('.updated-stock-status p')?.textContent && qq("div:has(>.updated-stock-status)"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".updated-stock-status p")?.textContent && qq("div:has(>.updated-stock-status)"));
     }
 
     await waitForElementAsync(checkForItems);
