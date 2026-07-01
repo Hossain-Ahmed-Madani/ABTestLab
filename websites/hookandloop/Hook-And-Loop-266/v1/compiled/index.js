@@ -2,10 +2,30 @@
     const TEST_CONFIG = {
         page_initials: "AB-266",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+    function fireHookAndLoopGa4AbTestEvent(dom_interaction_type = null, key_one = null, key_two = null, key_three = null, val_1 = null, val_2 = null, val_3 = null) {
+        window.dataLayer = window.dataLayer || [];
+
+        const eventData = {
+            event: "ab_test_custom_event",
+            dom_interaction_type,
+            key_one,
+            key_two,
+            key_three,
+            val_1,
+            val_2,
+            val_3,
+        };
+
+        console.log("fireHookAndLoopGa4AbTestEvent", eventData);
+        window.dataLayer.push(eventData);
+
+        return eventData;
+    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -78,8 +98,17 @@
         },
     };
 
+    let prevStatus = null;
+
     function createLayout(currentStatus) {
         if (!currentStatus) return;
+
+        const productId = q('input[name="product"][value]')?.getAttribute('value') ?? null;
+
+        if(currentStatus !== prevStatus) {
+            fireHookAndLoopGa4AbTestEvent("stock_message_hover", 'experiment_id', 'product_id', 'stock_type', "38042", productId, currentStatus);
+            prevStatus = currentStatus;
+        }
 
         qq(".ab-stock-status-container")?.forEach((item) => item.remove());
 
