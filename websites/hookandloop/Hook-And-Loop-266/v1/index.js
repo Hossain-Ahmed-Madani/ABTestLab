@@ -25,7 +25,6 @@
             val_3,
         };
 
-        console.log("fireHookAndLoopGa4AbTestEvent", eventData);
         window.dataLayer.push(eventData);
 
         return eventData;
