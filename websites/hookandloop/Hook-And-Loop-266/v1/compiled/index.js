@@ -2,29 +2,20 @@
     const TEST_CONFIG = {
         page_initials: "AB-266",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    function fireHookAndLoopGa4AbTestEvent(dom_interaction_type = null, key_one = null, key_two = null, key_three = null, val_1 = null, val_2 = null, val_3 = null) {
-        window.dataLayer = window.dataLayer || [];
-
-        const eventData = {
-            event: "ab_test_custom_event",
-            dom_interaction_type,
-            key_one,
-            key_two,
-            key_three,
-            val_1,
-            val_2,
-            val_3,
-        };
-
-        console.log("fireHookAndLoopGa4AbTestEvent", eventData);
-        window.dataLayer.push(eventData);
-
-        return eventData;
+    function fireGa4Event(productId, stockStatus) {
+        window.dataLayer.push({
+            event: "stock_message_interacts",
+            "ga4-event-label": "Stock Message Interacts",
+            "ga4-event-p1-name": "product_id",
+            "ga4-event-p1-value": productId,
+            "ga4-event-p2-name": "stock_status",
+            "ga4-event-p2-value": stockStatus,
+        });
     }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -98,17 +89,10 @@
         },
     };
 
-    let prevStatus = null;
+    let prevHoveredStockLabel = null;
 
     function createLayout(currentStatus) {
         if (!currentStatus) return;
-
-        const productId = q('input[name="product"][value]')?.getAttribute('value') ?? null;
-
-        if(currentStatus !== prevStatus) {
-            fireHookAndLoopGa4AbTestEvent("stock_message_hover", 'experiment_id', 'product_id', 'stock_type', "38042", productId, currentStatus);
-            prevStatus = currentStatus;
-        }
 
         qq(".ab-stock-status-container")?.forEach((item) => item.remove());
 
@@ -137,6 +121,17 @@
                     </div>
                 `,
             );
+        });
+
+        qq(".ab-stock-status-container").forEach((item) => {
+            item.addEventListener("mouseover", (e) => {
+                const hoveredStockLabel = q(e.currentTarget, ".ab-stock-status-text").textContent.trim() ?? mull;
+                if (hoveredStockLabel !== prevHoveredStockLabel) {
+                    const productId = q('input[name="product"][value]')?.getAttribute("value") ?? null;
+                    fireGa4Event(productId, hoveredStockLabel);
+                    prevHoveredStockLabel = hoveredStockLabel;
+                }
+            });
         });
     }
 
