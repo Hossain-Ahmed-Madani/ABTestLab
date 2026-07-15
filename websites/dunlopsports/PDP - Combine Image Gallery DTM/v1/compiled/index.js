@@ -39,13 +39,91 @@
         return o ? s.querySelector(o) : document.querySelector(s);
     }
 
+    function qq(s, o) {
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+        const imageList = qq(".primary-images img, .row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img").map((item) => ({
+            src: item.getAttribute("src"),
+            alt: item.getAttribute("alt"),
+        }));
+
+        console.log(imageList);
+
+        q(".product-detail .row .js-personalize-invisible").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <!-- Swiper -->
+                <div class="ab-image-gallery">
+                    <div class="swiper-container gallery-top">
+                        <div class="swiper-wrapper">
+                            ${imageList
+                                .map(
+                                    ({ src, alt }) => /* HTML */ `
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container">
+                                                <img src="${src}" alt="${alt}" />
+                                            </div>
+                                        </div>
+                                    `,
+                                )
+                                .join("")}
+                        </div>
+                    </div>
+                    <div class="swiper-container gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            ${imageList
+                                .map(
+                                    ({ src, alt }) => /* HTML */ `
+                                        <div class="swiper-slide">
+                                            <div class="swiper-slide-container"><img src="${src}" alt="${alt}" /></div>
+                                        </div>
+                                    `,
+                                )
+                                .join("")}
+                        </div>
+                        <!-- Add Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            `,
+        );
+
+        const galleryTop = new Swiper(".gallery-top", {
+            spaceBetween: 10,
+            loop: true,
+            loopedSlides: 4,
+        });
+        const galleryThumbs = new Swiper(".gallery-thumbs", {
+            // spaceBetween: 10,
+            // centeredSlides: true,
+            slidesPerView: "auto",
+            touchRatio: 0.2,
+            slideToClickedSlide: true,
+            loop: true,
+            loopedSlides: 4,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+        galleryTop.controller.control = galleryThumbs;
+        galleryThumbs.controller.control = galleryTop;
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".product-detail .row .js-personalize-invisible") &&
+            q(".primary-images img") &&
+            q(".row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img") &&
+            typeof window.Swiper === "function"
+        );
     }
 
     await waitForElementAsync(checkForItems);
