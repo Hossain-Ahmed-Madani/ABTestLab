@@ -1,0 +1,55 @@
+Site: www.us.dunlopsports.com 
+
+Hypothesis: We believe making the full product image gallery visible above the fold will enable users to evaluate products more efficiently, increasing engagement with product imagery and driving higher add-to-cart and conversion rates.
+
+Test Shell in Testing Platform: https://app.convert.com/accounts/10019693/projects/100110052/experiences/100143632/summary
+
+Audience: All Users
+
+Primary Goal: Cart Additions
+
+Secondary Goals: Image Gallery Clicks, Transactions, Revenue
+
+Standard Goals: 
+
+URL Targeting: PDPs 
+
+QA URLs: 
+https://us.dunlopsports.com/cleveland-golf/clubs/putters/hb-soft-2-black/hb-soft-2-black-putter-%E2%80%93-model-1/MHBSOFT2B-1.html
+https://us.dunlopsports.com/xxio/clubs/fairway-woods/xxio-prime-royal-edition-fairway-woods/xxio-prime-royal-edition-fairway-woods/MXXIORE6FWY.html
+
+QA Scenario: 
+Verify that the carousel is displayed directly below the main product image above the fold, with the main product image appearing as the first carousel item and selected by default.
+Verify that clicking any image in the carousel updates the selected state and replaces the main product image with the selected image.
+Verify that navigating through the carousel using the left/right arrow controls updates the selected state and synchronizes the main product image with the active carousel image.
+
+Launch % of Traffic: 100%
+
+Variation Design Details: 
+Current Site: Additional images of the product exist in a full-width carousel beneath the add to cart button. 
+Variant design: 
+Move the full-width image carousel so it appears directly below the main product image (above the fold).
+Add the current main product image as the first item in the carousel. This item should be selected by default on page load.
+Keep the main product image and the carousel selection in sync:
+When a user clicks a carousel image, update the selected state and replace the main product image with the selected image.
+When a user navigates the carousel using the arrow controls, update the selected state to match the active carousel item and replace the main product image accordingly.
+Suggest Layout (as shown in Figma mockup)
+Note: This is our proposed approach, not a strict requirement. If there's a simpler or more maintainable implementation that achieves the same outcome, feel free to suggest it. 
+Desktop: show five thumbnails (max)
+image dimension: 150x150px
+Mobile: show four thumbnails (max)
+image dimension: 75x75px/vector form of the left arrow*/
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+  <rect x="24.5" y="24.5" width="24" height="24" transform="rotate(180 24.5 24.5)" stroke="black"/>
+  <path d="M14.7539 5.87097L8.12478 12.5001L14.7539 19.1292" stroke="black" stroke-linecap="round"/>
+</svg>
+
+/*vector form of the right arrow*/
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+  <rect x="0.5" y="0.499758" width="24" height="24" stroke="black"/>
+  <path d="M10.2461 19.1288L16.8752 12.4997L10.2461 5.87053" stroke="black" stroke-linecap="round"/>
+</svg>
+
+
+Variation Design Mockup: 
+https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=1380-754&t=wE3nALHV7wCkXbuu-1
