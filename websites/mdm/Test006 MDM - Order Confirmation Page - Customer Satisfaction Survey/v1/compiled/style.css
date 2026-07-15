@@ -1,0 +1,137 @@
+.AB-TEST006 .az-textblock.az-success-upgrade__text-block {
+  display: flex;
+  gap: 25px;
+}
+.AB-TEST006 .ab-survey-container {
+  margin-left: auto;
+  border: 1px dashed #c9a84c;
+  border-radius: 8px;
+  background-color: #f5f0e5;
+  padding: 26px 30px 19px 25px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.AB-TEST006 .ab-survey-top {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 14px;
+}
+.AB-TEST006 .ab-survey-icon {
+  width: 46px;
+  min-width: 46px;
+  height: 46px;
+  min-height: 46px;
+  background-color: #b5963a;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TEST006 .ab-survey-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.AB-TEST006 .ab-survey-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.AB-TEST006 .ab-survey-title {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 13.7px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a1a1a;
+}
+.AB-TEST006 .ab-survey-subtitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 11.3px;
+  line-height: 18px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #555555;
+}
+.AB-TEST006 .ab-survey-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.AB-TEST006 .ab-survey-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 140px;
+  height: 34px;
+  background-color: #b5963a;
+  border-radius: 4px;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 11.6px;
+  line-height: 1;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #ffffff;
+  text-decoration: none;
+}
+.AB-TEST006 .ab-survey-cta:hover {
+  text-decoration: none;
+}
+.AB-TEST006 .ab-survey-pill-block {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 6px;
+}
+.AB-TEST006 .ab-survey-pill-item {
+  border: 1px solid #ddd3b5;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 4px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.AB-TEST006 .ab-survey-pill-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AB-TEST006 .ab-survey-pill-icon svg {
+  width: 13px;
+  height: 13px;
+}
+.AB-TEST006 .ab-survey-pill-text {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 100%;
+  letter-spacing: 0;
+  vertical-align: middle;
+  color: #6b5820;
+  white-space: nowrap;
+}
+@media screen and (max-width: 1023.5px) {
+  .AB-TEST006 .ab-survey-container {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .AB-TEST006 .ab-survey-bottom {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .AB-TEST006 .ab-survey-pill-block {
+    flex-wrap: wrap;
+  }
+}

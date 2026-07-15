@@ -1,0 +1,26 @@
+Test doc: https://docs.google.com/document/d/1ngKKEEU8KqqWKGKc9Q9uigqRKttihqGRvh1NOA7JD3M/edit?tab=t.0
+
+Figma: https://www.figma.com/design/PvTq4uC3UpNDRuB40JzgPA/MDM---A-B-Testing?node-id=822-30&m=draw
+
+Form: https://forms.gle/WDTWE1R7jrBEaio68
+
+
+Test credentials:
+First name: Bhavani
+Last name: Govindan
+Email: Bhavani.Govindan@mdm.de
+Street: Theodor-Heuss-Straße 7
+ZIP: 38122
+City: Braunschweig
+
+
+Auf Rechnung
+
+
+Test container: https://app2.abtasty.com/edit/test/1655059/main-information
+
+https://www.mdm.de/success?abtasty_qa_assistant_campaign_id=1655059
+
+https://www.mdm.de/success?upgradeSku=1150170108
+
+https://www.mdm.de/success?abtasty_qa_assistant=true&abtasty_qa_assistant_token_v1=MjFiN2Q4MGIyZWJhZGE4NTA1NmUwOGFlMTA5ZTk1NGYzYjBiYjA2YzQxZmIyYmVkYTlhMjM4MzY5ZjQxNDhmYQ&abtasty_qa_assistant_campaign_id=1655059
