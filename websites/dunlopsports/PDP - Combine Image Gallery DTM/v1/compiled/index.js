@@ -43,13 +43,7 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function init() {
-        if (window[page_initials] === true) return;
-
-        window[page_initials] = true;
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
+    function createLayout() {
         const imageList = qq(".primary-images img, .row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img").map((item) => ({
             src: item.getAttribute("src"),
             alt: item.getAttribute("alt"),
@@ -69,7 +63,7 @@
                                     ({ src, alt }) => /* HTML */ `
                                         <div class="swiper-slide">
                                             <div class="swiper-slide-container">
-                                                <img  src="${src}" alt="${alt}" />
+                                                <img src="${src}" alt="${alt}" />
                                             </div>
                                         </div>
                                     `,
@@ -102,25 +96,66 @@
                 </div>
             `,
         );
+    }
 
-        const galleryTop = new Swiper(".gallery-top", {
-            spaceBetween: 10,
-            loop: true,
-            loopedSlides: 4,
+    function loadSwiper() {
+        return new Promise((resolve, reject) => {
+            const cssUrl = `https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.css`;
+            const jsUrl = `https://cdn.jsdelivr.net/npm/swiper@14.0.1/swiper-bundle.min.js`;
+
+            // Remove any existing Swiper <link>/<script> tags, if present
+            qq('link[href*="swiper"], script[src*="swiper"]').forEach((el) => el.remove());
+
+            // Inject the correct version fresh
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = cssUrl;
+            document.head.appendChild(link);
+
+            const script = document.createElement("script");
+            script.src = jsUrl;
+
+            script.onload = () => resolve(true);
+            script.onerror = () => reject(new Error(`Failed to load Swiper ${version} from ${jsUrl}`));
+
+            document.head.appendChild(script);
         });
+    }
+
+    function initSwiperSlider() {
         const galleryThumbs = new Swiper(".gallery-thumbs", {
+            spaceBetween: 0,
             slidesPerView: "auto",
-            touchRatio: 0.2,
-            slideToClickedSlide: true,
+            freeMode: true,
+            watchSlidesProgress: true,
             loop: true,
-            loopedSlides: 4,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
             },
         });
-        galleryTop.controller.control = galleryThumbs;
-        galleryThumbs.controller.control = galleryTop;
+
+        new Swiper(".gallery-top", {
+            spaceBetween: 0,
+            slideToClickedSlide: true,
+            thumbs: {
+                swiper: galleryThumbs,
+            },
+        });
+    }
+
+    async function init() {
+        if (window[page_initials] === true) return;
+
+        window[page_initials] = true;
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        console.table(TEST_CONFIG);
+
+        createLayout();
+        await loadSwiper();
+        initSwiperSlider();
+
+        console.log("=== Swiper Initialized ====");
     }
 
     function checkForItems() {
@@ -128,8 +163,7 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q(".product-detail .row .js-personalize-invisible") &&
             q(".primary-images img") &&
-            q(".row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img") &&
-            typeof window.Swiper === "function"
+            q(".row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img")
         );
     }
 

@@ -1,3 +1,5 @@
+.AB-PDP-COMBINE-IMAGE-GALLERY .row.hidden-lg-down:has(.secondary-images),
+.AB-PDP-COMBINE-IMAGE-GALLERY .add-to-cart-promotion-text:empty,
 .AB-PDP-COMBINE-IMAGE-GALLERY .js-product-secondary-image-carousel,
 .AB-PDP-COMBINE-IMAGE-GALLERY .product-detail .row .js-personalize-invisible {
   display: none;
@@ -24,7 +26,6 @@
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb {
   width: 100%;
   overflow: hidden;
-  max-width: auto;
   position: relative;
   margin-bottom: 44px;
 }
@@ -34,12 +35,16 @@
   margin: auto;
   overflow: hidden;
 }
+.AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb:has(.swiper-button-lock) .ab-thumb-slide {
+  width: 100%;
+}
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container {
   width: 75px;
   height: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container img {
   width: 100%;
@@ -47,7 +52,7 @@
   object-fit: contain;
   object-position: center;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide.swiper-slide-active {
+.AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide.swiper-slide-thumb-active {
   outline: 1px solid #000000;
   outline-offset: -1px;
 }
@@ -62,6 +67,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
+}
+.AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav .swiper-navigation-icon {
+  display: none;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav {
   position: static;
@@ -94,4 +102,43 @@
 .AB-PDP-COMBINE-IMAGE-GALLERY .product-name {
   margin-top: 0;
   margin-bottom: 8px;
+}
+@media screen and (min-width: 991px) {
+  .AB-PDP-COMBINE-IMAGE-GALLERY .product-tabs__container {
+    margin-top: 50px !important;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-gallery .swiper-slide-container img {
+    max-height: 870px;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb {
+    margin-bottom: 0;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide {
+    width: calc(100% - 112px);
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev:after,
+  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next:after {
+    width: 15px;
+    height: 15px;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev:after {
+    margin-right: 0px;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next:after {
+    margin-left: 0px;
+  }
 }

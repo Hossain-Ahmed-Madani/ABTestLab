@@ -13,6 +13,8 @@
 }
 
 .AB-PDP-COMBINE-IMAGE-GALLERY {
+    .row.hidden-lg-down:has(.secondary-images),
+    .add-to-cart-promotion-text:empty,
     .js-product-secondary-image-carousel,
     .product-detail .row .js-personalize-invisible {
         display: none;
@@ -44,7 +46,6 @@
     .ab-image-thumb {
         width: 100%;
         overflow: hidden;
-        max-width: auto;
         position: relative;
         margin-bottom: 44px;
     }
@@ -56,12 +57,19 @@
         overflow: hidden;
     }
 
+
+    .ab-image-thumb:has(.swiper-button-lock)
+    .ab-thumb-slide {
+        width: 100%;
+    }
+
     .ab-thumb-slide .swiper-slide-container {
         width: 75px;
         height: 75px;
         display: flex;
         justify-content: center;
         align-items: center;
+        cursor: pointer;
     }
 
     .ab-thumb-slide .swiper-slide-container img {
@@ -71,7 +79,8 @@
         object-position: center;
     }
 
-    .ab-thumb-slide .swiper-slide.swiper-slide-active {
+    // .ab-thumb-slide .swiper-slide.swiper-slide-active {
+    .ab-thumb-slide .swiper-slide.swiper-slide-thumb-active {
         outline: 1px solid #000000;
         outline-offset: -1px;
     }
@@ -81,13 +90,18 @@
         left: 0;
         right: 0;
         top: 0;
-        bottom: 0;;
+        bottom: 0;
         margin: auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         width: 100%;
     }
+
+    .ab-swiper-nav .swiper-navigation-icon {
+        display: none;
+    }
+
 
     .ab-swiper-nav {
         position: static;
@@ -121,9 +135,56 @@
         margin-left: -3px;
     }
 
-
     .product-name {
         margin-top: 0;
         margin-bottom: 8px;
+    }
+
+    @media screen and (min-width: 991px) {
+        .product-tabs__container {
+            margin-top: 50px !important;
+        }
+
+        .ab-image-gallery .swiper-slide-container img {
+            max-height: 870px;
+        }
+
+        .ab-image-thumb {
+            margin-bottom: 0;
+        }
+
+        .ab-thumb-slide {
+            width: calc(100% - 112px);
+            // width: auto;
+        }
+
+        .ab-thumb-slide .swiper-slide-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .ab-swiper-nav {
+            width: 40px;
+            min-width: 40px;
+            height: 40px;
+            min-height: 40px;
+        }
+
+        div.swiper-button-prev:after,
+        div.swiper-button-next:after {
+            width: 15px;
+            height: 15px;
+        }
+
+        div.swiper-button-prev:after {
+            margin-right: 0px;
+        }
+
+        div.swiper-button-next:after {
+            margin-left: 0px;
+        }
     }
 }
