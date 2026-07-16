@@ -36,7 +36,7 @@
     }
 
     function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
+        return document.querySelector(s);
     }
 
     function qq(s, o) {
@@ -44,6 +44,9 @@
     }
 
     function init() {
+        if (window[page_initials] === true) return;
+
+        window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
@@ -66,7 +69,7 @@
                                     ({ src, alt }) => /* HTML */ `
                                         <div class="swiper-slide">
                                             <div class="swiper-slide-container">
-                                                <img src="${src}" alt="${alt}" />
+                                                <img  src="${src}" alt="${alt}" />
                                             </div>
                                         </div>
                                     `,
@@ -74,21 +77,27 @@
                                 .join("")}
                         </div>
                     </div>
-                    <div class="swiper-container gallery-thumbs">
-                        <div class="swiper-wrapper">
-                            ${imageList
-                                .map(
-                                    ({ src, alt }) => /* HTML */ `
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-container"><img src="${src}" alt="${alt}" /></div>
-                                        </div>
-                                    `,
-                                )
-                                .join("")}
-                        </div>
+                </div>
+                <div class="ab-image-thumb">
+                    <div class="ab-thumb-arrows">
                         <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <div class="ab-swiper-nav swiper-button-prev"></div>
+                        <div class="ab-swiper-nav swiper-button-next"></div>
+                    </div>
+                    <div class="ab-thumb-slide">
+                        <div class="swiper-container gallery-thumbs">
+                            <div class="swiper-wrapper">
+                                ${imageList
+                                    .map(
+                                        ({ src, alt }) => /* HTML */ `
+                                            <div class="swiper-slide">
+                                                <div class="swiper-slide-container"><img src="${src}" alt="${alt}" /></div>
+                                            </div>
+                                        `,
+                                    )
+                                    .join("")}
+                            </div>
+                        </div>
                     </div>
                 </div>
             `,
@@ -100,8 +109,6 @@
             loopedSlides: 4,
         });
         const galleryThumbs = new Swiper(".gallery-thumbs", {
-            // spaceBetween: 10,
-            // centeredSlides: true,
             slidesPerView: "auto",
             touchRatio: 0.2,
             slideToClickedSlide: true,
