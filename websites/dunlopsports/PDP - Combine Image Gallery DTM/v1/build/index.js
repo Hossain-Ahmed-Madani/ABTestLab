@@ -6,7 +6,7 @@
     test_name: "PDP - Combine Image Gallery [DTM]",
     page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -138,25 +138,73 @@
   }
 
   function initSwiperSlider() {
+    // OLD
+    // var galleryTop = new Swiper(".gallery-top", {
+    //     spaceBetween: 10,
+    //     navigation: {
+    //         nextEl: ".swiper-button-next",
+    //         prevEl: ".swiper-button-prev",
+    //     },
+    //     loop: true,
+    //     loopedSlides: 4,
+    // });
+    // var galleryThumbs = new Swiper(".gallery-thumbs", {
+    //     spaceBetween: 0,
+    //     // centeredSlides: true,
+    //     slidesPerView: "auto",
+    //     touchRatio: 0.2,
+    //     slideToClickedSlide: true,
+    //     loop: true,
+    //     loopedSlides: 4,
+    // });
+    // galleryTop.controller.control = galleryThumbs;
+    // galleryThumbs.controller.control = galleryTop;
+
+    // LTS
     const galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 0,
       slidesPerView: "auto",
-      freeMode: true,
       watchSlidesProgress: true,
-      loop: true,
+      // centeredSlides: true,
+      freeMode: {
+        enabled: true,
+        sticky: true, // snaps to nearest slide after a scroll/drag — needed for reliable activeIndex
+      },
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
     });
 
-    new Swiper(".gallery-top", {
+    const galleryTop = new Swiper(".gallery-top", {
       spaceBetween: 0,
       slideToClickedSlide: true,
       thumbs: {
         swiper: galleryThumbs,
       },
     });
+
+    // Manual reverse sync: when thumbs settle after a scroll/drag, update the top slider
+
+    let isUpdating = false;
+
+    galleryThumbs.on("slideChangeTransitionEnd", () => {
+      !isUpdating && galleryTop.slideTo(galleryThumbs.activeIndex);
+    });
+
+    galleryThumbs.on("click", () => {
+      const clickedItemIndex = +q(".swiper-slide-thumb-active")
+        .getAttribute("aria-label")
+        .split("/")[0];
+      console.log("clickedItemIndex", clickedItemIndex - 1);
+      isUpdating = true;
+      galleryThumbs.slideTo(clickedItemIndex - 1);
+
+      setTimeout(() => (isUpdating = false), 1000);
+    });
+
+    window.galleryThumbs = galleryThumbs;
+    window.galleryTop = galleryTop;
   }
 
   async function init() {

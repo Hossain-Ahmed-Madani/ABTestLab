@@ -53,3 +53,7 @@ image dimension: 75x75px/vector form of the left arrow*/
 
 Variation Design Mockup: 
 https://www.figma.com/design/sDP3TPgMBmNNr4RZvdx4Kb/Dunlop-Sports-America?node-id=1380-754&t=wE3nALHV7wCkXbuu-1
+
+
+Test Shell in Testing Platform: https://app.convert.com/accounts/10019693/projects/100110052/experiences/100143632/summary
+Forced Variation: https://us.dunlopsports.com/cleveland-golf/clubs/putters/hb-soft-2-black/hb-soft-2-black-putter-%E2%80%93-model-1/MHBSOFT2B-1.html?_conv_eforce=100143632.1001225142&utm_campaign=qa09
