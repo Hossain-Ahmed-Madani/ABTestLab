@@ -44,6 +44,8 @@
     }
 
     .ab-image-thumb {
+        display: flex;
+        align-items: center;
         width: 100%;
         overflow: hidden;
         position: relative;
@@ -52,14 +54,12 @@
 
     .ab-thumb-slide {
         display: block;
-        width: calc(100% - 66px);
+        // width: calc(100% - 66px);
         margin: auto;
         overflow: hidden;
     }
 
-
-    .ab-image-thumb:has(.swiper-button-lock)
-    .ab-thumb-slide {
+    .ab-image-thumb:has(.swiper-button-lock) .ab-thumb-slide {
         width: 100%;
     }
 
@@ -70,6 +70,7 @@
         justify-content: center;
         align-items: center;
         cursor: pointer;
+        margin: auto;
     }
 
     .ab-thumb-slide .swiper-slide-container img {
@@ -102,7 +103,6 @@
         display: none;
     }
 
-
     .ab-swiper-nav {
         position: static;
         margin: 0;
@@ -115,6 +115,14 @@
 
     .ab-swiper-nav:after {
         content: "";
+    }
+
+    div.swiper-button-prev {
+        margin-right: 8px;
+    }
+
+    div.swiper-button-next {
+        margin-left: 8px;
     }
 
     div.swiper-button-prev:after {
@@ -154,7 +162,7 @@
         }
 
         .ab-thumb-slide {
-            width: calc(100% - 112px);
+            // width: calc(100% - 112px);
             // width: auto;
         }
 
@@ -171,6 +179,14 @@
             min-width: 40px;
             height: 40px;
             min-height: 40px;
+        }
+
+        div.swiper-button-prev {
+            margin-right: 16px;
+        }
+
+        div.swiper-button-next {
+            margin-left: 16px;
         }
 
         div.swiper-button-prev:after,

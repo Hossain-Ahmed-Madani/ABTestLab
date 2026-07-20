@@ -6,7 +6,7 @@
     test_name: "PDP - Combine Image Gallery [DTM]",
     page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -51,8 +51,24 @@
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+
+  let imageList = null;
+  let galleryTop = null;
+  let galleryThumbs = null;
+
   function createLayout() {
-    const imageList = qq(
+    imageList = qq(
       ".primary-images img, .row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img",
     ).map((item) => ({
       src: item.getAttribute("src"),
@@ -83,11 +99,9 @@
           </div>
         </div>
         <div class="ab-image-thumb">
-          <div class="ab-thumb-arrows">
-            <!-- Add Arrows -->
-            <div class="ab-swiper-nav swiper-button-prev"></div>
-            <div class="ab-swiper-nav swiper-button-next"></div>
-          </div>
+          <!-- Arrow -->
+          <div class="ab-swiper-nav swiper-button-prev"></div>
+          <!-- Swiper -->
           <div class="ab-thumb-slide">
             <div class="swiper-container gallery-thumbs">
               <div class="swiper-wrapper">
@@ -105,6 +119,8 @@
               </div>
             </div>
           </div>
+          <!-- Arrow -->
+          <div class="ab-swiper-nav swiper-button-next"></div>
         </div>
       `,
     );
@@ -137,33 +153,17 @@
     });
   }
 
-  function initSwiperSlider() {
-    // OLD
-    // var galleryTop = new Swiper(".gallery-top", {
-    //     spaceBetween: 10,
-    //     navigation: {
-    //         nextEl: ".swiper-button-next",
-    //         prevEl: ".swiper-button-prev",
-    //     },
-    //     loop: true,
-    //     loopedSlides: 4,
-    // });
-    // var galleryThumbs = new Swiper(".gallery-thumbs", {
-    //     spaceBetween: 0,
-    //     // centeredSlides: true,
-    //     slidesPerView: "auto",
-    //     touchRatio: 0.2,
-    //     slideToClickedSlide: true,
-    //     loop: true,
-    //     loopedSlides: 4,
-    // });
-    // galleryTop.controller.control = galleryThumbs;
-    // galleryThumbs.controller.control = galleryTop;
+  function triggerConvertGoal() {
+    // Goal | Image Gallery Clicks
+    window._conv_q = window._conv_q || [];
+    _conv_q.push(["triggerConversion", "100157005"]);
+  }
 
+  function initSwiperSlider() {
     // LTS
-    const galleryThumbs = new Swiper(".gallery-thumbs", {
-      spaceBetween: 0,
-      slidesPerView: "auto",
+    galleryThumbs = new Swiper(".gallery-thumbs", {
+      spaceBetween: 0.5,
+      slidesPerView: 4,
       watchSlidesProgress: true,
       // centeredSlides: true,
       freeMode: {
@@ -174,9 +174,16 @@
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
       },
+
+      breakpoints: {
+        991: {
+          slidesPerView: 5,
+          // slidesPerView: 'auto',
+        },
+      },
     });
 
-    const galleryTop = new Swiper(".gallery-top", {
+    galleryTop = new Swiper(".gallery-top", {
       spaceBetween: 0,
       slideToClickedSlide: true,
       thumbs: {
@@ -185,26 +192,36 @@
     });
 
     // Manual reverse sync: when thumbs settle after a scroll/drag, update the top slider
-
-    let isUpdating = false;
-
     galleryThumbs.on("slideChangeTransitionEnd", () => {
-      !isUpdating && galleryTop.slideTo(galleryThumbs.activeIndex);
+      galleryTop.slideTo(galleryThumbs.activeIndex);
+      triggerConvertGoal();
     });
 
-    galleryThumbs.on("click", () => {
-      const clickedItemIndex = +q(".swiper-slide-thumb-active")
-        .getAttribute("aria-label")
-        .split("/")[0];
-      console.log("clickedItemIndex", clickedItemIndex - 1);
-      isUpdating = true;
-      galleryThumbs.slideTo(clickedItemIndex - 1);
-
-      setTimeout(() => (isUpdating = false), 1000);
-    });
+    q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
 
     window.galleryThumbs = galleryThumbs;
     window.galleryTop = galleryTop;
+  }
+
+  function updateSwiperLayout() {
+    qq(".ab-image-gallery, .ab-image-thumb").forEach((item) => item.remove());
+
+    if (typeof galleryTop === "object" && typeof galleryThumbs === "object") {
+      galleryThumbs.destroy();
+      galleryTop.destroy();
+    }
+    createLayout();
+    initSwiperSlider();
+  }
+
+  function mutationObserverFunction() {
+    const targetNode = q(".primary-images img");
+    const debouncedUpdate = debounce(updateSwiperLayout, 250);
+    return new MutationObserver(debouncedUpdate).observe(targetNode, {
+      childList: true,
+      subtree: false,
+      attributes: true,
+    });
   }
 
   async function init() {
@@ -221,8 +238,7 @@
     createLayout();
     await loadSwiper();
     initSwiperSlider();
-
-    console.log("=== Swiper Initialized ====");
+    mutationObserverFunction();
   }
 
   function checkForItems() {
