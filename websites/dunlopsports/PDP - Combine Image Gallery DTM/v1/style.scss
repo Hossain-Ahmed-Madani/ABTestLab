@@ -13,11 +13,12 @@
 }
 
 .AB-PDP-COMBINE-IMAGE-GALLERY {
+    .ab-hidden,
     .row.hidden-lg-down:has(.secondary-images),
     .add-to-cart-promotion-text:empty,
     .js-product-secondary-image-carousel,
     .product-detail .row .js-personalize-invisible {
-        display: none;
+        display: none !important;
     }
 
     .ab-image-gallery {
@@ -25,9 +26,13 @@
         overflow: hidden;
     }
 
-    .ab-image-gallery .swiper-slide,
-    .ab-image-thumb .swiper-slide {
+    .ab-image-gallery .swiper-slide {
         width: max-content;
+        overflow: hidden;
+    }
+
+    .ab-image-thumb .swiper-slide {
+        overflow: hidden;
     }
 
     .ab-image-gallery .swiper-slide-container {
@@ -44,6 +49,7 @@
     }
 
     .ab-image-thumb {
+        padding: 0 6.5px;
         display: flex;
         align-items: center;
         width: 100%;
@@ -54,9 +60,9 @@
 
     .ab-thumb-slide {
         display: block;
-        // width: calc(100% - 66px);
         margin: auto;
         overflow: hidden;
+        flex-grow: 1;
     }
 
     .ab-image-thumb:has(.swiper-button-lock) .ab-thumb-slide {
@@ -64,8 +70,6 @@
     }
 
     .ab-thumb-slide .swiper-slide-container {
-        width: 75px;
-        height: 75px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -74,10 +78,9 @@
     }
 
     .ab-thumb-slide .swiper-slide-container img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        object-position: center;
+        width: 75px;
+        height: 75px;
+        object-fit: cover;
     }
 
     // .ab-thumb-slide .swiper-slide.swiper-slide-active {
@@ -99,33 +102,43 @@
         width: 100%;
     }
 
-    .ab-swiper-nav .swiper-navigation-icon {
+    button.ab-swiper-nav .swiper-navigation-icon {
         display: none;
     }
 
-    .ab-swiper-nav {
+    button.ab-swiper-nav {
         position: static;
-        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin: 0;
         width: 25px;
         min-width: 25px;
         height: 25px;
         min-height: 25px;
         border: 1px solid #000000;
+        cursor: pointer;
+        background: none;
     }
 
-    .ab-swiper-nav:after {
+    button.ab-swiper-nav:disabled {
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    button.ab-swiper-nav:after {
         content: "";
     }
 
-    div.swiper-button-prev {
+    button.ab-swiper-button-prev {
         margin-right: 8px;
     }
 
-    div.swiper-button-next {
+    button.ab-swiper-button-next {
         margin-left: 8px;
     }
 
-    div.swiper-button-prev:after {
+    button.ab-swiper-button-prev:after {
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"><rect x="24.5" y="24.5" width="24" height="24" transform="rotate(180 24.5 24.5)" stroke="black" /><path d="M14.7539 5.87097L8.12478 12.5001L14.7539 19.1292" stroke="black" stroke-linecap="round" /></svg>');
         background-position: center;
         background-repeat: no-repeat;
@@ -134,7 +147,7 @@
         margin-right: -3px;
     }
 
-    div.swiper-button-next:after {
+    button.ab-swiper-button-next:after {
         background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"><rect x="0.5" y="0.499758" width="24" height="24" stroke="black" /><path d="M10.2461 19.1288L16.8752 12.4997L10.2461 5.87053" stroke="black" stroke-linecap="round" /></svg>');
         background-position: center;
         background-repeat: no-repeat;
@@ -148,7 +161,7 @@
         margin-bottom: 8px;
     }
 
-    @media screen and (min-width: 991px) {
+    @media screen and (min-width: 1200px) {
         .product-tabs__container {
             margin-top: 50px !important;
         }
@@ -158,6 +171,7 @@
         }
 
         .ab-image-thumb {
+            padding: 0 30px;
             margin-bottom: 0;
         }
 
@@ -167,39 +181,44 @@
         }
 
         .ab-thumb-slide .swiper-slide-container {
-            width: 150px;
-            height: 150px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
         }
-        .ab-swiper-nav {
+
+        .ab-thumb-slide .swiper-slide-container img {
+            width: 150px;
+            height: 150px;
+            // object-fit: contain;
+        }
+
+        button.ab-swiper-nav {
             width: 40px;
             min-width: 40px;
             height: 40px;
             min-height: 40px;
         }
 
-        div.swiper-button-prev {
+        button.ab-swiper-button-prev {
             margin-right: 16px;
         }
 
-        div.swiper-button-next {
+        button.ab-swiper-button-next {
             margin-left: 16px;
         }
 
-        div.swiper-button-prev:after,
-        div.swiper-button-next:after {
+        button.ab-swiper-button-prev:after,
+        button.ab-swiper-button-next:after {
             width: 15px;
             height: 15px;
         }
 
-        div.swiper-button-prev:after {
+        button.ab-swiper-button-prev:after {
             margin-right: 0px;
         }
 
-        div.swiper-button-next:after {
+        button.ab-swiper-button-next:after {
             margin-left: 0px;
         }
     }

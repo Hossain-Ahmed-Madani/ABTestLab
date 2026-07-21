@@ -6,7 +6,7 @@
         test_name: "PDP - Combine Image Gallery [DTM]",
         page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -78,6 +78,8 @@
     let imageList = null;
     let galleryTop = null;
     let galleryThumbs = null;
+    let prevBtn = null;
+    let nextBtn = null;
 
     function createLayout() {
         imageList = qq(".primary-images img, .row.secondary-image-carousel-desktop-hidden .slick-slide:not(.slick-cloned) img").map((item) => ({
@@ -108,7 +110,7 @@
                 </div>
                 <div class="ab-image-thumb">
                     <!-- Arrow -->
-                    <div class="ab-swiper-nav swiper-button-prev"></div>
+                    <button class="ab-swiper-nav ab-swiper-button-prev"></button>
                     <!-- Swiper -->
                     <div class="ab-thumb-slide">
                         <div class="swiper-container gallery-thumbs">
@@ -126,7 +128,7 @@
                         </div>
                     </div>
                     <!-- Arrow -->
-                    <div class="ab-swiper-nav swiper-button-next"></div>
+                    <button class="ab-swiper-nav ab-swiper-button-next"></button>
                 </div>
             `,
         );
@@ -159,11 +161,33 @@
 
     function triggerConvertGoal() {
         // Goal | Image Gallery Clicks
+        console.log("Goal: Image Gallery Clicks");
         window._conv_q = window._conv_q || [];
         _conv_q.push(["triggerConversion", "100157005"]);
     }
 
+    function updateNavButtons() {
+        prevBtn.disabled = galleryTop.isBeginning;
+        nextBtn.disabled = galleryTop.isEnd;
+
+        prevBtn.classList.toggle("disabled", galleryTop.isBeginning);
+        nextBtn.classList.toggle("disabled", galleryTop.isEnd);
+    }
+
+    function updateThumbNavVisibility() {
+        const hide = galleryThumbs.isLocked;
+
+        if (hide) {
+            prevBtn.classList.add("ab-hidden");
+            nextBtn.classList.add("ab-hidden");
+        } else {
+            prevBtn.classList.remove("ab-hidden");
+            nextBtn.classList.remove("ab-hidden");
+        }
+    }
+
     function initSwiperSlider() {
+        const totalImages = imageList.length;
         // LTS
         galleryThumbs = new Swiper(".gallery-thumbs", {
             spaceBetween: 0.5,
@@ -182,38 +206,67 @@
             breakpoints: {
                 991: {
                     slidesPerView: 5,
-                    // slidesPerView: 'auto',
+                },
+                1200: {
+                    slidesPerView: 3,
+                },
+                1536: {
+                    slidesPerView: 4,
+                },
+                1920: {
+                    slidesPerView: 5,
                 },
             },
         });
 
         galleryTop = new Swiper(".gallery-top", {
-            spaceBetween: 0,
+            spaceBetween: 10,
             slideToClickedSlide: true,
             thumbs: {
                 swiper: galleryThumbs,
             },
         });
 
-        // Manual reverse sync: when thumbs settle after a scroll/drag, update the top slider
-        galleryThumbs.on("slideChangeTransitionEnd", () => {
-            galleryTop.slideTo(galleryThumbs.activeIndex);
-            triggerConvertGoal();
-        });
-
-        q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
-
         window.galleryThumbs = galleryThumbs;
         window.galleryTop = galleryTop;
+
+        // Events
+        prevBtn = q(".ab-swiper-button-prev");
+        nextBtn = q(".ab-swiper-button-next");
+
+        prevBtn.addEventListener("click", () => {
+            galleryTop.slidePrev();
+            updateNavButtons();
+        });
+
+        nextBtn.addEventListener("click", () => {
+            galleryTop.slideNext();
+            updateNavButtons();
+        });
+
+        galleryTop.on("init", () => {
+            updateThumbNavVisibility();
+            updateNavButtons();
+        });
+
+        galleryTop.on("activeIndexChange", updateNavButtons);
+        galleryThumbs.on("resize", updateThumbNavVisibility);
+        galleryTop.slideTo(galleryThumbs.activeIndex);
+
+        // Goal
+        galleryThumbs.on("slideChangeTransitionEnd", triggerConvertGoal);
+        galleryThumbs.on("touchStart", triggerConvertGoal);
+        q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
     }
 
     function updateSwiperLayout() {
-        qq(".ab-image-gallery, .ab-image-thumb").forEach((item) => item.remove());
-
         if (typeof galleryTop === "object" && typeof galleryThumbs === "object") {
             galleryThumbs.destroy();
             galleryTop.destroy();
         }
+
+        qq(".ab-image-gallery, .ab-image-thumb").forEach((item) => item.remove());
+
         createLayout();
         initSwiperSlider();
     }

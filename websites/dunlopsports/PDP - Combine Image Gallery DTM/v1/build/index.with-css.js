@@ -4,19 +4,23 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-PDP-COMBINE-IMAGE-GALLERY .row.hidden-lg-down:has(.secondary-images),
+      style.innerHTML = `.AB-PDP-COMBINE-IMAGE-GALLERY .ab-hidden,
+.AB-PDP-COMBINE-IMAGE-GALLERY .row.hidden-lg-down:has(.secondary-images),
 .AB-PDP-COMBINE-IMAGE-GALLERY .add-to-cart-promotion-text:empty,
 .AB-PDP-COMBINE-IMAGE-GALLERY .js-product-secondary-image-carousel,
 .AB-PDP-COMBINE-IMAGE-GALLERY .product-detail .row .js-personalize-invisible {
-  display: none;
+  display: none !important;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-gallery {
   width: 100%;
   overflow: hidden;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-gallery .swiper-slide,
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb .swiper-slide {
+.AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-gallery .swiper-slide {
   width: max-content;
+  overflow: hidden;
+}
+.AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb .swiper-slide {
+  overflow: hidden;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-gallery .swiper-slide-container {
   display: flex;
@@ -30,6 +34,7 @@
   object-position: center;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb {
+  padding: 0 6.5px;
   display: flex;
   align-items: center;
   width: 100%;
@@ -41,6 +46,7 @@
   display: block;
   margin: auto;
   overflow: hidden;
+  flex-grow: 1;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY
   .ab-image-thumb:has(.swiper-button-lock)
@@ -48,8 +54,6 @@
   width: 100%;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container {
-  width: 75px;
-  height: 75px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,10 +61,9 @@
   margin: auto;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container img {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  object-position: center;
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
 }
 .AB-PDP-COMBINE-IMAGE-GALLERY
   .ab-thumb-slide
@@ -80,28 +83,36 @@
   align-items: center;
   width: 100%;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav .swiper-navigation-icon {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-nav .swiper-navigation-icon {
   display: none;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-nav {
   position: static;
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 25px;
   min-width: 25px;
   height: 25px;
   min-height: 25px;
   border: 1px solid #000000;
+  cursor: pointer;
+  background: none;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav:after {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-nav:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-nav:after {
   content: "";
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-prev {
   margin-right: 8px;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-next {
   margin-left: 8px;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev:after {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-prev:after {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"><rect x="24.5" y="24.5" width="24" height="24" transform="rotate(180 24.5 24.5)" stroke="black" /><path d="M14.7539 5.87097L8.12478 12.5001L14.7539 19.1292" stroke="black" stroke-linecap="round" /></svg>');
   background-position: center;
   background-repeat: no-repeat;
@@ -109,7 +120,7 @@
   height: 9.38px;
   margin-right: -3px;
 }
-.AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next:after {
+.AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-next:after {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none"><rect x="0.5" y="0.499758" width="24" height="24" stroke="black" /><path d="M10.2461 19.1288L16.8752 12.4997L10.2461 5.87053" stroke="black" stroke-linecap="round" /></svg>');
   background-position: center;
   background-repeat: no-repeat;
@@ -121,7 +132,7 @@
   margin-top: 0;
   margin-bottom: 8px;
 }
-@media screen and (min-width: 991px) {
+@media screen and (min-width: 1200px) {
   .AB-PDP-COMBINE-IMAGE-GALLERY .product-tabs__container {
     margin-top: 50px !important;
   }
@@ -129,37 +140,40 @@
     max-height: 870px;
   }
   .AB-PDP-COMBINE-IMAGE-GALLERY .ab-image-thumb {
+    padding: 0 30px;
     margin-bottom: 0;
   }
   .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container {
-    width: 150px;
-    height: 150px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-swiper-nav {
+  .AB-PDP-COMBINE-IMAGE-GALLERY .ab-thumb-slide .swiper-slide-container img {
+    width: 150px;
+    height: 150px;
+  }
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-nav {
     width: 40px;
     min-width: 40px;
     height: 40px;
     min-height: 40px;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev {
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-prev {
     margin-right: 16px;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next {
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-next {
     margin-left: 16px;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev:after,
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next:after {
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-prev:after,
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-next:after {
     width: 15px;
     height: 15px;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-prev:after {
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-prev:after {
     margin-right: 0px;
   }
-  .AB-PDP-COMBINE-IMAGE-GALLERY div.swiper-button-next:after {
+  .AB-PDP-COMBINE-IMAGE-GALLERY button.ab-swiper-button-next:after {
     margin-left: 0px;
   }
 }
@@ -173,13 +187,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "Dunlop Sports",
-    site_url: "https://us.dunlopsports.com/https://us.dunlopsports.com",
-    test_name: "PDP - Combine Image Gallery [DTM]",
     page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -239,6 +249,8 @@
   let imageList = null;
   let galleryTop = null;
   let galleryThumbs = null;
+  let prevBtn = null;
+  let nextBtn = null;
 
   function createLayout() {
     imageList = qq(
@@ -247,8 +259,6 @@
       src: item.getAttribute("src"),
       alt: item.getAttribute("alt"),
     }));
-
-    console.log(imageList);
 
     q(".product-detail .row .js-personalize-invisible").insertAdjacentHTML(
       "afterend",
@@ -273,7 +283,7 @@
         </div>
         <div class="ab-image-thumb">
           <!-- Arrow -->
-          <div class="ab-swiper-nav swiper-button-prev"></div>
+          <button class="ab-swiper-nav ab-swiper-button-prev"></button>
           <!-- Swiper -->
           <div class="ab-thumb-slide">
             <div class="swiper-container gallery-thumbs">
@@ -293,7 +303,7 @@
             </div>
           </div>
           <!-- Arrow -->
-          <div class="ab-swiper-nav swiper-button-next"></div>
+          <button class="ab-swiper-nav ab-swiper-button-next"></button>
         </div>
       `,
     );
@@ -328,11 +338,33 @@
 
   function triggerConvertGoal() {
     // Goal | Image Gallery Clicks
+    console.log("Goal: Image Gallery Clicks");
     window._conv_q = window._conv_q || [];
     _conv_q.push(["triggerConversion", "100157005"]);
   }
 
+  function updateNavButtons() {
+    prevBtn.disabled = galleryTop.isBeginning;
+    nextBtn.disabled = galleryTop.isEnd;
+
+    prevBtn.classList.toggle("disabled", galleryTop.isBeginning);
+    nextBtn.classList.toggle("disabled", galleryTop.isEnd);
+  }
+
+  function updateThumbNavVisibility() {
+    const hide = galleryThumbs.isLocked;
+
+    if (hide) {
+      prevBtn.classList.add("ab-hidden");
+      nextBtn.classList.add("ab-hidden");
+    } else {
+      prevBtn.classList.remove("ab-hidden");
+      nextBtn.classList.remove("ab-hidden");
+    }
+  }
+
   function initSwiperSlider() {
+    imageList.length;
     // LTS
     galleryThumbs = new Swiper(".gallery-thumbs", {
       spaceBetween: 0.5,
@@ -351,38 +383,67 @@
       breakpoints: {
         991: {
           slidesPerView: 5,
-          // slidesPerView: 'auto',
+        },
+        1200: {
+          slidesPerView: 3,
+        },
+        1536: {
+          slidesPerView: 4,
+        },
+        1920: {
+          slidesPerView: 5,
         },
       },
     });
 
     galleryTop = new Swiper(".gallery-top", {
-      spaceBetween: 0,
+      spaceBetween: 10,
       slideToClickedSlide: true,
       thumbs: {
         swiper: galleryThumbs,
       },
     });
 
-    // Manual reverse sync: when thumbs settle after a scroll/drag, update the top slider
-    galleryThumbs.on("slideChangeTransitionEnd", () => {
-      galleryTop.slideTo(galleryThumbs.activeIndex);
-      triggerConvertGoal();
-    });
-
-    q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
-
     window.galleryThumbs = galleryThumbs;
     window.galleryTop = galleryTop;
+
+    // Events
+    prevBtn = q(".ab-swiper-button-prev");
+    nextBtn = q(".ab-swiper-button-next");
+
+    prevBtn.addEventListener("click", () => {
+      galleryTop.slidePrev();
+      updateNavButtons();
+    });
+
+    nextBtn.addEventListener("click", () => {
+      galleryTop.slideNext();
+      updateNavButtons();
+    });
+
+    galleryTop.on("init", () => {
+      updateThumbNavVisibility();
+      updateNavButtons();
+    });
+
+    galleryTop.on("activeIndexChange", updateNavButtons);
+    galleryThumbs.on("resize", updateThumbNavVisibility);
+    galleryTop.slideTo(galleryThumbs.activeIndex);
+
+    // Goal
+    galleryThumbs.on("slideChangeTransitionEnd", triggerConvertGoal);
+    galleryThumbs.on("touchStart", triggerConvertGoal);
+    q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
   }
 
   function updateSwiperLayout() {
-    qq(".ab-image-gallery, .ab-image-thumb").forEach((item) => item.remove());
-
     if (typeof galleryTop === "object" && typeof galleryThumbs === "object") {
       galleryThumbs.destroy();
       galleryTop.destroy();
     }
+
+    qq(".ab-image-gallery, .ab-image-thumb").forEach((item) => item.remove());
+
     createLayout();
     initSwiperSlider();
   }
@@ -406,7 +467,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
 
     createLayout();
     await loadSwiper();
