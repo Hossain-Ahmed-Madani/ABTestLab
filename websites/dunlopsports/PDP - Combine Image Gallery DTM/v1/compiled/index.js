@@ -136,7 +136,6 @@
 
     function triggerConvertGoal() {
         // Goal | Image Gallery Clicks
-        console.log("Goal: Image Gallery Clicks");
         window._conv_q = window._conv_q || [];
         _conv_q.push(["triggerConversion", "100157005"]);
     }
