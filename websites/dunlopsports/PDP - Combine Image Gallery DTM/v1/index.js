@@ -6,7 +6,7 @@
         test_name: "PDP - Combine Image Gallery [DTM]",
         page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -166,7 +166,8 @@
         _conv_q.push(["triggerConversion", "100157005"]);
     }
 
-    function updateNavButtons() {
+    async function updateNavButtons() {
+        await waitForElementAsync(() => typeof galleryThumbs === "object");
         prevBtn.disabled = galleryTop.isBeginning;
         nextBtn.disabled = galleryTop.isEnd;
 
@@ -174,7 +175,8 @@
         nextBtn.classList.toggle("disabled", galleryTop.isEnd);
     }
 
-    function updateThumbNavVisibility() {
+    async function updateThumbNavVisibility() {
+        await waitForElementAsync(() => typeof galleryThumbs === "object");
         const hide = galleryThumbs.isLocked;
 
         if (hide) {
@@ -217,10 +219,20 @@
                     slidesPerView: 5,
                 },
             },
+            on: {
+                init: function () {
+                    updateThumbNavVisibility();
+                    updateNavButtons();
+                },
+                resize: updateNavButtons,
+                activeIndexChange: updateNavButtons,
+                slideChangeTransitionEnd: triggerConvertGoal,
+                touchStart: triggerConvertGoal,
+            },
         });
 
         galleryTop = new Swiper(".gallery-top", {
-            spaceBetween: 10,
+            spaceBetween: 15,
             slideToClickedSlide: true,
             thumbs: {
                 swiper: galleryThumbs,
@@ -244,18 +256,9 @@
             updateNavButtons();
         });
 
-        galleryTop.on("init", () => {
-            updateThumbNavVisibility();
-            updateNavButtons();
-        });
-
-        galleryTop.on("activeIndexChange", updateNavButtons);
-        galleryThumbs.on("resize", updateThumbNavVisibility);
         galleryTop.slideTo(galleryThumbs.activeIndex);
 
         // Goal
-        galleryThumbs.on("slideChangeTransitionEnd", triggerConvertGoal);
-        galleryThumbs.on("touchStart", triggerConvertGoal);
         q(".ab-image-thumb").addEventListener("click", triggerConvertGoal);
     }
 
