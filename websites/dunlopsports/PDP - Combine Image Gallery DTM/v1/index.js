@@ -6,21 +6,10 @@
         test_name: "PDP - Combine Image Gallery [DTM]",
         page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    const ASSETS = {
-        left_arrow: /* HTML */ `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-            <rect x="24.5" y="24.5" width="24" height="24" transform="rotate(180 24.5 24.5)" stroke="black" />
-            <path d="M14.7539 5.87097L8.12478 12.5001L14.7539 19.1292" stroke="black" stroke-linecap="round" />
-        </svg> `,
-        right_arrow: /* HTML */ `<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
-            <rect x="0.5" y="0.499758" width="24" height="24" stroke="black" />
-            <path d="M10.2461 19.1288L16.8752 12.4997L10.2461 5.87053" stroke="black" stroke-linecap="round" />
-        </svg> `,
-    };
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -224,7 +213,7 @@
                     updateNavButtons();
                 },
                 resize: updateNavButtons,
-                activeIndexChange: updateNavButtons,
+                // activeIndexChange: updateNavButtons,
                 slideChangeTransitionEnd: triggerConvertGoal,
                 touchStart: triggerConvertGoal,
             },
@@ -235,6 +224,9 @@
             slideToClickedSlide: true,
             thumbs: {
                 swiper: galleryThumbs,
+            },
+            on: {
+                activeIndexChange: updateNavButtons,
             },
         });
 
@@ -285,8 +277,8 @@
         window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
-        createLayout();
         await loadSwiper();
+        createLayout();
         initSwiperSlider();
         mutationObserverFunction();
     }

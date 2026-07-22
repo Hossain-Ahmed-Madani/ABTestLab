@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-PDP-COMBINE-IMAGE-GALLERY",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -199,7 +199,7 @@
                     updateNavButtons();
                 },
                 resize: updateNavButtons,
-                activeIndexChange: updateNavButtons,
+                // activeIndexChange: updateNavButtons,
                 slideChangeTransitionEnd: triggerConvertGoal,
                 touchStart: triggerConvertGoal,
             },
@@ -210,6 +210,9 @@
             slideToClickedSlide: true,
             thumbs: {
                 swiper: galleryThumbs,
+            },
+            on: {
+                activeIndexChange: updateNavButtons,
             },
         });
 
@@ -260,8 +263,8 @@
         window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
 
-        createLayout();
         await loadSwiper();
+        createLayout();
         initSwiperSlider();
         mutationObserverFunction();
     }
