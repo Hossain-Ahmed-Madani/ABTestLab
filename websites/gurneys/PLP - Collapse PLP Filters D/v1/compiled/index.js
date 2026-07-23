@@ -43,18 +43,20 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    const FILTER_SELECTOR = [".filter-form__group", '.filter-form__group:not(:has( button[data-filter-group-toggle="zone"]))'];
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
-        qq(".filter-form__group").forEach((item) => {
+        qq(FILTER_SELECTOR[test_variation - 1]).forEach((item) => {
             q(item, ".filter-form__group-toggle").setAttribute("aria-expanded", "false");
             q(item, ".filter-form__group-filter-wrapper").setAttribute("aria-hidden", "true");
         });
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".filter-form__group"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".filter-form__group") && document.readyState !== "loading");
     }
 
     await waitForElementAsync(checkForItems);
