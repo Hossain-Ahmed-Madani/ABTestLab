@@ -1,0 +1,13 @@
+{
+  "id": "1784799995586_4359_PLP___Collapse_PLP_Filters_D",
+  "name": "PLP - Collapse PLP Filters D",
+  "type": "A/B",
+  "website": "gurneys",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-07-23T09:46:35.586Z",
+  "createdAtReadable": "7/23/2026, 3:46:35 PM",
+  "lastUpdated": "2026-07-23T09:46:35.770Z"
+}
