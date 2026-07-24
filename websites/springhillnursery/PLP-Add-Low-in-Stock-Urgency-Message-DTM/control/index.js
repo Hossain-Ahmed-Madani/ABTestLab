@@ -137,26 +137,15 @@
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
     }
 
-    function updateLayout() {
-        //
-    }
-
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateLayout, 250);
+        const debouncedUpdate = debounce(updateSideCartLayout, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
-
-
-    function createLayout() {
-        //
-    }
-
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
-        createLayout()
     }
 
     function checkForItems() {
