@@ -1,0 +1,59 @@
+Objective:
+
+Site: Best Materials ® | Roofing Supplies, Roofing Materials, Caulking, Sealants, Backer Rod, Waterproofing, Rubber Roofing, Masonry Supplies, Building Supplies
+
+ 
+
+Hypothesis: We theorize that providing mobile users with a mobile responsive layout on the plp/search page will make it easier for them to digest the information, build their confidence, and increase the likelihood they find a product of interest.
+
+ 
+
+Test Shell in Testing Platform: https://app.convert.com/accounts/10017163/projects/10017741/experiences/100142412/summary
+
+ 
+
+Audience: Mobile
+
+ 
+
+Primary Goal: Cart Additions
+
+ 
+
+Secondary Goals: PDP Views, Transactions, Revenue
+
+ 
+
+URL Targeting: contains search
+
+ 
+
+QA URLs: Any search page that can be found through the navigation or advanced search. Here are some examples:
+
+https://www.bestmaterials.com/searchresult.aspx?CategoryID=792
+
+https://www.bestmaterials.com/searchresult.aspx?KeyWords=ERla42yJxbNq8iVVugzSbw==
+
+https://www.bestmaterials.com/searchresultnew.aspx
+
+ 
+
+QA Scenario: On mobile, the layout will adjust to a mobile-sized screen, restructuring the information to be easy to read.
+
+ 
+
+Launch % of Traffic: 100%
+
+ 
+
+Variation Design Details: Reformat the mobile layout to be responsive on smaller devices. Use the same header navigation design from a past cart and PDP test that our in-house developer built:
+
+https://app.convert.com/accounts/10017163/projects/10017741/experiences/100141246/summary
+
+https://app.convert.com/accounts/10017163/projects/10017741/experiences/100139753/summary
+
+ 
+
+Variation Design Mockup:
+
+https://www.figma.com/design/Z269tVWL9CN6IEDxseIffS/Best-Materials?node-id=1-2&p=f&t=EZ16ARImwnBcKg6C-0 Connect your Figma account
