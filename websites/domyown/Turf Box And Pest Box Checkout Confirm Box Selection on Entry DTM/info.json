@@ -1,0 +1,13 @@
+{
+  "id": "1777028615532_7928_Turf_Box_And_Pest_Box_Checkout_Confirm_Box_Selection_on_Entry_DTM",
+  "name": "Turf Box And Pest Box Checkout Confirm Box Selection on Entry DTM",
+  "type": "A/B",
+  "website": "domyown",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-04-24T11:03:35.532Z",
+  "createdAtReadable": "4/24/2026, 5:03:35 PM",
+  "lastUpdated": "2026-04-24T11:03:35.978Z"
+}
