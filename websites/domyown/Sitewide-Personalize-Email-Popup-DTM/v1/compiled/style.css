@@ -1,0 +1,136 @@
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-ribbon ~ #___ratingbadge_0 {
+  bottom: 35px !important;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .modal-content {
+  padding: 0;
+  border: 0;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #desktop #newsletter-signup-modal .modal-content {
+  width: 800px !important;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .modal-content-body > .newsletter-form-content {
+  display: none;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal img[alt="DoMyOwn - Do It Yourself Pest Control"] {
+  display: none;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .modal-content-body > .flex:nth-child(1) {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .image-container {
+  background-size: cover;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .newsletter-form-content {
+  padding: 32px 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .newsletter-form-content h2 {
+  font-weight: 800;
+  line-height: 1.2;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .newsletter-form-content p {
+  color: rgb(77, 77, 77);
+  font-size: 18px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal form {
+  gap: 8px;
+  max-width: 200px;
+  margin: auto;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal form input[type=text] {
+  margin: 0;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 12px;
+  padding: 12px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal form input[type=submit] {
+  border-radius: 6px;
+  font-size: 16px;
+  padding: 10px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefits-container {
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  max-width: 200px;
+  margin: 16px auto 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefits-container .benefit-item:nth-child(1) {
+  padding-right: 2px;
+  margin-right: 12px;
+  border-right: 1px solid #315caa;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefit-item-icon svg {
+  max-height: 100%;
+  width: 28px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefit-item:nth-child(2) svg {
+  width: 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefit-item {
+  display: flex;
+  font-size: 12px;
+  line-height: 1.1;
+  align-items: center;
+  text-align: left;
+  gap: 8px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .benefit-item-text {
+  width: 64px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .newsletter-footer {
+  font-size: 14px;
+  line-height: 1.3;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .modal-content-body > div:nth-child(1) {
+  display: flex;
+  flex-direction: column;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .image-container {
+  height: 180px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal h2.text-blue {
+  font-size: 2.25rem !important;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .newsletter-form-content {
+  padding: 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .newsletter-form-content p {
+  font-size: 16px !important;
+  margin-bottom: 16px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .benefits-container {
+  margin: 16px auto;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal:has(.newsletter-form-content-message[style="display: block;"]) .modal-content-body .flex {
+  min-height: 355px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal:has(.newsletter-form-content-message[style="display: block;"]) .image-container + div.w-full.text-center {
+  padding: 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .newsletter-form-content-message[style="display: block;"] {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile #newsletter-signup-modal .newsletter-form-content-message[style="display: block;"] {
+  padding: 24px;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #newsletter-signup-modal .modal-content-header {
+  padding: 0;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP .newsletter-close-modal {
+  margin-right: 1.5rem;
+  margin-top: 1rem;
+}
+.AB-SITE-WIDE-PERSONALIZE-EMAIL-POPUP #mobile .newsletter-close-modal {
+  margin-right: 0.5rem;
+  margin-top: 0;
+  color: #bdbdbd;
+  z-index: 10;
+}
