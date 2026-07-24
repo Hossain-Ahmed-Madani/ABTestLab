@@ -56,7 +56,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         qq(FILTER_SELECTOR[test_variation - 1]).forEach((item) => {
             q(item, ".filter-form__group-toggle").setAttribute("aria-expanded", "false");

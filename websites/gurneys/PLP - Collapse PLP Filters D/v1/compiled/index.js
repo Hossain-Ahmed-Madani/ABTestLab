@@ -1,9 +1,5 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "ROI Revolution",
-        project: "Gurneys",
-        site_url: "https://www.gurneys.com",
-        test_name: "PLP - Collapse PLP Filters [D]",
         page_initials: "AB-COLLAPSE-FILTERS",
         test_variation: 1 /* 1, 2 */,
         test_version: 0.0001,
@@ -47,7 +43,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         qq(FILTER_SELECTOR[test_variation - 1]).forEach((item) => {
             q(item, ".filter-form__group-toggle").setAttribute("aria-expanded", "false");

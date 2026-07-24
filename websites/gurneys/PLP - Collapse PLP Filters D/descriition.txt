@@ -4,6 +4,11 @@ Hypothesis: We believe that collapsing PLP filters by default will create a clea
 
 Test Shell in Testing Platform: https://app.convert.com/accounts/100412411/projects/100414848/experiences/1004205555/summary
 
+Forced variation:
+control: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482937&utm_campaign=qa01
+v1:  https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482938&utm_campaign=qa01
+v2: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004483418&utm_campaign=qa01
+
 Audience: All users
 
 Primary Goal: Cart Additions
@@ -31,3 +36,5 @@ Collapse the filters (Zone, Light Requirement, etc.) by default. There will be t
 Variant 1: All filters are collapsed by default.
 Variant 2: All filters are collapsed except for the "Zone" filter, which remains expanded since it receives the most filter engagement.
 Behavior: When a user selects a filter option from a collapsed filter section, keep that filter section expanded. The selected filter should remain open even after the user refreshes the page.
+
+
