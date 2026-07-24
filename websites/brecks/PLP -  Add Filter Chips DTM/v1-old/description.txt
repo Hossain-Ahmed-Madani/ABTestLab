@@ -1,0 +1,67 @@
+Site: https://www.brecks.com/
+
+Hypothesis: We believe that introducing quick filter chips at the top of the PLP will reduce browsing friction and help customers more quickly narrow down to relevant products. As a result, users will spend less time scrolling and more time engaging with products that match their needs, leading to higher product clicks and improved conversion rates.
+
+Test Shell in Testing Platform: 
+
+Audience: All Audience
+
+Primary Goal: Cart Additions
+
+Secondary Goals: Transactions, Revenue
+Supportive Metrics: PLP Product Tile Clicks
+Standard Goals: 
+
+URL Targeting: "/collections/" and "?q="
+
+QA URLs:  https://www.brecks.com/collections/asters
+
+QA Scenario: 
+Ensure filter chips render on collection pages.
+Ensure tapping a chip applies the corresponding filter.
+On mobile, chips should correctly select filters within the filter panel.
+Conditionally render chips where applicable (e.g., zone and usage filters)
+Allow users to select multiple filters
+
+Launch % of Traffic: 100%
+
+Variation Design Details: 
+We’d like to test adding filter chips to PLPs to improve product discovery and filter engagement. Users should be able to select multiple filter chips. Filter Chips Included
+Shop My Zone
+Ships Now
+"Usage" filter chips
+
+Functionality Requirements
+
+Shop My Zone
+Display Logic: If the cookie does not exist, do not render the chip. 
+Chip Copy: Shop My Zone: # (If the zone value contains a letter suffix (e.g., 8A), keep the full value in the filter chip copy, but the suffix may need to be removed when matching/selecting the actual Zone filter option). 
+On Click: Select the matching Zone filter in the filter panel. 
+Data Source: the zone information is located in the browser cookie: PlantingZone .
+
+
+Ships Now
+Chip Copy: Ships Now
+On Click: Apply filter where Shipping Season = Fall
+Note: We are currently transitioning between Spring/Fall shipping seasons, so this mapped value may need to be updated before launch.
+Data Source: the "Shipping Season" filter
+
+
+
+"Usage" Filters
+Display Logic: Dynamically render chips based on the available options under the existing Usage filter on the PLP.
+Chip Copy: The filter option copy (remove the (#) suffix)
+On Click: Select/apply the matching Usage filter option.
+Note: Not every page will contain the same Usage filter options. So we will need to fetch the active Usage filter options available on the PLP and convert them into filter chips.
+Example: https://www.brecks.com/collections/garden_sun_perennial_plants Each filter option is a filter chip  
+
+Competitor example: On this https://www.farmergracy.co.uk/collections/foliage-plants-indoor-outdoor-uk, there are several pink filter chips displayed below the page title and description. 
+
+
+Variation Design Mockup:
+https://www.figma.com/design/9JhvESiGmUH7UEXd0rEUDe/Gardens-Alive-?node-id=4146-14&t=7jSScH3yhTcU0esm-1
+
+Filter chip states are included in the Figma mockup:
+
+Test container: https://app.convert.com/accounts/100412411/projects/100413762/experiences/1004199395/summary
+Forced Variation:  https://www.brecks.com/collections/summer_flower_bulbs?_conv_eforce=1004199395.1004468605&sort_by=manual&utm_campaign=qa09
