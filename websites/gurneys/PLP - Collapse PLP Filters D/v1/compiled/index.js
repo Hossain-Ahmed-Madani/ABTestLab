@@ -1,8 +1,8 @@
 (async () => {
     const TEST_CONFIG = {
         page_initials: "AB-COLLAPSE-FILTERS",
-        test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_variation: 2 /* 1, 2 */,
+        test_version: 0.00003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -42,12 +42,17 @@
     const FILTER_SELECTOR = [".filter-form__group", '.filter-form__group:not(:has( button[data-filter-group-toggle="zone"]))'];
 
     function init() {
+        if (window[page_initials] === true) return;
+
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
 
         qq(FILTER_SELECTOR[test_variation - 1]).forEach((item) => {
+            if (q(item, "input.filter-item__checkbox[checked]")) return;
             q(item, ".filter-form__group-toggle").setAttribute("aria-expanded", "false");
             q(item, ".filter-form__group-filter-wrapper").setAttribute("aria-hidden", "true");
         });
+
     }
 
     function checkForItems() {

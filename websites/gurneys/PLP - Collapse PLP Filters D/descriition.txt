@@ -5,9 +5,9 @@ Hypothesis: We believe that collapsing PLP filters by default will create a clea
 Test Shell in Testing Platform: https://app.convert.com/accounts/100412411/projects/100414848/experiences/1004205555/summary
 
 Forced variation:
-control: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482937&utm_campaign=qa01
-v1:  https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482938&utm_campaign=qa01
-v2: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004483418&utm_campaign=qa01
+control: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482937&utm_campaign=qa02
+v1:  https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482938&utm_campaign=qa02
+v2: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004483418&utm_campaign=qa02
 
 Audience: All users
 
