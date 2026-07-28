@@ -1,114 +1,163 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
-}
-
-
-.ab-option-wrapper .select-trigger {
-    display: none !important;
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
-.ab-option-wrapper .select-options {
-    display: flex;
-    gap: 12px;
-    overflow-y: auto;
-    position: static !important;
-    margin-left: 6px;
-}
+.AB-UPDATE-OPTION-SELECTOR {
+    .ab-option-wrapper .select-trigger {
+        display: none !important;
+    }
 
-.ab-option-wrapper.active .select-options {
-    display: flex !important;
-}
+    .ab-option-wrapper .select-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        overflow-y: auto;
+        position: static !important;
+        // margin-left: 6px;
+        margin-left: 0px;
+        margin-top: 5px;
+    }
 
-.ab-option-wrapper .select-options .select-option {
-    align-items: center !important;
-    padding: 0 !important;
-    font-size: 13px;
-    font-family: 'Libre Franklin', sans-serif;
-    height: 45px !important;
-    width: 108px !important;
-    line-height: 13px;
-    letter-spacing: 0;
-    border: 1px solid #C4C2C3;
-}
-.ab-option-wrapper .select-options .select-option.disabled {
-    display: flex !important;
-    text-decoration: line-through;
-    color: #71767A !important;
-    cursor: not-allowed !important;
-    background-color: #F4F4F4 !important;
-    border: 1px solid #C4C2C3 !important;
-    font-weight: 400 !important;
-}
-.ab-option-wrapper .select-options .select-option.disabled:hover {
-    background-color: #F4F4F4 !important;
-    border-color: #C4C2C3 !important;
-    color: #71767A !important;
-    font-weight: 400 !important;
-}
+    .ab-option-wrapper.active .select-options {
+        display: flex !important;
+        flex-wrap: wrap;
+    }
 
-.ab-option-wrapper .select-options .select-option:hover,
-.ab-option-wrapper .select-options .select-option[data-reset="true"] {
-    background-color: var(--brand-color-bg);
-    border-color: var(--brand-color-bg);
-    color: var(--brand-color-bg-text);
-    font-weight: 700;
-}
+    .ab-option-wrapper .select-options .select-option {
+        align-items: center !important;
+        padding: 0 15px !important;
+        font-size: 13px;
+        // font-family: "Libre Franklin", sans-serif;
+        font-family: var(--global-font);
+        height: 45px !important;
+        width: auto;
+        min-width: 100px !important;
+        line-height: 13px;
+        letter-spacing: 0;
+        border: 1px solid #c4c2c3;
+        white-space: nowrap;
+    }
+    .ab-option-wrapper .select-options .select-option.disabled {
+        // display: flex !important;
+        display: none !important;
+        text-decoration: line-through;
+        color: #71767a !important;
+        cursor: not-allowed !important;
+        background-color: #f4f4f4 !important;
+        border: 1px solid #c4c2c3 !important;
+        font-weight: 400 !important;
+    }
+    .ab-option-wrapper .select-options .select-option.disabled:hover {
+        background-color: #f4f4f4 !important;
+        border-color: #c4c2c3 !important;
+        color: #71767a !important;
+        font-weight: 400 !important;
+    }
 
-/* checkbox options style */
-.ab-checkbox-wrapper {
-    margin-left: 6px;
-}
-.ab-checkbox-wrapper .select-list__item {
-    padding-right: 12px !important;
-    padding-bottom: 12px !important;
-    width: auto !important;
-}
-.ab-checkbox-wrapper .select-list__item input {
-    display: none !important;
-}
-.ab-checkbox-wrapper .select-list__item label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-family: 'Libre Franklin', sans-serif;
-    height: 45px !important;
-    width: 108px !important;
-    line-height: 13px;
-    letter-spacing: 0;
-    justify-content: center;
-    border: 1px solid #C4C2C3;
-    cursor: pointer;
-}
-.ab-checkbox-wrapper .select-list__item label:hover,
-.ab-checkbox-wrapper .select-list__item:has(input:checked) label,
-.ab-checkbox-wrapper .select-list__item:has(input[checked]) label {
-    background-color: var(--brand-color-bg);
-    border-color: var(--brand-color-bg);
-    color: var(--brand-color-bg-text);
-    font-weight: 700;
-}
-.ab-checkbox-wrapper .select-list__item:has(input[disabled]) label {
-    text-decoration: line-through;
-    color: #71767A !important;
-    cursor: not-allowed !important;
-    background-color: #F4F4F4 !important;
-    border: 1px solid #C4C2C3 !important;
-    font-weight: 400 !important;
-}
-.ab-checkbox-wrapper .select-list__item:has(input[disabled]) label:hover {
-    background-color: #F4F4F4 !important;
-    border-color: #C4C2C3 !important;
-    color: #71767A !important;
-    font-weight: 400 !important;
+    // .ab-option-wrapper .select-options .select-option:hover,
+    .ab-option-wrapper .select-options .select-option[data-reset="true"] {
+        background-color: var(--brand-color-bg);
+        border-color: var(--brand-color-bg);
+        color: var(--brand-color-bg-text);
+        font-weight: 700;
+    }
+
+    /* checkbox options style */
+    .ab-checkbox-wrapper {
+        // margin-left: 6px;
+        margin-left: 0px;
+        margin-top: 5px;
+    }
+    .ab-checkbox-wrapper .select-list__item {
+        // padding-right: 12px !important;
+        // padding-bottom: 12px !important;
+
+        padding: 0;
+        width: auto !important;
+    }
+
+    .ab-checkbox-wrapper div:has(> .select-list__item) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .ab-checkbox-wrapper .select-list__item input {
+        display: none !important;
+    }
+    .ab-checkbox-wrapper .select-list__item label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        // font-family: "Libre Franklin", sans-serif;
+        // font-family: inherit;
+        font-family: var(--global-font);
+        height: 45px !important;
+        width: auto;
+        min-width: 100px !important;
+        line-height: 13px;
+        letter-spacing: 0;
+        justify-content: center;
+        border: 1px solid #c4c2c3;
+        cursor: pointer;
+        padding: 0 15px;
+    }
+    // .ab-checkbox-wrapper .select-list__item label:hover,
+    .ab-checkbox-wrapper .select-list__item:has(input:checked) label,
+    .ab-checkbox-wrapper .select-list__item:has(input[checked]) label {
+        background-color: var(--brand-color-bg);
+        border-color: var(--brand-color-bg);
+        color: var(--brand-color-bg-text);
+        font-weight: 700;
+        width: initial;
+    }
+    .ab-checkbox-wrapper .select-list__item:has(input[disabled]) label {
+        text-decoration: line-through;
+        color: #71767a !important;
+        cursor: not-allowed !important;
+        background-color: #f4f4f4 !important;
+        border: 1px solid #c4c2c3 !important;
+        font-weight: 400 !important;
+    }
+    .ab-checkbox-wrapper .select-list__item:has(input[disabled]) label:hover {
+        background-color: #f4f4f4 !important;
+        border-color: #c4c2c3 !important;
+        color: #71767a !important;
+        font-weight: 400 !important;
+    }
+
+    /* ========== NEW ========== */
+    // .ab-option-wrapper .select-options .select-option:hover,
+    // .ab-checkbox-wrapper .select-list__item label:hover {
+    .ab-checkbox-wrapper .select-list__item:hover {
+        cursor: pointer;
+        background: #000;
+        color: #fff;
+    }
+
+    .ab-checkbox-wrapper .select-list__item:has(> input.select-list__item__input[disabled]) {
+        display: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-option-wrapper .select-options .select-option {
+            min-width: 108px !important;
+        }
+
+        .ab-checkbox-wrapper .select-list__item label {
+            min-width: 108px !important;
+        }
+    }
 }
