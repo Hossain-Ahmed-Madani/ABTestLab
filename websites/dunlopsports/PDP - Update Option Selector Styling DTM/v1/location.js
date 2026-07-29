@@ -57,9 +57,9 @@
         window._conv_q.push(["executeExperiment", "100142844"]);
     }
 
-    function handleScroll(e) {
+    function handleExperimentTrigger(e) {
         if (document.querySelector(".nav.nav-tabs.toggle-tabs") && isElementVisibleInViewport(document.querySelector(".nav.nav-tabs.toggle-tabs"))) {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleExperimentTrigger);
             triggerExperiment();
             convert_recheck_experiment();
         }
@@ -77,8 +77,13 @@
         if (IS_BUCKETED) {
             return true;
         } else {
-            waitForElement(checkForItems, triggerExperiment);
-            window.addEventListener("scroll", handleScroll);
+            waitForElement(
+                () => checkForItems(),
+                () => {
+                    handleExperimentTrigger();
+                    window.addEventListener("scroll", handleExperimentTrigger);
+                },
+            );
             return false;
         }
     } catch (error) {

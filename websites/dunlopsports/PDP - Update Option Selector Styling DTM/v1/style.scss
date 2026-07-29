@@ -48,8 +48,8 @@
         white-space: nowrap;
     }
     .ab-option-wrapper .select-options .select-option.disabled {
-        // display: flex !important;
-        display: none !important;
+        // display: none !important;
+        display: flex !important;
         text-decoration: line-through;
         color: #71767a !important;
         cursor: not-allowed !important;
@@ -57,6 +57,7 @@
         border: 1px solid #c4c2c3 !important;
         font-weight: 400 !important;
     }
+
     .ab-option-wrapper .select-options .select-option.disabled:hover {
         background-color: #f4f4f4 !important;
         border-color: #c4c2c3 !important;
@@ -147,9 +148,9 @@
         color: #fff;
     }
 
-    .ab-checkbox-wrapper .select-list__item:has(> input.select-list__item__input[disabled]) {
-        display: none;
-    }
+    // .ab-checkbox-wrapper .select-list__item:has(> input.select-list__item__input[disabled]) {
+    //     display: none;
+    // }
 
     @media screen and (min-width: 768px) {
         .ab-option-wrapper .select-options .select-option {

@@ -1,4 +1,3 @@
-
 .AB-UPDATE-OPTION-SELECTOR .ab-option-wrapper .select-trigger {
     display: none !important;
 }
@@ -29,7 +28,7 @@
     white-space: nowrap;
 }
 .AB-UPDATE-OPTION-SELECTOR .ab-option-wrapper .select-options .select-option.disabled {
-    display: none !important;
+    display: flex !important;
     text-decoration: line-through;
     color: #71767a !important;
     cursor: not-allowed !important;
@@ -108,9 +107,6 @@
     cursor: pointer;
     background: #000;
     color: #fff;
-}
-.AB-UPDATE-OPTION-SELECTOR .ab-checkbox-wrapper .select-list__item:has(> input.select-list__item__input[disabled]) {
-    display: none;
 }
 @media screen and (min-width: 768px) {
     .AB-UPDATE-OPTION-SELECTOR .ab-option-wrapper .select-options .select-option {

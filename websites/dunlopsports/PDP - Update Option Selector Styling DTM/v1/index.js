@@ -6,7 +6,7 @@
         test_name: "PDP - Update Option Selector Styling [DTM]",
         page_initials: "AB-UPDATE-OPTION-SELECTOR",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -76,7 +76,7 @@
 
     function mutationObserverFunction() {
         const stockEl = document.querySelector('.js-stock-visible[aria-labelledby*="stock-tab"]');
-        const debouncedUpdate = debounce(injectClasses, 250);
+        const debouncedUpdate = debounce(injectClasses, 10);
         return new MutationObserver(debouncedUpdate).observe(stockEl, { childList: true, subtree: true, attributes: false });
     }
 

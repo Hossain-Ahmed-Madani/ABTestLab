@@ -41,7 +41,7 @@
   .ab-option-wrapper
   .select-options
   .select-option.disabled {
-  display: none !important;
+  display: flex !important;
   text-decoration: line-through;
   color: #71767a !important;
   cursor: not-allowed !important;
@@ -139,11 +139,6 @@
   background: #000;
   color: #fff;
 }
-.AB-UPDATE-OPTION-SELECTOR
-  .ab-checkbox-wrapper
-  .select-list__item:has(> input.select-list__item__input[disabled]) {
-  display: none;
-}
 @media screen and (min-width: 768px) {
   .AB-UPDATE-OPTION-SELECTOR .ab-option-wrapper .select-options .select-option {
     min-width: 108px !important;
@@ -164,7 +159,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-UPDATE-OPTION-SELECTOR",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -249,7 +244,7 @@
     const stockEl = document.querySelector(
       '.js-stock-visible[aria-labelledby*="stock-tab"]',
     );
-    const debouncedUpdate = debounce(injectClasses, 250);
+    const debouncedUpdate = debounce(injectClasses, 10);
     return new MutationObserver(debouncedUpdate).observe(stockEl, {
       childList: true,
       subtree: true,
