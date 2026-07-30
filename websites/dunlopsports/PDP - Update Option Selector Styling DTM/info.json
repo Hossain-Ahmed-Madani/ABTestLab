@@ -1,0 +1,13 @@
+{
+  "id": "1785229502637_1762_PDP___Update_Option_Selector_Styling_DTM",
+  "name": "PDP - Update Option Selector Styling DTM",
+  "type": "A/B",
+  "website": "dunlopsports",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-07-28T09:05:02.637Z",
+  "createdAtReadable": "7/28/2026, 3:05:02 PM",
+  "lastUpdated": "2026-07-28T09:05:02.790Z"
+}
