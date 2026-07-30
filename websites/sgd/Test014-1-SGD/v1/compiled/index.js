@@ -1,9 +1,5 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "Netzproduzenten",
-        project: "SGD",
-        site_url: "https://www.sgd.de",
-        test_name: "Test014 - 1 [SGD] - global - sticky CTA at the bottom of the screen",
         page_initials: "AB-TEST014-1",
         test_variation: 1 /* 1, 2 */,
         test_version: 0.0001,
@@ -67,8 +63,6 @@
 
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-
-        console.table(TEST_CONFIG);
 
         const { info_package, sign_up } = CONTENT[test_variation];
 
