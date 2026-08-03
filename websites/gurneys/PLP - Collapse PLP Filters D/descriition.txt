@@ -1,0 +1,40 @@
+Site: https://www.gurneys.com/
+
+Hypothesis: We believe that collapsing PLP filters by default will create a cleaner, less overwhelming browsing experience, making it easier for users to navigate the page. This will encourage filter engagement when needed and ultimately lead to increased add-to-cart actions and transactions.
+
+Test Shell in Testing Platform: https://app.convert.com/accounts/100412411/projects/100414848/experiences/1004205555/summary
+
+Forced variation:
+control: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482937&utm_campaign=qa02
+v1:  https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004482938&utm_campaign=qa02
+v2: https://www.gurneys.com/collections/vegetables?_conv_eforce=1004205555.1004483418&utm_campaign=qa02
+
+Audience: All users
+
+Primary Goal: Cart Additions
+
+Secondary Goals: Filter Usage, PDP Views, Transactions, Revenue
+
+Standard Goals: 
+
+URL Targeting: PLP Contain "/collections/"
+
+QA URLs: 
+https://www.gurneys.com/collections/vegetables
+
+QA Scenario: 
+Verify filters are collapsed/expanded correctly for each variant.
+Confirm filters update products correctly when selected.
+Ensure selected filters stay open after selection and page refresh.
+Verify filter selections remain after navigating the page.
+
+
+Launch % of Traffic: 100%
+
+Variation Design Details: 
+Collapse the filters (Zone, Light Requirement, etc.) by default. There will be two variants:
+Variant 1: All filters are collapsed by default.
+Variant 2: All filters are collapsed except for the "Zone" filter, which remains expanded since it receives the most filter engagement.
+Behavior: When a user selects a filter option from a collapsed filter section, keep that filter section expanded. The selected filter should remain open even after the user refreshes the page.
+
+
