@@ -9,7 +9,7 @@
 }
 .AB-FIX-OVERLAP .product-detail-header-section {
   border-top: 1px solid #ced4da;
-  top: 77.5px;
+  top: 76px;
   padding: 5.5px 16px;
   box-shadow:
     rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -58,7 +58,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-FIX-OVERLAP",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
