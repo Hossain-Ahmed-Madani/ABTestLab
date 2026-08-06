@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00024,
+        test_version: 0.00025,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1296,6 +1296,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     async function handleCreditDebitFormShowHide(e) {
         await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
+
         const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
         const optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
 
@@ -1306,7 +1307,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         const targetFormSection = q(".ab-credit-or-debit-forms-section");
 
         if (optionTxt === "Credit/Debit Card") {
-            await waitForElementAsync(() => !!validateAllControlNodesExist(payment_options_credit_or_debit.inputList, minOptions = 1), 20000);
+            await waitForElementAsync(() => !!validateAllControlNodesExist(payment_options_credit_or_debit.inputList, (minOptions = 1)), 20000, 100);
+
+            q("select[formcontrolname='country']").insertAdjacentHTML("afterbegin", `<option value="">Please Select</option>`);
+
             contentWrapper.classList.add("ab-content-wrapper--show-credit-debit");
             targetFormSection.insertAdjacentHTML("beforeend", getFormLayout(payment_options_credit_or_debit));
             q("input#ab-cvv").insertAdjacentHTML(
@@ -1326,7 +1330,10 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
             setTimeout(() => {
                 const dataObj = getElementData(q("select#ab-country"));
                 handleSelectInput(dataObj);
+                updateDependencyNodes(dataObj);
             }, 150);
+
+            // Forcing Deselect as control shows no value in initial load
         } else {
             contentWrapper.classList.remove("ab-content-wrapper--show-credit-debit");
             setTimeout(() => q(".ab-control-forms-section").scrollIntoView({ behavior: "smooth", block: "center" }), 100);

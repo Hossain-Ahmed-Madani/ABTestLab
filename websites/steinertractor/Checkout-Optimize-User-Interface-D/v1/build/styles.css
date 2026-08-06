@@ -324,6 +324,7 @@
 .AB-Checkout-Step-1-2 .ab-content-forms-wrapper {
     padding: 0;
     padding-left: 15px;
+    padding-bottom: 123px;
 }
 .AB-Checkout-Step-1-2 .ab-content-product-summary-wrapper {
     padding-left: 0 !important;
@@ -1326,7 +1327,7 @@
     margin-left: 0 !important;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-credit-or-debit-forms-section {
-    padding: 0 63px 123px 0;
+    padding: 0 63px 0 0;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-product-summary__coupons-form-group,
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-product-summary__addons-form-group {
