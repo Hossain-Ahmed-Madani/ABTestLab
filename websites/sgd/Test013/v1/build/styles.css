@@ -18,7 +18,8 @@
 .AB-TEST013 #downloadForm .list-type-none.list-style-check,
 .AB-TEST013 .registration-left .form-button-submit,
 .AB-TEST013 .container-md.frame-space-after-medium.tab-393-none,
-.AB-TEST013 #js-card-download + .container-md:has(> hr) {
+.AB-TEST013 #js-card-download + .container-md:has(> hr),
+.AB-TEST013 main > div.container-md > .mb-2.row .course-tabs.d-inline:not(.d-none):has(> ul) {
     display: none !important;
 }
 .AB-TEST013 .ab-ml-auto {
@@ -86,6 +87,7 @@
     text-align: center;
     vertical-align: middle;
     color: rgb(26, 43, 73) !important;
+    background-color: rgba(218, 253, 252, 0.5019607843) !important;
 }
 .AB-TEST013 .ab-course-info-box {
     background-color: rgb(235, 235, 235);

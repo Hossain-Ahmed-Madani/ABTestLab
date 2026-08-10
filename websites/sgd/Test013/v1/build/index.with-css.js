@@ -32,7 +32,12 @@
 .AB-TEST013 #downloadForm .list-type-none.list-style-check,
 .AB-TEST013 .registration-left .form-button-submit,
 .AB-TEST013 .container-md.frame-space-after-medium.tab-393-none,
-.AB-TEST013 #js-card-download + .container-md:has(> hr) {
+.AB-TEST013 #js-card-download + .container-md:has(> hr),
+.AB-TEST013
+  main
+  > div.container-md
+  > .mb-2.row
+  .course-tabs.d-inline:not(.d-none):has(> ul) {
   display: none !important;
 }
 .AB-TEST013 .ab-ml-auto {
@@ -100,6 +105,7 @@
   text-align: center;
   vertical-align: middle;
   color: rgb(26, 43, 73) !important;
+  background-color: rgba(218, 253, 252, 0.5019607843) !important;
 }
 .AB-TEST013 .ab-course-info-box {
   background-color: rgb(235, 235, 235);
@@ -1362,8 +1368,11 @@ Figma: https://www.figma.com/design/RWs9kC2tKwUdp3OEJcadw9/Test013---Landingpage
 Important: https://www.sgd.de/lp/realschulabschluss.html
 
 Test container: https://app.varify.io/dashboard?msg=experiment-created&experiment_id=33053&variation_id=49499&search=Test013+%5BSGD%5D+-+landing+pages+-+new+structure
-Preview url: 
+QA url: 
 https://www.sgd.de/lp/abitur.html?qa5=true
+
+Preview URL:
+https://www.sgd.de/lp/abitur.html?varify-preview=49499-variation-1
 
 Target Pages:
 https://www.sgd.de/lp/abitur.html
@@ -1378,17 +1387,15 @@ https://www.sgd.de/lp/gepr-buchhalterin-sgd.html
 https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
 
+
+
 */
 
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "SGD",
-    site_url: "https://www.sgd.de/",
-    test_name: "Test013 [SGD] - landing pages - new structure",
     page_initials: "AB-TEST013",
     test_variation: 1,
-    test_version: 0.0009,
+    test_version: 0.00011,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -2187,7 +2194,16 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
 
         // Click Action
         q(".ab-show-contact-details-cta").addEventListener("click", () => {
-          registrationLeft.classList.add("ab-show-step-two-items");
+          // registrationLeft.classList.add("ab-show-step-two-items");
+          q(".ab-form-submit-cta").click();
+
+          setTimeout(() => {
+            if (
+              qq(".registration-left div:has(> input.is-invalid)").length === 0
+            ) {
+              registrationLeft.classList.add("ab-show-step-two-items");
+            }
+          }, 150);
         });
 
         q(".ab-form-submit-cta").addEventListener("click", () => {
@@ -2200,8 +2216,6 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
   }
 
   function init() {
-    console.log(TEST_CONFIG);
-
     q("body").classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
@@ -2250,5 +2264,10 @@ https://www.sgd.de/lp/staatlich-gepr-maschinenbautechnikerin.html
     );
   }
 
-  waitForElementAsync(checkForItems).then(init);
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
 })();
