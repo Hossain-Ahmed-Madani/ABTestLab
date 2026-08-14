@@ -70,8 +70,6 @@ analytics.subscribe("collection_viewed", (event) => {
             items: items,
         },
     });
-
-    console.log("Custom Events: ", "collection_viewed -> ", "view_item_list", window.dataLayer);
 });
 
 // ============================================================
@@ -116,8 +114,6 @@ analytics.subscribe("product_removed_from_cart", (event) => {
             ],
         },
     });
-
-    console.log("Custom Events: ", "product_removed_from_cart -> ", "remove_from_cart", window.dataLayer);
 });
 
 // ============================================================
@@ -145,6 +141,59 @@ analytics.subscribe("cart_viewed", (event) => {
             items: items,
         },
     });
-
-    console.log("Custom Events: ", "cart_viewed -> ", "view_cart", window.dataLayer);
 });
+
+// ============================================================
+// Shopify Standard Event: checkout_shipping_info_submitted
+// GA4 Event: add_shipping_info
+// ============================================================
+
+analytics.subscribe("checkout_shipping_info_submitted", (event) => {
+    const items = event.data?.checkout?.lineItems?.map((item) => {
+        return {
+            item_id: item.variant.product.id,
+            item_name: item.variant.product.title,
+            price: item.variant.price.amount,
+            quantity: item.quantity,
+        };
+    });
+
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+        event: "add_shipping_info",
+        url: event.context.document.location.href,
+        ecommerce: {
+            currency: event.data?.checkout?.currencyCode,
+            value: event.data?.checkout?.subtotalPrice?.amount,
+            items: items,
+        },
+    });
+});
+
+// ============================================================
+// Shopify Standard Event: payment_info_submitted
+// GA4 Event: add_payment_info
+// ============================================================
+
+analytics.subscribe("payment_info_submitted", (event) => {
+    const items = event.data?.checkout?.lineItems?.map((item) => {
+        return {
+            item_id: item.variant.product.id,
+            item_name: item.variant.product.title,
+            price: item.variant.price.amount,
+            quantity: item.quantity,
+        };
+    });
+
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+        event: "add_payment_info",
+        url: event.context.document.location.href,
+        ecommerce: {
+            currency: event.data?.checkout?.currencyCode,
+            value: event.data?.checkout?.subtotalPrice?.amount,
+            items: items,
+        },
+    });
+});
+

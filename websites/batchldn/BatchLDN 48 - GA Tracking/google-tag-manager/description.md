@@ -59,3 +59,14 @@ A couple of notes worth flagging:
 - purchase
 
 (These are typically standard/automatically collected engagement events, not part of the essential e-commerce funnel list above.)
+
+### Event Not Created In Customer Events
+- view_item | Already Exists
+- add_to_cart | Already Exists
+- add_to_wishlist | Functionality Does not Exist In Site
+- begin_checkout | Already Exists
+- purchase | Already Exists
+- refund  | Pending, Need Discussion
+- view_promotion, select_promotion, select_item -> Pending
+- sign_up, login ->  Pending, Need Discussion
+-
