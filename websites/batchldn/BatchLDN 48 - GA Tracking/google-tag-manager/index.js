@@ -1,5 +1,3 @@
-// ============= Ticket: BatchLDN 48 - GA Tracking =============
-
 // Define dataLayer and the gtag function.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
@@ -24,7 +22,6 @@ function gtag() {
     f.parentNode.insertBefore(j, f);
 })(window, document, "script", "dataLayer", "GTM-TSS75VDV");
 
-
 // subscribe to events
 
 // ============================================================
@@ -33,33 +30,60 @@ function gtag() {
 // ============================================================
 
 analytics.subscribe("collection_viewed", (event) => {
-    window.dataLayer = window.dataLayer || [];
-
     const collection = event.data?.collection;
     const productVariants = collection?.productVariants || [];
-    const items = productVariants.map((variant) => ({
-        item_id: variant.id,
-        item_name: variant.product?.title,
-        item_brand: variant.product?.vendor,
-        item_variant: variant.title,
-        item_sku: variant.sku,
-        item_category: variant.product?.type,
-        price: variant.price?.amount,
-        item_url: variant.product?.url,
-    }));
 
-    window.dataLayer.push({
-        event: "collection_viewed",
-        // GA4 view_item_list parameters
-        item_list_id: collection?.id,
-        item_list_name: collection?.title,
-        items: items,
-        // Optional Shopify event information
-        timestamp: event.timestamp,
-        shopify_event_id: event.id,
-        client_id: event.clientId,
-        url: event.context?.document?.location?.href,
+    if (!productVariants.length) return;
+
+    const items = productVariants.map((variant, index) => {
+        const product = variant?.product;
+
+        return {
+            item_id: variant?.sku || variant?.id || product?.id,
+            item_name: product?.title || variant?.title,
+            affiliation: product?.vendor || undefined,
+            index: index,
+            item_brand: product?.vendor || undefined,
+            item_category: product?.type || undefined,
+            item_list_id: String(collection?.id || ""),
+            item_list_name: collection?.title || undefined,
+            item_variant: variant?.title || undefined,
+            price: Number(variant?.price?.amount) || 0,
+            quantity: 1,
+        };
     });
+
+    const currency = productVariants[0]?.price?.currencyCode || "GBP";
+
+    window.dataLayer = window.dataLayer || [];
+
+    // Clear previous ecommerce object
+    window.dataLayer.push({
+        ecommerce: null,
+    });
+
+    // Push GA4 view_item_list event
+    window.dataLayer.push({
+        event: "view_item_list",
+        ecommerce: {
+            currency: currency,
+            item_list_id: String(collection?.id || ""),
+            item_list_name: collection?.title || "",
+            items: items,
+        },
+    });
+
+    console.log("collection_viewed: ", event.data, "\n", "view_item_list: ", {
+        event: "view_item_list",
+        ecommerce: {
+            currency: currency,
+            item_list_id: String(collection?.id || ""),
+            item_list_name: collection?.title || "",
+            items: items,
+        },
+    });
+
+    
 });
 
 
@@ -106,7 +130,6 @@ analytics.subscribe("product_viewed", (event) => {
 // ============================================================
 
 analytics.subscribe("product_added_to_cart", (event) => {
-
     const cartLine = event.data?.cartLine;
 
     if (!cartLine) return;
@@ -144,9 +167,7 @@ analytics.subscribe("product_added_to_cart", (event) => {
             ],
         },
     });
-
 });
-
 
 // ============================================================
 // Shopify Standard Event: product_removed_from_cart
@@ -190,5 +211,5 @@ analytics.subscribe("product_removed_from_cart", (event) => {
             ],
         },
     });
-
 });
+

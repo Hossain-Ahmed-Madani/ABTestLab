@@ -1,3 +1,5 @@
+// ============= Ticket: BatchLDN 48 - GA Tracking =============
+
 // Define dataLayer and the gtag function.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
