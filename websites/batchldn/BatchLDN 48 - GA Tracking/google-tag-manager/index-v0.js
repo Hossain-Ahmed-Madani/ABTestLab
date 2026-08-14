@@ -75,6 +75,92 @@ analytics.subscribe("collection_viewed", (event) => {
 });
 
 // ============================================================
+// Shopify Standard Event: product_viewed
+// GA4 Event: view_item
+// ============================================================
+
+analytics.subscribe("product_viewed", (event) => {
+    const productVariant = event.data?.productVariant;
+    const product = productVariant?.product;
+
+    const price = Number(productVariant?.price?.amount);
+    const currency = productVariant?.price?.currencyCode;
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        ecommerce: null,
+    });
+
+    // Push GA4-compatible ecommerce data
+    window.dataLayer.push({
+        event: "view_item",
+        ecommerce: {
+            currency: currency,
+            value: price,
+            items: [
+                {
+                    item_id: productVariant?.sku || productVariant?.id,
+                    item_name: product?.title,
+                    item_brand: product?.vendor,
+                    item_variant: productVariant?.title,
+                    price: price,
+                    quantity: 1,
+                },
+            ],
+        },
+    });
+
+    console.log("Custom Events: ", "product_viewed -> ", "view_item", window.dataLayer);
+});
+
+// ============================================================
+// Shopify Standard Event: product_added_to_cart
+// GA4 Event: add_to_cart
+// ============================================================
+
+analytics.subscribe("product_added_to_cart", (event) => {
+    const cartLine = event.data?.cartLine;
+
+    if (!cartLine) return;
+
+    const merchandise = cartLine.merchandise;
+    const product = merchandise?.product;
+    const currency = cartLine.cost?.totalAmount?.currencyCode;
+    const value = Number(cartLine.cost?.totalAmount?.amount || 0);
+    const price = Number(merchandise?.price?.amount || 0);
+    const quantity = Number(cartLine.quantity || 1);
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+        ecommerce: null,
+    });
+
+    window.dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+            currency: currency,
+            value: value,
+            items: [
+                {
+                    item_id: merchandise?.sku || merchandise?.id,
+                    item_name: product?.title,
+                    item_brand: product?.vendor,
+                    item_category: product?.type || undefined,
+                    item_variant: merchandise?.title,
+                    price: price,
+                    quantity: quantity,
+                    product_id: product?.id,
+                    variant_id: merchandise?.id,
+                    item_url: product?.url,
+                },
+            ],
+        },
+    });
+
+    console.log("Custom Events: ", "product_added_to_cart -> ", "add_to_cart", window.dataLayer);
+});
+
+// ============================================================
 // Shopify Standard Event: product_removed_from_cart
 // GA4 Event: remove_from_cart
 // ============================================================
