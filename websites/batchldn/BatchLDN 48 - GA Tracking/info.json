@@ -1,0 +1,12 @@
+{
+  "id": "1786622292185_5581_BatchLDN_48___GA_Tracking",
+  "name": "BatchLDN 48 - GA Tracking",
+  "type": "AA",
+  "website": "batchldn",
+  "variations": [
+    "google-tag-manager"
+  ],
+  "createdAt": "2026-08-13T11:58:12.185Z",
+  "createdAtReadable": "8/13/2026, 5:58:12 PM",
+  "lastUpdated": "2026-08-13T11:58:12.193Z"
+}
