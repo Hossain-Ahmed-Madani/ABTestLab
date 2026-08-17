@@ -1,0 +1,13 @@
+{
+  "id": "1786954550777_3015_HL___AB_test_idea___Adhesive_Backed_Product_Names",
+  "name": "HL - AB test idea - Adhesive Backed Product Names",
+  "type": "A/B",
+  "website": "hookandloop",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-08-17T08:15:50.777Z",
+  "createdAtReadable": "8/17/2026, 2:15:50 PM",
+  "lastUpdated": "2026-08-17T08:15:50.868Z"
+}
