@@ -53,27 +53,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
 
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
@@ -174,10 +153,10 @@
         const productTitleElement = q(targetNode, "a:not(.font-bold)");
         const productTitle = productTitleElement.textContent.trim();
         const updatedTitle = getUpdatedTitle(productTitle);
-        
+
         productTitleElement.innerText = updatedTitle;
-        
-        const productBrandTitle = q(targetNode, "a.font-bold").textContent.trim();;
+
+        const productBrandTitle = q(targetNode, "a.font-bold").textContent.trim();
         const matchedBrandData = getMatchingBrandData(productBrandTitle);
         if (!matchedBrandData) return;
         const { brand_title, img_url, link } = matchedBrandData;
@@ -197,10 +176,45 @@
         );
     }
 
+    function updateSideCartAddedProduct(targetNode) {
+        const productTitleElement = q(targetNode, "p.text-sm span[x-text]");
+        const productTitle = productTitleElement.textContent.trim();
+        const updatedTitle = getUpdatedTitle(productTitle);
+
+        productTitleElement.innerText = updatedTitle;
+
+        const productBrandTitle = q(targetNode, "p.text-base").textContent.trim();
+        const matchedBrandData = getMatchingBrandData(productBrandTitle);
+        if (!matchedBrandData) return;
+        const { brand_title, img_url, link } = matchedBrandData;
+
+
+        qq(targetNode, "a.ab-brand")?.forEach((item) => item.remove());
+        productTitleElement.parentNode.classList.add("ab-title-and-brand-container");
+
+        productTitleElement.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <a href="${link}" class="ab-brand">
+                    <div class="ab-brand__label">Brand:</div>
+                    <div class="ab-brand__img">
+                        <img src="${img_url}" alt="${brand_title}" />
+                    </div>
+                </a>
+            `,
+        );
+    }
+
     function updateSideCartProductTitles(mutationList, observer) {
         console.log("==== updateSideCartProductTitles ====");
         mutationList.forEach((mutation) => {
-            console.log("===== mutation: ", mutation, mutation.addedNodes.length, mutation.target, mutation.target.classList, mutation.target.classList.contains("product-title"));
+            if (mutation.target.hasAttribute("x-html") && mutation.target.getAttribute("x-html") === "cart.subtotal") {
+                console.log(" =========== Detected Change In Subtotal ========");
+                qq("#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1")?.forEach(updateSideCartAddedProduct);
+                setTimeout(() => {
+                    qq("#cart-drawer .product-title")?.forEach(updateLayout);
+                }, 1000);
+            }
         });
     }
 
@@ -228,9 +242,10 @@
             setTimeout(() => updateLayout(q("body.catalog-product-view h1.page-title span")), 100);
         });
 
-        // Side Cart Section | PENDING
+        // Side Cart Section
         if (q("#cart-drawer #cartDrawerContent")) {
-            qq("#cart-drawer #cartDrawerContent .product-price, #cart-drawer .product-title")?.forEach(updateLayout);
+            qq("#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1")?.forEach(updateSideCartAddedProduct);
+            qq("#cart-drawer .product-title")?.forEach(updateLayout);
             mutationObserverFunction();
         }
 
