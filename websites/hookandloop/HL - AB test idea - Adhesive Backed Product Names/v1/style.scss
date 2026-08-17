@@ -1,13 +1,70 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-ADHESIVE-BACKED-PRODUCT-NAME {
+
+    &.page-products
+    .product-info-name-and-price {
+        height: auto !important;
+    }
+
+
+    .ab-title-and-brand-container {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 4px;
+    }
+    
+
+    .ab-brand {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 8px;
+
+        border: none;
+        outline: none;
+
+        &__label {
+            font-family: Helvetica;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0px;
+            vertical-align: middle;
+            color: #374151;
+        }
+
+        &__img {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            background-color: #ffffff;
+            padding: 0 4px;
+            width: 64px;
+            height: 32px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+
+
+            img {
+                width: 54px;
+                height: auto;
+            }
+        }
+    }
 }

@@ -1,0 +1,42 @@
+.AB-ADHESIVE-BACKED-PRODUCT-NAME.page-products .product-info-name-and-price {
+  height: auto !important;
+}
+.AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-title-and-brand-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+.AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-brand {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  outline: none;
+}
+.AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-brand__label {
+  font-family: Helvetica;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #374151;
+}
+.AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-brand__img {
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background-color: #ffffff;
+  padding: 0 4px;
+  width: 64px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-brand__img img {
+  width: 54px;
+  height: auto;
+}

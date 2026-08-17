@@ -11,31 +11,6 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -102,32 +77,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -143,13 +92,82 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    const DATA = {
+        duragrip: {
+            title: "Duragrip",
+            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/d/u/duragrip.jpg",
+            link: "https://www.hookandloop.com/brands/duragrip",
+        },
+        velcro: {
+            title: "Velcro",
+            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/v/e/velcro_logo_1.jpg",
+            link: "https://www.hookandloop.com/brands/velcro",
+        },
+        "3m": {
+            title: "3M",
+            img_url: "https://hookandloop.com/media/wysiwyg/Logos/3M.png",
+            link: "https://www.hookandloop.com/brands/3M",
+        },
+    };
+
+    function getMatchingBrandData(targetNode) {
+        const txt = targetNode.textContent.trim().toLowerCase();
+        console.log("Txt", txt);
+
+        if (txt.includes("duragrip")) {
+            return DATA["duragrip"];
+        } else if (txt.includes("velcro")) {
+            return DATA["velcro"];
+        } else if (txt.includes("3m")) {
+            return DATA["3m"];
+        }
+
+        return null;
+    }
+
+    function updateLayout(targetNode) {
+        // console.log("targetNode", targetNode);
+
+        const matchedData = getMatchingBrandData(targetNode);
+        if (!matchedData) return;
+        const { title, img_url, link } = matchedData;
+
+        targetNode.parentNode.classList.add("ab-title-and-brand-container");
+
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <a href="${link}" class="ab-brand">
+                    <div class="ab-brand__label">Brand:</div>
+                    <div class="ab-brand__img">
+                        <img src="${img_url}" alt="${title}" />
+                    </div>
+                </a>
+            `,
+        );
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+        // PLP Page
+        // https://www.hookandloop.com/products
+        qq("body.page-products .product-item-link .text-primary.font-bold.text-lg")?.forEach(updateLayout);
+
+        // PDP Page
+
+        // Side Cart Section
+
+        // Cart Page
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q("body.page-products .product-item-link .text-primary.font-bold.text-lg") &&
+            document.readyState !== "loading"
+        );
     }
 
     try {
