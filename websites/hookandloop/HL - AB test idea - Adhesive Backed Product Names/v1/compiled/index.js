@@ -11,6 +11,24 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+    const DATA = {
+        duragrip: {
+            brand_title: "Duragrip",
+            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/d/u/duragrip.jpg",
+            link: "https://www.hookandloop.com/brands/duragrip",
+        },
+        velcro: {
+            brand_title: "Velcro",
+            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/v/e/velcro_logo_1.jpg",
+            link: "https://www.hookandloop.com/brands/velcro",
+        },
+        "3m": {
+            brand_title: "3M",
+            img_url: "https://hookandloop.com/media/wysiwyg/Logos/3M.png",
+            link: "https://www.hookandloop.com/brands/3M",
+        },
+    };
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -36,38 +54,29 @@
     }
 
     function q(s, o) {
-        return document.querySelector(s);
+        return o ? s.querySelector(o) : document.querySelector(s);
     }
 
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    const DATA = {
-        duragrip: {
-            brand_title: "Duragrip",
-            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/d/u/duragrip.jpg",
-            link: "https://www.hookandloop.com/brands/duragrip",
-        },
-        velcro: {
-            brand_title: "Velcro",
-            img_url: "https://www.hookandloop.com/media/catalog/product/cache/67ee89799642c567a71fc92f3699d937/v/e/velcro_logo_1.jpg",
-            link: "https://www.hookandloop.com/brands/velcro",
-        },
-        "3m": {
-            brand_title: "3M",
-            img_url: "https://hookandloop.com/media/wysiwyg/Logos/3M.png",
-            link: "https://www.hookandloop.com/brands/3M",
-        },
-    };
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
 
     function getMatchingBrandData(productTitle) {
         const txt = productTitle.toLowerCase();
-
         const brands = ["duragrip", "velcro", "3m"];
-
         const brand = brands.find((brand) => txt.includes(brand));
-
         return brand ? DATA[brand] : null;
     }
 
@@ -95,14 +104,12 @@
         // 5. Collapse/remove extra whitespace
         txt = txt.replace(/\s+/g, " ").trim();
 
-        console.log("UpdatedTxt", txt);
+        // console.log("UpdatedTxt", txt);
 
         return txt.trim();
     }
 
     function updateLayout(targetNode) {
-        // console.log("targetNode", targetNode);
-
         const productTitle = targetNode.textContent.trim();
         const updatedTitle = getUpdatedTitle(productTitle);
 
@@ -110,11 +117,9 @@
             targetNode.innerText = updatedTitle;
         }
 
-        // targetNode.insertAdjacentHTML("afterend", /* HTML */ `<span class="base  ab-product-title">${updatedTitle}</span>`);
-
-        const matchedData = getMatchingBrandData(productTitle);
-        if (!matchedData) return;
-        const { brand_title, img_url, link } = matchedData;
+        const matchedBrandData = getMatchingBrandData(productTitle);
+        if (!matchedBrandData) return;
+        const { brand_title, img_url, link } = matchedBrandData;
 
         qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach((item) => item.remove());
 
@@ -123,7 +128,7 @@
         targetNode.insertAdjacentHTML(
             "afterend",
             /* HTML */ `
-                ${targetNode.classList.contains('base') && targetNode.hasAttribute('data-ui-id') ? `<span class="base  ab-product-title">${updatedTitle}</span>` : ""} 
+                ${targetNode.classList.contains("base") && targetNode.hasAttribute("data-ui-id") ? `<span class="base  ab-product-title">${updatedTitle}</span>` : ""}
                 <a href="${link}" class="ab-brand">
                     <div class="ab-brand__label">Brand:</div>
                     <div class="ab-brand__img">
@@ -132,6 +137,47 @@
                 </a>
             `,
         );
+    }
+
+    function updateCartPageAddedProduct(targetNode) {
+        const productTitleElement = q(targetNode, "a:not(.font-bold)");
+        const productTitle = productTitleElement.textContent.trim();
+        const updatedTitle = getUpdatedTitle(productTitle);
+        
+        productTitleElement.innerText = updatedTitle;
+        
+        const productBrandTitle = q(targetNode, "a.font-bold").textContent.trim();        const matchedBrandData = getMatchingBrandData(productBrandTitle);
+        if (!matchedBrandData) return;
+        const { brand_title, img_url, link } = matchedBrandData;
+
+        productTitleElement.parentNode.classList.add("ab-title-and-brand-container");
+
+        productTitleElement.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                <a href="${link}" class="ab-brand">
+                    <div class="ab-brand__label">Brand:</div>
+                    <div class="ab-brand__img">
+                        <img src="${img_url}" alt="${brand_title}" />
+                    </div>
+                </a>
+            `,
+        );
+    }
+
+    function updateSideCartProductTitles(mutationList, observer) {
+        console.log("==== updateSideCartProductTitles ====");
+        mutationList.forEach((mutation) => {
+            console.log("===== mutation: ", mutation, mutation.addedNodes.length, mutation.target, mutation.target.classList, mutation.target.classList.contains("product-title"));
+        });
+    }
+
+    function mutationObserverFunction() {
+        const targetNode = q("#cart-drawer #cartDrawerContent");
+        console.log("targetNode ", targetNode);
+        if (!targetNode) return;
+        const debouncedUpdate = debounce(updateSideCartProductTitles, 250);
+        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: false });
     }
 
     function init() {
@@ -147,21 +193,26 @@
         // PDP Page
         qq("body.catalog-product-view h1.page-title span, body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateLayout);
         window.addEventListener("configurable-selection-changed", (e) => {
-            setTimeout(() => {
-                console.log("title: ", q("body.catalog-product-view h1.page-title span").textContent);
-                updateLayout(q("body.catalog-product-view h1.page-title span"));
-            }, 100);
+            setTimeout(() => updateLayout(q("body.catalog-product-view h1.page-title span")), 100);
         });
-        // Side Cart Section
+
+        // Side Cart Section | PENDING
+        if (q("#cart-drawer #cartDrawerContent")) {
+            qq("#cart-drawer #cartDrawerContent .product-price, #cart-drawer .product-title")?.forEach(updateLayout);
+            mutationObserverFunction();
+        }
 
         // Cart Page
+        qq("body.checkout-cart-index .product-item-name")?.forEach(updateCartPageAddedProduct);
+        qq("body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title")?.forEach(updateLayout);
     }
 
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             (q("body.page-products .product-item-link .text-primary.font-bold.text-lg") ||
-                (q("body.catalog-product-view h1.page-title span") && q("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title"))) &&
+                q("body.catalog-product-view h1.page-title span") ||
+                q("body.checkout-cart-index .product-item-name")) &&
             document.readyState === "complete"
         );
     }
@@ -174,30 +225,3 @@
         return false;
     }
 })();
-
-// function getUpdatedTitle(productTitle) {
-//     let txt = productTitle.trim();
-
-//     /*
-
-//     1. Remove : DuraGrip®, DuraGrip, VELCRO®, VELCRO,  3M™,  3M
-//     2. Remove: Brand , Brand -
-//     3. Replace:  "Peel & Stick"  with "Adhesive Backed"
-//     4. If title contains "Rubber" or "Acrylic" wrap them with (), Example: (Rubber)
-//     5. Remove whitespaces
-
-//     Examples:
-//     1. DuraGrip® Brand Hook and Loop Coins ->  Hook and Loop Coins
-//     2. DuraGrip Brand Display Loop -> Display Loop
-//     3. DuraGrip® Brand - 3/4" White Loop Peel & Stick - Rubber -> 3/4 White Loop Adhesive Backed - (Rubber)
-//     4. DuraGrip® Brand Adhesive Backed Hook and Loop Fasteners ->   Adhesive Backed Hook and Loop Fasteners
-//     5. VELCRO® Brand Sew-On Loop 3610 ->  Sew-On Loop 3610
-//     6. 3M™ Dual Lock™ 1" Clear Recloseable Fastener - 50 Yard Roll -> Dual Lock™ 1" Clear Recloseable Fastener - 50 Yard Roll
-//     7. DuraGrip® Brand - 1" Black Hook Peel & Stick - Acrylic -> 1 Black Hook Adhesive Backed - (Acrylic)
-
-//     */
-
-//     console.log("UpdatedTxt", txt);
-
-//     return txt.trim();
-// }

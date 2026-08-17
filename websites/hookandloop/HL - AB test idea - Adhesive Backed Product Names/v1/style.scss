@@ -20,6 +20,19 @@
     &.catalog-product-view  h1.page-title > span.base:not(.ab-product-title) {
         display: none;
     }
+    
+    &.checkout-cart-index .product-item-name a.font-bold {
+        display: none;
+
+    }
+
+    #cart-drawer .product-card {
+        height: 100%;
+    }
+
+    #cart-drawer .product-title {
+        margin-bottom: 0;
+    }
 
     .pdp-slider-container .pdp-slider .ab-title-and-brand-container .product-title {
         height: auto;
