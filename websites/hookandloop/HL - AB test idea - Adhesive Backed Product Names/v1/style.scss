@@ -17,6 +17,10 @@
         height: auto !important;
     }
 
+    &.catalog-product-view  h1.page-title > span.base:not(.ab-product-title) {
+        display: none;
+    }
+
     .pdp-slider-container .pdp-slider .ab-title-and-brand-container .product-title {
         height: auto;
         margin-bottom: 0;

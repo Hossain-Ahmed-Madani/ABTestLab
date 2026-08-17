@@ -40,7 +40,7 @@
     }
 
     function qq(s, o) {
-        return [...document.querySelectorAll(s)];
+        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
     const DATA = {
@@ -73,50 +73,57 @@
 
     function getUpdatedTitle(productTitle) {
         let txt = productTitle.trim();
-    
+
         // 1. Remove brand/material markers (order matters: longer/more specific first)
         const brandMarkers = ["DuraGrip®", "DuraGrip", "VELCRO®", "VELCRO", "3M™", "3M"];
         for (const marker of brandMarkers) {
-            txt = txt.split(marker).join('');
+            txt = txt.split(marker).join("");
         }
-    
+
         // 2. Remove "Brand -" and "Brand" (handle the dash variant first so it
         //    doesn't leave a dangling "-")
-        txt = txt.replace(/Brand\s*-\s*/gi, ' ');
-        txt = txt.replace(/Brand\b/gi, ' ');
-    
+        txt = txt.replace(/Brand\s*-\s*/gi, " ");
+        txt = txt.replace(/Brand\b/gi, " ");
+
         // 3. Replace "Peel & Stick" with "Adhesive Backed"
-        txt = txt.replace(/Peel\s*&\s*Stick/gi, 'Adhesive Backed');
-    
+        txt = txt.replace(/Peel\s*&\s*Stick/gi, "Adhesive Backed");
+
         // 4. Wrap "Rubber" or "Acrylic" in parentheses (skip if already wrapped)
-        txt = txt.replace(/(?<!\()\bRubber\b(?!\))/g, '(Rubber)');
-        txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/g, '(Acrylic)');
-    
+        txt = txt.replace(/(?<!\()\bRubber\b(?!\))/g, "(Rubber)");
+        txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/g, "(Acrylic)");
+
         // 5. Collapse/remove extra whitespace
-        txt = txt.replace(/\s+/g, ' ').trim();
-    
+        txt = txt.replace(/\s+/g, " ").trim();
+
         console.log("UpdatedTxt", txt);
-    
+
         return txt.trim();
     }
-
 
     function updateLayout(targetNode) {
         // console.log("targetNode", targetNode);
 
         const productTitle = targetNode.textContent.trim();
-
         const updatedTitle = getUpdatedTitle(productTitle);
-        targetNode.innerText = updatedTitle;
+
+        if (!(targetNode.classList.contains("base") && targetNode.hasAttribute("data-ui-id"))) {
+            targetNode.innerText = updatedTitle;
+        }
+
+        // targetNode.insertAdjacentHTML("afterend", /* HTML */ `<span class="base  ab-product-title">${updatedTitle}</span>`);
 
         const matchedData = getMatchingBrandData(productTitle);
         if (!matchedData) return;
         const { brand_title, img_url, link } = matchedData;
+
+        qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach((item) => item.remove());
+
         targetNode.parentNode.classList.add("ab-title-and-brand-container");
 
         targetNode.insertAdjacentHTML(
             "afterend",
             /* HTML */ `
+                ${targetNode.classList.contains('base') && targetNode.hasAttribute('data-ui-id') ? `<span class="base  ab-product-title">${updatedTitle}</span>` : ""} 
                 <a href="${link}" class="ab-brand">
                     <div class="ab-brand__label">Brand:</div>
                     <div class="ab-brand__img">
@@ -138,7 +145,13 @@
         qq("body.page-products .product-item-link .text-primary.font-bold.text-lg")?.forEach(updateLayout);
 
         // PDP Page
-        qq("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateLayout);
+        qq("body.catalog-product-view h1.page-title span, body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateLayout);
+        window.addEventListener("configurable-selection-changed", (e) => {
+            setTimeout(() => {
+                console.log("title: ", q("body.catalog-product-view h1.page-title span").textContent);
+                updateLayout(q("body.catalog-product-view h1.page-title span"));
+            }, 100);
+        });
         // Side Cart Section
 
         // Cart Page
@@ -147,7 +160,8 @@
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            (q("body.page-products .product-item-link .text-primary.font-bold.text-lg") || q("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")) &&
+            (q("body.page-products .product-item-link .text-primary.font-bold.text-lg") ||
+                (q("body.catalog-product-view h1.page-title span") && q("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title"))) &&
             document.readyState === "complete"
         );
     }
@@ -161,28 +175,25 @@
     }
 })();
 
-
 // function getUpdatedTitle(productTitle) {
 //     let txt = productTitle.trim();
 
-//     /* 
-    
+//     /*
+
 //     1. Remove : DuraGrip®, DuraGrip, VELCRO®, VELCRO,  3M™,  3M
 //     2. Remove: Brand , Brand -
 //     3. Replace:  "Peel & Stick"  with "Adhesive Backed"
 //     4. If title contains "Rubber" or "Acrylic" wrap them with (), Example: (Rubber)
 //     5. Remove whitespaces
 
-
-//     Examples: 
+//     Examples:
 //     1. DuraGrip® Brand Hook and Loop Coins ->  Hook and Loop Coins
-//     2. DuraGrip Brand Display Loop -> Display Loop 
-//     3. DuraGrip® Brand - 3/4" White Loop Peel & Stick - Rubber -> 3/4 White Loop Adhesive Backed - (Rubber) 
+//     2. DuraGrip Brand Display Loop -> Display Loop
+//     3. DuraGrip® Brand - 3/4" White Loop Peel & Stick - Rubber -> 3/4 White Loop Adhesive Backed - (Rubber)
 //     4. DuraGrip® Brand Adhesive Backed Hook and Loop Fasteners ->   Adhesive Backed Hook and Loop Fasteners
 //     5. VELCRO® Brand Sew-On Loop 3610 ->  Sew-On Loop 3610
 //     6. 3M™ Dual Lock™ 1" Clear Recloseable Fastener - 50 Yard Roll -> Dual Lock™ 1" Clear Recloseable Fastener - 50 Yard Roll
 //     7. DuraGrip® Brand - 1" Black Hook Peel & Stick - Acrylic -> 1 Black Hook Adhesive Backed - (Acrylic)
-                    
 
 //     */
 

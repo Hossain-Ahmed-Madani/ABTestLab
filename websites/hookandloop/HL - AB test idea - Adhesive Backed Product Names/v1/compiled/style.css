@@ -1,6 +1,9 @@
 .AB-ADHESIVE-BACKED-PRODUCT-NAME.page-products .product-info-name-and-price {
   height: auto !important;
 }
+.AB-ADHESIVE-BACKED-PRODUCT-NAME.catalog-product-view h1.page-title > span.base:not(.ab-product-title) {
+  display: none;
+}
 .AB-ADHESIVE-BACKED-PRODUCT-NAME .pdp-slider-container .pdp-slider .ab-title-and-brand-container .product-title {
   height: auto;
   margin-bottom: 0;
