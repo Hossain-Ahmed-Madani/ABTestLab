@@ -13,20 +13,30 @@
 }
 
 .AB-ADHESIVE-BACKED-PRODUCT-NAME {
-
-    &.page-products
-    .product-info-name-and-price {
+    &.page-products .product-info-name-and-price {
         height: auto !important;
     }
 
+    .pdp-slider-container .pdp-slider .ab-title-and-brand-container .product-title {
+        height: auto;
+        margin-bottom: 0;
+    }
 
+    .pdp-slider-container .pdp-slider .swiper-slide {
+        height: auto;
+    }
+
+    .pdp-slider-container .pdp-slider .swiper-slide .product-card {
+        height: 100%;
+    }
+
+    //  New Content
     .ab-title-and-brand-container {
         display: flex;
         flex-direction: column;
         gap: 4px;
         margin-bottom: 4px;
     }
-    
 
     .ab-brand {
         display: flex;
@@ -60,10 +70,14 @@
             align-items: center;
             overflow: hidden;
 
-
             img {
                 width: 54px;
                 height: auto;
+            }
+
+            img[alt="3M"] {
+                width: auto;
+                height: 15px;
             }
         }
     }
