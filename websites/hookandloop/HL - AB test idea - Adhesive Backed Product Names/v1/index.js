@@ -114,8 +114,6 @@
         // 5. Collapse/remove extra whitespace
         txt = txt.replace(/\s+/g, " ").trim();
 
-        // console.log("UpdatedTxt", txt);
-
         return txt.trim();
     }
 
@@ -206,10 +204,9 @@
     }
 
     function updateSideCartProductTitles(mutationList, observer) {
-        console.log("==== updateSideCartProductTitles ====");
         mutationList.forEach((mutation) => {
+            console.log("Mutation...")
             if (mutation.target.hasAttribute("x-html") && mutation.target.getAttribute("x-html") === "cart.subtotal") {
-                console.log(" =========== Detected Change In Subtotal ========");
                 qq("#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1")?.forEach(updateSideCartAddedProduct);
                 setTimeout(() => {
                     qq("#cart-drawer .product-title")?.forEach(updateLayout);
@@ -220,18 +217,16 @@
 
     function mutationObserverFunction() {
         const targetNode = q("#cart-drawer #cartDrawerContent");
-        console.log("targetNode ", targetNode);
         if (!targetNode) return;
         const debouncedUpdate = debounce(updateSideCartProductTitles, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: false });
     }
 
     function init() {
+        if(window[page_initials] === true) return;
+        
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
-        // https://www.hookandloop.com/products
-        // https://www.hookandloop.com/products/peel-and-stick
+        window[page_initials] = true;
 
         // PLP Page
         qq("body.page-products .product-item-link .text-primary.font-bold.text-lg")?.forEach(updateLayout);
@@ -268,7 +263,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
