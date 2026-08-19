@@ -1,0 +1,13 @@
+{
+  "id": "1784125518426_8662_PDP___Combine_Image_Gallery_DTM",
+  "name": "PDP - Combine Image Gallery DTM",
+  "type": "A/B",
+  "website": "dunlopsports",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-07-15T14:25:18.426Z",
+  "createdAtReadable": "7/15/2026, 8:25:18 PM",
+  "lastUpdated": "2026-07-15T14:25:18.710Z"
+}
