@@ -8,3 +8,7 @@ https://www.hookandloop.com/brands/duragrip/peel-and-stick
 https://www.hookandloop.com/brands/duragrip/peel-and-stick/1-5-duragrip-brand-peel-stick-loop-acrylic-black
 https://www.hookandloop.com/brands/3M
 https://www.hookandloop.com/products/dual-lock/3m-dual-lock-1-clear-50
+
+
+Test container: https://app.varify.io/dashboard?msg=variation-updated&variation_id=61531&search=H+%26+L+-+A%2FB+test+idea+-+Adhesive+Backed+Product+Names+%5BQA%5D+
+Forced Variation: https://www.hookandloop.com/brands/duragrip/sew-on?qa5=true
