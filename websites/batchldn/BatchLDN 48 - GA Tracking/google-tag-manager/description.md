@@ -69,4 +69,14 @@ A couple of notes worth flagging:
 - refund  | Pending, Need Discussion
 - view_promotion, select_promotion, select_item -> Pending
 - sign_up, login ->  Pending, Need Discussion
--
+
+
+
+refund -  ✗
+view_promotion - ✗ 
+
+
+### Alternate Events | Feasibility Check
+select_size - instead and capture the click on size selection from the PDP?
+select_promotion  - track when a users applies a discount code in the checkout?
+login  - we can’t track the form submission? If not, then ignore this one
