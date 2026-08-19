@@ -224,7 +224,18 @@
     return txt.trim();
   }
 
-  function updateLayout(targetNode) {
+  function getBrandLayout({ brand_title, img_url, link }) {
+    return /* HTML */ `
+      <a href="${link}" class="ab-brand">
+        <div class="ab-brand__label">Brand:</div>
+        <div class="ab-brand__img">
+          <img src="${img_url}" alt="${brand_title}" />
+        </div>
+      </a>
+    `;
+  }
+
+  function updateProductTitle(targetNode) {
     const productTitle = targetNode.textContent.trim();
     const updatedTitle = getUpdatedTitle(productTitle);
 
@@ -239,14 +250,11 @@
 
     const matchedBrandData = getMatchingBrandData(productTitle);
     if (!matchedBrandData) return;
-    const { brand_title, img_url, link } = matchedBrandData;
 
     qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach(
       (item) => item.remove(),
     );
-
     targetNode.parentNode.classList.add("ab-title-and-brand-container");
-
     targetNode.insertAdjacentHTML(
       "afterend",
       /* HTML */ `
@@ -254,17 +262,12 @@
         targetNode.hasAttribute("data-ui-id")
           ? `<span class="base  ab-product-title">${updatedTitle}</span>`
           : ""}
-        <a href="${link}" class="ab-brand">
-          <div class="ab-brand__label">Brand:</div>
-          <div class="ab-brand__img">
-            <img src="${img_url}" alt="${brand_title}" />
-          </div>
-        </a>
+        ${getBrandLayout(matchedBrandData)}
       `,
     );
   }
 
-  function updateCartPageAddedProduct(targetNode) {
+  function updateProductTitleCartPage(targetNode) {
     const productTitleElement = q(targetNode, "a:not(.font-bold)");
     const productTitle = productTitleElement.textContent.trim();
     const updatedTitle = getUpdatedTitle(productTitle);
@@ -274,7 +277,6 @@
     const productBrandTitle = q(targetNode, "a.font-bold").textContent.trim();
     const matchedBrandData = getMatchingBrandData(productBrandTitle);
     if (!matchedBrandData) return;
-    const { brand_title, img_url, link } = matchedBrandData;
 
     productTitleElement.parentNode.classList.add(
       "ab-title-and-brand-container",
@@ -282,18 +284,11 @@
 
     productTitleElement.insertAdjacentHTML(
       "afterend",
-      /* HTML */ `
-        <a href="${link}" class="ab-brand">
-          <div class="ab-brand__label">Brand:</div>
-          <div class="ab-brand__img">
-            <img src="${img_url}" alt="${brand_title}" />
-          </div>
-        </a>
-      `,
+      getBrandLayout(matchedBrandData),
     );
   }
 
-  function updateSideCartAddedProduct(targetNode) {
+  function updateProductTitleSideCart(targetNode) {
     const productTitleElement = q(targetNode, "p.text-sm span[x-text]");
     const productTitle = productTitleElement.textContent.trim();
     const updatedTitle = getUpdatedTitle(productTitle);
@@ -303,7 +298,6 @@
     const productBrandTitle = q(targetNode, "p.text-base").textContent.trim();
     const matchedBrandData = getMatchingBrandData(productBrandTitle);
     if (!matchedBrandData) return;
-    const { brand_title, img_url, link } = matchedBrandData;
 
     qq(targetNode, "a.ab-brand")?.forEach((item) => item.remove());
     productTitleElement.parentNode.classList.add(
@@ -312,41 +306,52 @@
 
     productTitleElement.insertAdjacentHTML(
       "afterend",
-      /* HTML */ `
-        <a href="${link}" class="ab-brand">
-          <div class="ab-brand__label">Brand:</div>
-          <div class="ab-brand__img">
-            <img src="${img_url}" alt="${brand_title}" />
-          </div>
-        </a>
-      `,
+      getBrandLayout(matchedBrandData),
     );
   }
 
-  function updateSideCartProductTitles(mutationList, observer) {
-    mutationList.forEach((mutation) => {
-      console.log("Mutation...");
+  function mutationObserverFunctionSideCart() {
+    const targetNode = q("#cart-drawer #cartDrawerContent");
+    if (!targetNode) return;
+    const debouncedUpdate = debounce((mutationList, observer) => {
       if (
-        mutation.target.hasAttribute("x-html") &&
-        mutation.target.getAttribute("x-html") === "cart.subtotal"
+        mutationList.some(
+          (mutation) =>
+            mutation.target &&
+            mutation.target.hasAttribute("x-html") &&
+            mutation.target.getAttribute("x-html") === "cart.subtotal",
+        )
       ) {
         qq(
           "#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1",
-        )?.forEach(updateSideCartAddedProduct);
-        setTimeout(() => {
-          qq("#cart-drawer .product-title")?.forEach(updateLayout);
-        }, 1000);
+        )?.forEach(updateProductTitleSideCart);
+        setTimeout(
+          () => qq("#cart-drawer .product-title")?.forEach(updateProductTitle),
+          1000,
+        );
       }
-    });
-  }
-
-  function mutationObserverFunction() {
-    const targetNode = q("#cart-drawer #cartDrawerContent");
-    if (!targetNode) return;
-    const debouncedUpdate = debounce(updateSideCartProductTitles, 250);
+    }, 250);
     return new MutationObserver(debouncedUpdate).observe(targetNode, {
       childList: true,
       subtree: true,
+      attributes: false,
+    });
+  }
+
+  function mutationObserverFunctionCartPage() {
+    const targetNode = q("body.checkout-cart-index > div.page-wrapper");
+    if (!targetNode) return;
+    const debouncedUpdate = debounce((mutationList, observer) => {
+      qq("body.checkout-cart-index .product-item-name")?.forEach(
+        updateProductTitleCartPage,
+      );
+      qq(
+        "body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title",
+      )?.forEach(updateProductTitle);
+    }, 250);
+    return new MutationObserver(debouncedUpdate).observe(targetNode, {
+      childList: true,
+      subtree: false,
       attributes: false,
     });
   }
@@ -362,37 +367,47 @@
     window[page_initials] = true;
 
     // PLP Page
-    qq(
-      "body.page-products .product-item-link .text-primary.font-bold.text-lg",
-    )?.forEach(updateLayout);
+    if (q("body.page-products")) {
+      qq(
+        "body.page-products .product-item-link .text-primary.font-bold.text-lg",
+      )?.forEach(updateProductTitle);
+    }
 
     // PDP Page
-    qq(
-      "body.catalog-product-view h1.page-title span, body.catalog-product-view .pdp-slider-container .pdp-slider .product-title",
-    )?.forEach(updateLayout);
-    window.addEventListener("configurable-selection-changed", (e) => {
-      setTimeout(
-        () => updateLayout(q("body.catalog-product-view h1.page-title span")),
-        100,
-      );
-    });
+    if (q("body.catalog-product-view")) {
+      qq(
+        "body.catalog-product-view h1.page-title span, body.catalog-product-view .pdp-slider-container .pdp-slider .product-title",
+      )?.forEach(updateProductTitle);
+      window.addEventListener("configurable-selection-changed", (e) => {
+        setTimeout(
+          () =>
+            updateProductTitle(
+              q("body.catalog-product-view h1.page-title span"),
+            ),
+          100,
+        );
+      });
+    }
 
     // Side Cart Section
     if (q("#cart-drawer #cartDrawerContent")) {
       qq(
         "#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1",
-      )?.forEach(updateSideCartAddedProduct);
-      qq("#cart-drawer .product-title")?.forEach(updateLayout);
-      mutationObserverFunction();
+      )?.forEach(updateProductTitleSideCart);
+      qq("#cart-drawer .product-title")?.forEach(updateProductTitle);
+      mutationObserverFunctionSideCart();
     }
 
     // Cart Page
-    qq("body.checkout-cart-index .product-item-name")?.forEach(
-      updateCartPageAddedProduct,
-    );
-    qq(
-      "body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title",
-    )?.forEach(updateLayout);
+    if (q("body.checkout-cart-index")) {
+      qq("body.checkout-cart-index .product-item-name")?.forEach(
+        updateProductTitleCartPage,
+      );
+      qq(
+        "body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title",
+      )?.forEach(updateProductTitle);
+      mutationObserverFunctionCartPage();
+    }
   }
 
   function checkForItems() {
