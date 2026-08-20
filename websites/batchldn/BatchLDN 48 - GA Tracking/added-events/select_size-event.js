@@ -1,6 +1,6 @@
 // ============================================================
 // Shopify Standard Event: null
-// GA4 Event: select_size
+// Publish Shopify Custom Event: select_size
 // ============================================================
 
 (function () {
@@ -49,7 +49,7 @@
         // Clear previous ecommerce object per GA4 best practice
         window.dataLayer.push({ ecommerce: null });
 
-        window.dataLayer.push({
+        const payload = {
             event: "select_size",
             url: window.location.href,
             size_option_name: sizeLabel,
@@ -70,7 +70,11 @@
                     },
                 ],
             },
-        });
+        };
+
+        console.log("select_size, Publish", payload);
+
+        Shopify.analytics.publish("select_size", payload);
     }
 
     function initSelectSizeTracking() {

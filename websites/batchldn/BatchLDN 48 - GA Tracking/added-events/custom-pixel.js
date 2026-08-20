@@ -201,31 +201,13 @@ analytics.subscribe("payment_info_submitted", (event) => {
 });
 
 
-
-
-
-// ============== WORKING TREE ================
-
-// {
-//     "event": "remove_from_cart",
-//     "ecommerce": {
-//         "currency": "GBP",
-//         "value": 200,
-//         "items": [
-//             {
-//                 "item_id": "BLDN-M-DCHB-T-30x30",
-//                 "item_name": "Mens Dark Chocolate Wool Herringbone Trousers - 30x30",
-//                 "item_brand": "Batch London",
-//                 "item_category": "Trouser",
-//                 "item_variant": "30x30",
-//                 "price": 200,
-//                 "quantity": 1
-//             }
-//         ]
-//     }
-// }
-
-
-
-// "item_id": 232323,
-// "sku" : "LDN-M-DCHB-T-30x30"
+// ============================================================
+// Shopify Standard Event: null
+// GA4 Event: select_size
+// ============================================================
+analytics.subscribe("select_size", (event) => {
+    console.log("select_size : Custom Pixel", event.customData);
+    const payload = event.customData;
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push(payload);
+});
