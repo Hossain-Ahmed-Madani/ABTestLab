@@ -39,7 +39,8 @@ analytics.subscribe("collection_viewed", (event) => {
         const product = variant?.product;
 
         return {
-            item_id: variant?.sku || variant?.id || product?.id,
+            item_id:  variant?.id || variant?.sku || product?.id,
+            item_sku: variant?.sku,
             item_name: product?.title || variant?.title,
             affiliation: product?.vendor || undefined,
             index: index,
@@ -95,6 +96,7 @@ analytics.subscribe("product_removed_from_cart", (event) => {
         ecommerce: null,
     });
 
+
     // Push remove_from_cart event
     window.dataLayer.push({
         event: "remove_from_cart",
@@ -103,7 +105,8 @@ analytics.subscribe("product_removed_from_cart", (event) => {
             value: value,
             items: [
                 {
-                    item_id: merchandise.sku || merchandise.id,
+                    item_id: merchandise.id || merchandise.id,
+                    item_sku:  merchandise.sku,
                     item_name: product.title,
                     item_brand: product.vendor,
                     item_category: product.type,
@@ -200,6 +203,7 @@ analytics.subscribe("payment_info_submitted", (event) => {
 
 
 
+
 // ============== WORKING TREE ================
 
 // {
@@ -220,3 +224,8 @@ analytics.subscribe("payment_info_submitted", (event) => {
 //         ]
 //     }
 // }
+
+
+
+// "item_id": 232323,
+// "sku" : "LDN-M-DCHB-T-30x30"
