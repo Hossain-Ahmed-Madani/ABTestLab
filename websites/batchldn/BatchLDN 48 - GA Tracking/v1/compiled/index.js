@@ -47,7 +47,7 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
         return (window.Shopify && Shopify.currency && Shopify.currency.active) || (window.ShopifyAnalytics && ShopifyAnalytics.meta && ShopifyAnalytics.meta.currency) || "GBP";
     }
 
-    function pushSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
+    function publishSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
         if (!product || !variant) return;
 
         const data = {
@@ -70,7 +70,7 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
             ],
         };
 
-        console.log("select_size, Publish", data);
+        console.log("select_size, Publish 0.0003", data);
         Shopify.analytics.publish("select_size", data);
     }
 
@@ -95,7 +95,7 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
             setTimeout(function () {
                 const selectedOptions = getSelectedOptions();
                 const variant = findMatchingVariant(product, selectedOptions);
-                pushSelectSizeEvent(product, variant, sizeLabel, sizeValue);
+                publishSelectSizeEvent(product, variant, sizeLabel, sizeValue);
             }, 50);
         });
 
@@ -107,7 +107,7 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
             setTimeout(function () {
                 const selectedOptions = getSelectedOptions();
                 const variant = findMatchingVariant(product, selectedOptions);
-                pushSelectSizeEvent(product, variant, "Size", select.value);
+                publishSelectSizeEvent(product, variant, "Size", select.value);
             }, 50);
         });
     }

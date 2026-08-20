@@ -41,7 +41,7 @@
         return (window.Shopify && Shopify.currency && Shopify.currency.active) || (window.ShopifyAnalytics && ShopifyAnalytics.meta && ShopifyAnalytics.meta.currency) || "GBP";
     }
 
-    function pushSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
+    function publishSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
         if (!product || !variant) return;
 
         const data = {
@@ -64,7 +64,7 @@
             ],
         };
 
-        console.log("select_size, Publish", data);
+        console.log("select_size, Publish 0.0003", data);
         Shopify.analytics.publish("select_size", data);
     }
 
@@ -89,7 +89,7 @@
             setTimeout(function () {
                 const selectedOptions = getSelectedOptions(product);
                 const variant = findMatchingVariant(product, selectedOptions);
-                pushSelectSizeEvent(product, variant, sizeLabel, sizeValue);
+                publishSelectSizeEvent(product, variant, sizeLabel, sizeValue);
             }, 50);
         });
 
@@ -101,7 +101,7 @@
             setTimeout(function () {
                 const selectedOptions = getSelectedOptions(product);
                 const variant = findMatchingVariant(product, selectedOptions);
-                pushSelectSizeEvent(product, variant, "Size", select.value);
+                publishSelectSizeEvent(product, variant, "Size", select.value);
             }, 50);
         });
     }
