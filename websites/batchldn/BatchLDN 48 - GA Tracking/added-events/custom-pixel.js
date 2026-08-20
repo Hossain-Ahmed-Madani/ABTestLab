@@ -39,7 +39,7 @@ analytics.subscribe("collection_viewed", (event) => {
         const product = variant?.product;
 
         return {
-            item_id:  variant?.id || variant?.sku || product?.id,
+            item_id: variant?.id || variant?.sku || product?.id,
             item_sku: variant?.sku,
             item_name: product?.title || variant?.title,
             affiliation: product?.vendor || undefined,
@@ -96,7 +96,6 @@ analytics.subscribe("product_removed_from_cart", (event) => {
         ecommerce: null,
     });
 
-
     // Push remove_from_cart event
     window.dataLayer.push({
         event: "remove_from_cart",
@@ -106,7 +105,7 @@ analytics.subscribe("product_removed_from_cart", (event) => {
             items: [
                 {
                     item_id: merchandise.id || merchandise.id,
-                    item_sku:  merchandise.sku,
+                    item_sku: merchandise.sku,
                     item_name: product.title,
                     item_brand: product.vendor,
                     item_category: product.type,
@@ -200,14 +199,33 @@ analytics.subscribe("payment_info_submitted", (event) => {
     });
 });
 
-
 // ============================================================
 // Shopify Standard Event: null
+// Shopify Custom Event: select_size
 // GA4 Event: select_size
 // ============================================================
 analytics.subscribe("select_size", (event) => {
-    console.log("select_size : Custom Pixel", event.customData);
-    const payload = event.customData;
+    console.log("select_size : Custom Pixel 0.0003", event.customData);
     dataLayer.push({ ecommerce: null });
-    dataLayer.push(payload);
+    dataLayer.push({
+        event: "select_size",
+        url: event.customData.url,
+        size_option_name: event.customData.size_option_name,
+        size_option_value: event.customData.size_option_value,
+        ecommerce: {
+            currency: event.customData.currency,
+            value: event.customData.value,
+            items: event.customData.items
+        }
+    });
+});
+
+// ============================================================
+// Shopify Standard Event: null
+// Shopify Custom Event: login
+// GA4 Event: login
+// ============================================================
+analytics.subscribe("login", (event) => {
+    console.log("login : Custom Pixel", event.customData);
+    // dataLayer.push(payload);
 });

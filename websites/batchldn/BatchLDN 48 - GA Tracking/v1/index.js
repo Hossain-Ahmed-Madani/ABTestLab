@@ -50,37 +50,28 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
     function pushSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
         if (!product || !variant) return;
 
-        window.dataLayer = window.dataLayer || [];
-
-        // Clear previous ecommerce object per GA4 best practice
-        window.dataLayer.push({ ecommerce: null });
-
-        const payload = {
-            event: "select_size",
+        const data = {
             url: window.location.href,
             size_option_name: sizeLabel,
             size_option_value: sizeValue,
-            ecommerce: {
-                currency: getCurrencyCode(),
-                value: variant.price / 100,
-                items: [
-                    {
-                        item_id: String(variant.id),
-                        item_sku: String(variant.sku),
-                        item_name: product.title,
-                        item_brand: product.vendor,
-                        item_category: product.type,
-                        item_variant: variant.title,
-                        price: variant.price / 100,
-                        quantity: 1,
-                    },
-                ],
-            },
+            currency: getCurrencyCode(),
+            value: variant.price / 100,
+            items: [
+                {
+                    item_id: String(variant.id),
+                    item_sku: String(variant.sku),
+                    item_name: product.title,
+                    item_brand: product.vendor,
+                    item_category: product.type,
+                    item_variant: variant.title,
+                    price: variant.price / 100,
+                    quantity: 1,
+                },
+            ],
         };
 
-        console.log("select_size, Publish", payload);
-
-        Shopify.analytics.publish("select_size", payload);
+        console.log("select_size, Publish", data);
+        Shopify.analytics.publish("select_size", data);
     }
 
     function initSelectSizeTracking() {
@@ -127,4 +118,3 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
         initSelectSizeTracking();
     }
 })();
-
