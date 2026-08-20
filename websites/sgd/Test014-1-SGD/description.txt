@@ -1,0 +1,5 @@
+Test container:  https://app.varify.io/dashboard?msg=variation-updated&variation_id=60003&search=Test014+-+1+%5BSGD%5D+-+global+-+sticky+CTA+at+the+bottom+of+the+screen+%5BQA%5D
+
+Forced Variation:
+V1: https://www.sgd.de/kursseite/englisch-fuer-anfaenger-grundkurs.html?varify-force=39886-60002
+V2: https://www.sgd.de/kursseite/englisch-fuer-anfaenger-grundkurs.html?varify-force=39886-60003
