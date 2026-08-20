@@ -12,12 +12,19 @@
     }
 }
 
-.AB-TEST014-1 {
-    // .page-header .header-elements .header-buttons {
-    //     display: block !important;
-    // }
+// .page-header .header-elements .header-buttons {
+//     display: block !important;
+// }
 
-    
+.AB-TEST014-1 {
+    footer.page-footer {
+        padding-bottom: 60px;
+    }
+
+    .ab-sticky-cta__button--signup {
+        margin-right: 0;
+    }
+
     .footer-buttons-bottom {
         bottom: 50px;
     }
@@ -30,9 +37,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 7px;
+        gap: 15px;
     }
 
+    .ab-sticky-cta__button {
+        // min-width: 11.4285714286rem;
+        min-width: 100%;
+    }
 
     .ab-sticky-cta__container {
         flex-grow: 1;
@@ -43,75 +54,15 @@
     .ab-sticky-cta {
         padding: 10px 19px 20px 12px;
     }
-
-    .ab-sticky-cta__button {
-        flex-grow: 1;
-        height: 30px;
-        border-radius: 15px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-family: "Onest Regular";
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 20px;
-        letter-spacing: 0px;
-        text-align: center;
-        vertical-align: middle;
-        color: #1a2b49;
-    }
-
-    .ab-sticky-cta__button--info {
-        background-color: #ffff1e;
-    }
-
-    .ab-sticky-cta__button--signup {
-        border: 1px solid #66cc00;
-        background-color: #fff;
-    }
 }
 
 .AB-TEST014-1--v2 {
-    
     .footer-buttons-bottom {
         bottom: 65px;
     }
 
     .ab-sticky-cta {
         padding: 10px 19px 5px 12px;
-    }
-
-    .ab-sticky-cta__button {
-        flex-grow: 1;
-        height: 30px;
-        border-radius: 15px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-family: "Onest Regular";
-        font-weight: 700;
-        font-style: Bold;
-        font-size: 14px;
-        line-height: 20px;
-        letter-spacing: 0px;
-        text-align: center;
-        vertical-align: middle;
-        color: #1a2b49;
-
-        margin-bottom: 3px;
-    }
-
-    .ab-sticky-cta__button--info {
-        background-color: #ffff1e;
-    }
-
-    .ab-sticky-cta__button--signup {
-        border: 1px solid #66cc00;
-        background-color: #fff;
     }
 
     .ab-sticky-cta__bottom-text {

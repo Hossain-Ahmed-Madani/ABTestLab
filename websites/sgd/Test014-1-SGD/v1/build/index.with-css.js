@@ -4,7 +4,13 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-TEST014-1 .footer-buttons-bottom {
+      style.innerHTML = `.AB-TEST014-1 footer.page-footer {
+  padding-bottom: 60px;
+}
+.AB-TEST014-1 .ab-sticky-cta__button--signup {
+  margin-right: 0;
+}
+.AB-TEST014-1 .footer-buttons-bottom {
   bottom: 50px;
 }
 .AB-TEST014-1 .ab-sticky-cta {
@@ -15,7 +21,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 7px;
+  gap: 15px;
+}
+.AB-TEST014-1 .ab-sticky-cta__button {
+  min-width: 100%;
 }
 .AB-TEST014-1 .ab-sticky-cta__container {
   flex-grow: 1;
@@ -24,60 +33,12 @@
 .AB-TEST014-1--v1 .ab-sticky-cta {
   padding: 10px 19px 20px 12px;
 }
-.AB-TEST014-1--v1 .ab-sticky-cta__button {
-  flex-grow: 1;
-  height: 30px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Onest Regular";
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: center;
-  vertical-align: middle;
-  color: #1a2b49;
-}
-.AB-TEST014-1--v1 .ab-sticky-cta__button--info {
-  background-color: #ffff1e;
-}
-.AB-TEST014-1--v1 .ab-sticky-cta__button--signup {
-  border: 1px solid #66cc00;
-  background-color: #fff;
-}
 
 .AB-TEST014-1--v2 .footer-buttons-bottom {
   bottom: 65px;
 }
 .AB-TEST014-1--v2 .ab-sticky-cta {
   padding: 10px 19px 5px 12px;
-}
-.AB-TEST014-1--v2 .ab-sticky-cta__button {
-  flex-grow: 1;
-  height: 30px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: "Onest Regular";
-  font-weight: 700;
-  font-style: Bold;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: center;
-  vertical-align: middle;
-  color: #1a2b49;
-  margin-bottom: 3px;
-}
-.AB-TEST014-1--v2 .ab-sticky-cta__button--info {
-  background-color: #ffff1e;
-}
-.AB-TEST014-1--v2 .ab-sticky-cta__button--signup {
-  border: 1px solid #66cc00;
-  background-color: #fff;
 }
 .AB-TEST014-1--v2 .ab-sticky-cta__bottom-text {
   font-family: "Onest Regular";
@@ -99,14 +60,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "SGD",
-    site_url: "https://www.sgd.de",
-    test_name:
-      "Test014 - 1 [SGD] - global - sticky CTA at the bottom of the screen",
     page_initials: "AB-TEST014-1",
     test_variation: 1 /* 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -152,20 +108,26 @@
       info_package: {
         label: "Infopaket",
         bottom_text: "",
+        btn_class_name: "btn btn-info btn-sm link-modal-info-package",
       },
       sign_up: {
         label: "Anmelden",
         bottom_text: "",
+        btn_class_name:
+          "btn btn-prio-1 btn-reg-header btn-sm track-fb-init-free-month",
       },
     },
     2: {
       info_package: {
-        label: "Infopaket bestellen",
+        label: "Infopaket",
         bottom_text: "Kostenlos. Alles Wissenswerte.",
+        btn_class_name: "btn btn-info btn-sm link-modal-info-package",
       },
       sign_up: {
-        label: "Kursplatz sichern",
+        label: "Anmelden",
         bottom_text: "4 Wochen unverbindlich testen.",
+        btn_class_name:
+          "btn btn-prio-1 btn-reg-header btn-sm track-fb-init-free-month",
       },
     },
   };
@@ -180,8 +142,6 @@
     );
     window[page_initials] = true;
 
-    console.table(TEST_CONFIG);
-
     const { info_package, sign_up } = CONTENT[test_variation];
 
     q("body").insertAdjacentHTML(
@@ -189,15 +149,19 @@
       /* HTML */ `
         <div class="ab-sticky-cta">
           <div class="ab-sticky-cta__container">
-            <div class="ab-sticky-cta__button ab-sticky-cta__button--info">
+            <button
+              class="ab-sticky-cta__button ab-sticky-cta__button--info ${info_package.btn_class_name}"
+            >
               ${info_package.label}
-            </div>
+            </button>
             ${""}
           </div>
           <div class="ab-sticky-cta__container">
-            <div class="ab-sticky-cta__button ab-sticky-cta__button--signup">
+            <button
+              class="ab-sticky-cta__button ab-sticky-cta__button--signup ${sign_up.btn_class_name}"
+            >
               ${sign_up.label}
-            </div>
+            </button>
             ${""}
           </div>
         </div>
@@ -205,11 +169,13 @@
     );
 
     q(".ab-sticky-cta__button--info").addEventListener("click", (e) =>
-      q(".btn.btn-info.btn-sm.link-modal-info-package").click(),
+      q(
+        ".btn.btn-info.btn-sm.link-modal-info-package:not(.ab-sticky-cta__button)",
+      ).click(),
     );
     q(".ab-sticky-cta__button--signup").addEventListener("click", (e) =>
       q(
-        ".btn.btn-prio-1.btn-reg-header.btn-sm.track-fb-init-free-month",
+        ".btn.btn-prio-1.btn-reg-header.btn-sm.track-fb-init-free-month:not(.ab-sticky-cta__button)",
       ).click(),
     );
   }
