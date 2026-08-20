@@ -77,6 +77,6 @@ view_promotion - ✗
 
 
 ### Alternate Events | Feasibility Check
-select_size - instead and capture the click on size selection from the PDP?
+select_size - instead and capture the click on size selection from the PDP? (cofirm the variant id for data Layer in the code)
 select_promotion  - track when a users applies a discount code in the checkout?
 login  - we can’t track the form submission? If not, then ignore this one
