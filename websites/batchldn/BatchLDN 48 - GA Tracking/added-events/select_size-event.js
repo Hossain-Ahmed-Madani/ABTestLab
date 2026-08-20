@@ -2,7 +2,7 @@
 // Shopify Standard Event: null
 // Publish Shopify Custom Event: select_size
 // ============================================================
-
+// <script>
 (function () {
     function getProductData() {
         const script = document.querySelector("script[data-product-json]");
@@ -112,3 +112,4 @@
         initSelectSizeTracking();
     }
 })();
+// </script>

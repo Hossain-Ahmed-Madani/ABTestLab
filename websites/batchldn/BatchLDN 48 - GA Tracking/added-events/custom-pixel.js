@@ -215,8 +215,8 @@ analytics.subscribe("select_size", (event) => {
         ecommerce: {
             currency: event.customData.currency,
             value: event.customData.value,
-            items: event.customData.items
-        }
+            items: event.customData.items,
+        },
     });
 });
 
@@ -226,6 +226,9 @@ analytics.subscribe("select_size", (event) => {
 // GA4 Event: login
 // ============================================================
 analytics.subscribe("login", (event) => {
-    console.log("login : Custom Pixel", event.customData);
-    // dataLayer.push(payload);
+    console.log("login : Custom Pixel 0.0001", event.customData.customerId);
+    window.dataLayer.push({
+        event: "login",
+        customer_id: event.customData.customerId,
+    });
 });
