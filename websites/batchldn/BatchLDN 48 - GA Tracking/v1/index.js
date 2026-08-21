@@ -1,12 +1,7 @@
 // ============================================================
-// Ticket: BatchLDN 48 - GA Tracking
-// ============================================================
-
-console.log("======== BatchLDN 48 - GA Tracking ===========");
-
-// ============================================================
-// Shopify Standard Event: null
 // Publish Shopify Custom Event: select_size
+// Triggered by observing changes to the hidden variant id input
+// inside the installment form (#product-form-installment-*)
 // ============================================================
 
 (function () {
@@ -20,46 +15,30 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
         }
     }
 
-    function getSelectedOptions(product) {
-        // Reads the value of every option selector on the PDP (Jacket Size, Trouser Size, Colour, etc.)
-        const selectors = document.querySelectorAll("[data-single-option-selector]");
-        const options = [];
-        selectors.forEach(function (input) {
-            options.push(input.value);
-        });
-        return options;
-    }
-
-    function findMatchingVariant(product, selectedOptions) {
-        if (!product || !product.variants) return null;
-
-        return (
-            product.variants.find(function (variant) {
-                return selectedOptions.every(function (val, i) {
-                    const key = "option" + (i + 1);
-                    return variant[key] === val;
-                });
-            }) || null
-        );
-    }
-
     function getCurrencyCode() {
         return (window.Shopify && Shopify.currency && Shopify.currency.active) || (window.ShopifyAnalytics && ShopifyAnalytics.meta && ShopifyAnalytics.meta.currency) || "GBP";
     }
 
-    function publishSelectSizeEvent(product, variant, sizeLabel, sizeValue) {
+    function findVariantById(product, variantId) {
+        if (!product || !product.variants || !variantId) return null;
+        return (
+            product.variants.find(function (variant) {
+                return String(variant.id) === String(variantId);
+            }) || null
+        );
+    }
+
+    function publishSelectSizeEvent(product, variant) {
         if (!product || !variant) return;
 
         const data = {
             url: window.location.href,
-            size_option_name: sizeLabel,
-            size_option_value: sizeValue,
             currency: getCurrencyCode(),
             value: variant.price / 100,
             items: [
                 {
                     item_id: String(variant.id),
-                    item_sku: String(variant.sku),
+                    item_sku: variant.sku ? String(variant.sku) : "",
                     item_name: product.title,
                     item_brand: product.vendor,
                     item_category: product.type,
@@ -70,45 +49,74 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
             ],
         };
 
-        console.log("select_size, Publish 0.0003", data);
         Shopify.analytics.publish("select_size", data);
+    }
+
+    function watchVariantIdInput(product, inputEl) {
+        if (!inputEl || inputEl.dataset.selectSizeWatched === "true") return;
+        inputEl.dataset.selectSizeWatched = "true";
+
+        let lastValue = inputEl.value;
+
+        const debouncedPublishSelectSizeEvent = debounce(publishSelectSizeEvent, 100)
+
+        const handleChange = function () {
+            const currentValue = inputEl.value;
+            if (currentValue === lastValue) return;
+            lastValue = currentValue;
+
+            const variant = findVariantById(product, currentValue);
+            debouncedPublishSelectSizeEvent(product, variant);
+        };
+
+        // Catch native events (change/input) in case the value is set via a real form control
+        inputEl.addEventListener("change", handleChange);
+        inputEl.addEventListener("input", handleChange);
+
+        // Catch attribute-based updates (setAttribute('value', ...))
+        const attributeObserver = new MutationObserver(handleChange);
+        attributeObserver.observe(inputEl, { attributes: true, attributeFilter: ["value"] });
+
+        // Catch programmatic property updates (input.value = '...'), which do NOT
+        // trigger attribute mutations or native events — override the value setter.
+        const proto = Object.getPrototypeOf(inputEl);
+        const nativeDescriptor = Object.getOwnPropertyDescriptor(proto, "value");
+        if (nativeDescriptor && nativeDescriptor.configurable) {
+            Object.defineProperty(inputEl, "value", {
+                get: function () {
+                    return nativeDescriptor.get.call(this);
+                },
+                set: function (val) {
+                    nativeDescriptor.set.call(this, val);
+                    handleChange();
+                },
+                configurable: true,
+            });
+        }
+    }
+
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
     }
 
     function initSelectSizeTracking() {
         const product = getProductData();
         if (!product) return;
 
-        // Delegate click listener to catch all size option links, including future re-renders
-        document.querySelector(".product__page .form__width").addEventListener("click", function (e) {
-            const optionEl = e.target.closest("[data-popout-option]");
-            if (!optionEl) return;
+        const formSelector = 'form[action="/cart/add"][data-product-form-installment]';
+        const inputSelector = 'form[action="/cart/add"][data-product-form-installment] input[name="id"]';
 
-            const popoutSelect = optionEl.closest("popout-select");
-            if (!popoutSelect) return;
-
-            const legendLabel = popoutSelect.closest("fieldset")?.querySelector(".radio__legend__option-name");
-            const sizeLabel = legendLabel ? legendLabel.childNodes[0].textContent.trim() : "Size";
-
-            const sizeValue = optionEl.getAttribute("data-value");
-
-            // Wait a tick for the hidden input value to update (theme.js updates it on click)
-            setTimeout(function () {
-                const selectedOptions = getSelectedOptions(product);
-                const variant = findMatchingVariant(product, selectedOptions);
-                publishSelectSizeEvent(product, variant, sizeLabel, sizeValue);
-            }, 50);
-        });
-
-        // Also catch native <select> fallback (noscript / mobile select dropdown)
-        document.querySelector(".product__page .form__width").addEventListener("change", function (e) {
-            const select = e.target.closest("select[data-single-option-selector], select.product__form__select");
-            if (!select) return;
-
-            setTimeout(function () {
-                const selectedOptions = getSelectedOptions(product);
-                const variant = findMatchingVariant(product, selectedOptions);
-                publishSelectSizeEvent(product, variant, "Size", select.value);
-            }, 50);
+        // Attach to any matching input already present
+        document.querySelectorAll(inputSelector).forEach(function (input) {
+            watchVariantIdInput(product, input);
         });
     }
 
@@ -118,40 +126,3 @@ console.log("======== BatchLDN 48 - GA Tracking ===========");
         initSelectSizeTracking();
     }
 })();
-
-// ============================================================
-// Shopify Standard Event: null
-// Publish Shopify Custom Event: login
-// GA4 Event: login
-// ============================================================
-
-// {% if customer %}
-// <script>
-(function () {
-    const currentCustomerId = "{{ customer.id }}";
-
-    const storedCustomerId = localStorage.getItem("ga_login_customer_id");
-    const loginSent = sessionStorage.getItem("ga_login_sent");
-
-    // Already published during this session
-    if (loginSent === "1") return;
-
-    // Customer was already tracked in a previous session
-    if (storedCustomerId === currentCustomerId) {
-        sessionStorage.setItem("ga_login_sent", "1");
-        return;
-    }
-
-    // Publish the Shopify custom login event
-    const data = {
-        customerId: currentCustomerId,
-    };
-
-    Shopify.analytics.publish("login", data);
-    sessionStorage.setItem("ga_login_sent", "1");
-    localStorage.setItem("ga_login_customer_id", currentCustomerId);
-
-    console.log("login : Custom Event Published", data);
-})();
-// </script>
-// {% endif %}

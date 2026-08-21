@@ -205,13 +205,11 @@ analytics.subscribe("payment_info_submitted", (event) => {
 // GA4 Event: select_size
 // ============================================================
 analytics.subscribe("select_size", (event) => {
-    console.log("select_size : Custom Pixel 0.0003", event.customData);
+    console.log("select_size : Custom Pixel 0.0004", event.customData);
     dataLayer.push({ ecommerce: null });
     dataLayer.push({
         event: "select_size",
         url: event.customData.url,
-        size_option_name: event.customData.size_option_name,
-        size_option_value: event.customData.size_option_value,
         ecommerce: {
             currency: event.customData.currency,
             value: event.customData.value,
