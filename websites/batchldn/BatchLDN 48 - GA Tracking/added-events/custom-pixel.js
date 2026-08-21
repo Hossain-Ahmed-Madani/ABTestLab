@@ -1,3 +1,8 @@
+
+// ============================================================
+// Google Tag Manager, version: 0.0001
+// ============================================================
+
 // Define dataLayer and the gtag function.
 window.dataLayer = window.dataLayer || [];
 function gtag() {
@@ -204,6 +209,7 @@ analytics.subscribe("payment_info_submitted", (event) => {
 // Shopify Custom Event: select_size
 // GA4 Event: select_size
 // ============================================================
+
 analytics.subscribe("select_size", (event) => {
     console.log("select_size : Custom Pixel 0.0005", event.customData);
     dataLayer.push({ ecommerce: null });
@@ -223,10 +229,46 @@ analytics.subscribe("select_size", (event) => {
 // Shopify Custom Event: login
 // GA4 Event: login
 // ============================================================
+
 analytics.subscribe("login", (event) => {
     console.log("login : Custom Pixel 0.0002", event.customData.customerId);
     window.dataLayer.push({
         event: "login",
         customer_id: event.customData.customerId,
+    });
+});
+
+// ============================================================
+// Shopify Standard Event: checkout_completed
+// GA4 Event: select_promotion
+// ============================================================
+
+analytics.subscribe("checkout_completed", (event) => {
+    const checkout = event.data.checkout;
+
+    if (checkout.discountApplications.length === 0) return;
+
+    const discount = checkout.discountApplications[0];
+
+    const items = event.data?.checkout?.lineItems?.map((item) => {
+        return {
+            item_id: item.variant.product.id,
+            item_name: item.variant.product.title,
+            price: item.variant.price.amount,
+            quantity: item.quantity,
+        };
+    });
+
+    dataLayer.push({ ecommerce: null });
+    dataLayer.push({
+        event: "select_promotion",
+        ecommerce: {
+            currency: checkout.currencyCode,
+            creative_name: discount.title,
+            creative_slot: discount.targetType,
+            promotion_id: discount.title,
+            promotion_name: discount.title,
+            items: items,
+        },
     });
 });
