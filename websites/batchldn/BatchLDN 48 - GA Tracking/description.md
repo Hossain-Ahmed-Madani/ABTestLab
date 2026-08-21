@@ -72,11 +72,17 @@ A couple of notes worth flagging:
 
 
 
-refund -  ✗
-view_promotion - ✗ 
-
-
 ### Alternate Events | Feasibility Check
 select_size - instead and capture the click on size selection from the PDP? (cofirm the variant id for data Layer in the code)
 select_promotion  - track when a users applies a discount code in the checkout? (need to confirm discount code and checkout with tanvir bhai)
 login  - we can’t track the form submission? If not, then ignore this one
+
+### Final Added Events
+1. view_item_list
+2. remove_from_cart
+3. view_cart
+4. add_shipping_info
+5. add_payment_info
+6. select_size -> when user clicks on confirm selection button after selecting a all the sizes
+7. login -> when a logged in user returns to batchldn domain
+8. select_promotion -> will trigger if user completes checkout with discount

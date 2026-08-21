@@ -1,6 +1,6 @@
 
 // ============================================================
-// Google Tag Manager, version: 0.0001
+// Google Tag Manager, code version: 0.0002
 // ============================================================
 
 // Define dataLayer and the gtag function.
@@ -211,7 +211,6 @@ analytics.subscribe("payment_info_submitted", (event) => {
 // ============================================================
 
 analytics.subscribe("select_size", (event) => {
-    console.log("select_size : Custom Pixel 0.0005", event.customData);
     dataLayer.push({ ecommerce: null });
     dataLayer.push({
         event: "select_size",
@@ -231,7 +230,6 @@ analytics.subscribe("select_size", (event) => {
 // ============================================================
 
 analytics.subscribe("login", (event) => {
-    console.log("login : Custom Pixel 0.0002", event.customData.customerId);
     window.dataLayer.push({
         event: "login",
         customer_id: event.customData.customerId,
