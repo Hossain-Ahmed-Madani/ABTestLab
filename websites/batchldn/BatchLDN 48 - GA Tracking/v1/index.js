@@ -5,6 +5,18 @@
 // ============================================================
 
 (function () {
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     function getProductData() {
         const script = document.querySelector("script[data-product-json]");
         if (!script) return null;
@@ -58,7 +70,7 @@
 
         let lastValue = inputEl.value;
 
-        const debouncedPublishSelectSizeEvent = debounce(publishSelectSizeEvent, 100)
+        const debouncedPublishSelectSizeEvent = debounce(publishSelectSizeEvent, 100);
 
         const handleChange = function () {
             const currentValue = inputEl.value;
@@ -93,18 +105,6 @@
                 configurable: true,
             });
         }
-    }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
     }
 
     function initSelectSizeTracking() {

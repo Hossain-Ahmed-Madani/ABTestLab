@@ -5,6 +5,18 @@
 // ============================================================
 
 (function () {
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
     function getProductData() {
         const script = document.querySelector("script[data-product-json]");
         if (!script) return null;
@@ -93,18 +105,6 @@
                 configurable: true,
             });
         }
-    }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
     }
 
     function initSelectSizeTracking() {
