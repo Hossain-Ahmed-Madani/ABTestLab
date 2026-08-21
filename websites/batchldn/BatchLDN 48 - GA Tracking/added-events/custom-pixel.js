@@ -205,7 +205,7 @@ analytics.subscribe("payment_info_submitted", (event) => {
 // GA4 Event: select_size
 // ============================================================
 analytics.subscribe("select_size", (event) => {
-    console.log("select_size : Custom Pixel 0.0004", event.customData);
+    console.log("select_size : Custom Pixel 0.0005", event.customData);
     dataLayer.push({ ecommerce: null });
     dataLayer.push({
         event: "select_size",
@@ -224,7 +224,7 @@ analytics.subscribe("select_size", (event) => {
 // GA4 Event: login
 // ============================================================
 analytics.subscribe("login", (event) => {
-    console.log("login : Custom Pixel 0.0001", event.customData.customerId);
+    console.log("login : Custom Pixel 0.0002", event.customData.customerId);
     window.dataLayer.push({
         event: "login",
         customer_id: event.customData.customerId,
