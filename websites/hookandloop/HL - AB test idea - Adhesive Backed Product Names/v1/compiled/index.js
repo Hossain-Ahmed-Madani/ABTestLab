@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-ADHESIVE-BACKED-PRODUCT-NAME",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -97,10 +97,32 @@
         txt = txt.replace(/(?<!\()\bRubber\b(?!\))/g, "(Rubber)");
         txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/g, "(Acrylic)");
 
-        // 5. Collapse/remove extra whitespace
+        // 5. Remove "-"
+        txt = txt.replace("-", " ").trim();
+
+        // 6. Collapse/remove extra whitespace
         txt = txt.replace(/\s+/g, " ").trim();
 
         return txt.trim();
+    }
+
+    function updateProductTitlePDPBreadCrumb(targetNode) {
+        let txt = targetNode.textContent.trim();
+
+        // Replace "Peel & Stick" with "Adhesive Backed"
+        txt = txt.replace(/Peel\s*&\s*Stick/gi, "Adhesive Backed");
+
+        // Wrap "Rubber" or "Acrylic" in parentheses (skip if already wrapped)
+        txt = txt.replace(/(?<!\()\bRubber\b(?!\))/gi, "(Rubber)");
+        txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/gi, "(Acrylic)");
+
+        //  Remove "-"
+        txt = txt.replace(/-/g, " ").trim();
+
+        // Collapse extra whitespace
+        txt = txt.replace(/\s+/g, " ").trim();
+
+        targetNode.innerText = txt;
     }
 
     function getBrandLayout({ brand_title, img_url, link }) {
@@ -147,8 +169,8 @@
         const matchedBrandData = getMatchingBrandData(productBrandTitle);
         if (!matchedBrandData) return;
 
+        qq(targetNode, "a.ab-brand")?.forEach((item) => item.remove());
         productTitleElement.parentNode.classList.add("ab-title-and-brand-container");
-
         productTitleElement.insertAdjacentHTML("afterend", getBrandLayout(matchedBrandData));
     }
 
@@ -191,7 +213,7 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: false });
     }
 
-    function init() {
+    async function init() {
         if (window[page_initials] === true) return;
 
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
@@ -204,10 +226,15 @@
 
         // PDP Page
         if (q("body.catalog-product-view")) {
-            qq("body.catalog-product-view h1.page-title span, body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
+            updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
+            const pdpProductTitle = q("body.catalog-product-view h1.page-title span");
+            updateProductTitle(pdpProductTitle);
             window.addEventListener("configurable-selection-changed", (e) => {
-                setTimeout(() => updateProductTitle(q("body.catalog-product-view h1.page-title span")), 100);
+                setTimeout(() => updateProductTitle(pdpProductTitle), 100);
             });
+
+            await waitForElementAsync(() => document.readyState === "complete");
+            qq("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
         }
 
         // Side Cart Section
@@ -230,8 +257,7 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             (q("body.page-products .product-item-link .text-primary.font-bold.text-lg") ||
                 q("body.catalog-product-view h1.page-title span") ||
-                q("body.checkout-cart-index .product-item-name")) &&
-            document.readyState === "complete"
+                q("body.checkout-cart-index .product-item-name"))
         );
     }
 
