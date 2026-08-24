@@ -119,31 +119,12 @@
         return txt.trim();
     }
 
-    function updateProductTitlePDPBreadCrumb(targetNode) {
-        let txt = targetNode.textContent.trim();
-
-        // Replace "Peel & Stick" with "Adhesive Backed"
-        txt = txt.replace(/Peel\s*&\s*Stick/gi, "Adhesive Backed");
-
-        // Wrap "Rubber" or "Acrylic" in parentheses (skip if already wrapped)
-        txt = txt.replace(/(?<!\()\bRubber\b(?!\))/gi, "(Rubber)");
-        txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/gi, "(Acrylic)");
-
-        //  Remove "-"
-        txt = txt.replace(/-/g, " ").trim();
-
-        // Collapse extra whitespace
-        txt = txt.replace(/\s+/g, " ").trim();
-
-        targetNode.innerText = txt;
-    }
-
     function getBrandLayout({ brand_title, img_url, link }) {
         return /* HTML */ `
             <a href="${link}" class="ab-brand">
                 <div class="ab-brand__label">Brand:</div>
                 <div class="ab-brand__img">
-                    <img src="${img_url}" alt="${brand_title}" />
+                    <img src="${img_url}" alt="${brand_title}"/>
                 </div>
             </a>
         `;
@@ -169,6 +150,56 @@
                 ${getBrandLayout(matchedBrandData)}
             `,
         );
+    }
+
+    function updateProductTitlePDPHeader(targetNode) {
+
+        const productTitle = targetNode.textContent.trim();
+        const updatedTitle = getUpdatedTitle(productTitle);
+
+        if (!(targetNode.classList.contains("base") && targetNode.hasAttribute("data-ui-id"))) {
+            targetNode.innerText = updatedTitle;
+        }
+
+        const matchedBrandData = getMatchingBrandData(productTitle);
+        if (!matchedBrandData) return;
+
+        qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach((item) => item.remove());
+        qq(".flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1 .ab-brand").forEach((item) => item.remove());
+        
+        targetNode.parentNode.classList.add("ab-title-and-brand-container");
+        targetNode.insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+                ${targetNode.classList.contains("base") && targetNode.hasAttribute("data-ui-id") ? `<span class="base  ab-product-title">${updatedTitle}</span>` : ""}
+                ${getBrandLayout(matchedBrandData)}
+            `,
+        );
+        q('.flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1').insertAdjacentHTML(
+            "afterbegin",
+            /* HTML */ `
+                ${getBrandLayout(matchedBrandData)}
+            `,
+        );
+    }
+
+    function updateProductTitlePDPBreadCrumb(targetNode) {
+        let txt = targetNode.textContent.trim();
+
+        // Replace "Peel & Stick" with "Adhesive Backed"
+        txt = txt.replace(/Peel\s*&\s*Stick/gi, "Adhesive Backed");
+
+        // Wrap "Rubber" or "Acrylic" in parentheses (skip if already wrapped)
+        txt = txt.replace(/(?<!\()\bRubber\b(?!\))/gi, "(Rubber)");
+        txt = txt.replace(/(?<!\()\bAcrylic\b(?!\))/gi, "(Acrylic)");
+
+        //  Remove "-"
+        txt = txt.replace(/-/g, " ").trim();
+
+        // Collapse extra whitespace
+        txt = txt.replace(/\s+/g, " ").trim();
+
+        targetNode.innerText = txt;
     }
 
     function updateProductTitleCartPage(targetNode) {
@@ -241,9 +272,9 @@
         if (q("body.catalog-product-view")) {
             updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
             const pdpProductTitle = q("body.catalog-product-view h1.page-title span");
-            updateProductTitle(pdpProductTitle);
+            updateProductTitlePDPHeader(pdpProductTitle);
             window.addEventListener("configurable-selection-changed", (e) => {
-                setTimeout(() => updateProductTitle(pdpProductTitle), 100);
+                setTimeout(() => updateProductTitlePDPHeader(pdpProductTitle), 100);
             });
 
             await waitForElementAsync(() => document.readyState === "complete");

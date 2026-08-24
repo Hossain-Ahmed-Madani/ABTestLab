@@ -21,6 +21,10 @@
         display: none;
     }
 
+    &.catalog-product-view .flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1 .ab-brand {
+        display: none;
+    }
+
     &.checkout-cart-index .product-item-name a.font-bold {
         display: none;
     }
@@ -101,6 +105,18 @@
                 width: auto;
                 height: 15px;
             }
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+
+        &.catalog-product-view h1.page-title.ab-title-and-brand-container .ab-brand {
+            display: none;
+        }
+
+        &.catalog-product-view .flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1 .ab-brand {
+            display: flex;
+            flex-grow: 1;
         }
     }
 }
