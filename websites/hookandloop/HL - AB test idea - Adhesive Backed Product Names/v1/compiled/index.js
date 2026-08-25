@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-ADHESIVE-BACKED-PRODUCT-NAME",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -20,7 +20,7 @@
         },
         "3m": {
             brand_title: "3M",
-            img_url: "https://hookandloop.com/media/wysiwyg/Logos/3M.png",
+            img_url: "https://hookandloop.com/media/wysiwyg/Logos/3M_Logo-small.png",
             link: "https://www.hookandloop.com/brands/3M",
         },
     };
