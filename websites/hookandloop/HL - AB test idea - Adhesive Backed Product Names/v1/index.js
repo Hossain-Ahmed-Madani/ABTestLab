@@ -6,7 +6,7 @@
         test_name: "H & L - A/B test idea - Adhesive Backed Product Names",
         page_initials: "AB-ADHESIVE-BACKED-PRODUCT-NAME",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -28,6 +28,16 @@
             link: "https://www.hookandloop.com/brands/3M",
         },
     };
+
+    function fireGa4Event(brandName) {
+        window.dataLayer.push({
+            event: "brand_tag_clicks",
+            url: window.location.href,
+            "ga4-event-label": "Brand Tag Clicks",
+            "ga4-event-p1-name": "brand_name",
+            "ga4-event-p1-value": brandName,
+        });
+    }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -121,12 +131,12 @@
 
     function getBrandLayout({ brand_title, img_url, link }) {
         return /* HTML */ `
-            <a href="${link}" class="ab-brand">
+            <div href="${link}" class="ab-brand">
                 <div class="ab-brand__label">Brand:</div>
                 <div class="ab-brand__img">
-                    <img src="${img_url}" alt="${brand_title}"/>
+                    <img src="${img_url}" alt="${brand_title}" />
                 </div>
-            </a>
+            </div>
         `;
     }
 
@@ -153,7 +163,6 @@
     }
 
     function updateProductTitlePDPHeader(targetNode) {
-
         const productTitle = targetNode.textContent.trim();
         const updatedTitle = getUpdatedTitle(productTitle);
 
@@ -166,7 +175,7 @@
 
         qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach((item) => item.remove());
         qq(".flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1 .ab-brand").forEach((item) => item.remove());
-        
+
         targetNode.parentNode.classList.add("ab-title-and-brand-container");
         targetNode.insertAdjacentHTML(
             "afterend",
@@ -175,11 +184,9 @@
                 ${getBrandLayout(matchedBrandData)}
             `,
         );
-        q('.flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1').insertAdjacentHTML(
+        q(".flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1").insertAdjacentHTML(
             "afterbegin",
-            /* HTML */ `
-                ${getBrandLayout(matchedBrandData)}
-            `,
+            /* HTML */ ` ${getBrandLayout(matchedBrandData)} `,
         );
     }
 
@@ -213,7 +220,7 @@
         const matchedBrandData = getMatchingBrandData(productBrandTitle);
         if (!matchedBrandData) return;
 
-        qq(targetNode, "a.ab-brand")?.forEach((item) => item.remove());
+        qq(targetNode, ".ab-brand")?.forEach((item) => item.remove());
         productTitleElement.parentNode.classList.add("ab-title-and-brand-container");
         productTitleElement.insertAdjacentHTML("afterend", getBrandLayout(matchedBrandData));
     }
@@ -229,7 +236,7 @@
         const matchedBrandData = getMatchingBrandData(productBrandTitle);
         if (!matchedBrandData) return;
 
-        qq(targetNode, "a.ab-brand")?.forEach((item) => item.remove());
+        qq(targetNode, ".ab-brand")?.forEach((item) => item.remove());
         productTitleElement.parentNode.classList.add("ab-title-and-brand-container");
 
         productTitleElement.insertAdjacentHTML("afterend", getBrandLayout(matchedBrandData));
@@ -255,6 +262,23 @@
             qq("body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
         }, 250);
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: false, attributes: false });
+    }
+
+    function clickFunction() {
+        document.body.addEventListener("click", (e) => {
+            const linkItem = e.target.closest(".ab-brand");
+            if (linkItem) {
+                e.preventDefault();
+
+                const href = linkItem.getAttribute("href");
+                const label = q(linkItem, ".ab-brand__img img").getAttribute("alt");
+
+                fireGa4Event(label);
+
+                if (e.ctrlKey) window.open(href, "_blank");
+                else setTimeout(() => (window.location.href = href), 100);
+            }
+        });
     }
 
     async function init() {
@@ -294,6 +318,8 @@
             qq("body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
             mutationObserverFunctionCartPage();
         }
+
+        clickFunction();
     }
 
     function checkForItems() {

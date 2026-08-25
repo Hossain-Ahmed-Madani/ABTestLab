@@ -36,10 +36,12 @@
     margin-bottom: 4px;
 }
 .AB-ADHESIVE-BACKED-PRODUCT-NAME .ab-brand {
+    cursor: pointer;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
+    contain: layout style paint;
     border: none;
     outline: none;
 }
