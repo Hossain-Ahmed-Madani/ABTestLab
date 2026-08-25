@@ -1,0 +1,33 @@
+Here's the updated note with a clear title structure for each URL and Figma link:
+
+---
+
+**Note to self:**
+
+**1. SKU 352039/006#d1 & 352039/011**  
+URL: `https://dop.mdm.de/dop?sku=352039/006%23d1`  
+URL: `https://dop.mdm.de/dop?sku=352039/011`  
+Figma: *[No Figma link provided]*
+
+**2. SKU 352040/005#n2**  
+URL: `https://dop.mdm.de/dop?sku=352040/005%23n2`  
+Figma: `https://www.figma.com/design/W5nCz5az6Pf8WKdkmnliil/Multipage-Test---Flatrate?node-id=6002-220`
+
+**3. SKU 352155/002#n2**  
+URL: `https://dop.mdm.de/dop?sku=352155/002%23n2`  
+Figma: `https://www.figma.com/design/W5nCz5az6Pf8WKdkmnliil/Multipage-Test---Flatrate?node-id=6002-3388`
+
+**4. SKU 25817/004#d1**  
+URL: `https://dop.mdm.de/dop?sku=25817/004%23d1`  
+Figma: `https://www.figma.com/design/W5nCz5az6Pf8WKdkmnliil/Multipage-Test---Flatrate?node-id=6002-4947`
+
+
+** Test Container **
+https://app2.abtasty.com/edit/test/1618657/main-information
+
+**Cookie for QA:**  
+`document.cookie='qa=007;path=/';`
+
+--- 
+
+Let me know if you want this as a markdown table or CSV.
