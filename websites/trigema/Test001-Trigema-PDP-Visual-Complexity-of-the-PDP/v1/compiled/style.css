@@ -1,0 +1,50 @@
+.AB-TEST001 .product-detail-buy-box .product-name__group.product-name__group--items-center {
+  gap: 10px;
+}
+.AB-TEST001 .product-detail-buy-box ul.product-name__rating li:last-child {
+  display: none;
+}
+.AB-TEST001 .ab-review-value {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #262228;
+}
+.AB-TEST001 .ab-review-total {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 24px;
+  letter-spacing: 0%;
+  color: #7d7a7e;
+}
+.AB-TEST001 form.heart {
+  margin-left: auto;
+}
+.AB-TEST001 .product-color--active {
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2509803922);
+}
+.AB-TEST001 .product-size--active {
+  box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2509803922);
+}
+@media screen and (min-width: 768px) {
+  .AB-TEST001 .product-detail-buy-box .product-name__group.product-name__group--items-center {
+    gap: 20px;
+  }
+  .AB-TEST001 .ab-review-value {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+  .AB-TEST001 .ab-review-total {
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+    letter-spacing: 0;
+  }
+}

@@ -1,17 +1,75 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-TEST001 {
-    //
+    .product-detail-buy-box .product-name__group.product-name__group--items-center {
+        gap: 10px;
+    }
+
+    .product-detail-buy-box ul.product-name__rating li:last-child {
+        display: none;
+    }
+
+    .ab-review-value {
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0;
+        color: #262228;
+    }
+
+    .ab-review-total {
+        font-family: "Inter", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 24px;
+        letter-spacing: 0%;
+        color: #7d7a7e;
+    }
+
+    form.heart {
+        margin-left: auto;
+    }
+
+    .product-color--active {
+        box-shadow: 2px 2px 2px 0px #00000040;
+    }
+
+    .product-size--active {
+        box-shadow: 2px 2px 2px 0px #00000040;
+    }
+
+    @media screen and (min-width: 768px) {
+        .product-detail-buy-box .product-name__group.product-name__group--items-center {
+            gap: 20px;
+        }
+
+        .ab-review-value {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            letter-spacing: 0;
+        }
+
+        .ab-review-total {
+            font-family: "Inter", sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 24px;
+            letter-spacing: 0;
+        }
+    }
 }
