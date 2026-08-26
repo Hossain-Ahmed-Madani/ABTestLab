@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ADHESIVE-BACKED-PRODUCT-NAME",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -189,15 +189,18 @@
       targetNode.innerText = updatedTitle;
     }
 
-    const matchedBrandData = getMatchingBrandData(productTitle);
-    if (!matchedBrandData) return;
-
     qq(targetNode.parentNode, ".ab-brand, span.ab-product-title").forEach(
       (item) => item.remove(),
     );
     qq(
       ".flex.justify-between.items-center.w-full.border-b.border-gray-300.flex-wrap.mb-3.py-2.gap-x-2.gap-y-1 .ab-brand",
     ).forEach((item) => item.remove());
+
+    const matchedBrandData = getMatchingBrandData(productTitle);
+    if (!matchedBrandData) {
+      targetNode.parentNode.classList.remove("ab-title-and-brand-container");
+      return;
+    }
 
     targetNode.parentNode.classList.add("ab-title-and-brand-container");
     targetNode.insertAdjacentHTML(
@@ -308,6 +311,21 @@
     });
   }
 
+  function mutationObserverFunctionSearchResultPage() {
+    const targetNode = q("#product-list");
+    if (!targetNode) return;
+    const debouncedUpdate = debounce((mutationList, observer) => {
+      qq(
+        "body.page-products .product-item-link .text-primary.font-bold.text-lg",
+      )?.forEach(updateProductTitle);
+    }, 250);
+    return new MutationObserver(debouncedUpdate).observe(targetNode, {
+      childList: true,
+      subtree: false,
+      attributes: false,
+    });
+  }
+
   function mutationObserverFunctionCartPage() {
     const targetNode = q("body.checkout-cart-index > div.page-wrapper");
     if (!targetNode) return;
@@ -353,11 +371,12 @@
     );
     window[page_initials] = true;
 
-    // PLP Page
+    // PLP Page , Search Result Page
     if (q("body.page-products")) {
       qq(
         "body.page-products .product-item-link .text-primary.font-bold.text-lg",
       )?.forEach(updateProductTitle);
+      mutationObserverFunctionSearchResultPage();
     }
 
     // PDP Page
