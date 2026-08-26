@@ -18,7 +18,9 @@
 .AB-TEST001
   .product-detail-buy-box
   .product-name:not(
-    :has(.product-name__group.product-name__group--items-center)
+    :has(
+      .product-name__group.product-name__group--items-center .p--small--medium
+    )
   ) {
   display: flex;
   flex-direction: row;
@@ -681,7 +683,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();
