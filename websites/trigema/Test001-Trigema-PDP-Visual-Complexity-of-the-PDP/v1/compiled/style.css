@@ -7,6 +7,11 @@
 .AB-TEST001 .product-detail-buy-box ul.product-name__rating li:last-child {
   display: none;
 }
+.AB-TEST001 .product-detail-buy-box .product-name:not(:has(.product-name__group.product-name__group--items-center)) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .AB-TEST001 h3.h3.product-name__name {
   font-family: "Inter", sans-serif;
   font-weight: 600;

@@ -97,11 +97,16 @@
                     item.innerText = "(" + txt + ")";
                 }
             });
+        }).catch(() => {
+            //
         });
 
         waitForElementAsync(() => q(".product-variant__info.product-variant__info--color .product-variant__label")).then(() => {
             q(".product-variant__info.product-variant__info--color .product-variant__label").innerText = "Farbe wählen:";
+        }).catch(() => {
+            //
         });
+
 
         waitForElementAsync(() => !!(q(".product-variant__info.product-variant__info--size .product-variant__label") && q(".product-size.product-size--active"))).then(() => {
             const productSizeVariantLabelElement = q(".product-variant__info.product-variant__info--size .product-variant__label");
@@ -110,10 +115,15 @@
             if (activeSizeElement) {
                 productSizeVariantLabelElement.insertAdjacentHTML("afterend", /* HTML */ `<span class="product-variant__size-name">${activeSizeElement.textContent}</span>`);
             }
+        }).catch(() => {
+            //
         });
+
 
         waitForElementAsync(() => !!(q(".product-name") && q(".product-detail-attribute-row:has(>.price-in-discount)"))).then(() => {
             q(".product-name").insertAdjacentElement("afterend", q(".product-detail-attribute-row:has(>.price-in-discount)"));
+        }).catch(() => {
+            //
         });
 
         waitForElementAsync(
@@ -123,7 +133,10 @@
                 "afterbegin",
                 q(".product-name__group.product-name__group--justify-between"),
             );
+        }).catch(() => {
+            //
         });
+
 
         waitForElementAsync(
             () =>
@@ -160,21 +173,21 @@
             q(".collapsible-block").addEventListener("click", (e) => {
                 q(".product-description-parameters:not(.product-description-parameters--top)").classList.toggle("show");
             });
+        }).catch(() => {
+            //
         });
+
     }
 
     function checkForItems() {
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-detail-content-inner-wrap-sticky"));
     }
 
-    await waitForElementAsync(checkForItems);
-    init();
-
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     console.warn(error);
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        console.warn(error);
+        return false;
+    }
 })();

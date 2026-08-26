@@ -25,9 +25,11 @@
         display: none;
     }
 
-    // .product-detail-content-inner-wrap-sticky .collapsible-block {
-    //     display: none;
-    // }
+    .product-detail-buy-box .product-name:not(:has(.product-name__group.product-name__group--items-center)) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 
     h3.h3.product-name__name {
         font-family: "Inter", sans-serif;
