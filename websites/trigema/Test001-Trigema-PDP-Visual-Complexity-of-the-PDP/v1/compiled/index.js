@@ -71,97 +71,110 @@
             `,
         );
 
+        waitForElementAsync(() => q(".product-detail-buy-box .product-name__group form.heart span.heart-default")).then(() => {
+            q(".product-detail-buy-box .product-name__group form.heart span.heart-default")?.insertAdjacentHTML("afterbegin", ASSETS.heart_icon);
+        });
 
-        q(".product-detail-buy-box .product-name__group form.heart span.heart-default").insertAdjacentHTML('afterbegin', ASSETS.heart_icon);
+        waitForElementAsync(() => !!(q(".product-detail-buy-box .product-name__group form.heart") && q(".product-name__group.product-name__group--items-center"))).then(() => {
+            const watchListButton = q(".product-detail-buy-box .product-name__group form.heart");
+            const reviewSection = q(".product-name__group.product-name__group--items-center");
 
-        const watchListButton = q(".product-detail-buy-box .product-name__group form.heart");
-        const reviewSection = q(".product-name__group.product-name__group--items-center");
-
-        if (watchListButton) {
-            reviewSection.insertAdjacentElement("beforeend", watchListButton);
-        }
-
-        qq(reviewSection, "p.p--small--medium")?.forEach((item) => {
-            const txt = item.textContent.trim();
-
-            if (+txt >= 0 && +txt <= 5) {
-                item.classList.add("ab-review-value");
-                const newTxt = txt.replace(/\./g, ",");
-                item.innerText = newTxt + "/5";
+            if (watchListButton) {
+                reviewSection.insertAdjacentElement("beforeend", watchListButton);
             }
 
-            if (txt.includes("Bewertungen")) {
-                item.classList.add("ab-review-total");
-                item.innerText = "(" + txt + ")";
+            qq(reviewSection, "p.p--small--medium")?.forEach((item) => {
+                const txt = item.textContent.trim();
+
+                if (+txt >= 0 && +txt <= 5) {
+                    item.classList.add("ab-review-value");
+                    const newTxt = txt.replace(/\./g, ",");
+                    item.innerText = newTxt + "/5";
+                }
+
+                if (txt.includes("Bewertungen")) {
+                    item.classList.add("ab-review-total");
+                    item.innerText = "(" + txt + ")";
+                }
+            });
+        });
+
+        waitForElementAsync(() => q(".product-variant__info.product-variant__info--color .product-variant__label")).then(() => {
+            q(".product-variant__info.product-variant__info--color .product-variant__label").innerText = "Farbe wählen:";
+        });
+
+        waitForElementAsync(() => !!(q(".product-variant__info.product-variant__info--size .product-variant__label") && q(".product-size.product-size--active"))).then(() => {
+            const productSizeVariantLabelElement = q(".product-variant__info.product-variant__info--size .product-variant__label");
+            productSizeVariantLabelElement.innerText = "Größe wählen:";
+            const activeSizeElement = q(".product-size.product-size--active");
+            if (activeSizeElement) {
+                productSizeVariantLabelElement.insertAdjacentHTML("afterend", /* HTML */ `<span class="product-variant__size-name">${activeSizeElement.textContent}</span>`);
             }
         });
 
-        q(".product-variant__info.product-variant__info--color .product-variant__label").innerText = "Farbe wählen:";
-        const productSizeVariantLabelElement = q(".product-variant__info.product-variant__info--size .product-variant__label");
-        productSizeVariantLabelElement.innerText = "Größe wählen:";
-        const activeSizeElement = q(".product-size.product-size--active");
-        if (activeSizeElement) {
-            productSizeVariantLabelElement.insertAdjacentHTML("afterend", /* HTML */ `<span class="product-variant__size-name">${activeSizeElement.textContent}</span>`);
-        }
-
-        q(".product-name").insertAdjacentElement("afterend", q(".product-detail-attribute-row:has(>.price-in-discount)"));
-
-        q(".product-detail-attribute-row:has(>ul.product-detail-shipping-commitment)").insertAdjacentElement(
-            "afterbegin",
-            q(".product-name__group.product-name__group--justify-between"),
-        );
-
-        const topProductDescriptionBlock = document.createElement("div");
-        topProductDescriptionBlock.className = "product-description-block product-description-block--top";
-
-        const topProductDescription = document.createElement("div");
-        topProductDescription.className = "product-description-parameters product-description-parameters--top";
-        topProductDescriptionBlock.appendChild(topProductDescription);
-
-        const topProductDescriptionTable = document.createElement("table");
-        topProductDescriptionTable.className = "table";
-        topProductDescription.appendChild(topProductDescriptionTable);
-
-        const topProductDescriptionTableBody = document.createElement("tbody");
-        topProductDescriptionTable.appendChild(topProductDescriptionTableBody);
-
-        qq(".product-description-parameters table.table tbody tr").forEach((tr) => {
-            const label = q(tr, "td:first-child").textContent.trim();
-            if (["Material und Pflege", "Passform", "Produktdetails"].some((text) => label.includes(text))) {
-                topProductDescriptionTableBody.appendChild(tr);
-            }
+        waitForElementAsync(() => !!(q(".product-name") && q(".product-detail-attribute-row:has(>.price-in-discount)"))).then(() => {
+            q(".product-name").insertAdjacentElement("afterend", q(".product-detail-attribute-row:has(>.price-in-discount)"));
         });
 
-        q(".product-detail-attribute-row:has(> ul.product-detail-shipping-commitment)").insertAdjacentElement("beforebegin", topProductDescriptionBlock);
+        waitForElementAsync(
+            () => !!(q(".product-detail-attribute-row:has(>ul.product-detail-shipping-commitment)") && q(".product-name__group.product-name__group--justify-between")),
+        ).then(() => {
+            q(".product-detail-attribute-row:has(>ul.product-detail-shipping-commitment)").insertAdjacentElement(
+                "afterbegin",
+                q(".product-name__group.product-name__group--justify-between"),
+            );
+        });
 
-        q(".collapsible-block").addEventListener("click", (e) => {
-            q(".product-description-parameters:not(.product-description-parameters--top)").classList.toggle("show");
+        waitForElementAsync(
+            () =>
+                !!(
+                    q(".product-description-parameters table.table tbody tr td:first-child") &&
+                    qq(".product-description-parameters table.table tbody tr td:first-child").some((td) =>
+                        ["Material und Pflege", "Passform", "Produktdetails"].some((txt) => txt.includes(td.textContent.trim()))
+                    )
+                ),
+        ).then(() => {
+            const topProductDescriptionBlock = document.createElement("div");
+            topProductDescriptionBlock.className = "product-description-block product-description-block--top";
+
+            const topProductDescription = document.createElement("div");
+            topProductDescription.className = "product-description-parameters product-description-parameters--top";
+            topProductDescriptionBlock.appendChild(topProductDescription);
+
+            const topProductDescriptionTable = document.createElement("table");
+            topProductDescriptionTable.className = "table";
+            topProductDescription.appendChild(topProductDescriptionTable);
+
+            const topProductDescriptionTableBody = document.createElement("tbody");
+            topProductDescriptionTable.appendChild(topProductDescriptionTableBody);
+
+            qq(".product-description-parameters table.table tbody tr").forEach((tr) => {
+                const label = q(tr, "td:first-child").textContent.trim();
+                if (["Material und Pflege", "Passform", "Produktdetails"].some((text) => label.includes(text))) {
+                    topProductDescriptionTableBody.appendChild(tr);
+                }
+            });
+
+            q(".product-detail-attribute-row:has(> ul.product-detail-shipping-commitment)").insertAdjacentElement("beforebegin", topProductDescriptionBlock);
+
+            q(".collapsible-block").addEventListener("click", (e) => {
+                q(".product-description-parameters:not(.product-description-parameters--top)").classList.toggle("show");
+            });
         });
     }
 
     function checkForItems() {
-        return !!(
-            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            q(".product-detail-buy-box .product-name") &&
-            q(".product-detail-buy-box .product-name__group form.heart") &&
-            q(".product-name__group.product-name__group--items-center") &&
-            q(".product-variant__info.product-variant__info--color .product-variant__label") &&
-            q(".product-variant__info.product-variant__info--size .product-variant__label") &&
-            q(".product-size.product-size--active") &&
-            q(".product-name") &&
-            q(".product-detail-attribute-row:has(>ul.product-detail-shipping-commitment)") &&
-            q(".product-name__group.product-name__group--justify-between") &&
-            q(".product-description-parameters table.table tbody tr") &&
-            q(".product-detail-attribute-row:has(> ul.product-detail-shipping-commitment)") &&
-            q(".collapsible-block")
-        );
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-detail-content-inner-wrap-sticky"));
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    await waitForElementAsync(checkForItems);
+    init();
+
+    // try {
+    //     await waitForElementAsync(checkForItems);
+    //     init();
+    // } catch (error) {
+    //     console.warn(error);
+    //     return false;
+    // }
 })();
