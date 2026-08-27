@@ -45,6 +45,54 @@
   color: #1a2b49;
   margin-bottom: 23px;
 }
+.AB-TEST021-CHECKOUT .ab-progress {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  gap: 8px;
+  padding: 4px 21px 15px;
+}
+.AB-TEST021-CHECKOUT .ab-progress__item {
+  flex-grow: 1;
+  width: calc(33% - 4px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.AB-TEST021-CHECKOUT .ab-progress__item__label {
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 25px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  padding-left: 5px;
+  white-space: nowrap;
+}
+.AB-TEST021-CHECKOUT .ab-progress__item__bar {
+  display: block;
+  background-color: #dafdfc;
+  border: 0.5px solid #1a2b49;
+  border-radius: 5px;
+  width: 100%;
+  height: 10px;
+}
+.AB-TEST021-CHECKOUT .ab-progress__item--filled .ab-progress__item__label {
+  font-family: "Onest Bold";
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+}
+.AB-TEST021-CHECKOUT .ab-progress__item--filled .ab-progress__item__bar {
+  background-color: #1a2b49;
+}
+@media screen and (max-width: 991.5px) {
+  .AB-TEST021-CHECKOUT .ab-mobile-hidden {
+    display: none;
+  }
+}
 @media screen and (min-width: 992px) {
   .AB-TEST021-CHECKOUT .page-header:not(.pinned) .header-elements .header-wrapper {
     padding-top: 28px;
@@ -68,5 +116,27 @@
   .AB-TEST021-CHECKOUT main.page-content > .container-md:has(> h1),
   .AB-TEST021-CHECKOUT .container-md.registration {
     max-width: 897px;
+    padding: 0 24px 24px;
+  }
+  .AB-TEST021-CHECKOUT .registration .registration-left {
+    padding-right: 0;
+  }
+  .AB-TEST021-CHECKOUT .ab-progress {
+    gap: 23px;
+    padding: 5px 0 7px;
+  }
+  .AB-TEST021-CHECKOUT .ab-progress__item {
+    align-items: flex-start;
+    width: calc(33% - 15px);
+  }
+  .AB-TEST021-CHECKOUT .ab-progress__item__label {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+  }
+  .AB-TEST021-CHECKOUT .ab-progress__item__bar {
+    height: 10px;
   }
 }

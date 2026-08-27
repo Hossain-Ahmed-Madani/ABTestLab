@@ -44,16 +44,33 @@
         console.table(TEST_CONFIG);
 
         q("main.page-content > .container-md > h1").innerText = "Sichere jetzt deinen Platz im Lehrgang";
+        q(".container-md.registration").insertAdjacentHTML("afterbegin", /* HTML */ `
+            <div class="ab-progress">
+                <div class="ab-progress__item ab-progress__item--filled">
+                    <div class="ab-progress__item__label">1. Deine Daten</div>
+                    <div class="ab-progress__item__bar"></div>
+                </div>
+                <div class="ab-progress__item">
+                    <div class="ab-progress__item__label">2. Zahlungsweise</div>
+                    <div class="ab-progress__item__bar"></div>
+                </div>
+                <div class="ab-progress__item">
+                    <div class="ab-progress__item__label">3. <span class="ab-mobile-hidden">Bestätigen &</span> Starten</div>
+                    <div class="ab-progress__item__bar"></div>
+                </div>
+            </div>
+        `);
 
         waitForElementAsync(() => q(".registration-left"))
             .then(() => {
                 q(".registration-left").className = "col-12 col-lg-12 registration-left";
             })
             .catch(() => {});
+
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1") && q(".container-md.registration"));
     }
 
     try {
