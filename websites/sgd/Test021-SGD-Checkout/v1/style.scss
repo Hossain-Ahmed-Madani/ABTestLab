@@ -1,17 +1,100 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-TEST021-CHECKOUT {
-    //
+    .header-banner.position-relative,
+    .page-header .header-elements .header-navigation-wrapper,
+    .page-header .header-elements .header-icons,
+    .page-header .header-elements .header-wrapper .header-grid-right,
+    .registration-breadcrumb,
+    .registration .registration-right,
+    .page-footer .footer-social,
+    .page-footer .footer-nav,
+    .page-footer .footer-others,
+    .frame-space-after-small {
+        display: none;
+    }
+
+    .page-header .header-elements .header-buttons,
+    .page-header .header-elements .header-grid-right .header-phone,
+    .page-header .header-elements .header-grid-right .header-button-wrapper .header-buttons {
+        display: none !important;
+    }
+
+    .page.page-type-registration .page-content {
+        padding-bottom: 0;
+    }
+
+    .container-md.registration {
+        background-color: #dafdfc;
+    }
+
+    .page-footer .footer-links {
+        background-color: #c4ffd8;
+    }
+
+    header.page-header .header-grid-left {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+    }
+
+    main.page-content {
+        padding-top: 16px;
+    }
+
+    main.page-content > .container-md:has(> h1) {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    main.page-content > .container-md > h1 {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1a2b49;
+        margin-bottom: 23px;
+    }
+
+    @media screen and (min-width: 992px) {
+        .page-header:not(.pinned) .header-elements .header-wrapper {
+            padding-top: 28px;
+            padding-bottom: 56px;
+            border-bottom: 0;
+            height: 164px;
+        }
+
+        main.page-content {
+            padding-top: 21px;
+        }
+
+        main.page-content > .container-md:has(> h1) {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        main.page-content > .container-md > h1 {
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 44px;
+            margin-bottom: 31px;
+        }
+        main.page-content > .container-md:has(> h1),
+        .container-md.registration {
+            max-width: 897px;
+        }
+    }
 }

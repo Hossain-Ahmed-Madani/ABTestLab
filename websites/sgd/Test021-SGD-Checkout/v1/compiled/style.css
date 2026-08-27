@@ -1,0 +1,72 @@
+.AB-TEST021-CHECKOUT .header-banner.position-relative,
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-navigation-wrapper,
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-icons,
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-wrapper .header-grid-right,
+.AB-TEST021-CHECKOUT .registration-breadcrumb,
+.AB-TEST021-CHECKOUT .registration .registration-right,
+.AB-TEST021-CHECKOUT .page-footer .footer-social,
+.AB-TEST021-CHECKOUT .page-footer .footer-nav,
+.AB-TEST021-CHECKOUT .page-footer .footer-others,
+.AB-TEST021-CHECKOUT .frame-space-after-small {
+  display: none;
+}
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-buttons,
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-grid-right .header-phone,
+.AB-TEST021-CHECKOUT .page-header .header-elements .header-grid-right .header-button-wrapper .header-buttons {
+  display: none !important;
+}
+.AB-TEST021-CHECKOUT .page.page-type-registration .page-content {
+  padding-bottom: 0;
+}
+.AB-TEST021-CHECKOUT .container-md.registration {
+  background-color: #dafdfc;
+}
+.AB-TEST021-CHECKOUT .page-footer .footer-links {
+  background-color: #c4ffd8;
+}
+.AB-TEST021-CHECKOUT header.page-header .header-grid-left {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.AB-TEST021-CHECKOUT main.page-content {
+  padding-top: 16px;
+}
+.AB-TEST021-CHECKOUT main.page-content > .container-md:has(> h1) {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.AB-TEST021-CHECKOUT main.page-content > .container-md > h1 {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1a2b49;
+  margin-bottom: 23px;
+}
+@media screen and (min-width: 992px) {
+  .AB-TEST021-CHECKOUT .page-header:not(.pinned) .header-elements .header-wrapper {
+    padding-top: 28px;
+    padding-bottom: 56px;
+    border-bottom: 0;
+    height: 164px;
+  }
+  .AB-TEST021-CHECKOUT main.page-content {
+    padding-top: 21px;
+  }
+  .AB-TEST021-CHECKOUT main.page-content > .container-md:has(> h1) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .AB-TEST021-CHECKOUT main.page-content > .container-md > h1 {
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 44px;
+    margin-bottom: 31px;
+  }
+  .AB-TEST021-CHECKOUT main.page-content > .container-md:has(> h1),
+  .AB-TEST021-CHECKOUT .container-md.registration {
+    max-width: 897px;
+  }
+}

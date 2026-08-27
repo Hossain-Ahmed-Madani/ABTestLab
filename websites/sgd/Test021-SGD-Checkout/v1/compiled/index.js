@@ -42,10 +42,18 @@
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+        q("main.page-content > .container-md > h1").innerText = "Sichere jetzt deinen Platz im Lehrgang";
+
+        waitForElementAsync(() => q(".registration-left"))
+            .then(() => {
+                q(".registration-left").className = "col-12 col-lg-12 registration-left";
+            })
+            .catch(() => {});
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1"));
     }
 
     try {

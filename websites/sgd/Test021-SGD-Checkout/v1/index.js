@@ -11,31 +11,6 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -60,28 +35,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -102,32 +55,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -146,10 +73,18 @@
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
+
+        q("main.page-content > .container-md > h1").innerText = "Sichere jetzt deinen Platz im Lehrgang";
+
+        waitForElementAsync(() => q(".registration-left"))
+            .then(() => {
+                q(".registration-left").className = "col-12 col-lg-12 registration-left";
+            })
+            .catch(() => {});
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1"));
     }
 
     try {
