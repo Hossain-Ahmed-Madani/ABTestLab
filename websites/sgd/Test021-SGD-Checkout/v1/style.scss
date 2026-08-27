@@ -181,6 +181,21 @@
                     height: 10px;
                 }
             }
+
+            &__item--filled {
+                .ab-progress__item__label {
+                    font-weight: 700;
+                    font-size: 20px;
+                    line-height: 44px;
+                    letter-spacing: 0px;
+                    vertical-align: middle;
+                    
+                }
+    
+                .ab-progress__item__bar {
+                    background-color: #1a2b49;
+                }
+            }
         }
     }
 }

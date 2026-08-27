@@ -70,34 +70,52 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    function getProgressLayout() {
+        const currentLocation = window.location.pathname;
+
+        const progress_data = [
+            {
+                title: "1. Deine Daten",
+                is_active: true,
+            },
+            {
+                title: "2. Zahlungsweise",
+                is_active: currentLocation.includes("/kursanmeldung/schritt/2.html") || currentLocation.includes("/kursanmeldung/schritt/3.html"),
+            },
+            {
+                title: '3. <span class="ab-mobile-hidden">Bestätigen &</span> Starten',
+                is_active: currentLocation.includes("/kursanmeldung/schritt/3.html"),
+            },
+        ];
+        
+        return /* HTML */ `
+            <div class="ab-progress">
+                ${progress_data
+                    .map(
+                        ({ title, is_active }) => /* HTML */ `
+                            <div class="ab-progress__item ${is_active ? "ab-progress__item--filled" : ""}">
+                                <div class="ab-progress__item__label">${title}</div>
+                                <div class="ab-progress__item__bar"></div>
+                            </div>
+                        `,
+                    )
+                    .join("")}
+            </div>
+        `;
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
 
         q("main.page-content > .container-md > h1").innerText = "Sichere jetzt deinen Platz im Lehrgang";
-        q(".container-md.registration").insertAdjacentHTML("afterbegin", /* HTML */ `
-            <div class="ab-progress">
-                <div class="ab-progress__item ab-progress__item--filled">
-                    <div class="ab-progress__item__label">1. Deine Daten</div>
-                    <div class="ab-progress__item__bar"></div>
-                </div>
-                <div class="ab-progress__item">
-                    <div class="ab-progress__item__label">2. Zahlungsweise</div>
-                    <div class="ab-progress__item__bar"></div>
-                </div>
-                <div class="ab-progress__item">
-                    <div class="ab-progress__item__label">3. <span class="ab-mobile-hidden">Bestätigen &</span> Starten</div>
-                    <div class="ab-progress__item__bar"></div>
-                </div>
-            </div>
-        `)
+        q(".container-md.registration").insertAdjacentHTML("afterbegin", getProgressLayout());
 
         waitForElementAsync(() => q(".registration-left"))
             .then(() => {
                 q(".registration-left").className = "col-12 col-lg-12 registration-left";
             })
             .catch(() => {});
-
     }
 
     function checkForItems() {
