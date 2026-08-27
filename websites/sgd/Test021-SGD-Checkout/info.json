@@ -1,0 +1,13 @@
+{
+  "id": "1787820433105_3001_Test021_SGD_Checkout",
+  "name": "Test021-SGD-Checkout",
+  "type": "A/B",
+  "website": "sgd",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-08-27T08:47:13.105Z",
+  "createdAtReadable": "8/27/2026, 2:47:13 PM",
+  "lastUpdated": "2026-08-27T08:47:13.283Z"
+}
