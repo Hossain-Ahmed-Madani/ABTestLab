@@ -16,7 +16,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         host: "https://www.steinertractor.com",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00027,
+        test_version: 0.00029,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -1284,7 +1284,6 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
     async function handleCreditDebitFormShowHide(e) {
         await waitForElementAsync(() => !q("ngx-loading .backdrop"));
 
-
         const selectInput = q(".AB-Shipping-Checkout .payment-row >  .col-lg-6  > select.form-control");
         const optionTxt = q(selectInput, `option[value="${selectInput.value}"]`).innerText?.trim() ?? null;
 
@@ -1424,21 +1423,51 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         }
     }
 
-    function handleTextBasedInputs({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
-        // Handle tel inputs
+    // function handleTextBasedInputs({ currentTarget, value, checked, inputType, controlNodeSelector, controlNodes, dependencySelector, dependencyNodes }) {
+    //     // Handle tel inputs
 
-        // Handle Rest
+    //     // Handle Rest
+    //     const scrollPos = { x: window.scrollX, y: window.scrollY };
+    //     const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+
+    //     controlNodes.forEach((controlNode) => {
+    //         if (nativeInputValueSetter) {
+    //             console.log("=== if")
+    //             nativeInputValueSetter.call(controlNode, value);
+    //         }
+    //         else {
+    //             console.log("==== else")
+    //             controlNode.value = value;
+    //         }
+
+    //         // controlNode.value = value;
+    //         controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
+    //         controlNode.dispatchEvent(new Event("change", { bubbles: true }));
+    //     });
+
+    //     window.scrollTo(scrollPos.x, scrollPos.y);
+    // }
+    function handleTextBasedInputs({ controlNodes, value }) {
         const scrollPos = { x: window.scrollX, y: window.scrollY };
-        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+        const nativeInputValueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value").set;
 
         controlNodes.forEach((controlNode) => {
-            if (nativeInputValueSetter) {
-                nativeInputValueSetter.call(controlNode, value);
+            if (!(controlNode instanceof HTMLInputElement)) {
+                console.log("==== if");
+                controlNode.value = value; // safe fallback for non-input elements
             } else {
-                controlNode.value = value;
+                console.log("==== else");
+                try {
+                    console.log("==== try");
+                    nativeInputValueSetter.call(controlNode, value);
+                } catch (err) {
+                    console.log("==== catch");
+                    controlNode.value = value;
+                }
             }
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
+            controlNode.dispatchEvent(new Event("blur", { bubbles: true })); // in case updateOn:'blur'
         });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
@@ -1560,6 +1589,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
                     // Handle control input updates
                     if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
+                        console.log("==== DataObj ====", dataObj);
+
                         handleTextBasedInputs(dataObj);
                     } else if (dataObj["inputType"] === "radio") ; else if (dataObj["inputType"] === "checkbox") {
                         handleCheckBoxInput(dataObj);
