@@ -16,7 +16,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         host: "https://www.steinertractor.com",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00025,
+        test_version: 0.00027,
     };
 
     const { host, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -844,6 +844,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                                                     type="select"
                                                     inputType="select"
                                                     control_node_selector="${control_node_selector}"
+                                                    autocomplete="off"
+                                                    readonly onfocus="this.removeAttribute('readonly');"
                                                     placeholder=""
                                                     ${dependency_node_selector ? `dependency_node_selector="${dependency_node_selector}"` : ""}
                                                     ${value ? `value="${value}"` : ""}
