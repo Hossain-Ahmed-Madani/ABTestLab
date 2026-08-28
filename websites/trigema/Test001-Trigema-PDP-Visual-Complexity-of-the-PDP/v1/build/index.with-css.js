@@ -415,9 +415,8 @@
     letter-spacing: 0;
     vertical-align: middle;
     text-decoration: underline;
-    text-decoration-style: solid;
-    text-decoration-thickness: 0;
-    text-decoration-skip-ink: auto;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 1px;
     color: #262228;
   }
   .AB-TEST001
