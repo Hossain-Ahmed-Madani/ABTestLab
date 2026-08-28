@@ -6,7 +6,7 @@
         test_name: "Test001 [Trigema] - PDP - Visual Complexity of the PDP",
         page_initials: "AB-TEST001",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -21,6 +21,7 @@
             </svg>
         `,
     };
+
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
@@ -102,7 +103,7 @@
             q(".product-detail-buy-box .product-name__group form.heart span.heart-default")?.insertAdjacentHTML("afterbegin", ASSETS.heart_icon);
         });
 
-        waitForElementAsync(() => !!(q(".product-detail-buy-box .product-name__group form.heart") && q(".product-name__group.product-name__group--items-center"))).then(() => {
+        waitForElementAsync(() => !!(q(".product-detail-buy-box .product-name__group form.heart") && q(".product-name__group.product-name__group--items-center") && q('.product-detail-content-inner-wrap-sticky .product-name .product-name__group > .p--small--medium:last-child').textContent.includes('Bewertungen'))).then(() => {
             const watchListButton = q(".product-detail-buy-box .product-name__group form.heart");
             const reviewSection = q(".product-name__group.product-name__group--items-center");
 

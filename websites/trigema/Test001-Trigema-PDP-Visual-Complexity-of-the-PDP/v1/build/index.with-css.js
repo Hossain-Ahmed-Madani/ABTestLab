@@ -8,14 +8,21 @@
   display: none;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-detail-buy-box
   .product-name__group.product-name__group--items-center {
   gap: 10px;
+  align-items: baseline;
 }
-.AB-TEST001 .product-detail-buy-box ul.product-name__rating li:last-child {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-detail-buy-box
+  ul.product-name__rating
+  li:last-child {
   display: none;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-detail-buy-box
   .product-name:not(
     :has(
@@ -26,7 +33,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.AB-TEST001 h3.h3.product-name__name {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky h3.h3.product-name__name {
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 20px;
@@ -35,7 +42,7 @@
   vertical-align: middle;
   color: #262228;
 }
-.AB-TEST001 .ab-review-value {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .ab-review-value {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -43,7 +50,7 @@
   letter-spacing: 0;
   color: #262228;
 }
-.AB-TEST001 .ab-review-total {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .ab-review-total {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -51,25 +58,27 @@
   letter-spacing: 0;
   color: #7d7a7e;
 }
-.AB-TEST001 form.heart {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky form.heart {
   margin-left: auto;
 }
-.AB-TEST001 .product-color--active {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .product-color--active {
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2509803922);
 }
-.AB-TEST001 .product-size--active {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .product-size--active {
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2509803922);
 }
-.AB-TEST001 .product-detail-attribute-row:has(> .price-in-discount) {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-detail-attribute-row:has(> .price-in-discount) {
   margin-top: 22px;
 }
-.AB-TEST001 .price-in-discount {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .price-in-discount {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: baseline;
   gap: 10px;
 }
-.AB-TEST001 .price-compare span {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .price-compare span {
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
@@ -78,7 +87,35 @@
   vertical-align: middle;
   color: #262228;
 }
-.AB-TEST001 .price-in-discount .tax-include {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .price-compare
+  span.sale-off-price {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #1b509f;
+}
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .price-compare
+  span.original-price {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 30px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: #7d7a7e;
+  padding-left: 5px;
+}
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .price-in-discount
+  .tax-include {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -87,10 +124,12 @@
   vertical-align: middle;
   color: #7d7a7e;
 }
-.AB-TEST001 .product-detail-attribute-row:has(> .product-variant-wrapper) {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-detail-attribute-row:has(> .product-variant-wrapper) {
   margin-top: 20px;
 }
-.AB-TEST001 .product-variant__label {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .product-variant__label {
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
@@ -99,13 +138,19 @@
   vertical-align: middle;
   color: #262228;
 }
-.AB-TEST001 .product-variant__info--color,
-.AB-TEST001 .product-variant__info--size {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-variant__info--color,
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-variant__info--size {
   justify-content: flex-start;
   align-items: center;
   gap: 10px;
 }
-.AB-TEST001 .product-variant__size-chart {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-variant__size-chart {
   margin-left: auto;
   font-family: "Inter", sans-serif;
   font-weight: 300;
@@ -114,13 +159,16 @@
   letter-spacing: 0;
   vertical-align: middle;
   text-decoration: underline;
-  text-decoration-style: solid;
-  text-decoration-thickness: 0;
-  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 1px;
   color: #262228;
 }
-.AB-TEST001 .product-variant__color-name,
-.AB-TEST001 .product-variant__size-name {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-variant__color-name,
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-variant__size-name {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -129,10 +177,12 @@
   vertical-align: middle;
   color: #262228;
 }
-.AB-TEST001 .product-detail-attribute-row:has(> .delivery-times) {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-detail-attribute-row:has(> .delivery-times) {
   margin-top: 17px;
 }
-.AB-TEST001 .delivery-times .content {
+.AB-TEST001 .product-detail-content-inner-wrap-sticky .delivery-times .content {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14.9px;
@@ -142,6 +192,7 @@
   color: #000000;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-description-block.product-description-block--top
   .product-description-parameters
   table
@@ -156,6 +207,7 @@
   color: #262228;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-description-block.product-description-block--top
   .product-description-parameters
   table
@@ -172,10 +224,12 @@
   color: #000000;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
   margin-top: 11px;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-name__group.product-name__group--justify-between
   .p--small--medium {
   font-family: "Inter", sans-serif;
@@ -186,10 +240,15 @@
   vertical-align: middle;
   color: #7d7a7e;
 }
-.AB-TEST001 ul.product-detail-shipping-commitment {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  ul.product-detail-shipping-commitment {
   margin-top: 11px;
 }
-.AB-TEST001 ul.product-detail-shipping-commitment li {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  ul.product-detail-shipping-commitment
+  li {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 14.8px;
@@ -199,22 +258,30 @@
   color: #000000;
   padding-bottom: 9px;
 }
-.AB-TEST001 ul.product-detail-shipping-commitment li svg {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  ul.product-detail-shipping-commitment
+  li
+  svg {
   width: 13px;
   height: auto;
   margin-right: 3px;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-description-parameters.product-description-parameters--top {
   display: block;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-detail-content
   .product-detail-content-inner-wrap
   .product-detail-buy-box {
   padding-bottom: 20px;
 }
-.AB-TEST001 .product-description-intro.p--normal {
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-description-intro.p--normal {
   font-family: "Inter", sans-serif;
   font-weight: 400;
   font-size: 19.5px;
@@ -224,6 +291,7 @@
   color: #000000;
 }
 .AB-TEST001
+  .product-detail-content-inner-wrap-sticky
   .product-detail-buy-box
   .product-name__group
   form.heart
@@ -235,61 +303,110 @@
   .AB-TEST001 .product-image-slider .productGalleryThumbSwiper {
     margin-top: 16px;
   }
-  .AB-TEST001 .product-name {
+  .AB-TEST001 .product-detail-content-inner-wrap-sticky .product-name {
     gap: 17px;
   }
 }
 @media screen and (min-width: 768px) {
   .AB-TEST001
+    .product-detail-content
+    .product-detail-content-inner-wrap
+    .product-detail-buy-box {
+    padding-top: 0;
+  }
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-detail-buy-box
     .product-name__group.product-name__group--items-center {
     gap: 20px;
   }
-  .AB-TEST001 .ab-review-value {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    h3.h3.product-name__name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33.6px;
+    vertical-align: middle;
+  }
+  .AB-TEST001 .product-detail-content-inner-wrap-sticky .ab-review-value {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
   }
-  .AB-TEST001 .ab-review-total {
+  .AB-TEST001 .product-detail-content-inner-wrap-sticky .ab-review-total {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
   }
-  .AB-TEST001 .product-detail-attribute-row:has(> .price-in-discount) {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-detail-attribute-row:has(> .price-in-discount) {
     margin-top: 21px;
   }
-  .AB-TEST001 .price-compare span {
+  .AB-TEST001 .product-detail-content-inner-wrap-sticky .price-compare span {
     font-family: "Inter", sans-serif;
     font-weight: 600;
     font-size: 20px;
     line-height: 30px;
   }
-  .AB-TEST001 .price-in-discount .tax-include {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .price-compare
+    span.sale-off-price {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #1b509f;
+  }
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .price-compare
+    span.original-price {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #7d7a7e;
+    padding-left: 5px;
+  }
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .price-in-discount
+    .tax-include {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 12px;
     line-height: 24px;
   }
-  .AB-TEST001 .product-detail-attribute-row:has(> .product-variant-wrapper) {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-detail-attribute-row:has(> .product-variant-wrapper) {
     margin-top: 22px;
   }
-  .AB-TEST001 .product-variant__label {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-variant__label {
     font-weight: 600;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0px;
   }
-  .AB-TEST001 .product-variant__color-name,
-  .AB-TEST001 .product-variant__size-name {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-variant__color-name,
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-variant__size-name {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0px;
     vertical-align: middle;
   }
-  .AB-TEST001 .product-variant__size-chart {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-variant__size-chart {
     margin-left: auto;
     font-family: "Inter", sans-serif;
     font-weight: 300;
@@ -303,19 +420,27 @@
     text-decoration-skip-ink: auto;
     color: #262228;
   }
-  .AB-TEST001 .product-detail-attribute-row:has(> .delivery-times) {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-detail-attribute-row:has(> .delivery-times) {
     margin-top: 22px;
   }
-  .AB-TEST001 .delivery-times .content {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .delivery-times
+    .content {
     font-weight: 400;
     font-size: 14.9px;
     line-height: 24px;
     letter-spacing: 0px;
   }
-  .AB-TEST001 .product-description-parameters--top {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-description-parameters--top {
     margin-top: 8px;
   }
   .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-description-block.product-description-block--top
     .product-description-parameters
     table
@@ -328,6 +453,7 @@
     vertical-align: top;
   }
   .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-description-block.product-description-block--top
     .product-description-parameters
     table
@@ -342,10 +468,12 @@
     vertical-align: top;
   }
   .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
     margin-top: 16px;
   }
   .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-name__group.product-name__group--justify-between
     .p--small--medium {
     font-weight: 400;
@@ -354,10 +482,15 @@
     letter-spacing: 0px;
     vertical-align: middle;
   }
-  .AB-TEST001 ul.product-detail-shipping-commitment {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    ul.product-detail-shipping-commitment {
     margin-top: 48px;
   }
-  .AB-TEST001 ul.product-detail-shipping-commitment li {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    ul.product-detail-shipping-commitment
+    li {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 14.8px;
@@ -366,18 +499,25 @@
     vertical-align: middle;
     color: #000000;
   }
-  .AB-TEST001 ul.product-detail-shipping-commitment li svg {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    ul.product-detail-shipping-commitment
+    li
+    svg {
     width: 13.5px;
     height: auto;
     margin-right: 5px;
   }
   .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
     .product-detail-content
     .product-detail-content-inner-wrap
     .product-detail-buy-box {
     padding-bottom: 48px;
   }
-  .AB-TEST001 .product-description-intro.p--normal {
+  .AB-TEST001
+    .product-detail-content-inner-wrap-sticky
+    .product-description-intro.p--normal {
     font-family: "Inter", sans-serif;
     font-weight: 400;
     font-size: 18.6px;
@@ -402,7 +542,7 @@
     test_name: "Test001 [Trigema] - PDP - Visual Complexity of the PDP",
     page_initials: "AB-TEST001",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -499,7 +639,10 @@
       () =>
         !!(
           q(".product-detail-buy-box .product-name__group form.heart") &&
-          q(".product-name__group.product-name__group--items-center")
+          q(".product-name__group.product-name__group--items-center") &&
+          q(
+            ".product-detail-content-inner-wrap-sticky .product-name .product-name__group > .p--small--medium:last-child",
+          ).textContent.includes("Bewertungen")
         ),
     )
       .then(() => {

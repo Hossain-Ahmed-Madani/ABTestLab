@@ -11,27 +11,28 @@
         //
     }
 }
-
+// .product-detail-content-inner-wrap-sticky
 .AB-TEST001 {
     .slide-description:empty {
         display: none;
     }
 
-    .product-detail-buy-box .product-name__group.product-name__group--items-center {
+    .product-detail-content-inner-wrap-sticky .product-detail-buy-box .product-name__group.product-name__group--items-center {
         gap: 10px;
+        align-items: baseline;
     }
 
-    .product-detail-buy-box ul.product-name__rating li:last-child {
+    .product-detail-content-inner-wrap-sticky .product-detail-buy-box ul.product-name__rating li:last-child {
         display: none;
     }
 
-    .product-detail-buy-box .product-name:not(:has(.product-name__group.product-name__group--items-center .p--small--medium)) {
+    .product-detail-content-inner-wrap-sticky .product-detail-buy-box .product-name:not(:has(.product-name__group.product-name__group--items-center .p--small--medium)) {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
 
-    h3.h3.product-name__name {
+    .product-detail-content-inner-wrap-sticky h3.h3.product-name__name {
         font-family: "Inter", sans-serif;
         font-weight: 600;
         font-size: 20px;
@@ -41,7 +42,7 @@
         color: #262228;
     }
 
-    .ab-review-value {
+    .product-detail-content-inner-wrap-sticky .ab-review-value {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -50,7 +51,7 @@
         color: #262228;
     }
 
-    .ab-review-total {
+    .product-detail-content-inner-wrap-sticky .ab-review-total {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 12px;
@@ -59,30 +60,30 @@
         color: #7d7a7e;
     }
 
-    form.heart {
+    .product-detail-content-inner-wrap-sticky form.heart {
         margin-left: auto;
     }
 
-    .product-color--active {
+    .product-detail-content-inner-wrap-sticky .product-color--active {
         box-shadow: 2px 2px 2px 0px #00000040;
     }
 
-    .product-size--active {
+    .product-detail-content-inner-wrap-sticky .product-size--active {
         box-shadow: 2px 2px 2px 0px #00000040;
     }
 
-    .product-detail-attribute-row:has(> .price-in-discount) {
+    .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .price-in-discount) {
         margin-top: 22px;
     }
 
-    .price-in-discount {
+    .product-detail-content-inner-wrap-sticky .price-in-discount {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: baseline;
         gap: 10px;
     }
 
-    .price-compare span {
+    .product-detail-content-inner-wrap-sticky .price-compare span {
         font-family: "Inter", sans-serif;
         font-weight: 600;
         font-size: 16px;
@@ -92,7 +93,28 @@
         color: #262228;
     }
 
-    .price-in-discount .tax-include {
+    .product-detail-content-inner-wrap-sticky .price-compare span.sale-off-price {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #1b509f;
+    }
+
+    .product-detail-content-inner-wrap-sticky .price-compare span.original-price {
+        font-family: "Inter", sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 30px;
+        letter-spacing: 0px;
+        vertical-align: middle;
+        color: #7d7a7e;
+        padding-left: 5px;
+    }
+
+    .product-detail-content-inner-wrap-sticky .price-in-discount .tax-include {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 12px;
@@ -102,11 +124,11 @@
         color: #7d7a7e;
     }
 
-    .product-detail-attribute-row:has(> .product-variant-wrapper) {
+    .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .product-variant-wrapper) {
         margin-top: 20px;
     }
 
-    .product-variant__label {
+    .product-detail-content-inner-wrap-sticky .product-variant__label {
         font-family: "Inter", sans-serif;
         font-weight: 600;
         font-size: 16px;
@@ -116,14 +138,14 @@
         color: #262228;
     }
 
-    .product-variant__info--color,
-    .product-variant__info--size {
+    .product-detail-content-inner-wrap-sticky .product-variant__info--color,
+    .product-detail-content-inner-wrap-sticky .product-variant__info--size {
         justify-content: flex-start;
         align-items: center;
         gap: 10px;
     }
 
-    .product-variant__size-chart {
+    .product-detail-content-inner-wrap-sticky .product-variant__size-chart {
         margin-left: auto;
         font-family: "Inter", sans-serif;
         font-weight: 300;
@@ -132,14 +154,13 @@
         letter-spacing: 0;
         vertical-align: middle;
         text-decoration: underline;
-        text-decoration-style: solid;
-        text-decoration-thickness: 0;
-        text-decoration-skip-ink: auto;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 1px;
         color: #262228;
     }
 
-    .product-variant__color-name,
-    .product-variant__size-name {
+    .product-detail-content-inner-wrap-sticky .product-variant__color-name,
+    .product-detail-content-inner-wrap-sticky .product-variant__size-name {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -149,11 +170,11 @@
         color: #262228;
     }
 
-    .product-detail-attribute-row:has(> .delivery-times) {
+    .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .delivery-times) {
         margin-top: 17px;
     }
 
-    .delivery-times .content {
+    .product-detail-content-inner-wrap-sticky .delivery-times .content {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14.9px;
@@ -163,7 +184,7 @@
         color: #000000;
     }
 
-    .product-description-block.product-description-block--top .product-description-parameters table tr td:first-child {
+    .product-detail-content-inner-wrap-sticky .product-description-block.product-description-block--top .product-description-parameters table tr td:first-child {
         font-family: "Inter", sans-serif;
         font-weight: 600;
         font-size: 16px;
@@ -173,7 +194,7 @@
         color: #262228;
     }
 
-    .product-description-block.product-description-block--top .product-description-parameters table tr td:last-child ul li {
+    .product-detail-content-inner-wrap-sticky .product-description-block.product-description-block--top .product-description-parameters table tr td:last-child ul li {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 16px;
@@ -183,11 +204,11 @@
         color: #000000;
     }
 
-    .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
+    .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
         margin-top: 11px;
     }
 
-    .product-name__group.product-name__group--justify-between .p--small--medium {
+    .product-detail-content-inner-wrap-sticky .product-name__group.product-name__group--justify-between .p--small--medium {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14.6px;
@@ -197,11 +218,11 @@
         color: #7d7a7e;
     }
 
-    ul.product-detail-shipping-commitment {
+    .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment {
         margin-top: 11px;
     }
 
-    ul.product-detail-shipping-commitment li {
+    .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment li {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 14.8px;
@@ -212,21 +233,21 @@
         padding-bottom: 9px;
     }
 
-    ul.product-detail-shipping-commitment li svg {
+    .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment li svg {
         width: 13px;
         height: auto;
         margin-right: 3px;
     }
 
-    .product-description-parameters.product-description-parameters--top {
+    .product-detail-content-inner-wrap-sticky .product-description-parameters.product-description-parameters--top {
         display: block;
     }
 
-    .product-detail-content .product-detail-content-inner-wrap .product-detail-buy-box {
+    .product-detail-content-inner-wrap-sticky .product-detail-content .product-detail-content-inner-wrap .product-detail-buy-box {
         padding-bottom: 20px;
     }
 
-    .product-description-intro.p--normal {
+    .product-detail-content-inner-wrap-sticky .product-description-intro.p--normal {
         font-family: "Inter", sans-serif;
         font-weight: 400;
         font-size: 19.5px;
@@ -236,7 +257,7 @@
         color: #000000;
     }
 
-    .product-detail-buy-box .product-name__group form.heart .heart-default .product-name__wishlist-icon {
+    .product-detail-content-inner-wrap-sticky .product-detail-buy-box .product-name__group form.heart .heart-default .product-name__wishlist-icon {
         display: none;
     }
 
@@ -245,61 +266,87 @@
             margin-top: 16px;
         }
 
-        .product-name {
+        .product-detail-content-inner-wrap-sticky .product-name {
             gap: 17px;
         }
     }
 
     @media screen and (min-width: 768px) {
-        .product-detail-buy-box .product-name__group.product-name__group--items-center {
+        .product-detail-content .product-detail-content-inner-wrap .product-detail-buy-box {
+            padding-top: 0;
+        }
+
+        .product-detail-content-inner-wrap-sticky .product-detail-buy-box .product-name__group.product-name__group--items-center {
             gap: 20px;
         }
 
-        .ab-review-value {
+        .product-detail-content-inner-wrap-sticky h3.h3.product-name__name {
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 33.6px;
+            vertical-align: middle;
+        }
+
+        .product-detail-content-inner-wrap-sticky .ab-review-value {
             font-family: "Inter", sans-serif;
             font-weight: 400;
             font-size: 16px;
             line-height: 24px;
         }
 
-        .ab-review-total {
+        .product-detail-content-inner-wrap-sticky .ab-review-total {
             font-family: "Inter", sans-serif;
             font-weight: 400;
             font-size: 12px;
             line-height: 24px;
         }
 
-        .product-detail-attribute-row:has(> .price-in-discount) {
+        .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .price-in-discount) {
             margin-top: 21px;
         }
 
-        .price-compare span {
+        .product-detail-content-inner-wrap-sticky .price-compare span {
             font-family: "Inter", sans-serif;
             font-weight: 600;
             font-size: 20px;
             line-height: 30px;
         }
 
-        .price-in-discount .tax-include {
+        .product-detail-content-inner-wrap-sticky .price-compare span.sale-off-price {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #1b509f;
+        }
+
+        .product-detail-content-inner-wrap-sticky .price-compare span.original-price {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #7d7a7e;
+            padding-left: 5px;
+        }
+
+        .product-detail-content-inner-wrap-sticky .price-in-discount .tax-include {
             font-family: "Inter", sans-serif;
             font-weight: 400;
             font-size: 12px;
             line-height: 24px;
         }
 
-        .product-detail-attribute-row:has(> .product-variant-wrapper) {
+        .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .product-variant-wrapper) {
             margin-top: 22px;
         }
 
-        .product-variant__label {
+        .product-detail-content-inner-wrap-sticky .product-variant__label {
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;
             letter-spacing: 0px;
         }
 
-        .product-variant__color-name,
-        .product-variant__size-name {
+        .product-detail-content-inner-wrap-sticky .product-variant__color-name,
+        .product-detail-content-inner-wrap-sticky .product-variant__size-name {
             font-weight: 400;
             font-size: 16px;
             line-height: 24px;
@@ -307,7 +354,7 @@
             vertical-align: middle;
         }
 
-        .product-variant__size-chart {
+        .product-detail-content-inner-wrap-sticky .product-variant__size-chart {
             margin-left: auto;
             font-family: "Inter", sans-serif;
             font-weight: 300;
@@ -322,22 +369,22 @@
             color: #262228;
         }
 
-        .product-detail-attribute-row:has(> .delivery-times) {
+        .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .delivery-times) {
             margin-top: 22px;
         }
 
-        .delivery-times .content {
+        .product-detail-content-inner-wrap-sticky .delivery-times .content {
             font-weight: 400;
             font-size: 14.9px;
             line-height: 24px;
             letter-spacing: 0px;
         }
 
-        .product-description-parameters--top {
+        .product-detail-content-inner-wrap-sticky .product-description-parameters--top {
             margin-top: 8px;
         }
 
-        .product-description-block.product-description-block--top .product-description-parameters table tr td:first-child {
+        .product-detail-content-inner-wrap-sticky .product-description-block.product-description-block--top .product-description-parameters table tr td:first-child {
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;
@@ -345,7 +392,7 @@
             vertical-align: top;
         }
 
-        .product-description-block.product-description-block--top .product-description-parameters table tr td:last-child ul li {
+        .product-detail-content-inner-wrap-sticky .product-description-block.product-description-block--top .product-description-parameters table tr td:last-child ul li {
             font-weight: 400;
             font-size: 16px;
             line-height: 24px;
@@ -353,11 +400,11 @@
             vertical-align: top;
         }
 
-        .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
+        .product-detail-content-inner-wrap-sticky .product-detail-attribute-row:has(> .product-detail-shipping-commitment) {
             margin-top: 16px;
         }
 
-        .product-name__group.product-name__group--justify-between .p--small--medium {
+        .product-detail-content-inner-wrap-sticky .product-name__group.product-name__group--justify-between .p--small--medium {
             font-weight: 400;
             font-size: 14.6px;
             line-height: 24px;
@@ -365,11 +412,11 @@
             vertical-align: middle;
         }
 
-        ul.product-detail-shipping-commitment {
+        .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment {
             margin-top: 48px;
         }
 
-        ul.product-detail-shipping-commitment li {
+        .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment li {
             font-family: "Inter", sans-serif;
             font-weight: 400;
             font-size: 14.8px;
@@ -379,17 +426,17 @@
             color: #000000;
         }
 
-        ul.product-detail-shipping-commitment li svg {
+        .product-detail-content-inner-wrap-sticky ul.product-detail-shipping-commitment li svg {
             width: 13.5px;
             height: auto;
             margin-right: 5px;
         }
 
-        .product-detail-content .product-detail-content-inner-wrap .product-detail-buy-box {
+        .product-detail-content-inner-wrap-sticky .product-detail-content .product-detail-content-inner-wrap .product-detail-buy-box {
             padding-bottom: 48px;
         }
 
-        .product-description-intro.p--normal {
+        .product-detail-content-inner-wrap-sticky .product-description-intro.p--normal {
             font-family: "Inter", sans-serif;
             font-weight: 400;
             font-size: 18.6px;
