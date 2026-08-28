@@ -21,7 +21,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
         test_name: "Checkout - Optimize User Interface [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00029,
+        test_version: 0.00031,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -607,6 +607,7 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                         required: true,
                         className: "col-12",
                         control_node_selector: "#cardName",
+                        dependency_node_selector: "input#ab-credit-debit",
                         value: "",
                         errorMessage: "",
                     },
@@ -1446,11 +1447,9 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
     //     controlNodes.forEach((controlNode) => {
     //         if (nativeInputValueSetter) {
-    //             console.log("=== if")
     //             nativeInputValueSetter.call(controlNode, value);
     //         }
     //         else {
-    //             console.log("==== else")
     //             controlNode.value = value;
     //         }
 
@@ -1467,21 +1466,17 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
         controlNodes.forEach((controlNode) => {
             if (!(controlNode instanceof HTMLInputElement)) {
-                console.log("==== if");
                 controlNode.value = value; // safe fallback for non-input elements
             } else {
-                console.log("==== else");
                 try {
-                    console.log("==== try");
                     nativeInputValueSetter.call(controlNode, value);
                 } catch (err) {
-                    console.log("==== catch");
                     controlNode.value = value;
                 }
             }
             controlNode.dispatchEvent(new InputEvent("input", { inputType: "insertText", data: value, bubbles: true, cancelable: true }));
             controlNode.dispatchEvent(new Event("change", { bubbles: true }));
-            controlNode.dispatchEvent(new Event("blur", { bubbles: true })); // in case updateOn:'blur'
+            // controlNode.dispatchEvent(new Event("blur", { bubbles: true })); // in case updateOn:'blur'
         });
 
         window.scrollTo(scrollPos.x, scrollPos.y);
@@ -1526,6 +1521,12 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
                 const controlNode = q(controlNodeSelector);
                 const dependencyNodeInputType = dependencyNode.getAttribute("type");
                 const dependencyDataObj = getElementData(dependencyNode);
+
+                if(dependencyNode.id && dependencyNode.id === 'ab-credit-debit') {
+                    dependencyNode.value = controlNode.value;
+                    handleFormErrorMessage(dependencyDataObj);
+                    return
+                }
 
                 let count = 0;
 
@@ -1603,9 +1604,8 @@ Preview: https://www.steinertractor.com/guestcheckout?convert_action=convert_vpr
 
                     // Handle control input updates
                     if (DATA["text_based_input_list"].some((type) => type === dataObj["inputType"])) {
-                        console.log("==== DataObj ====", dataObj);
-
                         handleTextBasedInputs(dataObj);
+
                     } else if (dataObj["inputType"] === "radio") {
                         // Add logic here
                     } else if (dataObj["inputType"] === "checkbox") {
