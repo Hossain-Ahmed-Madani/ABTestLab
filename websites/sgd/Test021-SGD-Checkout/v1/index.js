@@ -87,7 +87,7 @@
                 is_active: currentLocation.includes("/kursanmeldung/schritt/3.html"),
             },
         ];
-        
+
         return /* HTML */ `
             <div class="ab-progress">
                 ${progress_data
@@ -116,17 +116,46 @@
                 q(".registration-left").className = "col-12 col-lg-12 registration-left";
             })
             .catch(() => {});
+
+        // Step 1 - Page Changes
+        waitForElementAsync(
+            () =>
+                !window.location.href.includes("2.html") &&
+                !window.location.href.includes("3.html") &&
+                q(".registration-inner-container > .row > .form-field-course.form-group.form-input") &&
+                q(".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)"),
+        ).then(() => {
+            const preferredCourseHeader = q(".registration-inner-container > .row > h2.mt-4");
+            preferredCourseHeader.className = "ab-preferred-course-title";
+            const preferredCourseSelectionContainer = q(".registration-inner-container > .row > .form-field-course.form-group.form-input");
+            const row =  q(".registration-inner-container > .row");
+            row.classList.add('ab-row')
+            const p = q(".registration-inner-container > p");
+            const submitButtonContainer = q(".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)");
+            q(submitButtonContainer, 'button#submit1').innerText = "Weiter zu Zahlungsmöglichkeiten";
+
+            const div = document.createElement("div");
+            div.className = "ab-preferred-course-container";
+            div.insertAdjacentHTML("afterbegin", `<p class="ab-preferred-course-subtitle">In welchem Bereich möchtest du beruflich voran kommen?</p>`);
+            div.insertAdjacentElement("afterbegin", preferredCourseHeader);
+            div.insertAdjacentElement("beforeend", preferredCourseSelectionContainer);
+
+            q(".registration-inner-container").insertAdjacentElement("afterbegin", div);
+            
+            row.insertAdjacentElement("beforeend", submitButtonContainer);
+            row.insertAdjacentElement("beforeend", p);
+        });
     }
 
     function checkForItems() {
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1") && q(".container-md.registration"));
     }
 
-    try {
-        await waitForElementAsync(checkForItems);
-        init();
-    } catch (error) {
-        console.warn(error);
-        return false;
-    }
+    await waitForElementAsync(checkForItems);
+    init();
+    // try {
+    // } catch (error) {
+    //     console.warn(error);
+    //     return false;
+    // }
 })();
