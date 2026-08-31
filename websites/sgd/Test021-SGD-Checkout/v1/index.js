@@ -125,14 +125,15 @@
                 q(".registration-inner-container > .row > .form-field-course.form-group.form-input") &&
                 q(".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)"),
         ).then(() => {
+            // Other Sections
             const preferredCourseHeader = q(".registration-inner-container > .row > h2.mt-4");
             preferredCourseHeader.className = "ab-preferred-course-title";
             const preferredCourseSelectionContainer = q(".registration-inner-container > .row > .form-field-course.form-group.form-input");
-            const row =  q(".registration-inner-container > .row");
-            row.classList.add('ab-row')
+            const row = q(".registration-inner-container > .row");
+            row.classList.add("ab-row");
             const p = q(".registration-inner-container > p");
             const submitButtonContainer = q(".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)");
-            q(submitButtonContainer, 'button#submit1').innerText = "Weiter zu Zahlungsmöglichkeiten";
+            q(submitButtonContainer, "button#submit1").innerText = "Weiter zu Zahlungsmöglichkeiten";
 
             const div = document.createElement("div");
             div.className = "ab-preferred-course-container";
@@ -141,9 +142,95 @@
             div.insertAdjacentElement("beforeend", preferredCourseSelectionContainer);
 
             q(".registration-inner-container").insertAdjacentElement("afterbegin", div);
-            
+
             row.insertAdjacentElement("beforeend", submitButtonContainer);
             row.insertAdjacentElement("beforeend", p);
+
+            // Form Section
+            const firstNameGroup = q(".form-field-last-name.form-group");
+            const formEmailGroup = q(".form-field-email.form-group");
+            const formBirthGroup = q(".form-field-birth.form-group");
+            const formPostalCodeCol = q(".form-field-postal-code");
+            const formCityCol = q(".form-field-city");
+            const formStreetCol = q(".form-field-street");
+            const formHouseNoCol = q(".form-field-house-number");
+            const formLandGroup = q(".form-field-land.form-group");
+            const formTelephoneGroup = q(".form-field-phone.form-group");
+            const formStreetGroup = q(".form-field-group-street");
+
+            // Update Form Elements
+
+            // Email
+            const formEmailCol = document.createElement("div");
+            formEmailCol.classList.add("col-12");
+
+            const formEmailRow = document.createElement("div");
+            formEmailRow.className = "row";
+            formEmailCol.appendChild(formEmailRow);
+
+            formEmailRow.appendChild(formEmailGroup);
+            // First Name
+            firstNameGroup.insertAdjacentElement("afterend", formEmailCol);
+            formEmailCol.insertAdjacentElement("afterend", formBirthGroup);
+
+            // Date Share Info Desktop
+            formEmailGroup.insertAdjacentHTML(
+                "afterend",
+                /* HTML */ `
+                    <div class="col-12 col-lg-6 ab-data-share-info-group-desktop">
+                        <p>
+                            Alle Angaben dienen nur Ihrem Anmeldeprozess und werden vertraulich behandelt. <br />
+                            Keine Weitergabe. DSGVO-konform.
+                        </p>
+                    </div>
+                `,
+            );
+
+            // Post Code
+            formPostalCodeCol.classList.remove("col-md-3");
+            formPostalCodeCol.classList.add("col-md-2");
+            // City
+            formCityCol.classList.remove("col-md-9");
+            formCityCol.classList.add("col-md-6");
+            // Street
+            formStreetCol.classList.add("col-md-6");
+            // House
+            formHouseNoCol.classList.add("col-md-2");
+
+            // Land
+            const formLandCol = document.createElement("div");
+            formLandCol.classList.add("col-12");
+
+            const forLandRow = document.createElement("div");
+            forLandRow.className = "row";
+            formLandCol.appendChild(forLandRow);
+            forLandRow.appendChild(formLandGroup);
+
+            formStreetGroup.insertAdjacentElement("afterend", formLandCol);
+
+            // Telephone
+            const formTelephoneCol = document.createElement("div");
+            formTelephoneCol.classList.add("col-12");
+
+            const formTelephoneRow = document.createElement("div");
+            formTelephoneRow.className = "row";
+            formTelephoneCol.appendChild(formTelephoneRow);
+            formTelephoneRow.appendChild(formTelephoneGroup);
+
+            formLandCol.insertAdjacentElement("afterend", formTelephoneCol);
+
+            // Date Share Info Mobile
+            formTelephoneCol.insertAdjacentHTML(
+                "afterend",
+                /* HTML */ ` 
+                <div class="col-12 ab-data-share-info-group-mobile">
+                    <p>
+                        Alle Angaben dienen nur Ihrem Anmeldeprozess und werden vertraulich behandelt. <br />
+                        Keine Weitergabe. DSGVO-konform.
+                    </p>
+                </div>
+                `
+            );
         });
     }
 
@@ -154,6 +241,8 @@
     await waitForElementAsync(checkForItems);
     init();
     // try {
+    // await waitForElementAsync(checkForItems);
+    // init();
     // } catch (error) {
     //     console.warn(error);
     //     return false;
