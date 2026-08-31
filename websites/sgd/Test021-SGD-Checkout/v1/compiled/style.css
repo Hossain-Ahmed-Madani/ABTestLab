@@ -8,7 +8,8 @@
 .AB-TEST021-CHECKOUT .page-footer .footer-social,
 .AB-TEST021-CHECKOUT .page-footer .footer-nav,
 .AB-TEST021-CHECKOUT .page-footer .footer-others,
-.AB-TEST021-CHECKOUT .frame-space-after-small {
+.AB-TEST021-CHECKOUT .frame-space-after-small,
+.AB-TEST021-CHECKOUT .page-header .header-media.narrow-hero {
   display: none;
 }
 .AB-TEST021-CHECKOUT .page-header .header-elements .header-buttons,
@@ -98,7 +99,7 @@
   padding: 0 12px 16px;
 }
 .AB-TEST021-CHECKOUT h2.ab-preferred-course-title {
-  font-family: "Onest Bold";
+  font-family: "Onest SemiBold";
   font-weight: 500;
   font-size: 24px;
   line-height: 44px;
@@ -109,13 +110,42 @@
   margin-bottom: 0;
 }
 .AB-TEST021-CHECKOUT p.ab-preferred-course-subtitle {
-  font-family: "Onest Regular";
-  font-weight: 400;
+  font-family: "Onest SemiBold";
+  font-weight: 500;
   font-size: 10px;
   line-height: 44px;
   letter-spacing: 0px;
   vertical-align: middle;
   color: rgb(89, 89, 89);
+  margin-bottom: 0;
+}
+.AB-TEST021-CHECKOUT .ab-signup-text-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 17px;
+  margin-bottom: 4px;
+}
+.AB-TEST021-CHECKOUT .ab-signup-text-container span svg {
+  width: 15px;
+  height: 15px;
+}
+.AB-TEST021-CHECKOUT .ab-signup-text-container span svg rect {
+  width: 15px;
+  height: 15px;
+}
+.AB-TEST021-CHECKOUT .ab-signup-text-container p {
+  margin-bottom: 0;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 44px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+}
+.AB-TEST021-CHECKOUT .ab-signup-text-container p.ab-desktop {
+  display: none;
 }
 .AB-TEST021-CHECKOUT .ab-row {
   border: 1px solid rgb(178, 229, 128);
@@ -174,11 +204,13 @@
   font-family: "Onest Regular";
   font-weight: 400;
   font-size: 10px;
-  leading-trim: NONE;
   line-height: 20px;
   letter-spacing: 0px;
   vertical-align: middle;
   color: rgba(26, 43, 73, 0.7);
+}
+.AB-TEST021-CHECKOUT .ab-preferred-course-container .form-field-course {
+  margin: 0;
 }
 @media screen and (max-width: 991.5px) {
   .AB-TEST021-CHECKOUT .ab-mobile-hidden {
@@ -208,13 +240,15 @@
   .AB-TEST021-CHECKOUT main.page-content > .container-md:has(> h1),
   .AB-TEST021-CHECKOUT .container-md.registration {
     max-width: 897px;
+  }
+  .AB-TEST021-CHECKOUT .container-md.registration {
     padding: 0 24px 24px;
   }
   .AB-TEST021-CHECKOUT .registration .registration-left {
     padding-right: 0;
   }
   .AB-TEST021-CHECKOUT .registration .registration-left .registration-inner-container {
-    padding: 20px 11px 36px;
+    padding: 30px 11px 36px;
   }
   .AB-TEST021-CHECKOUT .ab-progress {
     gap: 23px;
@@ -248,8 +282,6 @@
     padding: 9px 13px 31px;
   }
   .AB-TEST021-CHECKOUT h2.ab-preferred-course-title {
-    font-family: "Onest Bold";
-    font-weight: 500;
     font-size: 34px;
     line-height: 44px;
     letter-spacing: 0px;
@@ -259,10 +291,39 @@
     margin-bottom: 0;
   }
   .AB-TEST021-CHECKOUT p.ab-preferred-course-subtitle {
-    font-weight: 500;
     font-size: 16px;
     line-height: 44px;
     letter-spacing: 0px;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 18px;
+    margin-top: 4px;
+    margin-bottom: 5px;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container span svg {
+    width: 20px;
+    height: 20px;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container span svg rect {
+    width: 20px;
+    height: 20px;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container p {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 44px;
+    letter-spacing: 0px;
+    vertical-align: middle;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container p.ab-mobile {
+    display: none;
+  }
+  .AB-TEST021-CHECKOUT .ab-signup-text-container p.ab-desktop {
+    display: block;
   }
   .AB-TEST021-CHECKOUT .ab-row Button#submit1 {
     width: 394px;
@@ -304,4 +365,45 @@
     letter-spacing: 0px;
     color: rgb(89, 89, 89);
   }
+}
+
+.AB-TEST021-CHECKOUT--STEP-1 .form-field-course {
+  border: 0;
+  border-bottom: 1px solid rgb(222, 226, 230);
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form-field-course > label {
+  display: none;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-field-course .was-validated .form-control:valid,
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-field-course .form-control.is-valid {
+  background-position: right calc(0.375em + 1.8rem) center;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input input {
+  border: 1px solid rgb(244, 244, 244);
+  height: 48px;
+  padding-left: 0.5rem;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input label {
+  padding-left: 0.5rem;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input label.active {
+  top: 0.275rem;
+  font-size: 0.75rem;
+  color: #25872d;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .was-validated .form-control:valid,
+.AB-TEST021-CHECKOUT--STEP-1 .form-control.is-valid {
+  background-size: calc(0.75em + 3px) calc(0.75em + 3px);
+}
+.AB-TEST021-CHECKOUT--STEP-1 .was-validated .form-control:invalid,
+.AB-TEST021-CHECKOUT--STEP-1 .form-control.is-invalid {
+  background-position: right 0.375em center;
+  background-size: calc(0.75em + 1.5px) calc(0.75em + 1.5px);
 }
