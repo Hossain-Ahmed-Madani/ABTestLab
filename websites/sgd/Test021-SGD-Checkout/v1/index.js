@@ -169,9 +169,7 @@
                 "afterend",
                 /* HTML */ `
                     <div class="ab-signup-text-container">
-                        <span>
-                            ${ASSETS.check_svg}
-                        </span>
+                        <span> ${ASSETS.check_svg} </span>
                         <p class="ab-mobile">Diesen Kurs 4 Wochen kostenlos testen</p>
                         <p class="ab-desktop">Jetzt anmelden und diesen Kurs 4 Wochen kostenlos testen</p>
                     </div>
@@ -274,13 +272,11 @@
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q("main.page-content > .container-md > h1") && q(".container-md.registration"));
     }
 
-    await waitForElementAsync(checkForItems);
-    init();
-    // try {
-    // await waitForElementAsync(checkForItems);
-    // init();
-    // } catch (error) {
-    //     console.warn(error);
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        console.warn(error);
+        return false;
+    }
 })();

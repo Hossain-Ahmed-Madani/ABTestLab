@@ -21,5 +21,7 @@ Design:
 https://www.figma.com/design/cnotnoemHrnvuMojFoapR0/Test021---Anmeldeformular---Ersten-schritt-optimieren?node-id=0-1&t=iyPgZBQCvAPqX3Px-1 
 
 
-Test Container:
-Forced Variation: 
+Test Container: https://app.varify.io/dashboard?msg=variation-updated&variation_id=62614&search=Test021+%5BSGD%5D+-+checkout+-+more+clarity+for+users+in+step+1
+Forced Variation: https://www.sgd.de/kursanmeldung.html?varify-force=41519-62614&varify-qa=true
+
+
