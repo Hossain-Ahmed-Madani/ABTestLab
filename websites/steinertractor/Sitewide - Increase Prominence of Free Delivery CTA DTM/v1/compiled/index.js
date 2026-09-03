@@ -122,7 +122,6 @@
                     </div>
                     <div class="item review-template">
                         <span class="stars">★★★★★</span>
-
                         <span class="review-text"> 2,300+ Google Reviews </span>
                     </div>
                 </div>
