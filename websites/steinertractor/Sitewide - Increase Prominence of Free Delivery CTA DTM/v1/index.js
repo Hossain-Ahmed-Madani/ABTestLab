@@ -11,37 +11,21 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
+    function q(selector, parent = document) {
+        return parent.querySelector(selector);
     }
 
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
+    function qq(selector, parent = document) {
+        return [...parent.querySelectorAll(selector)];
     }
 
-    async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
+    function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
         return new Promise((resolve, reject) => {
             if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
+                resolve(true);
+                return;
             }
 
             const interval = setInterval(() => {
@@ -49,148 +33,121 @@
 
                 if (elapsed >= timeout) {
                     clearInterval(interval);
-                    return reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`));
+                    reject(new Error(`Timeout of ${timeout}ms reached while waiting for condition`));
+                    return;
                 }
 
                 if (typeof predicate === "function" && predicate()) {
                     clearInterval(interval);
-                    return resolve(true);
+                    resolve(true);
                 }
             }, frequency);
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
+    function loadResource(type, url) {
         return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
+            let element;
+
+            if (type === "css") {
+                element = document.createElement("link");
+                element.rel = "stylesheet";
+                element.href = url;
+            } else {
+                element = document.createElement("script");
+                element.src = url;
+                element.async = true;
             }
 
-            new MutationObserver((mutationList, observer) => {
-                count++;
+            element.onload = resolve;
+            element.onerror = reject;
 
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
+            document.head.appendChild(element);
         });
     }
 
-    function q(s, o) {
-        return o ? s.querySelector(o) : document.querySelector(s);
+    async function loadOwlCarousel() {
+        // Wait for jQuery
+        await waitForElementAsync(() => window.jQuery && typeof window.jQuery === "function");
+
+        // Load Owl CSS
+        await loadResource("css", "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css");
+
+        // Load Owl JS
+        await loadResource("js", "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js");
+
+        // Make sure Owl has initialized on jQuery
+        await waitForElementAsync(() => window.jQuery && typeof window.jQuery.fn.owlCarousel === "function");
     }
 
-    function qq(s, o) {
-        return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
-    }
+    function initCarousel() {
+        const $carousel = window.jQuery(".ab-promotion-banner-container.owl-carousel");
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
+        if (!$carousel.length) {
+            return;
         }
+
+        if (typeof window.jQuery.fn.owlCarousel !== "function") {
+            return;
+        }
+
+        // Prevent duplicate initialization
+        if ($carousel.hasClass("owl-loaded")) {
+            return;
+        }
+
+        $carousel.owlCarousel({
+            items: 1,
+            loop: true,
+            autoplay: true,
+            autoplayTimeout: 8000,
+            autoplayHoverPause: false,
+            smartSpeed: 500,
+            nav: false,
+            dots: false,
+            mouseDrag: false,
+            touchDrag: false,
+        });
     }
 
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
-
-    function init() {
+    async function init() {
         if (window[page_initials] === true) return;
-        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`);
         window[page_initials] = true;
 
-        q(".review-template").classList.add('ab-hidden');
-
-
-        q(".review-template").insertAdjacentHTML(
+        // Hide original review
+        const originalReview = q(".review-template");
+        originalReview.classList.add("ab-hidden");
+        originalReview.insertAdjacentHTML(
             "beforebegin",
-            /* HTMl */ `
-            <div class="ab-promotion-banner-container owl-carousel">
-                <div class="item review-template ab-free-delivery">
-                    <span class="ab-icon">
-                        <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"/>
-                    </span>
-                    <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
+            /* HTML */ `
+                <div class="ab-promotion-banner-container owl-carousel">
+                    <div class="item review-template ab-free-delivery">
+                        <span class="ab-icon">
+                            <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png" alt="Free Delivery Icon" />
+                        </span>
+                        <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
+                    </div>
+                    <div class="item review-template">
+                        <span class="stars">★★★★★</span>
+
+                        <span class="review-text"> 2,300+ Google Reviews </span>
+                    </div>
                 </div>
-                <div class="item review-template">
-                    <span class="stars">★★★★★</span>
-                    <span class="review-text">2,300+ Google Reviews</span>
-                </div>
-            </div>
             `,
         );
 
-        console.table(TEST_CONFIG);
+        q(".ab-delivery-cta").addEventListener("click", (e) => {
+            q(".free-delivery-btn-header").click();
+        });
 
-        // $('.ab-promotion-banner-container.owl-carousel').owlCarousel({
-        //     loop:true,
-        //     margin:10,
-        //     nav:true,
-        //     responsive:{
-        //         0:{
-        //             items:1
-        //         },
-        //         600:{
-        //             items:3
-        //         },
-        //         1000:{
-        //             items:5
-        //         }
-        //     }
-        // })
+        // Load Owl and initialize
+        await loadOwlCarousel();
+        initCarousel();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".review-template"));
+        return !!(q(`body:not(.${page_initials})`) && q(".review-template") && q(".free-delivery-btn-header"));
     }
 
     try {

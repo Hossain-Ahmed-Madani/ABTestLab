@@ -13,13 +13,28 @@
 }
 
 .AB-FREE-DELIVERY-CTA {
-
-    .ab-hidden {
+    .ab-hidden,
+    .free-delivery-btn-header {
         display: none;
+    }
+
+    .container:has(> .review-template-navbar) {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .desktop-header {
+        margin-top: 0;
+    }
+
+    .ab-promotion-banner-container {
+        height: 35px;
+        overflow: hidden;
     }
 
     .ab-delivery-cta {
         text-decoration: underline;
+        cursor: pointer;
     }
 
     .ab-free-delivery {
@@ -27,7 +42,7 @@
         gap: 10px;
     }
 
-    .ab-free-delivery  .ab-icon img {
+    .ab-free-delivery .ab-icon img {
         width: 29px;
         height: auto;
     }
