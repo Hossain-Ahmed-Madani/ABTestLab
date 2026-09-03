@@ -292,12 +292,30 @@
 }
 .AB-TEST001
   .product-detail-content-inner-wrap-sticky
-  .product-detail-buy-box
-  .product-name__group
+  form.heart
+  .heart-default
+  .product-name__wishlist-icon,
+.AB-TEST001
+  .product-name
   form.heart
   .heart-default
   .product-name__wishlist-icon {
   display: none;
+}
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  .product-detail-buy-box
+  .product-name:has(> form.heart) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.AB-TEST001
+  .product-detail-content-inner-wrap-sticky
+  form.heart
+  .heart-default
+  svg {
+  margin-bottom: -2px;
 }
 @media screen and (max-width: 767.5px) {
   .AB-TEST001 .product-image-slider .productGalleryThumbSwiper {
@@ -541,7 +559,7 @@
     test_name: "Test001 [Trigema] - PDP - Visual Complexity of the PDP",
     page_initials: "AB-TEST001",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -549,6 +567,7 @@
   const ASSETS = {
     heart_icon: /* HTML */ `
       <svg
+        class="ab-heart-icon"
         width="19"
         height="17"
         viewBox="0 0 19 17"
@@ -626,11 +645,11 @@
 
     waitForElementAsync(() =>
       q(
-        ".product-detail-buy-box .product-name__group form.heart span.heart-default",
+        ".product-detail-buy-box form.heart span.heart-default:not(:has(> svg.ab-heart-icon))",
       ),
     ).then(() => {
       q(
-        ".product-detail-buy-box .product-name__group form.heart span.heart-default",
+        ".product-detail-buy-box form.heart span.heart-default",
       )?.insertAdjacentHTML("afterbegin", ASSETS.heart_icon);
     });
 
@@ -811,6 +830,20 @@
       .catch(() => {
         //
       });
+
+    setTimeout(() => {
+      if (
+        !q(".ab-review-value") &&
+        q(".product-detail-buy-box .product-name__group form.heart")
+      ) {
+        const watchListButton = q(
+          ".product-detail-buy-box .product-name__group form.heart",
+        );
+        q(
+          ".product-detail-content-inner-wrap-sticky h3.h3.product-name__name ",
+        ).insertAdjacentElement("afterend", watchListButton);
+      }
+    }, 1000);
   }
 
   function checkForItems() {
