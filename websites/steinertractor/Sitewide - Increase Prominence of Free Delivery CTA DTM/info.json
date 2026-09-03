@@ -1,0 +1,13 @@
+{
+  "id": "1788437766747_3805_Sitewide___Increase_Prominence_of_Free_Delivery_CTA_DTM",
+  "name": "Sitewide - Increase Prominence of Free Delivery CTA DTM",
+  "type": "A/B",
+  "website": "steinertractor",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-09-03T12:16:06.747Z",
+  "createdAtReadable": "9/3/2026, 6:16:06 PM",
+  "lastUpdated": "2026-09-03T12:16:06.973Z"
+}
