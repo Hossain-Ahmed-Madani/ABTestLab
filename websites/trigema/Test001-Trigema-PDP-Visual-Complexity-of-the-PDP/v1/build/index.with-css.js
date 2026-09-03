@@ -4,7 +4,11 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-TEST001 .slide-description:empty {
+      style.innerHTML = `.AB-TEST001 .slide-description:empty,
+.AB-TEST001
+  .product-name__group.product-name__group--items-center.product-name__group--gap-16:not(
+    :has(> *)
+  ) {
   display: none;
 }
 .AB-TEST001
@@ -553,13 +557,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "Trigema",
-    site_url: "https://www.trigema.de",
-    test_name: "Test001 [Trigema] - PDP - Visual Complexity of the PDP",
     page_initials: "AB-TEST001",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -630,8 +630,6 @@
       `${page_initials}--version:${test_version}`,
     );
     window[page_initials] = true;
-
-    console.table(TEST_CONFIG);
 
     q("head").insertAdjacentHTML(
       "beforeend",

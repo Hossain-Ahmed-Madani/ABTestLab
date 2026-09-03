@@ -1,4 +1,5 @@
-.AB-TEST001 .slide-description:empty {
+.AB-TEST001 .slide-description:empty,
+.AB-TEST001 .product-name__group.product-name__group--items-center.product-name__group--gap-16:not(:has(> *)) {
   display: none;
 }
 .AB-TEST001 .product-detail-content-inner-wrap-sticky .product-detail-buy-box .product-name__group.product-name__group--items-center {

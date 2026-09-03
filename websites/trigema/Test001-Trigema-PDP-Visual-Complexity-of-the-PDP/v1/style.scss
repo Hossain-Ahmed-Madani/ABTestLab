@@ -13,7 +13,8 @@
 }
 // .product-detail-content-inner-wrap-sticky
 .AB-TEST001 {
-    .slide-description:empty {
+    .slide-description:empty,
+    .product-name__group.product-name__group--items-center.product-name__group--gap-16:not(:has(> *)) {
         display: none;
     }
 
