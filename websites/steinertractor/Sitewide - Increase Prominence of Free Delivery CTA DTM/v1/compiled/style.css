@@ -1,0 +1,14 @@
+.AB-FREE-DELIVERY-CTA .ab-hidden {
+  display: none;
+}
+.AB-FREE-DELIVERY-CTA .ab-delivery-cta {
+  text-decoration: underline;
+}
+.AB-FREE-DELIVERY-CTA .ab-free-delivery {
+  display: flex;
+  gap: 10px;
+}
+.AB-FREE-DELIVERY-CTA .ab-free-delivery .ab-icon img {
+  width: 29px;
+  height: auto;
+}

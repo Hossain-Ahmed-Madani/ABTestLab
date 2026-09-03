@@ -144,19 +144,59 @@
     }
 
     function init() {
+        if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
+
+        q(".review-template").classList.add('ab-hidden');
+
+
+        q(".review-template").insertAdjacentHTML(
+            "beforebegin",
+            /* HTMl */ `
+            <div class="ab-promotion-banner-container owl-carousel">
+                <div class="item review-template ab-free-delivery">
+                    <span class="ab-icon">
+                        <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"/>
+                    </span>
+                    <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
+                </div>
+                <div class="item review-template">
+                    <span class="stars">★★★★★</span>
+                    <span class="review-text">2,300+ Google Reviews</span>
+                </div>
+            </div>
+            `,
+        );
+
         console.table(TEST_CONFIG);
+
+        // $('.ab-promotion-banner-container.owl-carousel').owlCarousel({
+        //     loop:true,
+        //     margin:10,
+        //     nav:true,
+        //     responsive:{
+        //         0:{
+        //             items:1
+        //         },
+        //         600:{
+        //             items:3
+        //         },
+        //         1000:{
+        //             items:5
+        //         }
+        //     }
+        // })
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".review-template"));
     }
 
     try {
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
