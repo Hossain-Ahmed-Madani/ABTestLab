@@ -11,6 +11,7 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -52,7 +53,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
