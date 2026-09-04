@@ -64,7 +64,7 @@
   letter-spacing: 0px;
   vertical-align: middle;
   color: #1a2b49;
-  margin-bottom: 23px;
+  margin-bottom: 15px;
 }
 .AB-TEST021-CHECKOUT
   .registration
@@ -133,9 +133,9 @@
 }
 .AB-TEST021-CHECKOUT p.ab-preferred-course-subtitle {
   font-family: "Onest SemiBold";
-  font-weight: 500;
+  font-weight: 400;
   font-size: 10px;
-  line-height: 34px;
+  line-height: 26px;
   letter-spacing: 0px;
   vertical-align: middle;
   color: rgb(89, 89, 89);
@@ -147,14 +147,15 @@
   align-items: center;
   gap: 17px;
   margin-bottom: 4px;
+  padding-left: 8px;
 }
 .AB-TEST021-CHECKOUT .ab-signup-text-container span svg {
   width: 15px;
   height: 15px;
 }
 .AB-TEST021-CHECKOUT .ab-signup-text-container span svg rect {
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
 }
 .AB-TEST021-CHECKOUT .ab-signup-text-container p {
   margin-bottom: 0;
@@ -236,9 +237,25 @@
 .AB-TEST021-CHECKOUT .ab-preferred-course-container .form-field-course {
   margin: 0;
 }
+@media screen and (max-width: 370px) {
+  .AB-TEST021-CHECKOUT .ab-row Button#submit1 {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .AB-TEST021-CHECKOUT .registration .registration-left {
+    padding: 0 1rem;
+  }
+}
 @media screen and (max-width: 991.5px) {
+  .AB-TEST021-CHECKOUT .ab-data-share-info-group-mobile p {
+    margin-bottom: 9px;
+  }
   .AB-TEST021-CHECKOUT .ab-mobile-hidden {
     display: none;
+  }
+  .AB-TEST021-CHECKOUT .header-company {
+    min-width: 84px;
   }
 }
 @media screen and (min-width: 992px) {
@@ -247,7 +264,7 @@
     .header-elements
     .header-wrapper {
     padding-top: 28px;
-    padding-bottom: 56px;
+    padding-bottom: 48px;
     border-bottom: 0;
     height: 164px;
   }
@@ -324,6 +341,7 @@
     font-size: 16px;
     line-height: 44px;
     letter-spacing: 0px;
+    font-weight: 500;
   }
   .AB-TEST021-CHECKOUT .ab-signup-text-container {
     display: flex;
@@ -332,6 +350,7 @@
     gap: 18px;
     margin-top: 4px;
     margin-bottom: 5px;
+    padding-left: 10px;
   }
   .AB-TEST021-CHECKOUT .ab-signup-text-container span svg {
     width: 20px;
@@ -397,8 +416,46 @@
   }
 }
 
+.AB-TEST021-CHECKOUT--STEP-1
+  .form
+  .form-group.form-input
+  .select-representation-input:not(.has-post-tool-select).is-invalid {
+  background-position: right calc(1.5em + 13px) center;
+}
 .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation {
   margin-top: 11px;
+  padding-left: 17px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-group-salutation,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-first-name,
+.AB-TEST021-CHECKOUT--STEP-1
+  .row.ab-row
+  > .col-12:has(> .row > .form-field-email),
+.AB-TEST021-CHECKOUT--STEP-1
+  .row.ab-row
+  > .col-12:has(> .row > .form-field-land),
+.AB-TEST021-CHECKOUT--STEP-1
+  .row.ab-row
+  > .col-12:has(> .row > .form-field-phone),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .col-12:has(> .form-check-checkable),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > div:has(> button#submit1),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-birth,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-group-city,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-group-street,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .ab-data-share-info-group-mobile,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > p {
+  padding-left: 17px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-4:has(> #selectDateMonth) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-8:has(> #locality),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-3:has(> #street_number) {
+  padding-left: 5px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-last-name {
+  padding-left: 17px;
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation label.btn {
   font-family: "Onest Regular";
@@ -419,10 +476,13 @@
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-field-course {
   border: 0;
-  border-bottom: 1px solid rgb(222, 226, 230);
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-field-course > label {
   display: none;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form-field-course > input#selectCourseInput {
+  border-bottom: 1px solid rgb(222, 226, 230);
+  height: 29px;
 }
 .AB-TEST021-CHECKOUT--STEP-1
   .form
@@ -467,7 +527,26 @@
   background-position: right 0.375em center;
   background-size: calc(0.75em + 1.5px) calc(0.75em + 1.5px);
 }
+@media screen and (max-width: 400px) {
+  .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input label {
+    font-size: 12px;
+  }
+}
+@media screen and (max-width: 991.5px) {
+  .AB-TEST021-CHECKOUT--STEP-1
+    .form
+    .form-field-course.form-group.form-input
+    .select-list-icon {
+    top: 0.5rem;
+  }
+}
 @media screen and (min-width: 992px) {
+  .AB-TEST021-CHECKOUT--STEP-1 .form-field-course > input#selectCourseInput {
+    height: 45px;
+  }
+  .AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-last-name {
+    padding-left: 5px;
+  }
   .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation {
     margin-top: 22px;
     margin-bottom: 15px;
@@ -494,7 +573,7 @@
     test_name: "Test021 [SGD] - checkout - more clarity for users in step 1",
     page_initials: "AB-TEST021-CHECKOUT",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -652,6 +731,12 @@
       const row = q(".registration-inner-container > .row");
       row.classList.add("ab-row");
       const p = q(".registration-inner-container > p");
+      p.innerHTML = `
+                Hier melden Sie sich schnell und sicher über unser Online-Formular für Ihren Lehrgang an. In wenigen Tagen erhalten Sie Ihr erstes Studienmaterial <br class="ab-mobile-hidden"/>
+                Mehr zu unserem Angebot finden Sie in den <a data-bs-target="#vertragsleistungen" data-bs-toggle="modal" href="">Vertragsleistungen (AGB)</a>, mehr zur Verarbeitung <br class="ab-mobile-hidden"/>
+                Ihrer Daten finden Sie in unserer <a data-bs-target="#datenschutzerklaerung" data-bs-toggle="modal" href="">Datenschutzerklärung</a>
+            `;
+
       const submitButtonContainer = q(
         ".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)",
       );
@@ -769,7 +854,6 @@
       formLandCol.insertAdjacentElement("afterend", formTelephoneCol);
 
       // Date Share Info Mobile
-
       formTelephoneCol.insertAdjacentHTML(
         "afterend",
         /* HTML */ `

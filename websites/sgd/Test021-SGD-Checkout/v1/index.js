@@ -6,7 +6,7 @@
         test_name: "Test021 [SGD] - checkout - more clarity for users in step 1",
         page_initials: "AB-TEST021-CHECKOUT",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -126,7 +126,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         q("main.page-content > .container-md > h1").innerText = "Sichere jetzt deinen Platz im Lehrgang";
         q(".container-md.registration").insertAdjacentHTML("afterbegin", getProgressLayout());
@@ -281,7 +280,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

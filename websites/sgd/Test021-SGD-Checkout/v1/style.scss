@@ -68,7 +68,7 @@
         letter-spacing: 0px;
         vertical-align: middle;
         color: #1a2b49;
-        margin-bottom: 23px;
+        margin-bottom: 15px;
     }
 
     .registration .registration-left .registration-inner-container {
@@ -149,9 +149,10 @@
 
     p.ab-preferred-course-subtitle {
         font-family: "Onest SemiBold";
-        font-weight: 500;
+        font-weight: 400;
         font-size: 10px;
-        line-height: 34px;
+        // line-height: 34px;
+        line-height: 26px;
         letter-spacing: 0px;
         vertical-align: middle;
         color: rgba(89, 89, 89, 1);
@@ -165,6 +166,7 @@
         align-items: center;
         gap: 17px;
         margin-bottom: 4px;
+        padding-left: 8px;
     }
 
     .ab-signup-text-container span svg {
@@ -173,8 +175,8 @@
     }
 
     .ab-signup-text-container span svg rect {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
     }
 
     .ab-signup-text-container p {
@@ -267,9 +269,32 @@
         margin: 0;
     }
 
+
+    @media screen and (max-width: 370px) {
+        .ab-row Button#submit1 {
+            font-size: 14px;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        .registration .registration-left {
+            padding: 0 1rem;
+        }
+    }
+
     @media screen and (max-width: 991.5px) {
+        .ab-data-share-info-group-mobile {
+            p {
+                margin-bottom: 9px;
+            }
+        }
+
         .ab-mobile-hidden {
             display: none;
+        }
+
+        .header-company {
+            min-width: 84px;
         }
     }
 
@@ -371,6 +396,7 @@
             font-size: 16px;
             line-height: 44px;
             letter-spacing: 0px;
+            font-weight: 500;
         }
 
         // Sign Up Test container
@@ -381,6 +407,7 @@
             gap: 18px;
             margin-top: 4px;
             margin-bottom: 5px;
+            padding-left: 10px;
         }
 
         .ab-signup-text-container span svg {
@@ -487,7 +514,7 @@
         padding-left: 5px;
         padding-right: 5px;
     }
-    .row.ab-row .col-8:has(> #locality) ,
+    .row.ab-row .col-8:has(> #locality),
     .row.ab-row .col-3:has(> #street_number) {
         padding-left: 5px;
     }
@@ -526,6 +553,7 @@
 
     .form-field-course > input#selectCourseInput {
         border-bottom: 1px solid rgba(222, 226, 230, 1);
+        height: 29px;
     }
 
     .form .form-group.form-field-course .was-validated .form-control:valid,
@@ -573,10 +601,23 @@
         background-position: right calc(0.375em) center;
         background-size: calc(0.75em + 1.5px) calc(0.75em + 1.5px);
     }
-    
 
+    @media screen and (max-width: 400px) {
+        .form .form-group.form-input label {
+            font-size: 12px;
+        }
+    }
+
+    @media screen and (max-width: 991.5px) {
+        .form .form-field-course.form-group.form-input .select-list-icon {
+            top: 0.5rem;
+        }
+    }
 
     @media screen and (min-width: 992px) {
+        .form-field-course > input#selectCourseInput {
+            height: 45px;
+        }
 
         .row.ab-row > .form-field-last-name {
             padding-left: 5px;
