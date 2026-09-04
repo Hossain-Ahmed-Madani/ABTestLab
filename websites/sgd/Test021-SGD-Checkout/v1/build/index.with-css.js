@@ -483,6 +483,13 @@
 .AB-TEST021-CHECKOUT--STEP-1 .form-field-course > input#selectCourseInput {
   border-bottom: 1px solid rgb(222, 226, 230);
   height: 29px;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
 }
 .AB-TEST021-CHECKOUT--STEP-1
   .form
@@ -502,6 +509,15 @@
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input label {
   padding-left: 0.5rem;
+  font-family: "Onest Regular";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  color: rgb(26, 43, 73);
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input input#country {
   font-family: "Onest Regular";
   font-weight: 400;
   font-size: 14px;
@@ -543,6 +559,11 @@
 @media screen and (min-width: 992px) {
   .AB-TEST021-CHECKOUT--STEP-1 .form-field-course > input#selectCourseInput {
     height: 45px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    vertical-align: middle;
   }
   .AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-last-name {
     padding-left: 5px;
@@ -555,6 +576,15 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
+    border-radius: 8px;
+  }
+  .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input label {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input input#country {
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 `;
@@ -569,7 +599,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-TEST021-CHECKOUT",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

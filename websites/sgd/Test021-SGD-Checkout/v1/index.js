@@ -6,7 +6,7 @@
         test_name: "Test021 [SGD] - checkout - more clarity for users in step 1",
         page_initials: "AB-TEST021-CHECKOUT",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
