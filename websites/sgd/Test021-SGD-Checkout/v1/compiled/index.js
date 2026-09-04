@@ -6,7 +6,7 @@
         test_name: "Test021 [SGD] - checkout - more clarity for users in step 1",
         page_initials: "AB-TEST021-CHECKOUT",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -123,6 +123,12 @@
             const row = q(".registration-inner-container > .row");
             row.classList.add("ab-row");
             const p = q(".registration-inner-container > p");
+            p.innerHTML = `
+                Hier melden Sie sich schnell und sicher über unser Online-Formular für Ihren Lehrgang an. In wenigen Tagen erhalten Sie Ihr erstes Studienmaterial <br class="ab-mobile-hidden"/>
+                Mehr zu unserem Angebot finden Sie in den <a data-bs-target="#vertragsleistungen" data-bs-toggle="modal" href="">Vertragsleistungen (AGB)</a>, mehr zur Verarbeitung <br class="ab-mobile-hidden"/>
+                Ihrer Daten finden Sie in unserer <a data-bs-target="#datenschutzerklaerung" data-bs-toggle="modal" href="">Datenschutzerklärung</a>
+            `;
+
             const submitButtonContainer = q(".d-flex.justify-content-end.mb-4.mb-lg-0.mt-4:has(>button#submit1)");
             q(submitButtonContainer, "button#submit1").innerText = "Weiter zu Zahlungsmöglichkeiten";
 
@@ -222,7 +228,6 @@
             formLandCol.insertAdjacentElement("afterend", formTelephoneCol);
 
             // Date Share Info Mobile
-
             formTelephoneCol.insertAdjacentHTML(
                 "afterend",
                 /* HTML */ `

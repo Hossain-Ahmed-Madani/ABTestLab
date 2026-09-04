@@ -276,7 +276,8 @@
     @media screen and (min-width: 992px) {
         .page-header:not(.pinned) .header-elements .header-wrapper {
             padding-top: 28px;
-            padding-bottom: 56px;
+            // padding-bottom: 56px;
+            padding-bottom: 48px;
             border-bottom: 0;
             height: 164px;
         }
@@ -458,8 +459,41 @@
 
 // Form
 .AB-TEST021-CHECKOUT--STEP-1 {
+    .form .form-group.form-input .select-representation-input:not(.has-post-tool-select).is-invalid {
+        background-position: right calc(1.5em + 13px) center;
+    }
+
     .form-group-salutation {
         margin-top: 11px;
+        padding-left: 17px;
+    }
+
+    .row.ab-row > .form-group-salutation,
+    .row.ab-row > .form-field-first-name,
+    .row.ab-row > .col-12:has(> .row > .form-field-email),
+    .row.ab-row > .col-12:has(> .row > .form-field-land),
+    .row.ab-row > .col-12:has(> .row > .form-field-phone),
+    .row.ab-row > .col-12:has(> .form-check-checkable),
+    .row.ab-row > div:has(> button#submit1),
+    .row.ab-row > .form-field-birth,
+    .row.ab-row > .form-field-group-city,
+    .row.ab-row > .form-field-group-street,
+    .row.ab-row > .ab-data-share-info-group-mobile,
+    .row.ab-row > p {
+        padding-left: 17px;
+    }
+
+    .row.ab-row .col-4:has(> #selectDateMonth) {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .row.ab-row .col-8:has(> #locality) ,
+    .row.ab-row .col-3:has(> #street_number) {
+        padding-left: 5px;
+    }
+
+    .row.ab-row > .form-field-last-name {
+        padding-left: 17px;
     }
 
     .form-group-salutation label.btn {
@@ -483,11 +517,15 @@
 
     .form-field-course {
         border: 0;
-        border-bottom: 1px solid rgba(222, 226, 230, 1);
+        // border-bottom: 1px solid rgba(222, 226, 230, 1);
     }
 
     .form-field-course > label {
         display: none;
+    }
+
+    .form-field-course > input#selectCourseInput {
+        border-bottom: 1px solid rgba(222, 226, 230, 1);
     }
 
     .form .form-group.form-field-course .was-validated .form-control:valid,
@@ -535,8 +573,15 @@
         background-position: right calc(0.375em) center;
         background-size: calc(0.75em + 1.5px) calc(0.75em + 1.5px);
     }
+    
+
 
     @media screen and (min-width: 992px) {
+
+        .row.ab-row > .form-field-last-name {
+            padding-left: 5px;
+        }
+
         .form-group-salutation {
             margin-top: 22px;
             margin-bottom: 15px;

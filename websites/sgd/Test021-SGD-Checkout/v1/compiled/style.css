@@ -220,7 +220,7 @@
 @media screen and (min-width: 992px) {
   .AB-TEST021-CHECKOUT .page-header:not(.pinned) .header-elements .header-wrapper {
     padding-top: 28px;
-    padding-bottom: 56px;
+    padding-bottom: 48px;
     border-bottom: 0;
     height: 164px;
   }
@@ -367,8 +367,37 @@
   }
 }
 
+.AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-input .select-representation-input:not(.has-post-tool-select).is-invalid {
+  background-position: right calc(1.5em + 13px) center;
+}
 .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation {
   margin-top: 11px;
+  padding-left: 17px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-group-salutation,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-first-name,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .col-12:has(> .row > .form-field-email),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .col-12:has(> .row > .form-field-land),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .col-12:has(> .row > .form-field-phone),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .col-12:has(> .form-check-checkable),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > div:has(> button#submit1),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-birth,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-group-city,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-group-street,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .ab-data-share-info-group-mobile,
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > p {
+  padding-left: 17px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-4:has(> #selectDateMonth) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-8:has(> #locality),
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row .col-3:has(> #street_number) {
+  padding-left: 5px;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-last-name {
+  padding-left: 17px;
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation label.btn {
   font-family: "Onest Regular";
@@ -389,10 +418,12 @@
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-field-course {
   border: 0;
-  border-bottom: 1px solid rgb(222, 226, 230);
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form-field-course > label {
   display: none;
+}
+.AB-TEST021-CHECKOUT--STEP-1 .form-field-course > input#selectCourseInput {
+  border-bottom: 1px solid rgb(222, 226, 230);
 }
 .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-field-course .was-validated .form-control:valid,
 .AB-TEST021-CHECKOUT--STEP-1 .form .form-group.form-field-course .form-control.is-valid {
@@ -431,6 +462,9 @@
   background-size: calc(0.75em + 1.5px) calc(0.75em + 1.5px);
 }
 @media screen and (min-width: 992px) {
+  .AB-TEST021-CHECKOUT--STEP-1 .row.ab-row > .form-field-last-name {
+    padding-left: 5px;
+  }
   .AB-TEST021-CHECKOUT--STEP-1 .form-group-salutation {
     margin-top: 22px;
     margin-bottom: 15px;
