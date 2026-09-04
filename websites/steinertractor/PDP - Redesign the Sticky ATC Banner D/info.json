@@ -1,0 +1,13 @@
+{
+  "id": "1788535015766_1448_PDP___Redesign_the_Sticky_ATC_Banner_D",
+  "name": "PDP - Redesign the Sticky ATC Banner D",
+  "type": "A/B",
+  "website": "steinertractor",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-09-04T15:16:55.766Z",
+  "createdAtReadable": "9/4/2026, 9:16:55 PM",
+  "lastUpdated": "2026-09-04T15:16:55.891Z"
+}
