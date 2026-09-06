@@ -14,6 +14,8 @@
   gap: 38px;
 }
 .AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1 {
+  padding-left: 15px;
+  width: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -103,9 +105,6 @@
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
-}
-.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1 {
-  width: auto;
 }
 .AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 {
   padding-top: 0;
