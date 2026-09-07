@@ -177,6 +177,9 @@
   display: flex;
   justify-content: flex-end;
 }
+.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
+  display: none;
+}
 @media screen and (max-width: 1334px) {
   .AB-STICKY-ATC-BANNER .product-detail-header-section h4.title,
   .AB-STICKY-ATC-BANNER .product-detail-header-section h4 span.price {

@@ -229,6 +229,10 @@
             justify-content: flex-end;
         }
 
+        .clearfix::after {
+            display: none;
+        }
+
         @media screen and (max-width: 1334px) {
             h4.title ,
             h4 span.price{
