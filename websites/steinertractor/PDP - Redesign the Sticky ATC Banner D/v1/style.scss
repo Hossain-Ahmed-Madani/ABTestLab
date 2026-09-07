@@ -38,7 +38,7 @@
             justify-content: flex-start;
             align-items: center;
         }
-        
+
         .header-section-4 {
             display: flex;
             justify-content: flex-end;
@@ -229,6 +229,13 @@
             justify-content: flex-end;
         }
 
+        @media screen and (max-width: 1334px) {
+            h4.title ,
+            h4 span.price{
+                font-size: 15px;
+            }
+        }
+
         @media screen and (min-width: 1002px) {
             & > div.container {
                 width: 100%;
@@ -238,6 +245,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                gap: 36px;
             }
         }
 

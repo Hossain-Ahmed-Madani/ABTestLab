@@ -1,4 +1,10 @@
-.AB-STICKY-ATC-BANNER:has(.product-detail-header-section) #sticky-search-bar {
+(function () {
+  var interval = setInterval(function () {
+    if (document.head) {
+      // Check if <head> exists
+      clearInterval(interval); // Stop checking once found
+      var style = document.createElement("style");
+      style.innerHTML = `.AB-STICKY-ATC-BANNER:has(.product-detail-header-section) #sticky-search-bar {
   box-shadow: none !important;
 }
 .AB-STICKY-ATC-BANNER .product-detail-header-section {
@@ -58,7 +64,9 @@
   margin-bottom: 0 !important;
   margin-right: 0 !important;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.eve-cart-submit[name=addtocart] {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  button.btn.eve-cart-submit[name="addtocart"] {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   background-color: #3d8b40;
@@ -75,10 +83,14 @@
   color: #ffffff;
   text-transform: none;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.eve-cart-submit[name=addtocart]:hover {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  button.btn.eve-cart-submit[name="addtocart"]:hover {
   color: #212529;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name=wishList] {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  button.btn.add_to_wishlist[name="wishList"] {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   background-color: #f3f5f6;
@@ -91,7 +103,10 @@
   max-width: 192px;
   height: 56px;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name=wishList] i {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  button.btn.add_to_wishlist[name="wishList"]
+  i {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +116,9 @@
   line-height: 100%;
   letter-spacing: 0px;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name=wishList]:hover {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  button.btn.add_to_wishlist[name="wishList"]:hover {
   color: #fff;
   background-color: #6c757d;
   border-color: #6c757d;
@@ -113,22 +130,36 @@
   margin-bottom: 0;
   height: 100%;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  .header-section-4
+  fieldset.cart {
   margin-bottom: 0;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  .header-section-4
+  fieldset.cart {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
   gap: 36px;
   justify-content: flex-end;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart .row {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  .header-section-4
+  fieldset.cart
+  .row {
   flex-wrap: nowrap;
   margin-left: 0;
   margin-right: 0;
 }
-.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart .row.w-100 {
+.AB-STICKY-ATC-BANNER
+  .product-detail-header-section
+  .header-section-4
+  fieldset.cart
+  .row.w-100 {
   flex-wrap: nowrap;
   gap: 36px;
   margin-left: 0;
@@ -201,3 +232,130 @@
     max-width: 1600px;
   }
 }
+`;
+      document.head.appendChild(style);
+      setTimeout(() => {
+        clearInterval(interval); // Clear the interval after 5 seconds
+      }, 5000);
+    }
+  }, 100); // Check every 100ms for <head>
+})();
+(async () => {
+  const TEST_CONFIG = {
+    client: "ROI Revolutions",
+    project: "steinertractor",
+    site_url: "https://www.steinertractor.com/",
+    test_name: "PDP - Redesign the Sticky ATC Banner [D]",
+    page_initials: "AB-STICKY-ATC-BANNER",
+    test_variation: 1,
+    test_version: 0.0001,
+  };
+
+  const { page_initials, test_variation, test_version } = TEST_CONFIG;
+
+  async function waitForElementAsync(
+    predicate,
+    timeout = 20000,
+    frequency = 150,
+  ) {
+    const startTime = Date.now();
+
+    return new Promise((resolve, reject) => {
+      if (typeof predicate === "function" && predicate()) {
+        return resolve(true);
+      }
+
+      const interval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+
+        if (elapsed >= timeout) {
+          clearInterval(interval);
+          return reject(
+            new Error(
+              `Timeout of ${timeout}ms reached while waiting for condition: ${predicate.toString()}`,
+            ),
+          );
+        }
+
+        if (typeof predicate === "function" && predicate()) {
+          clearInterval(interval);
+          return resolve(true);
+        }
+      }, frequency);
+    });
+  }
+
+  function q(s, o) {
+    return document.querySelector(s);
+  }
+
+  function qq(s, o) {
+    return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
+  }
+
+  function updateLayout() {
+    console.log(" ======= update layout ========");
+    const productDetailHeader = q(
+      ".product-detail-header-section:not(:has(.container))",
+    );
+    if (!productDetailHeader) return;
+
+    const container = document.createElement("div");
+    container.classList.add("container");
+    qq(productDetailHeader, ":scope > div").forEach((item) =>
+      container.appendChild(item),
+    );
+    productDetailHeader.appendChild(container);
+
+    q(".container#shop").insertAdjacentElement(
+      "beforebegin",
+      productDetailHeader,
+    );
+    q(".header-section-1").insertAdjacentElement(
+      "beforeend",
+      q(".header-section-2 h4.title"),
+    );
+    q(".header-section-4 .cart.clearfix").insertAdjacentElement(
+      "afterbegin",
+      q(".header-section-3 h4"),
+    );
+  }
+
+  function mutationObserverFunction() {
+    const targetNode = q(".container#shop");
+    return new MutationObserver(updateLayout).observe(targetNode, {
+      childList: true,
+      subtree: false,
+      attributes: false,
+    });
+  }
+
+  function init() {
+    q("body").classList.add(
+      page_initials,
+      `${page_initials}--v${test_variation}`,
+      `${page_initials}--version:${test_version}`,
+    );
+    console.table(TEST_CONFIG);
+
+    updateLayout();
+    mutationObserverFunction();
+  }
+
+  function checkForItems() {
+    return !!(
+      q(
+        `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
+      ) &&
+      q(".product-detail-header-section") &&
+      q(".container#shop")
+    );
+  }
+
+  try {
+    await waitForElementAsync(checkForItems);
+    init();
+  } catch (error) {
+    return false;
+  }
+})();
