@@ -65,7 +65,6 @@
     }
 
     function updateLayout() {
-        console.log(" ======= update layout ========");
         const productDetailHeader = q(".product-detail-header-section:not(:has(.container))");
         if (!productDetailHeader) return;
 
@@ -87,8 +86,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
-
         updateLayout();
         mutationObserverFunction();
     }
