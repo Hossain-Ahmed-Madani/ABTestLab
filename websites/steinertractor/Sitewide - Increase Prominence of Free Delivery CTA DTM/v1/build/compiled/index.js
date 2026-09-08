@@ -2,13 +2,17 @@
   const TEST_CONFIG = {
     page_initials: "AB-FREE-DELIVERY-CTA",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
   function q(selector, parent = document) {
     return parent.querySelector(selector);
+  }
+
+  function qq(selector, parent = document) {
+    return [...parent.querySelectorAll(selector)];
   }
 
   function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -87,11 +91,11 @@
   }
 
   function initCarousel() {
-    const $carousel = window.jQuery(
+    const $carousels = window.jQuery(
       ".ab-promotion-banner-container.owl-carousel",
     );
 
-    if (!$carousel.length) {
+    if (!$carousels.length) {
       return;
     }
 
@@ -99,22 +103,28 @@
       return;
     }
 
-    // Prevent duplicate initialization
-    if ($carousel.hasClass("owl-loaded")) {
-      return;
-    }
+    console.log("initCarousel");
 
-    $carousel.owlCarousel({
-      items: 1,
-      loop: true,
-      autoplay: true,
-      autoplayTimeout: 8000,
-      autoplayHoverPause: false,
-      smartSpeed: 500,
-      nav: false,
-      dots: false,
-      mouseDrag: false,
-      touchDrag: false,
+    $carousels.each(function () {
+      const $carousel = window.jQuery(this);
+
+      // Prevent duplicate initialization
+      if ($carousel.hasClass("owl-loaded")) {
+        return;
+      }
+
+      $carousel.owlCarousel({
+        items: 1,
+        loop: true,
+        autoplay: true,
+        autoplayTimeout: 8000,
+        autoplayHoverPause: false,
+        smartSpeed: 500,
+        nav: false,
+        dots: false,
+        mouseDrag: false,
+        touchDrag: false,
+      });
     });
   }
 
@@ -128,36 +138,45 @@
     window[page_initials] = true;
 
     // Hide original review
-    const originalReview = q(".review-template");
-    originalReview.classList.add("ab-hidden");
-    originalReview.insertAdjacentHTML(
-      "beforebegin",
-      /* HTML */ `
-        <div class="ab-promotion-banner-container owl-carousel">
-          <div class="item review-template ab-free-delivery">
-            <span class="ab-icon">
-              <img
-                src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"
-                alt="Free Delivery Icon"
-              />
-            </span>
-            <span class="review-text"
-              >Learn How to
-              <span class="ab-delivery-cta">Get FREE Delivery</span></span
-            >
+    const originalReviewItems = qq(".review-template, .review-template-navbar");
+    originalReviewItems.forEach((reviewItem) => {
+      // review-template-navbar, review-template
+      const className = reviewItem.className;
+      reviewItem.classList.add("ab-hidden");
+      reviewItem.insertAdjacentHTML(
+        "beforebegin",
+        /* HTML */ `
+          <div
+            class="ab-promotion-banner-container ab-promotion-banner-container--${className} owl-carousel"
+          >
+            <div class="item ${className} ab-free-delivery">
+              <span class="ab-icon">
+                <img
+                  src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"
+                  alt="Free Delivery Icon"
+                />
+              </span>
+              <span class="review-text"
+                >Learn How to
+                <span class="ab-delivery-cta">Get FREE Delivery</span></span
+              >
+            </div>
+            <div class="item ${className}">
+              <span class="stars">★★★★★</span>
+              <span class="review-text">
+                ${q(".review-template .review-text").textContent}
+              </span>
+            </div>
           </div>
-          <div class="item review-template">
-            <span class="stars">★★★★★</span>
-
-            <span class="review-text"> 2,300+ Google Reviews </span>
-          </div>
-        </div>
-      `,
-    );
-
-    q(".ab-delivery-cta").addEventListener("click", (e) => {
-      q(".free-delivery-btn-header").click();
+        `,
+      );
     });
+
+    qq(".ab-delivery-cta").forEach((item) =>
+      item.addEventListener("click", (e) => {
+        q(".free-delivery-btn-header").click();
+      }),
+    );
 
     // Load Owl and initialize
     await loadOwlCarousel();
@@ -168,6 +187,7 @@
     return !!(
       q(`body:not(.${page_initials})`) &&
       q(".review-template") &&
+      q(".review-template-navbar") &&
       q(".free-delivery-btn-header")
     );
   }

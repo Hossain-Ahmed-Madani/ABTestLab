@@ -28,7 +28,7 @@
     }
 
     .ab-promotion-banner-container {
-        height: 35px;
+        height: 44px;
         overflow: hidden;
     }
 
@@ -45,5 +45,29 @@
     .ab-free-delivery .ab-icon img {
         width: 29px;
         height: auto;
+    }
+
+    .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
+        display: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        #deliveryModalWrapper #deliveryModal {
+            margin-top: 30px;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-promotion-banner-container {
+            height: 35px;
+        }
+
+        .ab-promotion-banner-container.ab-promotion-banner-container--review-template-navbar {
+            display: none;
+        }
+
+        .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
+            display: block;
+        }
     }
 }

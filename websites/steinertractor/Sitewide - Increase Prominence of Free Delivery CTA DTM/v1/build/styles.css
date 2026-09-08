@@ -10,7 +10,7 @@
     margin-top: 0;
 }
 .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container {
-    height: 35px;
+    height: 44px;
     overflow: hidden;
 }
 .AB-FREE-DELIVERY-CTA .ab-delivery-cta {
@@ -24,4 +24,23 @@
 .AB-FREE-DELIVERY-CTA .ab-free-delivery .ab-icon img {
     width: 29px;
     height: auto;
+}
+.AB-FREE-DELIVERY-CTA .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .AB-FREE-DELIVERY-CTA #deliveryModalWrapper #deliveryModal {
+        margin-top: 30px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container {
+        height: 35px;
+    }
+    .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container.ab-promotion-banner-container--review-template-navbar {
+        display: none;
+    }
+    .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
+        display: block;
+    }
 }
