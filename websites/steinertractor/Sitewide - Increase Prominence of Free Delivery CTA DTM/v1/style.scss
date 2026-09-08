@@ -52,6 +52,10 @@
     }
 
     @media screen and (max-width: 768px) {
+        #deliveryModalWrapper #deliveryModal.modal-content {
+            overflow: hidden;
+        }
+
         #deliveryModalWrapper #deliveryModal {
             margin-top: 30px;
         }

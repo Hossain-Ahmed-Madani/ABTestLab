@@ -36,6 +36,9 @@
   display: none;
 }
 @media screen and (max-width: 768px) {
+  .AB-FREE-DELIVERY-CTA #deliveryModalWrapper #deliveryModal.modal-content {
+    overflow: hidden;
+  }
   .AB-FREE-DELIVERY-CTA #deliveryModalWrapper #deliveryModal {
     margin-top: 30px;
   }
@@ -65,7 +68,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-FREE-DELIVERY-CTA",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
