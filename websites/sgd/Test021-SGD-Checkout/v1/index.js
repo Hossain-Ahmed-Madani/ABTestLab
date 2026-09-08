@@ -6,7 +6,7 @@
         test_name: "Test021 [SGD] - checkout - more clarity for users in step 1",
         page_initials: "AB-TEST021-CHECKOUT",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -168,6 +168,8 @@
             referredCourseContainer.insertAdjacentElement("afterbegin", preferredCourseHeader);
             referredCourseContainer.insertAdjacentElement("beforeend", preferredCourseSelectionContainer);
 
+            // q('label[for="selectCourseInput"]').innerText = 'Wähle jetzt aus';
+
             q(".registration-inner-container").insertAdjacentElement("afterbegin", referredCourseContainer);
 
             referredCourseContainer.insertAdjacentHTML(
@@ -264,7 +266,7 @@
                     <div class="col-12 ab-data-share-info-group-mobile">
                         <p>
                             Alle Angaben dienen nur Ihrem Anmeldeprozess und werden vertraulich behandelt. <br />
-                            Keine Weitergabe. DSGVO-konform.
+                            Keine Weitergabe. Keine Werbung. DSGVO-konform.
                         </p>
                     </div>
                 `,
