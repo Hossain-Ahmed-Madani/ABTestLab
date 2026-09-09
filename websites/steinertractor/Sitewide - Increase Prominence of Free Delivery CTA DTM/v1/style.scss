@@ -51,6 +51,12 @@
         display: none;
     }
 
+    &--safari {
+        #deliveryModalWrapper #deliveryModal.modal-content {
+            overflow: hidden;
+        }
+    }
+
     @media screen and (max-width: 768px) {
         #deliveryModalWrapper #deliveryModal.modal-content {
             overflow: hidden;

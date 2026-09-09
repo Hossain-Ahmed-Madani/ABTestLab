@@ -45,6 +45,11 @@
     });
   }
 
+  function isSafari() {
+    const userAgent = navigator.userAgent;
+    return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+  }
+
   function loadResource(type, url) {
     return new Promise((resolve, reject) => {
       let element;
@@ -103,8 +108,6 @@
       return;
     }
 
-    console.log("initCarousel");
-
     $carousels.each(function () {
       const $carousel = window.jQuery(this);
 
@@ -135,6 +138,7 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version-${test_version}`,
     );
+    if (isSafari()) q("body").classList.add(`${page_initials}--safari`);
     window[page_initials] = true;
 
     // Hide original review

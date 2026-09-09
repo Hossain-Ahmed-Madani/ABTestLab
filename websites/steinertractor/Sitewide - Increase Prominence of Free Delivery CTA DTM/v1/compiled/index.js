@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-FREE-DELIVERY-CTA",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -39,6 +39,11 @@
                 }
             }, frequency);
         });
+    }
+
+    function isSafari() {
+        const userAgent = navigator.userAgent;
+        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
     }
 
     function loadResource(type, url) {
@@ -87,8 +92,6 @@
             return;
         }
 
-        console.log("initCarousel");
-
         $carousels.each(function () {
             const $carousel = window.jQuery(this);
 
@@ -115,6 +118,7 @@
     async function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version-${test_version}`);
+        if (isSafari()) q("body").classList.add(`${page_initials}--safari`);
         window[page_initials] = true;
 
         // Hide original review

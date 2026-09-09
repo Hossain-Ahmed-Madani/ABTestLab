@@ -28,6 +28,9 @@
 .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
     display: none;
 }
+.AB-FREE-DELIVERY-CTA--safari #deliveryModalWrapper #deliveryModal.modal-content {
+    overflow: hidden;
+}
 @media screen and (max-width: 768px) {
     .AB-FREE-DELIVERY-CTA #deliveryModalWrapper #deliveryModal.modal-content {
         overflow: hidden;
