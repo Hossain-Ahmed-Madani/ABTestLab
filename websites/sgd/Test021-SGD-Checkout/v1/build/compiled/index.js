@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-TEST021-CHECKOUT",
     test_variation: 1,
-    test_version: 0.0004,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -186,6 +186,8 @@
         preferredCourseSelectionContainer,
       );
 
+      // q('label[for="selectCourseInput"]').innerText = 'Wähle jetzt aus';
+
       q(".registration-inner-container").insertAdjacentElement(
         "afterbegin",
         referredCourseContainer,
@@ -289,7 +291,7 @@
             <p>
               Alle Angaben dienen nur Ihrem Anmeldeprozess und werden
               vertraulich behandelt. <br />
-              Keine Weitergabe. DSGVO-konform.
+              Keine Weitergabe. Keine Werbung. DSGVO-konform.
             </p>
           </div>
         `,

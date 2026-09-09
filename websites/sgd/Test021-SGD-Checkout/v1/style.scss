@@ -269,6 +269,11 @@
         margin: 0;
     }
 
+    @media screen and (max-width: 360px) {
+        main.page-content > .container-md > h1  {
+            font-size: 18px;
+        }
+    }
     @media screen and (max-width: 370px) {
         .ab-row Button#submit1 {
             font-size: 14px;
@@ -282,6 +287,10 @@
     }
 
     @media screen and (max-width: 991.5px) {
+        .registration .registration-left {
+            padding-bottom: 28px;
+        }
+
         .ab-data-share-info-group-mobile {
             p {
                 margin-bottom: 9px;
