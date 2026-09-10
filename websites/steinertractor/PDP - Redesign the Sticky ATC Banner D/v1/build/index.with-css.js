@@ -70,7 +70,6 @@
   margin-top: 0 !important;
   margin-bottom: 0 !important;
   background-color: #3d8b40;
-  box-shadow: 0px 4px 10px 0px rgba(61, 139, 64, 0.2);
   border-radius: 10px;
   width: 247px;
   min-width: 247px;
@@ -208,6 +207,9 @@
   display: flex;
   justify-content: flex-end;
 }
+.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
+  display: none;
+}
 @media screen and (max-width: 1334px) {
   .AB-STICKY-ATC-BANNER .product-detail-header-section h4.title,
   .AB-STICKY-ATC-BANNER .product-detail-header-section h4 span.price {
@@ -242,10 +244,6 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "steinertractor",
-    site_url: "https://www.steinertractor.com/",
-    test_name: "PDP - Redesign the Sticky ATC Banner [D]",
     page_initials: "AB-STICKY-ATC-BANNER",
     test_variation: 1,
     test_version: 0.0001,
@@ -294,7 +292,6 @@
   }
 
   function updateLayout() {
-    console.log(" ======= update layout ========");
     const productDetailHeader = q(
       ".product-detail-header-section:not(:has(.container))",
     );
@@ -336,8 +333,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
-
     updateLayout();
     mutationObserverFunction();
   }

@@ -1,9 +1,5 @@
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "steinertractor",
-    site_url: "https://www.steinertractor.com/",
-    test_name: "PDP - Redesign the Sticky ATC Banner [D]",
     page_initials: "AB-STICKY-ATC-BANNER",
     test_variation: 1,
     test_version: 0.0001,
@@ -52,7 +48,6 @@
   }
 
   function updateLayout() {
-    console.log(" ======= update layout ========");
     const productDetailHeader = q(
       ".product-detail-header-section:not(:has(.container))",
     );
@@ -94,8 +89,6 @@
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
-
     updateLayout();
     mutationObserverFunction();
   }
