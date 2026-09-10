@@ -6,7 +6,7 @@
         test_name: "H & L - A/B test idea - Adhesive Backed Product Names",
         page_initials: "AB-ADHESIVE-BACKED-PRODUCT-NAME",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -300,48 +300,51 @@
         window[page_initials] = true;
 
         // PLP Page , Search Result Page
-        if (q("body.page-products")) {
-            qq("body.page-products .product-item-link .text-primary.font-bold.text-lg")?.forEach(updateProductTitle);
-            mutationObserverFunctionSearchResultPage();
-        }
+        waitForElementAsync(() => q("body.page-products"))
+            .then(() => {
+                qq("body.page-products .product-item-link .text-primary.font-bold.text-lg")?.forEach(updateProductTitle);
+                mutationObserverFunctionSearchResultPage();
+            })
+            .catch(() => {});
 
         // PDP Page
-        if (q("body.catalog-product-view")) {
-            updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
-            const pdpProductTitle = q("body.catalog-product-view h1.page-title span");
-            updateProductTitlePDPHeader(pdpProductTitle);
-            window.addEventListener("configurable-selection-changed", (e) => {
-                setTimeout(() => updateProductTitlePDPHeader(pdpProductTitle), 100);
-            });
+        waitForElementAsync(() => q("body.catalog-product-view"))
+            .then(async () => {
+                updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
+                const pdpProductTitle = q("body.catalog-product-view h1.page-title span");
+                updateProductTitlePDPHeader(pdpProductTitle);
+                window.addEventListener("configurable-selection-changed", (e) => {
+                    setTimeout(() => updateProductTitlePDPHeader(pdpProductTitle), 100);
+                });
 
-            await waitForElementAsync(() => document.readyState === "complete");
-            qq("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
-        }
+                await waitForElementAsync(() => document.readyState === "complete");
+                qq("body.catalog-product-view .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
+            })
+            .catch(() => {});
 
         // Side Cart Section
-        if (q("#cart-drawer #cartDrawerContent")) {
-            qq("#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1")?.forEach(updateProductTitleSideCart);
-            qq("#cart-drawer .product-title")?.forEach(updateProductTitle);
-            mutationObserverFunctionSideCart();
-        }
+        waitForElementAsync(() => q("#cart-drawer #cartDrawerContent"))
+            .then(() => {
+                qq("#cart-drawer .flex.items-start.justify-between.gap-1 .flex.flex-col.gap-1")?.forEach(updateProductTitleSideCart);
+                qq("#cart-drawer .product-title")?.forEach(updateProductTitle);
+                mutationObserverFunctionSideCart();
+            })
+            .catch(() => {});
 
         // Cart Page
-        if (q("body.checkout-cart-index")) {
-            qq("body.checkout-cart-index .product-item-name")?.forEach(updateProductTitleCartPage);
-            qq("body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
-            mutationObserverFunctionCartPage();
-        }
+        waitForElementAsync(() => q("body.checkout-cart-index"))
+            .then(() => {
+                qq("body.checkout-cart-index .product-item-name")?.forEach(updateProductTitleCartPage);
+                qq("body.checkout-cart-index .pdp-slider-container .pdp-slider .product-title")?.forEach(updateProductTitle);
+                mutationObserverFunctionCartPage();
+            })
+            .catch(() => {});
 
         clickFunction();
     }
 
     function checkForItems() {
-        return !!(
-            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            (q("body.page-products .product-item-link .text-primary.font-bold.text-lg") ||
-                q("body.catalog-product-view h1.page-title span") ||
-                q("body.checkout-cart-index .product-item-name"))
-        );
+        return !!q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`);
     }
 
     try {
