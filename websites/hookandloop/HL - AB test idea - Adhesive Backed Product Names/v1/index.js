@@ -307,10 +307,16 @@
             })
             .catch(() => {});
 
+        // PDP Page | Breadcrumb
+        waitForElementAsync(() => q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"))
+            .then(() => {
+                updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
+            })
+            .catch(() => {});
+
         // PDP Page
         waitForElementAsync(() => q("body.catalog-product-view"))
             .then(async () => {
-                updateProductTitlePDPBreadCrumb(q("body.catalog-product-view .breadcrumbs ul.items > li.item:last-child > span"));
                 const pdpProductTitle = q("body.catalog-product-view h1.page-title span");
                 updateProductTitlePDPHeader(pdpProductTitle);
                 window.addEventListener("configurable-selection-changed", (e) => {
