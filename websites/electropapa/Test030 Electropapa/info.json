@@ -1,0 +1,13 @@
+{
+  "id": "1789120846865_3276_Test030_Electropapa",
+  "name": "Test030 Electropapa",
+  "type": "A/B",
+  "website": "electropapa",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-09-11T10:00:46.865Z",
+  "createdAtReadable": "9/11/2026, 4:00:46 PM",
+  "lastUpdated": "2026-09-11T10:00:46.989Z"
+}
