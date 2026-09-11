@@ -267,7 +267,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
 @media screen and (min-width: 1002px) {
   body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section {
     top: 90px;
-    z-index: 1000;
+    z-index: 100;
   }
 }
 `;
@@ -328,7 +328,6 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
   }
 
   function updateLayout() {
-    console.log("==== update layout ====");
     const productDetailHeader = q(
       ".product-detail-header-section:not(:has(.container))",
     );

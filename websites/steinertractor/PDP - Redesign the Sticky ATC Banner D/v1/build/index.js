@@ -48,7 +48,6 @@
   }
 
   function updateLayout() {
-    console.log("==== update layout ====");
     const productDetailHeader = q(
       ".product-detail-header-section:not(:has(.container))",
     );
