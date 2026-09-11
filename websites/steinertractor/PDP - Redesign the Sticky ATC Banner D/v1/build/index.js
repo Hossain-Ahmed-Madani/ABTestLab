@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-STICKY-ATC-BANNER",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -48,6 +48,7 @@
   }
 
   function updateLayout() {
+    console.log("==== update layout ====");
     const productDetailHeader = q(
       ".product-detail-header-section:not(:has(.container))",
     );

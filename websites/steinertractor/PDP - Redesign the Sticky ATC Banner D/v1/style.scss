@@ -12,15 +12,17 @@
     }
 }
 
-.AB-STICKY-ATC-BANNER {
+body#Body.AB-STICKY-ATC-BANNER {
     &:has(.product-detail-header-section) #sticky-search-bar {
         box-shadow: none !important;
+        border-bottom: 1px solid #ced4da;
     }
 
     .product-detail-header-section {
-        border-top: 1px solid #ced4da;
+        border-top: none;
         box-shadow: 0px 4px 16px 0px #0000001a;
         height: 120px;
+        overflow: hidden;
 
         .header-section-1,
         .header-section-3 {
@@ -87,6 +89,7 @@
         }
 
         button.btn.eve-cart-submit[name="addtocart"] {
+            border: none;
             margin-top: 0 !important;
             margin-bottom: 0 !important;
 
@@ -257,7 +260,15 @@
             & > div.container {
                 min-width: 1140px;
                 max-width: 1600px;
+                height: auto;
             }
+        }
+    }
+
+    @media screen and (min-width: 1002px) {
+        .product-detail-header-section {
+            top: 90px;
+            z-index: 1000;
         }
     }
 }

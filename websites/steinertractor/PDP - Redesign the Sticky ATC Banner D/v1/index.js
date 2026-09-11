@@ -6,7 +6,7 @@
         test_name: "PDP - Redesign the Sticky ATC Banner [D]",
         page_initials: "AB-STICKY-ATC-BANNER",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -80,7 +80,7 @@
 
     function mutationObserverFunction() {
         const targetNode = q(".container#shop");
-        const debouncedUpdate = debounce(updateLayout, 100);
+        const debouncedUpdate = debounce(updateLayout, 50);
         return new MutationObserver(updateLayout).observe(targetNode, { childList: true, subtree: false, attributes: false });
     }
 
