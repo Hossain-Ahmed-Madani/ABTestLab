@@ -63,7 +63,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4 {
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4.title {
   font-weight: 700;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0px;
   color: #333333;
   text-align: left;
@@ -72,7 +72,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4.title {
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4 span.price {
   font-weight: 700;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0px;
   color: #111827;
   margin-bottom: 0 !important;
@@ -92,7 +92,7 @@ body#Body.AB-STICKY-ATC-BANNER
   height: 56px;
   font-weight: 700;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0px;
   color: #ffffff;
   text-transform: none;
@@ -127,7 +127,7 @@ body#Body.AB-STICKY-ATC-BANNER
   gap: 10px;
   font-weight: 400;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0px;
 }
 body#Body.AB-STICKY-ATC-BANNER
@@ -222,7 +222,7 @@ body#Body.AB-STICKY-ATC-BANNER
   text-align: center;
   font-weight: 700;
   font-size: 18px;
-  line-height: 100%;
+  line-height: 1.2;
   letter-spacing: 0px;
   color: #333333;
   border: none;
