@@ -6,7 +6,7 @@
         test_name: "Test001 [Trigema] - PDP - Visual Complexity of the PDP",
         page_initials: "AB-TEST001",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -81,6 +81,36 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    function calculateAverageRating() {
+        const ratingItems = qq(".product-detail-buy-box .rating-bars-item");
+    
+        if (ratingItems.length === 0) return null;
+    
+        let totalRating = 0;
+        let totalReviews = 0;
+    
+        ratingItems.forEach((item) => {
+            const rating = Number(
+                item.querySelector(".rating-bars-star-number")?.dataset.commentFilter
+            );
+    
+            const reviews = Number(
+                item.querySelector("strong")?.textContent.trim()
+            );
+    
+            if (!Number.isNaN(rating) && !Number.isNaN(reviews)) {
+                totalRating += rating * reviews;
+                totalReviews += reviews;
+            }
+        });
+    
+        const averageRating = totalReviews ? totalRating / totalReviews : 0;
+    
+        return Number.isInteger(averageRating)
+            ? averageRating
+            : averageRating.toFixed(1);
+    }
+
     function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
@@ -122,7 +152,8 @@
                     if (+txt >= 0 && +txt <= 5) {
                         item.classList.add("ab-review-value");
                         const newTxt = txt.replace(/\./g, ",");
-                        item.innerText = newTxt + "/5";
+                        const averageRating = calculateAverageRating();
+                        item.innerText = (averageRating ? averageRating : newTxt) + "/5";
                     }
 
                     if (txt.includes("Bewertungen")) {
