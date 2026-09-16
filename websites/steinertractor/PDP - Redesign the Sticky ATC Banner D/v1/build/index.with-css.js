@@ -12,7 +12,7 @@
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section {
   border-top: none;
   box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1019607843);
-  height: 120px;
+  height: 100px;
   overflow: hidden;
 }
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1,
@@ -45,8 +45,8 @@ body#Body.AB-STICKY-ATC-BANNER
   .product-detail-header-section
   .header-section-1
   img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border: 1.13px solid #ced4da;
   border-radius: 4.53px;
   object-fit: contain;
@@ -71,7 +71,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4.title {
 }
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4 span.price {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0px;
   color: #111827;
@@ -246,7 +246,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
     .product-detail-header-section
     > div.container {
     width: 100%;
-    height: 120px;
+    height: auto;
     padding-top: 0;
     padding-left: 0;
     display: flex;
@@ -282,7 +282,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
   const TEST_CONFIG = {
     page_initials: "AB-STICKY-ATC-BANNER",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
