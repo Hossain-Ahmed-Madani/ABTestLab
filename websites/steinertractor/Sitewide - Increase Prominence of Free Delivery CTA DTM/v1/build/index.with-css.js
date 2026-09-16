@@ -19,6 +19,7 @@
   height: 44px;
   overflow: hidden;
   position: relative;
+  background: #38761d;
 }
 .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .stars {
   margin-top: -3px;
@@ -165,7 +166,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-FREE-DELIVERY-CTA",
     test_variation: 1,
-    test_version: 0.0005,
+    test_version: 0.0006,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -285,7 +286,7 @@
         autoplay: true,
         autoplayTimeout: 8000,
         autoplayHoverPause: false,
-        smartSpeed: 1000,
+        smartSpeed: 250,
         animateOut: "fadeOut",
         animateIn: "fadeIn",
         autoplayHoverPause: true,
@@ -307,6 +308,8 @@
     if (isSafari()) q("body").classList.add(`${page_initials}--safari`);
     window[page_initials] = true;
 
+    const first_bucket = !!window.sessionStorage.getItem(page_initials);
+
     // Hide original review
     const originalReviewItems = qq(".review-template, .review-template-navbar");
     originalReviewItems.forEach((reviewItem) => {
@@ -319,28 +322,39 @@
           <div
             class="ab-promotion-banner-container ab-promotion-banner-container--${className} owl-carousel"
           >
-            <div class="item ${className} ab-free-delivery">
-              <span class="ab-icon">
-                <img
-                  src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"
-                  alt="Free Delivery Icon"
-                />
-              </span>
-              <span class="review-text"
-                >Learn How to
-                <span class="ab-delivery-cta">Get FREE Delivery</span></span
-              >
-            </div>
-            <div class="item ${className}">
-              <span class="stars">★★★★★</span>
-              <span class="review-text">
-                ${q(".review-template .review-text").textContent}
-              </span>
-            </div>
+            ${!first_bucket
+              ? `
+                            <div class="item ${className} ab-free-delivery">
+                                <span class="ab-icon">
+                                    <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png" alt="Free Delivery Icon" />
+                                </span>
+                                <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
+                            </div>
+                            <div class="item ${className}">
+                                <span class="stars">★★★★★</span>
+                                <span class="review-text"> ${q(".review-template .review-text").textContent} </span>
+                            </div>
+                            
+                            `
+              : `
+                            <div class="item ${className}">
+                                <span class="stars">★★★★★</span>
+                                <span class="review-text"> ${q(".review-template .review-text").textContent} </span>
+                            </div>
+                            <div class="item ${className} ab-free-delivery">
+                                <span class="ab-icon">
+                                    <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png" alt="Free Delivery Icon" />
+                                </span>
+                                <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
+                            </div>
+                            
+                            `}
           </div>
         `,
       );
     });
+
+    window.sessionStorage.setItem(page_initials, true);
 
     qq(".ab-delivery-cta").forEach((item) =>
       item.addEventListener("click", (e) => {
