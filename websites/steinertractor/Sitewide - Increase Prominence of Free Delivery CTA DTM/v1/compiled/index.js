@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-FREE-DELIVERY-CTA",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -106,8 +106,11 @@
                 autoplay: true,
                 autoplayTimeout: 8000,
                 autoplayHoverPause: false,
-                smartSpeed: 500,
-                nav: false,
+                smartSpeed: 1000,
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                autoplayHoverPause: true,
+                nav: true,
                 dots: false,
                 mouseDrag: false,
                 touchDrag: false,
