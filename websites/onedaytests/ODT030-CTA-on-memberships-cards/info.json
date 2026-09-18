@@ -1,0 +1,13 @@
+{
+  "id": "1789736472311_8530_ODT030_CTA_on_memberships_cards",
+  "name": "ODT030-CTA-on-memberships-cards",
+  "type": "A/B",
+  "website": "onedaytests",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-09-18T13:01:12.311Z",
+  "createdAtReadable": "9/18/2026, 7:01:12 PM",
+  "lastUpdated": "2026-09-18T13:01:12.501Z"
+}
