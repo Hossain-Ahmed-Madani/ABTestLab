@@ -5,9 +5,10 @@
   "website": "onedaytests",
   "variations": [
     "control",
-    "v1"
+    "v1",
+    "global"
   ],
   "createdAt": "2026-09-21T08:48:32.851Z",
   "createdAtReadable": "9/21/2026, 2:48:32 PM",
-  "lastUpdated": "2026-09-21T08:48:33.079Z"
+  "lastUpdated": "2026-09-21T09:12:48.013Z"
 }
