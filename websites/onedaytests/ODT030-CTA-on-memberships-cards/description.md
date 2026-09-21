@@ -33,7 +33,7 @@ https://www.figma.com/proto/MqcHLHxXwxCAFOY7k2c6FU/One-Day-Tests?node-id=397-368
 
 Goals:
 
-URL Targeting:
+URL Targeting: 
 
 Triggers:
 
@@ -49,4 +49,8 @@ Additional notes to consider:
 
 Code reviewed by:
 
-Peer reviewed by:
+Peer reviewed by: 
+
+
+Test container: https://app.convert.com/accounts/10018141/projects/10018430/experiences/100147084/summary
+Forced Variation: https://onedaytests.com/products/membership?_conv_eforce=100147084.1001233009&utm_campaign=qa009

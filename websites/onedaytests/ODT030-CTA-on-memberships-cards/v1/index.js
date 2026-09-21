@@ -101,7 +101,6 @@
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.table(TEST_CONFIG);
 
         qq('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]').forEach((item) => {
             const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
@@ -144,14 +143,11 @@
     function checkForItems() {
         return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
     }
-    await waitForElementAsync(checkForItems);
-    init();
 
-    // try {
-    //     await waitForElementAsync(checkForItems);
-    //     init();
-    // } catch (error) {
-    //     console.warn(error);
-    //     return false;
-    // }
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false;
+    }
 })();
