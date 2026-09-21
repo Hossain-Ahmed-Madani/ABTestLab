@@ -135,23 +135,41 @@
     .ab-promotion-banner-container.ab-promotion-banner-container--review-template {
     display: block;
   }
+}
+@media screen and (min-width: 768px) and (max-width: 991px) {
   .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-prev {
     top: 30%;
-    margin-left: 28px;
+    margin-left: 0;
+    left: calc(70% - 350px);
   }
   .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-next {
     top: 30%;
-    margin-right: 28px;
+    margin-right: 0;
+    right: calc(70% - 350px);
   }
 }
 @media screen and (min-width: 991px) {
   .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-prev {
     top: 35%;
-    margin-left: 185px;
+    margin-left: 0;
+    left: calc(59% - 350px);
   }
   .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-next {
     top: 35%;
-    margin-right: 185px;
+    margin-right: 0;
+    right: calc(59% - 350px);
+  }
+}
+@media screen and (min-width: 2300px) {
+  .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-prev {
+    top: 35%;
+    margin-left: 0;
+    left: calc(50% - 350px);
+  }
+  .AB-FREE-DELIVERY-CTA .ab-promotion-banner-container .owl-nav .owl-next {
+    top: 35%;
+    margin-right: 0;
+    right: calc(50% - 350px);
   }
 }
 `;
@@ -166,7 +184,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-FREE-DELIVERY-CTA",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0008,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -308,7 +326,7 @@
     if (isSafari()) q("body").classList.add(`${page_initials}--safari`);
     window[page_initials] = true;
 
-    const first_bucket = !!window.sessionStorage.getItem(page_initials);
+    !!window.sessionStorage.getItem(page_initials);
 
     // Hide original review
     const originalReviewItems = qq(".review-template, .review-template-navbar");
@@ -322,33 +340,24 @@
           <div
             class="ab-promotion-banner-container ab-promotion-banner-container--${className} owl-carousel"
           >
-            ${!first_bucket
-              ? `
-                            <div class="item ${className} ab-free-delivery">
-                                <span class="ab-icon">
-                                    <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png" alt="Free Delivery Icon" />
-                                </span>
-                                <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
-                            </div>
-                            <div class="item ${className}">
-                                <span class="stars">★★★★★</span>
-                                <span class="review-text"> ${q(".review-template .review-text").textContent} </span>
-                            </div>
-                            
-                            `
-              : `
-                            <div class="item ${className}">
-                                <span class="stars">★★★★★</span>
-                                <span class="review-text"> ${q(".review-template .review-text").textContent} </span>
-                            </div>
-                            <div class="item ${className} ab-free-delivery">
-                                <span class="ab-icon">
-                                    <img src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png" alt="Free Delivery Icon" />
-                                </span>
-                                <span class="review-text">Learn How to <span class="ab-delivery-cta">Get FREE Delivery</span></span>
-                            </div>
-                            
-                            `}
+            <div class="item ${className} ab-free-delivery">
+              <span class="ab-icon">
+                <img
+                  src="https://cdn-3.convertexperiments.com/uf/100412165/10043124/subtract2x_6a9976113777d.png"
+                  alt="Free Delivery Icon"
+                />
+              </span>
+              <span class="review-text"
+                >Learn How to
+                <span class="ab-delivery-cta">Get FREE Delivery</span></span
+              >
+            </div>
+            <div class="item ${className}">
+              <span class="stars">★★★★★</span>
+              <span class="review-text">
+                ${q(".review-template .review-text").textContent}
+              </span>
+            </div>
           </div>
         `,
       );
