@@ -43,34 +43,19 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
     function init() {
+        if(window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.log(TEST_CONFIG);
+        window[page_initials] = true;
+        q(".shopify-section.slideshow--section.pxu-lia-section--play").insertAdjacentElement("afterend", q(".shopify-section.html--section:has(#adam-anchor)"));
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".shopify-section.slideshow--section.pxu-lia-section--play") &&
+            q(".shopify-section.html--section:has(#adam-anchor)")
+        );
     }
 
     try {

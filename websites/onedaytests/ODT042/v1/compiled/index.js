@@ -1,9 +1,5 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "Converted",
-        project: "One Day Test",
-        site_url: "https://onedaytests.com",
-        test_name: "ODT042 - Above the fold quiz placement (TRT)",
         page_initials: "AB-ODT042",
         test_variation: 1,
         test_version: 0.0001,
@@ -40,12 +36,18 @@
     }
 
     function init() {
+        if(window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
-        console.log(TEST_CONFIG);
+        window[page_initials] = true;
+        q(".shopify-section.slideshow--section.pxu-lia-section--play").insertAdjacentElement("afterend", q(".shopify-section.html--section:has(#adam-anchor)"));
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".shopify-section.slideshow--section.pxu-lia-section--play") &&
+            q(".shopify-section.html--section:has(#adam-anchor)")
+        );
     }
 
     try {
