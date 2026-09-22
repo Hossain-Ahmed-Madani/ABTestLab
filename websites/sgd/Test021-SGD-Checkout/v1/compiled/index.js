@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-TEST021-CHECKOUT",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0008,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -65,11 +65,11 @@
             },
             {
                 title: "2. Zahlungsweise",
-                is_active: currentLocation.includes("/kursanmeldung/schritt/2.html") || currentLocation.includes("/kursanmeldung/schritt/3.html"),
+                is_active: currentLocation.includes("/kursanmeldung/schritt/2.html") || currentLocation.includes("/kursanmeldung/schritt/3.html") || currentLocation.includes("/kursanmeldung/schritt/4.html"),
             },
             {
                 title: '3. <span class="ab-mobile-hidden">Bestätigen &</span> Starten',
-                is_active: currentLocation.includes("/kursanmeldung/schritt/3.html"),
+                is_active: currentLocation.includes("/kursanmeldung/schritt/3.html") || currentLocation.includes("/kursanmeldung/schritt/4.html"),
             },
         ];
 
@@ -118,6 +118,7 @@
             const row = q(".registration-inner-container > .row");
             row.classList.add("ab-row");
             const p = q(".registration-inner-container > p");
+            p.className = 'ab-hidden';
             p.innerHTML = `
                 Hier melden Sie sich schnell und sicher über unser Online-Formular für Ihren Lehrgang an. In wenigen Tagen erhalten Sie Ihr erstes Studienmaterial <br class="ab-mobile-hidden"/>
                 Mehr zu unserem Angebot finden Sie in den <a data-bs-target="#vertragsleistungen" data-bs-toggle="modal" href="">Vertragsleistungen (AGB)</a>, mehr zur Verarbeitung <br class="ab-mobile-hidden"/>

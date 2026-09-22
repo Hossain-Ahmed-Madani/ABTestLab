@@ -12,6 +12,7 @@
 .AB-TEST021-CHECKOUT .page-header .header-media.narrow-hero {
   display: none;
 }
+.AB-TEST021-CHECKOUT .ab-hidden,
 .AB-TEST021-CHECKOUT .page-header .header-elements .header-buttons,
 .AB-TEST021-CHECKOUT .page-header .header-elements .header-grid-right .header-phone,
 .AB-TEST021-CHECKOUT .page-header .header-elements .header-grid-right .header-button-wrapper .header-buttons {
