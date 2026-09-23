@@ -284,6 +284,8 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
 }
 @media screen and (min-width: 768px) and (max-width: 1280px) {
   body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section {
+    padding-left: 16px;
+    padding-right: 16px;
     top: 91px;
     height: 120px;
     display: flex;
@@ -394,7 +396,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
   const TEST_CONFIG = {
     page_initials: "AB-STICKY-ATC-BANNER",
     test_variation: 1,
-    test_version: 0.0006,
+    test_version: 0.0007,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -468,6 +470,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
 
   function mutationObserverFunction() {
     const targetNode = q(".container#shop");
+    // const debouncedUpdate = debounce(updateLayout, 50);
     return new MutationObserver(updateLayout).observe(targetNode, {
       childList: true,
       subtree: false,
