@@ -6,7 +6,7 @@
         test_name: "PDP - Redesign the Sticky ATC Banner [D]",
         page_initials: "AB-STICKY-ATC-BANNER",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

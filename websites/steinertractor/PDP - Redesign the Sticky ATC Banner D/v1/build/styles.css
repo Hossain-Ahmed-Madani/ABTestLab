@@ -158,7 +158,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .quantity .qty-con
     box-shadow: none;
 }
 body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .quantity .qty-text {
-    width: 56px;
+    width: 56px !important;
     height: 52px;
     margin: 0;
     padding: 0;
@@ -185,7 +185,7 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
 @media screen and (max-width: 1334px) {
     body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4.title,
     body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section h4 span.price {
-        font-size: 15px;
+        font-size: 18px;
     }
 }
 @media screen and (min-width: 1002px) {
@@ -211,5 +211,85 @@ body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .clearfix::after {
     body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section {
         top: 90px;
         z-index: 100;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .container,
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1,
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart {
+        gap: 15px !important;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1280px) {
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section {
+        top: 91px;
+        height: 120px;
+        display: flex;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .container {
+        display: flex;
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        min-width: 100%;
+        align-items: center;
+        gap: 36px;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1 h4.title {
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1,
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 .quantity.form-inline {
+        display: flex !important;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-1 {
+        padding-left: 0;
+        gap: 36px;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section .header-section-4 fieldset.cart .row.w-100 {
+        gap: 2px;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.eve-cart-submit[name="addtocart"] {
+        margin-left: 0;
+        width: 195px;
+        min-width: 195px;
+        max-width: 195px;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section:has(button.btn.add_to_wishlist[name="wishList"]) button.btn.eve-cart-submit[name="addtocart"] {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        background-color: rgb(0, 128, 0);
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name="wishList"] {
+        background-color: rgb(0, 92, 0);
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: none;
+        width: 64px;
+        min-width: 64px;
+        max-width: 64px;
+        height: 56px;
+        max-height: 56px;
+        min-height: 56px;
+        overflow: hidden;
+        background-image: url('data:image/svg+xml,<svg width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.16176 3.82069C1.40511 4.89841 1.00002 6.1756 1 7.48355C1 10.1869 2.79999 12.1851 4.59999 13.9481L11.2096 20.2152C11.4364 20.464 11.7147 20.6626 12.0259 20.7979C12.3371 20.9332 12.6742 21.0021 13.0147 21C13.3552 20.9978 13.6914 20.9248 14.0008 20.7856C14.3103 20.6465 14.586 20.4444 14.8096 20.1929L21.3999 13.9481C23.1999 12.1851 24.9999 10.1752 24.9999 7.48355C25.0063 6.17273 24.6049 4.89109 23.8493 3.80921C23.0936 2.72734 22.0194 1.89655 20.7698 1.42741C19.5201 0.958274 18.1542 0.873047 16.8539 1.18307C15.5536 1.49309 14.3805 2.18367 13.4908 3.16287C13.4279 3.22871 13.3519 3.2812 13.2675 3.31708C13.183 3.35297 13.092 3.37148 13 3.37148C12.9079 3.37148 12.8169 3.35297 12.7325 3.31708C12.648 3.2812 12.572 3.22871 12.5092 3.16287C11.6166 2.18999 10.4438 1.50517 9.14559 1.19887C7.84737 0.892568 6.48482 0.979189 5.23792 1.44729C3.99101 1.9154 2.9184 2.74296 2.16176 3.82069Z" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>');
+        background-size: 24px;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name="wishList"] i {
+        display: none;
+    }
+    body#Body.AB-STICKY-ATC-BANNER .product-detail-header-section button.btn.add_to_wishlist[name="wishList"]:hover {
+        background-color: rgb(0, 92, 0);
+        background-image: url('data:image/svg+xml,<svg width="26" height="22" viewBox="0 0 26 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.16176 3.82069C1.40511 4.89841 1.00002 6.1756 1 7.48355C1 10.1869 2.79999 12.1851 4.59999 13.9481L11.2096 20.2152C11.4364 20.464 11.7147 20.6626 12.0259 20.7979C12.3371 20.9332 12.6742 21.0021 13.0147 21C13.3552 20.9978 13.6914 20.9248 14.0008 20.7856C14.3103 20.6465 14.586 20.4444 14.8096 20.1929L21.3999 13.9481C23.1999 12.1851 24.9999 10.1752 24.9999 7.48355C25.0063 6.17273 24.6049 4.89109 23.8493 3.80921C23.0936 2.72734 22.0194 1.89655 20.7698 1.42741C19.5201 0.958274 18.1542 0.873047 16.8539 1.18307C15.5536 1.49309 14.3805 2.18367 13.4908 3.16287C13.4279 3.22871 13.3519 3.2812 13.2675 3.31708C13.183 3.35297 13.092 3.37148 13 3.37148C12.9079 3.37148 12.8169 3.35297 12.7325 3.31708C12.648 3.2812 12.572 3.22871 12.5092 3.16287C11.6166 2.18999 10.4438 1.50517 9.14559 1.19887C7.84737 0.892568 6.48482 0.979189 5.23792 1.44729C3.99101 1.9154 2.9184 2.74296 2.16176 3.82069Z" stroke="%23212529" stroke-width="2" stroke-linecap="round"/></svg>');
     }
 }
