@@ -1,11 +1,7 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "ROI Revolution",
-        project: "Do My Own",
-        site_url: "https://www.domyown.com",
-        test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
         page_initials: "AB-PDP-MINI-FEATURES",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 2 /* 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -152,9 +148,8 @@
 
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[TEST_CONFIG] = true;
-        console.table(TEST_CONFIG);
 
-        !!q("#mobile");
+        const isMobile = !!q("#mobile");
         const productFeaturesControl = q("#product-features");
         productFeaturesControl?.classList.add("ab-control-feature-item");
 
@@ -163,8 +158,9 @@
             createLayoutAndAddToggleFunctionality(data);
         }
 
-        if (productFeaturesControl) {
-            q(".ab-product-features-container")?.classList.add("hidden");
+        if (data.length >= 3) {
+            productFeaturesControl?.classList.add("hidden");
+            if(isMobile) productFeaturesControl?.parentNode?.classList.add("hidden");
         }
     }
 

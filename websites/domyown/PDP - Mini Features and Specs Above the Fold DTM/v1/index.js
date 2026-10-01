@@ -5,7 +5,7 @@
         site_url: "https://www.domyown.com",
         test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
         page_initials: "AB-PDP-MINI-FEATURES",
-        test_variation: 1 /* 1, 2 */,
+        test_variation: 2 /* 1, 2 */,
         test_version: 0.0001,
     };
 
@@ -179,7 +179,6 @@
 
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[TEST_CONFIG] = true;
-        console.table(TEST_CONFIG);
 
         const isMobile = !!q("#mobile");
         const productFeaturesControl = q("#product-features");
