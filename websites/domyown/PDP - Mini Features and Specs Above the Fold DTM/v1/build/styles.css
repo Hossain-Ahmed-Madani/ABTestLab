@@ -32,9 +32,6 @@
     border: none;
     outline: none;
 }
-.AB-PDP-MINI-FEATURES .pf-toggle:hover {
-    color: #d2272a;
-}
 .AB-PDP-MINI-FEATURES .pf-toggle[hidden] {
     display: none;
 }
@@ -79,6 +76,10 @@
 .AB-PDP-MINI-FEATURES .ab-product-features-container ul {
     margin-left: -0.8rem;
     margin-bottom: 6px;
+}
+
+#desktop.AB-PDP-MINI-FEATURES .pf-toggle:hover {
+    color: #d2272a;
 }
 
 #mobile.AB-PDP-MINI-FEATURES #product-features.ab-control-feature-item h2.text-xl {

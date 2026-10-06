@@ -53,9 +53,7 @@
         outline: none;
     }
 
-    .pf-toggle:hover {
-        color: #d2272a;
-    }
+ 
 
     .pf-toggle[hidden] {
         display: none;
@@ -119,6 +117,12 @@
     .ab-product-features-container ul {
         margin-left: -0.8rem;
         margin-bottom: 6px;
+    }
+}
+
+#desktop.AB-PDP-MINI-FEATURES { 
+    .pf-toggle:hover {
+        color: #d2272a;
     }
 }
 

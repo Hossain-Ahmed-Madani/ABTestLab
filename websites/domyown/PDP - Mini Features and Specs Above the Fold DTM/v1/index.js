@@ -6,7 +6,7 @@
         test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
         page_initials: "AB-PDP-MINI-FEATURES",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -224,13 +224,13 @@
         productFeaturesControl?.classList.add("ab-control-feature-item");
 
         const data = getSpecsData();
-        if (data.length >= 3) {
+        if (data.length >= 2) {
             createLayoutAndAddToggleFunctionality(data);
         }
 
         if (test_variation === 1 && productFeaturesControl) {
             q(".ab-product-features-container")?.classList.add("hidden");
-        } else if (test_variation === 2 && data.length >= 3) {
+        } else if (test_variation === 2 && data.length >= 2) {
             productFeaturesControl?.classList.add("hidden");
             if (isMobile) productFeaturesControl?.parentNode?.classList.add("hidden");
         }

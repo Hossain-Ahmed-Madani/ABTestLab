@@ -38,9 +38,6 @@
   border: none;
   outline: none;
 }
-.AB-PDP-MINI-FEATURES .pf-toggle:hover {
-  color: #d2272a;
-}
 .AB-PDP-MINI-FEATURES .pf-toggle[hidden] {
   display: none;
 }
@@ -85,6 +82,10 @@
 .AB-PDP-MINI-FEATURES .ab-product-features-container ul {
   margin-left: -0.8rem;
   margin-bottom: 6px;
+}
+
+#desktop.AB-PDP-MINI-FEATURES .pf-toggle:hover {
+  color: #d2272a;
 }
 
 #mobile.AB-PDP-MINI-FEATURES
@@ -159,7 +160,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-PDP-MINI-FEATURES",
     test_variation: 1 /* 1, 2 */,
-    test_version: 0.0003,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -378,7 +379,7 @@
     productFeaturesControl?.classList.add("ab-control-feature-item");
 
     const data = getSpecsData();
-    if (data.length >= 3) {
+    if (data.length >= 2) {
       createLayoutAndAddToggleFunctionality(data);
     }
 

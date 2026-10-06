@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-PDP-MINI-FEATURES",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -193,7 +193,7 @@
         productFeaturesControl?.classList.add("ab-control-feature-item");
 
         const data = getSpecsData();
-        if (data.length >= 3) {
+        if (data.length >= 2) {
             createLayoutAndAddToggleFunctionality(data);
         }
 
