@@ -12,17 +12,17 @@
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const SPEC_LIST_ROW_ORDER = [
-        "Target pests",
-        "Active Ingredient",
-        "Manufacturer",
-        "Sprayer Type",
-        "Tank Size",
-        "Tank Size (gal.)",
-        "For use In",
-        "Coverage Area",
-        "Special Features",
-        "Parts Included",
-        "Yield",
+        "target pests",
+        "active ingredient",
+        "manufacturer",
+        "sprayer type",
+        "tank size",
+        "tank size (gal.)",
+        "for use in",
+        "coverage area",
+        "special features",
+        "parts included",
+        "yield",
     ];
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -148,37 +148,47 @@
 
     function getSpecsData() {
         const obj = {};
+
         qq("#product-page-specs tr").forEach((tr) => {
             const key = q(tr, "th").textContent?.trim() || "";
             const htmlContent = q(tr, "td").innerHTML.trim() || "";
-            if (key && htmlContent && !obj[key]) {
-                obj[key] = htmlContent;
+
+            if (key && htmlContent) {
+                const normalizedKey = key.toLowerCase();
+
+                if (!obj[normalizedKey]) {
+                    obj[normalizedKey] = {
+                        label: key,
+                        htmlContent,
+                    };
+                }
             }
         });
 
         const foundList = [];
 
         SPEC_LIST_ROW_ORDER.forEach((rowName) => {
-            if (obj[rowName]) {
+            const key = rowName.trim().toLowerCase();
+
+            if (obj[key]) {
                 foundList.push({
-                    label: rowName,
-                    htmlContent: obj[rowName],
+                    label: obj[key].label,
+                    htmlContent: obj[key].htmlContent,
                 });
 
-                delete obj[rowName];
+                delete obj[key];
             }
         });
 
-        Object.keys(obj).forEach((rowName) => {
+        Object.keys(obj).forEach((key) => {
             foundList.push({
-                label: rowName,
-                htmlContent: obj[rowName],
+                label: obj[key].label,
+                htmlContent: obj[key].htmlContent,
             });
         });
 
         return foundList;
     }
-
     function createLayoutAndAddToggleFunctionality(data) {
         const targetNode = q("#mobile #product-page-nav, #desktop .leading-none:has(.price-breaks)");
         targetNode.insertAdjacentHTML(
