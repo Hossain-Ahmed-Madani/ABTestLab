@@ -171,6 +171,7 @@
     "Manufacturer",
     "Sprayer Type",
     "Tank Size",
+    "Tank Size (gal.)",
     "For use In",
     "Coverage Area",
     "Special Features",
