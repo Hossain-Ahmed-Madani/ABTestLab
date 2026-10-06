@@ -129,3 +129,6 @@ Test variation link:
 Control: https://www.domyown.com/termidor-sc-p-184.html?_conv_eforce=100147500.1001233923&utm_campaign=qa09
 V1: https://www.domyown.com/termidor-sc-p-184.html?_conv_eforce=100147500.1001233924&utm_campaign=qa09
 V2: https://www.domyown.com/termidor-sc-p-184.html?_conv_eforce=100147500.1001233925&utm_campaign=qa09
+
+
+https://www.domyown.com/bg-electric-duster-m2250-p-320.html

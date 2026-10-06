@@ -1,12 +1,8 @@
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolution",
-    project: "Do My Own",
-    site_url: "https://www.domyown.com",
-    test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
     page_initials: "AB-PDP-MINI-FEATURES",
     test_variation: 2 /* 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -65,21 +61,60 @@
   }
 
   // 4. Expand / collapse
+  // function handleExpandCollapse(item) {
+  //     const text = q(item, ".pf-text");
+  //     const btn = q(item, ".pf-toggle");
+
+  //     // Show the button only if the clamped text is actually cut off
+  //     const checkOverflow = () => {
+  //         const wasOpen = item.classList.contains("open");
+  //         item.classList.remove("open");
+  //         btn.hidden = text.scrollHeight <= text.clientHeight + 1;
+  //         item.classList.toggle("open", wasOpen && !btn.hidden);
+  //         btn.textContent = item.classList.contains("open") ? "Collapse" : "Expand";
+  //     };
+
+  //     btn.addEventListener("click", () => {
+  //         const open = item.classList.toggle("open");
+  //         btn.textContent = open ? "Collapse" : "Expand";
+  //     });
+
+  //     checkOverflow();
+  //     window.addEventListener("resize", checkOverflow);
+  // }
+
   function handleExpandCollapse(item) {
     const text = q(item, ".pf-text");
+    const content = q(item, ".pf-text-content");
     const btn = q(item, ".pf-toggle");
+
+    // Keep original markup for the expanded state; collapsed state gets <br> flattened to spaces
+    const fullHTML = content.innerHTML;
+    const flatHTML = fullHTML.replace(/(\s*<br\s*\/?>\s*)+/gi, " ").trim();
+
+    const render = (open) => {
+      // content.innerHTML = open ? fullHTML : flatHTML;
+      content.innerHTML = flatHTML;
+    };
 
     // Show the button only if the clamped text is actually cut off
     const checkOverflow = () => {
       const wasOpen = item.classList.contains("open");
+
       item.classList.remove("open");
+      render();
+
       btn.hidden = text.scrollHeight <= text.clientHeight + 1;
-      item.classList.toggle("open", wasOpen && !btn.hidden);
-      btn.textContent = item.classList.contains("open") ? "Collapse" : "Expand";
+
+      const stillOpen = wasOpen && !btn.hidden;
+      item.classList.toggle("open", stillOpen);
+      render();
+      btn.textContent = stillOpen ? "Collapse" : "Expand";
     };
 
     btn.addEventListener("click", () => {
       const open = item.classList.toggle("open");
+      render();
       btn.textContent = open ? "Collapse" : "Expand";
     });
 
@@ -180,7 +215,6 @@
       `${page_initials}--version:${test_version}`,
     );
     window[TEST_CONFIG] = true;
-    console.table(TEST_CONFIG);
 
     const isMobile = !!q("#mobile");
     const productFeaturesControl = q("#product-features");

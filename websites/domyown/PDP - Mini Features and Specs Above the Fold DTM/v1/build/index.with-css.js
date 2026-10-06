@@ -4,7 +4,8 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-PDP-MINI-FEATURES .pf-list {
+      style.innerHTML = `@charset "UTF-8";
+.AB-PDP-MINI-FEATURES .pf-list {
   padding-left: 1.25rem;
 }
 .AB-PDP-MINI-FEATURES .pf-item {
@@ -15,6 +16,10 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  text-align: justify;
+}
+.AB-PDP-MINI-FEATURES .pf-text b {
+  display: inline;
 }
 .AB-PDP-MINI-FEATURES .pf-text span {
   text-align: justify;
@@ -33,20 +38,46 @@
   border: none;
   outline: none;
 }
+.AB-PDP-MINI-FEATURES .pf-toggle:hover {
+  color: #d2272a;
+}
 .AB-PDP-MINI-FEATURES .pf-toggle[hidden] {
   display: none;
 }
 .AB-PDP-MINI-FEATURES .pf-item.open .pf-text {
-  display: inline;
+  display: block;
   overflow: visible;
+  -webkit-line-clamp: unset;
 }
 .AB-PDP-MINI-FEATURES .pf-item.open .pf-toggle {
   position: static;
-  padding-left: 6px;
+  display: inline;
+  margin-top: 2px;
+  padding: 0;
+  text-align: left;
   background: none;
 }
-.AB-PDP-MINI-FEATURES .ab-product-features li::marker {
-  color: #424242;
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item {
+  list-style: none;
+}
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item::marker {
+  display: none !important;
+  opacity: 0;
+}
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item::before {
+  content: "•";
+  position: absolute;
+  left: -15px;
+  top: -1px;
+  color: #424242 !important;
+  font-size: 1.2rem;
+  font-family:
+    Open Sans,
+    Helvetica,
+    Arial,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
 }
 .AB-PDP-MINI-FEATURES .ab-product-features-container {
   padding-left: 0;
@@ -82,8 +113,8 @@
   margin-bottom: 0.5rem;
 }
 #mobile.AB-PDP-MINI-FEATURES .ab-product-features .pf-item::marker {
-  font-size: 0.85rem;
-  color: #424242;
+  display: none !important;
+  opacity: 0;
 }
 #mobile.AB-PDP-MINI-FEATURES .ab-product-features .pf-text {
   font-size: 1rem;
@@ -110,6 +141,7 @@
   font-size: 12px;
   line-height: 18px;
   letter-spacing: 0;
+  font-weight: 400;
 }
 `;
       document.head.appendChild(style);
@@ -121,13 +153,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolution",
-    project: "Do My Own",
-    site_url: "https://www.domyown.com",
-    test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
     page_initials: "AB-PDP-MINI-FEATURES",
     test_variation: 2 /* 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -186,21 +214,60 @@
   }
 
   // 4. Expand / collapse
+  // function handleExpandCollapse(item) {
+  //     const text = q(item, ".pf-text");
+  //     const btn = q(item, ".pf-toggle");
+
+  //     // Show the button only if the clamped text is actually cut off
+  //     const checkOverflow = () => {
+  //         const wasOpen = item.classList.contains("open");
+  //         item.classList.remove("open");
+  //         btn.hidden = text.scrollHeight <= text.clientHeight + 1;
+  //         item.classList.toggle("open", wasOpen && !btn.hidden);
+  //         btn.textContent = item.classList.contains("open") ? "Collapse" : "Expand";
+  //     };
+
+  //     btn.addEventListener("click", () => {
+  //         const open = item.classList.toggle("open");
+  //         btn.textContent = open ? "Collapse" : "Expand";
+  //     });
+
+  //     checkOverflow();
+  //     window.addEventListener("resize", checkOverflow);
+  // }
+
   function handleExpandCollapse(item) {
     const text = q(item, ".pf-text");
+    const content = q(item, ".pf-text-content");
     const btn = q(item, ".pf-toggle");
+
+    // Keep original markup for the expanded state; collapsed state gets <br> flattened to spaces
+    const fullHTML = content.innerHTML;
+    const flatHTML = fullHTML.replace(/(\s*<br\s*\/?>\s*)+/gi, " ").trim();
+
+    const render = (open) => {
+      // content.innerHTML = open ? fullHTML : flatHTML;
+      content.innerHTML = flatHTML;
+    };
 
     // Show the button only if the clamped text is actually cut off
     const checkOverflow = () => {
       const wasOpen = item.classList.contains("open");
+
       item.classList.remove("open");
+      render();
+
       btn.hidden = text.scrollHeight <= text.clientHeight + 1;
-      item.classList.toggle("open", wasOpen && !btn.hidden);
-      btn.textContent = item.classList.contains("open") ? "Collapse" : "Expand";
+
+      const stillOpen = wasOpen && !btn.hidden;
+      item.classList.toggle("open", stillOpen);
+      render();
+      btn.textContent = stillOpen ? "Collapse" : "Expand";
     };
 
     btn.addEventListener("click", () => {
       const open = item.classList.toggle("open");
+      render();
       btn.textContent = open ? "Collapse" : "Expand";
     });
 
@@ -301,7 +368,6 @@
       `${page_initials}--version:${test_version}`,
     );
     window[TEST_CONFIG] = true;
-    console.table(TEST_CONFIG);
 
     const isMobile = !!q("#mobile");
     const productFeaturesControl = q("#product-features");

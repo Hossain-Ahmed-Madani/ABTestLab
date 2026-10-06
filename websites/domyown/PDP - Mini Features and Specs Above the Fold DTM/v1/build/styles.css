@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .AB-PDP-MINI-FEATURES .pf-list {
     padding-left: 1.25rem;
 }
@@ -9,6 +10,10 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    text-align: justify;
+}
+.AB-PDP-MINI-FEATURES .pf-text b {
+    display: inline;
 }
 .AB-PDP-MINI-FEATURES .pf-text span {
     text-align: justify;
@@ -27,20 +32,46 @@
     border: none;
     outline: none;
 }
+.AB-PDP-MINI-FEATURES .pf-toggle:hover {
+    color: #d2272a;
+}
 .AB-PDP-MINI-FEATURES .pf-toggle[hidden] {
     display: none;
 }
 .AB-PDP-MINI-FEATURES .pf-item.open .pf-text {
-    display: inline;
+    display: block;
     overflow: visible;
+    -webkit-line-clamp: unset;
 }
 .AB-PDP-MINI-FEATURES .pf-item.open .pf-toggle {
     position: static;
-    padding-left: 6px;
+    display: inline;
+    margin-top: 2px;
+    padding: 0;
+    text-align: left;
     background: none;
 }
-.AB-PDP-MINI-FEATURES .ab-product-features li::marker {
-    color: #424242;
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item {
+    list-style: none;
+}
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item::marker {
+    display: none !important;
+    opacity: 0;
+}
+.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item::before {
+    content: "•";
+    position: absolute;
+    left: -15px;
+    top: -1px;
+    color: #424242 !important;
+    font-size: 1.2rem;
+    font-family:
+        Open Sans,
+        Helvetica,
+        Arial,
+        -apple-system,
+        BlinkMacSystemFont,
+        sans-serif;
 }
 .AB-PDP-MINI-FEATURES .ab-product-features-container {
     padding-left: 0;
@@ -69,8 +100,8 @@
     margin-bottom: 0.5rem;
 }
 #mobile.AB-PDP-MINI-FEATURES .ab-product-features .pf-item::marker {
-    font-size: 0.85rem;
-    color: #424242;
+    display: none !important;
+    opacity: 0;
 }
 #mobile.AB-PDP-MINI-FEATURES .ab-product-features .pf-text {
     font-size: 1rem;
@@ -97,4 +128,5 @@
     font-size: 12px;
     line-height: 18px;
     letter-spacing: 0;
+    font-weight: 400;
 }
