@@ -9,6 +9,7 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   overflow: hidden;
+  text-align: justify;
 }
 .AB-PDP-MINI-FEATURES .pf-text span {
   text-align: justify;
@@ -26,6 +27,9 @@
   text-decoration: underline;
   border: none;
   outline: none;
+}
+.AB-PDP-MINI-FEATURES .pf-toggle:hover {
+  color: #d2272a;
 }
 .AB-PDP-MINI-FEATURES .pf-toggle[hidden] {
   display: none;

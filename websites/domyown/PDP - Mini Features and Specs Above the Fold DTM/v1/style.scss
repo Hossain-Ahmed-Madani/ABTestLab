@@ -26,6 +26,7 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
         overflow: hidden;
+        text-align: justify;
     }
 
     .pf-text span {
@@ -45,6 +46,10 @@
         text-decoration: underline;
         border: none;
         outline: none;
+    }
+
+    .pf-toggle:hover {
+        color: #d2272a;
     }
 
     .pf-toggle[hidden] {

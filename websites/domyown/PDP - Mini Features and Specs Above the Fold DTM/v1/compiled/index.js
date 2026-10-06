@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-PDP-MINI-FEATURES",
         test_variation: 2 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
