@@ -1,7 +1,7 @@
 (async () => {
   const TEST_CONFIG = {
     page_initials: "AB-PDP-MINI-FEATURES",
-    test_variation: 2 /* 1, 2 */,
+    test_variation: 1 /* 1, 2 */,
     test_version: 0.0003,
   };
 
@@ -216,7 +216,7 @@
     );
     window[TEST_CONFIG] = true;
 
-    const isMobile = !!q("#mobile");
+    !!q("#mobile");
     const productFeaturesControl = q("#product-features");
     productFeaturesControl?.classList.add("ab-control-feature-item");
 
@@ -225,9 +225,8 @@
       createLayoutAndAddToggleFunctionality(data);
     }
 
-    if (data.length >= 3) {
-      productFeaturesControl?.classList.add("hidden");
-      if (isMobile) productFeaturesControl?.parentNode?.classList.add("hidden");
+    if (productFeaturesControl) {
+      q(".ab-product-features-container")?.classList.add("hidden");
     }
   }
 

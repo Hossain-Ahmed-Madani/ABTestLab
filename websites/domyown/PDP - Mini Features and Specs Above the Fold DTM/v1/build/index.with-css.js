@@ -68,9 +68,9 @@
   content: "•";
   position: absolute;
   left: -15px;
-  top: -1px;
+  top: -4px;
   color: #424242 !important;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-family:
     Open Sans,
     Helvetica,
@@ -116,6 +116,10 @@
   display: none !important;
   opacity: 0;
 }
+#mobile.AB-PDP-MINI-FEATURES .ab-product-features li.pf-item::before {
+  top: -6px;
+  font-size: 1.5rem;
+}
 #mobile.AB-PDP-MINI-FEATURES .ab-product-features .pf-text {
   font-size: 1rem;
   line-height: 1.5;
@@ -154,7 +158,7 @@
 (async () => {
   const TEST_CONFIG = {
     page_initials: "AB-PDP-MINI-FEATURES",
-    test_variation: 2 /* 1, 2 */,
+    test_variation: 1 /* 1, 2 */,
     test_version: 0.0003,
   };
 
@@ -369,7 +373,7 @@
     );
     window[TEST_CONFIG] = true;
 
-    const isMobile = !!q("#mobile");
+    !!q("#mobile");
     const productFeaturesControl = q("#product-features");
     productFeaturesControl?.classList.add("ab-control-feature-item");
 
@@ -378,9 +382,8 @@
       createLayoutAndAddToggleFunctionality(data);
     }
 
-    if (data.length >= 3) {
-      productFeaturesControl?.classList.add("hidden");
-      if (isMobile) productFeaturesControl?.parentNode?.classList.add("hidden");
+    if (productFeaturesControl) {
+      q(".ab-product-features-container")?.classList.add("hidden");
     }
   }
 

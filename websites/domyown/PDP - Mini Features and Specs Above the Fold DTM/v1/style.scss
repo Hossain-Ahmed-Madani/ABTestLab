@@ -100,9 +100,9 @@
         content: "•";
         position: absolute;
         left: -15px;
-        top: -1px;
+        top: -4px;
         color: #424242 !important;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-family:
             Open Sans,
             Helvetica,
@@ -149,10 +149,10 @@
         opacity: 0;
     }
 
-    // .ab-product-features li.pf-item::before {
-    //     font-size: 0.85rem;
-    //     color: #424242;
-    // }
+    .ab-product-features li.pf-item::before {
+        top: -6px;
+        font-size: 1.5rem;
+    }
 
     .ab-product-features .pf-text {
         font-size: 1rem;
