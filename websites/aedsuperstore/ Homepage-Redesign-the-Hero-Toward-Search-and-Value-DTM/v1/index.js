@@ -24,12 +24,6 @@
         `,
     };
 
-    async function fetchJSON(url) {
-        const response = await fetch(url, { headers: { accept: "application/json" } });
-        if (!response.ok) throw new Error(response.status);
-        return response.json();
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -54,6 +48,16 @@
         });
     }
 
+    async function fetchJSON(url) {
+        const response = await fetch(url, { headers: { accept: "application/json" } });
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
+    }
+
+    function getLocalStorageValue(key) {
+        return JSON.parse(localStorage.getItem(key))?.value?.value || "";
+    }
+
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -74,32 +78,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -107,48 +85,6 @@
 
     function isTouchEnabled() {
         return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
-
-    function getLocalStorageValue(key) {
-        return JSON.parse(localStorage.getItem(key))?.value?.value || "";
-    }
-
-    function removeEsc(s) {
-        return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-    }
-
-    async function getSearchResults(searchedValue) {
-        if (!searchedValue) throw error;
-
-        const SITE_ID = "zsrz4a";
-        const BASE = `https://${SITE_ID}.a.searchspring.io/api`;
-        const SUGGEST_LIMIT = 4;
-
-        try {
-            const suggestion = await fetchJSON(`${BASE}/suggest/query?lang=en&limit=${SUGGEST_LIMIT}&pubId=${SITE_ID}&query=${encodeURIComponent(searchedValue)}`).catch((e) => {
-                throw error;
-            });
-
-            const queryValue = suggestion?.suggested?.text || searchedValue;
-
-            if (!queryValue) return;
-
-            const response = await fetchJSON(
-                `${BASE}/search/autocomplete.json?ajaxCatalog=v3&resultsFormat=native&siteId=zsrz4a&resultsPerPage=${SUGGEST_LIMIT}&q=${encodeURIComponent(queryValue)}&userId=${getLocalStorageValue("ssUserId")}&sessionId=${getLocalStorageValue("ssSessionId")}&pageLoadId=${getLocalStorageValue("ssPageLoadId")}&beacon=true&source=input&input=${encodeURIComponent(searchedValue)}`,
-            ).catch((e) => {
-                throw error;
-            });
-
-            if (!response?.results?.length) throw error;
-
-            return response;
-        } catch (error) {}
     }
 
     function getSearchResultLayout({ pagination, results, searchedValue }) {
@@ -174,22 +110,97 @@
                     .join("")}
             </ul>
             <div class="ab-search-footer">
-                <a href="/search-results.html?keyword${searchedValue}" class="ab-search-footer__cta">See ${pagination.totalResults} results for "${searchedValue}"</a>
+                <a href="/search-results.html?keyword=${searchedValue}" class="ab-search-footer__cta">See ${pagination.totalResults} results for "${searchedValue}"</a>
             </div>
         `;
     }
 
-    async function handleSearch(e) {
-        const targetNode = q(".ab-search-results");
+    async function getSearchResults(searchedValue) {
+        if (!searchedValue) throw new Error("Search value is empty");
+
+        const SITE_ID = "zsrz4a";
+        const BASE = `https://${SITE_ID}.a.searchspring.io/api`;
+        const SUGGEST_LIMIT = 4;
+
         try {
-            const searchedValue = e.target.value.trim();
-            const res = await getSearchResults(searchedValue);
-            targetNode.innerHTML = getSearchResultLayout({ ...res, searchedValue });
+            const suggestion = await fetchJSON(`${BASE}/suggest/query?lang=en&limit=${SUGGEST_LIMIT}&pubId=${SITE_ID}&query=${encodeURIComponent(searchedValue)}`);
+
+            const queryValue = suggestion?.suggested?.text || searchedValue;
+
+            if (!queryValue) throw new Error("No search query available");
+
+            const response = await fetchJSON(
+                `${BASE}/search/autocomplete.json?ajaxCatalog=v3&resultsFormat=native&siteId=${SITE_ID}&resultsPerPage=${SUGGEST_LIMIT}&q=${encodeURIComponent(queryValue)}&userId=${getLocalStorageValue("ssUserId")}&sessionId=${getLocalStorageValue("ssSessionId")}&pageLoadId=${getLocalStorageValue("ssPageLoadId")}&beacon=true&source=input&input=${encodeURIComponent(searchedValue)}`,
+            );
+
+            if (!response?.results?.length) throw new Error("No search results found");
+
+            return response;
         } catch (error) {
-            targetNode.innerHTML = "";
-            console.log(error);
+            throw error;
         }
     }
+
+    function handleSearchView(action /* show, hide */) {
+        const targetNode = q(".ab-search-results");
+
+        if (action === "show") {
+            targetNode.classList.remove("ab-hidden");
+        } else if (action === "hide") {
+            targetNode.classList.add("ab-hidden");
+        }
+    }
+
+    let eventAttached = false;
+
+    function addOutsideClickEvent() {
+        if (eventAttached) return;
+        eventAttached = true;
+
+        const callback = (e) => {
+            if (!e.target.closest(".ab-hero-search")) {
+                handleSearchView("hide");
+                eventAttached = false
+                document.removeEventListener("click", callback);
+            }
+        };
+        
+        
+        document.addEventListener("click", callback);
+    }
+
+    function handleClick(e) {
+        if (e.target.closest(".ab-search-form .search-submit")) {
+            window.location.href = "/search-results.html?keyword=" + q("input#ab-searchlight").value.trim() || "";
+            handleSearchView("hide");
+        }
+
+        if (e.target.closest(".ab-search-footer__cta")) {
+            handleSearchView("hide");
+        }
+
+        if (e.target.closest("#ab-searchlight") && q('.ab-search-results:not(:empty)')) {
+            handleSearchView("show");
+        }
+    }
+
+    async function handleSearch(e) {
+        const targetNode = q(".ab-search-results");
+
+        try {
+            const searchedValue = e.target.value.trim();
+            if (!searchedValue) throw new Error("Invalid Search Value: " + searchedValue);
+            const res = await getSearchResults(searchedValue);
+            targetNode.innerHTML = getSearchResultLayout({ ...res, searchedValue });
+            handleSearchView("show");
+            addOutsideClickEvent();
+        } catch (error) {
+            handleSearchView("hide");
+            targetNode.innerHTML = "";
+        }
+    }
+
+
 
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
@@ -217,11 +228,11 @@
                                             placeholder="Search for your perfect AED match"
                                             class="search-text form-control"
                                         />
-                                        <button type="submit" class="search-submit">${ASSETS["search_svg"]}</button>
+                                        <button type="click" class="search-submit">${ASSETS["search_svg"]}</button>
                                     </label>
                                 </div>
                             </div>
-                            <div class="ab-search-results"></div>
+                            <div class="ab-search-results ab-hidden"></div>
                         </div>
                     </div>
                     <a href="/aeds.html" class="ab-hero-promo-cta">$175 off $1,500+ · code SAVE175</a>
@@ -229,8 +240,9 @@
             `,
         );
 
-        const debouncedSearch = debounce(handleSearch, 250);
+        const debouncedSearch = debounce(handleSearch, 1000);
         q("#ab-searchlight").addEventListener("input", debouncedSearch);
+        q(".ab-hero-search").addEventListener("click", handleClick);
     }
 
     function checkForItems() {
@@ -241,7 +253,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();

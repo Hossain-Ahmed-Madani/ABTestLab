@@ -1,3 +1,6 @@
+.AB-HOMEPAGE-HERO-SEARCH .ab-hidden {
+  display: none !important;
+}
 .AB-HOMEPAGE-HERO-SEARCH .frame-feature {
   display: none;
 }
@@ -52,10 +55,7 @@
   width: 24px;
   height: 24px;
 }
-.AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results:empty {
-  display: none;
-}
-.AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results:not(:empty) {
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results {
   position: absolute;
   top: 100%;
   z-index: 100;
