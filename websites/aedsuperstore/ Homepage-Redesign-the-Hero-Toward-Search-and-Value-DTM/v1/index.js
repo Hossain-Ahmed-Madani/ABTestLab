@@ -24,18 +24,10 @@
         `,
     };
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
+    async function fetchJSON(url) {
+        const response = await fetch(url, { headers: { accept: "application/json" } });
+        if (!response.ok) throw new Error(response.status);
+        return response.json();
     }
 
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
@@ -123,6 +115,82 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    function getLocalStorageValue(key) {
+        return JSON.parse(localStorage.getItem(key))?.value?.value || "";
+    }
+
+    function removeEsc(s) {
+        return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+    }
+
+    async function getSearchResults(searchedValue) {
+        if (!searchedValue) throw error;
+
+        const SITE_ID = "zsrz4a";
+        const BASE = `https://${SITE_ID}.a.searchspring.io/api`;
+        const SUGGEST_LIMIT = 4;
+
+        try {
+            const suggestion = await fetchJSON(`${BASE}/suggest/query?lang=en&limit=${SUGGEST_LIMIT}&pubId=${SITE_ID}&query=${encodeURIComponent(searchedValue)}`).catch((e) => {
+                throw error;
+            });
+
+            const queryValue = suggestion?.suggested?.text || searchedValue;
+
+            if (!queryValue) return;
+
+            const response = await fetchJSON(
+                `${BASE}/search/autocomplete.json?ajaxCatalog=v3&resultsFormat=native&siteId=zsrz4a&resultsPerPage=${SUGGEST_LIMIT}&q=${encodeURIComponent(queryValue)}&userId=${getLocalStorageValue("ssUserId")}&sessionId=${getLocalStorageValue("ssSessionId")}&pageLoadId=${getLocalStorageValue("ssPageLoadId")}&beacon=true&source=input&input=${encodeURIComponent(searchedValue)}`,
+            ).catch((e) => {
+                throw error;
+            });
+
+            if (!response?.results?.length) throw error;
+
+            return response;
+        } catch (error) {}
+    }
+
+    function getSearchResultLayout({ pagination, results, searchedValue }) {
+        return /* HTML */ `
+            <div class="ab-search-header">
+                <p class="ab-search-header__text">Products Suggestions</p>
+            </div>
+            <ul class="ab-search-result-list">
+                ${results
+                    .map(
+                        ({ id, imageUrl, name, price, url }) => /* HTML */ `
+                            <li id="${id}" class="ab-search-result-item">
+                                <a href="${url}" class="ab-search-result-item__link">
+                                    <span class="ab-search-result-item__img-container">
+                                        <img class="ab-search-result-item__img" src="${imageUrl}" alt="${name}" />
+                                    </span>
+                                    <span class="ab-search-result-item__name">${name}</span>
+                                    <span class="ab-search-result-item__price">$${parseFloat(price).toFixed(2)}</span>
+                                </a>
+                            </li>
+                        `,
+                    )
+                    .join("")}
+            </ul>
+            <div class="ab-search-footer">
+                <a href="/search-results.html?keyword${searchedValue}" class="ab-search-footer__cta">See ${pagination.totalResults} results for "${searchedValue}"</a>
+            </div>
+        `;
+    }
+
+    async function handleSearch(e) {
+        const targetNode = q(".ab-search-results");
+        try {
+            const searchedValue = e.target.value.trim();
+            const res = await getSearchResults(searchedValue);
+            targetNode.innerHTML = getSearchResultLayout({ ...res, searchedValue });
+        } catch (error) {
+            targetNode.innerHTML = "";
+            console.log(error);
+        }
+    }
+
     function init() {
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         console.table(TEST_CONFIG);
@@ -136,13 +204,13 @@
                         or battery you need
                     </h2>
                     <div class="ab-hero-search">
-                        <div class="searchWidget">
-                            <div class="searchBox">
-                                <div class="search-form">
-                                    <label id="ab-searchLabel" for="search" style="display: inline">
+                        <div class="ab-searchWidget">
+                            <div class="ab-searchBox">
+                                <div class="ab-search-form">
+                                    <label id="ab-searchLabel" for="ab-search" style="display: inline">
                                         <input
                                             type="text"
-                                            id="searchlight"
+                                            id="ab-searchlight"
                                             aria-labelledby="searchLabel"
                                             name="keyword"
                                             value=""
@@ -152,14 +220,17 @@
                                         <button type="submit" class="search-submit">${ASSETS["search_svg"]}</button>
                                     </label>
                                 </div>
-                                <div class="clear"></div>
                             </div>
+                            <div class="ab-search-results"></div>
                         </div>
                     </div>
                     <a href="/aeds.html" class="ab-hero-promo-cta">$175 off $1,500+ · code SAVE175</a>
                 </div>
             `,
         );
+
+        const debouncedSearch = debounce(handleSearch, 250);
+        q("#ab-searchlight").addEventListener("input", debouncedSearch);
     }
 
     function checkForItems() {
@@ -173,23 +244,4 @@
         console.warn(error);
         return false;
     }
-})();
-
-(function injectStyles() {
-    const style = document.createElement("style");
-
-    style.textContent = /* HTML */ `
-        .AB-HOMEPAGE-HERO-SEARCH .frame-feature { display: none; } .AB-HOMEPAGE-HERO-SEARCH .ab-hero-container { background-color: #eaf4fa; padding: 24px 9px; display: flex;
-        flex-direction: column; justify-content: center; align-items: center; gap: 14px; } .AB-HOMEPAGE-HERO-SEARCH h2.ab-hero-heading { font-family: Rubik, Arial, "Helvetica Neue",
-        Helvetica, sans-serif; font-weight: 600; font-size: 22px; line-height: 100%; letter-spacing: 0px; text-align: center; color: #0d21a1; margin: 0; } .AB-HOMEPAGE-HERO-SEARCH
-        .ab-hero-search { width: 100%; } .AB-HOMEPAGE-HERO-SEARCH a.ab-hero-promo-cta { height: 24px; background-color: #e00034; padding: 5px 10px; border-radius: 100px; font-family:
-        Rubik, Arial, "Helvetica Neue", Helvetica, sans-serif; font-weight: 600; font-size: 12px; line-height: 100%; letter-spacing: 0px; color: #ffffff; align-content: center;
-        text-decoration: none; outline: none; margin: 0; } .AB-HOMEPAGE-HERO-SEARCH a.ab-hero-promo-cta:hover { text-decoration: none; outline: none; } @media screen and (min-width:
-        991px) { .AB-HOMEPAGE-HERO-SEARCH .ab-hero-container { padding: 59.5px 0px; gap: 24px; } .AB-HOMEPAGE-HERO-SEARCH h2.ab-hero-heading { font-weight: 500; font-size: 32px;
-        line-height: 100%; letter-spacing: 0px; text-align: center; } .AB-HOMEPAGE-HERO-SEARCH h2.ab-hero-heading br { display: none; } .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search {
-        max-width: 800px; } .AB-HOMEPAGE-HERO-SEARCH a.ab-hero-promo-cta { height: 35px; padding: 8px 20px; border-radius: 21.6px; font-weight: 700; font-size: 16px; line-height: 100%;
-        letter-spacing: 0px; } }
-    `;
-
-    document.head.appendChild(style);
 })();

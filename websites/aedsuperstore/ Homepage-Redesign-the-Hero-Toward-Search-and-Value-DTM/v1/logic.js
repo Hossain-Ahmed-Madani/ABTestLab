@@ -80,6 +80,7 @@
             if (ctrl) ctrl.abort();
             ctrl = new AbortController();
             const { signal } = ctrl;
+            console.log('signal', signal)
             try {
                 // const [sug, res] = await Promise.all([
                 //   getJSON(`${BASE}/suggest/query?lang=en&limit=${SUGGEST_LIMIT}&pubId=${SITE_ID}&query=${encodeURIComponent(q)}`, signal)
