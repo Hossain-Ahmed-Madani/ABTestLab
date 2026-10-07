@@ -160,12 +160,11 @@
         const callback = (e) => {
             if (!e.target.closest(".ab-hero-search")) {
                 handleSearchView("hide");
-                eventAttached = false
+                eventAttached = false;
                 document.removeEventListener("click", callback);
             }
         };
-        
-        
+
         document.addEventListener("click", callback);
     }
 
@@ -179,7 +178,7 @@
             handleSearchView("hide");
         }
 
-        if (e.target.closest("#ab-searchlight") && q('.ab-search-results:not(:empty)')) {
+        if (e.target.closest("#ab-searchlight") && q(".ab-search-results:not(:empty)")) {
             handleSearchView("show");
         }
     }
@@ -200,10 +199,11 @@
         }
     }
 
-
-
     function init() {
+        if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
+        
         console.table(TEST_CONFIG);
 
         q(".frame-feature").insertAdjacentHTML(
