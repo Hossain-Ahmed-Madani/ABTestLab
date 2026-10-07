@@ -1,0 +1,13 @@
+{
+  "id": "1791361264307_7593__Homepage_Redesign_the_Hero_Toward_Search_and_Value_DTM",
+  "name": " Homepage-Redesign-the-Hero-Toward-Search-and-Value-DTM",
+  "type": "A/B",
+  "website": "aedsuperstore",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-10-07T08:21:04.307Z",
+  "createdAtReadable": "10/7/2026, 2:21:04 PM",
+  "lastUpdated": "2026-10-07T08:21:04.578Z"
+}
