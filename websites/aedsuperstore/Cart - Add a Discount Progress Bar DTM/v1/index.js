@@ -84,37 +84,54 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    const checkpoints = [
+        {
+            checkpoint: 199,
+            offer: "Free shipping",
+        },
+        {
+            checkpoint: 1500,
+            offer: "$175 off",
+        },
+        {
+            checkpoint: 3000,
+            offer: "$450 off",
+        },
+    ];
+
     function getProgressData() {
         const txt = q(".summary-totals-colors")?.textContent?.trim() || "";
         const subTotal = parseFloat(txt.replace(/[$,]/g, "")) || 0;
 
-        const checkpoints = [199, 1500, 3000];
+        // Find the next unlocked checkpoint
+        const nextOffer = checkpoints.find(({ checkpoint }) => subTotal < checkpoint);
 
-        const nextDiscount = checkpoints.find((checkpoint) => subTotal < checkpoint);
-        const maxDiscountReached = nextDiscount === undefined;
+        const maxDiscountReached = nextOffer === undefined;
 
         const progress = Math.min(Math.round((subTotal / 3000) * 100), 100);
 
-        const needToSpend = maxDiscountReached ? 0 : nextDiscount - subTotal;
+        const needToSpend = maxDiscountReached ? 0 : Math.max(nextOffer.checkpoint - subTotal, 0);
 
         return {
             subTotal,
             progress,
+            nextCheckpoint: nextOffer?.checkpoint ?? null,
+            nextOffer: nextOffer?.offer ?? null,
             needToSpend,
-            nextDiscount: nextDiscount ?? null,
             maxDiscountReached,
         };
     }
-
     function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
-        const { subTotal, progress, needToSpend, nextDiscount, maxDiscountReached } = getProgressData();
+        const { subTotal, progress, nextCheckpoint, nextOffer, needToSpend, maxDiscountReached } = getProgressData();
 
-        console.log("data", subTotal, progress, needToSpend, nextDiscount, maxDiscountReached);
+        console.log("data", subTotal, progress, nextCheckpoint, nextOffer, needToSpend, maxDiscountReached);
+
+
 
         q(".cart-promo-banner").insertAdjacentHTML(
             "beforebegin",
@@ -124,24 +141,27 @@
                         <div class="ab-text-container">
                             <p class="ab-progress-text">
                                 ${maxDiscountReached
-                                    ? /* HTML */ ` 
-                                        <strong>You’ve unlocked $450 off</strong>
-                                    `
+                                    ? /* HTML */ ` <strong>You’ve unlocked $450 off</strong> `
                                     : /* HTML */ `
                                         Spend <strong>$${needToSpend} more</strong> to get
                                         <br />
-                                        <strong>$${nextDiscount} off</strong>
+                                        <strong>$${nextOffer} off</strong>
                                     `}
                             </p>
                         </div>
-                        <div class="ab-progress-container">
+                        <div class="ab-progress-container" style="--progress:${progress}%;">
                             <div class="shipping-progress">
                                 <!-- Top price labels -->
                                 <div class="progress-labels">
-                                    <span class="min-price">$0</span>
-                                    <span class="checkpoint-label completed checkpoint-1"> $199 </span>
-                                    <span class="checkpoint-label checkpoint-2"> $1,500 </span>
-                                    <span class="checkpoint-label checkpoint-3">$3,000</span>
+                                    ${checkpoints
+                                        .map(
+                                            (item, index) => /* HTML */ `
+                                                <span class="checkpoint-label ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} checkpoint-${index + 1}">
+                                                    $${item["checkpoint"].toLocaleString("en-US")}
+                                                </span>
+                                            `,
+                                        )
+                                        .join("")}
                                 </div>
 
                                 <!-- Progress bar -->
@@ -151,23 +171,27 @@
                                         <div class="progress-fill"></div>
 
                                         <!-- Checkpoints -->
-                                        <div class="checkpoint completed checkpoint-1"></div>
-                                        <div class="checkpoint checkpoint-2"></div>
-                                        <div class="checkpoint checkpoint-3"></div>
+                                        ${checkpoints
+                                            .map(
+                                                (item, index) => /* HTML */ `
+                                                    <div class="checkpoint  ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} checkpoint-${index + 1}"></div>
+                                                `,
+                                            )
+                                            .join("")}
                                     </div>
                                 </div>
 
                                 <!-- Offer labels -->
                                 <div class="offer-labels">
-                                    <div class="offer completed offer-1">
-                                        <span>Free shipping</span>
-                                    </div>
-                                    <div class="offer offer-2">
-                                        <span>$175 off</span>
-                                    </div>
-                                    <div class="offer offer-3">
-                                        <span>$450 off</span>
-                                    </div>
+                                    ${checkpoints
+                                        .map(
+                                            (item, index) => /* HTML */ `
+                                                <div class="offer  ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} offer-${index + 1}">
+                                                    <span>${item["offer"]}</span>
+                                                </div>
+                                            `,
+                                        )
+                                        .join("")}
                                 </div>
                             </div>
                         </div>
@@ -175,6 +199,7 @@
                 </section>
             `,
         );
+
     }
 
     function checkForItems() {

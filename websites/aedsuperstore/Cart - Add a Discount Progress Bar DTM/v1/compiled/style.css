@@ -31,7 +31,7 @@
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container {
   width: 100%;
   flex-grow: 1;
-  --progress: 7%;
+  --progress: 0%;
   /* --------------------------------
       Top labels
   -------------------------------- */
