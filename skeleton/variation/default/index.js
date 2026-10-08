@@ -143,9 +143,12 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function init() {
+    function init() {        
+        if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
+        window[page_initials] = true;
         console.table(TEST_CONFIG);
+
     }
 
     function checkForItems() {
