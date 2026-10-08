@@ -107,7 +107,7 @@
                                 <!-- Top price labels -->
                                 <div class="progress-labels">
                                     <span class="min-price">$0</span>
-                                    <span class="checkpoint-label checkpoint-1"> $199 </span>
+                                    <span class="checkpoint-label completed checkpoint-1"> $199 </span>
                                     <span class="checkpoint-label checkpoint-2"> $1,500 </span>
                                     <span class="max-price">$4,000</span>
                                 </div>
@@ -119,7 +119,7 @@
                                         <div class="progress-fill"></div>
 
                                         <!-- Checkpoints -->
-                                        <div class="checkpoint checkpoint-1"></div>
+                                        <div class="checkpoint completed checkpoint-1"></div>
                                         <div class="checkpoint checkpoint-2"></div>
                                         <div class="checkpoint checkpoint-3"></div>
                                     </div>
@@ -127,7 +127,7 @@
 
                                 <!-- Offer labels -->
                                 <div class="offer-labels">
-                                    <div class="offer offer-1">
+                                    <div class="offer completed offer-1">
                                         <span>Free shipping</span>
                                     </div>
                                     <div class="offer offer-2">

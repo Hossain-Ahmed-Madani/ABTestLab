@@ -48,10 +48,10 @@
   /* $199 */
   /* $1500 */
   /* $4000 */
-  /* Completed checkpoint */
   /* --------------------------------
       Offer labels
   -------------------------------- */
+  /* Completed checkpoint */
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .shipping-progress {
   width: 100%;
@@ -133,21 +133,6 @@
   right: 0;
   transform: translate(-150%, -50%);
 }
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint.completed {
-  background: #4a8f00;
-  border-color: #4a8f00;
-}
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint.completed::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 46%;
-  width: 5px;
-  height: 9px;
-  border: solid #fff;
-  border-width: 0 2px 2px 0;
-  transform: translate(-50%, -50%) rotate(45deg);
-}
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-labels {
   position: relative;
   height: 11px;
@@ -173,6 +158,27 @@
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-3 {
   right: 0;
   transform: translate(-30%, 0%);
+}
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint-label.completed,
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.completed {
+  color: #4a8f00;
+}
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint.completed {
+  background: #4a8f00;
+  border-color: #4a8f00;
+  border: 2px solid #ffffff;
+}
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint.completed::after {
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='8' viewBox='0 0 8 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.66678 2L3.00048 5.6664L1.33398 3.99985' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E%0A");
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 @media screen and (min-width: 991px) {
   .AB-CART-DISCOUNT-PROGRESS .ab-section {
