@@ -1,17 +1,304 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-CART-DISCOUNT-PROGRESS {
-    //
+    .cart-promo-banner {
+        display: none;
+    }
+
+    .ab-section {
+        border: 1px solid #e7e5e5;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+
+    .ab-text-container {
+        width: max-content;
+        text-align: center;
+    }
+
+    .ab-progress-text {
+        font-family: rubik, sans-serif;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-align: center;
+        color: #282828;
+        margin-bottom: 0;
+
+        br {
+            display: none;
+        }
+    }
+
+    .ab-progress-container {
+        width: 100%;
+        flex-grow: 1;
+
+        // PROGRESS SECTION
+
+        --progress: 10%;
+
+        .shipping-progress {
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-family: rubik, sans-serif;
+        }
+
+        /* --------------------------------
+        Top labels
+    -------------------------------- */
+
+        .progress-labels {
+            position: relative;
+            height: 11px;
+        }
+
+        .progress-labels span {
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+            white-space: nowrap;
+
+            font-weight: 500;
+            font-size: 11px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-align: center;
+            color: #282828;
+        }
+
+        /* $0 */
+        .min-price {
+            display: none;
+            left: 0;
+            transform: none !important;
+        }
+
+        /* Checkpoint positions */
+
+        .progress-labels .checkpoint-1 {
+            left: 6.633%;
+        }
+
+        .progress-labels .checkpoint-2 {
+            left: 50%;
+        }
+
+        /* $3000 */
+        .max-price {
+            right: 0;
+        }
+
+        /* --------------------------------
+        Progress track
+    -------------------------------- */
+
+        .progress-track-container {
+            height: 24px;
+            align-content: center;
+        }
+
+        .progress-track {
+            position: relative;
+            height: 8px;
+            background: #e7e5e5;
+            border-radius: 4px;
+        }
+
+        /* Green progress */
+
+        .progress-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: var(--progress);
+            height: 100%;
+
+            background: #4a8f00;
+            border-radius: 999px;
+
+            transition: width 0.3s ease;
+        }
+
+        /* --------------------------------
+        Checkpoints
+    -------------------------------- */
+
+        .checkpoint {
+            position: absolute;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid #9fa09f;
+            background: #fff;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* $199 */
+        .checkpoint-1 {
+            left: 6.633%;
+        }
+
+        /* $1500 */
+        .checkpoint-2 {
+            left: 50%;
+        }
+
+        /* $4000 */
+        .checkpoint-3 {
+            right: 0;
+            transform: translate(-150%, -50%);
+        }
+
+        /* Completed checkpoint */
+
+        .checkpoint.completed {
+            background: #4a8f00;
+            border-color: #4a8f00;
+        }
+
+        .checkpoint.completed::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 46%;
+            width: 5px;
+            height: 9px;
+            border: solid #fff;
+            border-width: 0 2px 2px 0;
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        /* --------------------------------
+        Offer labels
+    -------------------------------- */
+
+        .offer-labels {
+            position: relative;
+            height: 11px;
+            // margin-top: 8px;
+        }
+
+        .offer {
+            position: absolute;
+            top: 0;
+            transform: translateX(-50%);
+
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-align: center;
+            white-space: nowrap;
+            color: #9fa09f;
+        }
+
+        .offer-1 {
+            left: 6.633%;
+        }
+
+        .offer-2 {
+            left: 50%;
+        }
+
+        .offer-3 {
+            // right: 0px;
+            // transform: none;
+            right: 0;
+            transform: translate(-30%, 0%);
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-section {
+            box-shadow: 0px 2px 8px 0px #0000001a;
+            padding: 14px 16px;
+            border-radius: 6px;
+            flex-direction: row;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .ab-progress-text {
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0px;
+            text-align: center;
+        }
+
+        .ab-progress-container {
+            .shipping-progress {
+                gap: 4px;
+            }
+
+            .progress-labels {
+                height: 14px;
+            }
+
+            .progress-track-container {
+                //
+            }
+
+            .checkpoint-3 {
+                transform: translate(-0%, -50%);
+            }
+
+            .progress-labels span {
+                font-weight: 500;
+                // font-size: 10px;
+                font-size: 12px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                text-align: center;
+            }
+
+            .progress-labels .max-price {
+                right: 0;
+                transform: translateX(0%);
+            }
+
+            .offer-labels {
+                height: 14px;
+            }
+
+            .offer {
+                font-weight: 500;
+                // font-size: 10px;
+                font-size: 12px;
+                line-height: 100%;
+                letter-spacing: 0px;
+                text-align: right;
+            }
+
+            .offer-3 {
+                transform: translate(0%, 0%);
+            }
+        }
+    }
 }

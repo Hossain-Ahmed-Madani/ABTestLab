@@ -25,17 +25,6 @@
         }
     }
 
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -60,28 +49,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -102,32 +69,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -143,16 +84,69 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function init() {        
+    function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
+        q(".cart-promo-banner").insertAdjacentHTML(
+            "beforebegin",
+            /* HTML */ `
+                <section class="container">
+                    <div class="ab-section">
+                        <div class="ab-text-container">
+                            <p class="ab-progress-text">
+                                Spend <strong>$914 more</strong> to get
+                                <br />
+                                <strong>$450 off</strong>
+                            </p>
+                        </div>
+                        <div class="ab-progress-container">
+                            <div class="shipping-progress">
+                                <!-- Top price labels -->
+                                <div class="progress-labels">
+                                    <span class="min-price">$0</span>
+                                    <span class="checkpoint-label checkpoint-1"> $199 </span>
+                                    <span class="checkpoint-label checkpoint-2"> $1,500 </span>
+                                    <span class="max-price">$4,000</span>
+                                </div>
+
+                                <!-- Progress bar -->
+                                <div class="progress-track-container">
+                                    <div class="progress-track">
+                                        <!-- Filled progress -->
+                                        <div class="progress-fill"></div>
+
+                                        <!-- Checkpoints -->
+                                        <div class="checkpoint checkpoint-1"></div>
+                                        <div class="checkpoint checkpoint-2"></div>
+                                        <div class="checkpoint checkpoint-3"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Offer labels -->
+                                <div class="offer-labels">
+                                    <div class="offer offer-1">
+                                        <span>Free shipping</span>
+                                    </div>
+                                    <div class="offer offer-2">
+                                        <span>$175 off</span>
+                                    </div>
+                                    <div class="offer offer-3">
+                                        <span>$450 off</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `,
+        );
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".cart-promo-banner"));
     }
 
     try {
