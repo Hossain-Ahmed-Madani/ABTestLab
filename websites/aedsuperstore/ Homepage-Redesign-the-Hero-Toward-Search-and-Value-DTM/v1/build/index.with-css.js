@@ -207,6 +207,10 @@
   .AB-HOMEPAGE-HERO-SEARCH h2.ab-hero-heading br {
     display: none;
   }
+  .AB-HOMEPAGE-HERO-SEARCH .ab-search-results {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search {
     max-width: 800px;
   }
@@ -273,10 +277,6 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "ROI Revolutions",
-    project: "AED Superstore",
-    site_url: "https://www.aedsuperstore.com",
-    test_name: "Homepage - Redesign the Hero Toward Search and Value [DTM]",
     page_initials: "AB-HOMEPAGE-HERO-SEARCH",
     test_variation: 1,
     test_version: 0.0001,
@@ -364,7 +364,7 @@
     };
   }
 
-  function getSearchResultLayout({ pagination, results, searchedValue }) {
+  function getSearchResultLayout({ queryValue, pagination, results }) {
     return /* HTML */ `
       <div class="ab-search-header">
         <p class="ab-search-header__text">Products Suggestions</p>
@@ -394,9 +394,9 @@
       </ul>
       <div class="ab-search-footer">
         <a
-          href="/search-results.html?keyword=${searchedValue}"
+          href="/search-results.html?keyword=${queryValue}"
           class="ab-search-footer__cta"
-          >See ${pagination.totalResults} results for "${searchedValue}"</a
+          >See ${pagination.totalResults} results for "${queryValue}"</a
         >
       </div>
     `;
@@ -415,7 +415,6 @@
       );
 
       const queryValue = suggestion?.suggested?.text || searchedValue;
-
       if (!queryValue) throw new Error("No search query available");
 
       const response = await fetchJSON(
@@ -425,7 +424,7 @@
       if (!response?.results?.length)
         throw new Error("No search results found");
 
-      return response;
+      return { queryValue, ...response };
     } catch (error) {
       throw error;
     }
@@ -460,14 +459,23 @@
 
   function handleClick(e) {
     if (e.target.closest(".ab-search-form .search-submit")) {
-      window.location.href =
+      const url =
         "/search-results.html?keyword=" +
           q("input#ab-searchlight").value.trim() || "";
       handleSearchView("hide");
+
+      if (e.ctrlKey || e.metaKey) {
+        window.open(url, "_blank");
+      } else {
+        window.location.href = url;
+      }
     }
 
     if (e.target.closest(".ab-search-footer__cta")) {
+      e.preventDefault();
+      const url = e.target.closest(".ab-search-footer__cta").href;
       handleSearchView("hide");
+      window.location.href = url;
     }
 
     if (
@@ -486,7 +494,7 @@
       if (!searchedValue)
         throw new Error("Invalid Search Value: " + searchedValue);
       const res = await getSearchResults(searchedValue);
-      targetNode.innerHTML = getSearchResultLayout({ ...res, searchedValue });
+      targetNode.innerHTML = getSearchResultLayout(res);
       handleSearchView("show");
       addOutsideClickEvent();
     } catch (error) {
@@ -496,12 +504,13 @@
   }
 
   function init() {
+    if (window[page_initials] === true) return;
     q("body").classList.add(
       page_initials,
       `${page_initials}--v${test_variation}`,
       `${page_initials}--version:${test_version}`,
     );
-    console.table(TEST_CONFIG);
+    window[page_initials] = true;
 
     q(".frame-feature").insertAdjacentHTML(
       "afterend",

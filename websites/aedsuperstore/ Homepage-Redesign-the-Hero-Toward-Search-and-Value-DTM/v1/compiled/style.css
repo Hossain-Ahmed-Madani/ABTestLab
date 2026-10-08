@@ -201,6 +201,10 @@
   .AB-HOMEPAGE-HERO-SEARCH h2.ab-hero-heading br {
     display: none;
   }
+  .AB-HOMEPAGE-HERO-SEARCH .ab-search-results {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search {
     max-width: 800px;
   }
