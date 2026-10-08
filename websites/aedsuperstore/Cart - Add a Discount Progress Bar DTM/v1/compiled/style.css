@@ -31,7 +31,7 @@
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container {
   width: 100%;
   flex-grow: 1;
-  --progress: 10%;
+  --progress: 7%;
   /* --------------------------------
       Top labels
   -------------------------------- */
@@ -88,7 +88,7 @@
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels .checkpoint-2 {
   left: 50%;
 }
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .max-price {
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels .checkpoint-3 {
   right: 0;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-track-container {
@@ -149,13 +149,13 @@
   white-space: nowrap;
   color: #9fa09f;
 }
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-1 {
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
   left: 6.633%;
 }
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-2 {
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-2 {
   left: 50%;
 }
-.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-3 {
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-3 {
   right: 0;
   transform: translate(-30%, 0%);
 }
@@ -202,7 +202,7 @@
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels {
     height: 14px;
   }
-  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint-3 {
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-track .checkpoint-3 {
     transform: translate(0%, -50%);
   }
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels span {
@@ -212,7 +212,7 @@
     letter-spacing: 0px;
     text-align: center;
   }
-  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels .max-price {
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels .checkpoint-3 {
     right: 0;
     transform: translateX(0%);
   }
@@ -226,7 +226,7 @@
     letter-spacing: 0px;
     text-align: right;
   }
-  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-3 {
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-3 {
     transform: translate(0%, 0%);
   }
 }

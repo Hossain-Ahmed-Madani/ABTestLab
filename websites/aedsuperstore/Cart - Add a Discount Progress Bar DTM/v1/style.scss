@@ -53,7 +53,7 @@
         width: 100%;
         flex-grow: 1;
 
-        --progress: 10%;
+        --progress: 7%;
 
         .shipping-progress {
             width: 100%;
@@ -105,7 +105,7 @@
         }
 
         /* $3000 */
-        .max-price {
+        .progress-labels .checkpoint-3 {
             right: 0;
         }
 
@@ -198,15 +198,15 @@
             color: #9fa09f;
         }
 
-        .offer-1 {
+        .offer.offer-1 {
             left: 6.633%;
         }
 
-        .offer-2 {
+        .offer.offer-2 {
             left: 50%;
         }
 
-        .offer-3 {
+        .offer.offer-3 {
             // right: 0px;
             // transform: none;
             right: 0;
@@ -278,7 +278,7 @@
                 //
             }
 
-            .checkpoint-3 {
+            .progress-track .checkpoint-3 {
                 transform: translate(-0%, -50%);
             }
 
@@ -291,7 +291,7 @@
                 text-align: center;
             }
 
-            .progress-labels .max-price {
+            .progress-labels .checkpoint-3 {
                 right: 0;
                 transform: translateX(0%);
             }
@@ -309,7 +309,7 @@
                 text-align: right;
             }
 
-            .offer-3 {
+            .offer.offer-3 {
                 transform: translate(0%, 0%);
             }
         }

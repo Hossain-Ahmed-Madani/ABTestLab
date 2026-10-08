@@ -84,11 +84,37 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
+    function getProgressData() {
+        const txt = q(".summary-totals-colors")?.textContent?.trim() || "";
+        const subTotal = parseFloat(txt.replace(/[$,]/g, "")) || 0;
+
+        const checkpoints = [199, 1500, 3000];
+
+        const nextDiscount = checkpoints.find((checkpoint) => subTotal < checkpoint);
+        const maxDiscountReached = nextDiscount === undefined;
+
+        const progress = Math.min(Math.round((subTotal / 3000) * 100), 100);
+
+        const needToSpend = maxDiscountReached ? 0 : nextDiscount - subTotal;
+
+        return {
+            subTotal,
+            progress,
+            needToSpend,
+            nextDiscount: nextDiscount ?? null,
+            maxDiscountReached,
+        };
+    }
+
     function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
+
+        const { subTotal, progress, needToSpend, nextDiscount, maxDiscountReached } = getProgressData();
+
+        console.log("data", subTotal, progress, needToSpend, nextDiscount, maxDiscountReached);
 
         q(".cart-promo-banner").insertAdjacentHTML(
             "beforebegin",
@@ -97,9 +123,15 @@
                     <div class="ab-section">
                         <div class="ab-text-container">
                             <p class="ab-progress-text">
-                                Spend <strong>$914 more</strong> to get
-                                <br />
-                                <strong>$450 off</strong>
+                                ${maxDiscountReached
+                                    ? /* HTML */ ` 
+                                        <strong>You’ve unlocked $450 off</strong>
+                                    `
+                                    : /* HTML */ `
+                                        Spend <strong>$${needToSpend} more</strong> to get
+                                        <br />
+                                        <strong>$${nextDiscount} off</strong>
+                                    `}
                             </p>
                         </div>
                         <div class="ab-progress-container">
@@ -109,7 +141,7 @@
                                     <span class="min-price">$0</span>
                                     <span class="checkpoint-label completed checkpoint-1"> $199 </span>
                                     <span class="checkpoint-label checkpoint-2"> $1,500 </span>
-                                    <span class="max-price">$4,000</span>
+                                    <span class="checkpoint-label checkpoint-3">$3,000</span>
                                 </div>
 
                                 <!-- Progress bar -->
@@ -146,7 +178,7 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".cart-promo-banner"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".cart-promo-banner") && q(".summary-totals-colors"));
     }
 
     try {
