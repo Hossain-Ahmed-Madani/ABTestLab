@@ -1,4 +1,4 @@
 Figma: https://www.figma.com/design/00a6Weqwac6WHusxPYQ5YO/AED-Superstore---A-B-Test-Mockups--Sept-2026-POP-?node-id=350-50&t=HRAC0Dy8UguxcaFJ-0
 
-Test container:
-V1:
+Test container: https://app.wingify.com/#/deploy/experience/251/edit/urls/?accountId=259760
+V1: https://www.aedsuperstore.com/view_cart.asp?_vis_preview_data=eyJhIjoiMjlhYjMwZDM1ZGJjNWViZjE0OGY3MmE0NzBjZjAyZjYiLCJlIjp7IjI1MSI6eyJ2IjoiMiIsImQiOjAsInMiOjAsInRnIjowLCJ0IjowLCJ0ZCI6MCwibCI6MCwiYWxoIjowLCJpcGxlIjowLCJpaG8iOjAsInBhaGkiOm51bGwsInNhYmVyIjpudWxsLCJuZXdRdWVyeUJveCI6bnVsbCwiZGF0YVJlZ2lvbiI6bnVsbCwibWF0Y2hUeXBlIjpudWxsLCJjbiI6InVuZGVmaW5lZCIsInVybCI6Imh0dHBzJTI1M0ElMjUyRiUyNTJGd3d3LmFlZHN1cGVyc3RvcmUuY29tJTI1MkZ2aWV3X2NhcnQuYXNwIiwiYXBwIjoiYXBwIiwidHMiOjE3OTE1ODUwNDE3ODN9fX0=
