@@ -9,6 +9,13 @@
         test_version: 0.0001,
     };
 
+    const API = {
+        base_url: "https://www.aedsuperstore.com/recalculate.asp",
+        request_method: "POST",
+    };
+
+    let APPLIED_DISCOUNT = null;
+
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     async function fetchAndParseHTML(url, method, payload = {}) {
@@ -76,18 +83,15 @@
         const txt = q(".summary-totals-colors")?.textContent?.trim() || "";
         const subTotal = parseFloat(txt.replace(/[$,]/g, "")) || 0;
 
-        let appliedDiscount = null;
         const discountTxt = q(".discount-details .carttotal-price")?.textContent?.trim() || "";
-        if (discountTxt) appliedDiscount = parseFloat(discountTxt.replace(/[$,]/g, "")) || 0;
-        console.log("appliedDiscount", appliedDiscount); /* START FROM HERE */
+        if (discountTxt) {
+            APPLIED_DISCOUNT = parseFloat(discountTxt.replace(/[$,]/g, "")) || 0;
+        }
 
         // Find the next unlocked checkpoint
         const nextOffer = checkpoints.find(({ checkpoint }) => subTotal < checkpoint);
-
         const maxDiscountReached = nextOffer === undefined;
-
         const progress = Math.min(Math.round((subTotal / 3000) * 100), 100);
-
         const needToSpend = maxDiscountReached ? 0 : Math.max(nextOffer.checkpoint - subTotal, 0);
 
         return {
@@ -97,11 +101,12 @@
             nextOffer: nextOffer?.offer ?? null,
             needToSpend,
             maxDiscountReached,
-            appliedDiscount,
         };
     }
 
-    function getLayout({ subTotal, progress, nextCheckpoint, nextOffer, needToSpend, maxDiscountReached, appliedDiscount }) {
+    function getLayout() {
+        const { subTotal, progress, nextOffer, needToSpend, maxDiscountReached } = getProgressData();
+
         return /* HTML */ `
             <section class="container">
                 <div class="ab-section">
@@ -154,12 +159,12 @@
                                     .map(
                                         (item, index) => /* HTML */ `
                                             <div class="offer ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} offer-${index + 1}">
-                                                ${item["discount"] && subTotal >= item["checkpoint"] && appliedDiscount !== item["discount"] && appliedDiscount < item["discount"]
+                                                ${item["discount"] && subTotal >= item["checkpoint"] && APPLIED_DISCOUNT !== item["discount"] && APPLIED_DISCOUNT < item["discount"]
                                                     ? `<button type="button" class="offer-cta" data-code="${item["couponCode"]}">
-                                                    ${!appliedDiscount ? "Apply" : "Switch to"} $${item["discount"]} off
+                                                    ${!APPLIED_DISCOUNT ? "Apply" : "Switch to"} $${item["discount"]} off
                                                     
                                                     </button>`
-                                                    : `<span class="offer-label">${item["offer"]} ${appliedDiscount === item["discount"] ? "applied" : ""}</span>`}
+                                                    : `<span class="offer-label">${item["offer"]} ${APPLIED_DISCOUNT === item["discount"] ? "applied" : ""}</span>`}
                                             </div>
                                         `,
                                     )
@@ -172,26 +177,38 @@
         `;
     }
 
-    function updateLayout(resDoc) {
-        console.log("res", resDoc, q(resDoc, "#cart-box"));
-        const selectorList = [".row.subtotal-details.carttotal-cols", ".row.discount-details.carttotal-cols", ".row.total-details.carttotal-cols", ".displayPromotions"];
-        selectorList.forEach((selector) => {
-            const oldNode = q(selector);
-            const newNode = q(resDoc, selector);
-            if (oldNode && newNode) {
-                oldNode.insertAdjacentElement("afterend", newNode);
-            }
-            oldNode?.remove();
+    function updateCartElementsAndListeners(resDoc) {
+        q(".subtotal-details .carttotal-price").innerText = q(resDoc, ".subtotal-details .carttotal-price").textContent;
+        q(".total-details .carttotal-price").innerText = q(resDoc, ".total-details .carttotal-price").textContent;
+
+        q(".discount-details")?.remove();
+        const newDiscountDetailsElement = q(resDoc, ".discount-details");
+        if (newDiscountDetailsElement) q(".subtotal-details")?.insertAdjacentElement("afterend", newDiscountDetailsElement);
+
+        q(".displayPromotions")?.remove();
+        const newPromotionElement = q(resDoc, ".displayPromotions");
+        if (q("#apply-coupon") && newPromotionElement) q("#apply-coupon").insertAdjacentElement("afterend", newPromotionElement);
+
+        if (q(".remove-promo")) initLegacyPromoRemovalHandler();
+
+        q(".ab-section")?.remove();
+        q(".cart-promo-banner").insertAdjacentHTML("beforebegin", getLayout());
+    }
+
+    function initLegacyPromoRemovalHandler() {
+        window.jQuery(".remove-promo").click(function (e) {
+            e.preventDefault();
+            const promoId = jQuery(this).data("promoid");
+            const form = jQuery("<form />").attr({ action: "recalculate.asp?apply_coupon=2", method: "post", class: "hidden" });
+            const input = jQuery("<input />").attr({ type: "hidden", value: promoId, name: "coupon" });
+            jQuery(form).append(input);
+            jQuery("body").append(form);
+            jQuery(form).submit();
         });
     }
 
-    const BASE_URL = "https://www.aedsuperstore.com/recalculate.asp";
-    const REQUEST_METHOD = "POST";
-
     async function handleDiscountCtaClick(e) {
         try {
-            console.log("apply discount");
-
             const couponCode = e.currentTarget.getAttribute("data-code");
             const address = q(".shipquote-result-location")?.textContent?.trim() || "";
             const zipCode = address.match(/\b\d{5}(?:-\d{4})?\b/)?.[0] || "";
@@ -205,18 +222,18 @@
                 payload[input.name] = input.value;
             });
 
-            console.log("payload", payload);
-
             // Remove the existing coupon
-            const resOne = await fetchAndParseHTML(`${BASE_URL}?apply_coupon=2`, REQUEST_METHOD, { coupon: 1339 });
-            if (resOne.error) throw new Error(resOne.error);
+            if (APPLIED_DISCOUNT) {
+                const resOne = await fetchAndParseHTML(`${API["base_url"]}?apply_coupon=2`, API["request_method"], { coupon: 1339 });
+                if (resOne.error) throw new Error(resOne.error);
+            }
 
             // Apply the new discount
-            const resTwo = await fetchAndParseHTML(BASE_URL, REQUEST_METHOD, payload);
+            const resTwo = await fetchAndParseHTML(API["base_url"], API["request_method"], payload);
             if (resTwo.error) throw new Error(resTwo.error);
 
-            updateLayout(resTwo);
-
+            // Update Layout
+            updateCartElementsAndListeners(resTwo);
         } catch (error) {
             console.error("Error applying discount:", error);
         }
@@ -228,11 +245,7 @@
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
-        const data = getProgressData();
-
-        console.log("data", data);
-
-        q(".cart-promo-banner").insertAdjacentHTML("beforebegin", getLayout(data));
+        q(".cart-promo-banner").insertAdjacentHTML("beforebegin", getLayout());
         qq("button.offer-cta")?.forEach((item) => item.addEventListener("click", handleDiscountCtaClick));
     }
 

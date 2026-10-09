@@ -13,9 +13,65 @@
 }
 
 .AB-CART-DISCOUNT-PROGRESS {
-    .cart-promo-banner {
-        // display: none;
-        margin-top: 20px !important;
+    .cart-promo-banner,
+    .coupons-area.cart-detail-item .module-expand,
+    .coupons-area.cart-detail-item:not(:has(.displayPromotions)) {
+        display: none;
+        // margin-top: 20px !important;
+    }
+
+    .coupons-area.cart-detail-item {
+        padding: 15px 0 55px;
+    }
+
+    .displayPromotions {
+        padding: 0;
+    }
+
+    .promotion-head {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 0;
+    }
+
+    .promotion_name {
+        font-family: rubik, sans-serif;
+        font-weight: 600;
+        font-size: 11px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        color: #282828;
+    }
+
+    .remove-promo {
+        position: static;
+        font-size: 0;
+        padding-left: 0;
+        margin-left: 0;
+
+        i,
+        &:after {
+            font-family: rubik, sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            color: #cc0000;
+        }
+
+        i:before {
+            margin-left: 0;
+        }
+
+        &:after {
+            content: "Remove Coupon";
+        }
+
+        &:hover,
+        &:focus {
+            text-decoration: underline #cc0000;
+        }
     }
 
     .ab-section {
@@ -204,7 +260,7 @@
             outline: none;
             background: none;
             text-decoration: underline;
-            color: #0D21A1;
+            color: #0d21a1;
         }
 
         .offer.offer-1 {
@@ -245,13 +301,6 @@
             right: 0;
             bottom: 0;
             margin: auto;
-            // left: 50%;
-            // top: 46%;
-            // width: 5px;
-            // height: 9px;
-            // border: solid #fff;
-            // border-width: 0 2px 2px 0;
-            // transform: translate(-50%, -50%) rotate(45deg);
         }
     }
 

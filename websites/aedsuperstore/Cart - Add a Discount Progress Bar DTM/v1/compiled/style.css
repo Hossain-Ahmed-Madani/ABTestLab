@@ -1,5 +1,50 @@
-.AB-CART-DISCOUNT-PROGRESS .cart-promo-banner {
-  margin-top: 20px !important;
+.AB-CART-DISCOUNT-PROGRESS .cart-promo-banner,
+.AB-CART-DISCOUNT-PROGRESS .coupons-area.cart-detail-item .module-expand,
+.AB-CART-DISCOUNT-PROGRESS .coupons-area.cart-detail-item:not(:has(.displayPromotions)) {
+  display: none;
+}
+.AB-CART-DISCOUNT-PROGRESS .coupons-area.cart-detail-item {
+  padding: 15px 0 55px;
+}
+.AB-CART-DISCOUNT-PROGRESS .displayPromotions {
+  padding: 0;
+}
+.AB-CART-DISCOUNT-PROGRESS .promotion-head {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 0;
+}
+.AB-CART-DISCOUNT-PROGRESS .promotion_name {
+  font-family: rubik, sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #282828;
+}
+.AB-CART-DISCOUNT-PROGRESS .remove-promo {
+  position: static;
+  font-size: 0;
+  padding-left: 0;
+  margin-left: 0;
+}
+.AB-CART-DISCOUNT-PROGRESS .remove-promo i, .AB-CART-DISCOUNT-PROGRESS .remove-promo:after {
+  font-family: rubik, sans-serif;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #cc0000;
+}
+.AB-CART-DISCOUNT-PROGRESS .remove-promo i:before {
+  margin-left: 0;
+}
+.AB-CART-DISCOUNT-PROGRESS .remove-promo:after {
+  content: "Remove Coupon";
+}
+.AB-CART-DISCOUNT-PROGRESS .remove-promo:hover, .AB-CART-DISCOUNT-PROGRESS .remove-promo:focus {
+  text-decoration: underline #cc0000;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-section {
   border: 1px solid #e7e5e5;
@@ -154,7 +199,7 @@
   outline: none;
   background: none;
   text-decoration: underline;
-  color: #0D21A1;
+  color: #0d21a1;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
   left: 6.633%;
