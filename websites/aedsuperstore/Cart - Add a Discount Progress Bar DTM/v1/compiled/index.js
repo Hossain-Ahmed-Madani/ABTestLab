@@ -43,14 +43,22 @@
         {
             checkpoint: 199,
             offer: "Free shipping",
+            couponCtaLabel: "",
+            dataCode: "",
         },
         {
             checkpoint: 1500,
             offer: "$175 off",
+            couponCtaLabel: "Apply $175 off",
+            dataCode: "SAVE175",
+            discount: 175
         },
         {
             checkpoint: 3000,
             offer: "$450 off",
+            couponCtaLabel: "Switch to $450 off",
+            dataCode: "SAVE450",
+            discount: 450
         },
     ];
 
@@ -86,8 +94,6 @@
 
         console.log("data", subTotal, progress, nextCheckpoint, nextOffer, needToSpend, maxDiscountReached);
 
-
-
         q(".cart-promo-banner").insertAdjacentHTML(
             "beforebegin",
             /* HTML */ `
@@ -98,10 +104,10 @@
                                 ${maxDiscountReached
                                     ? /* HTML */ ` <strong>You’ve unlocked $450 off</strong> `
                                     : /* HTML */ `
-                                        Spend <strong>$${needToSpend} more</strong> to get
-                                        <br />
-                                        <strong>$${nextOffer} off</strong>
-                                    `}
+                                          Spend <strong>$${needToSpend} more</strong> to get
+                                          <br />
+                                          <strong>$${nextOffer} off</strong>
+                                      `}
                             </p>
                         </div>
                         <div class="ab-progress-container" style="--progress:${progress}%;">
@@ -141,8 +147,11 @@
                                     ${checkpoints
                                         .map(
                                             (item, index) => /* HTML */ `
-                                                <div class="offer  ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} offer-${index + 1}">
-                                                    <span>${item["offer"]}</span>
+                                                <div class="offer ${maxDiscountReached || item["checkpoint"] <= subTotal ? "completed" : ""} offer-${index + 1}">
+                                                    <span class="offer-label">${item["offer"]}</span>
+                                                    ${item["couponCtaLabel"]
+                                                        ? `<button type="button" class="offer-cta" data-code="${item["dataCode"]}">${item["couponCtaLabel"]}</button>`
+                                                        : ""}
                                                 </div>
                                             `,
                                         )
@@ -154,7 +163,6 @@
                 </section>
             `,
         );
-
     }
 
     function checkForItems() {

@@ -1,6 +1,3 @@
-.AB-CART-DISCOUNT-PROGRESS .cart-promo-banner {
-  display: none;
-}
 .AB-CART-DISCOUNT-PROGRESS .ab-section {
   border: 1px solid #e7e5e5;
   padding: 14px 16px;
@@ -148,6 +145,13 @@
   text-align: center;
   white-space: nowrap;
   color: #9fa09f;
+}
+.AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-cta {
+  border: none;
+  outline: none;
+  background: none;
+  text-decoration: underline;
+  color: #0D21A1;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
   left: 6.633%;

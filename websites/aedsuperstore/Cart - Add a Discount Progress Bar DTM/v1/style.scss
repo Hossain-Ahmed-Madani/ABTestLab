@@ -13,9 +13,9 @@
 }
 
 .AB-CART-DISCOUNT-PROGRESS {
-    .cart-promo-banner {
-        display: none;
-    }
+    // .cart-promo-banner {
+    //     display: none;
+    // }
 
     .ab-section {
         border: 1px solid #e7e5e5;
@@ -196,6 +196,14 @@
             text-align: center;
             white-space: nowrap;
             color: #9fa09f;
+        }
+
+        .offer-cta {
+            border: none;
+            outline: none;
+            background: none;
+            text-decoration: underline;
+            color: #0D21A1;
         }
 
         .offer.offer-1 {
