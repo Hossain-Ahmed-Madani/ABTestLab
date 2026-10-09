@@ -112,13 +112,9 @@
                 <div class="ab-section">
                     <div class="ab-text-container">
                         <p class="ab-progress-text">
-                            ${maxDiscountReached
-                                ? /* HTML */ ` <strong>You’ve unlocked $450 off</strong> `
-                                : /* HTML */ `
-                                      Spend <strong>$${needToSpend} more</strong> to get
-                                      <br />
-                                      <strong>$${nextOffer} off</strong>
-                                  `}
+                            ${subTotal >= 1500 && (!APPLIED_DISCOUNT || maxDiscountReached)
+                                ? `<strong>You’ve unlocked ${[...checkpoints].reverse().find(({ checkpoint }) => checkpoint <= subTotal).offer}</strong> `
+                                : `Spend <strong>$${needToSpend.toLocaleString("en-US")} more</strong> to get <br /> <strong>${nextOffer} off</strong>`}
                         </p>
                     </div>
                     <div class="ab-progress-container" style="--progress:${progress}%;">
@@ -193,6 +189,7 @@
 
         q(".ab-section")?.remove();
         q(".cart-promo-banner").insertAdjacentHTML("beforebegin", getLayout());
+        qq("button.offer-cta")?.forEach((item) => item.addEventListener("click", handleDiscountCtaClick));
     }
 
     function initLegacyPromoRemovalHandler() {
@@ -208,16 +205,12 @@
     }
 
     async function handleDiscountCtaClick(e) {
+        const couponCode = e.currentTarget.getAttribute("data-code");
         try {
-            const couponCode = e.currentTarget.getAttribute("data-code");
             const address = q(".shipquote-result-location")?.textContent?.trim() || "";
             const zipCode = address.match(/\b\d{5}(?:-\d{4})?\b/)?.[0] || "";
 
-            const payload = {
-                coupon_code: couponCode,
-                shipping_zip: zipCode,
-            };
-
+            const payload = { coupon_code: couponCode, shipping_zip: zipCode };
             qq('.cart-item .quant-input input[aria-label="Quantity"], .cart-item .quant-input input[type="hidden"]')?.forEach((input) => {
                 payload[input.name] = input.value;
             });
@@ -230,12 +223,13 @@
 
             // Apply the new discount
             const resTwo = await fetchAndParseHTML(API["base_url"], API["request_method"], payload);
-            if (resTwo.error) throw new Error(resTwo.error);
+            if (resTwo.error || q(resTwo, "body.error-page")) throw new Error(resTwo.error);
 
             // Update Layout
             updateCartElementsAndListeners(resTwo);
         } catch (error) {
             console.error("Error applying discount:", error);
+            window.location.href = `/error.asp?error=48&coupon=${couponCode}`;
         }
     }
 
