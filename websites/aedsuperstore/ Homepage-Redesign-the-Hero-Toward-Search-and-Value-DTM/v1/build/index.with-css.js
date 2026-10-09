@@ -46,6 +46,17 @@
   border: none;
   padding: 12px 0 12px 24px;
 }
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-search input#ab-searchlight {
+  height: 45px;
+  border: none;
+  padding: 12px 0 12px 24px;
+  font-family: "Roboto Condensed", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  color: #282828;
+}
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .form-control:focus {
   box-shadow: none;
 }
@@ -218,6 +229,14 @@
     height: 60px;
     padding: 18.5px 24px;
   }
+  .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search input#ab-searchlight {
+    height: 60px;
+    padding: 18.5px 24px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 100%;
+    letter-spacing: 0px;
+  }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .search-submit {
     height: 60px;
     width: 68px;
@@ -279,7 +298,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-HOMEPAGE-HERO-SEARCH",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -383,9 +402,12 @@
                     />
                   </span>
                   <span class="ab-search-result-item__name">${name}</span>
-                  <span class="ab-search-result-item__price"
-                    >$${parseFloat(price).toFixed(2)}</span
-                  >
+                  <span class="ab-search-result-item__price">
+                    $${parseFloat(price).toLocaleString("en-US", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </span>
                 </a>
               </li>
             `,
@@ -407,7 +429,7 @@
 
     const SITE_ID = "zsrz4a";
     const BASE = `https://${SITE_ID}.a.searchspring.io/api`;
-    const SUGGEST_LIMIT = 4;
+    const SUGGEST_LIMIT = 3;
 
     try {
       const suggestion = await fetchJSON(
@@ -455,6 +477,7 @@
     };
 
     document.addEventListener("click", callback);
+    q("#searchlight")?.addEventListener("click", callback);
   }
 
   function handleClick(e) {
@@ -483,7 +506,17 @@
       q(".ab-search-results:not(:empty)")
     ) {
       handleSearchView("show");
+      addOutsideClickEvent();
     }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const url =
+      "/search-results.html?keyword=" +
+        q("input#ab-searchlight").value.trim() || "";
+    window.location.href = url;
   }
 
   async function handleSearch(e) {
@@ -522,28 +555,30 @@
           </h2>
           <div class="ab-hero-search">
             <div class="ab-searchWidget">
-              <div class="ab-searchBox">
-                <div class="ab-search-form">
-                  <label
-                    id="ab-searchLabel"
-                    for="ab-search"
-                    style="display: inline"
-                  >
-                    <input
-                      type="text"
-                      id="ab-searchlight"
-                      aria-labelledby="searchLabel"
-                      name="keyword"
-                      value=""
-                      placeholder="Search for your perfect AED match"
-                      class="search-text form-control"
-                    />
-                    <button type="click" class="search-submit">
-                      ${ASSETS["search_svg"]}
-                    </button>
-                  </label>
+              <form class="ab-search-form">
+                <div class="ab-searchBox">
+                  <div class="ab-search-form">
+                    <label
+                      id="ab-searchLabel"
+                      for="ab-search"
+                      style="display: inline"
+                    >
+                      <input
+                        type="text"
+                        id="ab-searchlight"
+                        aria-labelledby="searchLabel"
+                        name="keyword"
+                        value=""
+                        placeholder="Search by part #, brand, or product..."
+                        class="search-text form-control"
+                      />
+                      <button type="click" class="search-submit">
+                        ${ASSETS["search_svg"]}
+                      </button>
+                    </label>
+                  </div>
                 </div>
-              </div>
+              </form>
               <div class="ab-search-results ab-hidden"></div>
             </div>
           </div>
@@ -554,9 +589,10 @@
       `,
     );
 
-    const debouncedSearch = debounce(handleSearch, 1000);
+    const debouncedSearch = debounce(handleSearch, 250);
     q("#ab-searchlight").addEventListener("input", debouncedSearch);
     q(".ab-hero-search").addEventListener("click", handleClick);
+    q("form.ab-search-form").addEventListener("submit", handleSubmit);
   }
 
   function checkForItems() {
