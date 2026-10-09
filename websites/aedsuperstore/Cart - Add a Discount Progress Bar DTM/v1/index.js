@@ -96,20 +96,25 @@
             offer: "$175 off",
             couponCtaLabel: "Apply $175 off",
             dataCode: "SAVE175",
-            discount: 175
+            discount: 175,
         },
         {
             checkpoint: 3000,
             offer: "$450 off",
             couponCtaLabel: "Switch to $450 off",
             dataCode: "SAVE450",
-            discount: 450
+            discount: 450,
         },
     ];
 
     function getProgressData() {
         const txt = q(".summary-totals-colors")?.textContent?.trim() || "";
         const subTotal = parseFloat(txt.replace(/[$,]/g, "")) || 0;
+
+        let appliedDiscount = null;
+        const discountTxt = q(".discount-details .carttotal-price")?.textContent?.trim() || "";
+        if (discountTxt) appliedDiscount = parseFloat(discountTxt.replace(/[$,]/g, "")) || 0;
+        console.log("appliedDiscount", appliedDiscount); /* START FROM HERE */
 
         // Find the next unlocked checkpoint
         const nextOffer = checkpoints.find(({ checkpoint }) => subTotal < checkpoint);
