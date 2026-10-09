@@ -246,7 +246,7 @@
             // Update Layout
             updateCartElementsAndListeners(resTwo);
         } catch (error) {
-            console.error("Error applying discount:", error);
+            // console.error("Error applying discount:", error);
             window.location.href = `https://www.aedsuperstore.com/error.asp?error=48&coupon=${couponCode.toLowerCase()}`;
         } finally {
             handleBodyLoaderView("hide");
@@ -257,7 +257,7 @@
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-        console.table(TEST_CONFIG);
+        // console.table(TEST_CONFIG);
 
         q("body").insertAdjacentHTML("afterbegin", `<div class="ab-loader-container"><div class="ab-loader"></div></div>`);
         q(".cart-promo-banner").insertAdjacentHTML("beforebegin", getLayout());
@@ -272,7 +272,7 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
+        // console.warn(error);
         return false;
     }
 })();
