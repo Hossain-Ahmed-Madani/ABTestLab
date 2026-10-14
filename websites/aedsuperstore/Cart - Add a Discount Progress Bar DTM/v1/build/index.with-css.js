@@ -6,7 +6,11 @@
       var style = document.createElement("style");
       style.innerHTML = `html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
   overflow: hidden;
-  padding-right: 10px;
+}
+@media screen and (min-width: 991px) {
+  html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
+    padding-right: 10px;
+  }
 }
 
 .AB-CART-DISCOUNT-PROGRESS .cart-promo-banner {
