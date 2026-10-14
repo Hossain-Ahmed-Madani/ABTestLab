@@ -6,7 +6,7 @@
         test_name: "Cart - Add a Discount Progress Bar [DTM]",
         page_initials: "AB-CART-DISCOUNT-PROGRESS",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -17,8 +17,8 @@
             {
                 checkpoint: 199,
                 offer: "Free shipping",
-                couponCode: null,
-                discount: null,
+                couponCode: "",
+                discount: "",
             },
             {
                 checkpoint: 1500,
@@ -109,13 +109,13 @@
         const { subTotal, progress, nextCheckpoint, nextOffer, needToSpend, maxDiscountReached } = getProgressData();
 
         return /* HTML */ `
-            <section class="container">
+            <section class="ab-container container">
                 <div class="ab-section">
                     <div class="ab-text-container">
                         <p class="ab-progress-text">
                             ${subTotal >= 1500 && (!DATA["applied_discount"] || maxDiscountReached)
                                 ? `<strong>You’ve unlocked ${[...DATA["progress_checkpoints"]].reverse().find(({ checkpoint }) => checkpoint <= subTotal).offer}</strong>`
-                                : `Spend <strong>$${needToSpend.toLocaleString("en-US")} more</strong> to get <br /> <strong>${nextOffer} off</strong>`}
+                                : `Spend <strong>$${needToSpend.toLocaleString("en-US")} more</strong> to get <br /> <strong>${nextOffer}</strong>`}
                         </p>
                     </div>
                     <div class="ab-progress-container" style="--progress:${progress}%;">

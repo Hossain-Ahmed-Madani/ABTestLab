@@ -4,56 +4,16 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-CART-DISCOUNT-PROGRESS .cart-promo-banner,
-.AB-CART-DISCOUNT-PROGRESS .coupons-area.cart-detail-item .module-expand,
-.AB-CART-DISCOUNT-PROGRESS
-  .coupons-area.cart-detail-item:not(:has(.displayPromotions)) {
+      style.innerHTML = `html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
+  overflow: hidden;
+  padding-right: 10px;
+}
+
+.AB-CART-DISCOUNT-PROGRESS .cart-promo-banner {
   display: none;
 }
-.AB-CART-DISCOUNT-PROGRESS .coupons-area.cart-detail-item {
-  padding: 15px 0 55px;
-}
-.AB-CART-DISCOUNT-PROGRESS .displayPromotions {
-  padding: 0;
-}
-.AB-CART-DISCOUNT-PROGRESS .promotion-head {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.AB-CART-DISCOUNT-PROGRESS .page_header {
   margin-bottom: 0;
-}
-.AB-CART-DISCOUNT-PROGRESS .promotion_name {
-  font-family: rubik, sans-serif;
-  font-weight: 600;
-  font-size: 11px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #282828;
-}
-.AB-CART-DISCOUNT-PROGRESS .remove-promo {
-  position: static;
-  font-size: 0;
-  padding-left: 0;
-  margin-left: 0;
-}
-.AB-CART-DISCOUNT-PROGRESS .remove-promo i,
-.AB-CART-DISCOUNT-PROGRESS .remove-promo:after {
-  font-family: rubik, sans-serif;
-  font-weight: 500;
-  font-size: 11px;
-  line-height: 100%;
-  letter-spacing: 0px;
-  color: #cc0000;
-}
-.AB-CART-DISCOUNT-PROGRESS .remove-promo i:before {
-  margin-left: 0;
-}
-.AB-CART-DISCOUNT-PROGRESS .remove-promo:after {
-  content: "Remove Coupon";
-}
-.AB-CART-DISCOUNT-PROGRESS .remove-promo:hover,
-.AB-CART-DISCOUNT-PROGRESS .remove-promo:focus {
-  text-decoration: underline #cc0000;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-loader-container {
   width: 100%;
@@ -188,6 +148,7 @@
   .progress-labels
   .checkpoint-3 {
   right: 0;
+  transform: translateX(0%);
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-track-container {
   height: 24px;
@@ -229,7 +190,7 @@
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .checkpoint-3 {
   right: 0;
-  transform: translate(-150%, -50%);
+  transform: translate(0%, -50%);
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer-labels {
   position: relative;
@@ -256,16 +217,17 @@
   background: none;
   text-decoration: underline;
   color: #0d21a1;
+  padding: 0;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
-  left: 6.633%;
+  left: 8.5%;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-2 {
   left: 50%;
 }
 .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-3 {
   right: 0;
-  transform: translate(-30%, 0%);
+  transform: translate(0%, 0%);
 }
 .AB-CART-DISCOUNT-PROGRESS
   .ab-progress-container
@@ -298,6 +260,12 @@
     display: inline;
   }
 }
+@media screen and (max-width: 990.5px) {
+  .AB-CART-DISCOUNT-PROGRESS .ab-container.container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-CART-DISCOUNT-PROGRESS .ab-section {
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1019607843);
@@ -308,8 +276,9 @@
     margin-bottom: 28px;
   }
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-text {
+    max-width: 250px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 20px;
     letter-spacing: 0px;
     text-align: center;
@@ -328,7 +297,7 @@
   }
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .progress-labels span {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 100%;
     letter-spacing: 0px;
     text-align: center;
@@ -345,10 +314,13 @@
   }
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer {
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 100%;
     letter-spacing: 0px;
     text-align: right;
+  }
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
+    left: 6.633%;
   }
   .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-3 {
     transform: translate(0%, 0%);
@@ -366,7 +338,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-CART-DISCOUNT-PROGRESS",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -377,8 +349,8 @@
       {
         checkpoint: 199,
         offer: "Free shipping",
-        couponCode: null,
-        discount: null,
+        couponCode: "",
+        discount: "",
       },
       {
         checkpoint: 1500,
@@ -489,14 +461,14 @@
       getProgressData();
 
     return /* HTML */ `
-      <section class="container">
+      <section class="ab-container container">
         <div class="ab-section">
           <div class="ab-text-container">
             <p class="ab-progress-text">
               ${subTotal >= 1500 &&
               (!DATA["applied_discount"] || maxDiscountReached)
                 ? `<strong>You’ve unlocked ${[...DATA["progress_checkpoints"]].reverse().find(({ checkpoint }) => checkpoint <= subTotal).offer}</strong>`
-                : `Spend <strong>$${needToSpend.toLocaleString("en-US")} more</strong> to get <br /> <strong>${nextOffer} off</strong>`}
+                : `Spend <strong>$${needToSpend.toLocaleString("en-US")} more</strong> to get <br /> <strong>${nextOffer}</strong>`}
             </p>
           </div>
           <div class="ab-progress-container" style="--progress:${progress}%;">
