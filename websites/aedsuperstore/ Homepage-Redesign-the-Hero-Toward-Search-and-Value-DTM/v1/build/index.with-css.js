@@ -75,7 +75,7 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results {
   position: absolute;
   top: 100%;
-  z-index: 100;
+  z-index: 1000000;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -93,11 +93,12 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-header__text {
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0px;
   text-transform: uppercase;
   color: #6b7280;
+  margin-bottom: 0;
 }
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-result-list {
   list-style: none;
@@ -131,10 +132,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 48px;
-  min-width: 48px;
-  height: 48px;
-  min-height: 48px;
+  width: 72px;
+  min-width: 72px;
+  height: 72px;
+  min-height: 72px;
   background-color: #fff;
   padding: 5px;
 }
@@ -146,7 +147,7 @@
   flex-grow: 1;
   font-family: "Roboto Condensed", sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 100%;
   letter-spacing: 0px;
   color: #282828;
@@ -157,7 +158,7 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-result-item__price {
   font-family: Rubik, Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 100%;
   letter-spacing: 0%;
   color: #282828;
@@ -184,13 +185,13 @@
   outline: none;
 }
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-cta {
-  height: 24px;
+  height: 26px;
   background-color: #e00034;
   padding: 5px 10px;
   border-radius: 100px;
   font-family: Rubik, Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 100%;
   letter-spacing: 0px;
   color: #ffffff;
@@ -251,7 +252,7 @@
   }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-header__text {
     font-weight: 700;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0px;
   }
@@ -259,19 +260,27 @@
     margin: 10px 16px;
     gap: 12px;
   }
+  .AB-HOMEPAGE-HERO-SEARCH
+    .ab-hero-search
+    .ab-search-result-item__img-container {
+    width: 96px;
+    min-width: 96px;
+    height: 96px;
+    min-height: 96px;
+  }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-result-item__name {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
   }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-result-item__price {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0px;
   }
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-footer__cta {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 100%;
     letter-spacing: 0px;
     text-align: center;
@@ -298,7 +307,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-HOMEPAGE-HERO-SEARCH",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

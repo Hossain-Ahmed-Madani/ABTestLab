@@ -6,7 +6,7 @@
         test_name: "Homepage - Redesign the Hero Toward Search and Value [DTM]",
         page_initials: "AB-HOMEPAGE-HERO-SEARCH",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
