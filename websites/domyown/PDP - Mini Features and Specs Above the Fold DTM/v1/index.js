@@ -6,7 +6,7 @@
         test_name: "PDP - Mini Features and Specs Above the Fold [DTM]",
         page_initials: "AB-PDP-MINI-FEATURES",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -56,56 +56,6 @@
     function qq(s, o) {
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
-
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function mutationObserverFunction() {
-        const targetNode = q("#cart-drawer");
-        const debouncedUpdate = debounce(updateSideCartLayout, 250);
-        return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
-    }
-
-    // 4. Expand / collapse
-    // function handleExpandCollapse(item) {
-    //     const text = q(item, ".pf-text");
-    //     const btn = q(item, ".pf-toggle");
-
-    //     // Show the button only if the clamped text is actually cut off
-    //     const checkOverflow = () => {
-    //         const wasOpen = item.classList.contains("open");
-    //         item.classList.remove("open");
-    //         btn.hidden = text.scrollHeight <= text.clientHeight + 1;
-    //         item.classList.toggle("open", wasOpen && !btn.hidden);
-    //         btn.textContent = item.classList.contains("open") ? "Collapse" : "Expand";
-    //     };
-
-    //     btn.addEventListener("click", () => {
-    //         const open = item.classList.toggle("open");
-    //         btn.textContent = open ? "Collapse" : "Expand";
-    //     });
-
-    //     checkOverflow();
-    //     window.addEventListener("resize", checkOverflow);
-    // }
 
     function handleExpandCollapse(item) {
         const text = q(item, ".pf-text");
@@ -180,15 +130,16 @@
             }
         });
 
-        Object.keys(obj).forEach((key) => {
-            foundList.push({
-                label: obj[key].label,
-                htmlContent: obj[key].htmlContent,
-            });
-        });
+        // Object.keys(obj).forEach((key) => {
+        //     foundList.push({
+        //         label: obj[key].label,
+        //         htmlContent: obj[key].htmlContent,
+        //     });
+        // });
 
         return foundList;
     }
+
     function createLayoutAndAddToggleFunctionality(data) {
         const targetNode = q("#mobile #product-page-nav, #desktop .leading-none:has(.price-breaks)");
         targetNode.insertAdjacentHTML(
