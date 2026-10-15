@@ -6,7 +6,7 @@
         test_name: "Cart - Add a Discount Progress Bar [DTM]",
         page_initials: "AB-CART-DISCOUNT-PROGRESS",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

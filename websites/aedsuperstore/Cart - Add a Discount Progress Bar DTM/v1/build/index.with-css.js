@@ -264,6 +264,11 @@
     display: inline;
   }
 }
+@media screen and (min-width: 600px) {
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
+    left: 6.633%;
+  }
+}
 @media screen and (max-width: 990.5px) {
   .AB-CART-DISCOUNT-PROGRESS .ab-container.container {
     padding-left: 0;
@@ -342,7 +347,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-CART-DISCOUNT-PROGRESS",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;

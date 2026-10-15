@@ -247,6 +247,11 @@ html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
     display: inline;
   }
 }
+@media screen and (min-width: 600px) {
+  .AB-CART-DISCOUNT-PROGRESS .ab-progress-container .offer.offer-1 {
+    left: 6.633%;
+  }
+}
 @media screen and (max-width: 990.5px) {
   .AB-CART-DISCOUNT-PROGRESS .ab-container.container {
     padding-left: 0;

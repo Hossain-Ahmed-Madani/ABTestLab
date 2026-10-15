@@ -14,13 +14,12 @@
 
 html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
     overflow: hidden;
-    
+
     @media screen and (min-width: 991px) {
         padding-right: 10px;
         //
     }
 }
-
 
 .AB-CART-DISCOUNT-PROGRESS {
     // .cart-promo-banner,
@@ -333,8 +332,8 @@ html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
         }
 
         .offer.offer-1 {
-            // left: 6.633%;
             left: 8.5%;
+            // left: 6.633%;
         }
 
         .offer.offer-2 {
@@ -382,6 +381,14 @@ html:has(.AB-CART-DISCOUNT-PROGRESS--show-loader) {
     @media screen and (max-width: 768px) {
         .offer.offer-1 .offer-label br {
             display: inline;
+        }
+    }
+
+    @media screen and (min-width: 600px) {
+        .ab-progress-container {
+            .offer.offer-1 {
+                left: 6.633%;
+            }
         }
     }
 
