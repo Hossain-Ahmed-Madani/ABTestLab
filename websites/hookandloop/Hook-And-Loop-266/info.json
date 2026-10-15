@@ -1,0 +1,13 @@
+{
+  "id": "1782292030931_7892_Hook_And_Loop_266",
+  "name": "Hook-And-Loop-266",
+  "type": "A/B",
+  "website": "hookandloop",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-06-24T09:07:10.932Z",
+  "createdAtReadable": "6/24/2026, 3:07:10 PM",
+  "lastUpdated": "2026-06-24T09:07:11.363Z"
+}
