@@ -35,6 +35,7 @@
 
     const DATA = [
         {
+            link: "https://onedaytests.com/products/testosterone-blood-test",
             className: "ab-trt-item--new-to-trt",
             mobileImage: "new_to_trt_mobile_img",
             desktopImage: "new_to_trt_desktop_img",
@@ -48,6 +49,7 @@
             expertRole: "Endocrinologist",
         },
         {
+            link: "https://onedaytests.com/products/trt-programme-transfer-consultation",
             className: "ab-trt-item--already-on-trt",
             mobileImage: "already_on_trt_mobile_img",
             desktopImage: "already_on_trt_desktop_img",
@@ -100,7 +102,7 @@
                 <div class="ab-trt-group">
                     ${DATA.map(
                         (item) => /* HTML */ `
-                            <a href="#" class="ab-trt-item ${item.className}">
+                            <a href="${item.link}" class="ab-trt-item ${item.className}">
                                 <div class="ab-img-group">
                                     <img src="${ASSETS[item.mobileImage]}" class="ab-img-sm ab-mobile" alt="${item.imageAlt}" />
                                     <img src="${ASSETS[item.desktopImage]}" class="ab-img-lg ab-desktop" alt="${item.imageAlt}" />
