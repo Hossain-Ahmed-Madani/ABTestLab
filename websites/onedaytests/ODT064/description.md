@@ -10,3 +10,15 @@ https://app.convert.com/accounts/10018141/projects/10018430/experiences/10014859
 
 control: https://onedaytests.com/pages/testosterone-replacement-therapy-subscription?_conv_eforce=100148595.1001236398&utm_campaign=qa009
 v1:  https://onedaytests.com/pages/testosterone-replacement-therapy-subscription?_conv_eforce=100148595.1001236399&utm_campaign=qa009
+
+
+ODT064 - clicks - new to trt
+
+a.slideshow-slide__button[href*="/products/testosterone-blood-test"],
+a.ab-trt-item[href*="/products/testosterone-blood-test"]
+
+
+ODT064 - clicks - already on trt
+
+a.slideshow-slide__button[href*="/products/trt-programme-transfer-consultation"],
+a.ab-trt-item[href*="/products/trt-programme-transfer-consultation"]
