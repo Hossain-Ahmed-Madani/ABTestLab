@@ -1,9 +1,5 @@
 (async () => {
     const TEST_CONFIG = {
-        client: "Converted",
-        project: "One Day Tests",
-        site_url: "https://onedaytests.com",
-        test_name: "ODT064 - TRT Split start page",
         page_initials: "AB-ODT064",
         test_variation: 1,
         test_version: 0.0001,
@@ -145,7 +141,6 @@
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-        console.table(TEST_CONFIG);
 
         q(".shopify-section.slideshow--section.pxu-lia-section--play").insertAdjacentHTML("beforebegin", getHTMLLayout());
     }
@@ -158,7 +153,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
