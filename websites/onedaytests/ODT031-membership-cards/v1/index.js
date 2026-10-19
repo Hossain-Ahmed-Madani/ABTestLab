@@ -16,16 +16,25 @@
             id: "flex_plan",
             featureLabel: "15% off any other test",
             ctaLabel: "Select Flex",
+            pricePerYear: 72,
+            pricePerMonth: 6,
+            savingText: "Save 15%+ vs buying separately",
         },
         "PERFORMANCE PLAN": {
             id: "performance_plan",
             featureLabel: "10% off any other test",
             ctaLabel: "Select PERFORMANCE ",
+            pricePerYear: 349,
+            pricePerMonth: 29,
+            savingText: "Save £291 vs buying separately",
         },
         "LONGEVITY PLAN": {
             id: "longevity_plan",
             featureLabel: "10% off any other test",
             ctaLabel: "Select LONGEVITY",
+            pricePerYear: 499,
+            pricePerMonth: 42,
+            savingText: "Save £380 vs buying separately",
         },
     };
 
@@ -107,44 +116,63 @@
         console.log(TEST_CONFIG);
 
         // ODT030
-        qq('body:AB-ODT030 div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')?.forEach((item) => {
-            const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
-            const firstFeatureElement = q(item, 'div[class*="ai-subscription-tier__feature-name"]');
-            const firstFeatureIndicatorElement = q(item, 'div[class*="ai-subscription-tier__feature-indicator"]');
-            const subscriptionTierElement = q(item, 'div[class*="ai-subscription-tier__features"]');
+        if (
+            window.convert &&
+            window.convert.currentData &&
+            window.convert.currentData.experiences &&
+            window.convert.currentData.experiences["100147507"] && 
+            window.convert.currentData.experiences["100147507"].variation.id !== "1001233939"
+        ) {
+            qq('body:not(.AB-ODT030) div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')?.forEach((item) => {
+                const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
+                const firstFeatureElement = q(item, 'div[class*="ai-subscription-tier__feature-name"]');
+                const firstFeatureIndicatorElement = q(item, 'div[class*="ai-subscription-tier__feature-indicator"]');
+                const subscriptionTierElement = q(item, 'div[class*="ai-subscription-tier__features"]');
 
-            const { id, featureLabel, ctaLabel } = DATA[title];
+                const { id, featureLabel, ctaLabel } = DATA[title];
 
-            firstFeatureElement.innerText = featureLabel;
-            firstFeatureIndicatorElement.innerHTML = ASSETS.check_svg;
-            subscriptionTierElement.insertAdjacentHTML(
-                "afterend",
-                /* HTML */ `
-                    <div class="ab-cta-container">
-                        <div id="${id}" class="ab-cta">${ctaLabel}</div>
-                        <div class="ab-cancel-text">Cancel anytime, no minimum term</div>
-                    </div>
-                `,
-            );
+                firstFeatureElement.innerText = featureLabel;
+                firstFeatureIndicatorElement.innerHTML = ASSETS.check_svg;
+                subscriptionTierElement.insertAdjacentHTML(
+                    "afterend",
+                    /* HTML */ `
+                        <div class="ab-cta-container">
+                            <div id="${id}" class="ab-cta">${ctaLabel}</div>
+                            <div class="ab-cancel-text">Cancel anytime, no minimum term</div>
+                        </div>
+                    `,
+                );
 
-            q(`.ab-cta#${id}`)?.addEventListener("click", (e) => {
-                const elementId = e.target.id;
-                if (elementId === "flex_plan") {
-                    q('.odt-radio-button__label input[value="Flex Plan"]').click();
-                } else if (elementId === "performance_plan") {
-                    q('.odt-radio-button__label input[value="Performance Plan"]').click();
-                } else if (elementId === "longevity_plan") {
-                    q('.odt-radio-button__label input[value="Longevity Plan"]').click();
-                }
+                q(`.ab-cta#${id}`)?.addEventListener("click", (e) => {
+                    const elementId = e.target.id;
+                    if (elementId === "flex_plan") {
+                        q('.odt-radio-button__label input[value="Flex Plan"]').click();
+                    } else if (elementId === "performance_plan") {
+                        q('.odt-radio-button__label input[value="Performance Plan"]').click();
+                    } else if (elementId === "longevity_plan") {
+                        q('.odt-radio-button__label input[value="Longevity Plan"]').click();
+                    }
 
-                q(".shopify-section.product--section .product-details")?.scrollIntoView({
-                    behavior: "smooth",
-                    block: window.innerWidth < 901 ? "start" : "center",
+                    q(".shopify-section.product--section .product-details")?.scrollIntoView({
+                        behavior: "smooth",
+                        block: window.innerWidth < 901 ? "start" : "center",
+                    });
                 });
             });
-        });
+        }
 
         // ODT031
+        qq('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')?.forEach((item) => {
+            const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
+            const tierPriceElement = q(item, 'div[class*="ai-subscription-tier__price-amount"]');
+            const tierPricePeriodElement = q(item, 'div[class*="ai-subscription-tier__price-period"]');
+
+            const { /* id, featureLabel, ctaLabel,  */ pricePerYear, pricePerMonth, savingText } = DATA[title];
+
+            tierPriceElement.innerHTML = `£${pricePerYear}<small class="ab-small"> / year</small>`;
+            tierPricePeriodElement.innerText = `Equivalent to £${pricePerMonth} / month`;
+            tierPricePeriodElement.insertAdjacentHTML("afterend", `<div class="ab-saving">✓ ${savingText}</div>`);
+        });
     }
 
     function checkForItems() {

@@ -51,3 +51,53 @@
     margin-top: 10px;
   }
 }
+.AB-ODT031 div[class*=ai-subscription-tier__price-amount] {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0px;
+}
+.AB-ODT031 div[class*=ai-subscription-tier__price-period] {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #1d1d1d;
+  margin-bottom: 8px;
+}
+.AB-ODT031 .ab-small {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+}
+.AB-ODT031 .ab-saving {
+  border: 1px solid #b1e7c7;
+  background-color: #e1f7ea;
+  border-radius: 4px;
+  padding: 2px 6px;
+  width: max-content;
+  margin: auto;
+  align-content: center;
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0px;
+  color: #006d41;
+}
+@media screen and (min-width: 991px) {
+  .AB-ODT031 div[class*=ai-subscription-tier__price-amount] {
+    font-size: 36px;
+    line-height: 46px;
+  }
+  .AB-ODT031 div[class*=ai-subscription-tier__price-period] {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 0;
+    margin-bottom: 12px;
+  }
+}
