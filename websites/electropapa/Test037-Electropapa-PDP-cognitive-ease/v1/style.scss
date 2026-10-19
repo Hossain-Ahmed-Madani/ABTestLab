@@ -1,13 +1,75 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
+}
+
+.AB-TEST037 {
+    .gallery-slider-thumbnails.is-underneath .gallery-slider-thumbnails-item {
+        min-height: 80px;
+    }
+
+    .trust-widget-list,
+    div[data-swag-pay-pal-express-button-options],
+    #swag-amazon-pay-product-detail-wrapper > div,
+    .usp-payment-methods,
+    .usp-item-container {
+        width: 100%;
+    }
+
+    .product-delivery-available {
+        margin-bottom: 12px;
+    }
+
+    .product-shipping-information {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .product-shipping-information .shipping-information {
+        margin-bottom: 0;
+    }
+
+    .usp-payment-methods-title {
+        text-align: left;
+    }
+
+    .usp-payment-methods-item-container {
+        justify-content: space-between;
+    }
+
+    .product-detail-quantity-group,
+    .btn.btn-primary.btn-buy {
+        height: 46px;
+    }
+
+    div[data-swag-pay-pal-express-button-options],
+    #swag-amazon-pay-product-detail-wrapper > div {
+        margin-top: 16px;
+    }
+
+    .usp-payment-methods {
+        margin-top: 16px;
+        gap: 16px;
+    }
+
+    div:has(> .usp-item-container) {
+        margin-top: 24px !important;
+    }
+
+    .usp-item-container {
+        gap: 70px;
+    }
+
+    .usp-item-label {
+        text-align: left;
+    }
 }

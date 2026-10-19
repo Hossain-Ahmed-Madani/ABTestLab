@@ -1,0 +1,47 @@
+.AB-TEST037 .gallery-slider-thumbnails.is-underneath .gallery-slider-thumbnails-item {
+    min-height: 80px;
+}
+.AB-TEST037 .trust-widget-list,
+.AB-TEST037 div[data-swag-pay-pal-express-button-options],
+.AB-TEST037 #swag-amazon-pay-product-detail-wrapper > div,
+.AB-TEST037 .usp-payment-methods,
+.AB-TEST037 .usp-item-container {
+    width: 100%;
+}
+.AB-TEST037 .product-delivery-available {
+    margin-bottom: 12px;
+}
+.AB-TEST037 .product-shipping-information {
+    flex-direction: column;
+    gap: 15px;
+}
+.AB-TEST037 .product-shipping-information .shipping-information {
+    margin-bottom: 0;
+}
+.AB-TEST037 .usp-payment-methods-title {
+    text-align: left;
+}
+.AB-TEST037 .usp-payment-methods-item-container {
+    justify-content: space-between;
+}
+.AB-TEST037 .product-detail-quantity-group,
+.AB-TEST037 .btn.btn-primary.btn-buy {
+    height: 46px;
+}
+.AB-TEST037 div[data-swag-pay-pal-express-button-options],
+.AB-TEST037 #swag-amazon-pay-product-detail-wrapper > div {
+    margin-top: 16px;
+}
+.AB-TEST037 .usp-payment-methods {
+    margin-top: 16px;
+    gap: 16px;
+}
+.AB-TEST037 div:has(> .usp-item-container) {
+    margin-top: 24px !important;
+}
+.AB-TEST037 .usp-item-container {
+    gap: 70px;
+}
+.AB-TEST037 .usp-item-label {
+    text-align: left;
+}

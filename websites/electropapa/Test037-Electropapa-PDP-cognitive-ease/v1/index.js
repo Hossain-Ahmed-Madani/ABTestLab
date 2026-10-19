@@ -43,25 +43,20 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
-    function init() {        
+    function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
+        q(".product-detail-media").className = "col-lg-7 product-detail-media";
+        q(".product-detail-buy").className = "col-lg-5 product-detail-buy";
+        q(".col-6.col-sm-7.col-md-8.col-lg-7.col-xl-8")?.classList.remove("col-xl-8");
+        q(".col-2.col-sm-2.col-md-1.col-lg-2.col-xl-1")?.classList.remove("col-xl-1");
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-detail-media") && q(".product-detail-buy"));
     }
 
     try {
