@@ -6,7 +6,7 @@
         test_name: "Cart - Add a Discount Progress Bar [DTM]",
         page_initials: "AB-CART-DISCOUNT-PROGRESS",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -265,7 +265,13 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".cart-promo-banner") && q(".summary-totals-colors"));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q(".cart-promo-banner") &&
+            q(".summary-totals-colors") &&
+            qq(".item-fullname").length > 0 &&
+            qq(".item-fullname").every((item) => !item.textContent?.toLowerCase().includes("zoll"))
+        );
     }
 
     try {
