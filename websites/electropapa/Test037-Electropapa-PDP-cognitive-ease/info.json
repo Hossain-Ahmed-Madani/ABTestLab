@@ -1,0 +1,13 @@
+{
+  "id": "1792417394794_2053_Test037_Electropapa_PDP_cognitive_ease",
+  "name": "Test037-Electropapa-PDP-cognitive-ease",
+  "type": "A/B",
+  "website": "electropapa",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-10-19T13:43:14.794Z",
+  "createdAtReadable": "10/19/2026, 7:43:14 PM",
+  "lastUpdated": "2026-10-19T13:43:14.868Z"
+}
