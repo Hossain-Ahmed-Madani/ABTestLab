@@ -1,0 +1,13 @@
+{
+  "id": "1792403664470_2615_ODT031_membership_cards",
+  "name": "ODT031-membership-cards",
+  "type": "A/B",
+  "website": "onedaytests",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-10-19T09:54:24.470Z",
+  "createdAtReadable": "10/19/2026, 3:54:24 PM",
+  "lastUpdated": "2026-10-19T09:54:24.868Z"
+}
