@@ -47,7 +47,6 @@
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-        console.table(TEST_CONFIG);
 
         q(".product-detail-media").className = "col-lg-7 product-detail-media";
         q(".product-detail-buy").className = "col-lg-5 product-detail-buy";
@@ -63,7 +62,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
