@@ -1,3 +1,6 @@
+.AB-HOMEPAGE-HERO-SEARCH {
+  /* Two-tier promo under hero search */
+}
 .AB-HOMEPAGE-HERO-SEARCH .ab-hidden {
   display: none !important;
 }
@@ -69,7 +72,7 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results {
   position: absolute;
   top: 100%;
-  z-index: 1000000;
+  z-index: 100;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -197,6 +200,65 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-cta:hover {
   text-decoration: none;
   outline: none;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 8px 22px;
+  margin: 2px auto 0;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #1f2a44;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #5b6478;
+  font-weight: 500;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label svg {
+  width: 15px;
+  height: 15px;
+  color: #e00034;
+  flex: none;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-tier {
+  font-family: Rubik, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0d21a1;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-tier:hover .ab-tier-offer {
+  text-decoration: underline;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-code {
+  background: #e00034;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  align-content: center;
+}
+@media (max-width: 600px) {
+  .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13.5px;
+  }
+  .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label {
+    font-size: 12.5px;
+  }
 }
 @media screen and (min-width: 991px) {
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-container {

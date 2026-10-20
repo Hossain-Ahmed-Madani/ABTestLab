@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-HOMEPAGE-HERO-SEARCH",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -16,6 +16,12 @@
                     stroke-width="2.72727"
                     stroke-linecap="round"
                 />
+            </svg>
+        `,
+        price_tag_svg: /* HTML */ `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z" />
+                <circle cx="7.5" cy="7.5" r="1.5" />
             </svg>
         `,
     };
@@ -207,7 +213,7 @@
         window[page_initials] = true;
 
         q(".frame-feature").insertAdjacentHTML(
-            "afterend",
+            "beforebegin",
             /* HTML */ `
                 <div class="ab-hero-container">
                     <h2 class="ab-hero-heading">
@@ -237,7 +243,15 @@
                             <div class="ab-search-results ab-hidden"></div>
                         </div>
                     </div>
-                    <a href="/aeds.html" class="ab-hero-promo-cta">$175 off $1,500+ · code SAVE175</a>
+                    <a href="/aeds.html" class="ab-hero-promo-cta ab-hidden">$175 off $1,500+ · code SAVE175</a>
+                    <div class="ab-hero-promo-tiers">
+                        <span class="ab-promo-label">
+                            ${ASSETS['price_tag_svg']}
+                            Spend more, save more:
+                        </span>
+                        <a href="/aeds.html" class="ab-tier"><span class="ab-tier-offer">$175 off $1,500+</span><span class="ab-promo-code">SAVE175</span></a>
+                        <a href="/aeds.html" class="ab-tier"><span class="ab-tier-offer">$450 off $3,000+</span><span class="ab-promo-code">SAVE450</span></a>
+                    </div>
                 </div>
             `,
         );

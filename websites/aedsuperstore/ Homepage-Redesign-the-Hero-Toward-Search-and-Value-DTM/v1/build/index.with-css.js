@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-HOMEPAGE-HERO-SEARCH .ab-hidden {
+      style.innerHTML = `.AB-HOMEPAGE-HERO-SEARCH {
+  /* Two-tier promo under hero search */
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hidden {
   display: none !important;
 }
 .AB-HOMEPAGE-HERO-SEARCH .frame-feature {
@@ -75,7 +78,7 @@
 .AB-HOMEPAGE-HERO-SEARCH .ab-hero-search .ab-search-results {
   position: absolute;
   top: 100%;
-  z-index: 1000000;
+  z-index: 100;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -204,6 +207,65 @@
   text-decoration: none;
   outline: none;
 }
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  gap: 8px 22px;
+  margin: 2px auto 0;
+  font-size: 14px;
+  line-height: 1.3;
+  color: #1f2a44;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #5b6478;
+  font-weight: 500;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label svg {
+  width: 15px;
+  height: 15px;
+  color: #e00034;
+  flex: none;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-tier {
+  font-family: Rubik, Arial, "Helvetica Neue", Helvetica, sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #0d21a1;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-tier:hover .ab-tier-offer {
+  text-decoration: underline;
+}
+.AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-code {
+  background: #e00034;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 9px;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  align-content: center;
+}
+@media (max-width: 600px) {
+  .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers {
+    flex-direction: column;
+    gap: 6px;
+    font-size: 13.5px;
+  }
+  .AB-HOMEPAGE-HERO-SEARCH .ab-hero-promo-tiers .ab-promo-label {
+    font-size: 12.5px;
+  }
+}
 @media screen and (min-width: 991px) {
   .AB-HOMEPAGE-HERO-SEARCH .ab-hero-container {
     padding: 59.5px 0px;
@@ -307,7 +369,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-HOMEPAGE-HERO-SEARCH",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -328,6 +390,22 @@
           stroke-width="2.72727"
           stroke-linecap="round"
         />
+      </svg>
+    `,
+    price_tag_svg: /* HTML */ `
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path
+          d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"
+        />
+        <circle cx="7.5" cy="7.5" r="1.5" />
       </svg>
     `,
   };
@@ -555,7 +633,7 @@
     window[page_initials] = true;
 
     q(".frame-feature").insertAdjacentHTML(
-      "afterend",
+      "beforebegin",
       /* HTML */ `
         <div class="ab-hero-container">
           <h2 class="ab-hero-heading">
@@ -591,9 +669,22 @@
               <div class="ab-search-results ab-hidden"></div>
             </div>
           </div>
-          <a href="/aeds.html" class="ab-hero-promo-cta"
+          <a href="/aeds.html" class="ab-hero-promo-cta ab-hidden"
             >$175 off $1,500+ · code SAVE175</a
           >
+          <div class="ab-hero-promo-tiers">
+            <span class="ab-promo-label">
+              ${ASSETS["price_tag_svg"]} Spend more, save more:
+            </span>
+            <a href="/aeds.html" class="ab-tier"
+              ><span class="ab-tier-offer">$175 off $1,500+</span
+              ><span class="ab-promo-code">SAVE175</span></a
+            >
+            <a href="/aeds.html" class="ab-tier"
+              ><span class="ab-tier-offer">$450 off $3,000+</span
+              ><span class="ab-promo-code">SAVE450</span></a
+            >
+          </div>
         </div>
       `,
     );
