@@ -6,7 +6,7 @@
         test_name: "ODT064 - TRT Split start page",
         page_initials: "AB-ODT064",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const ASSETS = {

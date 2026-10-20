@@ -13,7 +13,7 @@
 .AB-ODT064 h2,
 .AB-ODT064 h3,
 .AB-ODT064 h4,
-.AB-ODT064 h5,
+Z .AB-ODT064 h5,
 .AB-ODT064 h6,
 .AB-ODT064 p {
     margin: 0;
@@ -33,7 +33,7 @@
     display: none;
 }
 .AB-ODT064 .ab-section {
-    padding: 40px 16px 0 16px;
+    padding: 26px 16px 0 16px;
 }
 .AB-ODT064 .ab-heading {
     font-weight: 700;
@@ -127,6 +127,12 @@
     letter-spacing: 0px;
     text-align: center;
     color: #1d1d1d;
+}
+@media screen and (min-width: 768px) {
+    .AB-ODT064 .ab-heading,
+    .AB-ODT064 .ab-subheading {
+        text-align: center;
+    }
 }
 @media screen and (min-width: 768px) and (max-width: 1023.5px) {
     .AB-ODT064 .ab-trt-group {

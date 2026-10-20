@@ -55,7 +55,8 @@
     }
 
     .ab-section {
-        padding: 40px 16px 0 16px;
+        // padding: 40px 16px 0 16px;
+        padding: /* 40 - 14 */ 26px 16px 0 16px;
     }
 
     .ab-heading {
@@ -163,6 +164,13 @@
             letter-spacing: 0px;
             text-align: center;
             color: #1d1d1d;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .ab-heading,
+        .ab-subheading {
+            text-align: center;
         }
     }
 

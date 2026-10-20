@@ -39,7 +39,7 @@
   display: none;
 }
 .AB-ODT064 .ab-section {
-  padding: 40px 16px 0 16px;
+  padding: 26px 16px 0 16px;
 }
 .AB-ODT064 .ab-heading {
   font-weight: 700;
@@ -133,6 +133,12 @@
   letter-spacing: 0px;
   text-align: center;
   color: #1d1d1d;
+}
+@media screen and (min-width: 768px) {
+  .AB-ODT064 .ab-heading,
+  .AB-ODT064 .ab-subheading {
+    text-align: center;
+  }
 }
 @media screen and (min-width: 768px) and (max-width: 1023.5px) {
   .AB-ODT064 .ab-trt-group {
@@ -340,7 +346,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ODT064",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const ASSETS = {
