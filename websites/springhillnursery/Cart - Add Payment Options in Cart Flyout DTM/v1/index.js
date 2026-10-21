@@ -221,7 +221,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
         return false;
     }
 })();
