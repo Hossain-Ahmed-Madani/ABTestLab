@@ -75,7 +75,14 @@
     }
 
     // =============== ODT031 ===============
+    .ab-hidden {
+        display: none;
+    }
 
+    div[class*="ai-subscription-tier__features"] >
+    div[class*="ai-subscription-tier__feature"]:last-child {
+        display: none;
+    }
 
     div[class*="ai-subscription-tier__price-amount"] {
         font-family: "Nunito Sans", sans-serif;

@@ -6,7 +6,7 @@
         test_name: "ODT031 - Membership cards: Clear billing and savings upfront",
         page_initials: "AB-ODT031",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -14,6 +14,7 @@
     const DATA = {
         "FLEX PLAN": {
             id: "flex_plan",
+            discount: "15%",
             featureLabel: "15% off any other test",
             ctaLabel: "Select Flex",
             pricePerYear: 72,
@@ -22,6 +23,7 @@
         },
         "PERFORMANCE PLAN": {
             id: "performance_plan",
+            discount: "10%",
             featureLabel: "10% off any other test",
             ctaLabel: "Select PERFORMANCE ",
             pricePerYear: 349,
@@ -30,6 +32,7 @@
         },
         "LONGEVITY PLAN": {
             id: "longevity_plan",
+            discount: "10%",
             featureLabel: "10% off any other test",
             ctaLabel: "Select LONGEVITY",
             pricePerYear: 499,
@@ -42,6 +45,20 @@
         check_svg: /* HTML */ `
             <svg
                 class="ab-check-svg ai-subscription-tier__feature-icon-aazn6uxvscwvtys9xcaigenblock07168426tilmy ai-subscription-tier__feature-icon--tick-aazn6uxvscwvtys9xcaigenblock07168426tilmy"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        `,
+        control_check_svg: /* HTML */ `
+            <svg
+                class="ai-subscription-tier__feature-icon-aazn6uxvscwvtys9xcaigenblock07168426tilmy ai-subscription-tier__feature-icon--tick-aazn6uxvscwvtys9xcaigenblock07168426tilmy"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="none"
@@ -87,41 +104,19 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
-
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
     function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
 
-        console.log(TEST_CONFIG);
-
         // ODT030
         if (
-            window.convert &&
-            window.convert.currentData &&
-            window.convert.currentData.experiences &&
-            window.convert.currentData.experiences["100147507"] && 
-            window.convert.currentData.experiences["100147507"].variation.id !== "1001233939"
+            (window.convert && !window.convert.currentData) ||
+            (window.convert &&
+                window.convert.currentData &&
+                window.convert.currentData.experiences &&
+                window.convert.currentData.experiences["100147507"] &&
+                window.convert.currentData.experiences["100147507"].variation.id !== "1001233939")
         ) {
             qq('body:not(.AB-ODT030) div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')?.forEach((item) => {
                 const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
@@ -166,8 +161,15 @@
             const title = q(item, 'h3[class*="ai-subscription-tier__name"]').textContent.trim();
             const tierPriceElement = q(item, 'div[class*="ai-subscription-tier__price-amount"]');
             const tierPricePeriodElement = q(item, 'div[class*="ai-subscription-tier__price-period"]');
+            const firstFeatureIndicatorElement = q(item, 'div[class*="ai-subscription-tier__feature-indicator"]');
 
-            const { /* id, featureLabel, ctaLabel,  */ pricePerYear, pricePerMonth, savingText } = DATA[title];
+            const { /* id, featureLabel, ctaLabel,  */ discount, pricePerYear, pricePerMonth, savingText } = DATA[title];
+
+            firstFeatureIndicatorElement.innerHTML = /* HTML */ `
+                <div class="ai-subscription-tier__superscript-aazn6uxvscwvtys9xcaigenblock07168426tilmy">Any test</div>
+                ${ASSETS.control_check_svg}
+                <div class="ai-subscription-tier__subscript-aazn6uxvscwvtys9xcaigenblock07168426tilmy">${discount}</div>
+            `;
 
             tierPriceElement.innerHTML = `£${pricePerYear}<small class="ab-small"> / year</small>`;
             tierPricePeriodElement.innerText = `Equivalent to £${pricePerMonth} / month`;
@@ -176,7 +178,10 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
+        return !!(
+            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
+            q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')
+        );
     }
 
     try {
