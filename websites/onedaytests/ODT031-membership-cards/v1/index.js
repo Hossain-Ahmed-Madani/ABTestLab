@@ -6,7 +6,7 @@
         test_name: "ODT031 - Membership cards: Clear billing and savings upfront",
         page_initials: "AB-ODT031",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -162,9 +162,11 @@
             const tierPriceElement = q(item, 'div[class*="ai-subscription-tier__price-amount"]');
             const tierPricePeriodElement = q(item, 'div[class*="ai-subscription-tier__price-period"]');
             const firstFeatureIndicatorElement = q(item, 'div[class*="ai-subscription-tier__feature-indicator"]');
+            const firstFeatureElement = q(item, 'div[class*="ai-subscription-tier__feature-name"]');
 
             const { /* id, featureLabel, ctaLabel,  */ discount, pricePerYear, pricePerMonth, savingText } = DATA[title];
 
+            firstFeatureElement.innerText = "Any test discount";
             firstFeatureIndicatorElement.innerHTML = /* HTML */ `
                 <div class="ai-subscription-tier__superscript-aazn6uxvscwvtys9xcaigenblock07168426tilmy">Any test</div>
                 ${ASSETS.control_check_svg}
@@ -178,10 +180,7 @@
     }
 
     function checkForItems() {
-        return !!(
-            q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]')
-        );
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
     }
 
     try {
