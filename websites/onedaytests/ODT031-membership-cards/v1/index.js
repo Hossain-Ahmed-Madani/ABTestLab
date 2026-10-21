@@ -180,7 +180,7 @@
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]'));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && qq('div[class*="ai-subscription-tiers__grid"] > div[class*="ai-subscription-tier"]').length >= 2);
     }
 
     try {
