@@ -5,7 +5,7 @@
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
       style.innerHTML = `.AB-CART-ADD-PAYMENT-OPTIONS .ab-payment-icons {
-  margin: 12px 0;
+  margin: 10px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,6 +20,16 @@
   width: 38px;
   height: 24px;
   object-fit: contain;
+}
+.AB-CART-ADD-PAYMENT-OPTIONS
+  .quick-cart__container
+  a.quick-cart__close-icon.quick-cart__submit.viewcartbtn {
+  margin: 5.75px auto auto !important;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22.5px;
+  letter-spacing: 0px;
+  color: #393939;
 }
 `;
       document.head.appendChild(style);
