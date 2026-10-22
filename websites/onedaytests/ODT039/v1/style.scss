@@ -1,17 +1,74 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
 
 .AB-ODT039 {
-    //
+    .ab-hidden {
+        display: none !important;
+    }
+
+    .metafield-rich_text_field:has(#biomarkers_anchor) {
+        display: none;
+    }
+
+    .custom-liquid--container:has(#biomarkers_anchor) .rich-text--container{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .shopify-section:has(.glider-contain) > .tiles-section {
+        padding-top: 0 !important;
+    }
+
+
+    .ab-ultimateHealthyWomen-section {
+        .rich-text--container > div {
+            padding: 56px 16px;
+        }
+
+        .metafield-rich_text_field {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 24px;
+        }
+
+        p {
+            margin: 0;
+            font-weight: 400;
+            font-size: 17px;
+            line-height: 24px;
+            letter-spacing: 0px;
+            color: #222222;
+        }
+
+        b {
+            font-weight: 800;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-ultimateHealthyWomen-section {
+            .rich-text--container > div {
+                padding: 56px 16px;
+            }
+
+            h2 {
+            }
+        }
+    }
 }
