@@ -157,4 +157,100 @@
             }
         }
     }
+
+    // BIO MAKERS ACCORDION
+    .ab-biomakers {
+        padding: 56px 0;
+        background-color: #f7fcfe;
+
+        .rich-text--container {
+            margin-top: 0;
+            padding-bottom: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0 0 24px;
+        }
+
+        h2 span {
+            color: #c0302e;
+        }
+
+        .item {
+            border-bottom: 1px solid #dfe6ec;
+        }
+        .item button {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 22px 0;
+            background: none;
+            border: 0;
+            cursor: pointer;
+            font: 700 18px inherit;
+            color: inherit;
+            text-align: left;
+        }
+        .item button::after {
+            content: "";
+            width: 9px;
+            height: 9px;
+            margin: 0 6px 4px 16px;
+            border: solid #0b6fb8;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            transition: transform 0.2s;
+        }
+        .item button[aria-expanded="true"]::after {
+            transform: rotate(-135deg);
+            margin-top: 6px;
+        }
+        .panel {
+            padding-bottom: 22px;
+            color: #444;
+            line-height: 1.6;
+        }
+        .panel em {
+            display: block;
+            margin-bottom: 16px;
+        }
+        .panel ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .panel li {
+            margin-bottom: 12px;
+        }
+        .panel li::before {
+            content: "• ";
+        }
+        .panel a {
+            color: #0e6e8c;
+            text-decoration: none;
+        }
+        .panel a:hover {
+            text-decoration: underline;
+        }
+    }
+
+    @media screen and (min-width: 991px) {
+        .ab-biomakers {
+        }
+    }
+
+    
+    @media screen and (min-width: 1024px) {
+        .ab-biomakers {
+            .ab-container {
+                max-width: 1019px;
+                margin: auto;
+            }
+        }
+    }
+
 }
