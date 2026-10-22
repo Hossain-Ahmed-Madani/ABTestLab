@@ -201,7 +201,7 @@
                         <div class="funky_list">
                             <ol role="list" style="--length: 1;">
                                 <li style="--i: 1;">
-                                    <h4>IS TEST RIGHT <span style="color: #BD3332;">FOR YOU</span>?</h4>
+                                    <h4>IS THIS TEST RIGHT <br /><span style="color: #BD3332;">FOR YOU</span>?</h4>
                                     <p class="ab-right-for-you-subtitle">This test is a good fit if you want to:</p>
                                     <div class="ab-right-for-you-card-list">
                                         <div class="ab-right-for-you-card">
@@ -228,7 +228,7 @@
 
     function getHomeKitVSClinicLayout() {
         return /* HTML */ `
-            <div class="rich-text--container rich-text-full-width">
+            <div class="rich-text--container rich-text-full-width ab-home-kit-vs-clinic">
                 <div class="metafield-rich_text_field">
                     <h2>HOME KIT <span style="color: rgb(189, 51, 50);">VS</span> CLINIC</h2>
                     <p>
@@ -295,7 +295,9 @@
         ];
 
         sectionInfo.forEach(({ container, heading, text }) => {
-            qq(container).find((item) => q(item, heading) && q(item, heading).textContent.trim() === text).classList.add("ab-hidden");
+            qq(container)
+                .find((item) => q(item, heading) && q(item, heading).textContent.trim() === text)
+                .classList.add("ab-hidden");
         });
     }
 
@@ -312,8 +314,7 @@
     }
 
     function updateLayout() {
-
-        q("a[href='#biomarkers_anchor']").href = "#ab_biomarkers"
+        q("a[href='#biomarkers_anchor']").href = "#ab_biomarkers";
 
         const ultimateHealthyWomenElement = qq(".shopify-section").find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW");
 
@@ -330,12 +331,6 @@
         );
         const shareYourStoryElement = q(".shopify-section:has(.glider-contain)");
         quickAndAccurateResultsElement.insertAdjacentElement("afterend", shareYourStoryElement);
-
-        // Hide
-        hideSections();
-
-        // Accordion Expand / Collapse
-        clickFunction();
     }
 
     function init() {
@@ -345,6 +340,8 @@
         console.table(TEST_CONFIG);
 
         updateLayout();
+        hideSections();
+        clickFunction();
     }
 
     function checkForItems() {

@@ -22,6 +22,10 @@
         display: none;
     }
 
+    .tiles-section:has(.trustpilot-widget) {
+        padding-bottom: 40px !important;
+    }
+
     .custom-liquid--container:has(#biomarkers_anchor) .rich-text--container {
         padding-left: 0;
         padding-right: 0;
@@ -67,6 +71,25 @@
     }
 
     .ab-right-for-you h4 {
+        font-weight: 700;
+        font-size: 27px;
+        line-height: 35px;
+        letter-spacing: 0px;
+        text-transform: uppercase;
+
+        margin-bottom: 12px;
+    }
+
+    .ab-home-kit-vs-clinic h2 {
+        font-size: 27px;
+        line-height: 35px;
+        margin-bottom: 24px;
+    }
+
+    .ab-home-kit-vs-clinic p {
+        font-size: 17px;
+        line-height: 24px;
+        margin-top: 0;
         margin-bottom: 12px;
     }
 
@@ -115,7 +138,17 @@
         }
     }
 
-    @media screen and (min-width: 991px) {
+    @media screen and (min-width: 768px) {
+        .ab-right-for-you h4 br {
+            display: none;
+        }
+    }
+
+    @media screen and (min-width: 860px) {
+        .rich-text--container {
+            margin-top: 56px;
+        }
+
         .custom-liquid--container .rich-text-alignment-left {
             padding-left: 0;
             padding-right: 0;
@@ -128,8 +161,21 @@
         }
 
         .ab-right-for-you h4 {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 40px;
             margin-bottom: 8px;
         }
+
+        .ab-home-kit-vs-clinic h2 {
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 40px;
+            letter-spacing: 0px;
+            margin-bottom: 24px;
+            
+        }
+    
 
         .ab-right-for-you-card-list {
             flex-direction: row;
@@ -172,6 +218,8 @@
         .rich-text--container {
             margin-top: 0;
             padding-bottom: 0;
+            padding-left: 16px;
+            padding-right: 16px;
         }
 
         h2 {
@@ -294,7 +342,7 @@
         }
     }
 
-    @media screen and (min-width: 991px) {
+    @media screen and (min-width: 860px) {
         .ab-biomarkers {
             h2 {
                 font-size: 27px;
