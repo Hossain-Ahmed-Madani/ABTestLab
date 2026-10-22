@@ -1,6 +1,7 @@
 .AB-ODT039 .ab-hidden {
   display: none !important;
 }
+.AB-ODT039 #biomarkers_anchor,
 .AB-ODT039 .metafield-rich_text_field:has(#biomarkers_anchor) {
   display: none;
 }
@@ -82,6 +83,10 @@
   color: #222222;
 }
 @media screen and (min-width: 991px) {
+  .AB-ODT039 .custom-liquid--container .rich-text-alignment-left {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
     padding: 56px 16px;
   }
@@ -117,15 +122,15 @@
     line-height: 24px;
   }
 }
-.AB-ODT039 .ab-biomakers {
+.AB-ODT039 .ab-biomarkers {
   padding: 56px 0;
   background-color: #f7fcfe;
 }
-.AB-ODT039 .ab-biomakers .rich-text--container {
+.AB-ODT039 .ab-biomarkers .rich-text--container {
   margin-top: 0;
   padding-bottom: 0;
 }
-.AB-ODT039 .ab-biomakers h2 {
+.AB-ODT039 .ab-biomarkers h2 {
   font-weight: 700;
   font-size: 27px;
   line-height: 35px;
@@ -133,13 +138,13 @@
   text-transform: uppercase;
   margin: 0 0 10px;
 }
-.AB-ODT039 .ab-biomakers h2 span {
+.AB-ODT039 .ab-biomarkers h2 span {
   color: #c0302e;
 }
-.AB-ODT039 .ab-biomakers .item:not(:last-child) {
+.AB-ODT039 .ab-biomarkers .item:not(:last-child) {
   border-bottom: 1px solid #e2eff4;
 }
-.AB-ODT039 .ab-biomakers .item button {
+.AB-ODT039 .ab-biomarkers .item button {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -157,7 +162,7 @@
   text-transform: capitalize;
   color: #1d1d1d;
 }
-.AB-ODT039 .ab-biomakers .item button::after {
+.AB-ODT039 .ab-biomarkers .item button::after {
   content: "";
   width: 12.5px;
   height: 12.5px;
@@ -167,11 +172,11 @@
   transform: rotate(45deg);
   transition: transform 0.2s;
 }
-.AB-ODT039 .ab-biomakers .item button[aria-expanded=true]::after {
+.AB-ODT039 .ab-biomarkers .item button[aria-expanded=true]::after {
   transform: rotate(-135deg);
   margin-top: 6px;
 }
-.AB-ODT039 .ab-biomakers .panel {
+.AB-ODT039 .ab-biomarkers .panel {
   color: #444;
   font-size: 16px;
   line-height: 24px;
@@ -184,17 +189,17 @@
   transition: max-height 0.3s ease-in-out;
   will-change: height;
 }
-.AB-ODT039 .ab-biomakers .panel:not([hidden]) {
+.AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
   height: 100%;
   max-height: 1000px; /* Set a reasonable upper limit */
 }
-.AB-ODT039 .ab-biomakers .panel:not([hidden]) {
+.AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
   margin-bottom: 16px;
 }
-.AB-ODT039 .ab-biomakers .panel em {
+.AB-ODT039 .ab-biomarkers .panel em {
   display: block;
 }
-.AB-ODT039 .ab-biomakers .panel ul {
+.AB-ODT039 .ab-biomarkers .panel ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -202,51 +207,51 @@
   flex-direction: column;
   gap: 4px;
 }
-.AB-ODT039 .ab-biomakers .panel li {
+.AB-ODT039 .ab-biomarkers .panel li {
   margin: 0;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   gap: 8px;
 }
-.AB-ODT039 .ab-biomakers .panel li::before {
+.AB-ODT039 .ab-biomarkers .panel li::before {
   content: "";
   width: 4px;
   height: 4px;
   border-radius: 50%;
   background-color: #046e82;
 }
-.AB-ODT039 .ab-biomakers .panel a {
+.AB-ODT039 .ab-biomarkers .panel a {
   color: #0e6e8c;
   text-decoration: none;
 }
-.AB-ODT039 .ab-biomakers .panel a:hover {
+.AB-ODT039 .ab-biomarkers .panel a:hover {
   text-decoration: underline;
 }
-.AB-ODT039 .ab-biomakers .panel > * {
+.AB-ODT039 .ab-biomarkers .panel > * {
   margin: 0;
 }
 @media screen and (min-width: 991px) {
-  .AB-ODT039 .ab-biomakers h2 {
+  .AB-ODT039 .ab-biomarkers h2 {
     font-size: 27px;
     line-height: 38px;
   }
 }
 @media screen and (min-width: 1024px) {
-  .AB-ODT039 .ab-biomakers .ab-container {
+  .AB-ODT039 .ab-biomarkers .ab-container {
     max-width: 1019px;
     margin: auto;
   }
-  .AB-ODT039 .ab-biomakers h2 {
+  .AB-ODT039 .ab-biomarkers h2 {
     margin: 0 0 4px;
   }
-  .AB-ODT039 .ab-biomakers .item button {
+  .AB-ODT039 .ab-biomarkers .item button {
     padding: 20px 0;
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0px;
   }
-  .AB-ODT039 .ab-biomakers .panel:not([hidden]) {
+  .AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
     margin-bottom: 20px;
   }
 }

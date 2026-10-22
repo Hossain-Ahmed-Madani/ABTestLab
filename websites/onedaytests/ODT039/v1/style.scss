@@ -17,6 +17,7 @@
         display: none !important;
     }
 
+    #biomarkers_anchor,
     .metafield-rich_text_field:has(#biomarkers_anchor) {
         display: none;
     }
@@ -115,6 +116,11 @@
     }
 
     @media screen and (min-width: 991px) {
+        .custom-liquid--container .rich-text-alignment-left {
+            padding-left: 0;
+            padding-right: 0;
+        }
+
         .ab-ultimateHealthyWomen-section {
             .rich-text--container > div {
                 padding: 56px 16px;
@@ -159,7 +165,7 @@
     }
 
     // BIO MAKERS ACCORDION
-    .ab-biomakers {
+    .ab-biomarkers {
         padding: 56px 0;
         background-color: #f7fcfe;
 
@@ -289,7 +295,7 @@
     }
 
     @media screen and (min-width: 991px) {
-        .ab-biomakers {
+        .ab-biomarkers {
             h2 {
                 font-size: 27px;
                 line-height: 38px;
@@ -298,7 +304,7 @@
     }
 
     @media screen and (min-width: 1024px) {
-        .ab-biomakers {
+        .ab-biomarkers {
             .ab-container {
                 max-width: 1019px;
                 margin: auto;

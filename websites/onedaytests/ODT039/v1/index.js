@@ -170,7 +170,7 @@
 
     function getBioMakersLayout() {
         return /* HTML */ `
-            <section class="ab-section ab-biomakers">
+            <section id="ab_biomarkers" class="ab-section ab-biomarkers">
                 <div class="rich-text--container rich-text-full-width rich-text-block">
                     <div class="ab-container">
                         <h2 id="title"><span>48</span> Biomarkers in 10 Groups</h2>
@@ -179,7 +179,7 @@
                                 ({ title, description, items = [], notes = [] }, idx) => /* HTML */ `
                                     <div class="item">
                                         <button type="button" aria-expanded="${idx === 0}">${title}${items.length ? ` (${items.length})` : ""}</button>
-                                        <div class="panel" ${idx === 0 ? "" : "hidden"}>
+                                        <div class="panel" hidden>
                                             ${description ? `<em>${description}</em>` : ""} ${items.length ? `<ul>${items.map(getLinkLayout).join("")}</ul>` : ""}
                                             ${notes.map((n) => `<p>${n}</p>`).join("")}
                                         </div>
@@ -264,7 +264,57 @@
         `;
     }
 
+    function hideSections() {
+        // Hide ->  48 BIOMAKERS, WHY HAVE THE TEST?, WHY HAVE THE ULTIMATE HEALTHY WOMAN BLOOD TEST?, IS THIS TEST RIGHT FOR YOU?, IS THE ULTIMATE HEALTHY WOMAN BLOOD TEST RIGHT FOR YOU?
+        const sectionInfo = [
+            {
+                container: ".rich-text--container",
+                heading: "h3",
+                text: "48 BIOMARKERS",
+            },
+            {
+                container: ".shopify-section",
+                heading: "h2",
+                text: "WHY HAVE THE TEST?",
+            },
+            {
+                container: ".shopify-section",
+                heading: "h4",
+                text: "WHY HAVE THE ULTIMATE HEALTHY WOMAN BLOOD TEST?",
+            },
+            {
+                container: ".slideshow",
+                heading: "h2",
+                text: "IS THIS TEST RIGHT FOR YOU?",
+            },
+            {
+                container: ".rich-text--container",
+                heading: "h4",
+                text: "IS THE ULTIMATE HEALTHY WOMAN BLOOD TEST RIGHT FOR YOU?",
+            },
+        ];
+
+        sectionInfo.forEach(({ container, heading, text }) => {
+            qq(container).find((item) => q(item, heading) && q(item, heading).textContent.trim() === text).classList.add("ab-hidden");
+        });
+    }
+
+    function clickFunction() {
+        // EXPAND / COLLAPSE
+        const accordion = q(".ab-biomarkers #accordion");
+        accordion.addEventListener("click", ({ target }) => {
+            const btn = target.closest("button");
+            if (!btn) return;
+            const open = btn.getAttribute("aria-expanded") === "true";
+            btn.setAttribute("aria-expanded", !open);
+            btn.nextElementSibling.hidden = open;
+        });
+    }
+
     function updateLayout() {
+
+        q("a[href='#biomarkers_anchor']").href = "#ab_biomarkers"
+
         const ultimateHealthyWomenElement = qq(".shopify-section").find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW");
 
         // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU? +  HOME KIT VS CLINIC
@@ -274,34 +324,18 @@
         ultimateHealthyWomenElement.classList.add("ab-ultimateHealthyWomen-section");
         q(ultimateHealthyWomenElement, ".metafield-rich_text_field").innerHTML = getUltimateHealthyWomenBloodTestInnerLayout();
 
-        // Hide -> 48 BIOMAKERS, WHY HAVE THE TEST?, WHY HAVE THE ULTIMATE HEALTHY WOMAN BLOOD TEST?
-
-        qq(".rich-text--container")
-            .find((item) => q(item, "h3") && q(item, "h3").textContent.trim() === "48 BIOMARKERS")
-            ?.classList.add("ab-hidden");
-        qq(".shopify-section")
-            .find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "WHY HAVE THE TEST?")
-            ?.classList.add("ab-hidden");
-        qq(".shopify-section")
-            .find((item) => q(item, "h4") && q(item, "h4").textContent.trim() === "WHY HAVE THE ULTIMATE HEALTHY WOMAN BLOOD TEST?")
-            ?.classList.add("ab-hidden");
-
-        // SHARE YOUR STORY
+        // Relocate -> SHARE YOUR STORY
         const quickAndAccurateResultsElement = qq(".shopify-section ").find(
             (item) => q(item, "h2") && q(item, "h2").textContent.trim() === "QUICK AND ACCURATE RESULTS DIRECT FROM A LABORATORY.",
         );
         const shareYourStoryElement = q(".shopify-section:has(.glider-contain)");
         quickAndAccurateResultsElement.insertAdjacentElement("afterend", shareYourStoryElement);
 
-        // EXPAND / COLLAPSE
-        const accordion = document.getElementById("accordion");
-        accordion.addEventListener("click", ({ target }) => {
-            const btn = target.closest("button");
-            if (!btn) return;
-            const open = btn.getAttribute("aria-expanded") === "true";
-            btn.setAttribute("aria-expanded", !open);
-            btn.nextElementSibling.hidden = open;
-        });
+        // Hide
+        hideSections();
+
+        // Accordion Expand / Collapse
+        clickFunction();
     }
 
     function init() {
@@ -316,12 +350,15 @@
     function checkForItems() {
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
-            qq(".shopify-section").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW").length > 0 &&
+            q("a[href='#biomarkers_anchor']") &&
             q(".shopify-section:has(.glider-contain)") &&
+            qq(".shopify-section").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW").length > 0 &&
             qq(".shopify-section").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "QUICK AND ACCURATE RESULTS DIRECT FROM A LABORATORY.").length > 0 &&
             qq(".shopify-section").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "WHY HAVE THE TEST?").length > 0 &&
             qq(".shopify-section").filter((item) => q(item, "h4") && q(item, "h4").textContent.trim() === "WHY HAVE THE ULTIMATE HEALTHY WOMAN BLOOD TEST?").length > 0 &&
-            qq(".rich-text--container").filter((item) => q(item, "h3") && q(item, "h3").textContent.trim() === "48 BIOMARKERS").length > 0
+            qq(".rich-text--container").filter((item) => q(item, "h3") && q(item, "h3").textContent.trim() === "48 BIOMARKERS").length > 0 &&
+            qq(".slideshow").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "IS THIS TEST RIGHT FOR YOU?").length > 0 &&
+            qq(".rich-text--container").filter((item) => q(item, "h4") && q(item, "h4").textContent.trim() === "IS THE ULTIMATE HEALTHY WOMAN BLOOD TEST RIGHT FOR YOU?").length > 0
         );
     }
 
