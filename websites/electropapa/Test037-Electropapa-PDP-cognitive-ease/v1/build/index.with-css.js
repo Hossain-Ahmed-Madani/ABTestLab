@@ -16,8 +16,33 @@
 .AB-TEST037 .usp-item-container {
   width: 100%;
 }
+.AB-TEST037 .trust-widget-list {
+  padding: 12px 20px;
+  margin-bottom: 16px;
+}
+.AB-TEST037 .trust-widget-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.AB-TEST037 .trust-widget-list ul li {
+  margin-bottom: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+.AB-TEST037 .product-detail-tax {
+  margin-bottom: 21px;
+}
 .AB-TEST037 .product-delivery-available {
   margin-bottom: 12px;
+}
+.AB-TEST037 .product-detail-delivery-information {
+  margin-bottom: 21px;
+}
+.AB-TEST037 .product-shipping-information > div {
+  gap: 12px;
 }
 .AB-TEST037 .product-shipping-information {
   flex-direction: column;
@@ -63,13 +88,9 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "Electropapa",
-    site_url: "https://electropapa.com",
-    test_name: "Test037 [Electropapa] PDP - cognitive ease",
     page_initials: "AB-TEST037",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -118,7 +139,6 @@
       `${page_initials}--version:${test_version}`,
     );
     window[page_initials] = true;
-    console.table(TEST_CONFIG);
 
     q(".product-detail-media").className = "col-lg-7 product-detail-media";
     q(".product-detail-buy").className = "col-lg-5 product-detail-buy";
@@ -144,7 +164,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

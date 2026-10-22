@@ -8,8 +8,33 @@
 .AB-TEST037 .usp-item-container {
     width: 100%;
 }
+.AB-TEST037 .trust-widget-list {
+    padding: 12px 20px;
+    margin-bottom: 16px;
+}
+.AB-TEST037 .trust-widget-list ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.AB-TEST037 .trust-widget-list ul li {
+    margin-bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+.AB-TEST037 .product-detail-tax {
+    margin-bottom: 21px;
+}
 .AB-TEST037 .product-delivery-available {
     margin-bottom: 12px;
+}
+.AB-TEST037 .product-detail-delivery-information {
+    margin-bottom: 21px;
+}
+.AB-TEST037 .product-shipping-information > div {
+    gap: 12px;
 }
 .AB-TEST037 .product-shipping-information {
     flex-direction: column;

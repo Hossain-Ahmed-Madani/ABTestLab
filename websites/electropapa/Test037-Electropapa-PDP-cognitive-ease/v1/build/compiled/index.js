@@ -1,12 +1,8 @@
 (async () => {
   const TEST_CONFIG = {
-    client: "Netzproduzenten",
-    project: "Electropapa",
-    site_url: "https://electropapa.com",
-    test_name: "Test037 [Electropapa] PDP - cognitive ease",
     page_initials: "AB-TEST037",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -55,7 +51,6 @@
       `${page_initials}--version:${test_version}`,
     );
     window[page_initials] = true;
-    console.table(TEST_CONFIG);
 
     q(".product-detail-media").className = "col-lg-7 product-detail-media";
     q(".product-detail-buy").className = "col-lg-5 product-detail-buy";
@@ -81,7 +76,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();

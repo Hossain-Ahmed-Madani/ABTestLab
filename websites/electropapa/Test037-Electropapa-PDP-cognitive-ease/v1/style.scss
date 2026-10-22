@@ -25,8 +25,40 @@
         width: 100%;
     }
 
+    .trust-widget-list {
+        padding: 12px 20px;
+        margin-bottom: 16px;
+    }
+
+    .trust-widget-list ul {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .trust-widget-list ul li {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .product-detail-tax {
+        margin-bottom: 21px;
+    }
+
     .product-delivery-available {
         margin-bottom: 12px;
+    }
+
+
+    .product-detail-delivery-information {
+        margin-bottom: 21px;
+    }
+
+    .product-shipping-information>div {
+        gap: 12px;
     }
 
     .product-shipping-information {
