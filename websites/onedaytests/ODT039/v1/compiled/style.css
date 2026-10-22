@@ -34,8 +34,86 @@
 .AB-ODT039 .ab-ultimateHealthyWomen-section b {
   font-weight: 800;
 }
+.AB-ODT039 .ab-right-for-you li {
+  margin: 0;
+  padding: 64px 16px 56px;
+}
+.AB-ODT039 .ab-right-for-you h4 {
+  margin-bottom: 12px;
+}
+.AB-ODT039 .ab-right-for-you p.ab-right-for-you-subtitle {
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #222222;
+}
+.AB-ODT039 .ab-right-for-you-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.AB-ODT039 .ab-right-for-you-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 12px;
+}
+.AB-ODT039 .ab-right-for-you-card::before {
+  content: "";
+  background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.6568 2.34313C12.1458 0.832156 10.1369 0 8 0C5.86312 0 3.85413 0.832156 2.34313 2.34313C0.832156 3.85413 0 5.86312 0 8C0 10.1369 0.832156 12.1458 2.34313 13.6568C3.85409 15.1678 5.86312 16 8 16C10.1369 16 12.1458 15.1678 13.6568 13.6569C15.1678 12.1458 16 10.1369 16 8C16 5.86312 15.1678 3.85416 13.6568 2.34313ZM11.8221 6.09603L7.35128 10.5668C7.30781 10.6104 7.25614 10.645 7.19926 10.6686C7.14239 10.6921 7.08141 10.7042 7.01984 10.7041C6.95827 10.7042 6.89729 10.6921 6.84041 10.6686C6.78352 10.645 6.73185 10.6104 6.68837 10.5668L4.17794 8.05644C3.99487 7.87341 3.99487 7.57662 4.17794 7.39353C4.36097 7.21047 4.65778 7.21047 4.84084 7.39353L7.01984 9.5725L11.1592 5.43313C11.3422 5.25006 11.639 5.25006 11.8221 5.43313C12.0051 5.61619 12.0051 5.91297 11.8221 6.09603Z" fill="%23006EB3"/></svg>');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  min-height: 16px;
+  margin-top: 4px;
+}
+.AB-ODT039 .ab-right-for-you-card p {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0px;
+  color: #222222;
+}
 @media screen and (min-width: 991px) {
   .AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
     padding: 56px 16px;
+  }
+  .AB-ODT039 .ab-right-for-you h4 {
+    margin-bottom: 8px;
+  }
+  .AB-ODT039 .ab-right-for-you-card-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .AB-ODT039 .ab-right-for-you-card {
+    flex: 1 1 calc(50% - 4px);
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 24px 23px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .AB-ODT039 .ab-right-for-you-card::before {
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    margin-top: 4px;
+  }
+  .AB-ODT039 .ab-right-for-you-card p {
+    font-size: 16px;
+    line-height: 24px;
   }
 }

@@ -53,8 +53,33 @@
 
     function getIsThisTestRightForYourLayout() {
         return /* HTML */ `
-            <section class="ab-section">
-                <div style="border:1px solid red; text-transform: uppercase;">Is this test right for you</div>
+            <section class="ab-section ab-right-for-you">
+                <div class="rich-text--container rich-text-full-width rich-text-block rich-text-alignment-left">
+                    <div class="rich-text-content rte" data-rte="">
+                        <div class="funky_list">
+                            <ol role="list" style="--length: 1;">
+                                <li style="--i: 1;">
+                                    <h4>IS TEST RIGHT <span style="color: #BD3332;">FOR YOU</span>?</h4>
+                                    <p class="ab-right-for-you-subtitle">This test is a good fit if you want to:</p>
+                                    <div class="ab-right-for-you-card-list">
+                                        <div class="ab-right-for-you-card">
+                                            <p>For a comprehensive health check</p>
+                                        </div>
+                                        <div class="ab-right-for-you-card">
+                                            <p>You want to ensure your diet is providing the right amounts of micronutrients</p>
+                                        </div>
+                                        <div class="ab-right-for-you-card">
+                                            <p>You are worried about cardiovascular risk</p>
+                                        </div>
+                                        <div class="ab-right-for-you-card">
+                                            <p>You want to check on your reproductive health or menopause status</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </section>
         `;
     }
@@ -99,7 +124,7 @@
 
     function updateLayout() {
         const ultimateHealthyWomenElement = qq(".shopify-section ").find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW");
-        
+
         // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU? +  HOME KIT VS CLINIC
         ultimateHealthyWomenElement.insertAdjacentHTML("beforebegin", getBioMakersLayout() + getIsThisTestRightForYourLayout() + getHomeKitVSClinicLayout());
 
@@ -129,7 +154,7 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             qq(".shopify-section ").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW").length > 0 &&
             q(".shopify-section:has(.glider-contain)") &&
-            qq(".shopify-section ").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "QUICK AND ACCURATE RESULTS DIRECT FROM A LABORATORY.").length > 0 
+            qq(".shopify-section ").filter((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "QUICK AND ACCURATE RESULTS DIRECT FROM A LABORATORY.").length > 0
         );
     }
 
