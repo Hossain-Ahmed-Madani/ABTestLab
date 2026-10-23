@@ -1,13 +1,40 @@
 .BODY-WRAPPER-CLASS {
-	@media screen and (min-width: 768px) {
-		//
-	}
+    @media screen and (min-width: 768px) {
+        //
+    }
 
-	@media screen and (min-width: 991px) {
-		//
-	}
+    @media screen and (min-width: 991px) {
+        //
+    }
 
-	@media screen and (min-width: 1200px) {
-		//
-	}
+    @media screen and (min-width: 1200px) {
+        //
+    }
 }
+
+.media_wrapper_el,
+.pswp__img.custom_preview_el {
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    top: 50%;
+}
+
+.pswp__container .pswp__item .pswp__img.custom_preview_el {
+    width: 100% !important;
+    // max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain;
+}
+
+// @media (min-width: 946px) {
+//     .pswp__container .pswp__item .pswp__img.custom_preview_el {
+//         width: auto !important;
+//         height: 100vh !important;
+//     }
+// }
+// @media (max-width: 945px) {
+//     .pswp__container .pswp__item .pswp__img.custom_preview_el {
+//         width: 100vw !important;
+//         height: 100vw !important;
+//     }
+// }

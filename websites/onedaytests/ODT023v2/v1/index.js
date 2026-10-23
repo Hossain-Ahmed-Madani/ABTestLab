@@ -1,4 +1,7 @@
 (() => {
+
+    // const TEST_NAME = 'ODT023v2 - Image gallery PDP test'
+
     if (window.location.pathname !== "/products/testosterone-blood-test") {
         return;
     }
@@ -11,16 +14,53 @@
     }
 
     const images = [
-        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a1_6ad76d024edc7.png",
-        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b1_6ad76d2639892.png",
+        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a-1_6adb4650bd35f.png",
+        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b-1_6adb4664b12cf.png",
     ];
 
     function mainJs() {
         const style = document.createElement("style");
+        // style.textContent = /* HTML */ `
+        //     .media_wrapper_el,
+        //     .pswp__img.custom_preview_el {
+        //         left: 50%;
+        //         transform: translate(-50%, -50%) !important;
+        //         top: 50%;
+        //     }
+        //     @media (min-width: 946px) {
+        //         .pswp__container .pswp__item .pswp__img.custom_preview_el {
+        //             width: auto !important;
+        //             height: 100vh !important;
+        //         }
+        //     }
+        //     @media (max-width: 945px) {
+        //         .pswp__container .pswp__item .pswp__img.custom_preview_el {
+        //             width: 100vw !important;
+        //             height: 100vw !important;
+        //         }
+        //     }
+        // `;
+
         style.textContent = /* HTML */ `
-            .media_wrapper_el, .pswp__img.custom_preview_el { left: 50%; transform: translate(-50%, -50%) !important; top: 50%; } @media (min-width: 946px) { .pswp__container
-            .pswp__item .pswp__img.custom_preview_el { width: auto !important; height: 100vh !important; } } @media (max-width: 945px) { .pswp__container .pswp__item
-            .pswp__img.custom_preview_el { width: 100vw !important; height: 100vw !important; } }
+            .media_wrapper_el,
+            .pswp__img.custom_preview_el {
+                left: 50%;
+                transform: translate(-50%, -50%) !important;
+                top: 50%;
+            }
+            @media (min-width: 946px) {
+                .pswp__container .pswp__item .pswp__img.custom_preview_el {
+                    width: auto !important;
+                    height: 100vh !important;
+                }
+            }
+            @media (max-width: 945px) {
+                .pswp__container .pswp__item .pswp__img.custom_preview_el {
+                    width: 100vw !important;
+                    height: 100vw !important;
+                }
+            }
+
         `;
 
         document.head.appendChild(style);
@@ -35,13 +75,13 @@
             const preview5 = document.querySelector('.product-gallery--viewer .product-gallery--media[data-gallery-index="5"] img');
 
             if (thumb1) {
-                thumb1.src = images[0];
-                thumb1.srcset = images[0];
+                thumb1.querySelector('img').src = images[0];
+                thumb1.querySelector('img').srcset = images[0];
             }
 
             if (thumb2) {
-                thumb2.src = images[1];
-                thumb2.srcset = images[1];
+                thumb2.querySelector('img').src = images[1];
+                thumb2.querySelector('img').srcset = images[1];
             }
 
             if (preview1) {

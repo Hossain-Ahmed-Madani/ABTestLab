@@ -1,0 +1,12 @@
+.media_wrapper_el,
+.pswp__img.custom_preview_el {
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  top: 50%;
+}
+
+.pswp__container .pswp__item .pswp__img.custom_preview_el {
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain;
+}
