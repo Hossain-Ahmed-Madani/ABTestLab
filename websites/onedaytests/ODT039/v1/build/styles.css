@@ -1,0 +1,299 @@
+.AB-ODT039 .ab-hidden {
+    display: none !important;
+}
+.AB-ODT039 #biomarkers_anchor,
+.AB-ODT039 .metafield-rich_text_field:has(#biomarkers_anchor) {
+    display: none;
+}
+.AB-ODT039 .tiles-section:has(.trustpilot-widget) {
+    padding-bottom: 40px !important;
+}
+.AB-ODT039 .custom-liquid--container:has(#biomarkers_anchor) .rich-text--container {
+    padding-left: 0;
+    padding-right: 0;
+}
+.AB-ODT039 .shopify-section:has(.glider-contain) > .tiles-section {
+    padding-top: 0 !important;
+}
+.AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
+    padding: 56px 16px;
+}
+.AB-ODT039 .ab-ultimateHealthyWomen-section .metafield-rich_text_field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.AB-ODT039 .ab-ultimateHealthyWomen-section h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+.AB-ODT039 .ab-ultimateHealthyWomen-section p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #222222;
+}
+.AB-ODT039 .ab-ultimateHealthyWomen-section b {
+    font-weight: 800;
+}
+.AB-ODT039 .ab-right-for-you li {
+    margin: 0;
+    padding: 64px 16px 56px;
+}
+.AB-ODT039 .ab-right-for-you h4 {
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 35px;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+.AB-ODT039 .ab-home-kit-vs-clinic h2 {
+    font-size: 27px;
+    line-height: 35px;
+    margin-bottom: 24px;
+}
+.AB-ODT039 .ab-home-kit-vs-clinic p {
+    font-size: 17px;
+    line-height: 24px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.AB-ODT039 .ab-right-for-you p.ab-right-for-you-subtitle {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #222222;
+}
+.AB-ODT039 .ab-right-for-you-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.AB-ODT039 .ab-right-for-you-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+}
+.AB-ODT039 .ab-right-for-you-card::before {
+    content: "";
+    background-image: url('data:image/svg+xml,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.6568 2.34313C12.1458 0.832156 10.1369 0 8 0C5.86312 0 3.85413 0.832156 2.34313 2.34313C0.832156 3.85413 0 5.86312 0 8C0 10.1369 0.832156 12.1458 2.34313 13.6568C3.85409 15.1678 5.86312 16 8 16C10.1369 16 12.1458 15.1678 13.6568 13.6569C15.1678 12.1458 16 10.1369 16 8C16 5.86312 15.1678 3.85416 13.6568 2.34313ZM11.8221 6.09603L7.35128 10.5668C7.30781 10.6104 7.25614 10.645 7.19926 10.6686C7.14239 10.6921 7.08141 10.7042 7.01984 10.7041C6.95827 10.7042 6.89729 10.6921 6.84041 10.6686C6.78352 10.645 6.73185 10.6104 6.68837 10.5668L4.17794 8.05644C3.99487 7.87341 3.99487 7.57662 4.17794 7.39353C4.36097 7.21047 4.65778 7.21047 4.84084 7.39353L7.01984 9.5725L11.1592 5.43313C11.3422 5.25006 11.639 5.25006 11.8221 5.43313C12.0051 5.61619 12.0051 5.91297 11.8221 6.09603Z" fill="%23006EB3"/></svg>');
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 16px;
+    min-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    margin-top: 4px;
+}
+.AB-ODT039 .ab-right-for-you-card p {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0px;
+    color: #222222;
+}
+@media screen and (min-width: 768px) {
+    .AB-ODT039 .ab-right-for-you h4 br {
+        display: none;
+    }
+}
+@media screen and (min-width: 860px) {
+    .AB-ODT039 .rich-text--container {
+        margin-top: 56px;
+    }
+    .AB-ODT039 .custom-liquid--container .rich-text-alignment-left {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
+        padding: 56px 16px;
+    }
+    .AB-ODT039 .ab-right-for-you h4 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 8px;
+    }
+    .AB-ODT039 .ab-home-kit-vs-clinic h2 {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 40px;
+        letter-spacing: 0px;
+        margin-bottom: 24px;
+    }
+    .AB-ODT039 .ab-right-for-you-card-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .AB-ODT039 .ab-right-for-you-card {
+        flex: 1 1 calc(50% - 4px);
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 24px 23px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .AB-ODT039 .ab-right-for-you-card::before {
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 16px;
+        min-width: 16px;
+        height: 16px;
+        min-height: 16px;
+        margin-top: 4px;
+    }
+    .AB-ODT039 .ab-right-for-you-card p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+.AB-ODT039 .ab-biomarkers {
+    padding: 56px 0;
+    background-color: #f7fcfe;
+}
+.AB-ODT039 .ab-biomarkers .rich-text--container {
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+.AB-ODT039 .ab-biomarkers h2 {
+    font-weight: 700;
+    font-size: 27px;
+    line-height: 35px;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+}
+.AB-ODT039 .ab-biomarkers h2 span {
+    color: #c0302e;
+}
+.AB-ODT039 .ab-biomarkers .item:not(:last-child) {
+    border-bottom: 1px solid #e2eff4;
+}
+.AB-ODT039 .ab-biomarkers .item button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    width: 100%;
+    padding: 16px 0;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    color: #1d1d1d;
+}
+.AB-ODT039 .ab-biomarkers .item button::after {
+    content: "";
+    width: 12.5px;
+    height: 12.5px;
+    margin: 0 6px 4px 16px;
+    border: solid #006eb3;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.2s;
+}
+.AB-ODT039 .ab-biomarkers .item button[aria-expanded="true"]::after {
+    transform: rotate(-135deg);
+    margin-top: 6px;
+}
+.AB-ODT039 .ab-biomarkers .panel {
+    color: #444;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    will-change: height;
+}
+.AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
+    height: 100%;
+    max-height: 1000px; /* Set a reasonable upper limit */
+}
+.AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
+    margin-bottom: 16px;
+}
+.AB-ODT039 .ab-biomarkers .panel em {
+    display: block;
+}
+.AB-ODT039 .ab-biomarkers .panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.AB-ODT039 .ab-biomarkers .panel li {
+    margin: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+}
+.AB-ODT039 .ab-biomarkers .panel li::before {
+    content: "";
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #046e82;
+}
+.AB-ODT039 .ab-biomarkers .panel a {
+    color: #0e6e8c;
+    text-decoration: none;
+}
+.AB-ODT039 .ab-biomarkers .panel a:hover {
+    text-decoration: none;
+}
+.AB-ODT039 .ab-biomarkers .panel p {
+    margin: 0;
+}
+.AB-ODT039 .ab-biomarkers .panel > * {
+    margin: 0;
+}
+@media screen and (min-width: 860px) {
+    .AB-ODT039 .ab-biomarkers h2 {
+        font-size: 27px;
+        line-height: 38px;
+    }
+}
+@media screen and (min-width: 1024px) {
+    .AB-ODT039 .ab-biomarkers .ab-container {
+        max-width: 1019px;
+        margin: auto;
+    }
+    .AB-ODT039 .ab-biomarkers h2 {
+        margin: 0 0 4px;
+    }
+    .AB-ODT039 .ab-biomarkers .item button {
+        padding: 20px 0;
+        font-size: 20px;
+        line-height: 30px;
+        letter-spacing: 0px;
+    }
+    .AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
+        margin-bottom: 20px;
+    }
+}

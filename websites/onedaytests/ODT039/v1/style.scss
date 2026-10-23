@@ -333,8 +333,13 @@
             color: #0e6e8c;
             text-decoration: none;
         }
+        
         .panel a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+        }
+
+        .panel p {
+            margin: 0;
         }
 
         .panel > * {

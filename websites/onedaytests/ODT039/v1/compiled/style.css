@@ -265,7 +265,10 @@
   text-decoration: none;
 }
 .AB-ODT039 .ab-biomarkers .panel a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+}
+.AB-ODT039 .ab-biomarkers .panel p {
+  margin: 0;
 }
 .AB-ODT039 .ab-biomarkers .panel > * {
   margin: 0;
