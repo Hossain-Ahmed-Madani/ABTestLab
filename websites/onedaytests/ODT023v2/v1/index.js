@@ -26,9 +26,9 @@
         document.head.appendChild(style);
 
         function replaceThumbImageDesktop() {
-            const thumb1 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="1"] img');
-            const thumb2 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="2"] img');
-            const thumb5 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="5"] img');
+            const thumb1 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="1"]');
+            const thumb2 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="2"]');
+            const thumb5 = document.querySelector('.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="5"]');
 
             const preview1 = document.querySelector('.product-gallery--viewer .product-gallery--media[data-gallery-index="1"] img');
             const preview2 = document.querySelector('.product-gallery--viewer .product-gallery--media[data-gallery-index="2"] img');
@@ -55,7 +55,6 @@
             }
 
             thumb5?.remove();
-            thumb5?.parentNode?.remove();
             preview5?.remove();
         }
         replaceThumbImageDesktop();
