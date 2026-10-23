@@ -87,9 +87,9 @@
                 ["Globulin calculation", "/pages/globulin-description-and-reference-ranges"],
                 ["Albumin", "/pages/albumin-description-and-reference-ranges"],
                 ["Total protein", "/pages/total-protein-description-and-reference-ranges"],
-                ["Bilirubin", "/pages/bilirubin-description-and-reference-ranges"],
+                ["Bilirubin", ""],
                 ["Alanine AminoTransferase (ALT)", "/pages/alt-description-and-reference-ranges"],
-                ["Gamma-Glutamyl Transferase (GGT)", "/pages/ggt-description-and-reference-ranges"],
+                ["Gamma-Glutamyl Transferase (GGT)", ""],
                 ["Alkaline Phosphatase (ALP)", "/pages/alp-description-and-reference-ranges"],
                 ["Aspartate Aminotransferase (AST)", "/pages/ast-description-and-reference-ranges"],
             ],
@@ -313,7 +313,7 @@
         });
     }
 
-    function updateLayout() {
+    function updateSections() {
         q("a[href='#biomarkers_anchor']").href = "#ab_biomarkers";
 
         const ultimateHealthyWomenElement = qq(".shopify-section").find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW");
@@ -337,9 +337,8 @@
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
-        console.table(TEST_CONFIG);
 
-        updateLayout();
+        updateSections();
         hideSections();
         clickFunction();
     }

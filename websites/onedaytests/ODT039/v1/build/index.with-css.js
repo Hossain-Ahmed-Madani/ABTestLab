@@ -315,10 +315,6 @@
 })();
 (async () => {
   const TEST_CONFIG = {
-    client: "Converted",
-    project: "One Day Tests",
-    site_url: "https://onedaytests.com",
-    test_name: "ODT039 - PDP: Test details before brand content",
     page_initials: "AB-ODT039",
     test_variation: 1,
     test_version: 0.0001,
@@ -476,15 +472,12 @@
           "Total protein",
           "/pages/total-protein-description-and-reference-ranges",
         ],
-        ["Bilirubin", "/pages/bilirubin-description-and-reference-ranges"],
+        ["Bilirubin", ""],
         [
           "Alanine AminoTransferase (ALT)",
           "/pages/alt-description-and-reference-ranges",
         ],
-        [
-          "Gamma-Glutamyl Transferase (GGT)",
-          "/pages/ggt-description-and-reference-ranges",
-        ],
+        ["Gamma-Glutamyl Transferase (GGT)", ""],
         [
           "Alkaline Phosphatase (ALP)",
           "/pages/alp-description-and-reference-ranges",
@@ -782,7 +775,7 @@
     });
   }
 
-  function updateLayout() {
+  function updateSections() {
     q("a[href='#biomarkers_anchor']").href = "#ab_biomarkers";
 
     const ultimateHealthyWomenElement = qq(".shopify-section").find(
@@ -829,9 +822,8 @@
       `${page_initials}--version:${test_version}`,
     );
     window[page_initials] = true;
-    console.table(TEST_CONFIG);
 
-    updateLayout();
+    updateSections();
     hideSections();
     clickFunction();
   }
