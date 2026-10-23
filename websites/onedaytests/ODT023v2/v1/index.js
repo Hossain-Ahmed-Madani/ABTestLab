@@ -11,7 +11,7 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    const DATA = [
+    const IMAGES = [
         "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a-1_6adb4650bd35f.png",
         "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b-1_6adb4664b12cf.png",
     ];
@@ -52,11 +52,11 @@
         const thumbItems = [
             {
                 selector: `.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="1"] img, .product-gallery--viewer .product-gallery--media[data-gallery-index="1"] img, .pswp__img[src='//onedaytests.com/cdn/shop/files/One_Day_Test-Clinic_male_customer_1000x667.jpg?v=1786443187']`,
-                image_url: DATA[0],
+                image_url: IMAGES[0],
             },
             {
                 selector: `.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="2"] img, .product-gallery--viewer .product-gallery--media[data-gallery-index="2"] img, .pswp__img[src='//onedaytests.com/cdn/shop/products/box_sleeve_2000px_b1c5e5ff-fc28-42dc-9e53-04914947d948_2000x1594.jpg?v=1768211106']`,
-                image_url: DATA[1],
+                image_url: IMAGES[1],
             },
         ];
 
