@@ -6,7 +6,7 @@
         test_name: "ODT039 - PDP: Test details before brand content",
         page_initials: "AB-ODT039",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -165,7 +165,7 @@
     }
 
     function getLinkLayout([label, href]) {
-        return `<li>${href ? `<a href="/pages/${href}-description-and-reference-ranges">${label}</a>` : `<p>${label}</p>`}</li>`;
+        return `<li>${href ? `<a href="${href}">${label}</a>` : `<p>${label}</p>`}</li>`;
     }
 
     function getBioMakersLayout() {
@@ -178,7 +178,7 @@
                             ${DATA.map(
                                 ({ title, description, items = [], notes = [] }, idx) => /* HTML */ `
                                     <div class="item">
-                                        <button type="button" aria-expanded="${idx === 0}">${title}${items.length ? ` (${items.length})` : ""}</button>
+                                        <button type="button" aria-expanded="false">${title}${items.length ? ` (${items.length})` : ""}</button>
                                         <div class="panel" hidden>
                                             ${description ? `<em>${description}</em>` : ""} ${items.length ? `<ul>${items.map(getLinkLayout).join("")}</ul>` : ""}
                                             ${notes.map((n) => `<p>${n}</p>`).join("")}
@@ -205,16 +205,16 @@
                                     <p class="ab-right-for-you-subtitle">This test is a good fit if you want to:</p>
                                     <div class="ab-right-for-you-card-list">
                                         <div class="ab-right-for-you-card">
-                                            <p>For a comprehensive health check</p>
+                                            <p>Get a comprehensive annual health check</p>
                                         </div>
                                         <div class="ab-right-for-you-card">
-                                            <p>You want to ensure your diet is providing the right amounts of micronutrients</p>
+                                            <p>Understand heart health risk factors like cholesterol</p>
                                         </div>
                                         <div class="ab-right-for-you-card">
-                                            <p>You are worried about cardiovascular risk</p>
+                                            <p>Make sure your diet is giving you the right vitamins and minerals</p>
                                         </div>
                                         <div class="ab-right-for-you-card">
-                                            <p>You want to check on your reproductive health or menopause status</p>
+                                            <p>Check your hormones, including reproductive health or menopause status</p>
                                         </div>
                                     </div>
                                 </li>
