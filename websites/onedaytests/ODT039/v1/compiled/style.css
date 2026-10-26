@@ -15,6 +15,9 @@
 .AB-ODT039 .shopify-section:has(.glider-contain) > .tiles-section {
   padding-top: 0 !important;
 }
+.AB-ODT039 .rich-text--container {
+  margin-top: 56px;
+}
 .AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
   padding: 56px 16px;
 }
