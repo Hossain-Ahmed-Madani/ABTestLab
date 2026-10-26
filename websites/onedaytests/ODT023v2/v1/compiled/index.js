@@ -6,7 +6,7 @@
         test_name: "ODT023v2 - Image gallery PDP test",
         page_initials: "AB-ODT023v2",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -84,6 +84,8 @@
 
         replaceImages();
         mutationObserverFunction();
+
+        // handleRemove();
     }
 
     function checkForItems() {
