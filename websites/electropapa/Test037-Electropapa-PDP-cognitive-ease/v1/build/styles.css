@@ -53,10 +53,6 @@
 .AB-TEST037 .btn.btn-primary.btn-buy {
     height: 46px;
 }
-.AB-TEST037 div[data-swag-pay-pal-express-button-options],
-.AB-TEST037 #swag-amazon-pay-product-detail-wrapper > div {
-    margin-top: 16px;
-}
 .AB-TEST037 .usp-payment-methods {
     margin-top: 16px;
     gap: 16px;
