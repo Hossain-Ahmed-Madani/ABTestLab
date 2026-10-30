@@ -1,3 +1,6 @@
+.AB-ODT039 .site-footer-information {
+  overflow: hidden;
+}
 .AB-ODT039 .ab-hidden {
   display: none !important;
 }
@@ -162,15 +165,18 @@
     line-height: 24px;
   }
 }
-.AB-ODT039 .ab-biomarkers {
-  padding: 56px 0;
-  background-color: #f7fcfe;
-}
 .AB-ODT039 .ab-biomarkers .rich-text--container {
   margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0;
+}
+.AB-ODT039 .ab-biomarkers .ab-container {
+  border-top: 8px solid #006eb3;
+  background-color: #e2eff4;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.1490196078);
+  overflow: hidden;
+  padding: 64px 16px 56px;
+  margin: auto 16px;
 }
 .AB-ODT039 .ab-biomarkers h2 {
   font-weight: 700;
@@ -183,8 +189,11 @@
 .AB-ODT039 .ab-biomarkers h2 span {
   color: #c0302e;
 }
-.AB-ODT039 .ab-biomarkers .item:not(:last-child) {
-  border-bottom: 1px solid #e2eff4;
+.AB-ODT039 .ab-biomarkers .item:first-child {
+  border-top: 1px solid #5e5e5e;
+}
+.AB-ODT039 .ab-biomarkers .item {
+  border-bottom: 1px solid #5e5e5e;
 }
 .AB-ODT039 .ab-biomarkers .item button {
   display: flex;
@@ -193,7 +202,7 @@
   cursor: pointer;
   gap: 10px;
   width: 100%;
-  padding: 16px 0;
+  padding: 16px 12px;
   background: none;
   border: 0;
   font-family: inherit;
@@ -203,25 +212,26 @@
   letter-spacing: 0px;
   text-transform: capitalize;
   color: #1d1d1d;
+  text-align: left;
 }
 .AB-ODT039 .ab-biomarkers .item button::after {
   content: "";
-  width: 12.5px;
-  height: 12.5px;
+  width: 8px;
+  height: 8px;
   margin: 0 6px 4px 16px;
-  border: solid #006eb3;
+  border: solid #000000;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   transition: transform 0.2s;
 }
 .AB-ODT039 .ab-biomarkers .item button[aria-expanded=true]::after {
-  transform: rotate(-135deg);
-  margin-top: 6px;
+  transform: rotate(45deg);
 }
 .AB-ODT039 .ab-biomarkers .panel {
   color: #444;
   font-size: 16px;
   line-height: 24px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -284,19 +294,14 @@
 }
 @media screen and (min-width: 1024px) {
   .AB-ODT039 .ab-biomarkers .ab-container {
-    max-width: 1019px;
-    margin: auto;
+    max-width: 1360px;
+    margin: 0 25px 24px;
   }
   .AB-ODT039 .ab-biomarkers h2 {
-    margin: 0 0 4px;
+    margin: 0;
+    margin-bottom: 24px;
   }
   .AB-ODT039 .ab-biomarkers .item button {
-    padding: 20px 0;
-    font-size: 20px;
-    line-height: 30px;
     letter-spacing: 0px;
-  }
-  .AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
-    margin-bottom: 20px;
   }
 }

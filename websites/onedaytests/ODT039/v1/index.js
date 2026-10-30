@@ -6,7 +6,7 @@
         test_name: "ODT039 - PDP: Test details before brand content",
         page_initials: "AB-ODT039",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -318,12 +318,15 @@
 
         const ultimateHealthyWomenElement = qq(".shopify-section").find((item) => q(item, "h2") && q(item, "h2").textContent.trim() === "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW");
 
-        // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU? +  HOME KIT VS CLINIC
-        ultimateHealthyWomenElement.insertAdjacentHTML("beforebegin", getBioMakersLayout() + getIsThisTestRightForYourLayout() + getHomeKitVSClinicLayout());
+        // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU?
+        ultimateHealthyWomenElement.insertAdjacentHTML("beforebegin", getBioMakersLayout() + getIsThisTestRightForYourLayout());
 
-        // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW
+        // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW  
         ultimateHealthyWomenElement.classList.add("ab-ultimateHealthyWomen-section");
         q(ultimateHealthyWomenElement, ".metafield-rich_text_field").innerHTML = getUltimateHealthyWomenBloodTestInnerLayout();
+
+        // HOME KIT VS CLINIC
+        ultimateHealthyWomenElement.insertAdjacentHTML('afterend',  getHomeKitVSClinicLayout())
 
         // Relocate -> SHARE YOUR STORY
         const quickAndAccurateResultsElement = qq(".shopify-section ").find(
