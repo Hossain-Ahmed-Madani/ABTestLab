@@ -101,6 +101,10 @@
         margin-bottom: 12px;
     }
 
+    .ab-home-kit-vs-clinic p:last-child {
+        margin-bottom: 0;
+    }
+
     .ab-right-for-you p.ab-right-for-you-subtitle {
         margin-bottom: 24px;
         font-weight: 600;
@@ -144,6 +148,10 @@
             letter-spacing: 0px;
             color: #222222;
         }
+    }
+
+    .custom-html--container, .custom-liquid--container {
+        margin-top: 56px;
     }
 
     @media screen and (min-width: 768px) {

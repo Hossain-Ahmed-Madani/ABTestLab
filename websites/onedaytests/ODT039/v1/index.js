@@ -6,7 +6,7 @@
         test_name: "ODT039 - PDP: Test details before brand content",
         page_initials: "AB-ODT039",
         test_variation: 1,
-        test_version: 0.0004,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -15,7 +15,7 @@
         {
             title: "Full Blood Count",
             description:
-                "This part of the panel checks overall health by measuring red and white blood cells, haemoglobin, haematocrit, and platelets to detect conditions like aenemia, infections, and blood disorders.",
+                "This part of the panel checks overall health by measuring red and white blood cells, <a href='/pages/haemoglobin-hgb-description-and-reference-ranges' title='Haemoglobin'>haemoglobin</a>, haematocrit, and <a href='/pages/platelets-plt-description-and-reference-ranges' title='Platelets'>platelets</a> to detect conditions like aenemia, infections, and blood disorders.",
             items: [
                 ["White Blood Cell Count (WBC)", "/pages/white-blood-cell-count-wbc-description-and-reference-ranges"],
                 ["Red Blood Cell Count (RBC)", "/pages/red-blood-cell-count-rbc-description-and-reference-ranges"],
@@ -36,13 +36,13 @@
         },
         {
             title: "Immunoglobulins",
-            description: "Biomarker to assess immune function and help detect <a href='/pages/immunoglobulin-a-iga-description-and-reference-ranges' title='IgA'>IgA</a> deficiency or immune-related conditions.",
+            description:
+                "Biomarker to assess immune function and help detect <a href='/pages/immunoglobulin-a-iga-description-and-reference-ranges' title='IgA'>IgA</a> deficiency or immune-related conditions.",
             items: [["Total IgA", ""]],
         },
         {
             title: "Thyroid Function",
-            description:
-                "A thyroid function part of this blood test that checks levels of triiodothyronine (T3), thyroxine (T4), and thyroid-stimulating hormone (TSH) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.",
+            description: `A thyroid function part of this blood test that checks levels of <a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="Triiodothyronine">triiodothyronine</a> (<a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="T3">T3</a>), <a href="/pages/thyroxine-t4-description-and-reference-ranges" title="Thyroxine">thyroxine</a> (<a href="/pages/thyroxine-t4-description-and-reference-ranges" title="T4">T4</a>), and thyroid-stimulating hormone (<a href="/pages/thyroid-stimulating-hormone-tsh-description-and-reference-ranges" title="TSH">TSH</a>) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.`,
             items: [
                 ["Unbound thyroxine (Free T4)", ""],
                 ["Unbound triiodothyronine (Free T3)", ""],
@@ -321,12 +321,12 @@
         // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU?
         ultimateHealthyWomenElement.insertAdjacentHTML("beforebegin", getBioMakersLayout() + getIsThisTestRightForYourLayout());
 
-        // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW  
+        // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW
         ultimateHealthyWomenElement.classList.add("ab-ultimateHealthyWomen-section");
         q(ultimateHealthyWomenElement, ".metafield-rich_text_field").innerHTML = getUltimateHealthyWomenBloodTestInnerLayout();
 
         // HOME KIT VS CLINIC
-        ultimateHealthyWomenElement.insertAdjacentHTML('afterend',  getHomeKitVSClinicLayout())
+        ultimateHealthyWomenElement.insertAdjacentHTML("afterend", getHomeKitVSClinicLayout());
 
         // Relocate -> SHARE YOUR STORY
         const quickAndAccurateResultsElement = qq(".shopify-section ").find(

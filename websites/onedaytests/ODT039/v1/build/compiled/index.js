@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ODT039",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -11,7 +11,7 @@
     {
       title: "Full Blood Count",
       description:
-        "This part of the panel checks overall health by measuring red and white blood cells, haemoglobin, haematocrit, and platelets to detect conditions like aenemia, infections, and blood disorders.",
+        "This part of the panel checks overall health by measuring red and white blood cells, <a href='/pages/haemoglobin-hgb-description-and-reference-ranges' title='Haemoglobin'>haemoglobin</a>, haematocrit, and <a href='/pages/platelets-plt-description-and-reference-ranges' title='Platelets'>platelets</a> to detect conditions like aenemia, infections, and blood disorders.",
       items: [
         [
           "White Blood Cell Count (WBC)",
@@ -83,8 +83,7 @@
     },
     {
       title: "Thyroid Function",
-      description:
-        "A thyroid function part of this blood test that checks levels of triiodothyronine (T3), thyroxine (T4), and thyroid-stimulating hormone (TSH) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.",
+      description: `A thyroid function part of this blood test that checks levels of <a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="Triiodothyronine">triiodothyronine</a> (<a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="T3">T3</a>), <a href="/pages/thyroxine-t4-description-and-reference-ranges" title="Thyroxine">thyroxine</a> (<a href="/pages/thyroxine-t4-description-and-reference-ranges" title="T4">T4</a>), and thyroid-stimulating hormone (<a href="/pages/thyroid-stimulating-hormone-tsh-description-and-reference-ranges" title="TSH">TSH</a>) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.`,
       items: [
         ["Unbound thyroxine (Free T4)", ""],
         ["Unbound triiodothyronine (Free T3)", ""],
@@ -271,7 +270,7 @@
   }
 
   function getLinkLayout([label, href]) {
-    return `<li>${href ? `<a href="/pages/${href}-description-and-reference-ranges">${label}</a>` : `<p>${label}</p>`}</li>`;
+    return `<li>${href ? `<a href="${href}">${label}</a>` : `<p>${label}</p>`}</li>`;
   }
 
   function getBioMakersLayout() {
@@ -287,7 +286,7 @@
                   idx,
                 ) => /* HTML */ `
                   <div class="item">
-                    <button type="button" aria-expanded="${idx === 0}">
+                    <button type="button" aria-expanded="false">
                       ${title}${items.length ? ` (${items.length})` : ""}
                     </button>
                     <div class="panel" hidden>
@@ -327,20 +326,22 @@
                   </p>
                   <div class="ab-right-for-you-card-list">
                     <div class="ab-right-for-you-card">
-                      <p>For a comprehensive health check</p>
+                      <p>Get a comprehensive annual health check</p>
                     </div>
                     <div class="ab-right-for-you-card">
                       <p>
-                        You want to ensure your diet is providing the right
-                        amounts of micronutrients
+                        Understand heart health risk factors like cholesterol
                       </p>
                     </div>
                     <div class="ab-right-for-you-card">
-                      <p>You are worried about cardiovascular risk</p>
+                      <p>
+                        Make sure your diet is giving you the right vitamins and
+                        minerals
+                      </p>
                     </div>
                     <div class="ab-right-for-you-card">
                       <p>
-                        You want to check on your reproductive health or
+                        Check your hormones, including reproductive health or
                         menopause status
                       </p>
                     </div>
@@ -470,12 +471,10 @@
           "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW",
     );
 
-    // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU? +  HOME KIT VS CLINIC
+    // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU?
     ultimateHealthyWomenElement.insertAdjacentHTML(
       "beforebegin",
-      getBioMakersLayout() +
-        getIsThisTestRightForYourLayout() +
-        getHomeKitVSClinicLayout(),
+      getBioMakersLayout() + getIsThisTestRightForYourLayout(),
     );
 
     // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW
@@ -484,6 +483,12 @@
     );
     q(ultimateHealthyWomenElement, ".metafield-rich_text_field").innerHTML =
       getUltimateHealthyWomenBloodTestInnerLayout();
+
+    // HOME KIT VS CLINIC
+    ultimateHealthyWomenElement.insertAdjacentHTML(
+      "afterend",
+      getHomeKitVSClinicLayout(),
+    );
 
     // Relocate -> SHARE YOUR STORY
     const quickAndAccurateResultsElement = qq(".shopify-section ").find(

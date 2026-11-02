@@ -4,7 +4,10 @@
       // Check if <head> exists
       clearInterval(interval); // Stop checking once found
       var style = document.createElement("style");
-      style.innerHTML = `.AB-ODT039 .ab-hidden {
+      style.innerHTML = `.AB-ODT039 .site-footer-information {
+  overflow: hidden;
+}
+.AB-ODT039 .ab-hidden {
   display: none !important;
 }
 .AB-ODT039 #biomarkers_anchor,
@@ -22,6 +25,9 @@
 }
 .AB-ODT039 .shopify-section:has(.glider-contain) > .tiles-section {
   padding-top: 0 !important;
+}
+.AB-ODT039 .rich-text--container {
+  margin-top: 56px;
 }
 .AB-ODT039 .ab-ultimateHealthyWomen-section .rich-text--container > div {
   padding: 56px 16px;
@@ -69,6 +75,9 @@
   margin-top: 0;
   margin-bottom: 12px;
 }
+.AB-ODT039 .ab-home-kit-vs-clinic p:last-child {
+  margin-bottom: 0;
+}
 .AB-ODT039 .ab-right-for-you p.ab-right-for-you-subtitle {
   margin-bottom: 24px;
   font-weight: 600;
@@ -108,6 +117,10 @@
   line-height: 24px;
   letter-spacing: 0px;
   color: #222222;
+}
+.AB-ODT039 .custom-html--container,
+.AB-ODT039 .custom-liquid--container {
+  margin-top: 56px;
 }
 @media screen and (min-width: 768px) {
   .AB-ODT039 .ab-right-for-you h4 br {
@@ -167,15 +180,18 @@
     line-height: 24px;
   }
 }
-.AB-ODT039 .ab-biomarkers {
-  padding: 56px 0;
-  background-color: #f7fcfe;
-}
 .AB-ODT039 .ab-biomarkers .rich-text--container {
   margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 0;
+}
+.AB-ODT039 .ab-biomarkers .ab-container {
+  border-top: 8px solid #006eb3;
+  background-color: #e2eff4;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.1490196078);
+  overflow: hidden;
+  padding: 64px 16px 56px;
+  margin: auto 16px;
 }
 .AB-ODT039 .ab-biomarkers h2 {
   font-weight: 700;
@@ -188,8 +204,11 @@
 .AB-ODT039 .ab-biomarkers h2 span {
   color: #c0302e;
 }
-.AB-ODT039 .ab-biomarkers .item:not(:last-child) {
-  border-bottom: 1px solid #e2eff4;
+.AB-ODT039 .ab-biomarkers .item:first-child {
+  border-top: 1px solid #5e5e5e;
+}
+.AB-ODT039 .ab-biomarkers .item {
+  border-bottom: 1px solid #5e5e5e;
 }
 .AB-ODT039 .ab-biomarkers .item button {
   display: flex;
@@ -198,7 +217,7 @@
   cursor: pointer;
   gap: 10px;
   width: 100%;
-  padding: 16px 0;
+  padding: 16px 12px;
   background: none;
   border: 0;
   font-family: inherit;
@@ -208,25 +227,26 @@
   letter-spacing: 0px;
   text-transform: capitalize;
   color: #1d1d1d;
+  text-align: left;
 }
 .AB-ODT039 .ab-biomarkers .item button::after {
   content: "";
-  width: 12.5px;
-  height: 12.5px;
+  width: 8px;
+  height: 8px;
   margin: 0 6px 4px 16px;
-  border: solid #006eb3;
+  border: solid #000000;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: rotate(-45deg);
   transition: transform 0.2s;
 }
 .AB-ODT039 .ab-biomarkers .item button[aria-expanded="true"]::after {
-  transform: rotate(-135deg);
-  margin-top: 6px;
+  transform: rotate(45deg);
 }
 .AB-ODT039 .ab-biomarkers .panel {
   color: #444;
   font-size: 16px;
   line-height: 24px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -289,20 +309,15 @@
 }
 @media screen and (min-width: 1024px) {
   .AB-ODT039 .ab-biomarkers .ab-container {
-    max-width: 1019px;
-    margin: auto;
+    max-width: 1360px;
+    margin: 0 25px 24px;
   }
   .AB-ODT039 .ab-biomarkers h2 {
-    margin: 0 0 4px;
+    margin: 0;
+    margin-bottom: 24px;
   }
   .AB-ODT039 .ab-biomarkers .item button {
-    padding: 20px 0;
-    font-size: 20px;
-    line-height: 30px;
     letter-spacing: 0px;
-  }
-  .AB-ODT039 .ab-biomarkers .panel:not([hidden]) {
-    margin-bottom: 20px;
   }
 }
 `;
@@ -317,7 +332,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ODT039",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0005,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -326,7 +341,7 @@
     {
       title: "Full Blood Count",
       description:
-        "This part of the panel checks overall health by measuring red and white blood cells, haemoglobin, haematocrit, and platelets to detect conditions like aenemia, infections, and blood disorders.",
+        "This part of the panel checks overall health by measuring red and white blood cells, <a href='/pages/haemoglobin-hgb-description-and-reference-ranges' title='Haemoglobin'>haemoglobin</a>, haematocrit, and <a href='/pages/platelets-plt-description-and-reference-ranges' title='Platelets'>platelets</a> to detect conditions like aenemia, infections, and blood disorders.",
       items: [
         [
           "White Blood Cell Count (WBC)",
@@ -398,8 +413,7 @@
     },
     {
       title: "Thyroid Function",
-      description:
-        "A thyroid function part of this blood test that checks levels of triiodothyronine (T3), thyroxine (T4), and thyroid-stimulating hormone (TSH) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.",
+      description: `A thyroid function part of this blood test that checks levels of <a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="Triiodothyronine">triiodothyronine</a> (<a href="/pages/triiodothyronine-t3-description-and-reference-ranges" title="T3">T3</a>), <a href="/pages/thyroxine-t4-description-and-reference-ranges" title="Thyroxine">thyroxine</a> (<a href="/pages/thyroxine-t4-description-and-reference-ranges" title="T4">T4</a>), and thyroid-stimulating hormone (<a href="/pages/thyroid-stimulating-hormone-tsh-description-and-reference-ranges" title="TSH">TSH</a>) to diagnose thyroid disorders like hypothyroidism or hyperthyroidism.`,
       items: [
         ["Unbound thyroxine (Free T4)", ""],
         ["Unbound triiodothyronine (Free T3)", ""],
@@ -586,7 +600,7 @@
   }
 
   function getLinkLayout([label, href]) {
-    return `<li>${href ? `<a href="/pages/${href}-description-and-reference-ranges">${label}</a>` : `<p>${label}</p>`}</li>`;
+    return `<li>${href ? `<a href="${href}">${label}</a>` : `<p>${label}</p>`}</li>`;
   }
 
   function getBioMakersLayout() {
@@ -602,7 +616,7 @@
                   idx,
                 ) => /* HTML */ `
                   <div class="item">
-                    <button type="button" aria-expanded="${idx === 0}">
+                    <button type="button" aria-expanded="false">
                       ${title}${items.length ? ` (${items.length})` : ""}
                     </button>
                     <div class="panel" hidden>
@@ -642,20 +656,22 @@
                   </p>
                   <div class="ab-right-for-you-card-list">
                     <div class="ab-right-for-you-card">
-                      <p>For a comprehensive health check</p>
+                      <p>Get a comprehensive annual health check</p>
                     </div>
                     <div class="ab-right-for-you-card">
                       <p>
-                        You want to ensure your diet is providing the right
-                        amounts of micronutrients
+                        Understand heart health risk factors like cholesterol
                       </p>
                     </div>
                     <div class="ab-right-for-you-card">
-                      <p>You are worried about cardiovascular risk</p>
+                      <p>
+                        Make sure your diet is giving you the right vitamins and
+                        minerals
+                      </p>
                     </div>
                     <div class="ab-right-for-you-card">
                       <p>
-                        You want to check on your reproductive health or
+                        Check your hormones, including reproductive health or
                         menopause status
                       </p>
                     </div>
@@ -785,12 +801,10 @@
           "ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW",
     );
 
-    // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU? +  HOME KIT VS CLINIC
+    // 48 BIOMARKERS IN 10 GROUPS +  IS THIS TEST RIGHT FOR YOU?
     ultimateHealthyWomenElement.insertAdjacentHTML(
       "beforebegin",
-      getBioMakersLayout() +
-        getIsThisTestRightForYourLayout() +
-        getHomeKitVSClinicLayout(),
+      getBioMakersLayout() + getIsThisTestRightForYourLayout(),
     );
 
     // ULTIMATE HEALTHY WOMAN BLOOD TEST OVERVIEW
@@ -799,6 +813,12 @@
     );
     q(ultimateHealthyWomenElement, ".metafield-rich_text_field").innerHTML =
       getUltimateHealthyWomenBloodTestInnerLayout();
+
+    // HOME KIT VS CLINIC
+    ultimateHealthyWomenElement.insertAdjacentHTML(
+      "afterend",
+      getHomeKitVSClinicLayout(),
+    );
 
     // Relocate -> SHARE YOUR STORY
     const quickAndAccurateResultsElement = qq(".shopify-section ").find(
