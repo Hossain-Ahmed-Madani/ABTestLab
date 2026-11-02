@@ -1,19 +1,21 @@
 (async () => {
   const TEST_CONFIG = {
-    client: "Converted",
-    project: "One Day Tests",
-    site_url: "https://onedaytests.com",
-    test_name: "ODT023v2 - Image gallery PDP test",
     page_initials: "AB-ODT023v2",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
+  // const IMAGES = [
+  //     "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a-1_6adb4650bd35f.png",
+  //     "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b-1_6adb4664b12cf.png",
+  // ];
+
   const IMAGES = [
-    "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a-1_6adb4650bd35f.png",
-    "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b-1_6adb4664b12cf.png",
+    "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-a-choose-how-you-test-1_6ae87e7b39afd.png",
+    "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-b-track-your-results-over-time-1_6ae87e925ce56.png",
+    "https://onedaytests.com/cdn/shop/files/One_Day_Test-Clinic_male_customer_1000x667.jpg?v=1786443187",
   ];
 
   async function waitForElementAsync(
@@ -66,6 +68,10 @@
         selector: `.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="2"] img, .product-gallery--viewer .product-gallery--media[data-gallery-index="2"] img, .pswp__img[src='//onedaytests.com/cdn/shop/products/box_sleeve_2000px_b1c5e5ff-fc28-42dc-9e53-04914947d948_2000x1594.jpg?v=1768211106']`,
         image_url: IMAGES[1],
       },
+      {
+        selector: `.gallery-navigation--scroller .product-gallery--media-thumbnail[data-gallery-index="5"] img, .product-gallery--viewer .product-gallery--media[data-gallery-index="5"] img, .pswp__img[src='//onedaytests.com/cdn/shop/products/sussexpathology-01-04-web3_1b6a4c80-0bc8-42e2-ada1-3faf3b7098ee_2000x1333.jpg?v=1768211106']`,
+        image_url: IMAGES[2],
+      },
     ];
 
     thumbItems.forEach(({ selector, image_url }) => {
@@ -96,12 +102,8 @@
       `${page_initials}--version:${test_version}`,
     );
     window[page_initials] = true;
-    console.table(TEST_CONFIG);
-
     replaceImages();
     mutationObserverFunction();
-
-    // handleRemove();
   }
 
   function checkForItems() {
@@ -119,7 +121,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
     return false;
   }
 })();
