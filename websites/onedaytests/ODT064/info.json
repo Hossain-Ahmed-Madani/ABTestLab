@@ -1,0 +1,13 @@
+{
+  "id": "1792071203393_7872_ODT064",
+  "name": "ODT064",
+  "type": "A/B",
+  "website": "onedaytests",
+  "variations": [
+    "control",
+    "v1"
+  ],
+  "createdAt": "2026-10-15T13:33:23.393Z",
+  "createdAtReadable": "10/15/2026, 7:33:23 PM",
+  "lastUpdated": "2026-10-15T13:33:23.464Z"
+}
