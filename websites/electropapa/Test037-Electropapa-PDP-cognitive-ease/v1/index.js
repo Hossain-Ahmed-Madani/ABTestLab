@@ -6,7 +6,7 @@
         test_name: "Test037 [Electropapa] PDP - cognitive ease",
         page_initials: "AB-TEST037",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0004,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;

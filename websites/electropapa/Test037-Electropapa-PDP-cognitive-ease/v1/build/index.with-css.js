@@ -9,7 +9,6 @@
   .gallery-slider-thumbnails-item {
   min-height: 80px;
 }
-.AB-TEST037 .trust-widget-list,
 .AB-TEST037 div[data-swag-pay-pal-express-button-options],
 .AB-TEST037 #swag-amazon-pay-product-detail-wrapper > div,
 .AB-TEST037 .usp-payment-methods,
@@ -86,7 +85,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-TEST037",
     test_variation: 1,
-    test_version: 0.0003,
+    test_version: 0.0004,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
