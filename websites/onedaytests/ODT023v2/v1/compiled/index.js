@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-ODT023v2",
         test_variation: 1,
-        test_version: 0.0003,
+        test_version: 0.0005,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -77,7 +77,8 @@
         });
     }
 
-    function mutationObserverFunction() {
+    async function mutationObserverFunction() {
+        await waitForElementAsync(() => q(".pswp__container"));
         const targetNode = q(".pswp__container");
         return new MutationObserver(replaceImages).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
@@ -86,12 +87,13 @@
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
+
         replaceImages();
         mutationObserverFunction();
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-gallery") && q(".flickity-enabled") && q(".pswp__container"));
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product-gallery") && document.readyState !== "loading");
     }
 
     try {
