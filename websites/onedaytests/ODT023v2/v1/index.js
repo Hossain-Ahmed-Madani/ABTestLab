@@ -6,15 +6,10 @@
         test_name: "ODT023v2 - Image gallery PDP test",
         page_initials: "AB-ODT023v2",
         test_variation: 1,
-        test_version: 0.0005,
+        test_version: 0.0006,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
-
-    // const IMAGES = [
-    //     "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-a-1_6adb4650bd35f.png",
-    //     "https://cdn-3.convertexperiments.com/uf/10018141/10018430/image-b-1_6adb4664b12cf.png",
-    // ];
 
     const IMAGES = [
         "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-a-choose-how-you-test-1_6ae87e7b39afd.png",
@@ -54,6 +49,15 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function isSafari() {
+        const userAgent = navigator.userAgent;
+        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
+    }
+
+    function isTouchEnabled() {
+        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+    }
+
     function replaceImages() {
         const thumbItems = [
             {
@@ -73,12 +77,23 @@
         thumbItems.forEach(({ selector, image_url }) => {
             const targetNodes = qq(selector);
             targetNodes?.forEach((node) => {
+                if (node?.src.includes(image_url) && node?.srcset.includes(image_url)) return;
                 node.classList.add("custom_preview_el");
-                node.parentElement.classList.add("media_wrapper_el");
-                node.src = image_url;
-                node.srcset = image_url;
+                node?.parentElement.classList.add("media_wrapper_el");
+                node.setAttribute("src", image_url);
+                node.setAttribute("srcset", image_url);
             });
         });
+    }
+
+    function replaceImagesInInterval() {
+        let count = 0;
+        let interval = setInterval(() => {
+            replaceImages();
+            if (++count > 5) {
+                clearInterval(interval);
+            }
+        }, 1000);
     }
 
     async function mutationObserverFunction() {
@@ -93,6 +108,9 @@
         window[page_initials] = true;
 
         replaceImages();
+        if (isSafari()) {
+            replaceImagesInInterval();
+        }
         mutationObserverFunction();
     }
 
