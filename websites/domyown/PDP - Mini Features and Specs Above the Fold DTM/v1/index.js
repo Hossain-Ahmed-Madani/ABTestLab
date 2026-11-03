@@ -130,13 +130,6 @@
             }
         });
 
-        // Object.keys(obj).forEach((key) => {
-        //     foundList.push({
-        //         label: obj[key].label,
-        //         htmlContent: obj[key].htmlContent,
-        //     });
-        // });
-
         return foundList;
     }
 
