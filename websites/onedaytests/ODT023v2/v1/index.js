@@ -6,14 +6,14 @@
         test_name: "ODT023v2 - Image gallery PDP test",
         page_initials: "AB-ODT023v2",
         test_variation: 1,
-        test_version: 0.0006,
+        test_version: 0.0007,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
     const IMAGES = [
-        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-a-choose-how-you-test-1_6ae87e7b39afd.png",
-        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-b-track-your-results-over-time-1_6ae87e925ce56.png",
+        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-a-choose-how-you-testaa-1_6aeb004d6fb0f.png",
+        "https://cdn-3.convertexperiments.com/uf/10018141/10018430/card-b-track-your-results-over-timebb-1_6aeb0079e83b3.png",
         "https://onedaytests.com/cdn/shop/files/One_Day_Test-Clinic_male_customer_1000x667.jpg?v=1786443187",
     ];
 
