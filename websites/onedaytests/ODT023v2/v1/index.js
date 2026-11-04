@@ -6,7 +6,7 @@
         test_name: "ODT023v2 - Image gallery PDP test",
         page_initials: "AB-ODT023v2",
         test_variation: 1,
-        test_version: 0.0007,
+        test_version: 0.0009,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -49,15 +49,6 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
-    function isSafari() {
-        const userAgent = navigator.userAgent;
-        return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
-    }
-
-    function isTouchEnabled() {
-        return "ontouchstart" in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-    }
-
     function replaceImages() {
         const thumbItems = [
             {
@@ -77,7 +68,7 @@
         thumbItems.forEach(({ selector, image_url }) => {
             const targetNodes = qq(selector);
             targetNodes?.forEach((node) => {
-                if (node?.src.includes(image_url) && node?.srcset.includes(image_url)) return;
+                if (node?.getAttribute('src') === image_url && node?.getAttribute('srcset') === 'image_url') return;
                 node.classList.add("custom_preview_el");
                 node?.parentElement.classList.add("media_wrapper_el");
                 node.setAttribute("src", image_url);
@@ -90,7 +81,7 @@
         let count = 0;
         let interval = setInterval(() => {
             replaceImages();
-            if (++count > 5) {
+            if (++count > 10) {
                 clearInterval(interval);
             }
         }, 1000);
@@ -108,9 +99,7 @@
         window[page_initials] = true;
 
         replaceImages();
-        if (isSafari()) {
-            replaceImagesInInterval();
-        }
+        replaceImagesInInterval();
         mutationObserverFunction();
     }
 
