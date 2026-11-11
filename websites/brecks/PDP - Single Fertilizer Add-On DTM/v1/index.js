@@ -11,31 +11,6 @@
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
 
-    async function fetchAndParseURLApi(url) {
-        try {
-            const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const html = await response.text();
-            const dom = new DOMParser().parseFromString(html, "text/html");
-            return dom;
-        } catch (error) {
-            // console.error("Fetch and parse failed:", error);
-            return null;
-        }
-    }
-
-    function waitForElement(predicate, callback, timer = 20000, frequency = 150) {
-        if (timer <= 0) {
-            console.warn(`Timeout reached while waiting for condition: ${predicate.toString()}`);
-            return;
-        } else if (predicate && predicate()) {
-            callback();
-        } else {
-            setTimeout(() => waitForElement(predicate, callback, timer - frequency, frequency), frequency);
-        }
-    }
-
     async function waitForElementAsync(predicate, timeout = 20000, frequency = 150) {
         const startTime = Date.now();
 
@@ -60,28 +35,6 @@
         });
     }
 
-    async function waitForPromiseOnMutation(predicate, maxCount = 50) {
-        let count = 0;
-
-        return new Promise((resolve, reject) => {
-            if (typeof predicate === "function" && predicate()) {
-                return resolve(true);
-            }
-
-            new MutationObserver((mutationList, observer) => {
-                count++;
-
-                if (typeof predicate === "function" && predicate()) {
-                    observer.disconnect();
-                    return resolve(true);
-                } else if (count > maxCount) {
-                    observer.disconnect();
-                    return reject(new Error(`Max polling count ${count} reached while waiting for predicate:\n${predicate.toString()}`));
-                }
-            }).observe(document.body, { childList: true, subtree: true });
-        });
-    }
-
     function q(s, o) {
         return o ? s.querySelector(o) : document.querySelector(s);
     }
@@ -102,32 +55,6 @@
         };
     }
 
-    function getCookie(key) {
-        try {
-            if (!key || typeof key !== "string") {
-                // console.error("Invalid key provided to getCookie");
-                return null;
-            }
-
-            // Encode the key to handle special characters
-            const encodedKey = encodeURIComponent(key);
-            const cookies = `; ${document.cookie}`;
-
-            // Find the cookie value
-            const parts = cookies.split(`; ${encodedKey}=`);
-
-            if (parts.length === 2) {
-                const value = parts.pop().split(";").shift();
-                return value ? decodeURIComponent(value) : null;
-            }
-
-            return null;
-        } catch (error) {
-            // console.error(`Error reading cookie "${key}":`, error);
-            return null;
-        }
-    }
-
     function isSafari() {
         const userAgent = navigator.userAgent;
         return /Safari/.test(userAgent) && !/Chrome/.test(userAgent);
@@ -143,16 +70,48 @@
         return new MutationObserver(debouncedUpdate).observe(targetNode, { childList: true, subtree: true, attributes: true });
     }
 
-    function init() {        
+    function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
+        q(".product__price-block.product__block.product__block--medium").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+            <div class="ab-single-fertilizer">
+                <div class="ab-single-fertilizer__top">
+                    <label for="ab_fertilizer" class="ab-single-fertilizer__label">
+                        <input type="checkbox" id="ab_fertilizer" class="ab-single-fertilizer__input"/>
+                        <span class="ab-single-fertilizer__label-text">Add plant food for bigger, brighter blooms</span>
+                    </label>
+                </div>
+                <div class="ab-single-fertilizer__bottom">
+                    <div class="ab-single-fertilizer___img">
+                        <img src="https://www.brecks.com/cdn/shop/files/84749.webp?v=1776107453&width=1200" alt=""/>
+                    </div>
+                    <div class="ab-single-fertilizer___text-content">
+                        <h3 class="ab-single-fertilizer__title">Breck's® Food for Bulbs and Perennials · $8.99</h3>
+                        <ul class="ab-single-fertilizer__benefit-lists">
+                            <li class="ab-single-fertilizer__benefit-item">
+                                Recommended for dahlias
+                            </li>
+                            <li class="ab-single-fertilizer__benefit-item">
+                                Stronger roots and bigger, brighter bloom
+                            </li>
+                            <li class="ab-single-fertilizer__benefit-item">
+                                One 13 oz bag covers 40 sq ft
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            `,
+        );
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product__price-block.product__block.product__block--medium"));
     }
 
     try {

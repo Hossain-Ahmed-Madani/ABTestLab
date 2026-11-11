@@ -39,16 +39,48 @@
         return document.querySelector(s);
     }
 
-    function init() {        
+    function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
         console.table(TEST_CONFIG);
 
+        q(".product__price-block.product__block.product__block--medium").insertAdjacentHTML(
+            "afterend",
+            /* HTML */ `
+            <div class="ab-single-fertilizer">
+                <div class="ab-single-fertilizer__top">
+                    <label for="ab_fertilizer" class="ab-single-fertilizer__label">
+                        <input type="checkbox" id="ab_fertilizer" class="ab-single-fertilizer__input"/>
+                        <span class="ab-single-fertilizer__label-text">Add plant food for bigger, brighter blooms</span>
+                    </label>
+                </div>
+                <div class="ab-single-fertilizer__bottom">
+                    <div class="ab-single-fertilizer___img">
+                        <img src="https://www.brecks.com/cdn/shop/files/84749.webp?v=1776107453&width=1200" alt=""/>
+                    </div>
+                    <div class="ab-single-fertilizer___text-content">
+                        <h3 class="ab-single-fertilizer__title">Breck's® Food for Bulbs and Perennials · $8.99</h3>
+                        <ul class="ab-single-fertilizer__benefit-lists">
+                            <li class="ab-single-fertilizer__benefit-item">
+                                Recommended for dahlias
+                            </li>
+                            <li class="ab-single-fertilizer__benefit-item">
+                                Stronger roots and bigger, brighter bloom
+                            </li>
+                            <li class="ab-single-fertilizer__benefit-item">
+                                One 13 oz bag covers 40 sq ft
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            `,
+        );
     }
 
     function checkForItems() {
-        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && true);
+        return !!(q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) && q(".product__price-block.product__block.product__block--medium"));
     }
 
     try {
