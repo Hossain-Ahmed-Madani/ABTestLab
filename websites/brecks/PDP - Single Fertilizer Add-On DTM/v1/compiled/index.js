@@ -156,7 +156,7 @@
         const STORAGE_IS_CHECKED = Boolean(getSessionStorageValue("AB_IS_CHECKED"));
         const STORAGE_IS_ADDED = Boolean(getSessionStorageValue("AB_IS_ADDED"));
 
-        q(".product__price-block.product__block.product__block--medium").insertAdjacentHTML(
+        q(".product__price-block.product__block.product__block--medium, .product__controls-group.product__variants-wrapper.product__block.product__block--medium").insertAdjacentHTML(
             "afterend",
             /* HTML */ `
                 <div class="ab-single-fertilizer">
@@ -189,9 +189,12 @@
 
     function updateAddToCartButtonLayout() {
         const targetNode = q("#AddToCart");
+        const mainProductPriceText = q('button.selected [data-lion-price-for-product-id],  .product__price-block.product__block.product__block--medium .product__price [data-lion-price-for-product-id]').textContent;
+        const sellingPrice = mainProductPriceText.split(" ")[1] || mainProductPriceText;
+        const formattedMainPrice =  parseFloat(sellingPrice.replace("$", ""));
 
         const { productPrice } = getFertilizerInfo();
-        const total = (+q('meta[property="og:price:amount"]').content * +q(".product-form .quantity-input__input").value + +productPrice).toFixed(2);
+        const total = (+formattedMainPrice * +q(".product-form .quantity-input__input").value + +productPrice).toFixed(2);
 
         q(".ab-short-info")?.remove();
 
@@ -213,6 +216,12 @@
 
     function handleProductQuantity() {
         q(".product-form .quantity-input__input").addEventListener("change", (e) => {
+            updateAddToCartButtonLayout();
+        });
+    }
+
+    function handleProductVariantSwitch() {
+        q(".dynamic-variant-input-wrap")?.addEventListener("click", (e) => {
             updateAddToCartButtonLayout();
         });
     }
@@ -244,7 +253,7 @@
                 window._conv_q = window._conv_q || [];
                 _conv_q.push(["triggerConversion", "1004129715"]);
 
-                
+
                 btn.click(); // theme adds the main product and refreshes the side cart
             },
             true,
@@ -257,11 +266,12 @@
         window[page_initials] = true;
 
         const sku = q(".product__sku-block.product__block.product__block--medium");
-        if (sku) q(".product__price-block.product__block.product__block--medium").insertAdjacentElement("beforebegin", sku);
+        if (sku)  q("  .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium").insertAdjacentElement("beforebegin", sku);
         createLayout();
         updateAddToCartButtonLayout();
         handleFertilizerCheck();
         handleProductQuantity();
+        handleProductVariantSwitch();
         handleAddToCartWithFertilizer();
     }
 
@@ -269,7 +279,7 @@
         return !!(
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q('meta[property="og:price:amount"]') &&
-            q(".product__price-block.product__block.product__block--medium") &&
+            q(" .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium") &&
             q("#AddToCart")
         );
     }
