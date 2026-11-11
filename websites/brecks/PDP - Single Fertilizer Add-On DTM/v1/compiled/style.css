@@ -1,4 +1,10 @@
 @charset "UTF-8";
+.AB-SINGLE-FERTILIZER .product__block.product__block--medium:has(.rte) {
+  margin-bottom: 12px;
+}
+.AB-SINGLE-FERTILIZER .product__block.product__block--medium:has(.product__sku) {
+  margin-bottom: 12px;
+}
 .AB-SINGLE-FERTILIZER .ab-single-fertilizer {
   border: 1px solid #dbdbdb;
   background-color: #f3f3f3;
@@ -7,6 +13,7 @@
   flex-direction: column;
   gap: 10px;
   border-radius: 5px;
+  margin-bottom: 8px;
 }
 .AB-SINGLE-FERTILIZER .ab-single-fertilizer__label {
   cursor: pointer;
@@ -111,8 +118,36 @@
 }
 .AB-SINGLE-FERTILIZER .ab-single-fertilizer__benefit-item::before {
   content: "✓";
+  margin-right: 3px;
+  font-weight: 600;
+}
+.AB-SINGLE-FERTILIZER .product-form__item.product-form__item--submit {
+  position: relative;
+}
+.AB-SINGLE-FERTILIZER .product-form__quantity-and-buy-buttons-wrapper:has(.ab-short-info) {
+  margin-bottom: 50px;
+}
+.AB-SINGLE-FERTILIZER .ab-short-info {
+  position: absolute;
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: #393939;
+  width: 100%;
+  top: 110%;
+  right: 0;
+  left: 0;
+  white-space: wrap;
 }
 @media screen and (min-width: 991px) {
+  .AB-SINGLE-FERTILIZER .product__block.product__block--medium:has(.rte) {
+    margin-bottom: 12px;
+  }
+  .AB-SINGLE-FERTILIZER .product__block.product__block--medium:has(.product__sku) {
+    margin-bottom: 12px;
+  }
   .AB-SINGLE-FERTILIZER .ab-single-fertilizer__label {
     align-items: center;
   }
