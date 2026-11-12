@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-SINGLE-FERTILIZER",
     test_variation: 1,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -102,6 +102,10 @@
     return o ? s.querySelector(o) : document.querySelector(s);
   }
 
+  function qq(s, o) {
+    return [...document.querySelectorAll(s)];
+  }
+
   function setSessionStorageValue(key, value) {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
@@ -180,11 +184,18 @@
       productUrl,
       imageUrl,
     } = getFertilizerInfo();
+    const exactCategory =
+      productCategory !== "all"
+        ? productCategory
+        : q(
+            ".breadcrumbs__list > .breadcrumbs__item:nth-child(3) .breadcrumbs__link",
+          ).textContent.toLowerCase();
+
     const STORAGE_IS_CHECKED = Boolean(getSessionStorageValue("AB_IS_CHECKED"));
     const STORAGE_IS_ADDED = Boolean(getSessionStorageValue("AB_IS_ADDED"));
 
     q(
-      ".product__price-block.product__block.product__block--medium",
+      ".product__price-block.product__block.product__block--medium, .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
     ).insertAdjacentHTML(
       "afterend",
       /* HTML */ `
@@ -204,7 +215,7 @@
           </div>
           <div class="ab-single-fertilizer__bottom">
             <a href="${productUrl}" class="ab-single-fertilizer___img">
-              <img src="${imageUrl}" alt="${productCategory}" />
+              <img src="${imageUrl}" alt="${exactCategory}" />
             </a>
             <div class="ab-single-fertilizer___text-content">
               <h3 class="ab-single-fertilizer__title">
@@ -212,7 +223,7 @@
               </h3>
               <ul class="ab-single-fertilizer__benefit-lists">
                 <li class="ab-single-fertilizer__benefit-item">
-                  Recommended for ${productCategory.toLocaleLowerCase()}
+                  Recommended for ${exactCategory.toLowerCase()}
                 </li>
                 <li class="ab-single-fertilizer__benefit-item">
                   ${bulletPoint2}
@@ -233,13 +244,24 @@
 
   function updateAddToCartButtonLayout() {
     const targetNode = q("#AddToCart");
+    const mainProductPriceText = q(
+      "button.selected [data-lion-price-for-product-id],  .product__price-block.product__block.product__block--medium .product__price [data-lion-price-for-product-id]",
+    ).textContent;
+    const sellingPrice =
+      mainProductPriceText.split(" ")[1] || mainProductPriceText;
+    const formattedMainPrice = parseFloat(sellingPrice.replace("$", ""));
 
-    const { productPrice } = getFertilizerInfo();
+    const { productPrice, productCategory } = getFertilizerInfo();
     const total = (
-      +q('meta[property="og:price:amount"]').content *
-        +q(".product-form .quantity-input__input").value +
+      +formattedMainPrice * +q(".product-form .quantity-input__input").value +
       +productPrice
     ).toFixed(2);
+    const exactCategory =
+      productCategory !== "all"
+        ? productCategory
+        : q(
+            ".breadcrumbs__list > .breadcrumbs__item:nth-child(3) .breadcrumbs__link",
+          ).textContent;
 
     q(".ab-short-info")?.remove();
 
@@ -247,12 +269,14 @@
       q(targetNode, "#addcarttext").innerText = "Add to Cart";
     } else {
       q(targetNode, "#addcarttext").innerText = `Add to Cart | $${total}`;
-      targetNode.insertAdjacentHTML(
+      q(
+        ".product-form[data-has-quantity-selector] .product-form__controls-group",
+      ).insertAdjacentHTML(
         "afterend",
         /* HTML */ `
           <span class="ab-short-info"
             >Adds both items to your cart. Uncheck the box above to add only
-            your dahlias.</span
+            your ${exactCategory.toLowerCase()}.</span
           >
         `,
       );
@@ -276,39 +300,49 @@
     );
   }
 
+  function handleProductVariantSwitch() {
+    q(".dynamic-variant-input-wrap")?.addEventListener("click", (e) => {
+      updateAddToCartButtonLayout();
+    });
+  }
+
   function handleAddToCartWithFertilizer() {
-    const btn = q("#AddToCart");
-    btn.addEventListener(
-      "click",
-      async (e) => {
-        if (!IS_CHECKED || IS_BUSY) return; // second pass: let the theme handle it
-        btn.classList.add("loading");
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        IS_BUSY = true;
-
-        try {
-          const { variantId, productId } = getFertilizerInfo();
-          await addToCart(variantId, productId, 1, "product"); // your working function (A/B product)
-        } catch (err) {
-          console.error(err);
-        }
-
-        q("#ab_fertilizer").checked = false;
-        q("#ab_fertilizer").dispatchEvent(
-          new Event("change", { bubbles: true, cancelable: true }),
-        );
-        IS_CHECKED = false;
-        IS_BUSY = false;
-        setSessionStorageValue("AB_IS_ADDED", true);
-        // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
-        window._conv_q = window._conv_q || [];
-        _conv_q.push(["triggerConversion", "1004129715"]);
-
-        btn.click(); // theme adds the main product and refreshes the side cart
-      },
-      true,
+    const buttonList = qq(
+      "#AddToCart, .sticky-atc-bar__button button[name='add']",
     );
+    buttonList.forEach((btn) => {
+      btn.addEventListener(
+        "click",
+        async (e) => {
+          if (!IS_CHECKED || IS_BUSY) return; // second pass: let the theme handle it
+          btn.classList.add("loading");
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          IS_BUSY = true;
+
+          try {
+            const { variantId, productId } = getFertilizerInfo();
+            await addToCart(variantId, productId, 1, "product"); // your working function (A/B product)
+          } catch (err) {
+            // console.warn(err);
+          }
+
+          q("#ab_fertilizer").checked = false;
+          q("#ab_fertilizer").dispatchEvent(
+            new Event("change", { bubbles: true, cancelable: true }),
+          );
+          IS_CHECKED = false;
+          IS_BUSY = false;
+          setSessionStorageValue("AB_IS_ADDED", true);
+          // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
+          window._conv_q = window._conv_q || [];
+          _conv_q.push(["triggerConversion", "1004129715"]);
+
+          btn.click(); // theme adds the main product and refreshes the side cart
+        },
+        true,
+      );
+    });
   }
 
   function init() {
@@ -323,12 +357,13 @@
     const sku = q(".product__sku-block.product__block.product__block--medium");
     if (sku)
       q(
-        ".product__price-block.product__block.product__block--medium",
+        "  .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
       ).insertAdjacentElement("beforebegin", sku);
     createLayout();
     updateAddToCartButtonLayout();
     handleFertilizerCheck();
     handleProductQuantity();
+    handleProductVariantSwitch();
     handleAddToCartWithFertilizer();
   }
 
@@ -338,7 +373,9 @@
         `body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`,
       ) &&
       q('meta[property="og:price:amount"]') &&
-      q(".product__price-block.product__block.product__block--medium") &&
+      q(
+        " .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
+      ) &&
       q("#AddToCart")
     );
   }
@@ -347,7 +384,7 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    console.warn(error);
+    // console.warn(error);
     return false;
   }
 })();

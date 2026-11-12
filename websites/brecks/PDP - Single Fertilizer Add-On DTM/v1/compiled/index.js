@@ -254,7 +254,7 @@
                         const { variantId, productId } = getFertilizerInfo();
                         await addToCart(variantId, productId, 1, "product"); // your working function (A/B product)
                     } catch (err) {
-                        console.error(err);
+                        // console.warn(err);
                     }
 
                     q("#ab_fertilizer").checked = false;
@@ -304,7 +304,7 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        console.warn(error);
+        // console.warn(error);
         return false;
     }
 })();
