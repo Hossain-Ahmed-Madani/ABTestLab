@@ -6,9 +6,10 @@
   letter-spacing: 0px;
   text-align: left !important;
   margin-top: 20px;
+  margin-bottom: 0 !important;
+  padding-top: 30px;
   padding-bottom: 16px;
   padding-left: 12px;
-  padding-top: 30px;
   border-top: 1px solid #ddd;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-shipping-address {
@@ -30,6 +31,10 @@
   line-height: 1.2;
   letter-spacing: 0px;
   color: rgb(255, 255, 255);
+  background-color: #8CC152;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-shipping-address > .btn.btn-primary:hover {
+  background: #9cca5a;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-shipping-address > .row {
   margin-left: 0;
@@ -51,13 +56,13 @@
   line-height: 1.2;
   letter-spacing: 0px;
   color: rgb(51, 51, 51);
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper {
   flex-grow: 1;
   gap: 10px;
   padding: 16px;
-  border: 1px solid #ced4da;
+  border: 1px solid #D9D9D9;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -105,10 +110,14 @@
   border-radius: 0;
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 100%;
   letter-spacing: 0px;
-  color: rgb(255, 255, 255);
+  color: #fff;
+  background-color: #8CC152;
+}
+.AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn:hover {
+  background: #9cca5a;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper select.form-control {
   outline: none;
