@@ -8,7 +8,7 @@
         test_name: "Checkout - Personal Information & Billing Address Update (Iteration) [D]",
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.00031,
+        test_version: 0.0001,
     };
 
     const { host, path, hash, page_initials, test_variation, test_version } = TEST_CONFIG;

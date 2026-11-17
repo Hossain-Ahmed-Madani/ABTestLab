@@ -74,7 +74,6 @@
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper {
   flex-grow: 1;
-  gap: 10px;
   padding: 16px;
   border: 1px solid #d9d9d9;
   display: flex;
