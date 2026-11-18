@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-Checkout-Step-1-2",
     test_variation: 1,
-    test_version: 0.00031,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -47,6 +47,24 @@
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
+  function oneTimeModalMutationObserver() {
+    const body = q("body");
+    const observer = new MutationObserver(() => {
+      const modalSubtitleElement = q(
+        "ngb-modal-window > .modal-dialog  address > .modal-body > p",
+      );
+      if (
+        modalSubtitleElement &&
+        modalSubtitleElement.textContent.trim() ===
+          "This address will be automatically applied to the Delivery Address."
+      ) {
+        modalSubtitleElement.innerText =
+          "This address will be automatically applied to the Shipping Address.";
+      }
+    });
+    observer.observe(body, { childList: true });
+  }
+
   async function updateShippingTopBox() {
     // Add heading items
 
@@ -73,18 +91,26 @@
 
       const div = document.createElement("div");
       div.className = "ab-shipping-address-wrapper";
-      qq(item, ":scope > *:not(p:first-of-type)").forEach((child) =>
-        div.appendChild(child),
-      );
+
+      qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => {
+        if (child.tagName.toLowerCase() === "select") {
+          const option = q(child, 'option[value="null"]');
+          if (
+            option.textContent.trim().toLowerCase() ===
+            "change delivery address"
+          ) {
+            option.innerText = "Change shipping address";
+          }
+        }
+
+        div.appendChild(child);
+      });
+
       item.appendChild(div);
     });
   }
 
   // ===========  MAIN JS ===========
-
-  const PATHS = {
-    shipping_checkout: "/checkout#/main",
-  };
 
   async function init() {
     if (window[page_initials]) return;
@@ -96,7 +122,12 @@
       "AB-Shipping-Checkout",
     );
     updateShippingTopBox();
+    oneTimeModalMutationObserver();
   }
+
+  const PATHS = {
+    shipping_checkout: "/checkout#/main",
+  };
 
   function checkForItems() {
     const currentPath = (

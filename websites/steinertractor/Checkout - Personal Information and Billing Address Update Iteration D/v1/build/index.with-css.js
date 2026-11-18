@@ -40,6 +40,7 @@
   letter-spacing: 0px;
   color: rgb(255, 255, 255);
   background-color: #8cc152;
+  text-transform: capitalize;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   eve-shipping-address
@@ -66,7 +67,7 @@
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .address-text > p > strong {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1.2;
   letter-spacing: 0px;
   color: rgb(51, 51, 51);
@@ -119,8 +120,10 @@
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout .ab-shipping-address-wrapper .btn {
   position: absolute;
+  top: 0;
   bottom: 0;
   right: 0;
+  margin: auto !important;
   width: 72px;
   height: 40px;
   display: flex;
@@ -191,7 +194,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-Checkout-Step-1-2",
     test_variation: 1,
-    test_version: 0.00031,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -236,6 +239,24 @@
     return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
   }
 
+  function oneTimeModalMutationObserver() {
+    const body = q("body");
+    const observer = new MutationObserver(() => {
+      const modalSubtitleElement = q(
+        "ngb-modal-window > .modal-dialog  address > .modal-body > p",
+      );
+      if (
+        modalSubtitleElement &&
+        modalSubtitleElement.textContent.trim() ===
+          "This address will be automatically applied to the Delivery Address."
+      ) {
+        modalSubtitleElement.innerText =
+          "This address will be automatically applied to the Shipping Address.";
+      }
+    });
+    observer.observe(body, { childList: true });
+  }
+
   async function updateShippingTopBox() {
     // Add heading items
 
@@ -262,18 +283,26 @@
 
       const div = document.createElement("div");
       div.className = "ab-shipping-address-wrapper";
-      qq(item, ":scope > *:not(p:first-of-type)").forEach((child) =>
-        div.appendChild(child),
-      );
+
+      qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => {
+        if (child.tagName.toLowerCase() === "select") {
+          const option = q(child, 'option[value="null"]');
+          if (
+            option.textContent.trim().toLowerCase() ===
+            "change delivery address"
+          ) {
+            option.innerText = "Change shipping address";
+          }
+        }
+
+        div.appendChild(child);
+      });
+
       item.appendChild(div);
     });
   }
 
   // ===========  MAIN JS ===========
-
-  const PATHS = {
-    shipping_checkout: "/checkout#/main",
-  };
 
   async function init() {
     if (window[page_initials]) return;
@@ -285,7 +314,12 @@
       "AB-Shipping-Checkout",
     );
     updateShippingTopBox();
+    oneTimeModalMutationObserver();
   }
+
+  const PATHS = {
+    shipping_checkout: "/checkout#/main",
+  };
 
   function checkForItems() {
     const currentPath = (

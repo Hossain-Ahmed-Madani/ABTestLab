@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-Checkout-Step-1-2",
         test_variation: 1,
-        test_version: 0.0001,
+        test_version: 0.0002,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -39,6 +39,17 @@
         return o ? [...s.querySelectorAll(o)] : [...document.querySelectorAll(s)];
     }
 
+    function oneTimeModalMutationObserver() {
+        const body = q('body');
+        const observer = new MutationObserver(() => {
+            const modalSubtitleElement = q("ngb-modal-window > .modal-dialog  address > .modal-body > p");
+            if(modalSubtitleElement && modalSubtitleElement.textContent.trim() === 'This address will be automatically applied to the Delivery Address.') {
+                modalSubtitleElement.innerText = 'This address will be automatically applied to the Shipping Address.';
+            }
+        });
+        observer.observe(body, {childList: true});
+    }
+
     async function updateShippingTopBox() {
         // Add heading items
 
@@ -48,7 +59,7 @@
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
                 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
-            `
+            `,
         );
 
         q("app-progress-stepper + h4").innerText = "Personal Information";
@@ -62,23 +73,37 @@
 
             const div = document.createElement("div");
             div.className = "ab-shipping-address-wrapper";
-            qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => div.appendChild(child));
+
+            qq(item, ":scope > *:not(p:first-of-type)").forEach((child) => {
+                if (child.tagName.toLowerCase() === "select") {
+                    const option = q(child, 'option[value="null"]');
+                    if (option.textContent.trim().toLowerCase() === "change delivery address") {
+                        option.innerText = "Change shipping address";
+                    }
+                }
+
+                div.appendChild(child);
+            });
+
             item.appendChild(div);
         });
     }
 
     // ===========  MAIN JS ===========
 
-    const PATHS = {
-        shipping_checkout: "/checkout#/main",
-    };
-
     async function init() {
         if (window[page_initials]) return;
         window[page_initials] = true;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`, "AB-Shipping-Checkout");
         updateShippingTopBox();
+        oneTimeModalMutationObserver();
     }
+
+
+    const PATHS = {
+        shipping_checkout: "/checkout#/main",
+    };
+
 
     function checkForItems() {
         const currentPath = (window.location.pathname + window.location.hash).toLowerCase();

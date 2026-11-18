@@ -53,6 +53,7 @@
             letter-spacing: 0px;
             color: rgba(255, 255, 255, 1);
             background-color: #8CC152;
+            text-transform: capitalize;
 
             &:hover {
                 background: #9cca5a;
@@ -79,7 +80,7 @@
         & > p > strong {
             font-family: "Roboto", sans-serif;
             font-weight: 700;
-            font-size: 20px;
+            font-size: 18px;
             line-height: 1.2;
             letter-spacing: 0px;
             color: rgba(51, 51, 51, 1);
@@ -136,9 +137,10 @@
 
         .btn {
             position: absolute;
-            // top: 0;
+            top: 0;
             bottom: 0;
             right: 0;
+            margin: auto !important;
 
             width: 72px;
             height: 40px;
