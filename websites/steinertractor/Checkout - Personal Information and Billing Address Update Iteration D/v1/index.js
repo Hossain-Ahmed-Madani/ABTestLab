@@ -46,14 +46,14 @@
     }
 
     function oneTimeModalMutationObserver() {
-        const body = q('body');
+        const body = q("body");
         const observer = new MutationObserver(() => {
-            const modalSubtitleElement = q("ngb-modal-window > .modal-dialog  address > .modal-body > p")
-            if(modalSubtitleElement && modalSubtitleElement.textContent.trim() === 'This address will be automatically applied to the Delivery Address.') {
-                modalSubtitleElement.innerText = 'This address will be automatically applied to the Shipping Address.'
+            const modalSubtitleElement = q("ngb-modal-window > .modal-dialog  address > .modal-body > p");
+            if (modalSubtitleElement && modalSubtitleElement.textContent.trim() === "This address will be automatically applied to the Delivery Address.") {
+                modalSubtitleElement.innerText = "This address will be automatically applied to the Shipping Address.";
             }
-        })
-        observer.observe(body, {childList: true})
+        });
+        observer.observe(body, { childList: true });
     }
 
     async function updateShippingTopBox() {
@@ -105,11 +105,9 @@
         oneTimeModalMutationObserver();
     }
 
-
     const PATHS = {
         shipping_checkout: "/checkout#/main",
     };
-
 
     function checkForItems() {
         const currentPath = (window.location.pathname + window.location.hash).toLowerCase();
@@ -132,6 +130,10 @@
         );
     }
 
-    await waitForElementAsync(checkForItems);
-    init();
+    try {
+        await waitForElementAsync(checkForItems);
+        init();
+    } catch (error) {
+        return false;
+    }
 })();
