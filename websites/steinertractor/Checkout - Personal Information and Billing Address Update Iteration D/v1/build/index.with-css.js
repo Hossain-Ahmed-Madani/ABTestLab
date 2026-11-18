@@ -46,6 +46,7 @@
   eve-shipping-address
   > .btn.btn-primary:hover {
   background: #9cca5a;
+  color: #212529;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout eve-shipping-address > .row {
   margin-left: 0;
@@ -142,6 +143,7 @@
   .ab-shipping-address-wrapper
   .btn:hover {
   background: #9cca5a;
+  color: #212529;
 }
 .AB-Checkout-Step-1-2.AB-Shipping-Checkout
   .ab-shipping-address-wrapper
