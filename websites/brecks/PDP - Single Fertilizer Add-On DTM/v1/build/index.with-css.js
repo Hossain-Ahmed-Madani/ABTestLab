@@ -155,6 +155,61 @@
 .AB-SINGLE-FERTILIZER .loyaltycopy {
   margin-top: 15px;
 }
+.AB-SINGLE-FERTILIZER .sticky-atc-bar__details {
+  column-gap: 10px;
+}
+.AB-SINGLE-FERTILIZER .sticky-atc-bar__inner .ff-heading.fs-heading-5-base {
+  font-family: "EB Garamond", serif;
+  font-weight: 400;
+  font-size: 18.72px;
+  line-height: 21.53px;
+  letter-spacing: 0px;
+  color: #393939;
+}
+.AB-SINGLE-FERTILIZER
+  .sticky-atc-bar__inner:has(.sticky-atc-bar__meta-options)
+  .ff-heading.fs-heading-5-base {
+  margin-bottom: 2px;
+}
+.AB-SINGLE-FERTILIZER .sticky-atc-bar__inner .sticky-atc-bar__meta-options {
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-size: 12.32px;
+  line-height: 18.47px;
+  letter-spacing: 0px;
+  color: #393939;
+}
+.AB-SINGLE-FERTILIZER .sticky-atc-bar__meta-change-option-trigger {
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-size: 12.32px;
+  line-height: 100%;
+  letter-spacing: 0px;
+  text-decoration: underline;
+  color: #006cb3;
+}
+.AB-SINGLE-FERTILIZER .product-form__cart-submit {
+  min-width: max-content;
+}
+.AB-SINGLE-FERTILIZER .ab-sticky-fertilizer {
+  text-align: right;
+}
+.AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-plus,
+.AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-link {
+  font-style: italic;
+  font-family: "DM Sans";
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22.5px;
+  letter-spacing: 0px;
+}
+.AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-plus {
+  color: #444444;
+}
+.AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-link {
+  color: #76a246;
+  text-decoration: underline;
+}
 @media screen and (min-width: 991px) {
   .AB-SINGLE-FERTILIZER .product__block.product__block--medium:has(.rte) {
     margin-bottom: 12px;
@@ -177,6 +232,60 @@
     font-size: 18px;
     line-height: 28px;
   }
+  .AB-SINGLE-FERTILIZER .sticky-atc-bar__inner {
+    padding-left: 33px;
+    padding-right: 33px;
+  }
+  .AB-SINGLE-FERTILIZER .sticky-atc-bar__details {
+    column-gap: 20px;
+  }
+  .AB-SINGLE-FERTILIZER .sticky-atc-bar__inner .ff-heading.fs-heading-5-base {
+    font-size: 24.2px;
+    line-height: 27.83px;
+    letter-spacing: 0px;
+  }
+  .AB-SINGLE-FERTILIZER
+    .sticky-atc-bar__inner:has(.sticky-atc-bar__meta-options)
+    .ff-heading.fs-heading-5-base {
+    margin-bottom: 3px;
+  }
+  .AB-SINGLE-FERTILIZER .sticky-atc-bar__inner .sticky-atc-bar__meta-options {
+    font-family: "EB Garamond", serif;
+    font-size: 13.32px;
+    line-height: 19.98px;
+    letter-spacing: 0px;
+  }
+  .AB-SINGLE-FERTILIZER .sticky-atc-bar__meta-change-option-trigger {
+    font-family: "DM Sans";
+    font-weight: 400;
+    font-size: 12.32px;
+    line-height: 100%;
+    letter-spacing: 0px;
+    text-decoration: underline;
+    color: #006cb3;
+  }
+  .AB-SINGLE-FERTILIZER
+    .sticky-atc-bar__price:has(.ab-sticky-fertilizer)
+    .optionchipprice {
+    margin-right: -4px;
+  }
+  .AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-plus,
+  .AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-link {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13.87px;
+    line-height: 20.8px;
+  }
+  .AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-plus {
+    color: #444444;
+    font-style: normal;
+    font-weight: 700;
+    margin-right: 2px;
+  }
+  .AB-SINGLE-FERTILIZER .ab-sticky-fertilizer-link {
+    color: #76a246;
+    text-decoration: underline;
+  }
 }
 `;
       document.head.appendChild(style);
@@ -190,7 +299,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-SINGLE-FERTILIZER",
     test_variation: 1,
-    test_version: 0.0002,
+    test_version: 0.0003,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -287,7 +396,7 @@
   }
 
   function q(s, o) {
-    return o ? s.querySelector(o) : document.querySelector(s);
+    return document.querySelector(s);
   }
 
   function qq(s, o) {
@@ -431,7 +540,7 @@
   }
 
   function updateAddToCartButtonLayout() {
-    const targetNode = q("#AddToCart");
+    q("#AddToCart");
     const mainProductPriceText = q(
       "button.selected [data-lion-price-for-product-id],  .product__price-block.product__block.product__block--medium .product__price [data-lion-price-for-product-id]",
     ).textContent;
@@ -439,7 +548,8 @@
       mainProductPriceText.split(" ")[1] || mainProductPriceText;
     const formattedMainPrice = parseFloat(sellingPrice.replace("$", ""));
 
-    const { productPrice, productCategory } = getFertilizerInfo();
+    const { plantFood, productPrice, productCategory, productUrl } =
+      getFertilizerInfo();
     const total = (
       +formattedMainPrice * +q(".product-form .quantity-input__input").value +
       +productPrice
@@ -451,21 +561,39 @@
             ".breadcrumbs__list > .breadcrumbs__item:nth-child(3) .breadcrumbs__link",
           ).textContent;
 
-    q(".ab-short-info")?.remove();
+    qq(".ab-short-info, .ab-sticky-fertilizer")?.forEach((item) =>
+      item.remove(),
+    );
 
     if (!IS_CHECKED) {
-      q(targetNode, "#addcarttext").innerText = "Add to Cart";
+      qq(
+        "#AddToCart #addcarttext, .sticky-atc-bar__button button[name='add'] span[data-add-to-cart-text]",
+      ).forEach((item) => {
+        item.innerText = "Add to Cart";
+      });
     } else {
-      q(targetNode, "#addcarttext").innerText = `Add to Cart | $${total}`;
+      qq(
+        "#AddToCart #addcarttext, .sticky-atc-bar__button button[name='add'] span[data-add-to-cart-text]",
+      ).forEach((item) => {
+        item.innerText = `Add to Cart | $${total}`;
+      });
+
       q(
         ".product-form[data-has-quantity-selector] .product-form__controls-group",
       ).insertAdjacentHTML(
         "afterend",
+        `<span class="ab-short-info">Adds both items to your cart. Uncheck the box above to add only your ${exactCategory.toLowerCase()}.</span> `,
+      );
+
+      q(".sticky-atc-bar__price").insertAdjacentHTML(
+        "beforeend",
         /* HTML */ `
-          <span class="ab-short-info"
-            >Adds both items to your cart. Uncheck the box above to add only
-            your ${exactCategory.toLowerCase()}.</span
-          >
+          <div class="ab-sticky-fertilizer">
+            <span class="ab-sticky-fertilizer-plus">+</span>
+            <a class="ab-sticky-fertilizer-link" href="${productUrl}"
+              >${plantFood} ($${productPrice})</a
+            >
+          </div>
         `,
       );
     }
@@ -512,21 +640,21 @@
             const { variantId, productId } = getFertilizerInfo();
             await addToCart(variantId, productId, 1, "product"); // your working function (A/B product)
           } catch (err) {
-            // console.warn(err);
+            //
+          } finally {
+            q("#ab_fertilizer").checked = false;
+            q("#ab_fertilizer").dispatchEvent(
+              new Event("change", { bubbles: true, cancelable: true }),
+            );
+            IS_CHECKED = false;
+            IS_BUSY = false;
+            setSessionStorageValue("AB_IS_ADDED", true);
+            // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
+            window._conv_q = window._conv_q || [];
+            _conv_q.push(["triggerConversion", "1004129715"]);
+
+            btn.click(); // theme adds the main product and refreshes the side cart
           }
-
-          q("#ab_fertilizer").checked = false;
-          q("#ab_fertilizer").dispatchEvent(
-            new Event("change", { bubbles: true, cancelable: true }),
-          );
-          IS_CHECKED = false;
-          IS_BUSY = false;
-          setSessionStorageValue("AB_IS_ADDED", true);
-          // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
-          window._conv_q = window._conv_q || [];
-          _conv_q.push(["triggerConversion", "1004129715"]);
-
-          btn.click(); // theme adds the main product and refreshes the side cart
         },
         true,
       );
@@ -545,7 +673,7 @@
     const sku = q(".product__sku-block.product__block.product__block--medium");
     if (sku)
       q(
-        "  .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
+        ".product__price-block.product__block.product__block--medium, .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
       ).insertAdjacentElement("beforebegin", sku);
     createLayout();
     updateAddToCartButtonLayout();
@@ -564,7 +692,8 @@
       q(
         " .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
       ) &&
-      q("#AddToCart")
+      q("#AddToCart") &&
+      q(".sticky-atc-bar__price")
     );
   }
 
@@ -572,7 +701,6 @@
     await waitForElementAsync(checkForItems);
     init();
   } catch (error) {
-    // console.warn(error);
     return false;
   }
 })();

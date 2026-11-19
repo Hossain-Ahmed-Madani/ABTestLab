@@ -187,6 +187,75 @@
         margin-top: 15px;
     }
 
+    // .sticky-atc-bar__details .sticky-atc-bar__price {
+    //     margin-top: auto;
+    // }
+
+    .sticky-atc-bar__details {
+        column-gap: 10px;
+    }
+
+    .sticky-atc-bar__inner .ff-heading.fs-heading-5-base {
+        font-family: "EB Garamond", serif;
+        font-weight: 400;
+        font-size: 18.72px;
+        line-height: 21.53px;
+        letter-spacing: 0px;
+        color: #393939;
+    }
+
+    .sticky-atc-bar__inner:has(.sticky-atc-bar__meta-options) .ff-heading.fs-heading-5-base {
+        margin-bottom: 2px;
+    }
+
+    .sticky-atc-bar__inner .sticky-atc-bar__meta-options {
+        font-family: "DM Sans";
+        font-weight: 400;
+        font-size: 12.32px;
+        line-height: 18.47px;
+        letter-spacing: 0px;
+        color: #393939;
+    }
+
+    .sticky-atc-bar__meta-change-option-trigger {
+        font-family: "DM Sans";
+        font-weight: 400;
+        font-size: 12.32px;
+        line-height: 100%;
+        letter-spacing: 0px;
+        text-decoration: underline;
+        color: #006cb3;
+    }
+
+    .product-form__cart-submit {
+        min-width: max-content;
+    }
+
+    .ab-sticky-fertilizer {
+        text-align: right;
+    }
+
+    .ab-sticky-fertilizer-plus,
+    .ab-sticky-fertilizer-link {
+        font-style: italic;
+        font-family: "DM Sans";
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 22.5px;
+        letter-spacing: 0px;
+    }
+
+    .ab-sticky-fertilizer-plus {
+        color: #444444;
+    }
+
+    .ab-sticky-fertilizer-link {
+        color: #76a246;
+        text-decoration: underline;
+    }
+
+    
+
     @media screen and (min-width: 370.5px) {
         // .product-form__quantity-and-buy-buttons-wrapper:has(.ab-short-info) {
         //     margin-bottom: 50px;
@@ -216,6 +285,72 @@
         .ab-single-fertilizer__label-text {
             font-size: 18px;
             line-height: 28px;
+        }
+
+        // =============
+
+        .sticky-atc-bar__inner {
+            padding-left: 33px;
+            padding-right: 33px;
+        }
+
+        .sticky-atc-bar__details {
+            column-gap: 20px;
+        }
+
+        .sticky-atc-bar__inner .ff-heading.fs-heading-5-base {
+            font-size: 24.2px;
+            line-height: 27.83px;
+            letter-spacing: 0px;
+            
+            
+        }
+
+        .sticky-atc-bar__inner:has(.sticky-atc-bar__meta-options) .ff-heading.fs-heading-5-base {
+            margin-bottom: 3px;
+        }
+
+        .sticky-atc-bar__inner .sticky-atc-bar__meta-options {
+            font-family: "EB Garamond", serif;
+            font-size: 13.32px;
+            line-height: 19.98px;
+            letter-spacing: 0px;
+            
+        }
+
+        .sticky-atc-bar__meta-change-option-trigger {
+            font-family: "DM Sans";
+            font-weight: 400;
+            font-size: 12.32px;
+            line-height: 100%;
+            letter-spacing: 0px;
+            text-decoration: underline;
+            color: #006cb3;
+        }
+
+        // =========
+
+        .sticky-atc-bar__price:has(.ab-sticky-fertilizer) .optionchipprice {
+            margin-right: -4px;
+        }
+        .ab-sticky-fertilizer-plus,
+        .ab-sticky-fertilizer-link {
+            font-style: italic;
+            font-weight: 400;
+            font-size: 13.87px;
+            line-height: 20.8px;
+        }
+
+        .ab-sticky-fertilizer-plus {
+            color: #444444;
+            font-style: normal;
+            font-weight: 700;
+            margin-right: 2px;
+        }
+
+        .ab-sticky-fertilizer-link {
+            color: #76a246;
+            text-decoration: underline;
         }
     }
 }

@@ -6,7 +6,7 @@
         test_name: "PDP - Single Fertilizer Add-On [DTM]",
         page_initials: "AB-SINGLE-FERTILIZER",
         test_variation: 1,
-        test_version: 0.0002,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -226,19 +226,33 @@
         const sellingPrice = mainProductPriceText.split(" ")[1] || mainProductPriceText;
         const formattedMainPrice = parseFloat(sellingPrice.replace("$", ""));
 
-        const { productPrice, productCategory } = getFertilizerInfo();
+        const { plantFood, productPrice, productCategory, productUrl } = getFertilizerInfo();
         const total = (+formattedMainPrice * +q(".product-form .quantity-input__input").value + +productPrice).toFixed(2);
         const exactCategory = productCategory !== "all" ? productCategory : q(".breadcrumbs__list > .breadcrumbs__item:nth-child(3) .breadcrumbs__link").textContent;
 
-        q(".ab-short-info")?.remove();
+        qq(".ab-short-info, .ab-sticky-fertilizer")?.forEach((item) => item.remove());
 
         if (!IS_CHECKED) {
-            q(targetNode, "#addcarttext").innerText = "Add to Cart";
+            qq("#AddToCart #addcarttext, .sticky-atc-bar__button button[name='add'] span[data-add-to-cart-text]").forEach((item) => {
+                item.innerText = "Add to Cart";
+            });
         } else {
-            q(targetNode, "#addcarttext").innerText = `Add to Cart | $${total}`;
+            qq("#AddToCart #addcarttext, .sticky-atc-bar__button button[name='add'] span[data-add-to-cart-text]").forEach((item) => {
+                item.innerText = `Add to Cart | $${total}`;
+            });
+
             q(".product-form[data-has-quantity-selector] .product-form__controls-group").insertAdjacentHTML(
                 "afterend",
-                /* HTML */ ` <span class="ab-short-info">Adds both items to your cart. Uncheck the box above to add only your ${exactCategory.toLowerCase()}.</span> `,
+                `<span class="ab-short-info">Adds both items to your cart. Uncheck the box above to add only your ${exactCategory.toLowerCase()}.</span> `,
+            );
+            
+            q(".sticky-atc-bar__price").insertAdjacentHTML(
+                "beforeend",
+                /* HTML */ `
+                    <div class="ab-sticky-fertilizer">
+                        <span class="ab-sticky-fertilizer-plus">+</span> <a class="ab-sticky-fertilizer-link" href="${productUrl}">${plantFood} ($${productPrice})</a>
+                    </div>
+                `,
             );
         }
     }
@@ -279,19 +293,19 @@
                         const { variantId, productId } = getFertilizerInfo();
                         await addToCart(variantId, productId, 1, "product"); // your working function (A/B product)
                     } catch (err) {
-                        // console.warn(err);
+                        // 
+                    } finally {
+                        q("#ab_fertilizer").checked = false;
+                        q("#ab_fertilizer").dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
+                        IS_CHECKED = false;
+                        IS_BUSY = false;
+                        setSessionStorageValue("AB_IS_ADDED", true);
+                        // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
+                        window._conv_q = window._conv_q || [];
+                        _conv_q.push(["triggerConversion", "1004129715"]);
+
+                        btn.click(); // theme adds the main product and refreshes the side cart
                     }
-
-                    q("#ab_fertilizer").checked = false;
-                    q("#ab_fertilizer").dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
-                    IS_CHECKED = false;
-                    IS_BUSY = false;
-                    setSessionStorageValue("AB_IS_ADDED", true);
-                    // GOAL ->  Fertilizer Add-ons | Adds fertilizer product | js
-                    window._conv_q = window._conv_q || [];
-                    _conv_q.push(["triggerConversion", "1004129715"]);
-
-                    btn.click(); // theme adds the main product and refreshes the side cart
                 },
                 true,
             );
@@ -306,7 +320,7 @@
         const sku = q(".product__sku-block.product__block.product__block--medium");
         if (sku)
             q(
-                "  .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
+                ".product__price-block.product__block.product__block--medium, .product__controls-group.product__variants-wrapper.product__block.product__block--medium",
             ).insertAdjacentElement("beforebegin", sku);
         createLayout();
         updateAddToCartButtonLayout();
@@ -321,7 +335,8 @@
             q(`body:not(.${page_initials}):not(.${page_initials}--v${test_variation})`) &&
             q('meta[property="og:price:amount"]') &&
             q(" .product__price-block.product__block.product__block--medium,   .product__controls-group.product__variants-wrapper.product__block.product__block--medium") &&
-            q("#AddToCart")
+            q("#AddToCart") &&
+            q(".sticky-atc-bar__price")
         );
     }
 
@@ -329,7 +344,6 @@
         await waitForElementAsync(checkForItems);
         init();
     } catch (error) {
-        // console.warn(error);
         return false;
     }
 })();
