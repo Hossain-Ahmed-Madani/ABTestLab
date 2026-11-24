@@ -12,6 +12,9 @@
   position: relative;
   order: -1;
 }
+.AB-ODT038 label.odt-radio-button:has(input[value="Walk-in clinic"]) input {
+  min-width: 24px;
+}
 .AB-ODT038
   label.odt-radio-button:has(input[value="Walk-in clinic"])
   span.color-accent-800 {

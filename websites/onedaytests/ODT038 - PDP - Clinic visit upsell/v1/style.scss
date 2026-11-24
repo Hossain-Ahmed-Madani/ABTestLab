@@ -23,6 +23,10 @@
         order: -1;
     }
 
+    label.odt-radio-button:has(input[value="Walk-in clinic"])  input {
+        min-width: 24px;
+    }
+
     label.odt-radio-button:has(input[value="Walk-in clinic"]) span.color-accent-800 {
         font-weight: 700;
         font-size: 16px;
