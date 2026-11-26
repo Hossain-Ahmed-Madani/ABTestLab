@@ -35,7 +35,7 @@
 .AB-ODT038 .ab-sample-collection-short-info {
   margin-top: 16px;
   padding: 8px 12px;
-  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.1490196078);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   font-family: "Nunito Sans", sans-serif;
   font-weight: 400;
@@ -140,7 +140,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ODT038",
     test_variation: 1 /* 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -181,7 +181,7 @@
     return o ? s.querySelector(o) : document.querySelector(s);
   }
 
-  function init() {
+  async function init() {
     if (window[page_initials] === true) return;
     q("body").classList.add(
       page_initials,
@@ -221,6 +221,22 @@
       "afterend",
       /* HTML */ ` <div class="ab-badge">Recommended for this test</div> `,
     );
+
+    const homeKitNode = q(
+      'label.odt-radio-button:has(input[value="Home kit"])',
+    );
+
+    await waitForElementAsync(() => document.readyState === "complete");
+
+    try {
+      if (test_variation === 1) {
+        console.log("Clicked v1......");
+        homeKitNode.click();
+      }
+      if (test_variation === 2);
+    } catch (error) {
+      //
+    }
   }
 
   function checkForItems() {

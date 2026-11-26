@@ -2,7 +2,7 @@
     const TEST_CONFIG = {
         page_initials: "AB-ODT038",
         test_variation: 1 /* 1, 2 */,
-        test_version: 0.0001,
+        test_version: 0.0003,
     };
 
     const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -35,7 +35,18 @@
         return o ? s.querySelector(o) : document.querySelector(s);
     }
 
-    function init() {
+    function selectRadioWithoutScroll(labelNode) {
+        const input = q(labelNode, 'input[type="radio"]');
+
+        if (!input || input.checked) return;
+
+        input.checked = true;
+
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+
+    async function init() {
         if (window[page_initials] === true) return;
         q("body").classList.add(page_initials, `${page_initials}--v${test_variation}`, `${page_initials}--version:${test_version}`);
         window[page_initials] = true;
@@ -61,6 +72,20 @@
             `,
         );
         q(clinicVisitNode, ".odt-radio-button__label").insertAdjacentHTML("afterend", /* HTML */ ` <div class="ab-badge">Recommended for this test</div> `);
+
+        const homeKitNode = q('label.odt-radio-button:has(input[value="Home kit"])');
+
+        await waitForElementAsync(() => document.readyState === "complete");
+
+        try {
+            if (test_variation === 1) {
+                const input = q(homeKitNode, 'input[type="radio"]');
+                selectRadioWithoutScroll(input);
+            }
+            if (test_variation === 2) ;
+        } catch (error) {
+            //
+        }
     }
 
     function checkForItems() {

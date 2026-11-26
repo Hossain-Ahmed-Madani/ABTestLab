@@ -2,7 +2,7 @@
   const TEST_CONFIG = {
     page_initials: "AB-ODT038",
     test_variation: 1 /* 1, 2 */,
-    test_version: 0.0001,
+    test_version: 0.0002,
   };
 
   const { page_initials, test_variation, test_version } = TEST_CONFIG;
@@ -43,7 +43,7 @@
     return o ? s.querySelector(o) : document.querySelector(s);
   }
 
-  function init() {
+  async function init() {
     if (window[page_initials] === true) return;
     q("body").classList.add(
       page_initials,
@@ -83,6 +83,22 @@
       "afterend",
       /* HTML */ ` <div class="ab-badge">Recommended for this test</div> `,
     );
+
+    const homeKitNode = q(
+      'label.odt-radio-button:has(input[value="Home kit"])',
+    );
+
+    await waitForElementAsync(() => document.readyState === "complete");
+
+    try {
+      if (test_variation === 1) {
+        console.log("Clicked v1......");
+        homeKitNode.click();
+      }
+      if (test_variation === 2);
+    } catch (error) {
+      //
+    }
   }
 
   function checkForItems() {
